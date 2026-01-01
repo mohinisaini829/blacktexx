@@ -1,0 +1,23 @@
+{
+  "base": "/bundles/santafatexbrands/administration/",
+  "entryPoints": {
+    "santafatex-brands": {
+      "css": [],
+      "dynamic": [],
+      "js": [
+        "/bundles/santafatexbrands/administration/assets/santafatex-brands-BqycMkuV.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

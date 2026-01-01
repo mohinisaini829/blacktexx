@@ -7,6 +7,16 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+        .sticky-buybox {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px; /* Set to your sidebar width */
+            z-index: 9999;
+        }
+
+    </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
           if (document.body.classList.contains('is-ctl-landingpage')) {
@@ -124,7 +134,7 @@
             });
         });
     });
-    
+
 </script>
 
 
@@ -132,7 +142,7 @@
 {% block base_body_inner %}
     {{ parent() }}
     <script>
-        $(function() {
+        /*$(function() {
             $(window).on('scroll', function() {
                 var scrollTop = $(window).scrollTop();
                 var triggerPoint = 200; // Adjust as needed
@@ -143,8 +153,31 @@
                     $('#stickyBuybox').removeClass('sticky-buybox');
                 }
             });
-        });
+        });*/
     </script>
+    <script>
+    $(function() {
+        var $sticky = $('#stickyBuybox');
+        var $gallery = $('.product-detail-media');
+        if ($sticky.length && $gallery.length) {
+            var stickyTop = $sticky.offset().top;
+
+            $(window).on('scroll resize', function() {
+        //console.log('555555555');
+                var scrollTop = $(window).scrollTop();
+                var galleryBottom = $gallery.offset().top + $gallery.outerHeight();
+                var stickyHeight = $sticky.outerHeight();
+                var stickyBottom = scrollTop + stickyHeight;
+
+                if (scrollTop > stickyTop && stickyBottom < galleryBottom) {
+                    $sticky.addClass('sticky-buybox');
+                } else {
+                    $sticky.removeClass('sticky-buybox');
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}
 {% block base_body_classes %}{{ parent() }}{% if page.cmsPage.type == "product_list"%} santa--product-listing{% endif %}{% endblock %}
 

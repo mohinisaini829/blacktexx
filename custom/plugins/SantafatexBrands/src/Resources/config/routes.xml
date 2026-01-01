@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>santafatex_brands_routes:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</routes>    </route>        <default key="_controller">Santafatex\Brands\Controller\Admin\BrandController::deleteBrand</default>    <route id="api.santafatex.brands.delete" path="/api/santafatex-brands/{brandId}" methods="DELETE">    </route>        <default key="_controller">Santafatex\Brands\Controller\Admin\BrandController::updateBrand</default>    <route id="api.santafatex.brands.update" path="/api/santafatex-brands/{brandId}" methods="PATCH|PUT">    </route>        <default key="_controller">Santafatex\Brands\Controller\Admin\BrandController::getBrand</default>    <route id="api.santafatex.brands.detail" path="/api/santafatex-brands/{brandId}" methods="GET">    </route>        <default key="_controller">Santafatex\Brands\Controller\Admin\BrandController::createBrand</default>    <route id="api.santafatex.brands.create" path="/api/santafatex-brands" methods="POST">    </route>        <default key="_controller">Santafatex\Brands\Controller\Admin\BrandController::listBrands</default>    <route id="api.santafatex.brands.list" path="/api/santafatex-brands" methods="GET">        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd"><routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  resource: '@SantafatexBrandsBundle/resources/config/routes.xml'

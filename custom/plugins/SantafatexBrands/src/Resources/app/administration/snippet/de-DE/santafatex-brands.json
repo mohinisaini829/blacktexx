@@ -1,0 +1,61 @@
+{
+  "sw-santafatex": {
+    "brands": {
+      "general": {
+        "mainMenuItemGeneral": "Marken"
+      },
+      "notification": {
+        "saveSuccess": "Erfolg",
+        "saveSuccessMessage": "Marke erfolgreich gespeichert.",
+        "saveError": "Fehler",
+        "saveErrorMessage": "Fehler beim Speichern der Marke.",
+        "loadErrorMessage": "Fehler beim Laden der Marke.",
+        "deleteSuccess": "Erfolg",
+        "deleteSuccessMessage": "Marke erfolgreich gelöscht.",
+        "deleteError": "Fehler",
+        "deleteErrorMessage": "Fehler beim Löschen der Marke.",
+        "uploadSuccess": "Upload erfolgreich",
+        "uploadError": "Upload fehlgeschlagen"
+      },
+      "index": {
+        "title": "Marken",
+        "createButton": "Marke erstellen",
+        "editAction": "Bearbeiten",
+        "deleteAction": "Löschen",
+        "confirmDeleteTitle": "Marke löschen",
+        "confirmDeleteText": "Möchten Sie diese Marke wirklich löschen?",
+        "searchPlaceholder": "Marken durchsuchen...",
+        "columnName": "Markenname",
+        "columnDescription": "Beschreibung",
+        "columnActive": "Status",
+        "columnDisplayOrder": "Reihenfolge",
+        "columnCreatedAt": "Erstellt",
+        "active": "Aktiv",
+        "inactive": "Inaktiv",
+        "emptyTitle": "Keine Marken gefunden",
+        "emptyText": "Erstellen Sie Ihre erste Marke um zu beginnen."
+      },
+      "detail": {
+        "titleNew": "Marke erstellen",
+        "buttonCancel": "Abbrechen",
+        "buttonSave": "Marke speichern",
+        "generalCardTitle": "Allgemeine Informationen",
+        "generalCardSubtitle": "Grundlegende Markeneigenschaften",
+        "fieldName": "Markenname",
+        "fieldDescription": "Beschreibung",
+        "fieldActive": "Aktiv",
+        "fieldDisplayOrder": "Anzeigereihenfolge",
+        "filesCardTitle": "Markendateien",
+        "filesCardSubtitle": "PDF-Dateien und Bilder hochladen",
+        "fieldSizeChart": "Größentabelle (PDF/Bild)",
+        "fieldCatalogPdf": "Katalog PDF",
+        "buttonUpload": "Datei hochladen",
+        "currentFile": "Aktuelle Datei",
+        "videoSliderCardTitle": "Video-Schieber",
+        "videoSliderCardSubtitle": "HTML-Code für Video-Schieber hinzufügen",
+        "fieldVideoSliderHtml": "Video-Schieber HTML",
+        "helpVideoSliderHtml": "Fügen Sie hier Ihren HTML-Code für den Video-Schieber ein. Dies kann iframe, Video-Tags oder benutzerdefinierten HTML enthalten."
+      }
+    }
+  }
+}

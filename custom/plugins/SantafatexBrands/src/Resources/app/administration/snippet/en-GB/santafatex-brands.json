@@ -1,0 +1,62 @@
+{
+  "sw-santafatex": {
+    "brands": {
+      "general": {
+        "mainMenuItemGeneral": "Brands"
+      },
+      "notification": {
+        "saveSuccess": "Success",
+        "saveSuccessMessage": "Brand saved successfully.",
+        "saveError": "Error",
+        "saveErrorMessage": "Error saving brand.",
+        "loadErrorMessage": "Error loading brand.",
+        "deleteSuccess": "Success",
+        "deleteSuccessMessage": "Brand deleted successfully.",
+        "deleteError": "Error",
+        "deleteErrorMessage": "Error deleting brand.",
+        "uploadSuccess": "Upload successful",
+        "uploadError": "Upload failed"
+      },
+      "index": {
+        "title": "Brands",
+        "createButton": "Create Brand",
+        "editAction": "Edit",
+        "deleteAction": "Delete",
+        "confirmDeleteTitle": "Delete Brand",
+        "confirmDeleteText": "Are you sure you want to delete this brand?",
+        "searchPlaceholder": "Search brands...",
+        "columnName": "Brand Name",
+        "columnDescription": "Description",
+        "columnActive": "Status",
+        "columnDisplayOrder": "Order",
+        "columnCreatedAt": "Created",
+        "active": "Active",
+        "inactive": "Inactive",
+        "emptyTitle": "No brands found",
+        "emptyText": "Create your first brand to get started."
+      },
+      "detail": {
+        "titleNew": "Create Brand",
+        "buttonCancel": "Cancel",
+        "buttonSave": "Save Brand",
+        "generalCardTitle": "General Information",
+        "generalCardSubtitle": "Basic brand details",
+        "fieldName": "Brand Name",
+        "fieldDescription": "Description",
+        "fieldActive": "Active",
+        "fieldDisplayOrder": "Display Order",
+        "filesCardTitle": "Brand Files",
+        "filesCardSubtitle": "Upload PDF files and images",
+        "fieldSizeChart": "Size Chart (PDF/Image)",
+        "fieldCatalogPdf": "Catalog PDF",
+        "buttonUpload": "Upload File",
+        "currentFile": "Current File",
+        "videoSliderCardTitle": "Video Slider",
+        "videoSliderCardSubtitle": "Add HTML code for video slider",
+        "fieldVideoSliderHtml": "Video Slider HTML",
+        "helpVideoSliderHtml": "Paste your HTML code for video slider here. This can include iframe, video tags, or custom HTML."
+      }
+    }
+  }
+}
+

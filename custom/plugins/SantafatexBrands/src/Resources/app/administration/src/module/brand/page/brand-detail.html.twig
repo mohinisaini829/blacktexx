@@ -1,0 +1,145 @@
+<div class="brand-detail">
+    <sw-page class="sw-santafatex-brand-detail">
+        <template slot="smart-bar">
+            <sw-smart-bar
+                :item="identifier"
+                :detailRoute="'santafatex.brands.index'"
+                :allowBack="true"
+            >
+                <template slot="smart-bar-header">
+                    <h2>
+                        <span v-if="isNewBrand">{{ $t('sw-santafatex.brands.detail.titleNew') }}</span>
+                        <span v-else>{{ identifier }}</span>
+                    </h2>
+                </template>
+
+                <template slot="smart-bar-actions">
+                    <sw-button
+                        v-tooltip="{
+                            message: $tc('sw-biz-admin.detail.buttonCancel'),
+                            appearance: 'dark'
+                        }"
+                        @click="onCancel"
+                    >
+                        {{ $t('sw-santafatex.brands.detail.buttonCancel') }}
+                    </sw-button>
+
+                    <sw-button
+                        variant="primary"
+                        :isLoading="isLoading"
+                        :disabled="isLoading"
+                        @click="saveBrand"
+                    >
+                        {{ $t('sw-santafatex.brands.detail.buttonSave') }}
+                    </sw-button>
+                </template>
+            </sw-smart-bar>
+        </template>
+
+        <template slot="content">
+            <div class="sw-santafatex-brand-detail__content">
+                <sw-card
+                    :title="$t('sw-santafatex.brands.detail.generalCardTitle')"
+                    :subtitle="$t('sw-santafatex.brands.detail.generalCardSubtitle')"
+                >
+                    <sw-field
+                        v-model="brand.name"
+                        type="text"
+                        :label="$t('sw-santafatex.brands.detail.fieldName')"
+                        :placeholder="placeholder('Brand Name')"
+                        :error="nameError"
+                        required
+                    />
+
+                    <sw-field
+                        v-model="brand.description"
+                        type="textarea"
+                        :label="$t('sw-santafatex.brands.detail.fieldDescription')"
+                        :placeholder="placeholder('Brand Description')"
+                        :error="descriptionError"
+                    />
+
+                    <sw-field
+                        v-model="brand.active"
+                        type="checkbox"
+                        :label="$t('sw-santafatex.brands.detail.fieldActive')"
+                    />
+
+                    <sw-field
+                        v-model="brand.displayOrder"
+                        type="number"
+                        :label="$t('sw-santafatex.brands.detail.fieldDisplayOrder')"
+                    />
+                </sw-card>
+
+                <sw-card
+                    :title="$t('sw-santafatex.brands.detail.filesCardTitle')"
+                    :subtitle="$t('sw-santafatex.brands.detail.filesCardSubtitle')"
+                >
+                    <div class="sw-santafatex-brand-detail__file-upload">
+                        <div class="sw-santafatex-brand-detail__file-group">
+                            <label>{{ $t('sw-santafatex.brands.detail.fieldSizeChart') }}</label>
+                            <div class="sw-santafatex-brand-detail__file-input-wrapper">
+                                <input
+                                    type="file"
+                                    ref="sizeChartInput"
+                                    accept=".pdf,.jpg,.jpeg,.png,.gif"
+                                    @change="onSizeChartFileUpload"
+                                />
+                                <sw-button
+                                    variant="primary"
+                                    @click="$refs.sizeChartInput.click()"
+                                >
+                                    {{ $t('sw-santafatex.brands.detail.buttonUpload') }}
+                                </sw-button>
+                            </div>
+                            <div v-if="brand.sizeChartPath" class="sw-santafatex-brand-detail__file-info">
+                                <span class="label">{{ $t('sw-santafatex.brands.detail.currentFile') }}:</span>
+                                <a :href="brand.sizeChartPath" target="_blank">{{ brand.sizeChartPath }}</a>
+                            </div>
+                        </div>
+
+                        <div class="sw-santafatex-brand-detail__file-group">
+                            <label>{{ $t('sw-santafatex.brands.detail.fieldCatalogPdf') }}</label>
+                            <div class="sw-santafatex-brand-detail__file-input-wrapper">
+                                <input
+                                    type="file"
+                                    ref="catalogInput"
+                                    accept=".pdf,.jpg,.jpeg,.png,.gif"
+                                    @change="onCatalogFileUpload"
+                                />
+                                <sw-button
+                                    variant="primary"
+                                    @click="$refs.catalogInput.click()"
+                                >
+                                    {{ $t('sw-santafatex.brands.detail.buttonUpload') }}
+                                </sw-button>
+                            </div>
+                            <div v-if="brand.catalogPdfPath" class="sw-santafatex-brand-detail__file-info">
+                                <span class="label">{{ $t('sw-santafatex.brands.detail.currentFile') }}:</span>
+                                <a :href="brand.catalogPdfPath" target="_blank">{{ brand.catalogPdfPath }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </sw-card>
+
+                <sw-card
+                    :title="$t('sw-santafatex.brands.detail.videoSliderCardTitle')"
+                    :subtitle="$t('sw-santafatex.brands.detail.videoSliderCardSubtitle')"
+                >
+                    <sw-field
+                        v-model="brand.videoSliderHtml"
+                        type="textarea"
+                        :label="$t('sw-santafatex.brands.detail.fieldVideoSliderHtml')"
+                        :placeholder="placeholder('Paste HTML code here')"
+                        :error="videoSliderHtmlError"
+                        rows="8"
+                    />
+                    <div class="sw-santafatex-brand-detail__help-text">
+                        {{ $t('sw-santafatex.brands.detail.helpVideoSliderHtml') }}
+                    </div>
+                </sw-card>
+            </div>
+        </template>
+    </sw-page>
+</div>

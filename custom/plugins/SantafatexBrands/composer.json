@@ -1,0 +1,32 @@
+{
+    "name": "santafatex/brands",
+    "description": "Brand management module with file uploads for size charts, video sliders, and catalogs",
+    "version": "1.0.0",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Santafatex"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.4|~6.5|~6.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Santafatex\\Brands\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Santafatex\\Brands\\SantafatexBrands",
+        "plugin-icon": "src/Resources/config/plugin.png",
+        "label": {
+            "de-DE": "Santafatex Brands",
+            "en-GB": "Santafatex Brands"
+        },
+        "description": {
+            "de-DE": "Verwaltungsmodul für Marken mit Datei-Uploads für Größentabellen, Video-Schieber und Kataloge",
+            "en-GB": "Brand management module with file uploads for size charts, video sliders, and catalogs"
+        }
+    }
+}

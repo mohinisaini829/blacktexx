@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<privileges>
+    <privilege key="santafatex_brands.viewer" />
+    <privilege key="santafatex_brands.editor" />
+    <privilege key="santafatex_brands.creator" />
+</privileges>

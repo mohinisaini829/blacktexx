@@ -151,7 +151,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 /************************/
 .is-ctl-product {
+    overflow-x: hidden;
     .cms-section {
+        overflow:inherit;
         .product-detail-media{
             position: relative;
             .image-badges {
@@ -191,13 +193,13 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
                 
             }
         }
-        .cms-block-container-row {
-            position: relative;
-        }
         .product-detail-buy {
-            position: sticky;
-            top: 90px;
-            right: 0;
+            position:relative;
+            .cms-element-buy-box {
+                position: sticky;
+                top: 0;
+                right: 0;
+            }
         }
         .product-detail-buy {
             h1 {

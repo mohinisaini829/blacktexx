@@ -1,0 +1,7 @@
+build:
+  zip:
+    pack:
+      - composer.json
+      - SantafatexBrands.php
+      - src/
+      - resources/

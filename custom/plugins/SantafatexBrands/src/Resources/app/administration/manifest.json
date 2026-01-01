@@ -1,0 +1,8 @@
+{
+  "viewName": "administration",
+  "entryPoints": {
+    "sw-admin": [
+      "src/main.js"
+    ]
+  }
+}
