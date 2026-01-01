@@ -1,0 +1,124 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/buy-widget.html.twig'%}
+
+{% if page.configuratorSettings %}
+    {% set configuratorSettings = page.configuratorSettings %}
+{% elseif page.product.configurator %}
+    {% set configuratorSettings = page.product.configurator %}
+{% else %}
+    {% set configuratorSettings = page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings'] %}
+{% endif %}
+
+{% block page_product_detail_configurator_include %}
+    {% if page.extensions.bilobaArticleVariantOrderMatrix.elements.showShopwareSelection %}
+        {{ parent() }}
+    {% endif %}
+
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and  page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            %}
+        {# added lastGroupAsMatrixAndOtherGroupsAsSwOptions condition #}
+        {% if (configuratorSettings.elements|length >= 1) or (page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout != "selector") %}
+            {# checking if lastGroupAsMatrixAndOtherGroupsAsSwOptions selected and at least 2 groups are available #}
+            {% if page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "lastGroupAsMatrixAndOtherGroupsAsSwOptions" and configuratorSettings.elements|length >= 2 %}
+                {{ parent() }}
+            {% endif %}
+            
+            {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") == "price" %}
+                {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix.html.twig' %}
+            {% endif %}
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{# added lastGroupAsMatrixAndOtherGroupsAsSwOptions condition #}
+{% block page_product_detail_buy_form %}
+    {% if page.extensions.bilobaArticleVariantOrderMatrix.elements.showShopwareSelection 
+            && config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") != "price" %}
+        {{ parent() }}
+    {% endif %}
+
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and  page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and ((page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "selector" 
+                and configuratorSettings.elements|length >= 1) or page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout != "selector") %}
+    {% endif %}
+
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and  page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true 
+            and ((page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "selector" 
+                and configuratorSettings.elements|length >= 1) or page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout != "selector") %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{# stack price table in product-detail #}
+{% block page_product_detail_price %}
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true %}
+        {# if set true else default alway false #}
+        {% set hiddeStackPriceTable = config("BilobaArticleVariantOrderMatrix.config.stackPriceTableDisable")|default(false) %}
+
+        {% if hiddeStackPriceTable %}
+            {# empty #}
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_product_detail_delivery_informations %}
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true %}
+        {# if set true else default alway false #}
+        {% set hiddeStackPriceTable = config("BilobaArticleVariantOrderMatrix.config.stackPriceTableDisable")|default(false) %}
+
+        {% if hiddeStackPriceTable %}
+            {# empty #}
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_product_detail_ordernumber_container %}
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true
+                and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+                and page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true %}
+        {# if set true else default alway false #}
+        {% set hiddeStackPriceTable = config("BilobaArticleVariantOrderMatrix.config.stackPriceTableDisable")|default(false) %}
+
+        {% if hiddeStackPriceTable %}
+            {# empty #}
+        {% else %}
+            {# {{ parent() }} #}
+            {# hide product number #}
+        {% endif %}
+    {% elseif config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") != true %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_product_detail_tax %}
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true %}
+        {# if set true else default alway false #}
+        {% set hiddeStackPriceTable = config("BilobaArticleVariantOrderMatrix.config.stackPriceTableDisable")|default(false) %}
+
+        {% if hiddeStackPriceTable %}
+            {# empty #}
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

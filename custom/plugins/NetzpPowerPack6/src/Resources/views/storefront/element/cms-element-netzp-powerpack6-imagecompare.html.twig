@@ -1,0 +1,44 @@
+{% block netzp_powerpack6_imagecompare %}
+{% if element.data.image1.media and element.data.image2.media %}
+    {% set style="height: " ~ element.config.height.value ~ 'rem; width: 100%;' %}
+    {% set smoothing = element.config.smoothing.value === true ? "true" : "false" %}
+    {% set addCircle = element.config.addCircle.value === true ? "true" : "false" %}
+    {% set verticalMode = element.config.verticalMode.value === true ? "true" : "false" %}
+
+    <div class="netzp-powerpack6-imagecompare-element"
+         id="imagecompare_{{ element.id }}">
+        <div id="imagecompare_images_{{ element.id }}"
+             style="{{ style }}">
+            {% sw_thumbnails 'pp_imagecompare_thumbnail1' with {
+                media: element.data.image1.media,
+                attributes: {
+                    'alt':   element.data.image1.media.translated.alt ?: '',
+                    'title': element.data.image1.media.translated.title ?: ''
+                }
+            } %}
+
+            {% sw_thumbnails 'pp_imagecompare_thumbnail2' with {
+                media: element.data.image2.media,
+                attributes: {
+                    'alt':   element.data.image2.media.translated.alt ?: '',
+                    'title': element.data.image2.media.translated.title ?: ''
+                }
+            } %}
+        </div>
+
+        <template data-netzp-powerpack6-imagecompare
+                  data-netzp-powerpack6-imagecompare-options='{
+                        "el": "#imagecompare_images_{{ element.id }}",
+                        "fluidMode": true,
+                        "smoothing": {{ smoothing }},
+                        "addCircle": {{ addCircle }},
+                        "verticalMode": {{ verticalMode }},
+                        "labelBefore": "{{ element.data.labelBefore }}",
+                        "labelAfter": "{{ element.data.labelAfter }}",
+                        "controlColor": "{{ element.config.controlColor.value }}",
+                        "startingPoint": {{ element.config.startingPoint.value }}
+                  }'>
+        </template>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,4 @@
+{% block zenit_notification_bar_info %}
+    {% set infoText = "zenit.notificationBar.infoText"|trans({"%placeholder%": zenNotificationBar.infoText}) %}
+    <p class="notification-infotext text-{{ zenNotificationBar.infoTextAlign }}">{{ infoText | raw }}</p>
+{% endblock %}

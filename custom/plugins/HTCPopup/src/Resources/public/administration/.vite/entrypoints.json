@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/htcpopup/administration/",
+  "entryPoints": {
+    "h-t-c-popup": {
+      "css": [
+        "/bundles/htcpopup/administration/assets/h-t-c-popup-Dson0_8R.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/htcpopup/administration/assets/h-t-c-popup-B5c3Tep6.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

@@ -1,0 +1,37 @@
+{
+    "acris-cookie-group": {
+        "general": {
+            "mainMenuItemGeneral": "Cookies",
+            "placeholderSearchBar": "Zoek cookies",
+            "description": "Bekijk cookies die in de winkel zijn gevonden",
+            "labelName": "Cookiegroep"
+        },
+        "list": {
+            "textHeadline": "Cookiegroepen",
+            "buttonAdd": "Toevoegen",
+            "contextMenuEdit": "Bewerken",
+            "contextMenuDelete": "Verwijderen",
+            "columnTitle": "Titel",
+            "columnDescription": "Beschrijving",
+            "textDeleteConfirm": "Wilt u de cookiegroep verwijderen",
+            "modalTitleDelete": "Verwijder cookiegroep",
+            "buttonCancel": "Annuleren",
+            "buttonDelete": "Verwijderen",
+            "contentEmpty": "Er zijn geen cookiegroepen"
+        },
+        "detail": {
+            "textHeadline": "Instellingen cookiebeleid groep",
+            "buttonCancel": "Annuleren",
+            "buttonSave": "Opslaan",
+            "fieldTitleLabel": "Titel",
+            "fieldTitlePlaceholder": "Voer de titel van de cookiegroep in",
+            "fieldDescriptionLabel": "Beschrijving",
+            "fieldDescriptionPlaceholder": "Voer beschrijving in",
+            "cardTitle": "Klantinformatie",
+            "notificationSaveErrorMessage": "Er is een fout opgetreden bij het opslaan van de cookiegroep.",
+            "notificationSaveSuccessMessage": "De cookiegroep is succesvol opgeslagen.",
+            "notificationSaveSuccessMessageTitle": "Succes",
+            "notificationSaveErrorMessageTitle": "Fout"
+        }
+    }
+}

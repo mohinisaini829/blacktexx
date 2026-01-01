@@ -1,0 +1,164 @@
+<script type="text/javascript">
+    window.bilobaVariantIsCloseout = {% if childProduct.isCloseout == true %}true{% else %}false{% endif %};
+</script>
+{% set variantMatrixPosition = config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") %}
+{% set variantMatrixLayout = page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout %}
+{% set VariantMatrixStockQuantityDisplayThresholdHigh = config("BilobaArticleVariantOrderMatrix.config.VariantMatrixStockQuantityDisplayThresholdHigh") %}
+{% set VariantMatrixStockQuantityDisplayThresholdLow = config("BilobaArticleVariantOrderMatrix.config.VariantMatrixStockQuantityDisplayThresholdLow") %}
+{% set VariantMatrixImageChange = config("BilobaArticleVariantOrderMatrix.config.changeImageOnClickAmountField") %}
+{% if bilobaVariantMatrixListingInline == true %}
+    {% set VariantMatrixImageChange = false %}
+{% endif %}
+
+{% set imageChangeConfig = {
+    url: url('frontend.biloba.article-variant-order-matrix.load-imagegallery', { variantId: key }),
+} %}
+
+{# Variant options ids variations in the column #}
+{% if (config("BilobaArticleVariantOrderMatrix.config.VariantMatrixDisableIfNotInstock") == true) or (childProduct.isCloseout) %}
+    {% if childProduct.availableStock > 0 && childProduct.active != false %}
+        {% set condition = 'enabled' %}
+    {% else %}
+        {% set condition = 'disabled' %}
+    {% endif %}
+{# if VariantMatrixDisableIfNotInstock is not checked #}
+{% else %}
+    {% if childProduct.active != true %}
+        {% set condition = 'disabled' %}
+    {% else %}
+        {% set condition = 'enabled' %}
+    {% endif %}
+{% endif %}
+
+{% block page_product_detail_buy_quantity %}
+    {# checking if maxPurchase value set #}
+    {% if childProduct.maxPurchase > 0 %}
+        {# if set check if it is greater than availableStock or Clearance sale true #}
+        {% if childProduct.availableStock <= childProduct.maxPurchase and childProduct.isCloseout %}
+            {# set maxQuantity to availableStock#}
+            {% set maxQuantity = childProduct.availableStock %}
+        {% else %}
+            {% set maxQuantity = childProduct.maxPurchase %}
+        {% endif %}
+    {# if maxPurchase is < or = 0 then we will use the global max quanity value #}
+    {% else %}
+        {# core.cart.maxQuantity is the global max quantity value #}
+        {% if childProduct.availableStock <= config("core.cart.maxQuantity") and childProduct.isCloseout %}
+            {# set maxQuantity to availableStock #}
+            {% set maxQuantity = childProduct.availableStock %}
+        {% else %}
+            {% set maxQuantity = config("core.cart.maxQuantity") %}
+        {% endif %}
+    {% endif %}
+
+    {% set purchaseSteps = childProduct.purchaseSteps %}
+
+    {% if purchaseSteps <= 0 %}
+        {% set purchaseSteps = 1 %}
+    {% endif %}
+
+    {% if childProduct.calculatedPrices|length > 0 %}
+        {% set variantPrice = childProduct.calculatedPrices.first().unitPrice %}
+        {% set calculatedPricesArrayExist = "false" %}
+        {% set calculatedPricesPriceArray = [] %}
+        {% set calculatedPricesQuantityArray = [] %}
+        {% set totalPriceActivate = config("BilobaArticleVariantOrderMatrix.config.totalPriceActivate") %}
+
+        {# totalPrice active #}
+        {% if totalPriceActivate != false %}
+            {% for calculatedPrice in childProduct.calculatedPrices.getElements() %}                
+                {% set calculatedPricesQuantityArray = calculatedPricesQuantityArray|merge([calculatedPrice.getQuantity()]) %}
+                {% set calculatedPricesPriceArray = calculatedPricesPriceArray|merge([calculatedPrice.getUnitPrice()]) %}
+            {% endfor %}
+
+            {% set calculatedPricesArrayExist = "true" %}
+        {% else %}
+            {% set variantPrice = childProduct.calculatedPrices.first().unitPrice %}
+            {% set calculatedPricesArrayExist = "false" %}
+        {% endif %}
+    {% else %}
+        {% set variantPrice = childProduct.calculatedPrice.unitPrice %}
+        {% set calculatedPricesArrayExist = "false" %}
+    {% endif %}
+
+    {% if childProduct.availableStock > 0 %}
+        <select data-attribute-select-price="0" 
+                name="lineItems[{{ key }}][quantity]" 
+                max="{{ childProduct.availableStock }}"
+                class="form-control form-select form-select-lg product-detail-quantity-select variant-matrix-quantity" {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixDisableIfNotInstock") %} 
+                data-check-max-stock="true" 
+                data-attribute-max-stock="{{ childProduct.availableStock }}"{% else %}{% endif %} 
+                data-bit-variant-id="{{ key }}"
+                data-attribute-purchase-steps="{{ purchaseSteps }}" 
+                data-attribute-min-purchase="{{ childProduct.minPurchase }}" 
+                data-attribute-max-purchase="{{ childProduct.maxPurchase }}" 
+                data-attribute-variant-price="{% if childProduct.calculatedPrices|length == 0 %}{{variantPrice}}{% else %}0{% endif %}" 
+                {{ condition }} 
+                style="{% if variantMatrixPosition == 'price' and not(variantMatrixLayout == 'standard') %}width: 90%!important;{% endif %}"
+                {% if VariantMatrixImageChange %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}>
+            <option value="0">
+                0 {% if page.product.packUnit %} {{ page.product.packUnit }}{% endif %}
+            </option>
+            {% set calculatedPricesQuantityHelperIndex = 0 %}
+            {% set calculatedPriceFromArray = calculatedPricesPriceArray[calculatedPricesQuantityHelperIndex] %}
+            
+            {% for quantity in range(childProduct.minPurchase, maxQuantity,(purchaseSteps)) %}
+                
+                {% if quantity > calculatedPricesQuantityArray[calculatedPricesQuantityHelperIndex] and calculatedPricesQuantityHelperIndex +1 != calculatedPricesQuantityArray|length %}
+                    {% set calculatedPricesQuantityHelperIndex = calculatedPricesQuantityHelperIndex + 1 %}{{calculatedPricesPriceArray[calculatedPricesQuantityHelperIndex]}}
+                    {% set calculatedPriceFromArray = calculatedPricesPriceArray[calculatedPricesQuantityHelperIndex] %}
+                {% endif %}
+
+                <option value="{{ quantity }}" data-attribute-variant-price="{{calculatedPriceFromArray}}">{{ quantity}}</option>
+            {% endfor %}
+        </select>
+    {% else %}
+        <select data-attribute-select-price="0" 
+                name="lineItems[{{ key }}][quantity]"
+                class="form-control form-select form-select-lg product-detail-quantity-select variant-matrix-quantity" {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixDisableIfNotInstock") %} 
+                data-check-max-stock="true" 
+                data-attribute-max-stock="{{ childProduct.availableStock }}"{% else %}{% endif %} 
+                data-bit-variant-id="{{ key }}"
+                data-attribute-purchase-steps="{{ purchaseSteps }}" 
+                data-attribute-min-purchase="{{ childProduct.minPurchase }}" 
+                data-attribute-max-purchase="{{ childProduct.maxPurchase }}" 
+                data-attribute-variant-price="{% if childProduct.calculatedPrices|length == 0 %}{{variantPrice}}{% else %}0{% endif %}" 
+                {{ condition }} 
+                style="{% if variantMatrixPosition == 'price' and not(variantMatrixLayout == 'standard')  %}width: 90%!important;{% endif %}"
+                {% if VariantMatrixImageChange %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                >
+
+                {% set calculatedPricesQuantityHelperIndex = 0 %}
+                {% set calculatedPriceFromArray = calculatedPricesPriceArray[calculatedPricesQuantityHelperIndex] %}
+
+            {% for quantity in range(0, maxQuantity, purchaseSteps) %}
+
+                {% if quantity > calculatedPricesQuantityArray[calculatedPricesQuantityHelperIndex] and calculatedPricesQuantityHelperIndex +1 != calculatedPricesQuantityArray|length %}
+                    {% set calculatedPricesQuantityHelperIndex = calculatedPricesQuantityHelperIndex + 1 %}{{calculatedPricesPriceArray[calculatedPricesQuantityHelperIndex]}}
+                    {% set calculatedPriceFromArray = calculatedPricesPriceArray[calculatedPricesQuantityHelperIndex] %}
+                {% endif %}
+
+                <option value="{{ quantity }}" data-attribute-variant-price="{{calculatedPriceFromArray}}">
+                    {{ quantity }}{% if page.product.packUnit %} {{ page.product.packUnit }}{% endif %}
+                </option>
+            {% endfor %}
+        </select>
+    {% endif %}
+    {# stock is only displayed behind dropdown and input field if 1.Group as selection, 2. group as matrix isnt chosen #}
+    {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixShowStockQuantity") == true and variantMatrixLayout == 'standard' %}
+
+        {% if (VariantMatrixStockQuantityDisplayThresholdHigh is defined) and (childProduct.availableStock > VariantMatrixStockQuantityDisplayThresholdHigh) %}
+            <span class="variant-matrix-show-stock higher">&gt; {{ VariantMatrixStockQuantityDisplayThresholdHigh }} <br></span>
+        {% elseif (VariantMatrixStockQuantityDisplayThresholdLow is defined) and (childProduct.availableStock < VariantMatrixStockQuantityDisplayThresholdLow) %}
+            
+            {% if childProduct.availableStock == 0 %}
+                <span class="variant-matrix-show-stock empty">{{childProduct.availableStock}}</span>
+            {% else %}
+                <span class="variant-matrix-show-stock lower">&lt; {{ VariantMatrixStockQuantityDisplayThresholdLow }} <br></span>
+            {% endif %}
+        {# default if both are defined and availableStock = VariantMatrixStockQuantityDisplayThresholdLow #}
+        {% else %}
+            <span class="variant-matrix-show-stock equals">{{childProduct.availableStock}} <br></span>
+        {% endif %}
+    {% endif %}
+{% endblock %}

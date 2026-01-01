@@ -1,0 +1,37 @@
+.finishing-price-table-text{
+    display: none;
+    &.is-active{
+        display: block;
+    }
+}
+.finishing-price-table-text{
+    margin-top: 10px;
+    table {
+        border-top: 1px solid $border-color !important;
+        border-bottom: 1px solid $border-color !important;
+        width: 100% !important;
+        tr:first-child{
+            background: #eee;
+            border-bottom: 1px solid $border-color !important;
+            td, th{
+                text-align: center;
+                padding: 0.625rem;
+                color: $body-color;
+            }
+        }
+        td:first-child{
+            background: #eee;
+            border-right: 1px solid $border-color !important;
+            color: $body-color;
+            text-align: center;
+            padding: 0.625rem;
+        }
+        td, th{
+            padding: 0.3125rem 0.625rem;
+            width: auto !important;
+            border-right: 1px solid $border-color !important;
+            border-left: 1px solid $border-color !important;
+            color: lighten($body-color, 15%);
+        }
+    }
+}

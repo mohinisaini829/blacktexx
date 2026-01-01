@@ -1,0 +1,62 @@
+{% block block_netzp_powerpack6_grid6 %}
+    {% set columns = 5 %}
+    {% set id = element.id %}
+
+    <div class="container-fluid">
+        <div class="row">
+        {% block block_netzp_powerpack6_grid6_column1 %}
+            {% set element = block.slots.getSlot('column1') %}
+            <div class="col-sm-12 col-md-6 col-lg mb-3 mb-lg-0" data-cms-element-id="{{ id }}">
+                {% block block_netzp_powerpack6_grid6_column1_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block block_netzp_powerpack6_grid6_column2 %}
+            {% set element = block.slots.getSlot('column2') %}
+            <div class="col-sm-12 col-md-6 col-lg mb-3 mb-lg-0" data-cms-element-id="{{ id }}">
+                {% block block_netzp_powerpack6_grid6_column2_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block block_netzp_powerpack6_grid6_column3 %}
+            {% set element = block.slots.getSlot('column3') %}
+            <div class="col-sm-12 col-md-6 col-lg mb-3 mb-lg-0" data-cms-element-id="{{ id }}">
+                {% block block_netzp_powerpack6_grid6_column3_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block block_netzp_powerpack6_grid6_column4 %}
+            {% set element = block.slots.getSlot('column4') %}
+            <div class="col-sm-12 col-md-6 col-lg mb-3 mb-lg-0" data-cms-element-id="{{ id }}">
+                {% block block_netzp_powerpack6_grid6_column4_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block block_netzp_powerpack6_grid6_column5 %}
+            {% set element = block.slots.getSlot('column5') %}
+            <div class="col-sm-12 col-md-6 col-lg mb-3 mb-lg-0" data-cms-element-id="{{ id }}">
+                {% block block_netzp_powerpack6_grid6_column5_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block block_netzp_powerpack6_grid6_column6 %}
+            {% set element = block.slots.getSlot('column6') %}
+            <div class="col-sm-12 col-md-6 col-lg" data-cms-element-id="{{ id }}">
+                {% block block_netzp_powerpack6_grid6_column6_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+        </div>
+    </div>
+{% endblock %}

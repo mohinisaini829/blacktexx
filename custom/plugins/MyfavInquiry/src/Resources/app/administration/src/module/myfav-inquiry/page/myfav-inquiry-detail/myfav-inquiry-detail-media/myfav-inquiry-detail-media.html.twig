@@ -1,0 +1,21 @@
+<div class="myfav-inquiry-detail-media">
+  <!-- Thumbnail Image (Icon) -->
+  <img
+    v-if="mediaData"
+    :src="mediaData"
+    alt="Media Thumbnail"
+    class="media-thumbnail"
+    style="cursor: pointer;"
+  />
+
+  <!-- Full-size Image, will be downloaded on click -->
+  <div class="full-size-image">
+    <img
+      v-if="mediaData"
+      :src="mediaData"
+      alt="Full-size Image"
+      class="media-full-size"
+      style="display: none;"  <!-- Initially hidden, can be revealed on hover or click -->
+    />
+  </div>
+</div>

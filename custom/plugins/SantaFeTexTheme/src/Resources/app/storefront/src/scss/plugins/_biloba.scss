@@ -1,0 +1,36 @@
+.biloba-variant-matrix-button-container {
+  position: relative;
+  margin-top: 10px;
+}
+
+.bit-variant-button {
+  .icon {
+    margin-right: .25rem;
+  }
+  &:disabled {
+    .icon {
+      color: $gray-300;
+    }
+
+    &:hover:before {
+      content: attr(data-title);
+      position: absolute;
+      bottom: 100%;
+      font-size: 14px;
+      text-transform: none;
+      color: $primary;
+      left: 0;
+      top: -35px;
+      display: block;
+      width: 100%;
+      text-align: left;
+      line-height: 16px;
+      white-space: normal;
+    }
+  }
+}
+@include media-breakpoint-up(lg) {
+  .biloba-variant-matrix-button-container {
+    margin-bottom: 2rem;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/vio-manufacturer-video-slider--gohlyPG.js",
+    "name": "vio-manufacturer-video-slider",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/vio-manufacturer-video-slider-DXsfBg4v.css"
+    ]
+  }
+}

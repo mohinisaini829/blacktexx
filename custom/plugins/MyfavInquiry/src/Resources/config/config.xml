@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Basic Configuration</title>
+        <title lang="de-DE">Grundeinstellungen</title>
+
+        <input-field type="int">
+            <name>logoCount</name>
+            <copyable>true</copyable>
+            <label>Number of logos in the request form</label>
+            <label lang="de-DE">Anzahl der Logos im Anfrageformular</label>
+            <defaultValue>3</defaultValue>
+        </input-field>
+
+        <input-field type="url">
+            <name>titleImageSuccessPage</name>
+            <copyable>true</copyable>
+            <label>URL des Titelbildes auf der Success-Seite</label>
+            <label lang="de-DE">URL des Titelbildes auf der Success-Seite</label>
+            <defaultValue></defaultValue>
+        </input-field>
+    </card>
+</config>

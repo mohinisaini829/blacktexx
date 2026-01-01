@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Settings</title>
+        <title lang="de-DE">Einstellungen</title>
+
+        <input-field type="bool">
+            <name>provideDirectLinks</name>
+            <label>Direct links to variant</label>
+            <label lang="de-DE">Varianten verlinken</label>
+            <helpText>If activated color indicator will act as link to product variant</helpText>
+            <helpText lang="de-DE">Farbvariantenkacheln fungieren als Link zur Variante (wenn aktiv)</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>usePropertyMedia</name>
+            <label>Display property images</label>
+            <label lang="de-DE">Eigenschaftsbilder anzeigen</label>
+            <helpText>Instead of color codes images can be assigned to a property. Activate this option to display assigned images.</helpText>
+            <helpText lang="de-DE">Für Produkteigenschaften können neben Farbcodes auch Bilder konfiguriert werden. Ist diese Option aktiv, werden diese Bilder anstelle einfacher Farbkacheln ausgegeben.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>useVariantConfigurationMedia</name>
+            <label>Display assigned variant media</label>
+            <label lang="de-DE">Storefront-Medien der Varianten anzeigen</label>
+            <helpText>At the (Product » Variants » Storefront presentation » Assigned media) variant preview images can be configured. If this option is active those images will be used instead of the property's color code or image.</helpText>
+            <helpText lang="de-DE">In der Administration (Produkt » Varianten » Storefront-Darstellung » Medien) können für die Varianten explizit Vorschaubilder konfiguriert werden. Ist diese Option aktiv, wird das jeweilige Bild anstelle des Farbcodes oder des Eigenschaftsbildes ausgegeben.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>enablePreview</name>
+            <label>Preview on Mouseover</label>
+            <label lang="de-DE">Vorschau bei Mouseover</label>
+            <helpText>If activated mouseover on color indicators will update product image on listing page if different cover image is assigned to variant</helpText>
+            <helpText lang="de-DE">Bei Mouseover auf eine Farbkachel wird das Produktbild in der Kategorieansicht aktualisiert, insofern der Variante ein anderes Vorschaubild zugeordnet wurde.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>maxIndicators</name>
+            <label>Variants to display</label>
+            <label lang="de-DE">max. Anzahl der Farboptionen</label>
+            <defaultValue>5</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>moreColorsIndicator</name>
+            <label>Show indicator if more colors are available than displayed</label>
+            <label lang="de-DE">Anzeigen, dass weitere Farben existieren als ausgegeben</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Layout</title>
+        <title lang="de-DE">Layout</title>
+
+        <input-field type="bool">
+            <name>isRound</name>
+            <label>Output round indicators</label>
+            <label lang="de-DE">Ausgabe runder Indikatoren</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>size</name>
+            <label>Size in Px</label>
+            <label lang="de-DE">Größe in Px</label>
+            <defaultValue>25</defaultValue>
+        </input-field>
+
+    </card>
+</config>

@@ -1,0 +1,8 @@
+{% block acris_cookie_consent_permission_buttons_accept_only_functional %}
+    {% if cookieConfig.showAcceptOnlyFunctionalButton %}
+        <button {% if cookieConfig.layout == "modal" %}data-bs-dismiss="modal"{% endif %} id="ccAcceptOnlyFunctional"
+                class="cookie-consent-accept-only-functional-button btn {{ cookieConfig.displayButtonFunctionalCookiesType }} cookie-consent-button-margin" aria-label="{{ "acrisCookieConsent.acceptOnlyFunctionalButton"|trans }}">
+            {{ "acrisCookieConsent.acceptOnlyFunctionalButton"|trans }}
+        </button>
+    {% endif %}
+{% endblock %}

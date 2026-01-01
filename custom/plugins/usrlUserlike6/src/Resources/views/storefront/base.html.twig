@@ -1,0 +1,8 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_body_script %}
+{{ parent() }}
+{% if app.request.cookies.has('_usrlk_accepted') %}
+<script async type="text/javascript" src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/{{ config('usrlUserlike6.config.UserlikeSecret') }}.js"></script>
+{% endif %}
+{% endblock %}

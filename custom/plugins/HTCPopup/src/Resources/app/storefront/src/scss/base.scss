@@ -1,0 +1,143 @@
+.htc-popup_modal {
+	.modal-header {
+		padding: 0;
+
+		.modal-close {
+			&.close {
+				position: absolute;
+			    right: 5px;
+			    top: 5px;
+			    z-index: 100;
+			}
+		}
+	}
+	
+	.modal-body {
+		padding: 0;
+	}	
+	
+}
+
+.htc-popup-overlay {
+	position: fixed; /* Stay in place */
+	z-index: 10; /* Sit on top */
+	opacity: 0;
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	transition: all .4s;
+	&.active {
+		display: flex;
+		opacity: 1;
+		justify-content: center;
+	}
+}
+.htc-popup-overlay.active {
+	z-index: 99;
+}
+
+.htc-popup-content {
+	padding: 15px;
+	margin: auto;
+    display: flex;
+    box-shadow: 0px 0px 3px 3px #777;
+    background-size: cover;
+    position:relative;
+    flex-wrap: wrap;
+}
+
+.htc-popup-container {
+	position: relative;
+	max-width: 100%;
+    height: max-content;
+    top: 50%;
+    transform: translateY(-50%);
+} 
+
+.htc-popup-close {
+	position: absolute;
+    right: 5px;
+    top: 5px;
+    font-weight: bold;
+    box-shadow: none;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    width: 24px;
+    line-height: 24px;
+    text-align: center;
+    padding: 0;
+    color: $primary;
+    &:hover,&:active {
+    	color: $secondary; 
+    }
+}
+
+.htc-align- {
+	&top {
+		align-items: flex-start;
+	}
+	&center {
+		align-items: center;
+	}
+	&bottom {
+		align-items: flex-end;
+	}
+}
+
+.htc-justify- {
+	&left {
+		justify-content: flex-start;
+	}
+	&center {
+		justify-content: center;
+	}
+	&right {
+		justify-content: flex-end;
+	}
+	
+}
+
+.htc-popup-buttons {
+	text-align: center;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.htc-popup-button {
+	margin: 0 3px;
+    background: #fff;
+    padding: 11px 35px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    color: #fff;
+    border: none;
+    &:hover {
+    	text-decoration: none;
+    	outline: none;
+    	color: #fff;
+    	background-color: #000;
+    	border-color: #000;
+    }
+}
+
+@media screen and (max-width: 767px) {
+	.htc-popup-content {
+		max-width: 100%;
+		background-clip: content-box;
+	}
+	.htc-popup-close {
+		right: 5px;
+    	top: 5px;
+	}
+}

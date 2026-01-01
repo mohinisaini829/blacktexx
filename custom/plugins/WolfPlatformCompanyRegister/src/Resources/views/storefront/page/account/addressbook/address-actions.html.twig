@@ -1,0 +1,38 @@
+{% sw_extends '@@Storefront/storefront/page/account/addressbook/address-actions.html.twig' %}
+            {% block page_account_address_actions_set_default_billing %}
+                {%  set  WolfCompanyRegister =   config('WolfPlatformCompanyRegister.config')  %}
+                {% if defaultBillingAddress.id != address.id %}
+                    {%  if WolfCompanyRegister.PreventPrivatInviceAddress == true %}
+                        {%  if address.company !=""  %}
+                                <form action="{{ path('frontend.account.address.set-default-address', {'type': 'billing', 'addressId': address.id}) }}"
+                                     method="post">
+
+
+
+                                    <button type="submit"
+                                            title="{{ "account.addressesSetAsDefaultBillingAction"|trans|striptags }}"
+                                            class="btn btn-link address-action-set-default">
+                                        {{ "account.addressesSetAsDefaultBillingAction"|trans|sw_sanitize }}
+                                    </button>
+                                </form>
+                        {%  endif %}
+                    {%  else %}
+                            <form action="{{ path('frontend.account.address.set-default-address', {'type': 'billing', 'addressId': address.id}) }}"
+
+                                  method="post">
+
+
+
+
+
+                                <button type="submit"
+                                        title="{{ "account.addressesSetAsDefaultBillingAction"|trans|striptags }}"
+                                        class="btn btn-link address-action-set-default">
+                                    {{ "account.addressesSetAsDefaultBillingAction"|trans|sw_sanitize }}
+                                </button>
+                            </form>
+                    {% endif %}
+                {% endif %}
+
+            {% endblock %}
+

@@ -1,0 +1,10 @@
+{% block sw_product_detail_content_tabs_advanced_variants %}
+    {% parent() %}
+
+    <sw-tabs-item
+        :route="{ name: 'sas.product.detail.blog-assignment', params: { id: $route.params.id } }"
+        :title="$tc('sas-blog.product.tabLabel.blogAssignment')"
+    >
+        {{ $tc('sas-blog.product.tabLabel.blogAssignment') }}
+    </sw-tabs-item>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% sw_extends '@Storefront/storefront/component/checkout/offcanvas-item.html.twig' %}
+
+{% block component_offcanvas_product_image_inner %}
+    {% if lineItem.payload.customFields.myfav_zweideh_enabled %}
+        <a href="#{#{{ seoUrl('frontend.detail.page', {'productId': referencedId}) }}#}"
+            class="cart-item-img-link"
+            title="{{ label }}">
+            <img class="img-fluid cart-item-img-source" style="width: 100px" src="{{ seoUrl('frontend.myfav.zweideh.tmp.cart.image', {'key': lineItem.payload.lumise_tmp_key, 'tmp_cart_id': lineItem.payload.lumise_tmp_cart_id }) }}" />
+        </a>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block component_offcanvas_product_label %}
+    {% if lineItem.payload.customFields.myfav_zweideh_enabled %}
+        <div class="cart-item-details">
+            {% if type == PRODUCT_LINE_ITEM_TYPE %}
+                {#<a href="{{ seoUrl('frontend.detail.page', {'productId': referencedId}) }}"
+                    class="cart-item-label"
+                    title="{{ label }}">
+                    {{ quantity }}{{ "checkout.quantityTimes"|trans|sw_sanitize }} #}
+                <div class="cart-item-label">{{ label|u.truncate(60, '...', false) }}</div>
+                {# </a> #}
+            {% else %}
+                <div class="cart-item-label">
+                    {{ label|u.truncate(60, '...', false) }}
+                </div>
+            {% endif  %}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block component_offcanvas_product_buy_quantity %}
+    {% if lineItem.payload.customFields.myfav_zweideh_enabled %}
+        <select name="quantity"
+                class="{{ formSelectClass }} quantity-select-{{ id }} js-offcanvas-cart-change-quantity">
+            {% for quantityItem in range(quantityInformation.minPurchase, config('MyfavZweideh.config.maxOrderQty'), quantityInformation.purchaseSteps) %}
+                <option value="{{ quantityItem }}"
+                    {% if quantityItem == quantity %} selected="selected"{% endif %}>
+                    {{ quantityItem }}
+                </option>
+            {% endfor %}
+        </select>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

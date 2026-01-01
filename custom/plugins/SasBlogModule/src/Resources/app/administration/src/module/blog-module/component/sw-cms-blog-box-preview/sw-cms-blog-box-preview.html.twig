@@ -1,0 +1,25 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_cms_blog_box_preview %}
+    <div
+        class="sw-cms-blog-box-preview"
+        :class="{ 'has--text': hasText }"
+    >
+        <div class="sw-cms-blog-box-preview__image">
+            <img
+                :src="assetFilter('/administration/static/img/cms/preview_glasses_small.jpg')"
+                alt="{{ $tc('sas-blog.elements.assignment.preview.label.assignmentTitle') }}"
+            >
+        </div>
+        <div v-if="hasText">
+            <div class="sw-cms-blog-box-preview__name">
+            Blog Headline
+        </div>
+            <div class="sw-cms-blog-box-preview__description">
+            Lorem ipsum dolor sit amet conset...
+        </div>
+        </div>
+        <div class="sw-cms-blog-box-preview__action">
+       Read Article
+    </div>
+    </div>
+{% endblock %}

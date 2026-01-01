@@ -1,0 +1,486 @@
+{
+  "sw-cms": {
+    "netzp-powerpack6": {
+      "sidebarLabelLayouts": "PowerPack layouts",
+      "sidebarLabelElements": "PowerPack elements",
+      "configResponsive": "Responsive configuration",
+      "configResponsiveNoBreakpoint": "Attention: this element is never displayed!",
+      "configResponsiveDeprecation": "Attention: this functionality is now integrated in the Shopware standard and will therefore no longer be available in the <b>next plugin version</b>. Please use only the standard responsive functions under <b>Visibility / Devices</b>!",
+
+      "colorGradient": {
+          "label": "Background color gradient",
+          "color1": "Color 1",
+          "color2": "Color 2",
+          "colorAngle": "Angle"
+      },
+
+      "dates": {
+          "label": "Visibility",
+          "showFrom": "Show from",
+          "showUntil": "until"
+      },
+
+      "rule": {
+          "label": "Rule Builder rule",
+          "info": "Rule"
+      },
+
+      "blocks": {
+        "grid1": {
+          "label": "1 column"
+        },
+        "grid2": {
+          "label": "2 columns"
+        },
+        "grid2-39": {
+          "label": "2 columns (3 / 9)"
+        },
+        "grid2-93": {
+          "label": "2 columns (9 / 3)"
+        },
+        "grid2-48": {
+          "label": "2 columns (4 / 8)"
+        },
+        "grid2-84": {
+          "label": "2 columns (8 / 4)"
+        },
+        "grid3": {
+          "label": "3 columns"
+        },
+        "grid3a": {
+          "label": "3 columns"
+        },
+        "grid4": {
+          "label": "4 columns"
+        },
+        "grid5": {
+          "label": "5 columns"
+        },
+        "grid6": {
+          "label": "6 columns"
+        },
+        "imagetext2": {
+          "label": "Two columns, image/text cards"
+        },
+        "imagetext4": {
+          "label": "Four columns, image/text cards"
+        },
+        "tile1": {
+          "label": "Tile 1"
+        },
+        "tile2": {
+          "label": "Tile 2"
+        },
+        "testimonial": {
+          "label": "Testimonial"
+        },
+        "alert": {
+          "label": "Alert"
+        },
+        "infobar": {
+          "label": "Infobar / Iconbar"
+        },
+        "cta": {
+          "label": "CTA (old)"
+        },
+        "cta2": {
+            "label": "CTA Flex"
+        },
+        "counter": {
+            "label": "Counter"
+        },
+        "tabs": {
+          "label": "Tabs"
+        },
+        "collapse": {
+          "label": "Accordion"
+        },
+        "map": {
+          "label": "Google Map"
+        },
+        "countdown": {
+          "label": "Countdown"
+        },
+        "parallax": {
+          "label": "Parallax image"
+        },
+          "imagecompare": {
+              "label": "Image compare"
+          },
+          "card": {
+              "label": "Action card"
+          }
+      },
+
+      "elements": {
+          "card": {
+              "label": "Action card",
+              "tabs": {
+                  "front": "Front",
+                  "back": "Back",
+                  "config": "Configuration"
+              },
+              "config": {
+                  "image1": "Image front",
+                  "image2": "Image back",
+                  "text1": "Text front",
+                  "text2": "Text back",
+                  "imageCover1": "Cover image",
+                  "imageCover2": "Cover image",
+                  "backgroundColor1": "Background color",
+                  "backgroundColor2": "Background color",
+                  "imageOpacity1": "Image opacity",
+                  "imageOpacity2": "Image opacity",
+                  "color1": "Text color front",
+                  "color2": "Text color back",
+                  "height": "height (rem)",
+                  "icon": "Icon",
+                  "url": "Link",
+                  "urlNewWindow": "Open in new window",
+                  "urlText": "Link text",
+                  "blurText": "Blur text",
+                  "type": {
+                      "label": "Type",
+                      "flip": "Flip",
+                      "reveal": "Reveal",
+                      "blur": "Blur",
+                      "popup": "Popup",
+                      "static": "Static"
+                  }
+              }
+          },
+        "imagecompare": {
+            "label": "Image compare",
+            "config": {
+                "image1": "Image 1",
+                "image2": "Image 2",
+                "height": "Height (rem)",
+                "controlColor": "Control color",
+                "smoothing": "Smoothing",
+                "addCircle": "Circular handle",
+                "verticalMode": "Vertical mode",
+                "startingPoint": "Starting point",
+                "beforeLabel": "Label image 1",
+                "afterLabel": "Label image 2"
+            }
+        },
+        "cta": {
+          "label": "CTA (old)",
+          "config": {
+            "title": "CTA title",
+            "left": "left",
+            "center": "centered",
+            "right": "right",
+            "top": "top",
+            "bottom": "down",
+            "align": {
+              "centercenter": "centered (X + Y)",
+              "lefttop": "left top",
+              "rightbottom": "right bottom"
+            },
+            "auto": "Auto",
+            "contain": "complete image (contain)",
+            "cover": "fixed size (cover)",
+            "tabs": {
+              "main": {
+                "label": "Main"
+              },
+              "layout": {
+                "label": "Layout",
+                "height": "Height (rem)",
+                "borderColor": "Border color",
+                "borderRadius": "Border radius (px)",
+                "autoLayout": "Auto layout",
+                "autoLayoutHelp": "If selected, the elements are positioned automatically. Alternatively, each element (title, text, image, button) can be positioned manually."
+              },
+              "title": {
+                "label": "Title",
+                "title": "Title",
+                "color": "Title color",
+                "backgroundColor": "Title background color",
+                "size": "Size (rem)",
+                "align": "Alignment",
+                "posx": "Horizontal (X) position",
+                "posy": "Vertical (Y) position",
+                "shadow": "Shadow"
+              },
+              "text": {
+                "label": "Text",
+                "text": "Text",
+                "color": "Text color",
+                "backgroundColor": "Text background color",
+                "size": "Size (rem)",
+                "width": "Width (%)",
+                "align": "Alignment",
+                "posx": "Horizontal (X) position",
+                "posy": "Vertical (Y) position",
+                "shadow": "Shadow"
+              },
+              "button": {
+                "label": "Button",
+                "text": "Button text",
+                "size": "Size (rem)",
+                "align": "Alignment",
+                "posx": "Horizontal (X) position",
+                "posy": "Vertical (Y) position",
+                "shadow": "Shadow",
+                "block": "Full width",
+                "rounded": "Rounded",
+                "url": "Url",
+                "targetblank": "Open in new window",
+                "backgroundColor": "Button background color",
+                "color": "Button text color",
+                "borderColor": "Border color"
+              },
+              "images": {
+                "label": "Images",
+                "image": "Image",
+                "imagebackground": "Background image",
+                "backgroundColor": "Background color",
+                "backgroundColorHelp": "Only valid if no background image is selected.",
+                "size": "Size (rem)",
+                "rounded": "Circle",
+                "block": "Full width",
+                "pos": "Position",
+                "posx": "Horizontal pos.",
+                "posy": "Vertical pos.",
+                "mode": "Image mode",
+                "align": "Image position"
+              }
+            }
+          }
+        },
+
+          "cta2": {
+            "label": "CTA Flex",
+              "tabs": {
+                  "main": "Main",
+                  "remove": "Delete this element? This cannot be undone."
+              },
+            "config": {
+                "addElement": "Add new element",
+                "removeElement": "Remove element",
+                "numberOfElements": "Number of elements",
+                "height": "Height",
+                "gap": "Gap",
+                "imageBackground": "Background image",
+                "direction": {
+                    "label": "Direction",
+                    "row": "Horizontal",
+                    "column": "Vertical"
+                },
+                "justifyContent": {
+                    "label": "Justify",
+                    "start": "Start",
+                    "end": "End",
+                    "center": "Center",
+                    "spaceBetween": "Space between",
+                    "spaceAround": "Space around"
+                },
+                "alignItems": {
+                    "label": "Alignment",
+                    "start": "Start",
+                    "center": "Center",
+                    "end": "End",
+                    "stretch": "Stretch"
+                },
+                "imageMode": {
+                    "label": "Image mode",
+                    "auto": "Auto",
+                    "contain": "Contain",
+                    "cover": "Cover"
+                },
+                "imageAlign": {
+                    "label": "Image align",
+                    "centercenter": "Centered",
+                    "lefttop": "Left/Top",
+                    "rightbottom": "Right/Bottom"
+                },
+                "element": {
+                    "type": {
+                        "label": "Type",
+                        "text": "Text",
+                        "button": "Button",
+                        "image": "Image"
+                    },
+                    "contents": "Contents",
+                    "image": "Image",
+                    "imageBackground": "Background image",
+                    "color": "Color",
+                    "backgroundColor": "Background color",
+                    "borderColor": "Border color",
+                    "borderWidth": "Border width (px)",
+                    "fontSize": "Font size",
+                    "width": "Width",
+                    "height": "Height",
+                    "padding": "Padding",
+                    "url": "Link",
+                    "urlNewWindow": "Open in new window",
+                    "alignSelf": {
+                        "label": "Alignment",
+                        "auto": "Auto",
+                        "start": "Start",
+                        "center": "Center",
+                        "end": "End",
+                        "stretch": "Stretch"
+                    },
+                    "buttonMode": {
+                        "label": "Button type",
+                        "primary": "Primary",
+                        "secondary": "Secondary",
+                        "success": "Success",
+                        "danger": "Danger",
+                        "warning": "Warning",
+                        "info": "Info",
+                        "light": "Light",
+                        "dark": "Dark",
+                        "custom": "Custom"
+                    }
+                }
+            }
+          },
+
+          "tabs": {
+          "label": "Tabs",
+          "config": {
+            "numberOfTabs": "Number of tabs",
+            "title": "title",
+            "tabtitle": "Tab title",
+            "tabcontents": "Tab contents"
+          }
+        },
+        "collapse": {
+          "label": "Accordion",
+          "config": {
+            "title": "title",
+            "numberOfItems": "Number of items",
+            "firstItemOpened": "Show first item opened",
+            "itemtitle": "Item title",
+            "itemcontents": "Item contents"
+          }
+        },
+        "testimonial": {
+          "label": "Testimonial",
+          "config": {
+            "image": "Image",
+            "title": "Title",
+            "contents": "Contents",
+            "name": "Name",
+            "name2": "Name (subline)"
+          }
+        },
+        "alert": {
+          "label": "Alert",
+          "config": {
+            "alertType": {
+              "label": "Alert type",
+              "info": "info",
+              "warning": "warning",
+              "error": "error",
+              "success": "success"
+            },
+            "title": "Title (optional)",
+            "contents": "Contents"
+          }
+        },
+        "infobar": {
+          "label": "Infobar / Iconbar",
+          "config": {
+            "numberOfItems": "Number",
+            "item": "Item",
+            "icon": "Icon",
+            "link": "Link",
+            "linkNewWindow": "Open in new window",
+            "iconSize": "Icon size (rem)",
+            "textSize": "Text size (rem)",
+            "iconColor": "Icon color",
+            "textColor": "Text color",
+            "circleColor": "Circle color",
+            "layout": "Layout",
+            "horizontal": "Horizontal",
+            "vertical": "Vertical"
+          }
+        },
+        "html": {
+          "label": "HTML/CSS",
+          "config": {
+            "html": "HTML",
+            "css": "CSS"
+          }
+        },
+        "parallax": {
+          "label": "Parallax image",
+          "config": {
+            "image": "Image",
+            "height": "Height (rem)"
+          }
+        },
+        "countdown": {
+          "label": "Countdown",
+          "config": {
+            "layout": {
+              "title": "Layout",
+              "text": "Text counter",
+              "boxes": "Boxed",
+              "days": "days",
+              "hours": "hours",
+              "minutes": "minutes",
+              "seconds": "seconds"
+            },
+            "textSize": "Text size (rem)",
+            "textAlign": "Text alignment",
+            "enddate": "End date",
+            "title": "Title",
+            "countdown": "Countdown text",
+            "elapsed": "Text after end",
+            "elapsedHide": "Hide after end",
+            "buttontext": "Button Text",
+            "buttonlink": "Button Link",
+            "buttonTargetBlank": "Open in new window",
+            "backgroundColor": "Background color",
+            "textColor": "Text color",
+            "boxColor": "Box color",
+            "buttonColor": "Button back color",
+            "buttonTextColor": "Button text color",
+            "left": "left",
+            "center": "center",
+            "right": "right"
+          }
+        },
+        "counter": {
+            "label": "Counter",
+            "config": {
+                "title": "Title",
+                "text": "Text / Template",
+                "textHelp": "Templates can be used: {counter} {start} {end}",
+                "start": "Start value",
+                "end": "End value",
+                "speed": "Speed",
+                "speedHelp": "Higher values lead to slower counting, default value: 1000",
+                "icon": "Icon",
+                "iconColor": "Icon color",
+                "titleColor": "Title color",
+                "counterColor": "Counter color"
+            }
+        },
+        "map": {
+          "label": "Google Map",
+          "config": {
+            "height": "Height (rem)",
+            "mapType": "Map type",
+            "roadmap": "Street",
+            "satellite": "Satellite",
+            "hybrid": "Hybrid",
+            "terrain": "Terrain",
+            "zoomLevel": "Zoom level",
+            "optIn": "Opt-In",
+            "lat": "Lat",
+            "long": "Long",
+            "allowRouting": "Routing allowed",
+            "contents": "Popup contents"
+          }
+        }
+      }
+    }
+  }
+}

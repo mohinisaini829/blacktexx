@@ -1,0 +1,22 @@
+{% block sas_cms_element_blog_detail_config %}
+    <div class="sw-cms-el-config-blog-detail">
+        {% block sas_cms_element_blog_detail_config_show_meta %}
+        <mt-card
+            :title="$tc('sas-blog.elements.detail.config.showMeta.label')"
+            :hero="false"
+            :is-loading="false"
+            :large="false"
+            class="sw-blog-detail-config-filter"
+        >
+            <mt-checkbox
+                v-model:checked="element.config.showAuthor.value"
+                :label="$tc('sas-blog.elements.detail.config.showMeta.showAuthor')"
+            />
+            <mt-checkbox
+                v-model:checked="element.config.showCategory.value"
+                :label="$tc('sas-blog.elements.detail.config.showMeta.showCategory')"
+            />
+        </mt-card>
+        {% endblock %}
+    </div>
+{% endblock %}

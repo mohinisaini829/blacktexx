@@ -1,0 +1,46 @@
+.acris-settings-content-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+  grid-gap: 40px !important;
+
+  [id^=acris], .acris-settings-item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    .sw-settings-item__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      margin-right: 0;
+    }
+
+    .sw-settings-item__label {
+      font-weight: 400;
+      color: rgb(82, 102, 122);
+      text-decoration: none;
+      text-decoration-color: rgb(82, 102, 122);
+    }
+
+    &:hover {
+      .sw-settings-item__label {
+        font-weight: 600;
+      }
+    }
+
+    .mt-icon > svg {
+      color: #a6ce39 !important;
+      width: 18px !important;
+      height: 18px !important;
+    }
+  }
+}
+
+#sw-settings__content-group-plugins {
+  .mt-icon > svg {
+    color: #a6c836 !important;
+  }
+}

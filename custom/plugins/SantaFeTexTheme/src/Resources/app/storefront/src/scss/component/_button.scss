@@ -1,0 +1,26 @@
+.btn {
+  border-radius: 0;
+
+  &.btn-primary,
+  &.btn-secondary,
+  &.btn-light,
+  &.btn-buy {
+    line-height: 2;
+    font-size: $vio-btn-font-size;
+    font-weight: normal;
+    text-transform: uppercase;
+    .icon {
+      margin-right: .25rem;
+    }
+  }
+
+  &.btn-buy {
+    @extend .btn-light;
+  }
+
+  &.btn-light {
+    .icon {
+      color: $secondary;
+    }
+  }
+}

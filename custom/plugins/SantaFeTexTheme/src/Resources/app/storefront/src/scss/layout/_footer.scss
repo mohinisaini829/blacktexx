@@ -1,0 +1,316 @@
+.footer-bottom,
+.footer-main {
+  background: $vio-header-bg;
+  border-top:1px solid #bcc1c7;
+  .footer-colomn {
+    .footer-first-text {
+      width: 33.333%;
+      @media (max-width: 767px) {
+        width: 100%;
+        border-bottom: 1px solid #bcc1c7;
+        margin: 0;
+        padding: 0 20px !important;
+      }
+      h2 {
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: normal;
+        color: #fff;
+        padding: 2rem 0 .5rem 0;
+        margin: 0;
+        position: relative;
+        @media (max-width: 767px) {
+          padding:.5rem 0;
+          font-size:18px;
+          &::before {
+            content: "+";
+            position: absolute;
+            right: 0;
+            font-size: 36px;
+            color: #878787;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: normal;
+          }
+          &.active::before {
+            content: "";
+            width: 17px;
+            height: 3px;
+            background: #878787;
+            margin-top: 3px;
+            right: 3px;
+          }
+        }
+      }
+      ul {
+        margin-bottom: 1rem;
+      }
+      div a {
+        text-decoration: none;
+        &:hover {
+          color:#c24900;
+        }
+      }
+      &:nth-child(1) {
+        padding-right: 5%;
+        ul.footer-contact-hotline {
+          li {
+            span.icon {
+              margin-top: 3px;
+            }
+          }
+        }
+      }
+      &:nth-child(2) {
+        width: 16%;
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+      }
+      &:nth-child(3) {
+        width: 16%;
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+      }
+      &:nth-child(4) {
+        padding-left: 5%;
+        .container {
+          padding: 0;
+          .cms-element-form .form-content.row {
+            margin: 0;
+            p {
+              padding: 0;
+              margin-bottom: 1rem;
+            }
+            .form-group {
+              input {
+                &:focus {
+                  border-color: #c24900;
+                  outline: 0;
+                  box-shadow: 0 0 0 .2rem rgba(194, 73, 0, .25);
+                }
+              }
+              .btn-newsletter {
+                background: #fff;
+                border:1px  solid #798490;
+                &:active {
+                  background: #fff;
+                  color:#2b3136 !important;
+                }
+              }
+              & + div {
+                padding: 0;
+                .privacy-notice {
+                  .privacy-notice-title {
+                    color: #fff;
+                    margin-bottom: 0;
+                  }
+                  .data-protection-information {
+                    div {
+                      color: #d4d4d4;
+                      button {
+                        color: #fff;
+                        &:hover {
+                          color:#c24900;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .footer-bottom {
+      border:none;
+      padding:0 20px;
+      ul.footer-service-menu-list {
+        border: 1px solid rgba(255,255,255,.75);
+        padding:1rem 15px;
+        @media (max-width: 767px) {
+          margin-top:30px;
+        }
+        li.footer-service-menu-item {
+          a {
+            text-decoration:none;
+            @media (max-width:767px) {
+              font-size: 14px;
+              padding:0;
+            }
+            &:hover {
+              color:#c24900;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer-column-headline,
+  .footer-link,
+  a,
+  & {
+    color: $vio-header-color;
+    font-weight: normal;
+    &:hover {
+      color:#9c3b00;
+    }
+  }
+
+  .footer-column-headline {
+    text-transform: uppercase;
+    font-size: $vio-footer-font-size;
+    font-weight: normal;
+  }
+
+  ul {
+    padding-left: 0;
+    list-style: none;
+
+    &.footer-contact-hotline > li {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid $vio-footer-border-color;
+      font-weight: normal;
+      margin: 1.5rem 0;
+      padding-bottom: 1.5rem;
+      color: $vio-footer-icon-color;
+
+      a {
+        color: $vio-footer-icon-color;
+
+        &:hover {
+          color:#9c3b00;
+        }
+      }
+
+      .icon {
+        margin-right: 1rem;
+        align-self: flex-start;
+        color: $vio-footer-icon-color;
+        height: 2rem;
+        width: 2rem;
+      }
+
+      > * {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .headline {
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #fff;
+      }
+    }
+  }
+
+  .footer-link-item {
+    margin: 1rem 0;
+
+    a {
+      color: $vio-footer-link-color;
+    }
+  }
+
+  a {
+    margin: 0;
+    @include link-hover;
+  }
+
+  .data-protection-information,
+  p {
+    color: $vio-footer-link-color;
+  }
+
+  .btn-newsletter {
+    background-color: #fff;
+    color: $body-color;
+    border: none;
+    border-radius: 0;
+  }
+
+  .footer-column-content{
+    .cms-element-form{
+      .form-group{
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .form-text{
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+.cookie-permission-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  .container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    max-width: 500px;
+    margin: auto;
+    height: 400px;
+    box-shadow: 0 0 20px 2px #9c9898;
+    padding: 20px;
+    background: $white;
+  }
+  .align-items-center{
+    height: 100%;
+  }
+}
+
+.santa--footer-page-links {
+  border: 1px solid rgba(255, 255, 255, .75);
+  border-radius: 3px;
+  margin-top: 30px;
+  padding: 0 15px;
+  .footer-service-menu-list {
+    margin: 0;
+  }
+}
+
+.data-protection-information,
+.footer-vat {
+  a {
+    text-decoration: underline;
+  }
+}
+
+.santa--foo-fb {
+  img {
+    max-width: 40px;
+    margin-right: 10px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .santa--footer-page-links {
+    margin-top: 0;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .footer-main .footer-columns {
+    > *:first-child {
+      padding-right: 5%;
+    }
+
+    > :nth-child(3) {
+      padding-left: 5%;
+    }
+  }
+}

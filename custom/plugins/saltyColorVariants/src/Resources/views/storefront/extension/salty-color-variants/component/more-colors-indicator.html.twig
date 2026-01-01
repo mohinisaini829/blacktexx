@@ -1,0 +1,5 @@
+{% if variant.hasMoreColors == true %}
+    <a href="{{ seoUrl('frontend.detail.page', {'productId': mainId}) }}" class="color-variants--more color-variants--option-isLink" title="{{ 'saltyColorVariants.moreColors' | trans }}">
+        <span class="icon icon-align-justify icon-sm">{% sw_icon 'plus-small' style { 'pack': 'solid' } %}</span>
+    </a>
+{% endif %}

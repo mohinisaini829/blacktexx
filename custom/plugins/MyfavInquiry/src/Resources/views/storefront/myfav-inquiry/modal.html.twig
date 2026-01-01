@@ -1,0 +1,21 @@
+<div class="js-pseudo-modal-template-title-element">
+    {{ 'myfavInquiry.modal.title'|trans|sw_sanitize }}
+</div>
+
+<div class="js-pseudo-modal-template-content-element">
+    <div class="mb-3">
+        {{ 'myfavInquiry.modal.content'|trans|sw_sanitize }}
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <a href="{{ path('frontend.myfav.inquiry.confirm') }}" class="btn btn-outline-primary">
+                {{ 'myfavInquiry.modal.confirmBtn'|trans|sw_sanitize }}
+            </a>
+        </div>
+        <div class="col-12 col-md-6">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                {{ 'myfavInquiry.modal.closeBtn'|trans|sw_sanitize }}
+            </button>
+        </div>
+    </div>
+</div>

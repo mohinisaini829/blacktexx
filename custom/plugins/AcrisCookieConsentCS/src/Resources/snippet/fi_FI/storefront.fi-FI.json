@@ -1,0 +1,16 @@
+{
+    "acrisCookieConsent": {
+        "heading": "Kunnioitamme yksityisyyttäsi",
+        "messageIncludingSave": "Tämä verkkosivusto käyttää evästeitä varmistaakseen, että saat parhaan mahdollisen kokemuksen sivustollamme. Voit muuttaa evästeiden käyttöä koskevaa valintaasi milloin tahansa <a data-bs-dismiss=\"modal\" id=\"ccAcceptButton\" class=\"cookie-consent-accept-button-in-text\" href=\"#\" onclick=\"return false;\">tallentamalla.</a> <a data-ajax-modal=\"true\"\n data-modal-class=\"cookie-consent-permission-footer-modal\" data-url=\"%url%\" href=\"%url%\" title=\"Lisätietoja\">Lisätietoja</a>.",
+        "messageNoSave": "Tämä verkkosivusto käyttää evästeitä varmistaakseen, että saat parhaan mahdollisen kokemuksen sivustollamme...</a> <a data-ajax-modal=\"true\"\n data-modal-class=\"cookie-consent-permission-footer-modal\" data-url=\"%url%\" href=\"%url%\" title=\"Lisätietoja\">Lisätietoja</a>.",
+        "switchActive": "Aktiivinen",
+        "switchInactive": "Ei aktiivinen",
+        "settingsButton": "Evästeasetukset",
+        "acceptOnlyFunctionalButton": "Hyväksy vain toiminnalliset evästeet",
+        "acceptButton": "Hyväksy valitut evästeet",
+        "acceptAllButton": "Hyväksy kaikki evästeet",
+        "footerCmsPageLinkPrefixFirst": "- ",
+        "footerCmsPageLinkPrefixSecond": "- ",
+        "footerCmsPageLinkPrefixThird": "- "
+    }
+}

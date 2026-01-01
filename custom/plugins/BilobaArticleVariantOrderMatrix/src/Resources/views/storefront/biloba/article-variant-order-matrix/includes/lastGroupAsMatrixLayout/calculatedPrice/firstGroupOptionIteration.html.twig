@@ -1,0 +1,26 @@
+{% for firstGroupOption in firstGroup.options|slice(sliceStart, sliceEnd) %}
+    {% set groupOptionId = null %}
+
+    {% for optKey, value in variantMatrixArrayKeysAndValues %}
+        {% set currentKey = firstGroupOption.id %}
+
+        {% if currentKey == optKey %}
+            {# variant key #}
+            {% set key =  value %}
+            {# option key #}
+            {% set groupOptionId = currentKey %}
+        {% endif %}
+    {% endfor %}
+
+    {% if groupOptionId != null %}
+        {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+        {% set currencyID = context.currency.id %}
+
+        <td>
+            {# include calculated price #}
+            {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/calculatedPrice.html.twig" %}
+        </td>
+    {% else %}
+        {# <td>&nbsp;</td> #}
+    {% endif %}
+{% endfor %}

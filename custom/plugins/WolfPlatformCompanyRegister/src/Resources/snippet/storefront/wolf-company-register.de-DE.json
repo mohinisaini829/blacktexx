@@ -1,0 +1,8 @@
+{
+    "wolf-platform-company-register": {
+        "message": {
+            "registerhint": "Registrierung ist hier nur für Firmen möglich.",
+            "orderblocked": "Als Rechnungsadresse muss eine Firma gewählt werden!"
+        }
+    }
+}

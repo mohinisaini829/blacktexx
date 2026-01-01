@@ -1,0 +1,13 @@
+.sw-cms-el-preview-netzp-powerpack6-infobar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  font-size: 80%;
+  background-color: #eee;
+  padding: .25rem;
+  justify-content: space-between;
+
+  .item {
+    margin-right: .5rem;
+  }
+}

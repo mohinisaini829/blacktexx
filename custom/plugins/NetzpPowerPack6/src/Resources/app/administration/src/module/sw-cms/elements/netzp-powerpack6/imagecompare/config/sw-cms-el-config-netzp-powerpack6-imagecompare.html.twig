@@ -1,0 +1,126 @@
+<div class="sw-cms-el-config-netzp-powerpack6">
+    <sw-container columns="1fr 1fr" gap="20px">
+        <sw-cms-mapping-field :label="$tc('sw-cms.netzp-powerpack6.elements.imagecompare.config.image1')"
+                              valueTypes="entity" entity="media"
+                              v-model:config="element.config.image1">
+            <sw-media-upload-v2 variant="regular"
+                             :uploadTag="uploadTagImage1"
+                             :source="previewSourceImage1"
+                             :allowMultiSelect="false"
+                             :defaultFolder="cmsPageState.pageEntityName"
+                             :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                             @media-upload-sidebar-open="onOpenMediaModalImage1"
+                             @media-upload-remove-image="onImage1Remove" />
+
+            <template #preview="{ demoValue }">
+                <div class="sw-cms-el-config-imagecompare__mapping-preview">
+                    <img :src="demoValue.url" v-if="demoValue.url" alt="">
+                    <sw-alert class="sw-cms-el-config-imagecompare__preview-info" variant="info" v-else>
+                        {{ $tc('sw-cms.detail.label.mappingEmptyPreview') }}
+                    </sw-alert>
+                </div>
+            </template>
+        </sw-cms-mapping-field>
+
+        <sw-cms-mapping-field :label="$tc('sw-cms.netzp-powerpack6.elements.imagecompare.config.image2')"
+                              valueTypes="entity" entity="media"
+                              v-model:config="element.config.image2">
+            <sw-media-upload-v2 variant="regular"
+                                :uploadTag="uploadTagImage2"
+                                :source="previewSourceImage2"
+                                :allowMultiSelect="false"
+                                :defaultFolder="cmsPageState.pageEntityName"
+                                :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                                @media-upload-sidebar-open="onOpenMediaModalImage2"
+                                @media-upload-remove-image="onImage2Remove" />
+
+            <template #preview="{ demoValue }">
+                <div class="sw-cms-el-config-imagecompare__mapping-preview">
+                    <img :src="demoValue.url" v-if="demoValue.url" alt="">
+                    <sw-alert class="sw-cms-el-config-imagecompare__preview-info" variant="info" v-else>
+                        {{ $tc('sw-cms.detail.label.mappingEmptyPreview') }}
+                    </sw-alert>
+                </div>
+            </template>
+        </sw-cms-mapping-field>
+    </sw-container>
+
+    <br>
+    <sw-container columns="1fr 1fr" gap="20px">
+        <sw-cms-mapping-field v-model:config="element.config.labelBefore"
+                              :label="$tc('sw-cms.netzp-powerpack6.elements.imagecompare.config.beforeLabel')"
+                              value-types="string">
+            <sw-text-field v-model:value="element.config.labelBefore.value" />
+
+            <template #preview="{ demoValue }">
+                <div class="sw-cms-el-config-text__mapping-preview">
+                    <div v-html="$sanitize(demoValue)"></div>
+                </div>
+            </template>
+        </sw-cms-mapping-field>
+
+        <sw-cms-mapping-field v-model:config="element.config.labelAfter"
+                              :label="$tc('sw-cms.netzp-powerpack6.elements.imagecompare.config.afterLabel')"
+                              value-types="string">
+            <sw-text-field v-model:value="element.config.labelAfter.value" />
+
+            <template #preview="{ demoValue }">
+                <div class="sw-cms-el-config-text__mapping-preview">
+                    <div v-html="$sanitize(demoValue)"></div>
+                </div>
+            </template>
+        </sw-cms-mapping-field>
+    </sw-container>
+
+    <sw-container columns="1fr 1fr 1fr" gap="20px">
+        <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.imagecompare.config.height')"
+                         numberType="int" :min="1" :max="100" :step="1"
+                         v-model:value="element.config.height.value" />
+
+        <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.imagecompare.config.controlColor')"
+                        v-model:value="element.config.controlColor.value" colorOutput="hex" :zIndex="1001" :alpha="false" />
+
+        <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.imagecompare.config.startingPoint')"
+                         numberType="int" :min="0" :max="100" :step="1"
+                         v-model:value="element.config.startingPoint.value" />
+    </sw-container>
+
+    <sw-container columns="1fr 1fr 1fr" gap="20px">
+        <sw-switch-field :label="$tc('sw-cms.netzp-powerpack6.elements.imagecompare.config.smoothing')"
+                         bordered v-model:value="element.config.smoothing.value" />
+
+        <sw-switch-field :label="$tc('sw-cms.netzp-powerpack6.elements.imagecompare.config.addCircle')"
+                         bordered v-model:value="element.config.addCircle.value" />
+
+        <sw-switch-field :label="$tc('sw-cms.netzp-powerpack6.elements.imagecompare.config.verticalMode')"
+                         bordered v-model:value="element.config.verticalMode.value" />
+    </sw-container>
+
+    <sw-media-modal-v2
+            variant="full"
+            v-if="mediaModalImage1IsOpen"
+            :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+            :entityContext="cmsPageState.entityName"
+            :allowMultiSelect="false"
+            :initialFolderId="cmsPageState.defaultMediaFolderId"
+            @media-upload-remove-image="onImage1Remove"
+            @media-modal-selection-change="onSelectionChangesImage1"
+            @modal-close="onCloseModalImage1" />
+
+    <sw-media-modal-v2
+        variant="full"
+        v-if="mediaModalImage2IsOpen"
+        :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+        :entityContext="cmsPageState.entityName"
+        :allowMultiSelect="false"
+        :initialFolderId="cmsPageState.defaultMediaFolderId"
+        @media-upload-remove-image="onImage2Remove"
+        @media-modal-selection-change="onSelectionChangesImage2"
+        @modal-close="onCloseModalImage2" />
+
+    <sw-upload-listener :uploadTag="uploadTagImage2" autoUpload
+                        @media-upload-finish="onImage2Upload" />
+
+    <sw-upload-listener :uploadTag="uploadTagImage2" autoUpload
+                        media-upload-finish="onImage2Upload" />
+</div>

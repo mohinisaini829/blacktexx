@@ -1,0 +1,45 @@
+{
+    "myfav-inquiry": {
+        "label": "Anfrageformular",
+        "general": {
+            "mainMenuItemGeneral": "Inquiry",
+            "descriptionTextModule": "Overview of all inquiries via the inquiry function."
+        },
+        "list": {
+            "columnName": "Name",
+            "columnCount": "Number of articles",
+            "columnCreatedAt": "set on",
+            "columnDeliveryDateAt": "date of delivery",
+            "columnProcessStatus": "Status",
+            "columnAdminUser": "Admin User"
+        },
+        "detail": {
+            "companyLabel": "Company",
+            "firstNameLabel": "First name",
+            "lastNameLabel": "Last name",
+            "emailLabel": "Mail",
+            "phoneNumberLabel": "Phone",
+            "deliveryDateLabel": "date of delivery",
+            "commentLabel": "Customer comment",
+            "lineItemsCardTitle": "Products",
+            "itemNameColumn": "Name",
+            "itemQuantityColumn": "Quantity",
+            "deleteLineItem": "delete position",
+            "addLineItem": "add position",
+            "mediaCardTitle": "Logos",
+            "offerCardTitle": "Offers",
+            "offerNumber": "offer number",
+            "offerCreatedAt": "created at",
+            "deleteOffer": "delete offer",
+            "downloadOffer": "download offer",
+            "itemPriceColumn": "Price",
+            "itemImageColumn": "Image",
+            "itemBrandColumn": "Brand",
+            "itemColorColumn": "Color",
+            "itemSizeColumn": "Size"
+        },
+        "create": {
+            "offerDocument": "Create offer document"
+        }
+    }
+}

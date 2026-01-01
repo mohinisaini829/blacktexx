@@ -1,0 +1,36 @@
+#designerModal{
+    .modal-content {
+        padding-bottom: 2rem;
+    }
+    h2 {
+        display: block!important;
+        font-size: 18px;
+        margin: 12px 0 0!important;
+        width: 100%;
+        text-align: left;
+        &:before,
+        &:after {
+            background: none;
+            display: none!important;
+        }
+    }
+    .designer-modal-upper-heading{
+        h2 {
+            margin-top: 0!important;
+            font-weight: bold;
+            text-align: center;
+            font-size: 22px;
+            border-bottom: 1px solid;
+        }
+    }
+    .modal-body{
+        button{
+            background: $sw-color-brand-secondary;
+            color: $white;
+            &:hover {
+                background: $sw-color-brand-primary;
+                border-color: $sw-color-brand-primary;
+            }
+        }
+    }
+}

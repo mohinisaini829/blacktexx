@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Userlike Plugin Configuration</title>
+        <title lang="de-DE">Userlike Plugin Konfiguration</title>
+        <input-field type="text">
+            <name>UserlikeSecret</name>
+            <label>Your Userlike Widget Secret</label>
+            <label lang="de-DE">Ihr Userlike Widget Secret</label>
+            <helpText>You'll find the Widget Secret in the Widget Editor under "Install" > "Credentials for applications".</helpText>
+            <helpText lang="de-DE">Sie finden das Widget Secret im Widget Editor unter "Installieren" > "Anmeldeinformationen für Apps".</helpText>
+        </input-field>
+    </card>
+</config>

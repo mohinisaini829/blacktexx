@@ -1,0 +1,25 @@
+{% sw_extends '@Storefront/storefront/myfav-inquiry/page/finish/index.html.twig' %}
+
+{% block base_content %}
+    <div class="d-flex justify-content-center myfav-inquiry-success-page" style="margin-top: 24px;">
+        <div class="card w-75">
+            <div class="card-body">
+                {% if config('MyfavInquiry.config.titleImageSuccessPage') != '' %}
+                    <div style="width: 100%; text-align: center; margin-bottom: 36px;">
+                        <img src="{{ config('MyfavInquiry.config.titleImageSuccessPage') }}" alt="Vielen Dank für Ihre Anfrage." title="Vielen Dank für Ihre Anfrage." class="img-response" style="margin-left: auto; margin-right: auto; width: 100%;" />
+                    </div>
+                {% endif %}
+                <h1 class="card-title">{{ 'myfavInquiry.finish.title'|trans }}</h1>
+                <p class="card-text">{{ 'myfavInquiry.finish.text'|trans }}</p>
+                <a href="/produkte/" class="btn btn-primary" title="{{ 'myfavInquiry.finish.backToShop'|trans|sw_sanitize }}">{{ 'myfavInquiry.finish.backToShop'|trans|sw_sanitize }}</a>
+                <p class="santa--fb-tu">
+                    <span>
+                        <img src="{{ asset('bundles/santafetextheme/static/image/facebook.webp', 'asset') }}"
+                             alt="Folgt uns auf Facebook">
+                    </span>
+                    <a href="https://www.facebook.com/SantaFeTex" target="_blank">Folgt uns auf Facebook</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

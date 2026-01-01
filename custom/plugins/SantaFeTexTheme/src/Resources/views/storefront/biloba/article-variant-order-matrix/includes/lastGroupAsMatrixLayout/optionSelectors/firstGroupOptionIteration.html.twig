@@ -1,0 +1,33 @@
+{% for firstGroupOption in firstGroup.options|slice(sliceStart, sliceEnd) %}
+    {% for optKey, value in variantMatrixArrayKeysAndValues %}
+        {% set currentKey = firstGroupOption.id %}
+
+        {% if currentKey == optKey %}
+
+            {# variant key #}
+            {% set key =  value %}
+            {# option key #}
+            {% set groupOptionId = currentKey %}
+        {% endif %}
+    {% endfor %}
+
+    {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+
+    {% if dropdown %}
+        <td class="variants-options-dropdown-selector">{% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-dropdown-list.html.twig' with {'currentKey': currentKey, 'childProduct': childProduct, 'key': key} %}</td>
+    {% else %}
+        <td class="variants-options-input-selector">
+            <div class="d-flex flex-column">
+                <span class="product-detail-configurator-option-label-matrix">{{ firstGroupOption.translated.name }}</span>
+                {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-input-fields.html.twig' with {'currentKey': currentKey, 'childProduct': childProduct, 'key': key} %}
+                {% if childProduct.availableStock > 0 %}
+                    <span data-in-stock="{{ 'santa-theme.buybox.instock'|trans|sw_sanitize }}" class="product-detail-configurator-option-stock-matrix">
+                        {{ childProduct.availableStock }}
+                    </span>
+                {% else %}
+                    <span class="product-detail-configurator-option-stock-matrix">&nbsp;</span>
+                {% endif %}
+            </div>
+        </td>
+    {% endif %}
+{% endfor %}

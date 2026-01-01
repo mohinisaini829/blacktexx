@@ -1,0 +1,46 @@
+{
+    "version": "1.0.0",
+    "author": "Net Inventors GmbH",
+    "label": {
+        "de-DE": "Image Slider",
+        "en-GB": "Image Slider"
+    },
+    "description": {
+        "de-DE": "Ein CMS Element mit allen verfügbaren Konfigurationsmöglichkeiten",
+        "en-GB": "An cms element with all available configuration possibilities"
+    },
+    "editable": true,
+    "type": "element",
+    "blockConfiguration": {
+        "name": "neti-next-cms-element-builder-imageslider",
+        "backgroundColor": "#fff",
+        "cssClass": "",
+        "marginTop": "20px",
+        "marginBottom": "20px",
+        "marginLeft": "20px",
+        "marginRight": "20px"
+    },
+    "config": {
+        "dummyCollection": {
+            "type": "collection",
+            "label": {
+                "de-DE": "Wiederholung",
+                "en-GB": "Collection"
+            },
+            "helpText": {
+                "de-DE": "Hilfetext",
+                "en-GB": "Helptext"
+            },
+            "labelProperty": "collectionText",
+            "children": {
+                "collectionMedia": {
+                    "type": "media",
+                    "label": {
+                        "de-DE": "Bild",
+                        "en-GB": "Picture"
+                    }
+                }
+            }
+        }
+    }
+}

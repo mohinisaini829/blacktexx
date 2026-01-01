@@ -1,0 +1,7 @@
+{% sw_extends '@Storefront/storefront/component/captcha/basicCaptchaImage.html.twig' %}
+
+{% block basic_captcha_content_image %}
+    <div class="basic-captcha-content-image" id="{{ formId }}-basic-captcha-content-image">
+        <img loading="lazy" alt="captcha" src="data:image/png;base64, {{ page.getCaptcha.imageBase64 }}">
+    </div>
+{% endblock %}

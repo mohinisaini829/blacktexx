@@ -1,0 +1,88 @@
+{% block block_netzp_powerpack6_imagetext4 %}
+{% set columns = 4 %}
+{% set id = element.id %}
+
+{% block block_netzp_powerpack6_imagetext4_col1 %}
+<div class="col-6 col-md-3">
+    <div class="image-text-gallery-card">
+        {% block block_netzp_powerpack6_imagetext4_col1_image %}
+            {% set element = block.slots.getSlot('image1') %}
+            <div data-cms-element-id="{{ element.id }}">
+                {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+            </div>
+        {% endblock %}
+
+        {% block block_netzp_powerpack6_image14_col1_text %}
+            {% set element = block.slots.getSlot('text1') %}
+
+            <div data-cms-element-id="{{ element.id }}">
+                {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+            </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block block_netzp_powerpack6_imagetext4_col2 %}
+    <div class="col-6 col-md-3">
+        <div class="image-text-gallery-card">
+            {% block block_netzp_powerpack6_imagetext4_col2_image %}
+                {% set element = block.slots.getSlot('image2') %}
+                <div data-cms-element-id="{{ element.id }}">
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                </div>
+            {% endblock %}
+
+            {% block block_netzp_powerpack6_imagetext4_col2_text %}
+                {% set element = block.slots.getSlot('text2') %}
+
+                <div data-cms-element-id="{{ element.id }}">
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block block_netzp_powerpack6_imagetext4_col3 %}
+    <div class="col-6 col-md-3">
+        <div class="image-text-gallery-card">
+            {% block block_netzp_powerpack6_imagetext4_col3_image %}
+                {% set element = block.slots.getSlot('image3') %}
+                <div data-cms-element-id="{{ element.id }}">
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                </div>
+            {% endblock %}
+
+            {% block block_netzp_powerpack6_imagetext4_col3_text %}
+                {% set element = block.slots.getSlot('text3') %}
+
+                <div data-cms-element-id="{{ element.id }}">
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block block_netzp_powerpack6_imagetext4_col4 %}
+    <div class="col-6 col-md-3">
+        <div class="image-text-gallery-card">
+            {% block block_netzp_powerpack6_imagetext4_col4_image %}
+                {% set element = block.slots.getSlot('image4') %}
+                <div data-cms-element-id="{{ element.id }}">
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                </div>
+            {% endblock %}
+
+            {% block block_netzp_powerpack6_imagetext4_col4_text %}
+                {% set element = block.slots.getSlot('text4') %}
+
+                <div data-cms-element-id="{{ element.id }}">
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+{% endblock %}

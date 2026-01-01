@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[36146],{146:(e,n,s)=>{s.r(n),s.d(n,{default:()=>a});class a extends window.PluginBaseClass{init(){}openOffCanvas(){window.openCookieConsentManager()}}}}]);

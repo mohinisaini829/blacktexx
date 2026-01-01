@@ -1,0 +1,151 @@
+{% sw_extends '@Storefront/storefront/component/address/address-personal.html.twig' %}
+{% block component_address_personal_account_type %}
+    {%  set  WolfCompanyRegister =   config('WolfPlatformCompanyRegister.config')  %}
+    {%  if WolfCompanyRegister.PreventPrivatRegister == true %}
+        {% set onlyCompanyRegistration = true %}
+    {%  endif %}
+    {%  if WolfCompanyRegister.active == false  %}{{  parent() }}
+
+
+    {%  elseif prefix == "shippingAddress" %}
+        {%  if WolfCompanyRegister.PreventPrivatInviceAddress == true %}
+            {%  set onlyCompanyRegistration = true %}
+        {%  endif %}
+        <div class="row g-2">
+            <div class="form-group col-md-3 col-sm-6 contact-type">
+
+                    <label class="form-label"
+                           for="{{ idPrefix ~ prefix }}accountType">
+                        {{ "account.personalTypeLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                    </label>
+
+
+
+                    {% if onlyCompanyRegistration or config('core.loginRegistration.showAccountTypeSelection') %}
+                        <select name="{% if prefix %}{{ prefix }}[accountType]{% else %}accountType{% endif %}"
+                        id="{{ idPrefix ~ prefix }}accountType"
+                        {% if onlyCompanyRegistration %}disabled{% endif %}
+                        required="required"
+                        class="form-select contact-select"
+                        data-form-field-toggle="true"
+                        data-form-field-toggle-target=".js-field-toggle-contact-type-company{% if customToggleTarget %}-{{ prefix }}{% endif %}"
+                        data-form-field-toggle-value="{{ constant('Shopware\\Core\\Checkout\\Customer\\CustomerEntity::ACCOUNT_TYPE_BUSINESS') }}"
+                        data-form-field-toggle-scope="{% if scope == 'parent' %}parent{% else %}all{% endif %}"
+                        {% if scope == 'parent' %}data-form-field-toggle-parent-selector={{ parentSelector }}{% endif %}
+                        >
+                    {% endif %}
+
+                    {% set isCompany = false %}
+
+                    {% if page.address.company or data.company is not empty %}
+                        {% set isCompany  = true %}
+                    {% endif %}
+
+                    {% if onlyCompanyRegistration or (accountType and accountType == constant('Shopware\\Core\\Checkout\\Customer\\CustomerEntity::ACCOUNT_TYPE_BUSINESS')) %}
+                        {% set isCompany  = true %}
+                    {% endif %}
+
+                    {% set isLoginPage = false %}
+                    {% if activeRoute == 'frontend.account.login.page' %}
+                        {% set isLoginPage = true %}
+                    {% endif %}
+
+
+                        <option disabled="disabled"
+                                selected="selected"
+                                value="">
+                            {{ "account.personalTypeLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                        </option>
+
+
+                    {% if  WolfCompanyRegister.PreventPrivatRegister == false %}
+                        <option value="{{ constant('Shopware\\Core\\Checkout\\Customer\\CustomerEntity::ACCOUNT_TYPE_PRIVATE') }}">
+                            {{ "account.personalTypePrivate"|trans|sw_sanitize }}
+                        </option>
+                    {% endif %}
+
+                    <option value="{{ constant('Shopware\\Core\\Checkout\\Customer\\CustomerEntity::ACCOUNT_TYPE_BUSINESS') }}">
+                            {{ "account.personalTypeBusiness"|trans|sw_sanitize }}
+                    </option>
+                    </select>
+                    {% if onlyCompanyRegistration %}<input type="hidden" name="accountType" value="{{ constant('Shopware\\Core\\Checkout\\Customer\\CustomerEntity::ACCOUNT_TYPE_BUSINESS') }}">{% endif %}
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+    {%  elseif WolfCompanyRegister.active == true and (controllerAction == "loginPage" or controllerAction == "checkoutRegisterPage" or controllerAction =="accountRegisterPage" or controllerAction == "profileOverview") %}
+        {%  if WolfCompanyRegister.showHint == true %}
+
+            <p class="login-form-description ">
+                {{ "wolf-platform-company-register.message.registerhint"|trans|sw_sanitize }}</p>
+
+        {% endif %}
+        <div class="row g-2" style="display: none; visibility: hidden;">
+            <div class="form-group col-md-3 col-sm-6 contact-type">
+
+
+                <label class="form-label"
+                       for="{{ prefix }}accountType">
+                    {{ "account.personalTypeLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                </label>
+
+
+
+
+                <select name="{% if prefix %}{{ prefix }}[accountType]{% else %}accountType{% endif %}"
+                        id="{{ prefix }}accountType"
+                        {% if onlyCompanyRegistration %}disabled{% endif %}
+                        required="required"
+                        class="form-select contact-select"
+                        data-form-field-toggle="true"
+                        data-form-field-toggle-target=".js-field-toggle-contact-type-company{% if customToggleTarget %}-{{ prefix }}{% endif %}"
+                        data-form-field-toggle-value="{{ constant('Shopware\\Core\\Checkout\\Customer\\CustomerEntity::ACCOUNT_TYPE_BUSINESS') }}"
+                        data-form-field-toggle-scope="{% if scope == 'parent' %}parent{% else %}all{% endif %}"
+                        {% if scope == 'parent' %}data-form-field-toggle-parent-selector={{ parentSelector }}{% endif %}
+                >
+
+                    {% set isCompany = false %}
+                    {% if page.address.company or data.company is not empty %}
+                        {% set isCompany  = true %}
+                    {% endif %}
+
+                    {% if onlyCompanyRegistration or (accountType and accountType == constant('Shopware\\Core\\Checkout\\Customer\\CustomerEntity::ACCOUNT_TYPE_BUSINESS')) %}
+                        {% set isCompany  = true %}
+                    {% endif %}
+                    {% set isLoginPage = false %}
+                    {% if activeRoute == 'frontend.account.login.page' or activeRoute == 'frontend.checkout.register.page' %}
+                        {% set isLoginPage = true %}
+                    {% endif %}
+
+                    {% if isLoginPage %}
+                        <option disabled="disabled"
+                                selected="selected"
+                                value="">
+                            {{ "account.personalTypeLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                        </option>
+                    {% endif %}
+
+                    <option value="{{ constant('Shopware\\Core\\Checkout\\Customer\\CustomerEntity::ACCOUNT_TYPE_BUSINESS') }}"
+                            selected="selected">
+                        {{ "account.personalTypeBusiness"|trans|sw_sanitize }}
+                    </option>
+
+                </select>
+                <input type="hidden" name="accountType" value="{{ constant('Shopware\\Core\\Checkout\\Customer\\CustomerEntity::ACCOUNT_TYPE_BUSINESS') }}">
+
+                {% block component_address_personal_account_type_error %}
+
+                {% endblock %}
+            </div>
+        </div>
+    {%  else %}
+        {{ parent() }}
+    {% endif %}
+
+{% endblock %}

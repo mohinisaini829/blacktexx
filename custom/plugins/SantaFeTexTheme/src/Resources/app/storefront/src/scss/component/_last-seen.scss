@@ -1,0 +1,29 @@
+.cross-selling-headline{
+    width: 100%;
+    text-align: center;
+    line-height: 0.01em;
+    margin: 0.5em 0 0.5em;
+    font-weight: normal;
+    color: $secondary;
+    span{
+        background:#fff;
+        padding:0 1.4rem;
+    }
+}
+.product-box.box-last-seen{
+    border: 0;
+    .product-price-unit,
+    .product-cheapest-price{
+        display: none;
+    }
+    .product-price{
+        font-weight: normal;
+        font-size: 1.5rem;
+    }
+    .product-image-wrapper{
+        background: $gray-200;
+    }
+    .product-name{
+        font-size: 1rem;
+    }
+}

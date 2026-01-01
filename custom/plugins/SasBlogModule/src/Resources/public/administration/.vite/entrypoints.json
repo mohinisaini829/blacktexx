@@ -1,0 +1,41 @@
+{
+  "base": "/bundles/sasblogmodule/administration/",
+  "entryPoints": {
+    "sas-blog-module": {
+      "css": [
+        "/bundles/sasblogmodule/administration/assets/sas-blog-module-DaO3RXhp.css"
+      ],
+      "dynamic": [
+        "/bundles/sasblogmodule/administration/assets/index-ebLkCYiQ.js",
+        "/bundles/sasblogmodule/administration/assets/index-wBfLekzi.js",
+        "/bundles/sasblogmodule/administration/assets/index-_3RTkAkU.js",
+        "/bundles/sasblogmodule/administration/assets/index-jsPn6LqI.js",
+        "/bundles/sasblogmodule/administration/assets/index-CAPEzhwk.js",
+        "/bundles/sasblogmodule/administration/assets/index-CDZmmbPT.js",
+        "/bundles/sasblogmodule/administration/assets/index-CcDf2MTX.js",
+        "/bundles/sasblogmodule/administration/assets/index-Ds-V7WK2.js",
+        "/bundles/sasblogmodule/administration/assets/index-rVu1bF90.js",
+        "/bundles/sasblogmodule/administration/assets/index-C1sW_nXR.js",
+        "/bundles/sasblogmodule/administration/assets/index-C9-U_rcx.js",
+        "/bundles/sasblogmodule/administration/assets/index-BG9KmqLM.js",
+        "/bundles/sasblogmodule/administration/assets/index-yDC2BiXP.js",
+        "/bundles/sasblogmodule/administration/assets/index-jkK1uNQ_.js",
+        "/bundles/sasblogmodule/administration/assets/index-DsxBiCA9.js"
+      ],
+      "js": [
+        "/bundles/sasblogmodule/administration/assets/sas-blog-module-DCpIZKqc.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

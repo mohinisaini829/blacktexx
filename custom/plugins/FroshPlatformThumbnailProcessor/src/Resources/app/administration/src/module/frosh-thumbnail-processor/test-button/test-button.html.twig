@@ -1,0 +1,15 @@
+<sw-card class="sub-card frosh-thumbnail-processor">
+    <sw-button-process
+            class="frosh-thumbnail-processor--test-button"
+            :isLoading="isLoading"
+            :processSuccess="isSuccessful"
+            @process-finish="finish"
+            @click="systemConfigSaveAll">
+        {{ btnLabel }}
+    </sw-button-process>
+
+    <div class="testdata-container">
+        <p id="test-result"></p>
+        <div id="testimage-container"></div>
+    </div>
+</sw-card>

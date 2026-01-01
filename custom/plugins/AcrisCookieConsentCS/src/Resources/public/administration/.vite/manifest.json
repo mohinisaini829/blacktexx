@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/acris-cookie-consent-c-s-DrbfRBRA.js",
+    "name": "acris-cookie-consent-c-s",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/acris-cookie-consent-c-s-BlQKYJQm.css"
+    ]
+  }
+}

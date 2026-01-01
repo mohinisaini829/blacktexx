@@ -1,0 +1,33 @@
+{% block sw_cms_element_netzp_powerpack6_countdown %}
+    <div class="sw-cms-el-netzp-powerpack6-countdown p-0" :style="getStyle">
+        <h3 v-if="element.config.title.value" :Style="getTitleStyle">{{ element.config.title.value }}</h3>
+
+        <div v-if="element.config.layout.value == 'text'" :style="getCountdownStyle">
+            {{ element.config.countdown.value }}
+        </div>
+        <div v-if="element.config.layout.value == 'boxes'" :style="getCountdownStyle" class="boxed">
+            <span class="box">
+                <div class="counter" :style="getBoxStyle">...</div>
+                {{ $tc('sw-cms.netzp-powerpack6.elements.countdown.config.layout.days') }}
+            </span>
+            <span class="box">
+                <div class="counter" :style="getBoxStyle">...</div>
+                {{ $tc('sw-cms.netzp-powerpack6.elements.countdown.config.layout.hours') }}
+            </span>
+            <span class="box">
+                <div class="counter" :style="getBoxStyle">...</div>
+                {{ $tc('sw-cms.netzp-powerpack6.elements.countdown.config.layout.minutes') }}
+            </span>
+            <span class="box">
+                <div class="counter" :style="getBoxStyle">...</div>
+                {{ $tc('sw-cms.netzp-powerpack6.elements.countdown.config.layout.seconds') }}
+            </span>
+        </div>
+
+        <div class="enddate" :class="getEndDateClass" v-html="getEndDateFormatted"></div>
+
+        <div class="btn" v-if="element.config.buttonText.value" :class="getButtonClass" :style="getButtonStyle">
+            {{ element.config.buttonText.value }}
+        </div>
+    </div>
+{% endblock %}

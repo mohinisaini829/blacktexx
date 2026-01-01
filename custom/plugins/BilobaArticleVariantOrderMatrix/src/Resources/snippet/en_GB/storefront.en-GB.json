@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Producer:",
+            "ProductNumber": "Article number:"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Product number",
+            "DetailBuyActionAdd": "Add variants to the shopping basket",
+            "UnitPrice": "Unit price",
+            "VariantOrderMatrixColAmount": "Quantity",
+            "VariantStock": "Warehouse",
+            "quickOrder": "Quick order",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Estimated total price"
+        }
+    }
+}

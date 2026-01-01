@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/h-t-c-popup-B5c3Tep6.js",
+    "name": "h-t-c-popup",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/h-t-c-popup-Dson0_8R.css"
+    ]
+  }
+}

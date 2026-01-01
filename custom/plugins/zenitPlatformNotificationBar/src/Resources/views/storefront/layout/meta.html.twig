@@ -1,0 +1,29 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_stylesheet %}
+    {{ parent() }}
+
+    {% block zenit_notification_bar_css %}
+        {% set zenNotificationBar = context.context.extensions['zenitPlatformNotificationBar'].config %}
+
+        {% if zenNotificationBar.fontStackUrl and zenNotificationBar.font is same as ('custom') %}
+            {{ zenNotificationBar.fontStackUrl|raw }}
+        {% endif %}
+
+        <style data-plugin="zenitPlatformNotificationBar">
+            {% if zenNotificationBar.backgroundImageShow and zenNotificationBar.backgroundImageId %}
+                {% set mediaCollection = searchMedia([zenNotificationBar.backgroundImageId], context.context) %}
+                {% set backgroundImage = mediaCollection.get(zenNotificationBar.backgroundImageId) %}
+                .notification-bar-collapse-content .content-inner::before {
+                    background-image: url("{{ backgroundImage.url }}");
+                }
+            {% elseif zenNotificationBar.backgroundImageShow %}
+                .notification-bar-collapse-content .content-inner::before {
+                    background-image: url("{{ asset('storefront/img/notification-banner-default.jpg', '@zenitPlatformNotificationBar') }}");
+                }
+            {% endif %}
+
+            {{ zenNotificationBar.customCSS|raw }}
+        </style>
+    {% endblock %}
+{% endblock %}

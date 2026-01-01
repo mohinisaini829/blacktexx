@@ -1,0 +1,55 @@
+{% block element_manufacturer_video_slider %}
+    {% set config = element.fieldConfig.elements %}
+
+    {% if element.data and element.data.all %}
+        {% set videoUrls = element.data.all %}
+        <div class="cms-element-{{ element.type }}">
+            {% set sliderOptions = {
+                slider: {
+                    navPosition: 'bottom',
+                    speed: 500,
+                    nav: true,
+                    controls: true,
+                    autoHeight: true
+                }
+            } %}
+
+            <div class="base-slider image-slider has-nav-outside manufacturer-video-slider"
+                 data-base-slider="true"
+                 data-base-slider-options="{{ sliderOptions|json_encode }}"
+                 id="manufacturer-video-slider"
+            >
+                <div class="image-slider-container"
+                     data-base-slider-container="true">
+                    {% for videoUrl in videoUrls %}
+                        <div class="image-slider-item-container">
+                            <div class="image-slider-item{% if loop.first != true %} is-not-first{% endif %}">
+                                <iframe src="{{ videoUrl|sw_sanitize }}"
+                                        class="manufacturer-video-slider-iframe"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                ></iframe>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="image-slider-controls-container">
+                    <div class="base-slider-controls"
+                         data-base-slider-controls="true">
+                        <button class="base-slider-controls-prev image-slider-controls-prev is-nav-prev-outside">
+                            {% sw_icon 'arrow-large-left' style {
+                                "pack": "solid"
+                            } %}
+                        </button>
+                        <button class="base-slider-controls-next image-slider-controls-next is-nav-next-outside">
+                            {% sw_icon 'arrow-large-right' style {
+                                "pack": "solid"
+                            } %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

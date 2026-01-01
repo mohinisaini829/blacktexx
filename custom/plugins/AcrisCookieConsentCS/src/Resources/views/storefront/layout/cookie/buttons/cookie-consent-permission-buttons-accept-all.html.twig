@@ -1,0 +1,8 @@
+{% block acris_cookie_consent_permission_buttons_accept_all %}
+    {% if cookieConfig.showAcceptAllButton %}
+        <button {% if cookieConfig.layout == "modal" %}data-bs-dismiss="modal"{% endif %} id="ccConsentAcceptAllButton"
+                class="cookie-consent-accept-all-button btn {{ cookieConfig.displayButtonAllCookiesType }} cookie-consent-button-margin" aria-label="{{ "acrisCookieConsent.acceptAllButton"|trans }}">
+            {{ "acrisCookieConsent.acceptAllButton"|trans }}
+        </button>
+    {% endif %}
+{% endblock %}

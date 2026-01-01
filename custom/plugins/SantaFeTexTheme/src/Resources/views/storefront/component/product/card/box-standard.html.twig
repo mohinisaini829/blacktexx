@@ -1,0 +1,39 @@
+{% sw_extends '@Storefront/storefront/component/product/card/box-standard.html.twig' %}
+
+{% block component_product_box_variant_characteristics %}{% endblock %}
+
+{% block component_product_box_name %}
+
+    {% set name = product.translated.name %}
+    {% if( product.translated.customFields
+    and product.translated.customFields.vio_product_modelname) %}
+        {% set name = product.translated.customFields.vio_product_modelname %}
+    {% endif %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block component_product_box_image_link_inner %}
+    {% if cover.url %}
+        {% set attributes = {
+        'class': 'product-image is-'~displayMode,
+        'alt': (cover.translated.alt ?: name),
+        'title': (cover.translated.title ?: name),
+        'loading': 'lazy'
+        } %}
+
+        {% if displayMode == 'cover' or displayMode == 'contain' %}
+            {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+        {% endif %}
+
+        {% block component_product_box_image_thumbnail %}
+            {{ parent() }}
+        {% endblock %}
+    {% else %}
+        {% block component_product_box_image_placeholder %}
+            {{ parent() }}
+        {% endblock %}
+    {% endif %}
+{% endblock %}
+{% block component_product_box_description %}
+{% endblock %}

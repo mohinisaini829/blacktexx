@@ -1,0 +1,231 @@
+
+<div class="biloba-variant-matrix-quantity-block">
+    {% block biloba_variant_matrix_quantiy_block %}
+        {% set variantMatrixPosition = config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") %}
+        {% set variantMatrixLayout = page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout %}
+        {% set VariantMatrixStockQuantityDisplayThresholdHigh = config("BilobaArticleVariantOrderMatrix.config.VariantMatrixStockQuantityDisplayThresholdHigh") %}
+        {% set VariantMatrixStockQuantityDisplayThresholdLow = config("BilobaArticleVariantOrderMatrix.config.VariantMatrixStockQuantityDisplayThresholdLow") %}
+        {% set variantPrice = null %}
+        {% set totalPriceActivate = config("BilobaArticleVariantOrderMatrix.config.totalPriceActivate") %}
+        {% set VariantMatrixImageChange = config("BilobaArticleVariantOrderMatrix.config.changeImageOnClickAmountField") %}
+        {% if bilobaVariantMatrixListingInline == true %}
+            {% set VariantMatrixImageChange = false %}
+        {% endif %}
+
+        {% set imageChangeConfig = {
+            url: url('frontend.biloba.article-variant-order-matrix.load-imagegallery', { variantId: key }),
+        } %}
+        
+
+        {# enabling input fields when availableStock > 0 #}
+        {% if (config("BilobaArticleVariantOrderMatrix.config.VariantMatrixDisableIfNotInstock") == true) or (childProduct.isCloseout) %}
+            {% set respectStock = 'true' %}
+
+            {% if childProduct.availableStock > 0 && childProduct.active != false %}
+                {% set condition = 'enabled' %}
+            {% else %}
+                {% set condition = 'disabled' %}
+            {% endif %}
+        {# if VariantMatrixDisableIfNotInstock is not checked #}
+        {% else %}
+            {% if childProduct.active != true %}
+                {% set respectStock = 'false' %}
+                {% set condition = 'disabled' %}
+            {% else %}
+                {% set respectStock = 'false' %}
+                {% set condition = 'enabled' %}
+            {% endif %}
+        {% endif %}
+        {% if page.configuratorSettings %}
+            {% set configuratorSettings = page.configuratorSettings %}
+        {% elseif page.product.configurator %}
+            {% set configuratorSettings = page.product.configurator %}
+        {% else %}
+            {% set configuratorSettings = page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings'] %}
+        {% endif %}
+
+        {% if childProduct.calculatedPrices|length > 0 %}
+            {% set variantPrice = childProduct.calculatedPrices.first().unitPrice %}
+            {% set calculatedPricesArrayExist = "false" %}
+            {% set calculatedPricesPriceArray = [] %}
+            {% set calculatedPricesQuantityArray = [] %}
+
+            {# totalPrice active #}
+            {% if totalPriceActivate != false %}
+                {% for calculatedPrice in childProduct.calculatedPrices.getElements() %}                
+                    {% set calculatedPricesQuantityArray = calculatedPricesQuantityArray|merge([calculatedPrice.getQuantity()]) %}
+                    {% set calculatedPricesPriceArray = calculatedPricesPriceArray|merge([calculatedPrice.getUnitPrice()]) %}
+                {% endfor %}
+
+                {# using variable to determin when to search for the array or just use variant price data-attribute #}
+                {% set calculatedPricesArrayExist = "true" %}
+            {% else %}
+                {% set variantPrice = childProduct.calculatedPrices.first().unitPrice %}
+                {% set calculatedPricesArrayExist = "false" %}
+            {% endif %}
+        {% else %}
+            {% set variantPrice = childProduct.calculatedPrice.unitPrice %}
+            {% set calculatedPricesArrayExist = "false" %}
+        {% endif %}
+
+        {% if configuratorSettings.elements|length >1 %}
+    
+            {% if childProduct.calculatedPrices|length > 0 %}
+                {# totalPrice active #}
+                {% if totalPriceActivate != false %}
+                    {# arrays contain information for stackprices #}
+                    <script type="text/javascript">
+                        var calculatedPricesPriceArray = JSON.parse("{{calculatedPricesPriceArray|json_encode}}");
+                        var calculatedPricesQuantityArray = JSON.parse("{{calculatedPricesQuantityArray|json_encode}}");
+                    </script>
+                {% endif %}
+            {% endif %}
+            
+            {% block biloba_variant_matrix_quantity_wrapper %}
+                <div class="variant-matrix-quantity-wrapper">
+                    {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixDisableIfNotInstock") %}
+                        <input 
+                            type="number" 
+                            name="lineItems[{{ key }}][quantity]" 
+                            min="0" 
+                            max="{{ childProduct.availableStock }}" 
+                            class="form-control variant-matrix-quantity" 
+                            value="0" 
+                            data-bit-variant-id="{{ key }}" 
+                            data-check-max-stock="true" 
+                            data-attribute-max-stock="{{ childProduct.availableStock }}" 
+                            data-attribute-purchase-steps="{{ childProduct.purchaseSteps }}" 
+                            data-attribute-min-purchase="{{ childProduct.minPurchase }}" 
+                            data-attribute-max-purchase="{{ childProduct.maxPurchase }}" 
+                            data-attribute-respect-stock="{{ respectStock }}" 
+                            data-attribute-variant-price="{% if childProduct.calculatedPrices|length == 0 %}{{variantPrice}}{% else %}0{% endif %}" 
+                            {{ condition }} 
+                            style="{% if variantMatrixPosition == 'price' and not(variantMatrixLayout == 'standard') %}width: 90%!important;{% endif %}"
+                            {% if VariantMatrixImageChange %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                            >
+                    {% else %}
+                        <input 
+                            type="number" 
+                            name="lineItems[{{ key }}][quantity]" 
+                            min="0" 
+                            max="{{ childProduct.availableStock }}" 
+                            class="form-control variant-matrix-quantity" 
+                            value="0" 
+                            data-bit-variant-id="{{ key }}" 
+                            data-attribute-purchase-steps="{{ childProduct.purchaseSteps }}" 
+                            data-attribute-min-purchase="{{ childProduct.minPurchase }}" 
+                            data-attribute-max-purchase="{{ childProduct.maxPurchase }}" 
+                            data-attribute-respect-stock="{{ respectStock }}" 
+                            data-attribute-variant-price="{% if childProduct.calculatedPrices|length == 0 %}{{variantPrice}}{% else %}0{% endif %}" 
+                            {{ condition }} 
+                            style="{% if variantMatrixPosition == 'price' and not(variantMatrixLayout == 'standard') %}width: 90%!important;{% endif %}"
+                            {% if VariantMatrixImageChange %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                            >
+                    {% endif %}
+                    
+                    {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixShowStockQuantity") == true and variantMatrixLayout == 'standard' %}
+                        {% block biloba_variant_matrix_input_fields_stock %}
+                        
+                            {% if (VariantMatrixStockQuantityDisplayThresholdHigh is defined) and (childProduct.availableStock > VariantMatrixStockQuantityDisplayThresholdHigh) %}
+                                <span class="variant-matrix-show-stock higher">&gt; {{ VariantMatrixStockQuantityDisplayThresholdHigh }}</span>
+                            {% elseif (VariantMatrixStockQuantityDisplayThresholdLow is defined) and (childProduct.availableStock < VariantMatrixStockQuantityDisplayThresholdLow) %}
+                                
+                                {% if childProduct.availableStock == 0 %}
+                                    <span class="variant-matrix-show-stock empty">{{childProduct.availableStock}}</span>
+                                {% else %}
+                                    <span class="variant-matrix-show-stock lower">&lt; {{ VariantMatrixStockQuantityDisplayThresholdLow }}</span>
+                                {% endif %}
+                            {# default if both are defined and availableStock = VariantMatrixStockQuantityDisplayThresholdLow #}
+                            {% else %}
+                                <span class="variant-matrix-show-stock equals">{{childProduct.availableStock}}</span>
+                            {% endif %}
+                        {% endblock %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+        {% else %}
+        
+            {% if caseOrientY %}
+                {% if childProduct.calculatedPrices|length > 0 %}
+                    {# totalPrice active #}
+                    {% if totalPriceActivate != false %}
+                        {# arrays contain information for stackprices #}
+                        <script type="text/javascript">
+                            var calculatedPricesPriceArray = JSON.parse("{{calculatedPricesPriceArray|json_encode}}");
+                            var calculatedPricesQuantityArray = JSON.parse("{{calculatedPricesQuantityArray|json_encode}}");
+                        </script>
+                    {% endif %}
+                {% endif %}
+
+                {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixDisableIfNotInstock") %}
+                    <input type="number" min="0" max="{{ childProduct.availableStock }}" class="form-control variant-matrix-quantity" value="0" data-bit-variant-id="{{ key }}" data-check-max-stock="true" data-attribute-max-stock="{{ childProduct.availableStock }}" data-attribute-purchase-steps="{{ childProduct.purchaseSteps }}" 
+                    data-attribute-min-purchase="{{ childProduct.minPurchase }}" data-max-purchase="{{ childProduct.maxPurchase }}" data-attribute-variant-price="{% if childProduct.calculatedPrices|length == 0 %}{{variantPrice}}{% else %}0{% endif %}" {{ condition }} style="{% if variantMatrixPosition == 'price' and not(variantMatrixLayout == 'standard') %}width: 90%!important;{% endif %}">
+                {% else %}                
+                    <input type="number" min="0" max="{{ childProduct.availableStock }}" class="form-control variant-matrix-quantity" value="0" data-bit-variant-id="{{ key }}" data-attribute-purchase-steps="{{ childProduct.purchaseSteps }}" 
+                    data-attribute-min-purchase="{{ childProduct.minPurchase }}" data-max-purchase="{{ childProduct.maxPurchase }}" data-attribute-variant-price="{% if childProduct.calculatedPrices|length == 0 %}{{variantPrice}}{% else %}0{% endif %}" {{ condition }} style="{% if variantMatrixPosition == 'price' and not(variantMatrixLayout == 'standard') %}width: 90%!important;{% endif %}">
+                {% endif %}
+
+                {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixShowStockQuantity") == true and variantMatrixLayout == 'standard' %}
+
+                    {% if (VariantMatrixStockQuantityDisplayThresholdHigh is defined) and (childProduct.availableStock > VariantMatrixStockQuantityDisplayThresholdHigh) %}
+                        <span class="variant-matrix-show-stock higher">&gt; {{ VariantMatrixStockQuantityDisplayThresholdHigh }}</span>
+                        
+                    {% elseif (VariantMatrixStockQuantityDisplayThresholdLow is defined) and (childProduct.availableStock < VariantMatrixStockQuantityDisplayThresholdLow) %}
+                        
+                        {% if childProduct.availableStock == 0 %}
+                            <span class="variant-matrix-show-stock empty">{{childProduct.availableStock}}</span>
+                        {% else %}
+                            <span class="variant-matrix-show-stock lower">&lt; {{ VariantMatrixStockQuantityDisplayThresholdLow }}</span>
+                        {% endif %}
+                    {# default if both are defined and availableStock = VariantMatrixStockQuantityDisplayThresholdLow #}
+                    {% else %}
+                        <span class="variant-matrix-show-stock equals">{{childProduct.availableStock}}</span>
+                    {% endif %}
+                {# VariantMatrixShowStockQuantity == false #}
+                {% else %}
+
+                {% endif %}
+            {% else %}
+                {% if childProduct.calculatedPrices|length > 0 %}
+                    {# totalPrice active #}
+                    {% if totalPriceActivate != false %}
+                        {# arrays contain information for stackprices #}
+                        <script type="text/javascript">
+                            var calculatedPricesPriceArray = JSON.parse("{{calculatedPricesPriceArray|json_encode}}");
+                            var calculatedPricesQuantityArray = JSON.parse("{{calculatedPricesQuantityArray|json_encode}}");
+                        </script>
+                    {% endif %}
+                {% endif %}
+
+                {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixDisableIfNotInstock") %}
+                    <input type="number" min="0" max="{{ childProduct.availableStock }}" class="form-control variant-matrix-quantity" value="0" data-bit-variant-id="{{ key }}" data-check-max-stock="true" data-attribute-max-stock="{{ childProduct.availableStock }}" data-attribute-purchase-steps="{{ childProduct.purchaseSteps }}" 
+                    data-attribute-min-purchase="{{ childProduct.minPurchase }}" data-max-purchase="{{ childProduct.maxPurchase }}" data-attribute-variant-price="{% if childProduct.calculatedPrices|length == 0 %}{{variantPrice}}{% else %}0{% endif %}" {{ condition }} style="{% if variantMatrixPosition == 'price' and not(variantMatrixLayout == 'standard') %}width: 90%!important;{% endif %}">
+                {% else %}
+                    <input type="number" min="0" max="{{ childProduct.availableStock }}" class="form-control variant-matrix-quantity" value="0" data-bit-variant-id="{{ key }}" data-attribute-purchase-steps="{{ childProduct.purchaseSteps }}"
+                    data-attribute-min-purchase="{{ childProduct.minPurchase }}" data-max-purchase="{{ childProduct.maxPurchase }}" data-attribute-variant-price="{% if childProduct.calculatedPrices|length == 0 %}{{variantPrice}}{% else %}0{% endif %}" {{ condition }} style="{% if variantMatrixPosition == 'price' and not(variantMatrixLayout == 'standard') %}width: 90%!important;{% endif %}">
+                {% endif %}
+                
+                {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixShowStockQuantity") == true and variantMatrixLayout == 'standard' %}
+
+                    {% if (VariantMatrixStockQuantityDisplayThresholdHigh is defined) and (childProduct.availableStock > VariantMatrixStockQuantityDisplayThresholdHigh) %}
+                        <span class="variant-matrix-show-stock higher">&gt; {{ VariantMatrixStockQuantityDisplayThresholdHigh }}</span>
+
+                    {% elseif (VariantMatrixStockQuantityDisplayThresholdLow is defined) and (childProduct.availableStock < VariantMatrixStockQuantityDisplayThresholdLow) %}
+                        
+                        {% if childProduct.availableStock == 0 %}
+                            <span class="variant-matrix-show-stock empty">{{childProduct.availableStock}}</span>
+                        {% else %}
+                            <span class="variant-matrix-show-stock lower">&lt; {{ VariantMatrixStockQuantityDisplayThresholdLow }}</span>
+                        {% endif %}
+                    {# default if both are defined and availableStock = VariantMatrixStockQuantityDisplayThresholdLow #}
+                    {% else %}
+                        <span class="variant-matrix-show-stock equals">{{childProduct.availableStock}}</span>
+                    {% endif %}
+                {# VariantMatrixShowStockQuantity == false #}
+                {% else %}
+
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+</div>

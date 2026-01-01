@@ -1,0 +1,50 @@
+{% block element_moorl_contact %}
+    <div class="cms-element-{{ element.type }}">
+        <div class="card">
+            <div class="card-body">
+                {% block element_moorl_contact_card %}
+                    <div class="card-title">
+                        {% block element_moorl_contact_card_title %}
+                            {% sw_icon 'phone' style {size:'xs', pack:'fas'} %}
+                            {{ "moorl-foundation.card.contact"|trans }}
+                        {% endblock %}
+                    </div>
+
+                    {% block element_moorl_contact_card_body %}
+                        {% if element.data.merchantUrl %}
+                            <p>
+                                <a href="{{ element.data.merchantUrl }}" target="_blank" rel="noopener">
+                                    {{ "moorl-foundation.field.merchantUrl"|trans }}
+                                </a>
+                            </p>
+                        {% endif %}
+
+                        {% if element.data.shopUrl %}
+                            <p>
+                                <a href="{{ element.data.shopUrl }}" target="_blank" rel="noopener">
+                                    {{ "moorl-foundation.field.shopUrl"|trans }}
+                                </a>
+                            </p>
+                        {% endif %}
+
+                        {% if element.data.phoneNumber %}
+                            <p>
+                                <a href="tel:{{ element.data.phoneNumber }}" itemprop="telephone" content="{{ element.data.phoneNumber }}">
+                                    {{ "moorl-foundation.field.phoneNumber"|trans }}
+                                </a>
+                            </p>
+                        {% endif %}
+
+                        {% if element.data.email %}
+                            <p>
+                                <a href="mailto:{{ element.data.email }}" itemprop="email" content="{{ element.data.email }}">
+                                    {{ "moorl-foundation.field.email"|trans }}
+                                </a>
+                            </p>
+                        {% endif %}
+                    {% endblock %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

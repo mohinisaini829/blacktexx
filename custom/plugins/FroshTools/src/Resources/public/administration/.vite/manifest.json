@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/frosh-tools-CvkX_WKf.js",
+    "name": "frosh-tools",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/frosh-tools-CnaiEuh4.css"
+    ]
+  }
+}

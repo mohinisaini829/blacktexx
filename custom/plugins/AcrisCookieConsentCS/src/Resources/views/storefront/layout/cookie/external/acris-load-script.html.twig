@@ -1,0 +1,17 @@
+{% block acris_cookie_consent_load_script %}
+    {% if page.extensions.acrisCookieConsent.cookieGroups %}
+        {% for cookieGroup in page.extensions.acrisCookieConsent.cookieGroups %}
+            {% block acris_cookie_consent_load_script_group %}
+                {% for cookie in cookieGroup.cookies %}
+                    {% block acris_cookie_consent_load_script_cookie %}
+                        {% set cookieScriptPosition = cookie.scriptPosition != '' ? cookie.scriptPosition : 'body_end' %}
+
+                        {% if cookie.translated.script and cookieScriptPosition == scriptPosition %}
+                            {{ include(template_from_string(cookie.translated.script|raw)) }}
+                        {% endif %}
+                    {% endblock %}
+                {% endfor %}
+            {% endblock %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

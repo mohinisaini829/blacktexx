@@ -1,0 +1,16 @@
+{
+    "acrisCookieConsent": {
+        "heading": "Rispettiamo la tua privacy",
+        "messageIncludingSave": "Questo sito web utilizza i cookie per garantire che tu ottenga la migliore esperienza sul nostro sito. Puoi cambiare la tua scelta riguardo all'uso dei cookie in qualsiasi momento <a data-bs-dismiss=\"modal\" id=\"ccAcceptButton\" class=\"cookie-consent-accept-button-in-text\" href=\"#\" onclick=\"return false;\">salvando.</a> <a data-ajax-modal=\"true\"\n data-modal-class=\"cookie-consent-permission-footer-modal\" data-url=\"%url%\" href=\"%url%\" title=\"Maggiori informazioni\">Maggiori informazioni</a>.",
+        "messageNoSave": "Questo sito web utilizza i cookie per garantire che tu ottenga la migliore esperienza sul nostro sito...</a> <a data-ajax-modal=\"true\"\n data-modal-class=\"cookie-consent-permission-footer-modal\" data-url=\"%url%\" href=\"%url%\" title=\"Maggiori informazioni\">Maggiori informazioni</a>.",
+        "switchActive": "Attivo",
+        "switchInactive": "Non attivo",
+        "settingsButton": "Impostazioni dei cookie",
+        "acceptOnlyFunctionalButton": "Accetta solo i cookie funzionali",
+        "acceptButton": "Accetta i cookie selezionati",
+        "acceptAllButton": "Accetta tutti i cookie",
+        "footerCmsPageLinkPrefixFirst": "- ",
+        "footerCmsPageLinkPrefixSecond": "- ",
+        "footerCmsPageLinkPrefixThird": "- "
+    }
+}

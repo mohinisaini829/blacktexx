@@ -1,0 +1,53 @@
+{
+    "name": "biloba\/article-variant-order-matrix",
+    "description": "Display product variants as a matrix directly on the product page. This ensures simplified selection and quick ordering, enhancing user experience and boosting conversions.",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "version": "4.0.0",
+    "require": {
+        "shopware\/core": "~6.7.0"
+    },
+    "authors": [
+        {
+            "name": "Biloba IT"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Biloba\\ArticleVariantOrderMatrix\\": "src\/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Biloba\\ArticleVariantOrderMatrix\\BilobaArticleVariantOrderMatrix",
+        "plugin-icon": "plugin.png",
+        "copyright": "(c) by Biloba IT",
+        "label": {
+            "de-DE": "Varianten-Matrix Schnellbestellung",
+            "en-GB": "Variants Matrix Quick Order",
+            "fr-FR": "Matrice de variantes commande rapide",
+            "es-ES": "Orden r\u00e1pida de matriz de variantes",
+            "pt-PT": "Ordem r\u00e1pida da matriz de variantes",
+            "it-IT": "Ordine rapido della matrice delle varianti",
+            "nl-NL": "Variant matrix snel bestellen",
+            "pl-PL": "Wariantowa matryca szybkiego zamawiania"
+        },
+        "description": {
+            "de-DE": "Zeige Artikelvarianten als Matrix direkt auf der Produktseite. Vereinfachte Auswahl und schnelle Bestellung sorgen f\u00fcr eine bessere Nutzererfahrung und mehr Conversions.",
+            "en-GB": "Display product variants as a matrix directly on the product page. This ensures simplified selection and quick ordering, enhancing user experience and boosting conversions.",
+            "fr-FR": "Offrez \u00e0 vos clients un affichage de toutes les variantes de l'article. Avec le app, les variantes d'un article sont affich\u00e9es sous forme de tableau sur la page de d\u00e9tail.",
+            "es-ES": "Ofrezca a sus clientes una visualizaci\u00f3n de todas las variantes del art\u00edculo. Con el app, las variantes de un art\u00edculo se muestran en la p\u00e1gina de detalles como una tabla clara.",
+            "pt-PT": "Oferecer aos clientes uma exibi\u00e7\u00e3o de todas as variantes do artigo. Com o app, as variantes de um artigo s\u00e3o exibidas na p\u00e1gina detalhada como uma tabela clara.",
+            "it-IT": "Offri ai tuoi clienti un'esposizione di tutte le varianti dell'articolo. Con il app, le varianti di un articolo vengono visualizzate come tabella nella pagina di dettaglio.",
+            "nl-NL": "Bied uw klanten een display van alle varianten van het artikel. Met de app worden de varianten van een artikel op de detailpagina als een duidelijke tabel weergegeven.",
+            "pl-PL": "Zaproponuj swoim klientom wy\u015bwietlanie wszystkich wariant\u00f3w artyku\u0142u. Z wtyczk\u0105, warianty artyku\u0142u s\u0105 wy\u015bwietlane na stronie szczeg\u00f3\u0142\u00f3w jako przejrzysta tabela."
+        },
+        "manufacturerLink": {
+            "de-DE": "https:\/\/www.biloba-it.de\/online-shop\/",
+            "en-GB": "https:\/\/www.biloba-it.de\/online-shop\/"
+        },
+        "supportLink": {
+            "de-DE": "https:\/\/www.biloba-it.de\/anfrage\/",
+            "en-GB": "https:\/\/www.biloba-it.de\/anfrage\/"
+        }
+    }
+}

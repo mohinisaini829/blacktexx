@@ -1,0 +1,11 @@
+{% sw_extends '@Storefront/storefront/page/account/sidebar.html.twig' %}
+
+{% block page_account_sidebar_link_orders %}
+    {{ parent() }}
+    
+    <a href="{{ path('frontend.myfav.zweideh.account.designs') }}"
+        title="Meine Designs"
+        class="list-group-item list-group-item-action account-aside-item{% if activeRoute is same as('frontend.myfav.zweideh.account.designs') %} is-active{% endif %}">
+        Meine Designs
+    </a>
+{% endblock %}

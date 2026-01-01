@@ -1,0 +1,22 @@
+{
+    "MyfavZweideh": {
+        "designerModal": {
+            "upperHeading": "Bitte wählen Sie",
+            "option1": {
+                "heading": "Projekt-Designer: Ab 15 Stück",
+                "text": "- Volles Sortiment<br>- Designen & anfragen",
+                "btnText": "Projekt-Designer"
+            },
+            "option2": {
+                "heading": "Kleinmengen-Designer: Unter 15 Stück",
+                "text": "- Kleineres Sortiment<br>- Designen & direkt bestellen",
+                "btnText": "Kleinmengen-Designer"
+            },
+            "option3": {
+                "heading": "Weiter stöbern",
+                "text": "Verschaffen Sie sich alternativ gern einen Überblick über unserem Sortiment, oder erstellen Sie eine individuelle Anfrage.",
+                "btnText": "Hier bleiben"
+            }
+        }
+    }
+}

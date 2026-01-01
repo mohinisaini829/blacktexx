@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <!-- Entities popup -->
+        <service id="HTC\Popup\Core\Content\Popup\PopupDefinition">
+            <tag name="shopware.entity.definition" entity="htc_popup" />
+        </service>
+        <service id="HTC\Popup\Core\Content\Popup\Aggregate\PopupTranslation\PopupTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="htc_popup_translation" />
+        </service>
+        <!-- End entities popup -->
+
+        <!-- Services of Module-->
+        <service id="HTC\Popup\Service\PopupService">
+            <argument type="service" id="Doctrine\DBAL\Connection" />
+            <argument type="service" id="htc_popup.repository" />
+        </service>
+        
+        <service id="HTC\Popup\Storefront\Subscriber\PageSubscriber">
+            <argument type="service" id="HTC\Popup\Service\PopupService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="HTC\Popup\Controller\Storefront\PopupController">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+            <argument type="service" id="htc_popup.repository" />
+        </service>
+        <!-- Services of Module-->
+    </services>
+</container>

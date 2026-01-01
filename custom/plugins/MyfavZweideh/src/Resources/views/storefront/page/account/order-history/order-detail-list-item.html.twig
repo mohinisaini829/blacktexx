@@ -1,0 +1,21 @@
+{% sw_extends '@Storefront/storefront/page/account/order-history/order-detail-list-item.html.twig' %}
+
+{% block page_account_order_item_detail_image_value %}
+    {% if lineItem.payload.customFields.myfav_zweideh_enabled %}
+        <div class="product-image-link">
+            <img class="img-fluid order-item-img" style="width: 100px" src="{{ seoUrl('frontend.myfav.zweideh.tmp.cart.image', {'key': lineItem.payload.lumise_tmp_key, 'tmp_cart_id': lineItem.payload.lumise_tmp_cart_id }) }}" />
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_account_order_item_detail_name_value %}
+    {% if lineItem.payload.customFields.myfav_zweideh_enabled %}
+        <strong class="name-value">
+            {{ lineItem.label }}
+        </strong>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

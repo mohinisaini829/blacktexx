@@ -1,0 +1,25 @@
+{
+    "vio-finishing-prices": {
+        "general": {
+            "mainMenuItemGeneral": "Finishing prices"
+        },
+        "list": {
+            "columnActive": "active",
+            "columnName": "name"
+        },
+        "detail": {
+            "errorTitle": "An error occurred while saving the finishing price!",
+            "activeLabel": "active",
+            "nameLabel": "name",
+            "positionLabel": "position",
+            "textLabel": "text"
+        }
+    },
+    "sw-cms": {
+        "elements": {
+            "finishing-price-table": {
+                "label": "Finishing prices"
+            }
+        }
+    }
+}

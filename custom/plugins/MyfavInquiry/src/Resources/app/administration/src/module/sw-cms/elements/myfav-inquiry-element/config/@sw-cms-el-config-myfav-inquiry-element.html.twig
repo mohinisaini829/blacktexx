@@ -1,0 +1,33 @@
+{% block sw_cms_el_form_config_content_form_type_options %}
+     {% parent %}
+    <option value="myfavinquiry">
+        {{ $tc('myfav-inquiry.label') }}
+    </option>
+{% endblock %}
+
+{% block sw_cms_el_form_config_tab_options %}
+    <sw-tabs-item
+            v-if="element.config.type.value === 'contact' || element.config.type.value === 'myfavinquiry'"
+            :title="$tc('sw-cms.elements.general.config.tab.settings')"
+            name="options"
+            :active-tab="active"
+    >
+        {{ $tc('sw-cms.elements.general.config.tab.settings') }}
+    </sw-tabs-item>
+{% endblock %}
+
+{% block sw_cms_el_form_config_options %}
+    <sw-container
+            v-else-if="active === 'options' && (element.config.type.value === 'contact' || element.config.type.value === 'myfavinquiry')"
+            class="sw-cms-el-config-form__tab-options"
+    >
+        <sw-tagged-field
+                v-model="element.config.mailReceiver.value"
+                :class="getLastMailClass"
+                :label="$tc('sw-cms.elements.form.config.label.receiverEmail')"
+                name="mailReceiver"
+                placeholder="john@doe.com"
+                @change="updateMailReceiver"
+        />
+    </sw-container>
+{% endblock %}

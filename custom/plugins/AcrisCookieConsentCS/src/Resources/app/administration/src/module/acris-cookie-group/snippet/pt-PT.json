@@ -1,0 +1,37 @@
+{
+    "acris-cookie-group": {
+        "general": {
+            "mainMenuItemGeneral": "Cookies",
+            "placeholderSearchBar": "Pesquisar cookies",
+            "description": "Visualizar cookies que foram encontrados na loja",
+            "labelName": "Grupo de Cookies"
+        },
+        "list": {
+            "textHeadline": "Grupos de cookies",
+            "buttonAdd": "Adicionar",
+            "contextMenuEdit": "Editar",
+            "contextMenuDelete": "Eliminar",
+            "columnTitle": "Título",
+            "columnDescription": "Descrição",
+            "textDeleteConfirm": "Deseja eliminar o grupo de cookies",
+            "modalTitleDelete": "Eliminar grupo de cookies",
+            "buttonCancel": "Cancelar",
+            "buttonDelete": "Eliminar",
+            "contentEmpty": "Não há grupos de cookies"
+        },
+        "detail": {
+            "textHeadline": "Configurações do grupo de política de cookies",
+            "buttonCancel": "Cancelar",
+            "buttonSave": "Guardar",
+            "fieldTitleLabel": "Título",
+            "fieldTitlePlaceholder": "Inserir título do grupo de cookies",
+            "fieldDescriptionLabel": "Descrição",
+            "fieldDescriptionPlaceholder": "Inserir descrição",
+            "cardTitle": "Informação do cliente",
+            "notificationSaveErrorMessage": "Ocorreu um erro ao guardar o grupo de cookies.",
+            "notificationSaveSuccessMessage": "O grupo de cookies foi guardado com sucesso.",
+            "notificationSaveSuccessMessageTitle": "Sucesso",
+            "notificationSaveErrorMessageTitle": "Erro"
+        }
+    }
+}

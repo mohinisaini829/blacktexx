@@ -1,0 +1,23 @@
+{
+  "base": "/bundles/froshplatformadminer/administration/",
+  "entryPoints": {
+    "frosh-platform-adminer": {
+      "css": [],
+      "dynamic": [],
+      "js": [
+        "/bundles/froshplatformadminer/administration/assets/frosh-platform-adminer-CPUUsTqz.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

@@ -1,0 +1,13 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_noscript %}
+    {% sw_include '@Storefront/storefront/layout/cookie/external/acris-load-script.html.twig' with { scriptPosition: 'body_start' } %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block base_body_script %}
+    {{ parent() }}
+
+    {% sw_include '@Storefront/storefront/layout/cookie/external/acris-load-script.html.twig' with { scriptPosition: 'body_end' } %}
+{% endblock %}

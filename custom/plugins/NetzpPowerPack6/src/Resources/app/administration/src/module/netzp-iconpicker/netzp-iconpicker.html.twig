@@ -1,0 +1,65 @@
+{% block netzp_iconpicker %}
+<div class="netzp-iconpicker">
+    <sw-contextual-field v-bind="$attrs"
+                         :name="formFieldName"
+                         v-on="$listeners"
+                         class="netzp-iconpicker">
+
+        <template #sw-contextual-field-prefix>
+            <span v-if="doRender"
+                  @click="showPicker">
+                <i class="netzp-field-iconpicker-preview fa" :class="currentValue" />
+            </span>
+        </template>
+
+        <template #sw-field-input="{ identification, disabled, size, setFocusClass, removeFocusClass }">
+            <div class="netzp-field-iconpicker-container">
+                <input v-bind="$attrs"
+                       :id="identification"
+                       type="text"
+                       :name="identification"
+                       :placeholder="placeholder"
+                       :disabled="disabled"
+                       :value="currentValue"
+                       @input="onInput"
+                       @change="onChange"
+                       @focus="setFocusClass"
+                       @blur="removeFocusClass"
+                       v-on="additionalListeners">
+            </div>
+
+            <div v-if="visible" class="netzp-iconpicker-picker">
+                <div class="netzp-iconpicker-picker-searchbar">
+                    <input type="text"
+                           v-model="searchValue"
+                           :placeholder="$tc('netzp-iconpicker.search')"
+                           @keydown.esc="showPicker"
+                           @input="search"
+                           class="netzp-field-iconpicker-search"
+                           ref="search">
+
+                    <sw-icon name="regular-check-circle"
+                             class="netzp-iconpicker-picker-close-icon"
+                             @click="showPicker" />
+
+                </div>
+
+                <div v-for="(icon, index) in iconList" :key="index"
+                     class="iconbox" :class="{ selected: currentValue == 'fa-' + index }"
+                     @click="iconSelected(index)">
+
+                    <i class="icon fa" :class="'fa-' + index"></i>
+                    <span class="caption">{{ index }}</span>
+
+                </div>
+            </div>
+        </template>
+
+        <template #sw-contextual-field-suffix>
+            <sw-icon name="regular-search" small
+                     @click="showPicker" />
+        </template>
+
+    </sw-contextual-field>
+</div>
+{% endblock %}

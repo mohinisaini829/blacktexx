@@ -1,0 +1,26 @@
+{% block sw_cms_element_netzp_powerpack6_tabs %}
+    <div class="sw-cms-el-netzp-powerpack6-tabs">
+        <h3 class="title" v-if="element.config.title.value">
+            {{ element.config.title.value }}
+        </h3>
+
+        <sw-tabs :small="true" defaultItem="tab1" positionIdentifier="netzp-powerpack-tabs">
+            <template #default="{ active }">
+                <sw-tabs-item v-for="n in element.config.numberOfTabs.value" :key="n"
+                              :name="'tab' + n" :activeTab="active"
+                              :title="'Tab ' + n" class="tab">
+                    {{ element.config['tabtitle' + n].value }}
+                </sw-tabs-item>
+            </template>
+
+            <template #content="{ active }">
+                <template v-for="n in element.config.numberOfTabs.value" :key="n">
+                    <sw-container v-if="active === 'tab' + n">
+                        <sw-text-editor v-model:value="element.config['tabcontents' + n].value"
+                                        :isInlineEdit="true" />
+                    </sw-container>
+                </template>
+            </template>
+        </sw-tabs>
+    </div>
+{% endblock %}

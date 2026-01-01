@@ -1,0 +1,80 @@
+{
+    "htc-popup-snp": {
+        "list": {
+            "columnLabel": "Titel",
+            "columnPriority": "Priorität",
+            "columnStatus": "Status"
+        },
+        "general": {
+            "cancelButtonText": "Abbrechen",
+            "saveButtonText": "Speichern",
+            "resetStatisticsText": "Statistik Zurücksetzen",
+            "errorTitle": "Error",
+            "errorMessage": "Etwas ist schief gelaufen! Bitte überprüfen Sie noch einmal.",
+            "successTitle": "Erfolg",
+            "successSaveMessage": "Das Popup wurde gespeichert.",
+            "navigationTitle": "Popup-Verwaltung",
+            "navigationDescription": "HTC Popup-Verwaltung"
+        },
+        "popup": {
+            "detail": {
+                "newPopupHeaderTitle": "Neues Popup",
+                "generalCardLabel": "Allgemeine Einstellung",
+                "displayCardlabel": "Bildschirmeinstellung",
+                "isRedirectPopupCardlabel": "Umleitungs-Popup-Einstellung",
+                "styleCardLabel": "Benutzerdefinierte Stileinstellung",
+                "statisticsCardLabel": "Statistiken",
+                "titleLabel": "Titel",
+                "statusLabel": "Status",
+                "priorityLabel": "Priorität",
+                "contentLabel": "Inhalt",
+                "customCssLabel": "Benutzerdefinierte CSS",
+                "backgroundMediaLabel": "Hintergrundbild",
+                "classNameLabel": "Klassenname",
+                "textColorLabel": "Textfarbe",
+                "pagesShowLabel": "Sichtbar auf",
+                "visibleOptionLabels" : {
+                    "homePageOptionLabel": "Startseite",
+                    "productPageOptionLabel": "Produktseite",
+                    "categoryPageOptionLabel": "Kategorieseite",
+                    "otherPageOptionLabel": "Andere Seite"
+                },
+                "frequency": "Frequenz",
+                "frequencyOptionLabels": {
+                    "alwaysLabel": "Immer",
+                    "onlyOneLabel": "Nur einmal"
+                },
+                "alignContentOptions": {
+                    "leftTopLabel": "Links oben",
+                    "leftCenterLabel": "Links Mitte",
+                    "leftBottomLabel": "Links unten",
+                    "centerTopLabel": "Mitte oben",
+                    "centerCenterLabel": "Zentrum Zentrum",
+                    "centerBottomLabel": "Mitte unten",
+                    "rightTopLabel": "Rechts oben",
+                    "rightCenterLabel": "Rechts Mitte",
+                    "rightBottomLabel": "Rechts unten"
+                },
+                "showGuestLabel": "Show für Gast",
+                "customerGroupLabel": "Kundengruppe",
+                "isRedirectLabel": "Ist Umleitungs-Popup",
+                "isRedirectHelpText": "Die Frequenzkonfiguration wird deaktiviert, wenn das Popup ein Weiterleitungs-Popup ist.",
+                "confirmButtonTitleLable": "Schaltflächentext bestätigen",
+                "denyButtonTitleLable": "Schaltflächentext verweigern",
+                "denyButtonLinkLable": "Link zum Button verweigern",
+                "backgroundColorButton": "Schaltfläche für Hintergrundfarbe",
+                "viewLabel": "Aussicht",
+                "clickLabel": "Klicken",
+                "ctrLabel": "Click-through rate (CTR)",
+                "widthLabel":"Breite",
+                "heightLabel":"Höhe",
+                "alignContentLabel": "Inhalt ausrichten"
+            }
+        },
+        "modules": {
+            "menu": "HTC-Popup",
+            "addModulesButton": "Neues Popup hinzufügen",
+            "cancelButton": "Stornieren"
+        }
+    }
+}

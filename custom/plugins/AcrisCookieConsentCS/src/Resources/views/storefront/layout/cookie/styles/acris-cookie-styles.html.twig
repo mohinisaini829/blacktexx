@@ -1,0 +1,44 @@
+{% block acris_cookie_consent_styles_styles %}
+    {% set cookieConfig = config('AcrisCookieConsentCS.config') %}
+
+    {% if cookieConfig.displayMainBackgroundColor or cookieConfig.displaySwitchTabBackgroundColor or cookieConfig.displayFontColor or cookieConfig.displayBorderColor or (cookieConfig.displayButtonSameWidth and cookieConfig.displayButtonWidth) %}
+        <style>
+            {% if cookieConfig.displayMainBackgroundColor %}
+            .acris-cookie-consent.is--default {
+                background-color: {{ cookieConfig.displayMainBackgroundColor }};
+            }
+
+            .acris-cookie-consent .modal-content {
+                background-color: {{ cookieConfig.displayMainBackgroundColor }};
+            }
+
+            {% endif %}
+            {% if cookieConfig.displaySwitchTabBackgroundColor %}
+            .cookie-consent-group-header {
+                background-color: {{ cookieConfig.displaySwitchTabBackgroundColor }};
+            }
+
+            {% endif %}
+            {% if cookieConfig.displayFontColor %}
+            .acris-cookie-consent {
+                color: {{ cookieConfig.displayFontColor }};
+            }
+
+            {% endif %}
+
+            {% if cookieConfig.displayBorderColor %}
+            .acris-cookie-consent, .acris-cookie-consent .cookie-consent-settings, .acris-cookie-consent .cookie-consent-setting-description {
+                border-color: {{ cookieConfig.displayBorderColor }};
+            }
+
+            {% endif %}
+
+            {% if cookieConfig.displayButtonSameWidth and cookieConfig.displayButtonWidth %}
+            .acris-cookie-consent .cookie-consent-permission-button .btn {
+                width: {{ cookieConfig.displayButtonWidth }}px;
+            }
+
+            {% endif %}
+        </style>
+    {% endif %}
+{% endblock %}

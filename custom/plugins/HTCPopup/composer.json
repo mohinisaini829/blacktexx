@@ -1,0 +1,49 @@
+{
+    "name": "htc/popup-pro",
+    "description": "Popup management system",
+    "version": "v1.3.1",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "HTC shopware dev team",
+            "homepage": "https://www.htcestore.com/product/shopware.html"
+        }
+    ],
+    "require": {
+        "shopware/core": "6.7.*",
+        "shopware/administration": "6.7.*",
+        "shopware/storefront": "6.7.*"
+    },
+    "minimum-stability": "RC",
+    "autoload": {
+        "psr-4": {
+            "HTC\\Popup\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "HTC\\Popup\\HTCPopup",
+        "plugin-icon": "src/Resources/config/plugin.png",
+        "label": {
+            "de-DE": "HTC Popup",
+            "en-GB": "HTC Popup",
+            "nl-NL": "HTC Popup"
+        },
+        "description": {
+            "de-DE": "Popup Window is the best solution for your online store, as well as announce promotions, new products, or new information to customers...",
+            "en-GB": "Popup Window ist die beste Lösung für Ihren Online-Shop und bietet Kunden Werbeaktionen, neue Produkte oder neue Informationen...",
+            "nl-NL": "Pop-upvenster is de beste oplossing voor uw online winkel en biedt klanten promoties, nieuwe producten of nieuwe informatie..."
+        },
+        "copyright": "(c) by HTCSOFT",
+        "manufacturerLink": {
+            "de-DE": "https://www.htcestore.com/product/shopware.html",
+            "en-GB": "https://www.htcestore.com/product/shopware.html",
+            "nl-NL": "https://www.htcestore.com/product/shopware.html"
+        },
+        "supportLink": {
+            "de-DE": "https://www.htcestore.com/contact-us",
+            "en-GB": "https://www.htcestore.com/contact-us",
+            "nl-NL": "https://www.htcestore.com/contact-us"
+        }
+    }
+}

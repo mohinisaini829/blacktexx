@@ -1,0 +1,275 @@
+{% block sw_cms_element_netzp_powerpack6_cta2_config %}
+    <div class="sw-cms-el-config-netzp-powerpack6">
+        <sw-confirm-modal v-if="showTabRemoveConfirm"
+                          type="delete"
+                          :text="$tc('sw-cms.netzp-powerpack6.elements.cta2.tabs.remove')"
+                          @confirm="removeTabConfirmed()"
+                          @close="showTabRemoveConfirm = false"
+                          @cancel="showTabRemoveConfirm = false">
+        </sw-confirm-modal>
+
+        <span :title="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.addElement')">
+            <sw-icon v-show="element.config.numberOfElements.value < 10"
+                     name="regular-plus-square" color="orange"
+                     @click="onAddTab" />
+        </span>
+
+        <sw-tabs ref="netzpCta2Tabs" :small="false" class="tabs"
+                 defaultItem="element1"
+                 @new-item-active="setActiveTab"
+                 positionIdentifier="netzp-powerpack-cta2-tabs">
+            <template #default="{ active }">
+                <sw-tabs-item v-for="n in element.config.numberOfElements.value" :key="n"
+                              :index="n"
+                              :name="'element' + n"
+                              :ref="'netzpCta2Tab' + n"
+                              :activeTab="active"
+                              :title="getTabName(n-1)">
+                    {{ getTabName(n-1) }}
+                    <span :title="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.removeElement')" class="removeButton">
+                        <sw-icon v-if="element.config.numberOfElements.value > 1"
+                                 name="regular-trash" small
+                                 @click="onRemoveTab" />
+                    </span>
+                </sw-tabs-item>
+
+                <sw-tabs-item name="main" :activeTab="active" :index="0"
+                              :title="$tc('sw-cms.netzp-powerpack6.elements.cta2.tabs.main')">
+                    <span class="mainTab">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.tabs.main') }}</span>
+                </sw-tabs-item>
+            </template>
+
+            <template #content="{ active }">
+                <template v-for="n in element.config.numberOfElements.value" :key="n">
+                    <sw-container v-if="active === 'element' + n">
+
+                        <sw-container columns="1fr 1fr 2fr" gap="10px">
+                            <sw-select-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.type.label')"
+                                             v-model:value="getElement(n-1).type">
+                                <option value="text">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.type.text') }}</option>
+                                <option value="button">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.type.button') }}</option>
+                                <option value="image">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.type.image') }}</option>
+                            </sw-select-field>
+
+                            <sw-select-field v-if="showButtonType(n-1)"
+                                             :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.buttonMode.label')"
+                                             v-model:value="getElement(n-1).mode">
+                                <option value="auto">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.buttonMode.primary') }}</option>
+                                <option value="secondary">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.buttonMode.secondary') }}</option>
+                                <option value="success">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.buttonMode.success') }}</option>
+                                <option value="danger">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.buttonMode.danger') }}</option>
+                                <option value="warning">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.buttonMode.warning') }}</option>
+                                <option value="info">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.buttonMode.info') }}</option>
+                                <option value="light">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.buttonMode.light') }}</option>
+                                <option value="dark">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.buttonMode.dark') }}</option>
+                                <option value="custom">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.buttonMode.custom') }}</option>
+                            </sw-select-field>
+                            <span v-else>&nbsp;</span>
+
+                            <sw-cms-mapping-field v-if="getElementType(n-1) == 'text' || getElementType(n-1) == 'button'"
+                                                  v-model:config="element.config.elements.value[n-1].contents"
+                                                  :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.contents')"
+                                                  value-types="string">
+
+                                <sw-text-field v-model:value="getElement(n-1).contents.value" />
+
+                                <template #preview="{ demoValue }">
+                                    <div class="sw-cms-el-config-text__mapping-preview">
+                                        <div v-html="$sanitize(demoValue)"></div>
+                                    </div>
+                                </template>
+                            </sw-cms-mapping-field>
+
+                        </sw-container>
+
+                        <sw-container columns="1fr 1fr 1fr 1fr 1fr" gap="10px">
+                            <sw-select-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.alignSelf.label')"
+                                             v-model:value="getElement(n-1).alignSelf">
+                                <option value="auto">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.alignSelf.auto') }}</option>
+                                <option value="flex-start">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.alignSelf.start') }}</option>
+                                <option value="center">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.alignSelf.center') }}</option>
+                                <option value="flex-end">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.alignSelf.end') }}</option>
+                                <option value="stretch">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.alignSelf.stretch') }}</option>
+                            </sw-select-field>
+
+                            <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.height')"
+                                           v-model:value="getElement(n-1).height" />
+
+                            <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.width')"
+                                           v-model:value="getElement(n-1).width" />
+
+                            <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.padding')"
+                                           v-model:value="getElement(n-1).padding" />
+
+                            <sw-text-field v-if="getElementType(n-1) !== 'image'"
+                                           :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.fontSize')"
+                                           v-model:value="getElement(n-1).fontSize" />
+                        </sw-container>
+
+                        <sw-container v-if="showColorSettings(n-1)"
+                                      columns="1fr 1fr 1fr 1fr" gap="20px">
+
+                            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.color')"
+                                            v-model:value="getElement(n-1).color"
+                                            colorOutput="hex" :zIndex="1001" />
+
+                            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.backgroundColor')"
+                                            v-model:value="getElement(n-1).backgroundColor"
+                                            colorOutput="hex" :zIndex="1001" />
+
+                            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.borderColor')"
+                                            v-model:value="getElement(n-1).borderColor"
+                                            colorOutput="hex" :zIndex="1001" />
+
+                            <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.borderWidth')"
+                                           v-model:value="getElement(n-1).borderWidth"
+                                           colorOutput="hex" :zIndex="1001" />
+                        </sw-container>
+
+                        <sw-cms-mapping-field v-if="getElementType(n-1) == 'image'"
+                                              :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.image')"
+                                              valueTypes="entity" entity="media"
+                                              v-model:config="element.config.elements.value[n-1].image">
+
+                            <sw-media-upload-v2 variant="regular"
+                                                :uploadTag="uploadTagImage(n-1)"
+                                                :source="previewSourceImage(n-1)"
+                                                :allowMultiSelect="false"
+                                                :defaultFolder="cmsPageState.pageEntityName"
+                                                :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                                                @media-upload-sidebar-open="onOpenMediaModalImage"
+                                                @media-upload-remove-image="onImageRemove(n-1)" />
+
+                            <template #preview="{ demoValue }">
+                                <div class="sw-cms-el-config-cta2__mapping-preview">
+                                    <img v-if="demoValue.url" :src="demoValue.url" alt="">
+
+                                    <sw-alert class="sw-cms-el-config-cta2__preview-info" variant="info" v-else>
+                                        {{ $tc('sw-cms.detail.label.mappingEmptyPreview') }}
+                                    </sw-alert>
+                                </div>
+                            </template>
+                        </sw-cms-mapping-field>
+
+                        <sw-container columns="1fr 1fr" gap="20px">
+                            <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.url')"
+                                           v-model:value="getElement(n-1).url" />
+
+                            <sw-switch-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.urlNewWindow')"
+                                             bordered v-model:value="getElement(n-1).urlNewWindow" />
+                        </sw-container>
+
+                        <sw-media-modal-v2 v-if="mediaModalImageIsOpen"
+                                           variant="full"
+                                           :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                                           :entityContext="cmsPageState.entityName"
+                                           :allowMultiSelect="false"
+                                           :initialFolderId="cmsPageState.defaultMediaFolderId"
+                                           @media-upload-remove-image="onImageRemove(n-1)"
+                                           @media-modal-selection-change="onSelectionChangedImage($event, n-1)"
+                                           @modal-close="onCloseModalImage" />
+
+                        <sw-upload-listener :uploadTag="uploadTagImage(n-1)" autoUpload
+                                            @media-upload-finish="onImageUpload($event, n-1)" />
+
+                    </sw-container>
+                </template>
+
+                <sw-container v-if="active === 'main'">
+                    <sw-container columns="1fr 1fr 1fr 1fr" gap="20px">
+                        <sw-select-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.direction.label')"
+                                         v-model:value="element.config.direction.value">
+                            <option value="row">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.direction.row') }}</option>
+                            <option value="column">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.direction.column') }}</option>
+                        </sw-select-field>
+
+                        <sw-select-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.justifyContent.label')"
+                                         v-model:value="element.config.justifyContent.value">
+                            <option value="flex-start">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.justifyContent.start') }}</option>
+                            <option value="center">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.justifyContent.center') }}</option>
+                            <option value="flex-end">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.justifyContent.end') }}</option>
+                            <option value="space-between">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.justifyContent.spaceBetween') }}</option>
+                            <option value="space-around">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.justifyContent.spaceAround') }}</option>
+                        </sw-select-field>
+
+                        <sw-select-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.alignItems.label')"
+                                         v-model:value="element.config.alignItems.value">
+                            <option value="flex-start">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.alignItems.start') }}</option>
+                            <option value="center">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.alignItems.center') }}</option>
+                            <option value="flex-end">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.alignItems.end') }}</option>
+                            <option value="stretch">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.alignItems.stretch') }}</option>
+                        </sw-select-field>
+                    </sw-container>
+
+                    <sw-container columns="1fr 1fr 1fr 1fr" gap="20px">
+                        <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.height')"
+                                       v-model:value="element.config.height.value" />
+
+                        <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.gap')"
+                                       v-model:value="element.config.gap.value" />
+                    </sw-container>
+
+                    <sw-container columns="2fr 1fr" gap="20px">
+                        <sw-cms-mapping-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.imageBackground')"
+                                              valueTypes="entity" entity="media"
+                                              v-model:config="element.config.backgroundImage">
+
+                            <sw-media-upload-v2 variant="regular"
+                                                :uploadTag="uploadTagImageBackground"
+                                                :source="previewSourceImageBackground"
+                                                :allowMultiSelect="false"
+                                                :defaultFolder="cmsPageState.pageEntityName"
+                                                :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                                                @media-upload-sidebar-open="onOpenMediaModalImageBackground"
+                                                @media-upload-remove-image="onImageBackgroundRemove" />
+
+                            <template #preview="{ demoValue }">
+                                <div class="sw-cms-el-config-cta2__mapping-preview">
+                                    <img :src="demoValue.url" v-if="demoValue.url" alt="">
+                                    <sw-alert class="sw-cms-el-config-cta2__preview-info" variant="info" v-else>
+                                        {{ $tc('sw-cms.detail.label.mappingEmptyPreview') }}
+                                    </sw-alert>
+                                </div>
+                            </template>
+                        </sw-cms-mapping-field>
+
+                        <sw-container rows="1fr 1fr 1fr" gap="0px">
+                            <sw-select-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.imageMode.label')"
+                                             v-model:value="element.config.backgroundImageMode.value">
+                                <option value="auto">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.imageMode.auto') }}</option>
+                                <option value="contain">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.imageMode.contain') }}</option>
+                                <option value="cover">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.imageMode.cover') }}</option>
+                            </sw-select-field>
+
+                            <sw-select-field :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.imageAlign.label')"
+                                             v-model:value="element.config.backgroundImageAlign.value">
+                                <option value="center center">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.imageAlign.centercenter') }}</option>
+                                <option value="left top">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.imageAlign.lefttop') }}</option>
+                                <option value="right bottom">{{ $tc('sw-cms.netzp-powerpack6.elements.cta2.config.imageAlign.rightbottom') }}</option>
+                            </sw-select-field>
+
+                            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.cta2.config.element.backgroundColor')"
+                                            v-model:value="element.config.backgroundColor.value"
+                                            colorOutput="hex" :zIndex="1001" />
+                        </sw-container>
+
+                        <sw-media-modal-v2
+                            variant="full"
+                            v-if="mediaModalImageBackgroundIsOpen"
+                            :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                            :entityContext="cmsPageState.entityName"
+                            :allowMultiSelect="false"
+                            :initialFolderId="cmsPageState.defaultMediaFolderId"
+                            @media-upload-remove-image="onImageBackgroundRemove"
+                            @media-modal-selection-change="onSelectionChangesImageBackground"
+                            @modal-close="onCloseModalImageBackground" />
+
+                        <sw-upload-listener :uploadTag="uploadTagImageBackground" autoUpload
+                                            @media-upload-finish="onImageBackgroundUpload" />
+
+                    </sw-container>
+                </sw-container>
+            </template>
+        </sw-tabs>
+    </div>
+{% endblock %}

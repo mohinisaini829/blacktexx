@@ -1,0 +1,7 @@
+{
+    "htc-popup": {
+        "denyButton": "Deny Button",
+        "confirmButton": "Confirm Button",
+        "closeButton": "Close"
+    }
+}

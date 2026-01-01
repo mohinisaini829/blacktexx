@@ -1,0 +1,141 @@
+{% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
+
+{% block layout_footer_inner_container %}
+    {# ✅ Custom Footer Text (e.g., Stick und Druck...) #}
+    {% set footerText = context.salesChannel.translated.customFields.footer_first ?? '' %}
+    {% if footerText is not empty %}
+        <div class="footer-first-text mt-3">
+            {{ footerText|raw }}
+        </div>
+    {% endif %}
+    {% set footerText = context.salesChannel.translated.customFields.middle_footer_menu ?? '' %}
+    {% if footerText is not empty %}
+        <div class="footer-first-text mt-3">
+            {{ footerText|raw }}
+        </div>
+    {% endif %}
+    {% set footerText = context.salesChannel.translated.customFields.footer_third ?? '' %}
+    {% if footerText is not empty %}
+        <div class="footer-first-text mt-3">
+            {{ footerText|raw }}
+        </div>
+    {% endif %} 
+    {# ✅ Newsletter Block #}
+    <div class="footer-first-text mt-3">
+        <h2 class="accordion-header">Don't miss anything</h2>
+        <div id="collapseFooterNewsletter accordion-content"
+             class="footer-column-content collapse js-footer-column-content accordion-content">
+            <div class="footer-column-content-inner">
+                <div class="cms-block">
+                    <div class="cms-block-container">
+                        <div class="container">
+                            <div class="cms-element-form">
+                                <form action="{{ path('frontend.form.newsletter.register.handle') }}"
+                                      method="post"
+                                      data-form-csrf-handler="true"
+                                      data-form-validation="true">
+
+                                    <input type="hidden" name="option" value="subscribe"/>
+                                    <input type="submit" class="submit--hidden d-none"/>
+
+                                    <div class="form-content row">
+                                        <p>
+                                            {{ "santa-theme.footer.newsletterText"|trans|sw_sanitize }}
+                                        </p>
+
+                                        <div class="form-group input-group col-12 col-md-12">
+                                            <label for="footerNewsletterMail" class="hidden"></label>
+                                            <input name="email"
+                                                   type="email"
+                                                   id="footerNewsletterMail"
+                                                   placeholder="E-Mail Adresse"
+                                                   required="required"
+                                                   value="{{ data.get('email') }}"
+                                                   class="form-control{% if formViolations.getViolations('/email') %} is-invalid{% endif %}"/>
+
+                                            <button type="submit" class="btn btn-newsletter">
+                                                <span class="footer-newsletter-icon">
+                                                    {{ "santa-theme.footer.newsletterGo"|trans|sw_sanitize }}
+                                                </span>
+                                            </button>
+                                        </div>
+
+                                        <div>
+                                            {% sw_include '@Storefront/storefront/component/privacy-notice.html.twig' with {
+                                                customForm: 'newsletterFooter'
+                                            } %}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# ✅ Footer Service Menu Links #}
+    {% if page.header.serviceMenu is defined and page.header.serviceMenu|length > 0 %}
+        <div class="santa--footer-page-links mt-3">
+            {% apply spaceless %}
+                <ul class="footer-service-menu-list list-unstyled">
+                    {% for serviceMenuItem in page.header.serviceMenu %}
+                        <li class="footer-service-menu-item">
+                            <a class="footer-service-menu-link"
+                               href="{{ category_url(serviceMenuItem) }}"
+                               {% if category_linknewtab(serviceMenuItem) %}target="_blank"{% endif %}
+                               title="{{ serviceMenuItem.translated.name }}">
+                                {{ serviceMenuItem.translated.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endapply %}
+        </div>
+    {% endif %}
+
+    {# ✅ Move footer-bottom here #}
+    {% block layout_footer_bottom %}
+        <div class="footer-bottom">
+            {% block layout_footer_service_menu %}
+                <div class="container">
+                    {% block layout_footer_service_menu_content %}
+                        <ul class="footer-service-menu-list list-unstyled">
+                            {% for serviceMenuItem in footer.serviceMenu %}
+                                {% block layout_footer_service_menu_item %}
+                                    <li class="footer-service-menu-item">
+                                        <a class="footer-service-menu-link"
+                                           href="{{ category_url(serviceMenuItem) }}"
+                                           {% if category_linknewtab(serviceMenuItem) %}target="_blank"{% endif %}
+                                           title="{{ serviceMenuItem.translated.name }}">
+                                            {{ serviceMenuItem.translated.name }}
+                                        </a>
+                                    </li>
+                                {% endblock %}
+                            {% endfor %}
+                        </ul>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {# ✅ VAT Notice shown last #}
+    {% set cmsPath = 'frontend.cms.page.full' %}
+    {% if showVatNotice or showVatNotice is not defined %}
+        <div class="footer-vat mt-3">
+            {% set shippingSnippetKey = context.taxState == 'gross' ? 'footer.includeVatTextPage' : 'footer.excludeVatTextPage' %}
+            <p>
+                {{ shippingSnippetKey|trans({
+                    '%url%': path(cmsPath, { id: config('core.basicInformation.shippingPaymentInfoPage') }),
+                    '%star%': ''
+                })|raw }}
+            </p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{# ✅ Remove these blocks so they don’t render in the original position #}
+{% block layout_footer_vat %}{% endblock %}
+{% block layout_footer_copyright %}{% endblock %}
+{% block layout_footer_navigation_hotline %}{% endblock %}

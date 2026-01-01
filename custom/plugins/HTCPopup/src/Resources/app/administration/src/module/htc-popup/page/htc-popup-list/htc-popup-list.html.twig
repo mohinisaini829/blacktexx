@@ -1,0 +1,32 @@
+{% block htc_popup_list %}
+    <sw-page class="htc-popup-list">
+        {% block htc_popup_list_smart_bar_actions %}
+            <template #smart-bar-actions>
+                <sw-button variant="primary" :routerLink="{ name: 'htc.popup.create' }">
+                    {{ $t('htc-popup-snp.modules.addModulesButton') }}
+                </sw-button>
+            </template>
+        {% endblock %}
+
+        <template #content>
+            {% block htc_popup_list_content %}
+                <sw-entity-listing
+                        v-if="popups"
+                        :items="popups"
+                        :repository="repository"
+                        :showSelection="false"
+                        :columns="columns"
+                        detailRoute="htc.popup.detail">
+                    {% block htc_popup_list_grid_columns %}
+                    	{% block htc_popup_list_grid_columns_active %}
+                            <template #column-active="{ item, isInlineEdit }">
+                                <sw-icon v-if="item.active" name="regular-checkmark-xs" small class="is--active"/>
+                                <sw-icon v-else name="regular-times-s" small class="is--inactive" />
+                            </template>
+                        {% endblock %}
+                    {% endblock %}
+                </sw-entity-listing>
+            {% endblock %}
+        </template>
+    </sw-page>
+{% endblock %}

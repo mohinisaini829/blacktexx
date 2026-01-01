@@ -1,0 +1,18 @@
+{% block block_netzp_powerpack6_grid1 %}
+    {% set columns = 2 %}
+    {% set id = element.id %}
+
+    <div class="container-fluid">
+        <div class="row">
+        {% block block_netzp_powerpack6_grid1_column1 %}
+            {% set element = block.slots.getSlot('column1') %}
+            <div class="col-12" data-cms-element-id="{{ id }}">
+                {% block block_netzp_powerpack6_grid1_column1_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

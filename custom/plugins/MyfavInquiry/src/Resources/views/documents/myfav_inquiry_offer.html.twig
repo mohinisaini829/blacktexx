@@ -1,0 +1,124 @@
+{% sw_extends '@Framework/documents/base.html.twig' %}
+{% block document_base %}
+    {# @var inquiry \Myfav\Inquiry\Entity\Inquiry\InquiryEntity #}
+    {# @var config \Shopware\Core\Checkout\Document\DocumentConfiguration #}
+    {# @var context \Shopware\Core\Framework\Context #}
+
+
+    {% set total = inquiry.lineItems.count %}
+
+    {% if config.itemsPerPage <= 0 %}
+        {% set itemsPerPage = 10 %}
+    {% else %}
+        {% set itemsPerPage = config.itemsPerPage %}
+    {% endif %}
+
+    {% set pages = (total / itemsPerPage)|round(0,'ceil') %}
+    {% if config.displayLineItems == false %}
+        {% set pages = 1 %}
+    {% endif %}
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        {{ block('document_head') }}
+    </head>
+
+    <body>
+
+    {{ block('footer') }}
+
+    {% block document_body %}
+        {% set position = 1 %}
+        {% set prefix = '' %}
+        {% set level = 0 %}
+
+        {% for lineItem in inquiry.lineItems %}
+            {{ block('loop') }}
+
+            {% set position = position + 1 %}
+        {% endfor %}
+
+        {{ block('comment')  }}
+    {% endblock %}
+    </body>
+    </html>
+{% endblock %}
+
+
+{% block document_side_info_customer_number %}{% endblock %}
+{% block document_side_info_order_number %}
+    <tr>
+        <td>
+            {{ 'document.offerNumber'|trans({'%orderNumber%': offerNumber })|sw_sanitize }}
+        </td>
+    </tr>
+{% endblock %}
+{% block document_side_info_order_date %}{% endblock %}
+
+{% block document_recipient %}
+    <span class="sender-address-small">
+        {{ block('document_recipient_sender') }}
+    </span>
+    {% if inquiry.company %}
+        {{ inquiry.company }}<br>
+    {% endif %}
+    {% if inquiry.salutation and inquiry.salutation.id is not same as(constant('Shopware\\Core\\Defaults::SALUTATION')) %}{{ inquiry.salutation.displayName ~ ' ' }}{% endif %}{{ inquiry.firstName }} {{ inquiry.lastName }}<br>
+{% endblock %}
+
+{% block comment %}
+    {% if inquiry.comment %}
+        <div class="document-comment-container">
+            {{ 'document.comment'|trans({'%comment%': inquiry.comment})|sw_sanitize }}
+        </div>
+    {% endif %}
+    {% if inquiry.deliveryDate %}
+        <div class="document-comment-container">
+            {{ 'document.inquiryDeliveryDate'|trans({'%date%': inquiry.deliveryDate|format_date('medium', locale=locale)})|sw_sanitize }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block document_line_item_table_row_product_number %}
+    {% if lineItem.product.productNumber %}
+        <td>{{ lineItem.product.productNumber }}</td>
+    {% else %}
+        <td></td>
+    {% endif %}
+{% endblock %}
+
+{% block document_line_item_table_row_label %}
+    <td class="line-item-breakable">
+        {% if level > 0 %}
+            {% for i in 1..level %}
+                <span class="wrapper-wrapper">
+                    <span class="label-wrapper level-{{ i }}"></span>
+                </span>
+            {% endfor %}
+        {% endif %}
+
+        <span class="line-item-label level-{{ level }}">{{ lineItem.product.name }}</span>
+    </td>
+{% endblock %}
+
+{% block document_line_item_table_head_tax_rate %}{% endblock %}
+{% block document_line_item_table_row_tax_rate %}{% endblock %}
+{% block document_line_item_row_table_unit_price %}
+    <td class="align-right">
+        {% if lineItem.price is not null %}
+            {{ lineItem.price|currency(currencyIsoCode) }}
+        {% else %}
+            {{ lineItem.product.price.first.gross|currency(currencyIsoCode) }}
+        {% endif %}
+    </td>
+{% endblock %}
+{% block document_line_item_table_row_total_price %}
+    <td class="align-right">
+        {% if lineItem.price is not null %}
+            {{ (lineItem.price * lineItem.quantity)|currency(currencyIsoCode) }}
+        {% else %}
+            {{ (lineItem.product.price.first.gross * lineItem.quantity)|currency(currencyIsoCode) }}
+        {% endif %}
+    </td>
+{% endblock %}
+{% block shipping_costs %}{% endblock %}

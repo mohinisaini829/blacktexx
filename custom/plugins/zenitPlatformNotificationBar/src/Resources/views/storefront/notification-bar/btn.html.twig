@@ -1,0 +1,12 @@
+{% block zenit_notification_bar_btn %}
+    {% set btnLink = "zenit.notificationBar.btnLink"|trans({"%placeholder%": zenNotificationBar.btnLink}) %}
+    {% set btnLinkTitle = "zenit.notificationBar.btnLinkTitle"|trans({"%placeholder%": zenNotificationBar.btnLinkTitle}) %}
+    {% set btnLinkText = "zenit.notificationBar.btnLinkText"|trans({"%placeholder%": zenNotificationBar.btnLinkText}) %}
+
+    <a href="{{ btnLink }}"
+       class="notification-btn btn"
+       title="{{ btnLinkTitle }}"
+       {% if zenNotificationBar.btnLinkTarget is same as ('_blank') %}target="_blank" rel="noopener"{% endif %}>
+        {{ btnLinkText | raw }}
+    </a>
+{% endblock %}

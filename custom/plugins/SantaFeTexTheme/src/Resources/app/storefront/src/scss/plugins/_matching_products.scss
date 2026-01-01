@@ -1,0 +1,6 @@
+.cms-element-vio_matching_products h3 {
+  font-size: calc(#{$vio-cms-title-font-size * .65});
+  @include media-breakpoint-up(md) {
+    font-size: $vio-cms-title-font-size;
+  }
+}

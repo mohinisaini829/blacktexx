@@ -1,0 +1,18 @@
+.notification-btn {
+    display: block;
+    color: $zen-notification-bar-text-color;
+    border-color: $zen-notification-bar-text-color;
+    overflow: hidden;
+    margin: 0 auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    max-width: 200px;
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $zen-notification-bar-background-color;
+        background: $zen-notification-bar-text-color;
+    }
+}

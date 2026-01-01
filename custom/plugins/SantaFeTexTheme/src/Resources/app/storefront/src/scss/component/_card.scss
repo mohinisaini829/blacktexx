@@ -1,0 +1,59 @@
+.is-act-confirm, .cms-element-form, .is-act-checkoutregisterpage {
+
+        .card-title {
+            font-size: 22px;
+            margin: 0;
+            padding: 1rem;
+        }
+
+        .form-group {
+            padding: 0 1rem;
+            .form-label {
+                font-size: 16px;
+            }
+        }
+        .form-text {
+            padding-left: 0.7rem;
+        }
+    .custom-checkbox {
+        margin-left: 1rem;
+    }
+
+}
+
+.is-act-confirm, .cms-element-form {
+    .card {
+        background: white;
+        border-radius: 2px;
+        box-shadow: 0 0 50px 0 rgb(0 0 0 / 8%);
+        margin-bottom: 30px;
+        padding: 1rem;
+    }
+}
+
+.is-act-checkoutregisterpage {
+    .register-personal, .register-address {
+        background: white;
+        border-radius: 2px;
+        box-shadow: 0 0 50px 0 rgb(0 0 0 / 8%);
+        margin-bottom: 30px;
+        padding: 1rem;
+    }
+
+    .card-title {
+        margin-bottom: 1rem;
+    }
+}
+.cms-element-form {
+
+    .col-12.col-md-8.col-lg-9 {
+        padding-left: 1rem;
+
+        .form-text {
+            padding-left: 0;
+        }
+        .privacy-notice {
+            padding-left: 0.5rem;
+        }
+    }
+}

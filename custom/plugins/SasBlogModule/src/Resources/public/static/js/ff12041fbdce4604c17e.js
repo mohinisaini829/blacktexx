@@ -1,0 +1,1 @@
+"use strict";(window["webpackJsonpPluginsas-blog-module"]=window["webpackJsonpPluginsas-blog-module"]||[]).push([[276],{6276:function(e,t,o){o.r(t),t.default={methods:{createdComponent(){this.productDetailBlocks=[{type:"blog-assignment",elements:[{slot:"content",type:"blog-assignment",config:{}}]},...this.productDetailBlocks],this.$super("createdComponent")}}}}}]);

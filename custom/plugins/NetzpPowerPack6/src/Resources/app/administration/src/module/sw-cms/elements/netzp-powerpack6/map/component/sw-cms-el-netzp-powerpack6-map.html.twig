@@ -1,0 +1,6 @@
+{% block sw_cms_element_netzp_powerpack6_map %}
+    <div class="sw-cms-el-netzp-powerpack6-map">
+        <div :id="'netzp-powerpack6-map' + element.id" :style="getMapStyle"></div>
+        <component :is="'script'" v-html="getMapScript"></component>
+    </div>
+{% endblock %}

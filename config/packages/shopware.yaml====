@@ -1,0 +1,3 @@
+shopware:
+    import_export:
+        batch_size: 200

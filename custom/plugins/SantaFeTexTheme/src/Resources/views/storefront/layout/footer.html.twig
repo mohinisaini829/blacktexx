@@ -1,0 +1,12 @@
+{% sw_extends '@Storefront/storefront/layout/footer.html.twig' %}
+{% block base_footer %}
+    <footer class="footer-main">
+        <div class="container">
+            <div class="row footer-colomn">
+            {% block base_footer_inner %}
+                {% sw_include '@Storefront/storefront/layout/footer/footer.html.twig' %}
+            {% endblock %}
+            </div>
+        </div>
+    </footer>
+{% endblock %}

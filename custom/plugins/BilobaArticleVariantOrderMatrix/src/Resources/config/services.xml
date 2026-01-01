@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id= "Biloba\ArticleVariantOrderMatrix\Resources\snippet\de_DE\SnippetFile_de_DE" public="true">
+          <tag name="shopware.snippet.file" />
+        </service>
+
+        <service id= "Biloba\ArticleVariantOrderMatrix\Resources\snippet\en_GB\SnippetFile_en_GB" public="true">
+          <tag name="shopware.snippet.file" />
+        </service>
+
+        <service id="Biloba\ArticleVariantOrderMatrix\Subscriber\ProductDetailSubscriber">
+          <argument type="service" id="product.repository"/>
+          <argument type="service" id="sales_channel.product.repository"/>
+          <argument type="service" id="cache.object"/>
+          <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+          <argument type="service" id="Shopware\Storefront\Page\Product\Configurator\ProductPageConfiguratorLoader"/>
+
+          <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Biloba\ArticleVariantOrderMatrix\Controller\ArticleVariantOrderMatrixController">
+            <argument type="service" id="Shopware\Storefront\Page\Product\QuickView\MinimalQuickViewPageLoader"/>
+            <argument type="service" id="Shopware\Storefront\Page\Product\Configurator\ProductPageConfiguratorLoader"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="sales_channel.product.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            
+            <tag name="controller.service_arguments" />
+        </service>
+    </services>
+</container>

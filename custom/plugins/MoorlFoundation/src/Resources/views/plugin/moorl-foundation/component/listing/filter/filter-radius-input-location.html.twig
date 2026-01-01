@@ -1,0 +1,28 @@
+<div data-moorl-input-location="true" class="input-group">
+    <span class="input-group-text">
+        {% sw_icon 'map-marker-alt' style {pack: 'fas'} %}
+    </span>
+
+    <input
+            id="location"
+            name="location"
+            class="form-control location"
+            aria-label="{{ "moorl-foundation.listing.filter.zipcodeCity"|trans }}"
+            placeholder="{{ "moorl-foundation.listing.filter.zipcodeCity"|trans }}"
+            required
+    >
+
+    {% if config('MoorlFoundation.config.filterRadiusMyLocation') %}
+        <button
+                class="btn btn-primary my-location"
+                type="button"
+                name="location"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="{{ "moorl-foundation.listing.filter.myLocation"|trans }}"
+                aria-label="{{ "moorl-foundation.listing.filter.myLocation"|trans }}"
+        >
+            {% sw_icon 'crosshairs' style {size:'sm', pack:'fas'} %}
+        </button>
+    {% endif %}
+</div>

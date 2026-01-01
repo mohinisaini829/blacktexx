@@ -1,0 +1,21 @@
+{
+  "name": "custom/article-import",
+  "description": "Plugin to import article",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "require": {
+    "shopware/core": "*"
+  },
+  "extra": {
+    "shopware-plugin-class": "ArticleImport\\ArticleImport",
+    "label": {
+      "en-GB": "Article Import Plugin",
+      "de-DE": "Artikelimport Plugin"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "ArticleImport\\": "src/"
+    }
+  }
+}

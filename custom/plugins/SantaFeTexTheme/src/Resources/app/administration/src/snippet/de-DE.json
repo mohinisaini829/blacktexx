@@ -1,0 +1,12 @@
+{
+    "sw-cms": {
+        "elements": {
+            "vio_product_zerts": {
+                "label": "Produkt-Zertifizierungen"
+            },
+            "viomanufacturercatalog": {
+              "label": "Hersteller-Katalog"
+            }
+        }
+    }
+}

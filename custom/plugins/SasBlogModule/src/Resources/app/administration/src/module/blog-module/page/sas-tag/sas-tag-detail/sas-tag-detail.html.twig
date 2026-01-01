@@ -1,0 +1,54 @@
+{% block sas_tag_detail %}
+    <sw-page class="sas-tag-detail">
+        <template #smart-bar-header>
+            <h2>
+                {% block sas_tag_detail_smart_bar_header_title_text %}
+                {{ tag?.name ?? $tc('sas-tag.detail.name') }}
+                {% endblock %}
+            </h2>
+        </template>
+
+        <template #smart-bar-actions>
+            <mt-button @click="$router.push({ name: 'blog.module.tag.index' })">
+                {{ $tc('sas-tag.detail.buttonCancel') }}
+            </mt-button>
+            <sw-button-process
+                :is-loading="isLoading"
+                :process-success="processSuccess"
+                variant="primary"
+                @process-finish="saveFinish"
+                @click="onSave"
+            >
+                {{ $tc('sas-tag.detail.buttonSave') }}
+            </sw-button-process>
+        </template>
+
+        <template #content>
+            <sw-card-view>
+                <mt-card
+                    v-if="tag"
+                    :is-loading="isLoading"
+                >
+                    <sw-container
+                        columns="1fr"
+                        gap="16px"
+                    >
+                        <mt-text-field
+                            v-model="tag.name"
+                            required
+                            :error="tagNameError"
+                            :placeholder="$tc('sas-tag.detail.title.placeholder')"
+                            :label="$tc('sas-tag.detail.title.label')"
+                        />
+                        <sw-entity-multi-select
+                            v-model:entityCollection="tag.blogs"
+                            :error="tagBlogsError"
+                            :label="$tc('sas-tag.detail.blogs.label')"
+                            label-property="title"
+                        />
+                    </sw-container>
+                </mt-card>
+            </sw-card-view>
+        </template>
+    </sw-page>
+{% endblock %}

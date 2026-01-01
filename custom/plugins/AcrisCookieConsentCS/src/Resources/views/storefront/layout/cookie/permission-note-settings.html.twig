@@ -1,0 +1,129 @@
+    {% block acris_cookie_consent_setting_container %}
+        <div class="cookie-consent-setting-container container collapse{% if cookieConfig.openCookieSettings == true %} show{% endif %}" id="ccSettings">
+
+            {% block acris_cookie_consent_settings %}
+                <div class="accordion cookie-consent-settings" id="ccConsentAccordion">
+                    {% for cookieGroup in page.extensions.acrisCookieConsent.cookieGroups %}
+                        {% block acris_cookie_consent_group %}
+                            <div class="card cookie-consent-group{% if cookieGroup.isDefault != true %} is--not-functional{% endif %}">
+                                {% block acris_cookie_consent_group_header %}
+                                    <div
+                                        class="cookie-consent-group-header card-header d-flex justify-content-between align-items-center"
+                                        id="ccGroupHeader{{ loop.index }}">
+                                        {% block acris_cookie_consent_group_header_button %}
+                                            <button class="btn btn-link p-0 collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#ccGroupCollapse{{ loop.index }}"
+                                                    aria-expanded="true"
+                                                    aria-controls="ccGroupCollapse{{ loop.index }}">
+                                                <span class="pe-1">{{ cookieGroup.translated.title }}</span>
+                                                {% sw_icon 'arrow-circle-down' style {
+                                                    'size': 'sm',
+                                                    'color': 'primary'
+                                                } %}
+                                            </button>
+                                        {% endblock %}
+
+                                        {% block acris_cookie_consent_group_header_switch %}
+                                            <div class="cookie-consent-group-switch">
+                                                <label class="cookie-consent-switch mb-0">
+                                                    <input type="checkbox" name="checkbox-{{ cookieGroup.id }}" data-groupid="{{ cookieGroup.id }}"
+                                                           class="switch-checkbox cookie-setting--switch--group"{% if cookieGroup.isDefault %} disabled="disabled"{% endif %}{% if cookieGroup.denied != true %} checked="checked"{% endif %}
+                                                           role="switch" aria-label="cookie-group-switch-{{ cookieGroup.translated.title|lower|replace({' ' : '-'}) }}"
+                                                            {% if cookieGroup.isDefault %}aria-readonly="true"{% else %}aria-readonly="false"{% endif %}
+                                                            {% if cookieGroup.denied != true %}aria-checked="true"{% else %}aria-checked="false"{% endif %}>
+                                                    <span class="switch-slider switch-slider-media"></span>
+                                                    <span
+                                                        class="switch-slider-enabled switch-slider-active">{{ "acrisCookieConsent.switchActive"|trans|sw_sanitize }}</span>
+                                                    <span
+                                                        class="switch-slider-enabled switch-slider-inactive">{{ "acrisCookieConsent.switchInactive"|trans|sw_sanitize }}</span>
+                                                </label>
+                                            </div>
+                                        {% endblock %}
+                                    </div>
+                                {% endblock %}
+
+                                {% block acris_cookie_consent_group_body %}
+                                    <div id="ccGroupCollapse{{ loop.index }}"
+                                         class="cookie-consent-group-collapse collapse"
+                                         aria-labelledby="ccGroupHeader{{ loop.index }}"
+                                         data-bs-parent="#ccConsentAccordion">
+                                        <div class="cookie-consent-group-body card-body">
+                                            {% block acris_cookie_consent_group_body_description %}
+                                                {% if cookieGroup.translated.description %}
+                                                    <p class="cookie-consent-setting-description">{{ cookieGroup.translated.description|raw }}</p>
+                                                {% endif %}
+                                            {% endblock %}
+
+                                            {% block acris_cookie_consent_group_body_cookie %}
+                                                <div class="cookie-consent-setting-cookies">
+                                                    {% for cookie in cookieGroup.cookies %}
+                                                        {% block acris_cookie_consent_group_body_cookie_item %}
+                                                            <div class="cookie-item d-md-flex justify-content-between">
+                                                                <div class="cookie-item-info d-md-flex{% if cookieGroup.isDefault == true %} is-default{% endif %}{% if cookieConfig.titleDescLayout == "titleAbove" %} has-title-above{% endif %}">
+                                                                    <div
+                                                                        class="cookie-title">{{ cookie.translated.title }}{% if cookie.translated.description %}:{% endif %}</div>
+                                                                    <div
+                                                                        class="cookie-description">{{ cookie.translated.description|raw }}</div>
+                                                                </div>
+
+                                                                {% block acris_cookie_consent_group_body_cookie_item_switch %}
+                                                                    {% if cookieGroup.isDefault == false %}
+                                                                        <div class="cookie-consent-group-switch">
+                                                                            <label
+                                                                                class="cookie-consent-switch float-right{% if cookieGroup.denied %} is--disabled{% endif %}">
+                                                                                <input type="checkbox"
+                                                                                       name="checkbox-{{ cookie.id }}"
+                                                                                       data-groupidcookie="{{ cookieGroup.id }}"
+                                                                                       data-cookieid="{{ cookie.id }}"
+                                                                                       data-cookiename="{{ cookie.cookieId }}"
+                                                                                       data-cookietitle="{{ cookie.translated.title }}"
+                                                                                       data-cookievalue="{{ cookie.defaultValue }}"
+                                                                                       {% for consentMode in cookie.googleCookieConsentMode %}
+                                                                                           {% if consentMode == "ad_storage" %}
+                                                                                               data-cookieGoogleConsentModeAdStorage="{{ consentMode }}"
+                                                                                           {% elseif consentMode == "ad_user_data" %}
+                                                                                               data-cookieGoogleConsentModeAdUserData="{{ consentMode }}"
+                                                                                           {% elseif consentMode == "ad_personalization" %}
+                                                                                               data-cookieGoogleConsentModeAdPersonalization="{{ consentMode }}"
+                                                                                           {% elseif consentMode == "analytics_storage" %}
+                                                                                               data-cookieGoogleConsentModeAnalyticsStorage="{{ consentMode }}"
+                                                                                           {% elseif consentMode == "functionality_storage" %}
+                                                                                               data-cookieGoogleConsentModeFunctionalityStorage="{{ consentMode }}"
+                                                                                           {% elseif consentMode == "personalization_storage" %}
+                                                                                               data-cookieGoogleConsentModePersonalizationStorage="{{ consentMode }}"
+                                                                                           {% elseif consentMode == "security_storage" %}
+                                                                                               data-cookieGoogleConsentModeSecurityStorage="{{ consentMode }}"
+                                                                                           {% endif %}
+                                                                                       {% endfor %}
+                                                                                       class="switch-checkbox cookie-setting--switch--group"{% if cookieGroup.denied == true %} disabled="disabled"{% endif %}{% if cookie.denied != true %} checked="checked"{% endif %}
+                                                                                       role="switch" aria-label="cookie-switch-{{ cookie.translated.title|lower|replace({' ' : '-'}) }}"
+                                                                                        {% if cookieGroup.denied == true %}aria-readonly="true"{% else %}aria-readonly="false"{% endif %}
+                                                                                        {% if cookie.denied != true %}aria-checked="true"{% else %}aria-checked="false"{% endif %}>
+                                                                                <span class="switch-slider switch-slider-media"></span>
+                                                                                <span
+                                                                                    class="switch-slider-enabled switch-slider-active">{{ "acrisCookieConsent.switchActive"|trans|sw_sanitize }}</span>
+                                                                                <span
+                                                                                    class="switch-slider-enabled switch-slider-inactive">{{ "acrisCookieConsent.switchInactive"|trans|sw_sanitize }}</span>
+                                                                            </label>
+                                                                        </div>
+                                                                    {% endif %}
+                                                                {% endblock %}
+                                                            </div>
+                                                        {% endblock %}
+                                                    {% endfor %}
+                                                </div>
+                                            {% endblock %}
+                                        </div>
+                                    </div>
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                    {% endfor %}
+                </div>
+            {% endblock %}
+
+        </div>
+    {% endblock %}
+
+

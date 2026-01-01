@@ -1,0 +1,32 @@
+.is-act-confirm {
+
+    .list-group-item {
+
+        font-size: $font-size-product-details;
+        padding: 1.25rem;
+
+        a:first-of-type {
+            font-size: $font-size-product-title;
+        }
+
+        dt {
+            font-weight: normal;
+        }
+    }
+
+    h1 {
+        font-size: $font-size-page-title;
+        margin-bottom: 1rem;
+    }
+
+    .cart-item-img-more-container {
+        margin-top: 16px;
+    }
+
+    .cart-item-img-more {
+        width: auto;
+        height: auto !important;
+        max-height: 120px;
+        margin-right: 12px;
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "name": "frosh/adminer-platform",
+    "version": "2.2.0",
+    "type": "shopware-platform-plugin",
+    "keywords": ["adminer", "shopware", "frosh"],
+    "description": "Adminer for Shopware",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "FriendsOfShopware",
+            "homepage": "https://friendsofshopware.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Frosh\\Adminer\\": "src/"
+        }
+    },
+    "require": {
+        "shopware/core": "~6.6 || ~6.7",
+        "shopware/administration": "~6.6 || ~6.7"
+    },
+    "extra": {
+        "shopware-plugin-class": "Frosh\\Adminer\\FroshPlatformAdminer",
+        "copyright": "FriendsOfShopware",
+        "label": {
+            "de-DE": "Adminer für das Admin",
+            "en-GB": "Adminer for Admin"
+        },
+        "description": {
+            "de-DE": "Erlaubt direkt in der Administration, mit der Shopware Konfiguration, auf die Datenbank zuzugreifen. Nützlich sofern kein anderer Datenbank Zugriff des Hoster o.ä. vorliegt.",
+            "en-GB": "Allows to manage your database inside the administration, using the Shopware database configuration. Useful if there is no other easy access from the hoster to the database."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://github.com/FriendsOfShopware/FroshPlatformAdminer",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshPlatformAdminer"
+        },
+        "supportLink": {
+            "de-DE": "https://github.com/FriendsOfShopware/FroshPlatformAdminer/issues",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshPlatformAdminer/issues"
+        }
+    }
+}

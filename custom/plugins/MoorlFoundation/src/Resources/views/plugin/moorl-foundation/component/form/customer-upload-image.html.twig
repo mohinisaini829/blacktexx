@@ -1,0 +1,44 @@
+{% if not media and mediaId %}
+    {% set mediaCollection = searchMedia([mediaId], context.context) %}
+    {% set media = mediaCollection.get(mediaId) %}
+{% endif %}
+
+<div class="{% if entityCoverId and entityMedia %}col-6 col-md-3{% else %}col{% endif %}{% if entityMedia.id == entityCoverId %} order-1{% else %} order-2{% endif %}">
+    <div class="moorl-customer-upload-image-container" id="media{{ media.id }}">
+        {% sw_thumbnails 'customer-upload-thumbnail' with {
+            media: media,
+            attributes: {
+                'alt': media.name
+            }
+        } %}
+
+        <div class="moorl-customer-upload-image-actions">
+            {% if entityCoverId and entityMedia %}
+                <div class="form-check cover">
+                    <input type="radio"
+                           class="form-check-input"
+                           required
+                           id="coverId{{ entityMedia.id }}"
+                           name="coverId"
+                           value="{{ entityMedia.id }}"{% if entityMedia.id == entityCoverId %} checked{% endif %}>
+                    <label class="form-check-label" for="coverId{{ entityMedia.id }}">
+                        {{ 'moorl-foundation.customerUpload.useAsCover'|trans }}
+                    </label>
+                </div>
+            {% endif %}
+
+            {% if entityMedia %}
+                <div class="form-check delete">
+                    <input type="checkbox"
+                           class="form-check-input"
+                           id="entityMediaDelete{{ entityMedia.id }}"
+                           name="entityMediaDeleteIds[]"
+                           value="{{ entityMedia.id }}">
+                    <label class="form-check-label" for="entityMediaDelete{{ entityMedia.id }}">
+                        {{ 'moorl-foundation.customerUpload.checkToDelete'|trans }}
+                    </label>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

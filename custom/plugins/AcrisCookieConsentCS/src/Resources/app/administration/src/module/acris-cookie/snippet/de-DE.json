@@ -1,0 +1,89 @@
+{
+    "acris-cookie": {
+        "general": {
+            "mainMenuItemGeneral": "Cookies",
+            "placeholderSearchBar": "Cookies durchsuchen",
+            "description": "Zeigt die Cookies die für den Shop gefunden wurden"
+        },
+        "list": {
+            "textHeadline": "Cookie Einstellungen",
+            "buttonAdd": "Hinzufügen",
+            "contextMenuEdit": "Bearbeiten",
+            "contextMenuDelete": "Löschen",
+            "columnCookieId": "Cookie-ID",
+            "columnTitle": "Titel für Anzeige",
+            "columnDescription": "Beschreibung für Anzeige",
+            "columnCookieGroup": "Cookie-Gruppe",
+            "providers": "Anbieter",
+            "columnDefault": "System-Cookie",
+            "columnActive": "freigegeben",
+            "columnCreatedAt": "Erstellungsdatum",
+            "contentEmpty": "Es gibt keine Cookies",
+            "textDeleteConfirm": "Möchten Sie das Cookie löschen",
+            "modalTitleDelete": "Cookie löschen",
+            "buttonCancel": "Abbrechen",
+            "buttonDelete": "Löschen",
+            "titleSidebarItemRefresh": "Aktualisieren"
+        },
+        "detail": {
+            "textHeadline": "Cookie Einstellungen",
+            "buttonCancel": "Abbrechen",
+            "buttonSave": "Speichern",
+
+            "cardSalesChannel": "Verkaufskanal",
+            "fieldSalesChannel": "Wählen Sie den Verkaufskanal",
+            "emptyCookieGroup": "Es gibt keine Cookie-Gruppen!",
+            "fieldTitleLabelCardId": "Cookie-ID",
+            "fieldTitlePlaceholderCardId": "Cookie-ID eingeben",
+            "fieldTitleTooltipCardId": "Die Cookie-ID zur dient eindeutigen identifikation des Cookies.",
+            "fieldActiveLabelCardId": "Aktiv",
+            "fieldCookieGroupLabelCardId": "Cookie Gruppe:",
+            "fieldCookieGroupPlaceholderCardId": "Cookie Gruppe auswählen",
+
+            "fieldDescriptionPlaceholder": "Beschreibung einfügen",
+
+            "fieldActiveLabel": "Aktiv",
+
+            "cardDescription": "Beschreibung",
+            "cardId": "Identifikation",
+            "cardCustomerInformation": "Kundeninformationen",
+
+            "fieldTitleLabelCustomerInformation": "Titel",
+            "fieldTitlePlaceholderCustomerInformation": "Titel einfügen",
+            "fieldProvidersLabelCustomerInformation": "Anbieter",
+            "fieldProvidersPlaceholderCustomerInformation": "Anbieter einfügen",
+
+            "SalesChannelFieldPlaceholder": "Vertriebskanal auswählen",
+            "fieldDescriptionPlaceholderDescription": "Beschreibung einfügen",
+
+            "notificationSaveErrorMessage": "Beim Speichern des Cookies ist ein Fehler aufgetreten.",
+            "notificationSaveSuccessMessage": "Der Cookie wurde erfolgreich gespeichert.",
+            "notificationSaveSuccessMessageTitle": "Erfolg",
+            "notificationSaveErrorMessageTitle": "Error",
+
+            "cardValue": "Wert",
+            "fieldDefaultValueLabel": "Standard Wert",
+            "fieldDefaultValueHelpText": "Wird ein Standardwert gewählt, wird das Cookie immer gesetzt, sobald es akzeptiert wurde. Dies ist hilfreich, wenn eigene Cookies definiert werden, worauf danach im Storefront über JavaScript reagiert werden soll.",
+
+            "cardScript": "Script Code",
+            "fieldScriptPlaceholder": "Script einfügen",
+            "fieldScriptHelpText": "Der Script Code wird ausgeführt, wenn das Cookie vom Benutzer akzeptiert wurde. Das Script kann mit dem <script>-Tag oder ohne angegeben werden. Es kann auch ein externes Script (src-Attribut) eingebunden werden. Zusätzlich kann auch TWIG-Code eingegeben und TWIG Variablen genutzt werden.",
+            "fieldScripPositionLabel": "Script Code Position",
+            "fieldScripPositionOptionHead": "Am Ende vom HTML-Head",
+            "fieldScripPositionOptionBodyStart": "Am Anfang vom HTML-Body",
+            "fieldScripPositionOptionBodyEnd": "Am Ende vom HTML-Body",
+
+            "cardGoogleCookieConsentMode": "Google Cookie Consent Mode",
+            "fieldGoogleCookieConsentModeLabel": "Google Cookie Consent Mode",
+            "fieldGoogleCookieConsentModePlaceholder": "Wählen Sie eine Option für den Google-Cookie-Zustimmungsmodus",
+
+            "googleCookieConsentModeOption1": "ad_storage - Ermöglicht das Speichern werbebezogener Cookies (Web) oder Geräte-IDs (Apps)",
+            "googleCookieConsentModeOption2": "ad_user_data - Legt die Einwilligung zum Senden von Nutzerdaten an Google für Online-Werbezwecke fest",
+            "googleCookieConsentModeOption3": "ad_personalization - Legt die Einwilligung für personalisierte Anzeigen fest",
+            "googleCookieConsentModeOption4": "analytics_storage - Ermöglicht das Speichern von Cookies (Web) oder Geräte-IDs (Apps) im Zusammenhang mit Analysen, z. B. die Besuchsdauer.",
+            "googleCookieConsentModeOption5": "functionality_storage - Ermöglicht das Speichern von Daten, die die Funktionen der Website oder App unterstützen, z. B. Spracheinstellungen",
+            "googleCookieConsentModeOption6": "personalization_storage - Ermöglicht das Speichern im Zusammenhang mit Personalisierung, z. B. Videoempfehlungen",
+            "googleCookieConsentModeOption7": "security_storage - Ermöglicht das Speichern sicherheitsrelevanter Daten, z. B. für Authentifizierungsfunktionen, Betrugsprävention und sonstige Schutzmechanismen für Nutzer"
+        }
+    }
+}

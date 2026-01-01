@@ -1,0 +1,17 @@
+{% block netzp_powerpack6_alert %}
+    <div class="netzp-powerpack6-alert-element" id="alert_{{ element.id }}">
+        {% set type = element.config.alertType.value %}
+        {% set alertType = ['info', 'warning', 'danger', 'success'][type] %}
+        {% set classTitle = ['text-dark', 'text-dark', 'text-white', 'text-white'][type] %}
+        {% set classContents = ['text-dark', 'text-dark', 'text-white', 'text-white'][type] %}
+
+        <div class="alert alert-{{ alertType }} m-0 pt-2 pe-2 pb-2 ps-2 {{ classContents }}" role="alert">
+            {% if element.data.title %}
+                <h4 class="alert-heading m-0 {{ classTitle }}">{{ element.data.title }}</h4>
+            {% endif %}
+            {% if element.data.contents %}
+                {{ element.data.contents|raw }}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

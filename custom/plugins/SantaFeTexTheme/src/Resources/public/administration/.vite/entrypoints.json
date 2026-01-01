@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/santafetextheme/administration/",
+  "entryPoints": {
+    "santa-fe-tex-theme": {
+      "css": [
+        "/bundles/santafetextheme/administration/assets/santa-fe-tex-theme-DvAE8BlP.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/santafetextheme/administration/assets/santa-fe-tex-theme-iQI10cld.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

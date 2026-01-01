@@ -1,0 +1,20 @@
+{% sw_extends '@Storefront/storefront/page/checkout/finish/index.html.twig' %}
+
+{% block page_checkout_container %}
+    {% if(page.netzp_finish_cms_position > 0) %}
+        {% if(page.netzp_finish_cms_position == 2) %}
+            {{ parent() }}
+        {% endif %}
+
+        {% if(page.netzp_finish_cms_position != 0) %}
+            {% sw_include "@Storefront/storefront/page/content/detail.html.twig" with {'cmsPage': page.netzp_finish_cms_page} %}
+        {% endif %}
+
+        {% if(page.netzp_finish_cms_position == 1) %}
+            {{ parent() }}
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+

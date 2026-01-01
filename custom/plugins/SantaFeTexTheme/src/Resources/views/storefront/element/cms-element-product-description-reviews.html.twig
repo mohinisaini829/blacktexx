@@ -1,0 +1,85 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-product-description-reviews.html.twig' %}
+
+{% block element_product_desciption_reviews %}
+    {% set pdfTabId = "pdf-tab-" ~ page.product.id %}
+    {% set pdfTabHref = "#pdf-tab-" ~ page.product.id ~ "-pane" %}
+    {% set pdfTabContent = "pdf-tab-" ~ page.product.id ~ "-pane" %}
+
+    {% set vioPdfCustomField = page.product.manufacturer.translated.customFields.vio_size_table %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block element_product_desciption_reviews_tabs_navigation_description %}
+    <li class="nav-item">
+        <a class="nav-link {% if (ratingSuccess != 1) and (ratingSuccess != -1) %}active{% endif %} product-detail-tab-navigation-link"
+           id="{{ descriptionTabId }}"
+           data-toggle="tab"
+           data-offcanvas-tabs="true"
+           href="{{ descriptionTabHref }}"
+           role="tab"
+           aria-controls="{{ descriptionTabContent }}"
+           aria-selected="true">
+            <span>{{ "detail.tabsDescription"|trans|sw_sanitize }}</span>
+            <span class="product-detail-tab-navigation-icon">
+                {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
+            </span>
+        </a>
+    </li>
+    {# PDF Tab #}
+    {% if vioPdfCustomField|length > 0 %}
+        {% block element_product_desciption_reviews_tabs_navigation_viopdf %}
+            <li class="nav-item">
+                <a class="nav-link product-detail-tab-navigation-link"
+                   id="{{ pdfTabId }}"
+                   data-toggle="tab"
+                   data-offcanvas-tabs="true"
+                   href="{{ pdfTabHref }}"
+                   role="tab"
+                   aria-controls="{{ pdfTabContent }}"
+                   aria-selected="true">
+                    <span>{{ "detail.pdfDescriptionTitle"|trans|sw_sanitize }}</span>
+                    <span class="product-detail-tab-navigation-icon">
+                        {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
+                    </span>
+                </a>
+            </li>
+        {% endblock %}
+    {% endif %}
+{% endblock %}
+
+{% block element_product_desciption_reviews_tabs_content_description %}
+    {{ parent() }}
+    {% if vioPdfCustomField|length > 0 %}
+        {% block element_product_desciption_reviews_tabs_content_viopdf %}
+            <div class="tab-pane fade"
+                 id="{{ pdfTabContent }}"
+                 role="tabpanel"
+                 aria-labelledby="{{ pdfTabId }}">
+                <div class="product-detail-description tab-pane-container">
+                    <div class="h3 product-detail-description-title">
+                        {{ "detail.pdfDescription"|trans({'%manufacturer%': product.manufacturer.translated.name})|sw_sanitize }}
+                    </div>
+
+                    <div class="product-detail-description-text">
+                        {% if vioPdfCustomField|length > 0 %}
+                            {% set vioMedia = searchMedia({vioPdfCustomField}, context.context) %}
+                            {% for media in vioMedia %}
+                                {% if media.mediaType.name|upper == 'DOCUMENT' %}
+                                    <iframe
+                                            src="{{ media.url }}#navpanes=0"
+                                            title="{{ "detail.pdfDescription"|trans({'%manufacturer%': product.manufacturer.translated.name})|sw_sanitize }}"
+                                            width="100%"
+                                            height="600"
+                                    >
+
+                                    </iframe>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    {% endif %}
+{% endblock %}

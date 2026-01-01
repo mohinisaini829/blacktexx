@@ -1,0 +1,105 @@
+{% block sas_blog_author_list %}
+    <sw-page class="sas-blog-author-list">
+        <template #smart-bar-header>
+            <h2>
+                {% block sas_blog_author_list_smart_bar_header_title_text %}
+                {{ $tc('sas-blog-author.list.textBlogOverview') }}
+                {% endblock %}
+                {% block sas_blog_author_list_smart_bar_header_amount %}
+                <span
+                    v-if="!isLoading"
+                    class="sw-page__smart-bar-amount"
+                >
+                ({{ total }})
+                </span>
+                {% endblock %}
+            </h2>
+        </template>
+
+        <template #language-switch>
+            <sw-language-switch @on-change="changeLanguage" />
+        </template>
+        {% block sas_blog_author_list_smart_bar_actions %}
+        <template #smart-bar-actions>
+            {% block sas_blog_author_list_smart_bar_actions_add %}
+            <mt-button
+                variant="primary"
+                @click="$router.push({ name: 'blog.module.author.create' })"
+            >
+                {{ $tc('sas-blog-author.list.buttonAdd') }}
+            </mt-button>
+            {% endblock %}
+        </template>
+        {% endblock %}
+        <template #sidebar>
+            <sas-blog-vertical-tabs :default-item="'author'" />
+        </template>
+
+        <template #content>
+            {% block sas_blog_author_list_content %}
+            <sw-entity-listing
+                v-if="blogAuthors"
+                :items="blogAuthors"
+                :repository="blogAuthorRepository"
+                :show-selection="false"
+                :columns="columns"
+                detail-route="blog.module.author.detail"
+            >
+                {% block sas_blog_author_list_columns_image_preview %}
+                <template #preview-fullName="{ item, compact }">
+                    <sw-avatar
+                        :size="compact ? '32px' : '48px'"
+                        :image-url="item.media ? item.media.url : null"
+                        :source-context="item"
+                        :first-name="item.firstName"
+                        :last-name="item.lastName"
+                    />
+                </template>
+                {% endblock %}
+
+            {% block sas_blog_author_list_grid_columns_name %}
+                <template #column-fullName="{ item, compact, isInlineEdit }">
+                    {% block sas_blog_author_list_grid_inline_edit_name %}
+                    <template v-if="isInlineEdit">
+                        {% block sas_blog_author_list_grid_inline_edit_first_name %}
+                        <mt-text-field
+                            v-model="item.firstName"
+                            class="sas-blog-author-list__inline-edit-first-name"
+                            :size="compact ? 'small' : 'default'"
+                        />
+                        {% endblock %}
+
+                        {% block sas_blog_author_list_grid_inline_edit_last_name %}
+                        <mt-text-field
+                            v-model="item.lastName"
+                            class="sas-blog-author-list__inline-edit-last-name"
+                            :size="compact ? 'small' : 'default'"
+                        />
+                        {% endblock %}
+                    </template>
+                    {% endblock %}
+
+                    {% block sas_blog_author_list_grid_columns_name_link %}
+                    <router-link
+                        v-else
+                        :to="{ name: 'blog.module.author.detail', params: { id: item.id } }"
+                    >
+                        {{ item.firstName }} {{ item.lastName }}
+                    </router-link>
+                    {% endblock %}
+                </template>
+                {% endblock %}
+            </sw-entity-listing>
+            {% endblock %}
+
+        {% block sas_blog_author_list_empty_state %}
+            <sw-empty-state
+                v-if="!isLoading && !total"
+                :title="$tc('sas-blog-author.list.messageEmpty')"
+            >
+                {{ $tc('sas-blog-author.list.messageEmpty') }}
+            </sw-empty-state>
+            {% endblock %}
+        </template>
+    </sw-page>
+{% endblock %}

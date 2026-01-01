@@ -1,0 +1,58 @@
+{% block product_detail_blog_assignment_tabs_inner %}
+    {% if blogs is defined and blogs.elements|length > 0 %}
+        <div class="product-detail-blog-assignment">
+            <div class="card card-tabs" data-blog-assignment="true">
+                {% block product_detail_blog_assignment_tabs_content %}
+                    <div class="product-detail-tabs-content card-body">
+                        {% set title = "sas-blog.blogAssignment.title"|trans({
+                            '%product%': page.product.name ?: page.product.translated.name,
+                        }) %}
+                        <div class="blog-assignment-tab tab-pane fade show active"
+                             id="blog-assignment-tab-pane"
+                             role="tabpanel"
+                             aria-labelledby="blog-assignment-tab">
+                            {% set config = {
+                                'title': {
+                                    'value': title
+                                },
+                                'border': {
+                                    'value': false
+                                },
+                                'rotate': {
+                                    'value': false
+                                },
+                                'boxLayout': {
+                                    'value': 'standard'
+                                },
+                                'elMinWidth': {
+                                    'value': '300px'
+                                },
+                                'navigation': {
+                                    'value': true
+                                },
+                                'displayMode': {
+                                    'value': 'minimal'
+                                },
+                                'verticalAlign': {
+                                    'value': 'top'
+                                },
+                            } %}
+
+                            {% block product_detail_blog_assignment_tabs_content_container_slider %}
+                                {% sw_include "@Storefront/storefront/element/cms-element-blog-slider.html.twig" with {
+                                    sliderConfig: config,
+                                    element: {
+                                        'data': {
+                                            'blogEntries': blogs
+                                        },
+                                        type: 'product-slider'
+                                    }
+                                } %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+<div class="cms-element-{{ element.type }}">
+    {% if element.config.provider.value %}
+        {% set currentUrl = app.getRequest().attributes.get('sw-sales-channel-absolute-base-url') ~ app.getRequest().attributes.get('resolved-uri') %}
+        {% if activeRoute == 'frontend.moorl.magazine.article' %}
+            {% set currentUrl = seoUrl(activeRoute, {magazineArticleId:page.magazineArticle.id}) %}
+        {% endif %}
+        <div class="sticky-top">
+            <ul>
+                <li>{{ "moorl-foundation.general.share"|trans }}</li>
+
+                {% if 'facebook' in element.config.provider.value %}
+                    <li>
+                        <a title="" class="btn btn-facebook"
+                           href="https://www.facebook.com/sharer/sharer.php?u={{ currentUrl }}" target="_blank">
+                            {% sw_icon 'facebook' style {pack: 'fab'} %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if 'twitter' in element.config.provider.value %}
+                    <li>
+                        <a title="" class="btn btn-twitter"
+                           href="https://twitter.com/intent/tweet?url={{ currentUrl }}" target="_blank">
+                            {% sw_icon 'twitter' style {pack: 'fab'} %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if 'pinterest' in element.config.provider.value %}
+                    <li>
+                        <a title="" class="btn btn-pinterest"
+                           href="http://pinterest.com/pin/create/button/?url={{ currentUrl }}" target="_blank">
+                            {% sw_icon 'pinterest' style {pack: 'fab'} %}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    {% endif %}
+</div>

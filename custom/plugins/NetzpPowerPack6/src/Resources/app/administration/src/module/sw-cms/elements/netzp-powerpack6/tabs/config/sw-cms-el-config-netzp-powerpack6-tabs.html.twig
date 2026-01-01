@@ -1,0 +1,41 @@
+{% block sw_cms_element_netzp_powerpack6_tabs_config %}
+    <div class="sw-cms-el-config-netzp-powerpack6">
+        <sw-container columns="1fr 1fr 1fr 1fr" gap="20px">
+            <sw-number-field numbertype="int" :min="2" :max="25"
+                             :label="$tc('sw-cms.netzp-powerpack6.elements.tabs.config.numberOfTabs')"
+                             v-model:value="element.config.numberOfTabs.value">
+            </sw-number-field>
+        </sw-container>
+
+        <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.tabs.config.title')"
+                       v-model:value="element.config.title.value" />
+
+        <sw-tabs :small="false" defaultItem="tab1" positionIdentifier="netzp-powerpack-tabs">
+            <template #default="{ active }">
+                <sw-tabs-item v-for="n in element.config.numberOfTabs.value" :key="n"
+                              :name="'tab' + n" :activeTab="active"
+                              :title="'Tab ' + n">
+                    <span v-if="element.config['tabtitle' + n].value" v-html="element.config['tabtitle' + n].value"></span>
+                    <span v-else>
+                        Tab {{ n }}
+                    </span>
+                </sw-tabs-item>
+            </template>
+
+            <template #content="{ active }">
+                <template v-for="n in element.config.numberOfTabs.value" :key="n">
+                    <sw-container v-if="active === 'tab' + n">
+
+                        <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.tabs.config.tabtitle')"
+                                       v-model:value="element.config['tabtitle' + n].value"
+                                       @update:value="checkTabTitle(n)" />
+
+                        <sw-text-editor :label="$tc('sw-cms.netzp-powerpack6.elements.tabs.config.tabcontents')"
+                                        v-model:value="element.config['tabcontents' + n].value" />
+
+                    </sw-container>
+                </template>
+            </template>
+        </sw-tabs>
+    </div>
+{% endblock %}

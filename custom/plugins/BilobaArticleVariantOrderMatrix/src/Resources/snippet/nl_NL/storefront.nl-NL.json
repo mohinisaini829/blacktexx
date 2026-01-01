@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Producent:",
+            "ProductNumber": "Artikelnummer:"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Productnummer",
+            "DetailBuyActionAdd": "Varianten toevoegen aan het winkelmandje",
+            "UnitPrice": "Prijs per eenheid",
+            "VariantOrderMatrixColAmount": "Hoeveelheid",
+            "VariantStock": "Magazijn",
+            "quickOrder": "Snel bestellen",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Geschatte totale prijs"
+        }
+    }
+}

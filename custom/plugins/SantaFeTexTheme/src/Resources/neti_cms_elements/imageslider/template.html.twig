@@ -1,0 +1,16 @@
+<div class="neti-next-cms-element-builder-dummy-element">
+    <div class="config-elements">
+        <div class="config-element dummyCollection">
+            <div class="config-element-value brand-slider tns-slider" id="slider-{{ loop.index }}">
+
+                {% for key, el in element.config.dummyCollection.value %}
+                            <div class="config-element-value">
+                                <img src="{{ el.collectionMedia.url }}" />
+                            </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+

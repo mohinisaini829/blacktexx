@@ -1,0 +1,213 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Actions for the flow builder -->
+        <service id="Myfav\Inquiry\Core\Content\Flow\Dispatching\Action\SendMailAction" autowire="true"
+         autoconfigure="true">
+            <argument id="Myfav\Inquiry\Services\InquiryMailService" type="service"/>
+            <argument id="service_container" type="service" />
+            <tag name="shopware.flow.action"/>
+        </service>
+        <service id="Myfav\Inquiry\Twig\Extension\JsonDecodeExtension" public="true">
+            <tag name="twig.extension" />
+        </service>
+
+
+        <!-- Dal -->
+        <service id="Myfav\Inquiry\Entity\InquiryCartEntry\InquiryCartEntryDefinition">
+            <tag name="shopware.entity.definition" entity="myfav_inquiry_cart_entry"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Entity\Inquiry\InquiryDefinition">
+            <tag name="shopware.entity.definition" entity="myfav_inquiry"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Entity\Inquiry\Aggregate\InquiryLineItem\InquiryLineItemDefinition">
+            <tag name="shopware.entity.definition" entity="myfav_inquiry_line_item"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Entity\Inquiry\Aggregate\InquiryMedia\InquiryMediaDefinition">
+            <tag name="shopware.entity.definition" entity="myfav_inquiry_media"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Entity\Inquiry\Aggregate\InquiryOffer\InquiryOfferDefinition">
+            <tag name="shopware.entity.definition" entity="myfav_inquiry_offer"/>
+        </service>
+
+        <!-- Controller -->
+        <!-- <service id="Myfav\Inquiry\Administration\Controllers\AdminApi\DesignerDataController">
+            <argument type="service" id="Doctrine\DBAL\Connection" />
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="Myfav\Inquiry\Services\InquiryService"/>
+            <argument type="service" id="product.repository"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+        </service> -->
+
+        <service id="Myfav\Inquiry\Administration\Controllers\AdminApi\DesignerDataController"
+         public="true"
+                 autowire="true"
+                 autoconfigure="true">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="Myfav\Inquiry\Services\InquiryService"/>
+            <argument type="service" id="product.repository"/>
+            <tag name="controller.service_arguments"/>
+        </service>
+
+    
+        <service id="Myfav\Inquiry\Administration\Controllers\InquiryMediaController">
+            <argument id="media.repository" type="service"/>
+            <argument id="Shopware\Core\Content\Media\File\FileLoader" type="service"/>
+            <argument type="service" id="myfav_inquiry.repository"/>
+            <argument type="service" id="Doctrine\DBAL\Connection" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Administration\Controllers\InquiryOfferController">
+            <argument id="Myfav\Inquiry\Services\OfferService" type="service"/>
+            <argument id="myfav_inquiry_offer.repository" type="service"/>
+            <argument id="Shopware\Core\Content\Media\File\FileLoader" type="service"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Storefront\Controller\InquiryController">
+            <argument id="Myfav\Inquiry\Services\InquiryCartService" type="service"/>
+            <argument id="Myfav\Inquiry\Services\InquiryService" type="service"/>
+            <argument type="service" id="twig"/>
+            <argument type="service" id="Doctrine\DBAL\Connection" />
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="mail_template.repository"/>
+            <argument type="service" id="product.repository"/>
+            <!-- <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call> -->
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Storefront\Controller\MailTestController">
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="mail_template.repository"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Storefront\Controller\SpecialOffersController">
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <!-- Decorators -->
+        <service id="Myfav\Inquiry\Storefront\Theme\Twig\ThemeInheritanceBuilder"
+                 decorates="Shopware\Storefront\Theme\Twig\ThemeInheritanceBuilderInterface"
+                 decoration-inner-name="MyfavInquiryThemeInheritanceBuilderCore"
+        >
+            <argument id="MyfavInquiryThemeInheritanceBuilderCore" type="service"/>
+        </service>
+
+        <!-- Services -->
+        <service id="Myfav\Inquiry\Services\InquiryCartService">
+            <argument id="myfav_inquiry_cart_entry.repository" type="service"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Services\InquiryMailService">
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService"/>
+            <argument type="service" id="mail_template.repository"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Services\InquiryService">
+            <argument id="myfav_inquiry.repository" type="service"/>
+            <argument id="sales_channel.product.repository" type="service"/>
+            <argument id="Myfav\Inquiry\Services\InquiryCartService" type="service"/>
+            <argument id="event_dispatcher" type="service"/>
+            <argument id="Shopware\Core\Content\Media\MediaService" type="service"/>
+            <argument id="logger" type="service"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Services\OfferService">
+            <argument id="myfav_inquiry_offer.repository" type="service"/>
+            <argument id="myfav_inquiry.repository" type="service"/>
+            <argument id="document_base_config.repository" type="service"/>
+            <argument id="Shopware\Core\Content\Media\MediaService" type="service"/>
+            <argument id="Shopware\Core\System\NumberRange\ValueGenerator\NumberRangeValueGeneratorInterface" type="service"/>
+            <argument id="Shopware\Core\Checkout\Document\Twig\DocumentTemplateRenderer" type="service"/>
+            <argument id="Shopware\Core\Checkout\Document\Service\DocumentGenerator" type="service"/>
+        </service>
+
+
+        <!-- pages -->
+        <service id="Myfav\Inquiry\Storefront\Page\InquiryConfirm\InquiryConfirmPageLoader">
+            <argument id="Myfav\Inquiry\Services\InquiryCartService" type="service"/>
+            <argument id="Shopware\Storefront\Page\GenericPageLoader" type="service"/>
+            <argument id="event_dispatcher" type="service"/>
+            <argument id="sales_channel.product.repository" type="service"/>
+            <argument id="Shopware\Core\System\Salutation\SalesChannel\SalutationRoute" type="service"/>
+            <argument id="service_container" type="service" />
+        </service>
+
+        <service id="Myfav\Inquiry\Storefront\Page\InquiryFinish\InquiryFinishPageLoader">
+            <argument id="myfav_inquiry.repository" type="service"/>
+            <argument id="Shopware\Storefront\Page\GenericPageLoader" type="service"/>
+            <argument id="event_dispatcher" type="service"/>
+            <argument id="sales_channel.product.repository" type="service"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Storefront\Page\SpecialOffers\SpecialOffersPageLoader">
+            <argument id="Shopware\Storefront\Page\GenericPageLoader" type="service"/>
+            <argument id="event_dispatcher" type="service"/>
+            <argument id="sales_channel.product.repository" type="service"/>
+            <argument id="Shopware\Core\System\Salutation\SalesChannel\SalutationRoute" type="service"/>
+        </service>
+
+        <!-- Subscriber -->
+        <service id="Myfav\Inquiry\Subscriber\BusinessEventFlowSubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Myfav\Inquiry\Subscriber\BusinessEventSubscriber" autowire="true" autoconfigure="true">
+            <argument type="service" id="Shopware\Core\Framework\Event\BusinessEventCollector"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <!-- <service id="Myfav\Inquiry\BusinessEvent\InquirySendCollector" public="true">
+            <tag name="business.event.collector"/>
+        </service> -->
+        <!-- resolver -->
+        <!-- <service id="Myfav\Inquiry\Core\Content\Product\Cms\MyfavSpecialOffersCmsElementResolver">
+            <argument type="service" id="Shopware\Core\Content\ProductStream\Service\ProductStreamBuilder"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <tag name="shopware.cms.data_resolver"/>
+        </service> -->
+        <service id="Myfav\Inquiry\Core\Content\Product\Cms\MyfavSpecialOffersCmsElementResolver" public="true">
+            <tag name="shopware.cms.element" />
+            <argument type="tagged_iterator" tag="shopware.cms.product_list.processor" />
+        </service>
+
+        
+
+    </services>
+</container>

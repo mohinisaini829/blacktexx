@@ -1,0 +1,45 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_cms_block_assignment_preview %}
+    <div class="sw-cms-block-preview-assignment">
+        <h4>
+            {{ $tc('sas-blog.elements.assignment.preview.label.assignmentTitle') }}
+        </h4>
+        <div class="sw-cms-block-preview-assignment__slider">
+            <mt-icon
+                name="regular-chevron-left"
+                size="10"
+            />
+            <template
+                v-for="block in 4"
+                :key="block"
+            >
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block sw_cms_block_assignment_preview_box %}
+                <div class="sw-cms-block-preview-assignment__product-box">
+                    <img
+                        class="sw-cms-block-preview-assignment__product-image"
+                        :src="assetFilter('/administration/static/img/cms/preview_glasses_small.jpg')"
+                        alt="{{ $tc('sas-blog.elements.assignment.preview.label.assignmentTitle') }}"
+                    >
+                    <div class="sw-cms-block-preview-assignment__product-info">
+                        <div
+                            class="sw-cms-block-preview-assignment__product-skeleton"
+                        ></div>
+                        <div
+                            class="sw-cms-block-preview-assignment__product-skeleton"
+                        ></div>
+                        <div
+                            class="sw-cms-block-preview-assignment__product-skeleton"
+                        ></div>
+                    </div>
+                    <div class="sw-cms-block-preview-assignment__product-action"></div>
+                </div>
+                {% endblock %}
+            </template>
+            <mt-icon
+                name="regular-chevron-right"
+                size="10"
+            />
+        </div>
+    </div>
+{% endblock %}

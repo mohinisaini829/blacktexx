@@ -1,0 +1,15 @@
+{% block sw_cms_block_content %}
+    <div v-if="hasVisibility || breakpointInfoNoSelection || breakpointInfoIsVisible" class="netzp-pp-block-breakpointinfo">
+        <span v-if="hasVisibility" class="visibility">
+            {{ visibilityInfo }}
+        </span>
+
+        <span v-if="breakpointInfoNoSelection" class="breakpoint warning">
+            &mdash;
+        </span>
+        <span v-else-if="breakpointInfoIsVisible">
+            <span v-for="breakpoint in getBreakpointInfo()" class="breakpoint">{{ breakpoint }}</span>
+        </span>
+    </div>
+    {% parent() %}
+{% endblock %}

@@ -1,0 +1,63 @@
+{% block sas_cms_element_blog_listing_config %}
+    <div class="sw-cms-el-config-blog">
+        {% block sas_cms_element_blog_listing_config_paginationCount_field %}
+        <mt-number-field
+            v-model="element.config.paginationCount.value"
+            number-type="int"
+            :step="1"
+            :min="1"
+            :max="null"
+            :digits="2"
+            :allow-empty="false"
+            :label="$tc('sas-blog.elements.listing.config.paginationCount')"
+        />
+        {% endblock %}
+
+    {% block sas_cms_element_blog_listing_config_show_type %}
+        <mt-select
+            v-model="element.config.showType.value"
+            :label="$tc('sas-blog.elements.listing.config.showType.label')"
+            :options="[
+    {
+        label: $tc('sas-blog.elements.listing.config.showType.options.all'),
+        value: 'all'
+    },
+    {
+        label: $tc('sas-blog.elements.listing.config.showType.options.select'),
+        value: 'select'
+    }
+]"
+        />
+        {% endblock %}
+
+    {% block sas_cms_element_blog_listing_config_select_categories %}
+        <sas-blog-category-tree-field
+            v-if="element.config.showType.value !== 'all' && selectedCategories"
+            v-model:value="selectedCategories"
+            :label="$tc('sas-blog.elements.listing.config.blogCategories.label')"
+            :categories-collection="selectedCategories"
+            class="sw-product-detail__select-category"
+            :placeholder="$tc('sas-blog.elements.listing.config.blogCategories.placeholder')"
+        />
+        {% endblock %}
+
+    {% block sas_cms_element_blog_listing_config_show_filter_select %}
+        <mt-card
+            :title="$tc('sas-blog.elements.listing.config.showFilter.label')"
+            :hero="false"
+            :is-loading="false"
+            :large="false"
+            class="sw-blog-config-filter"
+        >
+            <mt-checkbox
+                v-model:checked="element.config.showCategoryFilter.value"
+                :label="$tc('sas-blog.elements.listing.config.showFilter.options.filter.category')"
+            />
+            <mt-checkbox
+                v-model:checked="element.config.showAuthorFilter.value"
+                :label="$tc('sas-blog.elements.listing.config.showFilter.options.filter.author')"
+            />
+        </mt-card>
+        {% endblock %}
+    </div>
+{% endblock %}

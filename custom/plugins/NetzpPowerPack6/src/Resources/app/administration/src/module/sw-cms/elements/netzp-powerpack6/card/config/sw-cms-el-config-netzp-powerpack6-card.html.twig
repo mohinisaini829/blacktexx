@@ -1,0 +1,212 @@
+{% block sw_cms_element_netzp_powerpack6_config_card %}
+<div class="sw-cms-el-config-netzp-powerpack6">
+    <sw-tabs :small="false" defaultItem="front" positionIdentifier="netzp-powerpack-card-tabs">
+        <template #default="{ active }">
+            <sw-tabs-item name="front" :activeTab="active"
+                          :title="$tc('sw-cms.netzp-powerpack6.elements.card.tabs.front')">
+                {{ $tc('sw-cms.netzp-powerpack6.elements.card.tabs.front') }}
+            </sw-tabs-item>
+            <sw-tabs-item name="back" :activeTab="active" v-if="isTwoSided"
+                          :title="$tc('sw-cms.netzp-powerpack6.elements.card.tabs.back')">
+                {{ $tc('sw-cms.netzp-powerpack6.elements.card.tabs.back') }}
+            </sw-tabs-item>
+            <sw-tabs-item name="config" :activeTab="active"
+                          :title="$tc('sw-cms.netzp-powerpack6.elements.card.tabs.config')">
+                {{ $tc('sw-cms.netzp-powerpack6.elements.card.tabs.config') }}
+            </sw-tabs-item>
+        </template>
+
+        <template #content="{ active }">
+            <sw-container v-if="active === 'front'">
+                <sw-cms-mapping-field :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.image1')"
+                                      valueTypes="entity" entity="media"
+                                      v-model:config="element.config.image1">
+                    <sw-media-upload-v2 variant="regular"
+                                        :uploadTag="uploadTagImage1"
+                                        :source="previewSourceImage1"
+                                        :allowMultiSelect="false"
+                                        :defaultFolder="cmsPageState.pageEntityName"
+                                        :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                                        @media-upload-sidebar-open="onOpenMediaModalImage1"
+                                        @media-upload-remove-image="onImage1Remove" />
+
+                    <template #preview="{ demoValue }">
+                        <div class="sw-cms-el-config-card__mapping-preview">
+                            <img :src="demoValue.url" v-if="demoValue.url" alt="">
+                            <sw-alert class="sw-cms-el-config-card__preview-info" variant="info" v-else>
+                                {{ $tc('sw-cms.detail.label.mappingEmptyPreview') }}
+                            </sw-alert>
+                        </div>
+                    </template>
+                </sw-cms-mapping-field>
+
+                <br>
+                <sw-cms-mapping-field v-model:config="element.config.text1"
+                                      :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.text1')"
+                                      value-types="string">
+                    <sw-text-editor :allow-inline-data-mapping="true"
+                                    v-model:value="element.config.text1.value" />
+
+                    <template #preview="{ demoValue }">
+                        <div class="sw-cms-el-config-text__mapping-preview">
+                            <div v-html="$sanitize(demoValue)"></div>
+                        </div>
+                    </template>
+                </sw-cms-mapping-field>
+
+                <sw-container columns="1fr .7fr 1fr 1fr" gap="20px">
+                    <sw-switch-field :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.imageCover1')"
+                                     bordered v-model:value="element.config.imageCover1.value" />
+
+                    <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.imageOpacity1')"
+                                     numberType="int" :min="0" :max="100" :step="1"
+                                     v-model:value="element.config.imageOpacity1.value" />
+
+                    <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.backgroundColor1')"
+                                    v-model:value="element.config.backgroundColor1.value" colorOutput="hex" :zIndex="1001" :alpha="false" />
+
+                    <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.color1')"
+                                    v-model:value="element.config.color1.value" colorOutput="hex" :zIndex="1001" :alpha="false" />
+                </sw-container>
+
+                <sw-media-modal-v2
+                    variant="full"
+                    v-if="mediaModalImage1IsOpen"
+                    :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                    :entityContext="cmsPageState.entityName"
+                    :allowMultiSelect="false"
+                    :initialFolderId="cmsPageState.defaultMediaFolderId"
+                    @media-upload-remove-image="onImage1Remove"
+                    @media-modal-selection-change="onSelectionChangesImage1"
+                    @modal-close="onCloseModalImage1" />
+                <sw-upload-listener :uploadTag="uploadTagImage2" autoUpload
+                                    @media-upload-finish="onImage2Upload" />
+            </sw-container>
+
+            <sw-container v-if="active === 'back'">
+                <sw-cms-mapping-field :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.image2')"
+                                      valueTypes="entity" entity="media"
+                                      v-model:config="element.config.image2">
+                    <sw-media-upload-v2 variant="regular"
+                                        :uploadTag="uploadTagImage2"
+                                        :source="previewSourceImage2"
+                                        :allowMultiSelect="false"
+                                        :defaultFolder="cmsPageState.pageEntityName"
+                                        :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                                        @media-upload-sidebar-open="onOpenMediaModalImage2"
+                                        @media-upload-remove-image="onImage2Remove" />
+
+                    <template #preview="{ demoValue }">
+                        <div class="sw-cms-el-config-card__mapping-preview">
+                            <img :src="demoValue.url" v-if="demoValue.url" alt="">
+                            <sw-alert class="sw-cms-el-config-card__preview-info" variant="info" v-else>
+                                {{ $tc('sw-cms.detail.label.mappingEmptyPreview') }}
+                            </sw-alert>
+                        </div>
+                    </template>
+                </sw-cms-mapping-field>
+
+                <br>
+                <sw-cms-mapping-field v-model:config="element.config.text2"
+                                      :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.text2')"
+                                      value-types="string">
+                    <sw-text-editor :allow-inline-data-mapping="true"
+                                    v-model:value="element.config.text2.value" />
+
+                    <template #preview="{ demoValue }">
+                        <div class="sw-cms-el-config-text__mapping-preview">
+                            <div v-html="$sanitize(demoValue)"></div>
+                        </div>
+                    </template>
+                </sw-cms-mapping-field>
+
+                <sw-container columns="1fr .7fr 1fr 1fr" gap="20px">
+                    <sw-switch-field :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.imageCover2')"
+                                     bordered v-model:value="element.config.imageCover2.value" />
+
+                    <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.imageOpacity2')"
+                                     numberType="int" :min="0" :max="100" :step="1"
+                                     v-model:value="element.config.imageOpacity2.value" />
+
+                    <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.backgroundColor2')"
+                                    v-model:value="element.config.backgroundColor2.value" colorOutput="hex" :zIndex="1001" :alpha="false" />
+
+                    <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.color2')"
+                                    v-model:value="element.config.color2.value" colorOutput="hex" :zIndex="1001" :alpha="false" />
+                </sw-container>
+
+                <sw-media-modal-v2
+                    variant="full"
+                    v-if="mediaModalImage2IsOpen"
+                    :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                    :entityContext="cmsPageState.entityName"
+                    :allowMultiSelect="false"
+                    :initialFolderId="cmsPageState.defaultMediaFolderId"
+                    @media-upload-remove-image="onImage2Remove"
+                    @media-modal-selection-change="onSelectionChangesImage2"
+                    @modal-close="onCloseModalImage2" />
+                <sw-upload-listener :uploadTag="uploadTagImage2" autoUpload
+                                    @media-upload-finish="onImage2Upload" />
+            </sw-container>
+
+            <sw-container v-if="active === 'config'">
+                <sw-container columns="1fr 1fr 1fr 1fr" gap="20px">
+                    <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.height')"
+                                     numberType="int" :min="1" :max="100" :step="1"
+                                     v-model:value="element.config.height.value" />
+
+                    <sw-select-field :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.type.label')"
+                                     v-model:value="element.config.type.value">
+                        <option value="flip">
+                            {{ $tc('sw-cms.netzp-powerpack6.elements.card.config.type.flip') }}
+                        </option>
+                        <option value="reveal">
+                            {{ $tc('sw-cms.netzp-powerpack6.elements.card.config.type.reveal') }}
+                        </option>
+                        <option value="blur">
+                            {{ $tc('sw-cms.netzp-powerpack6.elements.card.config.type.blur') }}
+                        </option>
+                        <option value="popup">
+                            {{ $tc('sw-cms.netzp-powerpack6.elements.card.config.type.popup') }}
+                        </option>
+                        <option value="static">
+                            {{ $tc('sw-cms.netzp-powerpack6.elements.card.config.type.static') }}
+                        </option>
+                    </sw-select-field>
+
+                    <sw-switch-field v-if="element.config.type.value == 'blur'"
+                                     :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.blurText')"
+                                     bordered v-model:value="element.config.blurText.value" />
+                    <span v-else />
+
+                    <netzp-iconpicker :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.icon')"
+                                      v-model:value="element.config.icon.value" />
+
+                </sw-container>
+
+                <sw-container rows="1fr 1fr">
+                    <sw-container columns="1fr 1fr" gap="20px">
+                        <sw-text-field  :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.url')"
+                                        v-model:value="element.config.url.value" />
+
+                        <sw-switch-field :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.urlNewWindow')"
+                                         bordered v-model:value="element.config.urlNewWindow.value" />
+                    </sw-container>
+
+                    <sw-cms-mapping-field v-model:config="element.config.urlText"
+                                          :label="$tc('sw-cms.netzp-powerpack6.elements.card.config.urlText')"
+                                          value-types="string">
+                        <sw-text-field v-model:value="element.config.urlText.value" />
+
+                        <template #preview="{ demoValue }">
+                            <div class="sw-cms-el-config-text__mapping-preview">
+                                <div v-html="$sanitize(demoValue)"></div>
+                            </div>
+                        </template>
+                    </sw-cms-mapping-field>
+                </sw-container>
+            </sw-container>
+        </template>
+    </sw-tabs>
+</div>
+{% endblock %}

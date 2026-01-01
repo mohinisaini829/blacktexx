@@ -1,0 +1,10 @@
+{% block acris_cookie_consent_permission_button_setting %}
+    <button id="ccSettingButton"
+            class="cookie-consent-setting-button btn {{ cookieConfig.displayButtonCookieSettingsType }} cookie-consent-button-margin{% if cookieConfig.openCookieSettings != true %} collapsed{% endif %}"
+            data-bs-toggle="collapse" data-bs-target="#ccSettings"
+            aria-expanded="{% if cookieConfig.openCookieSettings == true %}true{% else %}false{% endif %}"
+            aria-controls="ccSettings"
+            aria-label="{{ "acrisCookieConsent.settingsButton"|trans }}">
+        {{ "acrisCookieConsent.settingsButton"|trans }}
+    </button>
+{% endblock %}

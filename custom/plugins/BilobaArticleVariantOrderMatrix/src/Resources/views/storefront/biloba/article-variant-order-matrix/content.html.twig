@@ -1,0 +1,35 @@
+<div class="container biloba-variant-matrix-children-content">
+    {% set children = page.extensions.bilobaArticleVariantOrderMatrix.elements.children %}
+    {% set variantMatrixArrayKeysAndValues = page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrix %}
+    {% set groupOptionId = null %}
+    {% set key = null %}
+    {% if page.configuratorSettings %}
+        {% set configuratorSettings = page.configuratorSettings %}
+    {% elseif page.product.configurator %}
+        {% set configuratorSettings = page.product.configurator %}
+    {% else %}
+        {% set configuratorSettings = page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings'] %}
+    {% endif %}
+
+    {% if configuratorSettings.elements|length >1 %}
+        {% for optKey, value in variantMatrixArrayKeysAndValues %}
+            {% set currentKey = firstGroupOption.id ~ '_' ~ secondGroupOption.id %}
+
+            {% if currentKey == optKey %}
+                {# variant key #}
+                {% set key =  value %}
+                {% set groupOptionId = currentKey %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% for optKey, value in variantMatrixArrayKeysAndValues %}
+            {% set currentKey = firstGroupOption.id %}
+
+            {% if currentKey == optKey %}
+                {% set key =  value %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+</div>

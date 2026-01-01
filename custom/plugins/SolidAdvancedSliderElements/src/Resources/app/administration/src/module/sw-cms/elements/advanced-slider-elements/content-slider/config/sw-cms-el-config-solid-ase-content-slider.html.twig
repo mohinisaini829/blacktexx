@@ -1,0 +1,1119 @@
+{% block sw_cms_el_config_solid_ase_content_slider %}
+    <div class="sw-cms-el-config-solid-ase-content-slider">
+        <mt-tabs
+            position-identifier="sw-cms-el-config-solid-ase-content-slider"
+            :items="tabItems"
+            :default-item="tabItems[0].name"
+            @new-item-active="onChangeTab"
+        />
+
+        {# slides #}
+        {% block sw_cms_el_config_solid_ase_content_slider_slides %}
+            <div v-show="currentTabName === 'slides'">
+                {% block sw_cms_el_config_solid_ase_content_slider_slides_list %}
+                    <ul class="slides">
+                        <li v-for="(slide, index) in element.config.slides.value"
+                            :key="slide.id"
+                            class="slide"
+                        >
+                            <sw-container columns="1fr auto">
+                                <div class="settings">
+                                    <sw-collapse :class="{ 'disabled': !slide.active }">
+                                        <template v-slot:header>
+                                            <h2 class="mb-0">
+                                                {{ slide.name }}
+                                            </h2>
+
+                                            <span
+                                                v-if="!slide.active && slide.publishingType === 'scheduled'"
+                                                class="slide-badge"
+                                            >
+                                                {{ $t('sw-cms.elements.solid-ase.content-slider.config.slides.scheduled') }}
+                                            </span>
+
+                                            <mt-icon name="regular-chevron-down-xxs" />
+                                        </template>
+
+                                        <template v-slot:content>
+                                            <div class="toggleable-container name">
+                                                <mt-text-field
+                                                    v-model="slide.name"
+                                                    class="mb-0"
+                                                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.fields.name.label')"
+                                                />
+
+                                                <mt-switch
+                                                    v-model="slide.active"
+                                                    class="mb-0"
+                                                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.fields.active.label')"
+                                                    :disabled="slide.publishingType === 'scheduled'"
+                                                />
+                                            </div>
+
+                                            <mt-tabs
+                                                position-identifier="sw-cms-el-config-solid-ase-content-slider-slide"
+                                                :items="slideTabItems"
+                                                :default-item="slideTabItems[0].name"
+                                                @new-item-active="onChangeSlideTab(slide, $event)"
+                                            />
+
+                                            <div class="tab-contents">
+                                                {% block sw_cms_el_config_solid_ase_content_slider_slides_slide_content %}
+                                                    <div v-show="currentSlideTabNames[slide.id] === 'content'">
+                                                        <mt-select
+                                                            v-model="slide.contentType"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.content-type.label')"
+                                                            :options="slideContentTypeOptions"
+                                                            hideClearableButton
+                                                        />
+
+                                                        <div v-show="slide.contentType === 'default'">
+                                                            <mt-text-field
+                                                                v-model="slide.smallHeadline"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.small-headline.label')"
+                                                            />
+
+                                                            <mt-text-field
+                                                                v-model="slide.headline"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.headline.label')"
+                                                            />
+
+                                                            <mt-text-field
+                                                                v-model="slide.text"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.text.label')"
+                                                            />
+
+                                                            <mt-text-field
+                                                                v-model="slide.buttonLabel"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-label.label')"
+                                                            />
+
+                                                            <mt-select
+                                                                v-model="slide.buttonLinkType"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.type.label')"
+                                                                :options="slideButtonLinkTypeOptions"
+                                                                hideClearableButton
+                                                                @update:model-value="onChangeSlideButtonLinkType(slide)"
+                                                            />
+
+                                                            <mt-select
+                                                                v-if="slide.buttonLinkType === 'internal'"
+                                                                v-model="slide.buttonLinkEntity"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.entity.label')"
+                                                                :options="slideButtonLinkEntityOptions"
+                                                                hideClearableButton
+                                                                @update:model-value="onChangeSlideButtonLinkEntity(slide)"
+                                                            />
+
+                                                            <template v-if="slide.buttonLinkType === 'internal' && slide.buttonLinkEntity === 'category'">
+                                                                <sw-category-tree-field
+                                                                    :categories-collection="slideButtonLinkCategoryCollections[slide.id]"
+                                                                    :placeholder="slideButtonLinkCategoryPlaceholder(slide)"
+                                                                    :category-criteria="categoryCriteria"
+                                                                    :single-select="true"
+                                                                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.entity.types.category.label')"
+                                                                    @selection-add="onAddSlideButtonLinkCategory(slide, $event)"
+                                                                    @selection-remove="onRemoveSlideButtonLinkCategory(slide)"
+                                                                />
+                                                            </template>
+
+                                                            <sw-entity-single-select
+                                                                v-if="slide.buttonLinkType === 'internal' && slide.buttonLinkEntity === 'product'"
+                                                                v-model:value="slide.buttonLink"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.entity.types.product.label')"
+                                                                :placeholder="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.entity.types.product.placeholder')"
+                                                                :criteria="productCriteria"
+                                                                :display-variants="true"
+                                                                entity="product"
+                                                            />
+
+                                                            <sw-entity-single-select
+                                                                v-if="slide.buttonLinkType === 'internal' && slide.buttonLinkEntity === 'landing-page'"
+                                                                v-model:value="slide.buttonLink"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.entity.types.landingPage.label')"
+                                                                :placeholder="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.entity.types.landingPage.placeholder')"
+                                                                entity="landing_page"
+                                                            />
+
+                                                            <mt-text-field
+                                                                v-if="slide.buttonLinkType === 'internal'"
+                                                                v-model="slide.buttonLinkInternalQuery"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.internalQuery.label')"
+                                                                :placeholder="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.internalQuery.placeholder')"
+                                                            />
+
+                                                            <mt-text-field
+                                                                v-if="slide.buttonLinkType === 'external'"
+                                                                v-model="slide.buttonLink"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.link.label')"
+                                                                :placeholder="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.link.placeholder')"
+                                                            />
+
+                                                            <mt-switch
+                                                                v-model="slide.buttonTargetBlank"
+                                                                bordered
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.targetBlank.label')"
+                                                            />
+
+                                                            <mt-text-field
+                                                                v-model="slide.buttonTitle"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.title.label')"
+                                                                :placeholder="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.button-link.title.placeholder')"
+                                                                class="mb-0"
+                                                            />
+                                                        </div>
+
+                                                        <sw-text-editor
+                                                            v-show="slide.contentType === 'custom'"
+                                                            v-model:value="slide.customContent"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.content.fields.custom-content.label')"
+                                                            class="mb-0"
+                                                        />
+                                                    </div>
+                                                {% endblock %}
+
+                                                {% block sw_cms_el_config_solid_ase_content_slider_slides_slide_background %}
+                                                    <div v-show="currentSlideTabNames[slide.id] === 'background'">
+                                                        <mt-colorpicker
+                                                            v-model="slide.backgroundColor"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.background.fields.background-color.label')"
+                                                            color-output="hex"
+                                                        />
+
+                                                        <sw-upload-listener
+                                                            :upload-tag="'cms-block-media-config-slide-background-' + index + '-' + element.id"
+                                                            auto-upload
+                                                            @media-upload-finish="onFinishUploadSlideBackgroundMedia($event, slide)"
+                                                        />
+
+                                                        <sw-media-compact-upload-v2
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.background.fields.background-media.label')"
+                                                            :source="slideBackgroundMediaPreviews[index]"
+                                                            :upload-tag="'cms-block-media-config-slide-background-' + index + '-' + element.id"
+                                                            :default-folder="cmsPageState.pageEntityName"
+                                                            file-accept="image/*,video/*"
+                                                            @media-upload-remove-image="onRemoveSlideBackgroundMedia(slide)"
+                                                            @selection-change="onChangeSlideBackgroundMedia($event, slide)">
+                                                        >
+                                                            {# Can not be self closed #}
+                                                        </sw-media-compact-upload-v2>
+
+                                                        <sw-container
+                                                            columns="1fr 1fr 1fr"
+                                                            gap="20px"
+                                                        >
+                                                            <mt-select
+                                                                v-model="slide.backgroundSizingMode"
+                                                                class="mb-0"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.background.fields.background-sizing-mode.label')"
+                                                                :options="slideBackgroundSizingModeOptions"
+                                                                :disabled="!slideBackgroundMediaPreviews[index] || slideBackgroundMediaPreviews[index].mimeType.includes('video')"
+                                                                hideClearableButton
+                                                            />
+
+                                                            <mt-select
+                                                                v-model="slide.backgroundPosition"
+                                                                class="mb-0"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.background.fields.background-position.label')"
+                                                                :options="slideBackgroundPositionOptions"
+                                                                :disabled="!slideBackgroundMediaPreviews[index] || slideBackgroundMediaPreviews[index].mimeType.includes('video') || slide.backgroundSizingMode == 'cover'"
+                                                                hideClearableButton
+                                                            />
+
+                                                            <mt-select
+                                                                v-model="slide.backgroundAnimation"
+                                                                class="mb-0"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.background.fields.background-animation.label')"
+                                                                :options="slideBackgroundAnimationOptions"
+                                                                :disabled="!slideBackgroundMediaPreviews[index] || slideBackgroundMediaPreviews[index].mimeType.includes('video') || slide.backgroundSizingMode !== 'cover'"
+                                                                hideClearableButton
+                                                            />
+                                                        </sw-container>
+                                                    </div>
+                                                {% endblock %}
+
+                                                {% block sw_cms_el_config_solid_ase_content_slider_slides_slide_link %}
+                                                    <div v-show="currentSlideTabNames[slide.id] === 'link'">
+                                                        <mt-select
+                                                            v-model="slide.linkType"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.type.label')"
+                                                            :options="slideLinkTypeOptions"
+                                                            hideClearableButton
+                                                            @update:model-value="onChangeSlideLinkType(slide)"
+                                                        />
+
+                                                        <mt-select
+                                                            v-if="slide.linkType === 'internal'"
+                                                            v-model="slide.linkEntity"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.entity.label')"
+                                                            :options="slideLinkEntityOptions"
+                                                            hideClearableButton
+                                                            @update:model-value="onChangeSlideLinkEntity(slide)"
+                                                        />
+
+                                                        <template v-if="slide.linkType === 'internal' && slide.linkEntity === 'category'">
+                                                            <sw-category-tree-field
+                                                                :categories-collection="slideLinkCategoryCollections[slide.id]"
+                                                                :placeholder="slideLinkCategoryPlaceholder(slide)"
+                                                                :category-criteria="categoryCriteria"
+                                                                :single-select="true"
+                                                                :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.entity.types.category.label')"
+                                                                @selection-add="onAddSlideLinkCategory(slide, $event)"
+                                                                @selection-remove="onRemoveSlideLinkCategory(slide)"
+                                                            />
+                                                        </template>
+
+                                                        <sw-entity-single-select
+                                                            v-if="slide.linkType === 'internal' && slide.linkEntity === 'product'"
+                                                            v-model:value="slide.link"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.entity.types.product.label')"
+                                                            :placeholder="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.entity.types.product.placeholder')"
+                                                            :criteria="productCriteria"
+                                                            :display-variants="true"
+                                                            entity="product"
+                                                        />
+
+                                                        <sw-entity-single-select
+                                                            v-if="slide.linkType === 'internal' && slide.linkEntity === 'landing-page'"
+                                                            v-model:value="slide.link"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.entity.types.landingPage.label')"
+                                                            :placeholder="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.entity.types.landingPage.placeholder')"
+                                                            entity="landing_page"
+                                                        />
+
+                                                        <mt-text-field
+                                                            v-if="slide.linkType === 'internal'"
+                                                            v-model="slide.linkInternalQuery"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.internalQuery.label')"
+                                                            :placeholder="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.internalQuery.placeholder')"
+                                                        />
+
+                                                        <mt-text-field
+                                                            v-if="slide.linkType === 'external'"
+                                                            v-model="slide.link"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.link.label')"
+                                                            :placeholder="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.link.placeholder')"
+                                                        />
+
+                                                        <mt-switch
+                                                            v-model="slide.linkTargetBlank"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.targetBlank.label')"
+                                                            bordered
+                                                        />
+
+                                                        <mt-text-field
+                                                            v-model="slide.linkTitle"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.title.label')"
+                                                            :placeholder="$t('sw-cms.elements.solid-ase.content-slider.config.slides.link.fields.title.placeholder')"
+                                                            class="mb-0"
+                                                        />
+                                                    </div>
+                                                {% endblock %}
+
+                                                {% block sw_cms_el_config_solid_ase_content_slider_slides_slide_publishing %}
+                                                    <div v-show="currentSlideTabNames[slide.id] === 'publishing'">
+                                                        <sw-alert>
+                                                            <div v-html="$t('sw-cms.elements.solid-ase.content-slider.config.slides.publishing.cli-worker-info')" />
+                                                        </sw-alert>
+
+                                                        <mt-select
+                                                            v-model="slide.publishingType"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.publishing.fields.type.label')"
+                                                            :options="slidePublishingTypeOptions"
+                                                            hideClearableButton
+                                                            @update:model-value="onChangeSlidePublishingType(slide)"
+                                                        />
+
+                                                        <mt-datepicker
+                                                            v-model="slide.scheduledPublishingDateTime"
+                                                            date-type="datetime"
+                                                            :config="getSlideScheduledPublishingDateTimeConfig(slide)"
+                                                            :disabled="slide.publishingType === 'instant'"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.publishing.fields.scheduledPublishingDateTime.label')"
+                                                            @update:model-value="onChangeSlideScheduledPublishingDateTime(slide)"
+                                                        />
+
+                                                        <mt-datepicker
+                                                            v-model="slide.scheduledUnpublishingDateTime"
+                                                            date-type="datetime"
+                                                            :config="getSlideScheduledUnpublishingDateTimeConfig(slide)"
+                                                            :disabled="slide.publishingType === 'instant'"
+                                                            :label="$t('sw-cms.elements.solid-ase.content-slider.config.slides.publishing.fields.scheduledUnpublishingDateTime.label')"
+                                                            class="mb-0"
+                                                            @update:model-value="onChangeSlideScheduledUnpublishingDateTime(slide)"
+                                                        />
+                                                    </div>
+                                                {% endblock %}
+                                            </div>
+
+                                            <p class="hint hint-slide-class">
+                                                {{ $t('sw-cms.elements.solid-ase.content-slider.config.slides.slide-class') }}:
+                                                <code>
+                                                    solid-ase-content-slider-slide-{{ slide.id }}
+                                                </code>
+                                            </p>
+                                        </template>
+                                    </sw-collapse>
+                                </div>
+
+                                {% block sw_cms_el_config_solid_ase_content_slider_slides_slide_actions %}
+                                    <div class="actions">
+                                        <mt-button
+                                            square
+                                            :disabled="index === 0"
+                                            size="small"
+                                            class="move-up"
+                                            @click="onClickMoveSlide(slide, 'up')"
+                                        >
+                                            <mt-icon name="regular-chevron-up-xxs" />
+                                        </mt-button>
+
+                                        <sw-container
+                                            columns="1fr 1fr"
+                                            gap="10px"
+                                        >
+                                            <mt-button
+                                                square
+                                                size="small"
+                                                @click="onClickDuplicateSlide(slide)"
+                                            >
+                                                <mt-icon name="regular-products-s" />
+                                            </mt-button>
+
+                                            <mt-button
+                                                class="remove"
+                                                square
+                                                size="small"
+                                                :disabled="element.config.slides.value.length === 1"
+                                                variant="critical"
+                                                @click="onClickRemoveSlide(slide)"
+                                            >
+                                                <mt-icon name="regular-trash" />
+                                            </mt-button>
+                                        </sw-container>
+
+                                        <mt-button
+                                            class="move-down"
+                                            square
+                                            :disabled="index === element.config.slides.value.length - 1"
+                                            size="small"
+                                            @click="onClickMoveSlide(slide, 'down')"
+                                        >
+                                            <mt-icon name="regular-chevron-down-xxs" />
+                                        </mt-button>
+                                    </div>
+                                {% endblock %}
+                            </sw-container>
+                        </li>
+                    </ul>
+                {% endblock %}
+
+                <mt-button
+                    class="add-slide-btn"
+                    block
+                    @click="onClickAddSlide"
+                >
+                    {{ $t('sw-cms.elements.solid-ase.content-slider.config.slides.add-slide.label') }}
+                </mt-button>
+            </div>
+        {% endblock %}
+
+        {# general #}
+        {% block sw_cms_el_config_solid_ase_content_slider_general %}
+            <div v-show="currentTabName === 'general'">
+                {# animation #}
+                <mt-select
+                    v-model="element.config.sliderSettings.value.animation"
+                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.animation.label')"
+                    :options="settingsAnimationOptions"
+                    hideClearableButton
+                />
+
+                {# items mode #}
+                <mt-select
+                    v-model="element.config.sliderSettings.value.itemsMode"
+                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.itemsMode.label')"
+                    :options="settingsItemsMode"
+                    hideClearableButton
+                />
+
+                {# items #}
+                <mt-select
+                    v-show="element.config.sliderSettings.value.itemsMode === 'responsive-automatic'"
+                    v-model="element.config.sliderSettings.value.items"
+                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.items.label')"
+                    :options="getIntOptions(10)"
+                    hideClearableButton
+                    @update:model-value="onChangeItems"
+                />
+
+                <sw-container
+                    v-show="element.config.sliderSettings.value.itemsMode === 'responsive-custom'"
+                    columns="1fr 1fr 1fr"
+                    gap="20px"
+                >
+                    {# items-mobile #}
+                    <mt-select
+                        v-model="element.config.sliderSettings.value.itemsMobile"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.items-mobile.label')"
+                        :options="getIntOptions(10)"
+                        hideClearableButton
+                        @update:model-value="onChangeItemsMobile"
+                    />
+
+                    {# items-tablet #}
+                    <mt-select
+                        v-model="element.config.sliderSettings.value.itemsTablet"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.items-tablet.label')"
+                        :options="getIntOptions(10)"
+                        hideClearableButton
+                        @update:model-value="onChangeItemsTablet"
+                    />
+
+                    {# items-desktop #}
+                    <mt-select
+                        v-model="element.config.sliderSettings.value.itemsDesktop"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.items-desktop.label')"
+                        :options="getIntOptions(10)"
+                        hideClearableButton
+                        @update:model-value="onChangeItemsDesktop"
+                    />
+                </sw-container>
+
+                {# slide-by #}
+                <mt-select
+                    v-show="element.config.sliderSettings.value.itemsMode === 'responsive-automatic'"
+                    v-model="element.config.sliderSettings.value.slideBy"
+                    :disabled="element.config.sliderSettings.value.animation.includes('gallery')"
+                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.slide-by.label')"
+                    :options="getIntOptions(parseInt(element.config.sliderSettings.value.items))"
+                    hideClearableButton
+                />
+
+                <sw-container
+                    v-show="element.config.sliderSettings.value.itemsMode === 'responsive-custom'"
+                    columns="1fr 1fr 1fr"
+                    gap="20px"
+                >
+                    {# slide-by-mobile #}
+                    <mt-select
+                        v-model="element.config.sliderSettings.value.slideByMobile"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.slide-by-mobile.label')"
+                        :options="getIntOptions(parseInt(element.config.sliderSettings.value.itemsMobile))"
+                        hideClearableButton
+                    />
+
+                    {# slide-by-tablet #}
+                    <mt-select
+                        v-model="element.config.sliderSettings.value.slideByTablet"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.slide-by-tablet.label')"
+                        :options="getIntOptions(parseInt(element.config.sliderSettings.value.itemsTablet))"
+                        hideClearableButton
+                    />
+
+                    {# slide-by-desktop #}
+                    <mt-select
+                        v-model="element.config.sliderSettings.value.slideByDesktop"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.slide-by-desktop.label')"
+                        :options="getIntOptions(parseInt(element.config.sliderSettings.value.itemsDesktop))"
+                        hideClearableButton
+                    />
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr 1fr"
+                    gap="20px"
+                >
+                    {# start-index #}
+                    <mt-text-field
+                        v-model="element.config.sliderSettings.value.startIndex"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.start-index.label')"
+                    />
+
+                    {# speed #}
+                    <mt-text-field
+                        v-model="element.config.sliderSettings.value.speed"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.speed.label')"
+                    />
+
+                    {# gutter #}
+                    <mt-text-field
+                        v-model="element.config.sliderSettings.value.gutter"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.gutter.label')"
+                    />
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# loop #}
+                    <mt-switch
+                        v-model="element.config.sliderSettings.value.loop"
+                        class="mt-0"
+                        bordered
+                        :disabled="element.config.sliderSettings.value.rewind"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.loop.label')"
+                    />
+
+                    {# rewind #}
+                    <mt-switch
+                        v-model="element.config.sliderSettings.value.rewind"
+                        class="mt-0"
+                        bordered
+                        :disabled="element.config.sliderSettings.value.loop || element.config.sliderSettings.value.animation.includes('gallery')"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.rewind.label')"
+                    />
+                </sw-container>
+
+                {# sizing-mode #}
+                <mt-select
+                    v-model="element.config.settings.value.sizingMode"
+                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.sizing-mode.label')"
+                    :options="settingsSizingMode"
+                    hideClearableButton
+                />
+
+                <sw-container
+                    v-show="element.config.settings.value.sizingMode === 'responsive-min-height'"
+                    columns="1fr 1fr 1fr"
+                    gap="20px"
+                >
+                    {# min-height-mobile #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.minHeightMobile"
+                        class="mb-0"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.min-height-mobile.label')"
+                    />
+
+                    {# min-height-tablet #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.minHeightTablet"
+                        class="mb-0"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.min-height-tablet.label')"
+                    />
+
+                    {# min-height-desktop #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.minHeightDesktop"
+                        class="mb-0"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.min-height-desktop.label')"
+                    />
+                </sw-container>
+
+                <sw-container
+                    v-show="element.config.settings.value.sizingMode === 'min-aspect-ratio'"
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# min-aspect-ratio-width #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.minAspectRatioWidth"
+                        class="mb-0"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.min-aspect-ratio-width.label')"
+                    />
+
+                    {# min-aspect-ratio-height #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.minAspectRatioHeight"
+                        class="mb-0"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.general.fields.min-aspect-ratio-height.label')"
+                    />
+                </sw-container>
+            </div>
+        {% endblock %}
+
+        {# content #}
+        {% block sw_cms_el_config_solid_ase_content_slider_content %}
+            <div v-show="currentTabName === 'content'">
+                <p class="section-title">
+                    {{ $t('sw-cms.elements.solid-ase.content-slider.config.content.layout.label') }}
+                </p>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# layout-variant #}
+                    <mt-select
+                        v-model="element.config.settings.value.layoutVariant"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.layout-variant.label')"
+                        :options="settingsLayoutVariant"
+                        hideClearableButton
+                    />
+
+                    {# content-animation #}
+                    <mt-select
+                        v-model="element.config.settings.value.contentAnimation"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.content-animation.label')"
+                        :options="settingsContentAnimation"
+                        hideClearableButton
+                    />
+                </sw-container>
+
+                <p class="section-title">
+                    {{ $t('sw-cms.elements.solid-ase.content-slider.config.content.typography.label') }}
+                </p>
+
+                <sw-container
+                    columns="1fr 1fr 1fr"
+                    gap="20px"
+                >
+                    {# small-headline-size-mobile #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.smallHeadlineSizeMobile"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.small-headline-size-mobile.label')"
+                    />
+
+                    {# small-headline-size-tablet #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.smallHeadlineSizeTablet"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.small-headline-size-tablet.label')"
+                    />
+
+                    {# small-headline-size-desktop #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.smallHeadlineSizeDesktop"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.small-headline-size-desktop.label')"
+                    />
+                </sw-container>
+
+                {# small-headline-weight #}
+                <mt-select
+                    v-model="element.config.settings.value.smallHeadlineWeight"
+                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.small-headline-weight.label')"
+                    :options="getFontWeightOptions(true, $t('sw-cms.elements.solid-ase.content-slider.config.content.fields.small-headline-weight.options.default.label'))"
+                    hideClearableButton
+                />
+
+                <sw-container
+                    columns="1fr 1fr 1fr" gap="20px">
+                    {# headline-size-mobile #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.headlineSizeMobile"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.headline-size-mobile.label')"
+                    />
+
+                    {# headline-size-tablet #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.headlineSizeTablet"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.headline-size-tablet.label')"
+                    />
+
+                    {# headline-size-desktop #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.headlineSizeDesktop"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.headline-size-desktop.label')"
+                    />
+                </sw-container>
+
+                {# headline-weight #}
+                <mt-select
+                    v-model="element.config.settings.value.headlineWeight"
+                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.headline-weight.label')"
+                    :options="getFontWeightOptions(true, $t('sw-cms.elements.solid-ase.content-slider.config.content.fields.headline-weight.options.default.label'))"
+                    hideClearableButton
+                />
+
+                <sw-container
+                    columns="1fr 1fr 1fr"
+                    gap="20px"
+                >
+                    {# text-size-mobile #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.textSizeMobile"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.text-size-mobile.label')"
+                    />
+
+                    {# text-size-tablet #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.textSizeTablet"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.text-size-tablet.label')"
+                    />
+
+                    {# text-size-desktop #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.textSizeDesktop"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.text-size-desktop.label')"
+                    />
+                </sw-container>
+
+                {# text-weight #}
+                <mt-select
+                    v-model="element.config.settings.value.textWeight"
+                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.text-weight.label')"
+                    :options="getFontWeightOptions(true, $t('sw-cms.elements.solid-ase.content-slider.config.content.fields.text-weight.options.default.label'))"
+                    hideClearableButton
+                />
+
+                <sw-container
+                    columns="1fr 1fr 1fr"
+                    gap="20px"
+                >
+                    {# button-label-size-mobile #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.buttonLabelSizeMobile"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.button-label-size-mobile.label')"
+                    />
+
+                    {# button-label-size-tablet #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.buttonLabelSizeTablet"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.button-label-size-tablet.label')"
+                    />
+
+                    {# button-label-size-desktop #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.buttonLabelSizeDesktop"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.button-label-size-desktop.label')"
+                    />
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# button-label-weight #}
+                    <mt-select
+                        v-model="element.config.settings.value.buttonLabelWeight"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.button-label-weight.label')"
+                        :options="getFontWeightOptions(true, $t('sw-cms.elements.solid-ase.content-slider.config.content.fields.button-label-weight.options.default.label'))"
+                        hideClearableButton
+                    />
+
+                    {# button-variant #}
+                    <mt-select
+                        v-model="element.config.settings.value.buttonVariant"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.button-variant.label')"
+                        :options="settingsButtonVariantOptions"
+                        hideClearableButton
+                    />
+                </sw-container>
+
+                <p class="section-title">
+                    {{ $t('sw-cms.elements.solid-ase.content-slider.config.content.spacing.label') }}
+                </p>
+
+                <sw-container
+                    columns="1fr 1fr 1fr"
+                    gap="20px"
+                >
+                    {# small-headline-margin-bottom-mobile #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.smallHeadlineMarginBottomMobile"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.small-headline-margin-bottom-mobile.label')"
+                    />
+
+                    {# small-headline-margin-bottom-tablet #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.smallHeadlineMarginBottomTablet"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.small-headline-margin-bottom-tablet.label')"
+                    />
+
+                    {# small-headline-margin-bottom-desktop #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.smallHeadlineMarginBottomDesktop"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.small-headline-margin-bottom-desktop.label')"
+                    />
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr 1fr"
+                    gap="20px"
+                >
+                    {# headline-margin-bottom-mobile #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.headlineMarginBottomMobile"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.headline-margin-bottom-mobile.label')"
+                    />
+
+                    {# headline-margin-bottom-tablet #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.headlineMarginBottomTablet"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.headline-margin-bottom-tablet.label')"
+                    />
+
+                    {# headline-margin-bottom-desktop #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.headlineMarginBottomDesktop"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.headline-margin-bottom-desktop.label')"
+                    />
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr 1fr"
+                    gap="20px"
+                >
+                    {# text-margin-bottom-mobile #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.textMarginBottomMobile"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.text-margin-bottom-mobile.label')"
+                    />
+
+                    {# text-margin-bottom-tablet #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.textMarginBottomTablet"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.text-margin-bottom-tablet.label')"
+                    />
+
+                    {# text-margin-bottom-desktop #}
+                    <mt-text-field
+                        v-model="element.config.settings.value.textMarginBottomDesktop"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.text-margin-bottom-desktop.label')"
+                    />
+                </sw-container>
+
+                <p class="section-title">
+                    {{ $t('sw-cms.elements.solid-ase.content-slider.config.content.colors.label') }}
+                </p>
+
+                <sw-container
+                    columns="1fr 1fr 1fr"
+                    gap="20px"
+                >
+                    {# small-headline-color #}
+                    <mt-colorpicker
+                        v-model="element.config.settings.value.smallHeadlineColor"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.small-headline-color.label')"
+                        color-output="hex"
+                    />
+
+                    {# headline-color #}
+                    <mt-colorpicker
+                        v-model="element.config.settings.value.headlineColor"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.headline-color.label')"
+                        color-output="hex"
+                    />
+
+                    {# text-color #}
+                    <mt-colorpicker
+                        v-model="element.config.settings.value.textColor"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.text-color.label')"
+                        color-output="hex"
+                    />
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# button-color #}
+                    <mt-colorpicker
+                        v-model="element.config.settings.value.buttonColor"
+                        class="mb-0"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.button-color.label')"
+                        color-output="hex"
+                    />
+
+                    {# content-background-color #}
+                    <mt-colorpicker
+                        v-model="element.config.settings.value.contentBackgroundColor"
+                        class="mb-0"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.content.fields.content-background-color.label')"
+                        color-output="hex"
+                    />
+                </sw-container>
+            </div>
+        {% endblock %}
+
+        {# navigation #}
+        {% block sw_cms_el_config_solid_ase_content_slider_navigation %}
+            <div v-show="currentTabName === 'navigation'">
+                <p class="section-title">
+                    {{ $t('sw-cms.elements.solid-ase.content-slider.config.navigation.controls.label') }}
+                </p>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# controls #}
+                    <mt-switch
+                        v-model="element.config.sliderSettings.value.controls"
+                        class="mt-0"
+                        bordered
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.navigation.fields.controls.label')"
+                    />
+
+                    {# mouse-drag #}
+                    <mt-switch
+                        v-model="element.config.sliderSettings.value.mouseDrag"
+                        class="mt-0"
+                        bordered
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.navigation.fields.mouse-drag.label')"
+                        :disabled="!element.config.sliderSettings.value.controls"
+                    />
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# controls-variant #}
+                    <mt-select
+                        v-model="element.config.settings.value.controlsVariant"
+                        :disabled="!element.config.sliderSettings.value.controls"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.navigation.fields.controls-variant.label')"
+                        :options="settingsControlsVariantOptions"
+                        hideClearableButton
+                    />
+
+                    {# controls-icon-variant #}
+                    <mt-select
+                        v-model="element.config.settings.value.controlsIconVariant"
+                        :disabled="!element.config.sliderSettings.value.controls"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.navigation.fields.controls-icon-variant.label')"
+                        :options="settingsControlsIconVariantOptions"
+                        hideClearableButton
+                    />
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# controls-position #}
+                    <mt-select
+                        v-model="element.config.settings.value.controlsPosition"
+                        :disabled="!element.config.sliderSettings.value.controls"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.navigation.fields.controls-position.label')"
+                        :options="settingsControlsPositionOptions"
+                        hideClearableButton
+                    />
+
+                    {# controls-color #}
+                    <mt-colorpicker
+                        v-model="element.config.settings.value.controlsColor"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.navigation.fields.controls-color.label')"
+                        :disabled="!element.config.sliderSettings.value.controls"
+                        color-output="hex"
+                    />
+                </sw-container>
+
+                <p class="section-title">
+                    {{ $t('sw-cms.elements.solid-ase.content-slider.config.navigation.navigation.label') }}
+                </p>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# nav #}
+                    <mt-switch
+                        v-model="element.config.sliderSettings.value.nav"
+                        bordered
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.navigation.fields.nav.label')"
+                    />
+
+                    {# nav-color #}
+                    <mt-colorpicker
+                        v-model="element.config.settings.value.navColor"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.navigation.fields.nav-color.label')"
+                        :disabled="!element.config.sliderSettings.value.nav"
+                        color-output="hex"
+                    />
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# nav-variant #}
+                    <mt-select
+                        v-model="element.config.settings.value.navVariant"
+                        :disabled="!element.config.sliderSettings.value.nav"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.navigation.fields.nav-variant.label')"
+                        :options="settingsNavVariantOptions"
+                        hideClearableButton
+                    />
+
+                    {# nav-size #}
+                    <mt-select
+                        v-model="element.config.settings.value.navSize"
+                        :disabled="!element.config.sliderSettings.value.nav"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.navigation.fields.nav-size.label')"
+                        :options="settingsNavSizeOptions"
+                        hideClearableButton
+                    />
+                </sw-container>
+
+                {# nav-position #}
+                <mt-select
+                    v-model="element.config.settings.value.navPosition"
+                    class="mb-0"
+                    :disabled="!element.config.sliderSettings.value.nav"
+                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.navigation.fields.nav-position.label')"
+                    :options="settingsNavPositionOptions"
+                    hideClearableButton
+                />
+            </div>
+        {% endblock %}
+
+        {# autoplay #}
+        {% block sw_cms_el_config_solid_ase_content_slider_autoplay %}
+            <div v-show="currentTabName === 'autoplay'">
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# autoplay #}
+                    <mt-switch
+                        v-model="element.config.sliderSettings.value.autoplay"
+                        bordered
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.autoplay.fields.autoplay.label')"
+                    />
+
+                    {# autoplay-direction #}
+                    <mt-select
+                        v-model="element.config.sliderSettings.value.autoplayDirection"
+                        :disabled="!element.config.sliderSettings.value.autoplay"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.autoplay.fields.autoplay-direction.label')"
+                        :options="settingsAutoplayDirection"
+                        hideClearableButton
+                    />
+                </sw-container>
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="20px"
+                >
+                    {# autoplay-timeout #}
+                    <mt-text-field
+                        v-model="element.config.sliderSettings.value.autoplayTimeout"
+                        class="mb-0"
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.autoplay.fields.autoplay-timeout.label')"
+                        :disabled="!element.config.sliderSettings.value.autoplay"
+                    />
+
+                    {# autoplay-hover-pause #}
+                    <mt-switch
+                        v-model="element.config.sliderSettings.value.autoplayHoverPause"
+                        class="mb-0"
+                        bordered
+                        :label="$t('sw-cms.elements.solid-ase.content-slider.config.autoplay.fields.autoplay-hover-pause.label')"
+                        :disabled="!element.config.sliderSettings.value.autoplay"
+                    />
+                </sw-container>
+            </div>
+        {% endblock %}
+
+        {# custom #}
+        {% block sw_cms_el_config_solid_ase_content_slider_custom %}
+            <div v-show="currentTabName === 'custom'">
+                {# custom-css #}
+                <sw-code-editor
+                    v-model:value="element.config.settings.value.customCss"
+                    class="mb-0"
+                    :label="$t('sw-cms.elements.solid-ase.content-slider.config.custom.fields.custom-css.label')"
+                />
+
+                <p class="hint">
+                    {{ $t('sw-cms.elements.solid-ase.content-slider.config.custom.fields.custom-css.slider-class') }}:
+                    <code>
+                        solid-ase-content-slider-{{ element.id }}
+                    </code>
+                </p>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

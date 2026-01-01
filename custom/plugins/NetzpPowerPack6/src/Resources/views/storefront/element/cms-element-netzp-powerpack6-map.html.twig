@@ -1,0 +1,46 @@
+{% block netzp_powerpack6_map %}
+<div class="netzp-powerpack6-map-element" id="map_{{ element.id }}">
+    {% set lang = page.header.languages.get(context.salesChannel.languageId).translationCode.code %}
+    {% set elementId = "netzp-powerpack6-map" ~ element.id %}
+    <div id="netzp-powerpack6-map{{ element.id }}"
+         class="netzp-powerpack6-map"
+         style="height: {{ element.config.height.value }}rem">
+
+        <template data-netzp-powerpack6-map
+                  data-netzp-powerpack6-map-options='{
+                        "el": "{{ elementId }}",
+                        "optInPolicyClass": "optin-policy",
+                        "apiKey": "{{ config('NetzpPowerPack6.config.googleMapsApiKey') }}",
+                        "lang": "{{ lang }}",
+                        "optIn": "{{ element.config.optIn.value == 1 }}",
+                        "lat": "{{ element.config.lat.value }}",
+                        "lng": "{{ element.config.long.value }}",
+                        "zoom": "{{ element.config.zoomLevel.value }}",
+                        "mapType": "{{ element.config.mapType.value }}",
+                        "content": "{{ element.config.contents.value|raw|escape('js') }}"
+                  }'>
+        </template>
+
+        {% if element.config.optIn.value == 1 %}
+            <div class="optin-policy">
+                <h3>{{ "netzp.powerpack.googlemapsPolicyTitle"|trans|sw_sanitize }}</h3>
+                <p>
+                    {{ "netzp.powerpack.googlemapsPolicyText"|trans|sw_sanitize }}
+                </p>
+                <div class="optin-buttons">
+                    <button type="button"
+                            class="btn btn-primary optin-button"
+                            onClick="document.$emitter.publish('netzp-pp-map-optin', { confirm: '{{ elementId }}' })">
+                        {{ "netzp.powerpack.googlemapsPolicyButton"|trans|sw_sanitize }}
+                    </button>
+                    <button type="button"
+                            class="btn btn-info optin-button"
+                            onClick="document.$emitter.publish('netzp-pp-map-optin', { confirm: true })">
+                        {{ "netzp.powerpack.googlemapsPolicyButtonAll"|trans|sw_sanitize }}
+                    </button>
+                </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

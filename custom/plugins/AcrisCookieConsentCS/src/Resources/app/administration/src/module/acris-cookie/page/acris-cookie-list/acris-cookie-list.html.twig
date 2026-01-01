@@ -1,0 +1,327 @@
+{% block acris_cookie_list %}
+<sw-page class="acris-cookie-list">
+
+    {% block acris_cookie_list_search_bar %}
+        <template #search-bar>
+            <sw-search-bar initialSearchType="Cookie"
+                           :placeholder="$tc('acris-cookie.general.placeholderSearchBar')"
+                           :initialSearch="term"
+                           @search="onSearch">
+            </sw-search-bar>
+        </template>
+    {% endblock %}
+
+    {% block acris_cookie_list_smart_bar_header %}
+        <template #smart-bar-header>
+            {% block acris_cookie_list_smart_bar_header_title %}
+                <h2>
+                    {% block acris_cookie_list_smart_bar_header_title_text %}
+                        {{ $tc('sw-settings.index.title') }}
+                        <mt-icon name="regular-chevron-right-xs" size="16px">
+                        </mt-icon>
+                        {{ $tc('acris-cookie.list.textHeadline') }}
+                        {% endblock %}
+
+                        {% block acris_cookie_list_smart_bar_header_amount %}
+                        <span v-if="!isLoading" class="sw-page__smart-bar-amount">
+                        ({{ total }})
+                        </span>
+                    {% endblock %}
+                </h2>
+            {% endblock %}
+        </template>
+    {% endblock %}
+
+    {% block acris_cookie_group_list_smart_bar_actions_language %}
+        <template #language-switch>
+            <sw-language-switch
+                @on-change="onChangeLanguage">
+            </sw-language-switch>
+        </template>
+    {% endblock %}
+
+    {% block acris_cookie_list_smart_bar_actions %}
+        <template #smart-bar-actions>
+            {% block acris_cookie_list_smart_bar_actions_add %}
+            <mt-button @click="$router.push({ name: 'acris.cookie.create' })" variant="primary" size="default">
+                {{ $tc('acris-cookie.list.buttonAdd') }}
+            </mt-button>
+            {% endblock %}
+        </template>
+    {% endblock %}
+    {{ total }}
+
+    {% block acris_cookie_list_cardview %}
+    <template #content>
+        {% block acris_cookie_consent_list_content_cookie %}
+        <sw-entity-listing
+            v-if="items && !isLoading"
+            detailRoute="acris.cookie.detail"
+            :is-loading="isLoading"
+            :items="items"
+            :repository="entityRepository"
+            :showSelection="true"
+            :allowBulkEdit="false"
+            :allow-delete="allowDelete"
+            :allowInlineEdit="true"
+            class="acris-import-export-process-run-entities-list"
+            :columns="columns"
+            :sort-by="sortBy"
+            :sort-direction="sortDirection"
+            @selection-change="updateSelection"
+            @column-sort="onSortColumn"
+            @page-change="onPageChange">
+
+        {% block acris_cookie_consent_list_empty_state %}
+            <sw-empty-state v-if="!isLoading && !items" :title="$tc('acris-cookie.list.contentEmpty')"></sw-empty-state>
+        {% endblock %}
+
+        {% block acris_cookie_consent_list_grid_columns_cookie_id %}
+        <template #column-cookieId="{ item, isInlineEdit }">
+            {% block acris_cookie_list_columns_cookie_id_link %}
+            <template v-if="!isInlineEdit">
+                <router-link :title="$tc('acris-cookie.list.contextMenuEdit')"
+                             :to="{ name: 'acris.cookie.detail', params: { id: item.id } }">
+                    {% block acris_cookie_list_columns_cookie_id_link %}
+                    {{ item.cookieId }}
+                    {% endblock %}
+                </router-link>
+            </template>
+            {% endblock %}
+
+            {% block acris_cookie_list_columns_cookie_id_editor %}
+                    <template v-else>
+                        <sw-field type="text"
+                                  :entity-collection="item.cookieId"
+                                  @update:entity-collection="onChange"
+                                  :disabled="item.isDefault"
+                                  #inline-edit>
+                        </sw-field>
+                    </template>
+            {% endblock %}
+        </template>
+        {% endblock %}
+
+        {% block acris_cookie_consent_list_grid_columns_title %}
+            <template #column-title="{ item, isInlineEdit }">
+                {% block acris_cookie_list_columns_title_link %}
+                    <template v-if="!isInlineEdit">
+                        <router-link :title="$tc('acris-cookie.list.contextMenuEdit')"
+                                     :to="{ name: 'acris.cookie.detail', params: { id: item.id } }">
+                            {% block acris_cookie_list_columns_title_link %}
+                                {% if item.title %}
+                                    {{ item.title }}
+                                {% else %}
+                                    {{ placeholder(item, 'title') }}
+                                {% endif %}
+                            {% endblock %}
+                        </router-link>
+                    </template>
+                {% endblock %}
+
+                {% block acris_cookie_list_columns_title_editor %}
+                    <template v-else>
+                        <sw-field type="text"
+                                  :disabled="item.isDefault"
+                                  :entity-collection="item.title"
+                                  @update:entity-collection="onChange"
+                                  #inline-edit>
+                        </sw-field>
+                    </template>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_consent_list_grid_columns_description %}
+            <template #column-description="{ item,isInlineEdit }">
+                {% block acris_cookie_list_columns_description_link %}
+                    <template v-if="!isInlineEdit">
+                        <router-link :title="$tc('acris-cookie.list.contextMenuEdit')"
+                                     :to="{ name: 'acris.cookie.detail', params: { id: item.id } }">
+                            {% block acris_cookie_list_columns_description_link %}
+                                {% if item.description %}
+                                    {{ item.description }}
+                                {% else %}
+                                    {{ placeholder(item, 'description') }}
+                                {% endif %}
+                            {% endblock %}
+                        </router-link>
+                    </template>
+                {% endblock %}
+
+                {% block acris_cookie_list_columns_description_editor %}
+                    <template v-else>
+                        <sw-field type="text"
+                                  :disabled="item.isDefault"
+                                  :entity-collection="item.description"
+                                  @update:entity-collection="onChange"
+                                  #inline-edit>
+                        </sw-field>
+                    </template>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_consent_list_grid_columns_cookie_group %}
+            <template #column-cookieGroup="{ item }">
+                {% block acris_cookie_list_columns_cookie_group_link %}
+                        <router-link v-if="item.cookieGroup"
+                                     :title="$tc('acris-cookie.list.contextMenuEdit')"
+                                     :to="{ name: 'acris.cookie.group.detail', params: { id: item.cookieGroup.id } }">
+                            {% block acris_cookie_list_columns_cookie_group_link %}
+                                {{ item.cookieGroup.title }}
+                            {% endblock %}
+                        </router-link>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_consent_list_grid_columns_provider %}
+            <template #column-provider="{ item, isInlineEdit }">
+                {% block acris_cookie_list_columns_providers_link %}
+                <template v-if="!isInlineEdit">
+                    <router-link :title="$tc('acris-cookie.list.contextMenuEdit')"
+                                 :to="{ name: 'acris.cookie.detail', params: { id: item.id } }">
+                        {% block acris_cookie_list_columns_providers_link %}
+                            {{ item.provider }}
+                        {% endblock %}
+                    </router-link>
+                </template>
+                {% endblock %}
+
+                {% block acris_cookie_list_columns_providers_editor %}
+                    <template v-else>
+                        <sw-field type="text"
+                                  :disabled="item.isDefault"
+                                  :entity-collection="item.provider"
+                                  @update:entity-collection="onChange"
+                                  #inline-edit>
+                        </sw-field>
+                    </template>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_consent_list_grid_columns_default %}
+            <template #column-isDefault="{ item, isInlineEdit }">
+                {% block acris_cookie_list_columns_default_label %}
+                <template v-if="!isInlineEdit">
+                    <mt-icon name="regular-checkmark-xs" size="16px" v-if="item.isDefault" class="is--active"></mt-icon>
+                    <mt-icon name="regular-times-s" size="16px" v-else class="is--inactive"></mt-icon>
+                </template>
+                {% endblock %}
+
+                {% block acris_cookie_list_columns_default_editor %}
+                    <template v-else>
+                        <sw-field type="checkbox"
+                                  :disabled="item.isDefault"
+                                  :entity-collection="item.isDefault"
+                                  @update:entity-collection="onChange"
+                                  #inline-edit>
+                        </sw-field>
+                    </template>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_consent_list_grid_columns_active %}
+            <template #column-active="{ item, isInlineEdit }">
+                <template v-if="!isInlineEdit">
+                    {% block acris_cookie_list_columns_cookie_active %}
+                    <mt-icon name="regular-checkmark-xs" size="16px" v-if="item.active" class="is--active"></mt-icon>
+                    <mt-icon name="regular-exclamation-triangle" size="16px" v-else-if="item.unknown" class="is--active"></mt-icon>
+                    <mt-icon name="regular-times-s" size="16px" v-else class="is--inactive"></mt-icon>
+                    {% endblock %}
+                </template>
+
+                {% block acris_cookie_list_columns_active_editor %}
+                    <template v-else>
+                        <sw-field type="checkbox"
+                                  :disabled="item.isDefault"
+                                  :entity-collection="item.active"
+                                  @update:entity-collection="onChange"
+                                  #inline-edit>
+                        </sw-field>
+                    </template>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_consent_list_grid_columns_created_at %}
+            <template #column-createdAt="{ item }">
+                <sw-time-ago :date="item.createdAt" />
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_consent_grid_columns_actions %}
+        <template #actions="{ item }">
+            {% block acris_cookie_consent_grid_columns_actions_edit %}
+            <sw-context-menu-item :routerLink="{ name: 'acris.cookie.detail', params: { id: item.id } }">
+                {{ $tc('acris-cookie.list.contextMenuEdit') }}
+            </sw-context-menu-item>
+            {% endblock %}
+
+            {% block acris_cookie_list_columns_actions_delete %}
+            <sw-context-menu-item variant="danger" v-if="!item.isDefault"
+                                  @click="onDelete(item.id)">
+                {{ $tc('acris-cookie.list.buttonDelete') }}
+            </sw-context-menu-item>
+            {% endblock %}
+        </template>
+        {% endblock %}
+
+        {% block acris_cookie_consent_grid_columns_actions_delete %}
+        <template #action-modals="{ item }">
+            {% block acris_cookie_list_delete_modal %}
+            <sw-modal v-if="showDeleteModal === item.id"
+                      @modal-close="onCloseDeleteModal"
+                      :title="$tc('acris-cookie.list.modalTitleDelete')"
+                      variant="small">
+                {% block acris_cookie_list_delete_modal_confirm_text %}
+                <p>
+                    {{ $tc('acris-cookie.list.textDeleteConfirm', 0, { cookieId: item.cookieId }) }}
+                </p>
+                {% endblock %}
+
+                {% block acris_cookie_list_delete_modal_footer %}
+                <template #modal-footer>
+                    {% block acris_cookie_list_delete_modal_actions_cancel %}
+                    <mt-button @click="onCloseDeleteModal"
+                               size="small" variant="secondary">
+                        {{ $tc('acris-cookie.list.buttonCancel') }}
+                    </mt-button>
+                    {% endblock %}
+
+                    {% block acris_cookie_list_delete_modal_actions_delete %}
+                    <mt-button @click="onConfirmDelete(item.id)"
+                               variant="primary"
+                               size="small">
+                        {{ $tc('acris-cookie.list.buttonDelete') }}
+                    </mt-button>
+                    {% endblock %}
+                </template>
+                {% endblock %}
+            </sw-modal>
+            {% endblock %}
+        </template>
+        {% endblock %}
+        </sw-entity-listing>
+        {% endblock %}
+    </template>
+    {% endblock %}
+
+    {% block acris_cookie_list_sidebar %}
+    <template #sidebar>
+        <sw-sidebar class="acris-cookie-list__sidebar">
+            {% block acris_cookie_list_sidebar_item %}
+            <sw-sidebar-item
+                icon="regular-undo"
+                :title="$tc('acris-cookie.list.titleSidebarItemRefresh')"
+                @click="onRefresh">
+            </sw-sidebar-item>
+            {% endblock %}
+        </sw-sidebar>
+    </template>
+    {% endblock %}
+</sw-page>
+{% endblock %}

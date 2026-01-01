@@ -1,0 +1,296 @@
+<form action="/myfav/inquiry/send"
+      id="myfav-inquiry-form"
+      method="post"
+      data-form-csrf-handler="true"
+      data-form-validation="true"
+      data-form-preserver="true"
+      enctype="multipart/form-data"
+>
+    <div class="form-row row">
+        {% block myfav_inquiry_send_fields_salutation %}
+            {% if not element.data %}
+                {% set data = page.salutations %}
+                {% set element = {
+                    data: data
+                } %}
+            {% endif %}
+
+            {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-select-salutation.html.twig'
+                with {
+                additionalClass: 'col-6 col-md-4',
+                required: true
+            }
+            %}
+        {% endblock %}
+
+        {% block myfav_inquiry_send_fields_first_name %}
+            <div class="col-6 col-md-4 form-group">
+                {% block myfav_inquiry_send_fields_first_name_label %}
+                    <label class="form-label"
+                           for="personalFirstName">
+                        {{ "account.personalFirstNameLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                    </label>
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_first_name_input %}
+                    <input type="text"
+                           class="form-control{% if formViolations.getViolations('/firstName') is not empty %} is-invalid{% endif %}"
+                           autocomplete="section-personal given-name"
+                           id="personalFirstName"
+                           placeholder="{{ "account.personalFirstNamePlaceholder"|trans|striptags }}"
+                           name="firstName"
+                           value="{{ data.get('firstName') }}"
+                           required="required">
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_first_name_input_error %}
+                    {% if formViolations.getViolations('/firstName') is not empty %}
+                        {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                            violationPath: '/firstName'
+                        } %}
+                    {% endif %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block myfav_inquiry_send_fields_last_name %}
+            <div class="col-6 col-md-4 form-group">
+                {% block myfav_inquiry_send_fields_last_name_label %}
+                    <label class="form-label"
+                           for="personalLastName">
+                        {{ "account.personalLastNameLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                    </label>
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_last_name_input %}
+                    <input type="text"
+                           class="form-control{% if formViolations.getViolations('/lastName') is not empty %} is-invalid{% endif %}"
+                           autocomplete="section-personal family-name"
+                           id="personalLastName"
+                           placeholder="{{ "account.personalLastNamePlaceholder"|trans|striptags }}"
+                           name="lastName"
+                           value="{{ data.get('lastName') }}"
+                           required="required">
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_last_name_input_error %}
+                    {% if formViolations.getViolations('/lastName') is not empty %}
+                        {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                            violationPath: '/lastName'
+                        } %}
+                    {% endif %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block myfav_inquiry_send_fields_mail %}
+            <div class="col-6 col-md-4 form-group">
+                {% block myfav_inquiry_send_fields_mail_label %}
+                    <label class="form-label"
+                           for="personalMail">
+                        {{ "account.personalMailLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                    </label>
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_mail_input %}
+                    <input type="email"
+                           class="form-control{% if formViolations.getViolations('/email') is not empty %} is-invalid{% endif %}"
+                           autocomplete="section-personal email"
+                           id="personalMail"
+                           placeholder="{{ "account.personalMailPlaceholder"|trans|striptags }}"
+                           name="email"
+                           value="{{ data.get('email') }}"
+                           required="required">
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_mail_input_error %}
+                    {% if formViolations.getViolations('/email') is not empty %}
+                        {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                            violationPath: '/email'
+                        } %}
+                    {% endif %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block myfav_inquiry_send_fields_company %}
+            <div class="col-6 col-md-4 form-group">
+                {% block myfav_inquiry_send_fields_company_label %}
+                    <label class="form-label"
+                           for="personalCompany">
+                        {{ "address.companyNameLabel"|trans|sw_sanitize }}
+                    </label>
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_company_input %}
+                    <input type="text"
+                           class="form-control{% if formViolations.getViolations('/company') is not empty %} is-invalid{% endif %}"
+                           autocomplete="section-personal company"
+                           id="personalCompany"
+                           placeholder="{{ "address.companyNamePlaceholder"|trans|striptags }}"
+                           name="company"
+                           value="{{ data.get('company') }}">
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_company_input_error %}
+                    {% if formViolations.getViolations('/company') is not empty %}
+                        {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                            violationPath: '/company'
+                        } %}
+                    {% endif %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block myfav_inquiry_send_fields_phone %}
+            <div class="col-6 col-md-4 form-group">
+                {% block myfav_inquiry_send_fields_phone_label %}
+                    <label class="form-label"
+                           for="personalPhone">
+                        {{ "myfavInquiry.confirm.phoneNameLabel"|trans|sw_sanitize }}
+                    </label>
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_phone_input %}
+                    <input type="tel"
+                           class="form-control{% if formViolations.getViolations('/phone') is not empty %} is-invalid{% endif %}"
+                           autocomplete="section-personal phone"
+                           id="personalPhone"
+                           placeholder="{{ "myfavInquiry.confirm.phoneNamePlaceholder"|trans|striptags }}"
+                           name="phone"
+                           value="{{ data.get('phone') }}">
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_phone_input_error %}
+                    {% if formViolations.getViolations('/phone') is not empty %}
+                        {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                            violationPath: '/phone'
+                        } %}
+                    {% endif %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block myfav_inquiry_send_fields_date %}
+            <div class="col-6 col-md-4 form-group">
+                {% block myfav_inquiry_send_fields_date_label %}
+                    <label class="form-label"
+                           for="date">
+                        {{ "myfavInquiry.confirm.dateNameLabel"|trans|sw_sanitize }}
+                    </label>
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_date_input %}
+                    <input type="date"
+                           class="form-control{% if formViolations.getViolations('/date') is not empty %} is-invalid{% endif %}"
+                           autocomplete="section-personal date"
+                           id="date"
+                           placeholder="{{ "myfavInquiry.confirm.dateNamePlaceholder"|trans|striptags }}"
+                           name="date"
+                           value="{{ data.get('date') }}">
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_date_input_error %}
+                    {% if formViolations.getViolations('/date') is not empty %}
+                        {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                            violationPath: '/date'
+                        } %}
+                    {% endif %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block myfav_inquiry_send_fields_comment %}
+            <div class="col-12 col-md-8 form-group">
+                {% block myfav_inquiry_send_fields_comment_label %}
+                    <label class="form-label"
+                           for="comment">
+                        {{ "myfavInquiry.confirm.commentNameLabel"|trans|sw_sanitize }}
+                    </label>
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_comment_input %}
+                    <textarea type="comment"
+                              class="form-control{% if formViolations.getViolations('/comment') is not empty %} is-invalid{% endif %}"
+                              autocomplete="section-personal comment"
+                              id="comment"
+                              placeholder="{{ "myfavInquiry.confirm.commentNamePlaceholder"|trans|striptags }}"
+                              name="comment"
+                              rows="8"
+                    >{{ data.get('comment') }}</textarea>
+                {% endblock %}
+
+                {% block myfav_inquiry_send_fields_comment_input_error %}
+                    {% if formViolations.getViolations('/comment') is not empty %}
+                        {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                            violationPath: '/comment'
+                        } %}
+                    {% endif %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+
+    <div class="form-row row">
+
+        {% set logoCount = config('MyfavInquiry.config.logoCount') %}
+        {% for i in 1..logoCount %}
+            {% block myfav_inquiry_send_fields_logo %}
+                <div class="col-12 col-sm-6 col-md-4 form-group">
+                    {% block myfav_inquiry_send_fields_logo_label %}
+                        <label class="form-label"
+                               for="logo-{{ i }}">
+                            {{ "myfavInquiry.confirm.logoNameLabel"|trans|sw_sanitize }}
+                        </label>
+                    {% endblock %}
+
+                    {% block myfav_inquiry_send_fields_logo_input %}
+                        <div class="custom-file">
+                            <input type="file"
+                                   class="custom-file-input{% if formViolations.getViolations('/logo') is not empty %} is-invalid{% endif %}"
+                                   autocomplete="section-personal logo"
+                                   id="logo-{{ i }}"
+                                   name="logo[]"
+                                   accept="image/*"
+                                   value="{{ data.get('logo') }}">
+                            <span class="custom-file-label">{{ "myfavInquiry.confirm.logoNamePlaceholder"|trans|sw_sanitize }}</span>
+                        </div>
+                    {% endblock %}
+
+                    {% block myfav_inquiry_send_fields_logo_input_error %}
+                        {% if formViolations.getViolations('/logo') is not empty %}
+                            {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                                violationPath: '/logo'
+                            } %}
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        {% endfor %}
+
+    </div>
+
+    <div class="row captcha-sec">
+        <div class="col-12 col-md-8 col-lg-9">
+            {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-info-required.html.twig' %}
+            {% sw_include '@Storefront/storefront/component/captcha/base.html.twig' with {preCheck:true, additionalClass : 'col-12 col-md-4'} %}
+        </div>
+        <div class="mt-1 col-12 col-md-4 col-lg-3 d-flex align-items-end justify-content-end">
+            <button type="submit" class="btn btn-primary">
+                {{ "myfavInquiry.confirm.submit"|trans|sw_sanitize }}
+                {% sw_icon 'paperplane' %}
+            </button>
+        </div>
+    </div>
+
+  <div class="row privacy-sec">
+    <div class="col-12 col-md-8 col-lg-9">
+      <div class="form-text privacy-notice custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="myCheck" name="test" required>
+        <label for="myCheck" class="custom-control-label">
+          Ich habe die <a data-toggle="modal" data-bs-toggle="modal" data-url="/widgets/cms/ce50a7bfbefa403c9d71cc838eda4798" href="/widgets/cms/ce50a7bfbefa403c9d71cc838eda4798" title="Datenschutzbestimmungen">Datenschutzbestimmungen</a> zur Kenntnis genommen und die <a data-toggle="modal" data-bs-toggle="modal" data-url="/widgets/cms/a465871b372d4b8fa168bb6c848b1f90" href="/widgets/cms/a465871b372d4b8fa168bb6c848b1f90" title="AGB">AGB</a> gelesen und bin mit ihnen einverstanden.
+        </label>
+      </div>
+    </div>
+  </div>
+</form>

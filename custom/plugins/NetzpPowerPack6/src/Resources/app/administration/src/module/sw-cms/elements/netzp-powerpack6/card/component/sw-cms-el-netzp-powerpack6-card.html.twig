@@ -1,0 +1,51 @@
+{% block sw_cms_element_netzp_powerpack6_card %}
+    <div class="sw-cms-el-netzp-powerpack6-card"
+         :style="getStyle">
+
+        <div class="card-inner" :class="getClass">
+            <div class="card-front" :style="getStyleFront">
+                <img v-if="element.config.image1.value"
+                     :src="image1Url"
+                     :class="getImageClassFront" :style="getImageStyleFront" alt="">
+
+                <div v-if="element.config.text1.source === 'mapped'"
+                     :class="getTextClass"
+                     v-html="$sanitize(demoValueText1)" />
+
+                <div v-else
+                     :class="getTextClass"
+                     v-html="element.config.text1.value" />
+
+                <div v-if="hasUrl && hasUrlText && !isPopup && !isTwoSided"
+                     :class="getLinkClass">
+                    <span class="sw-button sw-button--primary" v-html="element.config.urlText.value" />
+                </div>
+
+                <span v-if="hasIcon"
+                      class="card-icon" :style="getStyleIcon">
+                    <i class="fa" :class="element.config.icon.value"></i>
+                </span>
+            </div>
+
+            <div v-if="isTwoSided"
+                 class="card-back" :style="getStyleBack">
+                <img v-if="element.config.image2.value"
+                     :src="image2Url"
+                     :class="getImageClassBack" :style="getImageStyleBack" alt="">
+
+                <div v-if="element.config.text2.source === 'mapped'"
+                     class="card-text"
+                     v-html="$sanitize(demoValueText2)" />
+
+                <div v-else
+                     class="card-text"
+                     v-html="element.config.text2.value" />
+
+                <div v-if="hasUrl && hasUrlText"
+                     class="card-link">
+                    <span class="sw-button sw-button--primary" v-html="element.config.urlText.value" />
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

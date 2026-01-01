@@ -1,0 +1,46 @@
+{% block block_netzp_powerpack6_grid4 %}
+    {% set columns = 4 %}
+    {% set id = element.id %}
+
+    <div class="container-fluid">
+        <div class="row">
+
+        {% block block_netzp_powerpack6_grid4_column1 %}
+            {% set element = block.slots.getSlot('column1') %}
+            <div class="col-sm-12 col-md-6 col-lg-3 mb-3 mb-lg-0" data-cms-element-id="{{ id }}">
+                {% block block_netzp_powerpack6_grid4_column1_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block block_netzp_powerpack6_grid4_column2 %}
+            {% set element = block.slots.getSlot('column2') %}
+            <div class="col-sm-12 col-md-6 col-lg-3 mb-3 mb-lg-0" data-cms-element-id="{{ id }}">
+                {% block block_netzp_powerpack6_grid4_column2_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block block_netzp_powerpack6_grid4_column3 %}
+            {% set element = block.slots.getSlot('column3') %}
+            <div class="col-sm-12 col-md-6 col-lg-3 mb-3 mb-lg-0" data-cms-element-id="{{ id }}">
+                {% block block_netzp_powerpack6_grid4_column3_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block block_netzp_powerpack6_grid4_column4 %}
+            {% set element = block.slots.getSlot('column4') %}
+            <div class="col-sm-12 col-md-6 col-lg-3" data-cms-element-id="{{ id }}">
+                {% block block_netzp_powerpack6_grid4_column4_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

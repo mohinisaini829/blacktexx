@@ -1,0 +1,96 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/configurator.html.twig'%}
+
+{% if page.configuratorSettings %}
+    {% set configuratorSettings = page.configuratorSettings %}
+{% elseif page.product.configurator %}
+    {% set configuratorSettings = page.product.configurator %}
+{% else %}
+    {% set configuratorSettings = page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings'] %}
+{% endif %}
+
+{% block buy_widget_configurator_groups %}
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true %}
+        {% set lastGroup = false %}
+
+        {% for group in page.configuratorSettings %}
+            {% if loop.last %}
+                {% set lastGroup = true %}
+            {% endif %}
+
+            {% block buy_widget_configurator_group %}
+                {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+                        and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+                        and  page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true 
+                        and ((page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "selector" 
+                            and configuratorSettings.elements|length >= 1) or (page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout != "selector")) %}
+                    {# display all group options except the last group if layout lastGroupAsMatrixAndOtherGroupsAsSwOptions #}
+                    {% if page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "lastGroupAsMatrixAndOtherGroupsAsSwOptions" and configuratorSettings.elements|length >= 2 %}
+                        {% if not lastGroup %}
+                            {{ parent() }}
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    {{ parent() }}
+                {% endif %}
+            {% endblock %}
+        {% endfor %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+ {% endblock %}
+
+{% block buy_widget_configurator_option_radio %}
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true%}
+        <input type="radio"
+                name="{{ group.id }}"
+                value="{{ option.id }}"
+                class="bit-variant-matrix-is-combinable product-detail-configurator-option-input btn-check {{ isCombinableCls }}"
+                title="{{ optionIdentifier }}"
+                id="{{ optionIdentifier }}"
+                {% if isActive %}checked="checked"{% endif %}>
+
+        {% block buy_widget_configurator_option_radio_label %}
+            {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+                    and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+                    and page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true%}
+                <label class="bit-variant-matrix-is-combinable  product-detail-configurator-option-label {{ isCombinableCls }} is-display-{{ displayType }} btn btn-outline-secondary d-inline-flex justify-content-center align-items-center"
+                    {% if displayType == 'color' and option.colorHexCode %}
+                        style="background-color: {{ option.colorHexCode }}"
+                    {% endif %}
+                        title="{{ option.translated.name }}"
+                        for="{{ optionIdentifier }}">
+
+                    {% if displayType == 'media' and media %}
+                        {% block buy_widget_configurator_option_radio_label_media %}
+                            {% sw_thumbnails 'configurator-option-img-thumbnails' with {
+                                media: media,
+                                sizes: {
+                                    default: '52px'
+                                },
+                                attributes: {
+                                    class: 'product-detail-configurator-option-image',
+                                    alt: option.translated.name,
+                                    title: option.translated.name
+                                }
+                            } %}
+                        {% endblock %}
+                    {% elseif displayType == 'text' or
+                        (displayType == 'media' and not media) or
+                        (displayType == 'color' and not option.colorHexCode) %}
+                        {% block buy_widget_configurator_option_radio_label_text %}
+                            {{ option.translated.name }}
+                        {% endblock %}
+                    {% endif %}
+                </label>
+            {% else %}
+                {{ parent() }}
+            {% endif %}
+        {% endblock %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

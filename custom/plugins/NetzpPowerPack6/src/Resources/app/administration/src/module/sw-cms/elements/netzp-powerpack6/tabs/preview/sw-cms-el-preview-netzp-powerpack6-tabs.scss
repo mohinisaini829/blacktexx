@@ -1,0 +1,30 @@
+.sw-cms-el-preview-netzp-powerpack6-tabs {
+  position: relative;
+  width: 100%;
+  font-size: 80%;
+
+  .tabs {
+    overflow: hidden;
+
+    .tab {
+      float: left;
+      display: inline-block;
+      padding: .5rem 1rem .5rem 1rem;
+      border-bottom: 1px solid #ccc;
+      font-size: 110%;
+    }
+
+    .tab-active {
+      border-left: 1px solid #ccc;
+      border-top: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      border-bottom: none;
+      font-weight: bold;
+    }
+  }
+
+  .tab-container {
+    display: block;
+    margin-top: 1rem;
+  }
+}

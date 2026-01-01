@@ -1,0 +1,66 @@
+export default {
+    data: {
+        productDetailBlocks: [
+            {
+                type: 'blog-assignment',
+                elements: [
+                    {
+                        slot: 'content',
+                        type: 'blog-assignment',
+                        config: {},
+                    },
+                ],
+            },
+            {
+                type: 'cross-selling',
+                elements: [
+                    {
+                        slot: 'content',
+                        type: 'cross-selling',
+                        config: {},
+                    },
+                ],
+            },
+            {
+                type: 'product-description-reviews',
+                elements: [
+                    {
+                        slot: 'content',
+                        type: 'product-description-reviews',
+                        config: {},
+                    },
+                ],
+            },
+            {
+                type: 'gallery-buybox',
+                elements: [
+                    {
+                        slot: 'left',
+                        type: 'image-gallery',
+                        config: {},
+                    },
+                    {
+                        slot: 'right',
+                        type: 'buy-box',
+                        config: {},
+                    },
+                ],
+            },
+            {
+                type: 'product-heading',
+                elements: [
+                    {
+                        slot: 'left',
+                        type: 'product-name',
+                        config: {},
+                    },
+                    {
+                        slot: 'right',
+                        type: 'manufacturer-logo',
+                        config: {},
+                    },
+                ],
+            },
+        ],
+    },
+};

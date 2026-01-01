@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/viofinishingprices/administration/",
+  "entryPoints": {
+    "vio-finishing-prices": {
+      "css": [
+        "/bundles/viofinishingprices/administration/assets/vio-finishing-prices-9al2FRNY.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/viofinishingprices/administration/assets/vio-finishing-prices-DwITnp7s.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

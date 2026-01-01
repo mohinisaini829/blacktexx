@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Tuottaja:",
+            "ProductNumber": "Artikkelinumero: :"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Tuotenumero",
+            "DetailBuyActionAdd": "Lisää vaihtoehtoja ostoskoriin",
+            "UnitPrice": "Yksikköhinta",
+            "VariantOrderMatrixColAmount": "Määrä",
+            "VariantStock": "Varasto",
+            "quickOrder": "Nopea tilaus",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Arvioitu kokonaishinta"
+        }
+    }
+}

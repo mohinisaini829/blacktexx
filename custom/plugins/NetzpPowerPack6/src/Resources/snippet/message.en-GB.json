@@ -1,0 +1,14 @@
+{
+    "netzp": {
+        "powerpack": {
+            "days": "Days",
+            "hours": "Hours",
+            "minutes": "Minutes",
+            "seconds": "Seconds",
+            "googlemapsPolicyTitle": "Google Map",
+            "googlemapsPolicyText": "If you want to see the map on this page, personal data will be sent to Google and cookies will be set by the provider.\nThus it is possible that the provider stores your accesses and can analyze your behavior. The privacy policy of Google Maps can be found at: <a href=\"https://policies.google.com/privacy\" target=\"_blank\" title=\"https://policies.google.com/privacy\">https://policies.google.com/privacy</a>",
+            "googlemapsPolicyButton": "Load this map",
+            "googlemapsPolicyButtonAll": "Load all maps"
+        }
+    }
+}

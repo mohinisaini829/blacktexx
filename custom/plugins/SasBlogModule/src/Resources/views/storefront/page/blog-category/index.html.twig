@@ -1,0 +1,11 @@
+{% sw_extends '@Storefront/storefront/page/content/index.html.twig' %}
+
+{% block cms_breadcrumb %}
+    <div class="cms-breadcrumb container">
+        {% sw_include '@Storefront/storefront/layout/blog-breadcrumb.html.twig' with {
+            context: context,
+            themeIconConfig: themeIconConfig,
+            category: page.blogCategory ?? page.blogEntry.seoCategory
+        } only %}
+    </div>
+{% endblock %}

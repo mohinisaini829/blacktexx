@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Produsent:",
+            "ProductNumber": "Artikkelnummer:"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Produktnummer",
+            "DetailBuyActionAdd": "Legg varianter i handlekurven",
+            "UnitPrice": "Enhetspris",
+            "VariantOrderMatrixColAmount": "Antall",
+            "VariantStock": "Lager",
+            "quickOrder": "Rask bestilling",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Anslått totalpris"
+        }
+    }
+}

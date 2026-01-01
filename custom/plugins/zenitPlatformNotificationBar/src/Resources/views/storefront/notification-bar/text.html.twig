@@ -1,0 +1,47 @@
+{% block zenit_notification_bar_text %}
+    {% set text = "zenit.notificationBar.text"|trans({"%placeholder%": zenNotificationBar.text})|replace({'\n': ';'})|trim|trim(';') %}
+    {% set btnLink = "zenit.notificationBar.btnLink"|trans({"%placeholder%": zenNotificationBar.btnLink}) %}
+    {% set btnLinkTitle = "zenit.notificationBar.btnLinkTitle"|trans({"%placeholder%": zenNotificationBar.btnLinkTitle}) %}
+    {% set entries = text|split(';') %}
+    {% set ariaLabel = text|striptags %}
+    {% set isSlider = entries|length > 1 %}
+    {% set sliderOptions = {
+        "interval": zenNotificationBar.textSliderInterval
+    } %}
+
+    {% block zenit_notification_bar_textSlide %}
+        <div class="notification-text {% if isSlider %} notification-slider{% endif %}"
+            {% if isSlider %}
+                data-zenit-notification-bar-slider="true"
+                data-zenit-notification-bar-slider-options="{{ sliderOptions|json_encode }}"
+                aria-label="{{ ariaLabel }}"
+            {% endif %}
+        >
+
+            {% if not zenNotificationBar.btnLinkShow and btnLink %}
+                <a href="{{ btnLink }}"
+                   class="text-items{% if isSlider %} text-slider-items{% endif %}"
+                   title="{{ btnLinkTitle }}"
+                   aria-label="{{ btnLinkText }}"
+                   {% if zenNotificationBar.btnLinkTarget is same as ('_blank') %}target="_blank" rel="noopener"{% endif %}
+                >
+                    {% for entry in entries %}
+                        <span class="text-item{% if isSlider %} text-slider-item{% endif %}"
+                              {% if isSlider %}aria-hidden="true"{% endif %}>
+                            <span class="item-entry">{{ entry|trim|raw }}</span>
+                        </span>
+                    {% endfor %}
+                </a>
+            {% else %}
+                <div class="text-items{% if isSlider %} text-slider-items{% endif %}">
+                    {% for entry in entries %}
+                        <span class="text-item{% if isSlider %} text-slider-item{% endif %}"
+                              {% if isSlider %}aria-hidden="true"{% endif %}>
+                            <span class="item-entry">{{ entry|trim|raw }}</span>
+                        </span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endblock %}
+{% endblock %}

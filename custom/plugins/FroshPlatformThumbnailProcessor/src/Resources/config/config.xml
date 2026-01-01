@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Configuration</title>
+
+        <input-field type="bool">
+            <name>Active</name>
+            <label>Active</label>
+            <defaultValue>false</defaultValue>
+            <helpText>Should the pattern be used in shop for images? Keep it disabled unless you tested with the button below.</helpText>
+        </input-field>
+
+        <input-field>
+            <name>ThumbnailPattern</name>
+            <label>Thumbnail-Pattern</label>
+            <placeholder>{mediaUrl}/{mediaPath}?width={width}</placeholder>
+            <defaultValue>{mediaUrl}/{mediaPath}?width={width}</defaultValue>
+            <helpText><![CDATA[available variables:<br>
+                {mediaUrl}: https://cdn.test.de/<br>
+                {mediaPath}: media/image/5b/6d/16/tea.png<br>
+                {width}: 800<br>
+                {mediaUpdatedAt}: 1716882050 (unix timestamp) or 0
+            ]]></helpText>
+        </input-field>
+
+        <input-field type="int">
+            <name>ProcessOriginalImageMaxWidth</name>
+            <label>Maximum width of full size image</label>
+            <defaultValue>3000</defaultValue>
+            <helpText>
+                Additionally to the config for thumbnail-sizes, the image uploaded to media is always used as highest thumbnail size.
+                Therefore, it should also be processed. You can set a maximum width for this image. Default: 3000
+            </helpText>
+        </input-field>
+
+        <input-field>
+            <name>ExtensionsAllowList</name>
+            <label>Allow list for file extensions</label>
+            <defaultValue>png, jpg, jpeg, webp, gif</defaultValue>
+            <helpText>
+                You can set a list of file extension seperated by comma which will be processed. E.g. some services will convert svg files into jpg or webp which results in much bigger files. That is why we do not set svg as default here. Default: png, jpg, jpeg, webp, gif
+            </helpText>
+        </input-field>
+
+        <component name="frosh-thumbnail-processor-info-texts">
+            <name>froshthumbnailprocessorinfotexts</name>
+        </component>
+
+        <component name="thumbnailprocessor-test">
+            <name>test</name>
+            <btnLabel>Save and Test</btnLabel>
+        </component>
+    </card>
+</config>

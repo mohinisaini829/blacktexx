@@ -1,0 +1,54 @@
+{% sw_extends '@Storefront/storefront/page/search/index.html.twig' %}
+
+{% block page_search %}
+    {% if page.listing.moorlSearchResults and page.listing.moorlSearchResults|length > 0 %}
+        {# Has advanced search results - Load tabs #}
+        {% set activeTab = "product" %}
+        {% set count = page.listing.total %}
+        {% if app.request.query.get('tab') %}
+            {% set activeTab = app.request.query.get('tab') %}
+        {% endif %}
+        {% for moorlSearchResult in page.listing.moorlSearchResults %}
+            {% if moorlSearchResult.criteria.title == activeTab %}
+                {% set count = moorlSearchResult.total %}
+            {% endif %}
+        {% endfor %}
+
+        <div class="cms-page search-page moorl-search-page">
+            <h1 class="search-headline">
+                {{ "moorl-foundation.search.headline"|trans({
+                    '%count%': count,
+                    '%searchTerm%': page.searchTerm,
+                }) }}
+            </h1>
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link{% if activeTab == "product" %} active{% endif %}"
+                       href="{{ path('frontend.search.page') }}?search={{ page.searchTerm }}">
+                        {{ "moorl-foundation.search.product"|trans }}
+                        <span class="badge bg-primary">{{ page.listing.total }}</span>
+                    </a>
+                </li>
+
+                {% for moorlSearchResult in page.listing.moorlSearchResults %}
+                    <li class="nav-item">
+                        <a href="{{ path('frontend.search.page') }}?search={{ page.searchTerm }}&tab={{ moorlSearchResult.criteria.title }}"
+                           class="nav-link{% if activeTab == moorlSearchResult.criteria.title %} active{% endif %}">
+                            {{ moorlSearchResult.snippet|trans }}
+                            <span class="badge bg-primary">{{ moorlSearchResult.total }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="tab-content">
+                {# Search page #}
+                {% sw_include '@Storefront/storefront/page/search/search-pagelet.html.twig' %}
+            </div>
+        </div>
+    {% else %}
+        {# Do nothing #}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,12 @@
+.sw-cms-preview-netzp-powerpack6-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
+  padding: 15px;
+
+  .box-placeholder {
+    background-color: #eee;
+    width: 100%;
+    height: 2rem;
+  }
+}

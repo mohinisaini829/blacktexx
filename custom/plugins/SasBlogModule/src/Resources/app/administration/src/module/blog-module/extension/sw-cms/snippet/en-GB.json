@@ -1,0 +1,17 @@
+{
+    "sw-cms": {
+        "sorting": {
+            "labelSortByBlogPages": "Blog pages"
+        },
+        "component": {
+            "sw-cms-sidebar": {
+                "blog": "Blog"
+            }
+        },
+        "detail": {
+            "label": {
+                "pageTypeBlog": "Blog page"
+            }
+        }
+    }
+}

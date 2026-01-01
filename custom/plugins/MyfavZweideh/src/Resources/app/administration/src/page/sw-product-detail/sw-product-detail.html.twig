@@ -1,0 +1,7 @@
+{% block sw_product_detail_content_tabs_reviews %}
+    {% parent %}
+
+    <sw-tabs-item :route="{ name: 'sw.product.detail.zweideh.designer', params: { id: $route.params.id } }" title="Designer">
+        Designer
+    </sw-tabs-item>
+{% endblock %}

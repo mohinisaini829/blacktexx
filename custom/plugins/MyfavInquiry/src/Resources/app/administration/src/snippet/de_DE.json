@@ -1,0 +1,40 @@
+{
+    "global": {
+        "businessEvents": {
+            "inquiry_send": "Anfrage eingegangen"
+        }
+    },
+    "sw-cms": {
+        "elements": {
+            "productBox": {
+                "config": {
+                    "label": {
+                        "myfavSpecialOffer": "Sonderangebote"
+                    }
+                }
+            },
+            "myfav-special-offers": {
+                "label": "Sonderangebote"
+            },
+            "form": {
+              "element": {
+                "label": {
+                  "company": "Firma",
+                  "deliveryDate": "Liefertermin"
+                },
+                "placeholder": {
+                  "company": "Firma",
+                  "deliveryDate": "Liefertermin"
+                }
+              }
+            }
+        }
+    },
+    "myfav-inquiry": {
+        "titleSendMail": "Versende E-Mail",
+        "labelSendMail": "E-Mail",
+        "buttonSaveAction": "Speichern",
+        "buttonAddAction": "Hinzufügen",
+        "descriptionSendMail": "E-Mail versenden"
+    }
+}

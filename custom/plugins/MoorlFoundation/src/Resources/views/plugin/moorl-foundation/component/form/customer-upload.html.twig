@@ -1,0 +1,36 @@
+{% set customerUploadId = "customerUpload#{random()}" %}
+
+{% set customerUploadOptions = {
+    url: path('moorl.customer-upload.send'),
+    params: {
+        entityId: entityId,
+        initiator: initiator,
+        redirectParameters: redirectParameters,
+        redirectTo: redirectTo,
+    },
+    dictDefaultMessage: 'moorl-foundation.customerUpload.dictDefaultMessage'|trans
+} %}
+
+{% if formLabel %}
+    <label class="form-label" for="{{ customerUploadId }}">
+        {{ formLabel }}
+    </label>
+{% endif %}
+
+<div class="moorl-customer-upload"
+     data-moorl-customer-upload="true"
+     data-moorl-customer-upload-options='{{ customerUploadOptions|json_encode }}'>
+    <div class="dropzone" id="{{ customerUploadId }}">
+        <div class="moorl-dropzone-uploaded-files-container">
+            {% if media or mediaId %}
+                <div class="moorl-customer-upload-image row">
+                    {% sw_include '@MoorlFoundation/plugin/moorl-foundation/component/form/customer-upload-image.html.twig' %}
+                </div>
+            {% else %}
+                <div class="moorl-customer-upload-files row g-3">
+                    {% sw_include '@MoorlFoundation/plugin/moorl-foundation/component/form/customer-upload-files.html.twig' %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

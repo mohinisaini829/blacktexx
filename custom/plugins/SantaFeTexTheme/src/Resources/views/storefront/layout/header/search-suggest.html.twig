@@ -1,0 +1,26 @@
+{% sw_extends '@Storefront/storefront/layout/header/search-suggest.html.twig' %}
+
+{% block layout_search_suggest_result_name %}
+    {{ parent() }}
+    <div class="col-auto">
+        {% if product.manufacturer.mediaId %}
+            {% sw_thumbnails 'product-manufacturer-logo' with {
+                media: product.manufacturer.media,
+                sizes: {
+                    'default': '40px'
+                },
+                attributes: {
+                    'class': 'product-manufacturer-logo',
+                    'alt': product.manufacturer.translated.name,
+                    'title': product.manufacturer.translated.name
+                }
+            } %}
+        {% else %}
+            {% block component_product_box_manufacturer_logo_text %}
+                <span class="product-manufacturer-logo">
+                    {{ product.manufacturer.translated.name }}
+                </span>
+            {% endblock %}
+        {% endif %}
+    </div>
+{% endblock %}

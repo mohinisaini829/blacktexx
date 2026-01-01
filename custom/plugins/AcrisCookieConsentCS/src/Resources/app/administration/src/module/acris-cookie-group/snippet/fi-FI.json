@@ -1,0 +1,37 @@
+{
+    "acris-cookie-group": {
+        "general": {
+            "mainMenuItemGeneral": "Keksit",
+            "placeholderSearchBar": "Etsi keksejä",
+            "description": "Näytä kaupasta löydetyt keksit",
+            "labelName": "Keksiryhmä"
+        },
+        "list": {
+            "textHeadline": "Keksiryhmät",
+            "buttonAdd": "Lisää",
+            "contextMenuEdit": "Muokkaa",
+            "contextMenuDelete": "Poista",
+            "columnTitle": "Otsikko",
+            "columnDescription": "Kuvaus",
+            "textDeleteConfirm": "Haluatko poistaa keksiryhmän",
+            "modalTitleDelete": "Poista keksiryhmä",
+            "buttonCancel": "Peruuta",
+            "buttonDelete": "Poista",
+            "contentEmpty": "Keksiryhmiä ei ole"
+        },
+        "detail": {
+            "textHeadline": "Keksipoliittisten ryhmien asetukset",
+            "buttonCancel": "Peruuta",
+            "buttonSave": "Tallenna",
+            "fieldTitleLabel": "Otsikko",
+            "fieldTitlePlaceholder": "Lisää keksiryhmän otsikko",
+            "fieldDescriptionLabel": "Kuvaus",
+            "fieldDescriptionPlaceholder": "Lisää kuvaus",
+            "cardTitle": "Asiakastiedot",
+            "notificationSaveErrorMessage": "Virhe tallennettaessa keksiryhmää.",
+            "notificationSaveSuccessMessage": "Keksiryhmä tallennettiin onnistuneesti.",
+            "notificationSaveSuccessMessageTitle": "Onnistui",
+            "notificationSaveErrorMessageTitle": "Virhe"
+        }
+    }
+}

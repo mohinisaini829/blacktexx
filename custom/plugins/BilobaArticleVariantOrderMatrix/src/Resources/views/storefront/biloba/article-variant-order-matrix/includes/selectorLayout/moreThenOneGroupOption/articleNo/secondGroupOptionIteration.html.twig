@@ -1,0 +1,26 @@
+{% for secondGroupOption in secondGroup.options %}
+    {% set groupOptionId = null %}
+    
+    {% for optKey, value in variantMatrixArrayKeysAndValues %}
+        {% set currentKey = firstGroupOption.id ~ '_' ~ secondGroupOption.id %}
+
+        {% if currentKey == optKey %}
+            {# variant key #}
+            {% set key =  value %}
+            {# option key #}
+            {% set groupOptionId = currentKey %}
+        {% endif %}
+    {% endfor %}
+
+    {% if groupOptionId != null %}
+        {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+        
+        
+        <td>
+        {# include calculatedPrice #}
+            {{ childProduct.productNumber }}
+        </td>
+    {% else %}
+        {# <td style="width:35%">&nbsp;</td> #}
+    {% endif %}
+{% endfor %}

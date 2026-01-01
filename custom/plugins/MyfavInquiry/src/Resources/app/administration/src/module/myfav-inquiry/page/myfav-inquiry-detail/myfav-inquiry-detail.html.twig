@@ -1,0 +1,169 @@
+{% block myfav_inquiry_detail %}
+
+<sw-page class="myfav-inquiry-detail">
+    <template #smart-bar-actions>
+        <sw-button :routerLink="{ name: 'myfav.inquiry.list' }">
+            {{ $tc('global.default.cancel') }}
+        </sw-button>
+
+        <sw-button @click="createOfferDocument">
+            {{ $tc('myfav-inquiry.create.offerDocument') }}
+        </sw-button>
+
+        <sw-button-process
+            :isLoading="isLoading"
+            :processSuccess="processSuccess"
+            variant="primary"
+            @process-finish="saveFinish"
+            @click="onClickSave">
+            {{ $tc('global.default.save') }}
+        </sw-button-process>
+    </template>
+
+    <template #content>
+        <sw-card-view>
+            <sw-card v-if="inquiry" :isLoading="isLoading">
+                <sw-time-ago :date="inquiry.createdAt"></sw-time-ago>
+                <br/>
+                <br/>
+
+                <sw-entity-single-select
+                    entity="customer"
+                    label="Kunden-Account (nur automatisch zugeordnet, wenn Kunde bei Erstellen der Anfrage eingeloggt war)"
+                    labelProperty="email"
+                    valueProperty="id"
+                    show-clearable-button
+                    @change="updateAssignedCustomer"
+                    :value="customerId"
+                    >
+                </sw-entity-single-select>
+
+                <sw-text-field :label="$tc('myfav-inquiry.detail.companyLabel')" v-model="inquiry.company" type="text"></sw-text-field>
+                <sw-text-field :label="$tc('myfav-inquiry.detail.firstNameLabel')" v-model="inquiry.firstName" type="text"></sw-text-field>
+                <sw-text-field :label="$tc('myfav-inquiry.detail.lastNameLabel')" v-model="inquiry.lastName" type="text"></sw-text-field>
+
+                <sw-email-field :label="$tc('myfav-inquiry.detail.emailLabel')" v-model="inquiry.email"></sw-email-field>
+                <sw-text-field :label="$tc('myfav-inquiry.detail.phoneNumberLabel')" v-model="inquiry.phoneNumber" type="phone"></sw-text-field>
+
+                <sw-datepicker
+                    v-model="inquiry.deliveryDate"
+                    date-type="date"
+                    :label="$tc('myfav-inquiry.detail.deliveryDateLabel')"
+                ></sw-datepicker>
+
+                <sw-textarea-field :label="$t('myfav-inquiry.detail.commentLabel')" v-model="inquiry.comment"></sw-textarea-field>
+            </sw-card>
+
+            <sw-card v-if="inquiry && inquiry.lineItems.length > 0">
+                <template #title>
+                    <h3>{{ $tc('myfav-inquiry.detail.lineItemsCardTitle') }} ({{ inquiry.lineItems.length }})</h3>
+                </template>
+
+                <sw-data-grid
+                    :compact-mode="false"
+                    :dataSource="inquiry.lineItems"
+                    :columns="lineItemsColums"
+                    :isLoading="isLoading"
+                    :showSelection="false"
+                >
+                    <template #column-product="{ item }">
+                        <div>
+                            <div v-if="item.product">
+                                <router-link :to="{ name: 'sw.product.detail', params: { id: item.product.id } }">
+                                    {{ item.product.translated.name || item.product.name || variantNames[item.product.id] }}
+                                </router-link>
+                                <ul v-if="item.product.variation.length > 0">
+                                    <li v-for="variation in item.product.variation">
+                                        <b>{{ variation.group }}:</b> {{ variation.option }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div v-else>
+                                <div class="myfav-inquiry-extended-item-name" data-attr-item-id="{{ item.id }}"><span style="text-decoration: underline;">Gestalteter Artikel:</span></div>
+
+                                <!-- Start: Erweiterte Artikeldaten für desigenten Artikel laden -->
+                                <template v-if="loadingAdditionalData">
+                                    <spinner></spinner>
+                                </template>
+                                <template v-else>
+                                    <div>
+                                        <div class="myfav-inquiry-extended-item-link" data-attr-item-id="{{ item.id }}" id="item-{{ item.id }}" v-html="getDesignerLink(item.id)">
+                                        </div>
+                                        <router-link :to="{ name: 'sw.product.detail', params: { id: getExtendedProductsId(item.id) }}">
+                                             {{ getExtendedProductsNumber(item.id, this) }}
+                                        </router-link>
+                                    </div>
+                                    <!-- <ul><li><b>Größe: </b>{{ getExtendedProductsSizeName(item.id) }} </li>
+                                        <li><b>Farbe: </b>{{ getExtendedProductsColor(item.id) }} </li></ul> -->
+                                </template>
+                                <!-- Ende: Erweiterte Artikeldaten für desigenten Artikel laden -->
+                            </div>
+                        </div>
+                    </template>
+                     <template #column-brand="{ item }">
+                        {{ getExtendedProductsBrand(item.id) }}
+                    </template>
+                    <template #column-color="{ item }">
+                        {{ getExtendedProductsColor(item.id) }}
+                    </template>
+                    <template #column-size="{ item }">
+                        {{ getExtendedProductsSizeName(item.id) }}
+                    </template>
+                    <template #column-quantity="{ item }">
+                         <sw-number-field numberType="int"
+                                         :min="1"
+                                         :allowEmpty="false"
+                                         :placeholder="$tc('myfav-inquiry.detail.itemQuantityColumn')"
+                                         v-model="item.quantity"></sw-number-field> 
+                    </template>
+                    <template #column-price="{ item }">
+                        <sw-number-field numberType="float"
+                                         :min="0"
+                                         :digits="2"
+                                         :allowEmpty="false"
+                                         :placeholder="$tc('myfav-inquiry.detail.itemPriceColumn')"
+                                         v-model="item.price"></sw-number-field>
+                    </template>
+                    <template #column-image="{ item }">
+                        <div
+                          class="product-image" :id="'img-container-' + item.id"
+                          v-if="getExtendedModifiedProductImage(item.id)"
+                        >
+                        <img :src="getExtendedModifiedProductImage(item.id)" alt="Modified Product Image" style="height: 100px; width: 100px;" @click="downloadImage(getExtendedModifiedProductImage(item.id), item.id)" />
+
+                        </div>
+
+                        <!-- <div v-else> -->
+                            <!-- Fallback image if no media is linked -->
+                            <!-- <img src="{{ asset(/public/noimg.jpeg) }}" alt="No Image" />
+                        </div> -->
+                    </template>
+                    <template #actions="{ item }">
+                        <sw-context-menu-item
+                            :disabled="!acl.can('myfav_inquiry.deleter')"
+                            variant="danger"
+                            @click="deleteLineItem(item)">
+                            {{ $tc('myfav-inquiry.detail.deleteLineItem') }}
+                        </sw-context-menu-item>
+                    </template>
+
+
+
+                </sw-data-grid>
+            </sw-card>
+
+            <sw-card v-if="inquiry && inquiry.medias.length > 0">
+                <template #title>
+                    <h3>{{ $tc('myfav-inquiry.detail.mediaCardTitle') }} ({{ inquiry.medias.length }})</h3>
+                </template>
+                <div v-for="media in inquiry.medias">
+                    <myfav-inquiry-detail-media :mediaId="media.mediaId"/>
+                </div>
+            </sw-card>
+
+            <myfav-inquiry-detail-offer v-if="inquiry" :inquiryId="inquiry.id" :reload="reloadOffers"/>
+        </sw-card-view>
+    </template>
+
+</sw-page>
+{% endblock %}

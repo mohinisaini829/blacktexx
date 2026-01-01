@@ -1,0 +1,14 @@
+{% block sw_cms_element_netzp_powerpack6_counter %}
+    <div class="sw-cms-el-netzp-powerpack6-counter">
+        <span v-if="element.config.icon.value" class="icon" :style="getIconStyle">
+            <i class="fa" :class="element.config.icon.value"></i>
+        </span>
+
+        <h3 :style="getTitleStyle">
+            {{ element.config.title.value }}
+        </h3>
+
+        <div class="counter" :style="getCounterStyle"
+             v-html="getCounterTemplate()" />
+    </div>
+{% endblock %}

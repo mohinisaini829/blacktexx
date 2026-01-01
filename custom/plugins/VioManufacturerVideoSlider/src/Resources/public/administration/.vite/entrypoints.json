@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/viomanufacturervideoslider/administration/",
+  "entryPoints": {
+    "vio-manufacturer-video-slider": {
+      "css": [
+        "/bundles/viomanufacturervideoslider/administration/assets/vio-manufacturer-video-slider-DXsfBg4v.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/viomanufacturervideoslider/administration/assets/vio-manufacturer-video-slider--gohlyPG.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

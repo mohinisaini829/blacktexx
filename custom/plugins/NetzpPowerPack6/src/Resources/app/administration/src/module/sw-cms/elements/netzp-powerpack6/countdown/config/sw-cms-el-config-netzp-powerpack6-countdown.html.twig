@@ -1,0 +1,95 @@
+{% block sw_cms_element_netzp_powerpack6_countdown_config %}
+    <div class="sw-cms-el-config-netzp-powerpack6">
+        <sw-container columns="2fr 1fr 1fr" gap="20px">
+            <sw-datepicker dateType="datetime-local" :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.enddate')"
+                           v-model:value="element.config.enddate.value">
+            </sw-datepicker>
+
+            <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.textSize')"
+                             numberType="float" :min="0.1" :max="3" :step="0.01" :digits="2"
+                             v-model:value="element.config.textSize.value">
+            </sw-number-field>
+
+            <sw-select-field :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.textAlign')"
+                             v-model:value="element.config.textAlign.value">
+                <option value="left">
+                    {{ $tc('sw-cms.netzp-powerpack6.elements.countdown.config.left') }}
+                </option>
+                <option value="center">
+                    {{ $tc('sw-cms.netzp-powerpack6.elements.countdown.config.center') }}
+                </option>
+                <option value="right">
+                    {{ $tc('sw-cms.netzp-powerpack6.elements.countdown.config.right') }}
+                </option>
+            </sw-select-field>
+        </sw-container>
+
+        <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.title')"
+                       v-model:value="element.config.title.value">
+        </sw-text-field>
+
+        <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.countdown')"
+                       v-model:value="element.config.countdown.value">
+        </sw-text-field>
+
+        <sw-container columns="1fr 1fr" gap="40px">
+            <sw-switch-field bordered :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.elapsedHide')"
+                             v-model:value="element.config.elapsedHide.value">
+            </sw-switch-field>
+
+            <sw-text-field v-if="! element.config.elapsedHide.value"
+                           :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.elapsed')"
+                           v-model:value="element.config.elapsed.value">
+            </sw-text-field>
+        </sw-container>
+
+        <sw-container columns="1fr 1fr 2fr" gap="20px">
+            <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.buttontext')"
+                           v-model:value="element.config.buttonText.value">
+            </sw-text-field>
+
+            <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.buttonlink')"
+                           v-model:value="element.config.buttonLink.value">
+            </sw-text-field>
+
+            <sw-switch-field bordered :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.buttonTargetBlank')"
+                             v-model:value="element.config.buttonTargetBlank.value">
+            </sw-switch-field>
+        </sw-container>
+
+        <sw-container columns="1fr 1fr" gap="20px">
+            <sw-select-field :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.layout.title')"
+                             v-model:value="element.config.layout.value">
+                <option value="text">
+                    {{ $tc('sw-cms.netzp-powerpack6.elements.countdown.config.layout.text') }}
+                </option>
+                <option value="boxes">
+                    {{ $tc('sw-cms.netzp-powerpack6.elements.countdown.config.layout.boxes') }}
+                </option>
+            </sw-select-field>
+
+            <sw-colorpicker v-if="element.config.layout.value == 'boxes'"
+                            :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.boxColor')"
+                            v-model:value="element.config.boxColor.value" colorOutput="hex" :zIndex="1001" :alpha="false">
+            </sw-colorpicker>
+        </sw-container>
+
+        <sw-container columns="1fr 1fr 1fr 1fr" gap="20px">
+            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.backgroundColor')"
+                            v-model:value="element.config.backgroundColor.value" colorOutput="hex" :zIndex="1001" :alpha="true">
+            </sw-colorpicker>
+
+            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.textColor')"
+                            v-model:value="element.config.textColor.value" colorOutput="hex" :zIndex="1001" :alpha="false">
+            </sw-colorpicker>
+
+            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.buttonColor')"
+                            v-model:value="element.config.buttonColor.value" colorOutput="hex" :zIndex="1001" :alpha="false">
+            </sw-colorpicker>
+
+            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.countdown.config.buttonTextColor')"
+                            v-model:value="element.config.buttonTextColor.value" colorOutput="hex" :zIndex="1001" :alpha="false">
+            </sw-colorpicker>
+        </sw-container>
+    </div>
+{% endblock %}

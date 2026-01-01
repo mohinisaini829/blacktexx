@@ -1,0 +1,15 @@
+{
+    "zenit": {
+        "notificationBar": {
+            "text": "%placeholder%",
+            "infoText": "%placeholder%",
+            "btnLink": "%placeholder%",
+            "btnLinkTitle": "%placeholder%",
+            "btnLinkText": "%placeholder%",
+            "openclose": "Banner öffnen / schließen",
+            "close": "Banner schließen",
+            "cookieName": "Nachrichten Banner",
+            "cookieDescription": "Speichert den offenen oder geschlossenen Zustand des Nachrichten Banners."
+        }
+    }
+}

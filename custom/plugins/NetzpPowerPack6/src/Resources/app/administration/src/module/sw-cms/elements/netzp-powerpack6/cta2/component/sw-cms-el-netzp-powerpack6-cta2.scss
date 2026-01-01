@@ -1,0 +1,67 @@
+.sw-cms-el-netzp-powerpack6-cta2 {
+    position: relative;
+    width: 100%;
+
+    .container {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+
+        .element {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sw-button {
+            &.auto {
+                color: #fff;
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+
+            &.secondary {
+                color: #fff;
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+
+            &.success {
+                color: #fff;
+                background-color: #28a745;
+                border-color: #28a745;
+            }
+
+            &.danger {
+                color: #fff;
+                background-color: #dc3545;
+                border-color: #dc3545;
+            }
+
+            &.warning {
+                color: #212529;
+                background-color: #ffc107;
+                border-color: #ffc107;
+            }
+
+            &.info {
+                color: #fff;
+                background-color: #17a2b8;
+                border-color: #17a2b8;
+            }
+
+            &.light {
+                color: #212529;
+                background-color: #f8f9fa;
+                border-color: #f8f9fa;
+            }
+
+            &.dark {
+                color: #fff;
+                background-color: #343a40;
+                border-color: #343a40;
+            }
+        }
+    }
+}

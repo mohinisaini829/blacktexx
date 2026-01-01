@@ -1,0 +1,45 @@
+{% block acris_cookie_consent_permission_heading %}
+
+    {% if page.extensions.acrisCookieConsent.footerPages.footerPageOne or page.extensions.acrisCookieConsent.footerPages.footerPageTwo or page.extensions.acrisCookieConsent.footerPages.footerPageThree %}
+        <div class="cookie-consent-permission-footer{% if additionalClasses %} {{ additionalClasses }}{% endif %}">
+            {% if page.extensions.acrisCookieConsent.footerPages.footerPageOne %}
+                {% set cmsPageUrl = path('frontend.cms.page', { id: page.extensions.acrisCookieConsent.footerPages.footerPageOne.id }) %}
+                <a class="cookie-consent-permission-footer-cms-page-link ms-1 me-1"
+                   data-ajax-modal="true"
+                   data-modal-class="cookie-consent-permission-footer-modal"
+                   data-url="{{ cmsPageUrl }}"
+                   href="{{ cmsPageUrl }}"
+                   title="{{ page.extensions.acrisCookieConsent.footerPages.footerPageOne.translated.name }}">
+                    {{ "acrisCookieConsent.footerCmsPageLinkPrefixFirst"|trans }}
+                    {{ page.extensions.acrisCookieConsent.footerPages.footerPageOne.translated.name }}
+                </a>
+            {% endif %}
+
+            {% if page.extensions.acrisCookieConsent.footerPages.footerPageTwo %}
+                {% set cmsPageUrl = path('frontend.cms.page', { id: page.extensions.acrisCookieConsent.footerPages.footerPageTwo.id }) %}
+                <a class="cookie-consent-permission-footer-cms-page-link ms-1 me-1"
+                   data-ajax-modal="true"
+                   data-modal-class="cookie-consent-permission-footer-modal"
+                   data-url="{{ cmsPageUrl }}"
+                   href="{{ cmsPageUrl }}"
+                   title="{{ page.extensions.acrisCookieConsent.footerPages.footerPageTwo.translated.name }}">
+                    {{ "acrisCookieConsent.footerCmsPageLinkPrefixSecond"|trans }}
+                    {{ page.extensions.acrisCookieConsent.footerPages.footerPageTwo.translated.name }}
+                </a>
+            {% endif %}
+
+            {% if page.extensions.acrisCookieConsent.footerPages.footerPageThree %}
+                {% set cmsPageUrl = path('frontend.cms.page', { id: page.extensions.acrisCookieConsent.footerPages.footerPageThree.id }) %}
+                <a class="cookie-consent-permission-footer-cms-page-link ms-1 me-1"
+                   data-ajax-modal="true"
+                   data-modal-class="cookie-consent-permission-footer-modal"
+                   data-url="{{ cmsPageUrl }}"
+                   href="{{ cmsPageUrl }}"
+                   title="{{ page.extensions.acrisCookieConsent.footerPages.footerPageThree.translated.name }}">
+                    {{ "acrisCookieConsent.footerCmsPageLinkPrefixThird"|trans }}
+                    {{ page.extensions.acrisCookieConsent.footerPages.footerPageThree.translated.name }}
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

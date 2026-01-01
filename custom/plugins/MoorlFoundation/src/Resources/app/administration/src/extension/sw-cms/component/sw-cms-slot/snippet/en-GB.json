@@ -1,0 +1,17 @@
+{
+    "sw-cms": {
+        "component": {
+            "sw-cms-slot": {
+                "cmsElementAnimation": "moori CMS element animation",
+                "cmsElementConfigSaver": "moori CMS element configuration",
+                "label": {
+                    "manageConfigs": "Manage configuration",
+                    "name": "Save active configuration as",
+                    "save": "Save and close",
+                    "load": "Load and close",
+                    "selectConfig": "Select a configuration"
+                }
+            }
+        }
+    }
+}

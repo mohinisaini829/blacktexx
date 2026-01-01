@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/myfavinquiry/administration/",
+  "entryPoints": {
+    "myfav-inquiry": {
+      "css": [
+        "/bundles/myfavinquiry/administration/assets/myfav-inquiry-D3XWynAN.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/myfavinquiry/administration/assets/myfav-inquiry-CNgnzqYQ.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

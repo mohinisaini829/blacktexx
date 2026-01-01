@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Produser:",
+            "ProductNumber": "Nomor artikel:"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Nomor produk",
+            "DetailBuyActionAdd": "Tambahkan varian ke keranjang belanja",
+            "UnitPrice": "Harga satuan",
+            "VariantOrderMatrixColAmount": "Kuantitas",
+            "VariantStock": "Gudang",
+            "quickOrder": "Pesanan cepat",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Perkiraan total harga"
+        }
+    }
+}

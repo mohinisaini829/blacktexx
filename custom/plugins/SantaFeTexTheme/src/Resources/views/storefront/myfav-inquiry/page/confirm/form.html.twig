@@ -1,0 +1,33 @@
+{% sw_extends '@Storefront/storefront/myfav-inquiry/page/confirm/form.html.twig' %}
+
+{% block myfav_inquiry_send_fields_logo %}
+    <div class="col-12 col-sm-6 col-md-4 form-group">
+        {% block myfav_inquiry_send_fields_logo_label %}
+            <label class="form-label"
+                   for="logo-{{ i }}">
+                {{ "myfavInquiry.confirm.logoNameLabel"|trans|sw_sanitize }}
+            </label>
+        {% endblock %}
+
+        {% block myfav_inquiry_send_fields_logo_input %}
+            <div class="custom-file">
+                <input type="file"
+                       class="custom-file-input{% if formViolations.getViolations('/logo') is not empty %} is-invalid{% endif %}"
+                       autocomplete="section-personal logo"
+                       id="logo-{{ i }}"
+                       name="logo[]"
+                       accept="image/*"
+                       value="{{ data.get('logo') }}">
+                <span class="custom-file-label">{{ "myfavInquiry.confirm.logoNamePlaceholder"|trans|sw_sanitize }}</span>
+            </div>
+        {% endblock %}
+
+        {% block myfav_inquiry_send_fields_logo_input_error %}
+            {% if formViolations.getViolations('/logo') is not empty %}
+                {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                violationPath: '/logo'
+                } %}
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

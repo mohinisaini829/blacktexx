@@ -1,0 +1,36 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget-price.html.twig' %}
+
+{% block buy_widget_price_block %}
+    <div class="row">
+        {% set lastQuantity = 0 %}
+        {% for price in product.calculatedPrices %}
+            <div class="text-center col-auto"
+                 itemprop="offers" itemscope
+                 itemtype="https://schema.org/Offer">
+                <meta itemprop="priceCurrency" content="{{ page.header.activeCurrency.translated.shortName }}" />
+                <meta itemprop="price" content="{{ price.unitPrice }}" />
+                <link itemprop="availability" href="https://schema.org/InStock" />
+
+                {% sw_include '@Storefront/storefront/component/product/block-price.html.twig' with {
+                    price: price
+                } only %}
+                <span class="product-block-prices-quantity">
+                    {{ lastQuantity + 1}}
+                    {% if product.unit.shortCode %} {{ product.unit.shortCode }}{% else %} {{ "santa-theme.buybox.unit"|trans }}{% endif %}
+                </span>
+                {% if price.referencePrice is not null %}
+                    <div>
+                        {{ price.referencePrice.price|currency }}{{ "general.star"|trans|sw_sanitize }} / {{ price.referencePrice.referenceUnit }} {{ price.referencePrice.unitName }}
+                    </div>
+                {% endif %}
+            </div>
+            {% set lastQuantity = price.quantity %}
+            {% if price.quantity > 50 %}
+                {% break %}
+            {% endif %}
+        {% endfor %}
+        <div class="col-auto price-enquire-text">
+            {{ "santa-theme.buybox.price-inquiry-text"|trans|sw_sanitize }}
+        </div>
+    </div>
+{% endblock %}

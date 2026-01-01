@@ -1,0 +1,16 @@
+{% sw_extends '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-last-group-as-matrix.html.twig' %}
+{% block biloba_variant_matrix_last_group_table_y_orientation_table_head %}{% endblock %}
+{% block biloba_variant_matrix_last_group_table_x_orientation_table_head %}{% endblock %}
+{% block biloba_variant_matrix_last_group_table_x_orientation_table_body_variant_price %}{% endblock %}
+{% block biloba_variant_matrix_last_group_table_x_orientation_table_body_stock %}{% endblock %}
+{% block biloba_variant_matrix_last_group_table_x_orientation_table_body_matrix_amount %}
+    <tr class="matrix-tr-flex">
+        {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/lastGroupAsMatrixLayout/optionSelectors/firstGroupOptionIteration.html.twig" %}
+    </tr>
+{% endblock %}
+
+{% block biloba_variant_matrix_last_group_table %}
+    <div class="biloba-matrix-table-grid-flex{% if firstGroup.options|length > 9 %} many-options{% endif %}">
+        {{ parent() }}
+    </div>
+{% endblock %}

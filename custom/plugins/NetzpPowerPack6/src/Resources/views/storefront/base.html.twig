@@ -1,0 +1,10 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_header %}
+    {% if(page.header.netzp_header_cms_page) and (page.header.netzp_header_cms_position == 1) %}
+        <div class="netzp-powerpack6-header-cms {% if(page.header.netzp_header_cms_sticky) %}sticky-top{% endif %}">
+            {% sw_include "@Storefront/storefront/page/content/detail.html.twig" with {'cmsPage': page.header.netzp_header_cms_page} %}
+        </div>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}

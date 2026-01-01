@@ -1,0 +1,51 @@
+{% block block_netzp_powerpack6_tile1 %}
+    {% set id = element.id %}
+
+    <style>
+    .netzp-powerpack6-tile1 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 40px;
+    }
+
+    .tile {
+    }
+    .tile1 {
+        grid-row: 1 / span 2;
+    }
+
+    </style>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="netzp-powerpack6-tile1">
+            {% block block_netzp_powerpack6_tile1_column1 %}
+                {% set element = block.slots.getSlot('column1') %}
+                <div class="tile tile1" data-cms-element-id="{{ id }}">
+                    {% block block_netzp_powerpack6_tile1_column1_inner %}
+                        {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+            {% block block_netzp_powerpack6_tile1_column2 %}
+                {% set element = block.slots.getSlot('column2') %}
+                <div class="tile tile2" data-cms-element-id="{{ id }}">
+                    {% block block_netzp_powerpack6_tile1_column2_inner %}
+                        {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+            {% block block_netzp_powerpack6_tile1_column3 %}
+                {% set element = block.slots.getSlot('column3') %}
+                <div class="tile tile3" data-cms-element-id="{{ id }}">
+                    {% block block_netzp_powerpack6_tile1_column3_inner %}
+                        {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

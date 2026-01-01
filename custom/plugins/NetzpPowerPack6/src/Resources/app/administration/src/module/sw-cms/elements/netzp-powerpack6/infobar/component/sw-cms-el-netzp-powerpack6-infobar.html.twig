@@ -1,0 +1,16 @@
+{% block sw_cms_element_netzp_powerpack6_infobar %}
+    <div class="sw-cms-el-netzp-powerpack6-infobar infobar">
+        <div class="infobar">
+            <div v-for="n in element.config.numberOfItems.value" :key="n">
+                <div class="item" :class="{ 'vertical': (element.config.layout.value == 'vertical') }">
+                    <span class="icon" :style="getIconStyle">
+                        <i class="fa" :class="element.config['icon' + n].value"></i>
+                    </span>
+                    <span class="info" :style="getTextStyle">
+                        <sw-text-editor v-model:value="element.config['item' + n].value" :isInlineEdit="true" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

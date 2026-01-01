@@ -1,0 +1,45 @@
+{
+  "name": "netzp/netzppowerpack6",
+  "description": "Einkaufserlebnis PowerPack",
+  "version": "3.0.3",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "netzperfekt",
+      "homepage": "https://plugins.netzperfekt.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "NetzpPowerPack6\\": "src/"
+    }
+  },
+  "require": {
+    "shopware/core": "~6.6.0",
+    "shopware/storefront": "~6.6.0",
+    "shopware/administration": "~6.6.0"
+  },
+  "extra": {
+    "shopware-plugin-class": "NetzpPowerPack6\\NetzpPowerPack6",
+    "plugin-icon": "src/Resources/config/plugin.png",
+    "copyright": "netzperfekt",
+    "label": {
+      "de-DE": "CMS Powerpack",
+      "en-GB": "CMS powerpack"
+    },
+    "description": {
+      "de-DE": "Umfangreiche Komponenten für die Einkaufserlebnisse/CMS: Spalten-Layouts, Button/CTA, TABs, Akkordion uvm. Snippets in Artikeln und Kategorien, Layouts in Header/Footer einbinden.",
+      "en-GB": "Extensive components for the shopping experience/CMS: column layouts, button/CTA, TABs, accordion + many more. Snippets in articles/categories. CMS layouts can be used in  header/footer"
+    },
+    "manufacturerLink": {
+      "de-DE": "https://plugins.netzperfekt.de",
+      "en-GB": "https://plugins.netzperfekt.de"
+    },
+    "supportLink": {
+      "de-DE": "https://plugins.netzperfekt.de/support",
+      "en-GB": "https://plugins.netzperfekt.de/support"
+    }
+  }
+}
+

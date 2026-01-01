@@ -1,0 +1,15 @@
+.sw-cms-el-preview-netzp-powerpack6-alert {
+  .sw-alert {
+    &.sw-alert--no-icon {
+      padding: .25rem .5rem .25rem .5rem;
+    }
+    .sw-alert__body {
+      padding: 0;
+    }
+
+    h3 {
+      margin: 0;
+      font-weight: bold;
+    }
+  }
+}

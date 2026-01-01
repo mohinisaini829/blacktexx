@@ -1,0 +1,24 @@
+{% block element_finishing_price_table %}
+    {% set config = element.fieldConfig.elements %}
+    {# @var finishingPriceTables \Vio\FinishingPrices\Content\FinishingPriceTableCollection #}
+    {% set finishingPriceTables = element.data %}
+    <!-- {{ dump(finishingPriceTables.count) }} -->
+    {% if finishingPriceTables and finishingPriceTables.count > 0 %}
+        <div class="cms-element-{{ element.type }}" data-finishing-price-tables="true">
+            <select class="finishing-price-tables-select custom-select" aria-label="{{ 'vioFinishingPrices.selectLabel'|trans|sw_sanitize }}">
+                {% for finishingPriceTable in finishingPriceTables %}
+                    <option value="{{ finishingPriceTable.id }}">{{ finishingPriceTable.translated.name }}</option>
+                {% endfor %}
+            </select>
+            <div class="card">
+                <div class="card-body" id="finishing-price-table">
+                    {% for finishingPriceTable in finishingPriceTables %}
+                        <div class="finishing-price-table-text{% if loop.first %} is-active{% endif %}" id="finishing-price-table-{{ finishingPriceTable.id }}">
+                            {{ finishingPriceTable.translated.text|raw }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

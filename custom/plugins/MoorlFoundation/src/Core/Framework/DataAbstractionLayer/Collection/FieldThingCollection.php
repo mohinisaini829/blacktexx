@@ -1,0 +1,63 @@
+<?php declare(strict_types=1);
+
+namespace MoorlFoundation\Core\Framework\DataAbstractionLayer\Collection;
+
+use MoorlFoundation\Core\Framework\DataAbstractionLayer\Field\Flags\EditField;
+use Shopware\Core\Content\Seo\SeoUrl\SeoUrlDefinition;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\BoolField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\LongTextField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\TranslatedField;
+use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
+
+class FieldThingCollection extends FieldCollection
+{
+    public static function getFieldItems(
+        bool $thingBase = true,
+        bool $thingPage = true,
+        bool $thingMeta = true,
+        bool $thingMetaAuthor = false,
+        bool $thingMetaMedia = false,
+        bool $media = true
+    ): array
+    {
+        return array_merge(
+            [
+                (new BoolField('active', 'active'))->addFlags(new EditField(EditField::SWITCH)),
+                (new TranslatedField('teaser'))->addFlags(new EditField(EditField::TEXTAREA)),
+                (new OneToManyAssociationField('seoUrls', SeoUrlDefinition::class, 'foreign_key'))->addFlags(new ApiAware()),
+            ],
+            FieldThingBaseCollection::getFieldItems(flag: $thingBase),
+            FieldThingPageCollection::getFieldItems(flag: $thingPage),
+            FieldThingMetaCollection::getFieldItems(
+                flag: $thingMeta,
+                metaAuthor: $thingMetaAuthor,
+                metaMedia: $thingMetaMedia
+            ),
+            FieldMediaCollection::getFieldItems(flag: $media),
+        );
+    }
+
+    public static function getTranslatedFieldItems(
+        bool $thingBase = true,
+        bool $thingPage = true,
+        bool $thingMeta = true,
+        bool $thingMetaAuthor = false,
+        bool $thingMetaMedia = false,
+    ): array
+    {
+        return array_merge(
+            [
+                new LongTextField('teaser', 'teaser')
+            ],
+            FieldThingBaseCollection::getTranslatedFieldItems(flag: $thingBase),
+            FieldThingPageCollection::getTranslatedFieldItems(flag: $thingPage),
+            FieldThingMetaCollection::getTranslatedFieldItems(
+                flag: $thingMeta,
+                metaAuthor: $thingMetaAuthor,
+                metaMedia: $thingMetaMedia
+            ),
+        );
+    }
+}

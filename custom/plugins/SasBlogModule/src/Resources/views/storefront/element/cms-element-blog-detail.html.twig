@@ -1,0 +1,105 @@
+{% block sas_blog_detail %}
+    {% if element.data %}
+        {% block sas_blog_detail_outer %}
+            <article class="sas-blog-detail">
+                {% block sas_blog_detail_inner %}
+                    {% block sas_blog_detail_article_item_meta_published %}
+                        <meta itemprop="datePublished" content="{{ element.data.publishedAt|date('Y-m-d\\TH:i:sP') }}"/>
+                    {% endblock %}
+
+                    {% block sas_blog_detail_article_item_meta_author %}
+                        <meta itemprop="author" content="{{ element.data.blogAuthor.displayName ?? element.data.blogAuthor.translated.name }}"/>
+                    {% endblock %}
+
+                    {% block page_product_detail_review_item_info_date %}
+                        <div class="col-12 sas-blog-detail-item-date">
+                            <p><small>{{ element.data.publishedAt|format_date('short', locale=app.request.locale) }}</small></p>
+                        </div>
+                    {% endblock %}
+
+                    {% block sas_blog_detail_article_blocks %}
+                        <div class="col-12 sas-blog-detail-article">
+
+                            {% block sas_blog_detail_article_teaser_image %}
+                                {% if element.data.detailTeaserImage %}
+                                    {% set attributes = {
+                                        'class': 'blog-image-teaser card-img-top mb-3',
+                                        'alt': (element.data.media.translated.alt ?: element.data.media.fileName),
+                                        'title': (element.data.media.translated.title ?: element.data.media.fileName)
+                                    } %}
+
+                                    {% sw_thumbnails 'blog-image-teaser' with {
+                                        media: element.data.media,
+                                        sizes: {
+                                            'xs': '650px',
+                                            'sm': '650px',
+                                            'md': '650px',
+                                            'lg': '900px',
+                                            'xl': '1280px',
+                                        }
+                                    } %}
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block sas_blog_detail_article_title %}
+                                <h1 class="sas-blog-detail-title" itemprop="headline">
+                                    {{ element.data.translated.title }}
+                                </h1>
+                            {% endblock %}
+
+                            {% block sas_blog_detail_article_meta %}
+                                {% set showAuthor = element.fieldconfig.elements.showAuthor.value ?? element.config.showAuthor.value %}
+                                {% set showCategory = element.fieldconfig.elements.showCategory.value ?? element.config.showCategory.value %}
+                                {% if showAuthor or showCategory %}
+                                    <div class="sas-blog-detail-article-meta">
+                                        {% block sas_blog_detail_article_meta_author %}
+                                            {% if showAuthor and element.data.blogAuthor %}
+                                                {% sw_include '@Storefront/storefront/component/blog/_partials/_block_author.html.twig' with {
+                                                    author: element.data.blogAuthor
+                                                } %}
+                                            {% endif %}
+                                        {% endblock %}
+
+                                        {% block sas_blog_detail_article_meta_categories %}
+                                            {% if showCategory and element.data.blogCategories %}
+                                                {% sw_include '@Storefront/storefront/component/blog/_partials/_block_category.html.twig' with {
+                                                    categories: element.data.blogCategories
+                                                } %}
+                                            {% endif %}
+                                        {% endblock %}
+                                    </div>
+                                {% endif %}
+                            {% endblock %}
+                            {% block sas_blog_detail_article_blocks_content %}
+                                {% if not element.data.cmsPage %}
+                                    <div itemprop="articleBody">
+                                        {{ element.data.translated.content|raw }}
+                                    </div>
+                                {% endif %}
+                            {% endblock %}
+                        </div>
+
+                        {% block sas_blog_detail_article_blocks_cms %}
+                            {% if element.data.cmsPage %}
+                                <div class="row sas-blog-detail-cms" itemprop="articleBody">
+                                    {% set cmsPageClasses = ('cms-page ' ~ element.data.cmsPage.cssClass|striptags)|trim %}
+                                    <div class="{{ cmsPageClasses }}">
+                                        {% block page_content_blocks %}
+                                            {% sw_include "@Storefront/storefront/page/content/detail.html.twig" with {'cmsPage': element.data.cmsPage} %}
+                                        {% endblock %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endblock %}
+                    {% endblock %}
+                {% endblock %}
+            </article>
+        {% endblock %}
+    {% else %}
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: "warning",
+            content: 'sas-blog.element.detail.warning.content'|trans,
+            heading: 'sas-blog.element.detail.warning.heading'|trans
+        } %}
+    {% endif %}
+{% endblock %}

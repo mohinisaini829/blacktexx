@@ -1,0 +1,17 @@
+{% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
+
+{% block layout_footer_inner_container %}
+    {% if(page.footer.netzp_footer_cms_position > 0) %}
+        {% if(page.footer.netzp_footer_cms_position == 2) %}
+            {{ parent() }}
+        {% endif %}
+
+        {% sw_include "@Storefront/storefront/page/content/detail.html.twig" with {'cmsPage': page.footer.netzp_footer_cms_page} %}
+
+        {% if(page.footer.netzp_footer_cms_position == 1) %}
+            {{ parent() }}
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

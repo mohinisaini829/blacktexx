@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/myfav-inquiry-CNgnzqYQ.js",
+    "name": "myfav-inquiry",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/myfav-inquiry-D3XWynAN.css"
+    ]
+  }
+}

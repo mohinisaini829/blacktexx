@@ -1,0 +1,14 @@
+.cms-element-solid-ase-content-slider {
+  .tns-nav button {
+    height: .1rem;
+    width: 1rem;
+  }
+
+  &.solid-ase-content-slider-nav-dots-opacity,
+  &.solid-ase-content-slider-nav-dots-fill,
+  &.solid-ase-content-slider-nav-dots-size {
+    .tns-nav button {
+      border-radius: 0;
+    }
+  }
+}

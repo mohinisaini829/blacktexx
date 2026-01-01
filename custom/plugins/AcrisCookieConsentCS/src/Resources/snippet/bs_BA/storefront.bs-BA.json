@@ -1,0 +1,16 @@
+{
+    "acrisCookieConsent": {
+        "heading": "Poštujemo vašu privatnost",
+        "messageIncludingSave": "Ova web stranica koristi kolačiće kako bi osigurala da dobijete najbolje iskustvo na našoj web stranici. Svoj izbor korištenja kolačića možete promijeniti u bilo kojem trenutku <a data-bs-dismiss=\"modal\" id=\"ccAcceptButton\" class=\"cookie-consent-accept-button-in-text\" href=\"#\" onclick=\"return false;\">spašavanjem.</a> <a data-ajax-modal=\"true\"\n data-modal-class=\"cookie-consent-permission-footer-modal\" data-url=\"%url%\" href=\"%url%\" title=\"Više informacija\">Više informacija</a>.",
+        "messageNoSave": "Ova web stranica koristi kolačiće kako bi osigurala da dobijete najbolje iskustvo na našoj web stranici...</a> <a data-ajax-modal=\"true\"\n data-modal-class=\"cookie-consent-permission-footer-modal\" data-url=\"%url%\" href=\"%url%\" title=\"Više informacija\">Više informacija</a>.",
+        "switchActive": "Aktivno",
+        "switchInactive": "Neaktivno",
+        "settingsButton": "Postavke kolačića",
+        "acceptOnlyFunctionalButton": "Prihvati samo funkcionalne kolačiće",
+        "acceptButton": "Prihvati odabrane kolačiće",
+        "acceptAllButton": "Prihvati sve kolačiće",
+        "footerCmsPageLinkPrefixFirst": "- ",
+        "footerCmsPageLinkPrefixSecond": "- ",
+        "footerCmsPageLinkPrefixThird": "- "
+    }
+}

@@ -1,0 +1,46 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_main %}
+    {% if page.extensions.popup %}
+    	{% set popup = page.extensions.popup %}
+    	{% if page.storeId == popup.stores %}
+			{% if popup.css %}
+				<style>
+					{{ popup.css }}
+				</style>
+			{% endif %}
+			<div class="htc-popup-overlay">
+				<div class="htc-popup-container">
+					<div class="htc-popup-content htc-justify-{{ popup.justify }} htc-align-{{ popup.align }} {{ popup.className }}" 
+						data-htc-popup data-popup-id="{{ popup.id }}" 
+						data-popup-update-ctr-url="{{ url('frontend.popup.updateCtr') }}" 
+						data-popup-show-mode="{{ popup.frequency }}" 
+						id="htc-popup_container" 
+						data-ratio="{{ popup.ratio }}" 
+						data-popup-is-redirect="{{ popup.isRedirect }}" 
+						data-popup-redirect-url="{{ popup.denyButtonLink }}"
+				        style="width:{{ popup.width }}px;
+				        	height:{{ popup.height }}px;
+				        	background-image: url('{{ popup.backgroundMedia.url }}');
+				        	color: {{ popup.textColor ? popup.textColor : '#000'}};
+				        	margin: auto;">
+		                <div class="htc-popup-content-main">
+		                	{{ popup.content | raw }}
+			            	{% if popup.isRedirect %}
+								<div class="htc-popup-buttons">
+									<button title="{{"htc-popup.confirmButton"|trans|sw_sanitize }}" style="background-color:{{ (popup.backgroundColorButton) ? popup.backgroundColorButton : '#000'}}" class="htc-popup-button htc-popup-confirm-button">{{popup.confirmButtonTitle}}</button>
+									<a href="{{ popup.denyButtonLink }}" style="background-color:{{ (popup.backgroundColorButton) ? popup.backgroundColorButton : '#000'}}" 
+										title="{{"htc-popup.denyButton"|trans|sw_sanitize }}" class="htc-popup-button htc-popup-deny-button">
+										{{ popup.denyButtonTitle }}
+									</a>
+								</div>
+							{% endif %}
+		                </div>
+					</div>
+					<button title="{{ "htc-popup.closeButton"|trans|sw_sanitize }}" class="htc-popup-close">&times;</button>
+				</div>
+			</div>
+    	{% endif %}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,265 @@
+{
+    "name": "SantaFeTexTheme",
+    "author": "VIOSYS AG AG",
+    "views": [
+        "@Storefront",
+        "@Plugins",
+        "@SantaFeTexTheme"
+    ],
+    "style": [
+        "app/storefront/src/scss/overrides.scss",
+        "@Storefront",
+        "app/storefront/src/scss/base.scss"
+    ],
+    "script": [
+        "@Storefront",
+        "app/storefront/dist/storefront/js/santa-fe-tex-theme.js"
+    ],
+    "asset": [
+        "@Storefront",
+        "app/storefront/src/assets"
+    ],
+    "config": {
+        "tabs": {
+            "Header": {
+                "label": {
+                    "en-GB": "Header",
+                    "de-DE": "Header"
+                }
+            },
+            "Footer": {
+                "label": {
+                    "en-GB": "Footer",
+                    "de-DE": "Footer"
+                }
+            },
+            "Detail": {
+                "label": {
+                    "en-GB": "Product detail page",
+                    "de-DE": "Produkt-Detailseite"
+                }
+            },
+            "Listing": {
+                "label": {
+                    "en-GB": "Category listing",
+                    "de-DE": "Kategorie-Listing"
+                }
+            }
+        },
+        "fields": {
+            "vio-header-bg": {
+                "label": {
+                    "en-GB": "Header background color",
+                    "de-DE": "Header-Hintergrundfarbe"
+                },
+                "type": "color",
+                "value": "#152b48",
+                "tab": "Header"
+            },
+            "vio-header-color": {
+                "label": {
+                    "en-GB": "Header color",
+                    "de-DE": "Header-Schriftfarbe"
+                },
+                "type": "color",
+                "value": "#fff",
+                "tab": "Header"
+            },
+            "vio-breadcrumb-bg": {
+                "label": {
+                    "en-GB": "Breadcrumb background",
+                    "de-DE": "Breadcrumb-Hintergrund"
+                },
+                "type": "color",
+                "value": "#dee1e3",
+                "tab": "Header"
+            },
+            "vio-breadcrumb-color": {
+                "label": {
+                    "en-GB": "Breadcrumb color",
+                    "de-DE": "Breadcrumb-Schriftfarbe"
+                },
+                "type": "color",
+                "value": "#7d7d7d",
+                "tab": "Header"
+            },
+            "vio-footer-font-size": {
+                "label": {
+                    "en-GB": "Footer font size",
+                    "de-DE": "Footer-Schriftgröße"
+                },
+                "type": "text",
+                "value": "20px",
+                "tab": "Footer"
+            },
+            "vio-footer-border-color": {
+                "label": {
+                    "en-GB": "Footer border color",
+                    "de-DE": "Footer Border"
+                },
+                "type": "color",
+                "value": "#3d3d38",
+                "tab": "Footer"
+            },
+            "vio-footer-icon-color": {
+                "label": {
+                    "en-GB": "Footer icon color",
+                    "de-DE": "Footer Iconfarbe"
+                },
+                "type": "color",
+                "value": "#e1ddc3",
+                "tab": "Footer"
+            },
+            "vio-footer-link-color": {
+                "label": {
+                    "en-GB": "Footer link color",
+                    "de-DE": "Footer-Links-Farbe"
+                },
+                "type": "color",
+                "value": "#d4d4d4",
+                "tab": "Footer"
+            },
+            "vio-detail-font-size": {
+                "label": {
+                    "en-GB": "product page font size",
+                    "de-DE": "Produktseite - Schriftgröße allgemein"
+                },
+                "type": "text",
+                "value": "16px",
+                "tab": "Detail"
+            },
+            "vio-detail-name-font-size": {
+                "label": {
+                    "en-GB": "Product name font size",
+                    "de-DE": "Produktname-Schriftgröße"
+                },
+                "type": "text",
+                "value": "48px",
+                "tab": "Detail"
+            },
+            "vio-detail-price-font-size": {
+                "label": {
+                    "en-GB": "Product price font size",
+                    "de-DE": "Preis-Schriftgröße"
+                },
+                "type": "text",
+                "value": "18px",
+                "tab": "Detail"
+            },
+            "vio-btn-font-size": {
+                "label": {
+                    "en-GB": "Button font size",
+                    "de-DE": "Button-Schriftgröße"
+                },
+                "type": "text",
+                "value": "22px",
+                "tab": "Detail"
+            },
+            "vio-tab-font-size": {
+                "label": {
+                    "en-GB": "Tab font size",
+                    "de-DE": "Tab-Schriftgröße"
+                },
+                "type": "text",
+                "value": "20px",
+                "tab": "Detail"
+            },
+            "vio-cms-title-font-size": {
+                "label": {
+                    "en-GB": "CMS element title font size",
+                    "de-DE": "CMS-Element-Titel-Schriftgröße"
+                },
+                "type": "text",
+                "value": "46px",
+                "tab": "Detail"
+            },
+            "vio-heading-suffix-bg": {
+                "label": {
+                    "en-GB": "Subtitle product name background",
+                    "de-DE": "Untertitel-Produktname-Hintergrund"
+                },
+                "type": "color",
+                "value": "#a7a7a7",
+                "tab": "Detail"
+            },
+            "vio-heading-suffix-color": {
+                "label": {
+                    "en-GB": "Subtitle product name color",
+                    "de-DE": "Untertitel-Produktname-Schriftfarbe"
+                },
+                "type": "color",
+                "value": "#ffffff",
+                "tab": "Detail"
+            },
+            "vio-detail-button-color": {
+                "label": {
+                    "en-GB": "Button color",
+                    "de-DE": "Button-Schriftfarbe"
+                },
+                "type": "color",
+                "value": "#ffffff",
+                "tab": "Detail"
+            },
+            "vio-detail-button-bg": {
+                "label": {
+                    "en-GB": "Button background",
+                    "de-DE": "Button-Hintergrund"
+                },
+                "type": "color",
+                "value": "#152b48",
+                "tab": "Detail"
+            },
+            "vio-detail-button-hover-color": {
+                "label": {
+                    "en-GB": "Button color - hover",
+                    "de-DE": "Button-Schriftfarbe bei Hover"
+                },
+                "type": "color",
+                "value": "#ffffff",
+                "tab": "Detail"
+            },
+            "vio-detail-button-hover-bg": {
+                "label": {
+                    "en-GB": "Button background hover",
+                    "de-DE": "Button-Hintergrund bei Hover"
+                },
+                "type": "color",
+                "value": "#f05b00",
+                "tab": "Detail"
+            },
+            "vio-product-image-box-bg": {
+                "label": {
+                    "en-GB": "Product box image background",
+                    "de-DE": "Hintergrundfarbe der Produktbox"
+                },
+                "type": "color",
+                "value": "#e6e1de",
+                "tab": "Listing"
+            },
+            "vio-product-name-font-size": {
+                "label": {
+                    "en-GB": "Product name font size",
+                    "de-DE": "Schriftgröße des Produktnamens"
+                },
+                "type": "text",
+                "value": "28px",
+                "tab": "Listing"
+            },
+            "vio-product-cert-property-group": {
+                "label": {
+                    "de-DE": "Zertifizierungseigenschaft",
+                    "en-GB": "Certification property"
+                },
+                "type": "text",
+                "editable": true,
+                "custom": {
+                    "componentName": "sw-entity-single-select",
+                    "entity": "property_group"
+                },
+                "scss": false,
+                "tab": "Detail"
+            }
+
+        }
+    }
+}

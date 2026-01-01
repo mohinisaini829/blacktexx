@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/solidadvancedsliderelements/administration/",
+  "entryPoints": {
+    "solid-advanced-slider-elements": {
+      "css": [
+        "/bundles/solidadvancedsliderelements/administration/assets/solid-advanced-slider-elements-DNqeX1RU.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/solidadvancedsliderelements/administration/assets/solid-advanced-slider-elements-D_OW--Ao.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

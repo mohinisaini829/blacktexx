@@ -1,0 +1,21 @@
+{% block sw_cms_element_netzp_powerpack6_imagecompare %}
+    <div class="sw-cms-el-netzp-powerpack6-imagecompare"
+         :class="{ horizontal: !element.config.verticalMode.value, vertical: element.config.verticalMode.value }"
+         :style="getStyleHeight">
+        <div v-if="element.config.image1.value"
+             class="netzp-imagecompare-image1">
+            <img :src="image1Url" alt="">
+        </div>
+        <img v-else
+             class="netzp-imagecompare-image1"
+             :src="assetFilter('/administration/static/img/cms/preview_camera_small.jpg')" alt="">
+
+        <div v-if="element.config.image2.value"
+             class="netzp-imagecompare-image2">
+            <img :src="image2Url" alt="">
+        </div>
+        <img v-else
+             class="netzp-imagecompare-image2"
+             :src="assetFilter('/administration/static/img/cms/preview_glasses_large.jpg')" alt="">
+    </div>
+{% endblock %}

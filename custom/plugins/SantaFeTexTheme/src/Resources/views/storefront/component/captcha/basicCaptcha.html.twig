@@ -1,0 +1,13 @@
+{% sw_extends '@Storefront/storefront/component/captcha/basicCaptcha.html.twig' %}
+
+{% block component_basic_captcha_fields_title_label %}
+    <label class="form-label" for="{{ formId }}-basic-captcha-input">
+        {{ 'captcha.basicCaptchaLabel'|trans|sw_sanitize }}
+    </label>
+{% endblock %}
+
+{% block component_basic_captcha_refresh_icon %}
+    <a class="btn santa--captcha-refresh-btn" id="{{ formId }}-basic-captcha-content-refresh-icon">
+        <img src="{{ asset('bundles/santafetextheme/static/image/icon-capta-refresh.webp') }}" alt="icon"/>
+    </a>
+{% endblock %}

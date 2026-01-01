@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/santa-fe-tex-theme-iQI10cld.js",
+    "name": "santa-fe-tex-theme",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/santa-fe-tex-theme-DvAE8BlP.css"
+    ]
+  }
+}

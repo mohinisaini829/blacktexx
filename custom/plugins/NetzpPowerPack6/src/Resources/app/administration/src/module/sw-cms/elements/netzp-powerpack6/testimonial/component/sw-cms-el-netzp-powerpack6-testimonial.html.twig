@@ -1,0 +1,50 @@
+{% block sw_cms_element_netzp_powerpack6_testimonial %}
+    <div class="sw-cms-el-netzp-powerpack6-testimonial">
+        <img :src="mediaUrl" alt="">
+
+        <div class="media-body">
+            <span class="title">
+                <div v-if="element.config.title.source === 'mapped'"
+                     class="sw-cms-el-text__mapping-preview content-editor"
+                     v-html="$sanitize(demoValueTitle)" />
+
+                <sw-text-editor v-else
+                                v-model:value="element.config.title.value"
+                                :isInlineEdit="true"
+                                :allow-inline-data-mapping="true"/>
+            </span>
+
+            <div v-if="element.config.contents.source === 'mapped'"
+                 class="sw-cms-el-text__mapping-preview content-editor"
+                 v-html="$sanitize(demoValueContents)" />
+
+            <sw-text-editor v-else
+                            v-model:value="element.config.contents.value"
+                            :isInlineEdit="true"
+                            :allow-inline-data-mapping="true"/>
+
+            <div class="meta">
+                <span style="font-weight: bold; display: inline-block">
+                    <div v-if="element.config.name.source === 'mapped'"
+                         class="sw-cms-el-text__mapping-preview content-editor"
+                         v-html="$sanitize(demoValueName)" />
+
+                    <sw-text-editor v-else
+                                    v-model:value="element.config.name.value"
+                                    :isInlineEdit="true"
+                                    :allow-inline-data-mapping="true"/>
+                </span><template v-if="element.config.name.value && element.config.name2.value">, </template>
+                <small style="display: inline-block">
+                    <div v-if="element.config.name2.source === 'mapped'"
+                         class="sw-cms-el-text__mapping-preview content-editor"
+                         v-html="$sanitize(demoValueName2)" />
+
+                    <sw-text-editor v-else
+                                    v-model:value="element.config.name2.value"
+                                    :isInlineEdit="true"
+                                    :allow-inline-data-mapping="true"/>
+                </small>
+            </div>
+        </div>
+    </div>
+{% endblock %}

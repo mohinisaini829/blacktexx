@@ -1,0 +1,301 @@
+{% block element_solid_ase_content_slider %}
+  {% set config = element.fieldConfig.elements %}
+  {% set resolvedConfig = element.data %}
+  {% set resolvedSlidesConfig = resolvedConfig.get('slides') %}
+  {% set slides = [] %}
+
+  {% if resolvedSlidesConfig %}
+    {% set slides = resolvedSlidesConfig | filter(slide => slide.active) %}
+  {% endif %}
+
+  {% if slides|length > 0 %}
+    {% block element_solid_ase_content_slider_skip_link %}
+        {% sw_include '@Storefront/storefront/component/skip-target.html.twig' with {
+            targetId: element.id,
+            snippet: 'solidAdvancedSliderElements.general.skipSlider',
+        } %}
+    {% endblock %}
+
+    <div tabindex="0" role="region">
+    <div class="cms-element-solid-ase-content-slider
+      solid-ase-content-slider-{{ element.id }}
+      solid-ase-content-slider-{{ config.sliderSettings.value.animation }}
+      solid-ase-content-slider-{{ config.settings.value.sizingMode }}
+      {{ config.sliderSettings.value.center and
+        config.settings.value.inactiveLowerOpacity ?
+        'solid-ase-content-slider-inactive-lower-opacity' }}
+      solid-ase-content-slider-{{ config.settings.value.layoutVariant }}
+      {{ config.settings.value.contentAnimation != 'none' ?
+        ('solid-ase-content-slider-content-' ~
+        config.settings.value.contentAnimation) | raw }}
+      {{ config.sliderSettings.value.controls ?
+        'solid-ase-content-slider-controls' }}
+      {{ config.sliderSettings.value.controls ?
+        ('solid-ase-content-slider-controls-' ~
+        config.settings.value.controlsVariant) | raw }}
+      {{ config.sliderSettings.value.controls ?
+        ('solid-ase-content-slider-controls-' ~
+          config.settings.value.controlsPosition) | raw }}
+      {{ config.sliderSettings.value.nav ? 'solid-ase-content-slider-nav' }}
+      {{ config.sliderSettings.value.nav ? ('solid-ase-content-slider-nav-' ~
+        config.settings.value.navVariant) | raw }}
+      {{ config.sliderSettings.value.nav ? ('solid-ase-content-slider-nav-' ~
+        config.settings.value.navSize) | raw }}
+      {{ config.sliderSettings.value.nav ? ('solid-ase-content-slider-nav-' ~
+        config.settings.value.navPosition) | raw }}">
+      {% set dataAttributes = '' %}
+
+      {# data attributes #}
+      {% for key, value in config.sliderSettings.value %}
+        {% if not value == false %}
+          {% if loop.index0 > 0 %}
+            {% set dataAttributes = dataAttributes ~ ' ' %}
+          {% endif %}
+
+          {% set dataAttributes = dataAttributes ~ 'data-' ~
+            key | camelCaseToKebabCase ~ '="' ~ value ~ '"' %}
+        {% endif %}
+      {% endfor %}
+
+      {# slide clones #}
+      {% set maxItems = config.sliderSettings.value.items %}
+
+      {% if config.sliderSettings.value.itemsMode == 'responsive-custom' %}
+        {% set maxItems = max(config.sliderSettings.value.itemsMobile,
+          config.sliderSettings.value.itemsTablet,
+          config.sliderSettings.value.itemsDesktop) %}
+      {% endif %}
+
+      {% if config.sliderSettings.value.loop %}
+        {% if 'gallery' in config.sliderSettings.value.animation %}
+          {% if slides | length == 1 %}
+            {% set cloneCount = maxItems * 2 - 1 %}
+          {% elseif slides | length == maxItems %}
+            {% set cloneCount = slides | length %}
+          {% else %}
+            {% if slides | length % maxItems != 0 %}
+              {% set cloneCount = slides | length *
+                (maxItems - 1) %}
+            {% endif %}
+          {% endif %}
+        {% elseif slides | length <= maxItems %}
+          {% set minCloneCount =  maxItems - slides |
+            length + 1 %}
+          {% set cloneTimes = (minCloneCount / slides | length) |
+            round(0, 'ceil') %}
+          {% set cloneCount = slides | length * cloneTimes %}
+        {% endif %}
+      {% endif %}
+
+      {% if cloneCount %}
+        {% for i in 0..cloneCount - 1 %}
+          {% set slideClone = slides[i] | merge({ isClone: true }) %}
+          {% set slides = slides |
+            merge({ (i + slides | length): slideClone }) %}
+        {% endfor %}
+      {% endif %}
+
+      {% block element_solid_ase_content_slider_slides %}
+        {# slides #}
+        <ul class="solid-ase-content-slider is-loading"
+          data-element-id="{{ element.id }}"
+          {{ dataAttributes | raw }}>
+          {% for slide in slides %}
+            {% block element_solid_ase_content_slider_slide %}
+              <li class="slide solid-ase-content-slider-slide-{{ slide.id }} {{ slide.isClone ? 'solid-ase-content-slider-slide-clone' : '' }}">
+
+                <div class="slide-container"
+                  {{ slide.backgroundColor ? ('style="background-color: ' ~
+                    slide.backgroundColor ~ ';"') | raw }}>
+
+                  {% block element_solid_ase_content_slider_slide_background_media %}
+                    {# background-media #}
+                    {% if slide.backgroundMedia %}
+                      {% set mediaCollection =
+                        searchMedia([slide.backgroundMedia], context.context) %}
+                      {% set backgroundMedia =
+                        mediaCollection.get(slide.backgroundMedia) %}
+
+                      <div class="background-media-container">
+                        {% if 'video' in backgroundMedia.mimeType %}
+                          <video autoplay muted playsinline loop>
+                            <source
+                            src="{{ backgroundMedia.url }}"
+                            type="{{ backgroundMedia.mimeType }}">
+                          </video>
+                        {% else %}
+                          {% sw_thumbnails 'solid-ase-content-slider-slides' with {
+                            media: backgroundMedia,
+                            columns: 1,
+                            loadOriginalImage: true,
+                            attributes: {
+                              'class': slide.backgroundSizingMode ~ ' ' ~
+                                (slide.backgroundSizingMode == 'cover' ? slide.backgroundAnimation) ~ ' ' ~
+                                (slide.backgroundSizingMode == 'contain' ? slide.backgroundPosition),
+                              'alt': (backgroundMedia.translated.alt ?: ''),
+                              'title': (backgroundMedia.translated.title ?: '')
+                            }
+                          } %}
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block element_solid_ase_content_slider_slide_content_container %}
+                    {# content-container #}
+                    <div class="content-container">
+                      {% if config.sliderSettings.value.items == 1 %}
+                        {% set class = 'col-sm-9 col-md-8 col-lg-6 col-xl-5' %}
+                      {% elseif config.sliderSettings.value.items == 2 %}
+                        {% set class = 'col-sm-9 col-lg-10' %}
+                      {% elseif config.sliderSettings.value.items >= 3 %}
+                        {% set class = 'col-sm-9 col-lg-10 col-xl-12' %}
+                      {% endif %}
+
+                      <div class="{{ class }} content">
+                        {% if slide.contentType == 'default' %}
+                          {% if slide.smallHeadline %}
+                            <p class="small-headline">
+                              {{ slide.smallHeadline|raw }}
+                            </p>
+                          {% endif %}
+
+                          {% if slide.headline %}
+                            <p class="h1 headline">
+                              {{ slide.headline|raw }}
+                            </p>
+                          {% endif %}
+
+                          {% if slide.text %}
+                            <p class="text">
+                              {{ slide.text|raw }}
+                            </p>
+                          {% endif %}
+
+                          {% if slide.buttonLabel and slide.buttonLink %}
+                            {% set buttonLink = slide.buttonLink %}
+
+                            {% if slide.buttonLinkType == 'internal' %}
+                              {% if slide.buttonLinkEntity == 'category' %}
+                                {% set buttonLink = seoUrl('frontend.navigation.page', { navigationId: buttonLink }) %}
+                              {% elseif slide.buttonLinkEntity == 'landing-page' %}
+                                {% set buttonLink = seoUrl('frontend.landing.page', { landingPageId: buttonLink }) %}
+                              {% elseif slide.buttonLinkEntity == 'product' %}
+                                {% set buttonLink = seoUrl('frontend.detail.page', { productId: buttonLink }) %}
+                              {% endif %}
+                            {% endif %}
+
+                            {% if slide.buttonLinkInternalQuery %}
+                              {% set buttonLink = buttonLink ~ '?' ~ slide.buttonLinkInternalQuery %}
+                            {% endif %}
+
+                            <a class="btn
+                              btn-{{ config.settings.value.buttonVariant }}"
+                              {{ buttonLink ? ('href="' ~ buttonLink|raw ~ '"') | raw }}
+                              {{ slide.buttonTargetBlank ? 'target="_blank" rel="noopener"' }}
+                              {{ slide.buttonTitle ? ('title="' ~ slide.buttonTitle|raw  ~ '"') | raw }}>
+                              {{ slide.buttonLabel|raw }}
+                            </a>
+                          {% endif %}
+                        {% elseif slide.contentType == 'custom' %}
+                          {{ slide.customContent|raw }}
+                        {% endif %}
+                      </div>
+                    </div>
+                  {% endblock %}
+
+                  {% block element_solid_ase_content_slider_slide_link %}
+                    {% if slide.link %}
+                      {% set link = slide.link %}
+
+                      {% if slide.linkType == 'internal' %}
+                        {% if slide.linkEntity == 'category' %}
+                          {% set link = seoUrl('frontend.navigation.page', { navigationId: link }) %}
+                        {% elseif slide.linkEntity == 'landing-page' %}
+                          {% set link = seoUrl('frontend.landing.page', { landingPageId: link }) %}
+                        {% elseif slide.linkEntity == 'product' %}
+                          {% set link = seoUrl('frontend.detail.page', { productId: link }) %}
+                        {% endif %}
+                      {% endif %}
+
+                      {% if slide.linkInternalQuery %}
+                        {% set link = link ~ '?' ~ slide.linkInternalQuery %}
+                      {% endif %}
+
+                      {% if slide.linkTitle %}
+                        {% set title = slide.linkTitle %}
+                      {% elseif slide.contentType == 'default' and slide.headline %}
+                        {% set title = slide.headline|raw %}
+                      {% elseif slide.name %}
+                        {% set title = slide.name %}
+                      {% endif %}
+
+                      <a class="stretched-link visually-hidden-focusable overflow-hidden link"
+                        aria-label="{{ title }}"
+                        href="{{ link|raw }}"
+                        {{ slide.linkTargetBlank ? 'target="_blank" rel="noopener"' }}
+                        {{ slide.linkTitle ? ('title="' ~ title|raw ~ '"') | raw }}>
+                        {{ slide.linkTitle ? slide.linkTitle : link }}
+                      </a>
+                    {% endif %}
+                  {% endblock %}
+                </div>
+              </li>
+            {% endblock %}
+          {% endfor %}
+        </ul>
+      {% endblock %}
+
+      {% block element_solid_ase_content_slider_controls %}
+        {# controls #}
+        {% if config.sliderSettings.value.controls %}
+          <div class="solid-ase-content-slider-controls-container" role="region">
+            {% block element_solid_ase_content_slider_control_prev %}
+              <button class="btn btn-primary solid-ase-content-slider-control
+                solid-ase-content-slider-control-prev"
+                aria-label="{{ 'solidAdvancedSliderElements.general.previousSlide'|trans }}">
+                <span class="icon">
+                  {% if config.settings.value.controlsIconVariant == 'caret' %}
+                    {{ source('@Storefront/assets/icon/default/arrow-head-left.svg',
+                      ignore_missing = true) }}
+                  {% elseif config.settings.value.controlsIconVariant == 'caret-circle' %}
+                    {{ source('@Storefront/assets/icon/default/arrow-circle-left.svg',
+                      ignore_missing = true) }}
+                  {% elseif config.settings.value.controlsIconVariant == 'arrow' %}
+                    {{ source('@Storefront/assets/icon/default/arrow-left.svg',
+                      ignore_missing = true) }}
+                  {% endif %}
+                </span>
+              </button>
+            {% endblock %}
+
+            {% block element_solid_ase_content_slider_control_next %}
+              <button class="btn btn-primary solid-ase-content-slider-control
+                solid-ase-content-slider-control-next"
+                aria-label="{{ 'solidAdvancedSliderElements.general.nextSlide'|trans }}">
+                <span class="icon">
+                  {% if config.settings.value.controlsIconVariant == 'caret' %}
+                    {{ source('@Storefront/assets/icon/default/arrow-head-right.svg',
+                      ignore_missing = true) }}
+                  {% elseif config.settings.value.controlsIconVariant == 'caret-circle' %}
+                    {{ source('@Storefront/assets/icon/default/arrow-circle-right.svg',
+                      ignore_missing = true) }}
+                  {% elseif config.settings.value.controlsIconVariant == 'arrow' %}
+                    {{ source('@Storefront/assets/icon/default/arrow-right.svg',
+                      ignore_missing = true) }}
+                  {% endif %}
+                </span>
+              </button>
+            {% endblock %}
+          </div>
+        {% endif %}
+      {% endblock %}
+    </div>
+    </div>
+
+    {% block element_solid_ase_content_slider_skip_link_target %}
+        <div id="content-after-target-{{ element.id }}">
+        </div>
+    {% endblock %}
+  {% endif %}
+{% endblock %}

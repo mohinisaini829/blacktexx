@@ -1,0 +1,172 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+{% block base_navigation %}{% endblock %}
+
+{% block base_head %}
+  {{ parent() }}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          if (document.body.classList.contains('is-ctl-landingpage')) {
+              document.querySelectorAll('.moorl-column-layout').forEach(function (el) {
+                  el.classList.add('custom-slider');
+              });
+          }
+            document.querySelectorAll('.custom-slider').forEach(function (sliderEl) {
+                tns({
+                    container: sliderEl,
+                    items: 4,
+                    slideBy: 1,
+                    autoplay: false,
+                    controls: true,
+                    autoplayButtonOutput: false,
+                    nav: true,
+                    gutter: 10,
+                    lazyload: true,
+                    responsive: {
+                        0: { items: 1 },
+                        480: { items: 2 },
+                        768: { items: 3 },
+                        1024: { items: 4 }
+                    }
+                });
+            });
+        });
+    </script>
+  <script>
+    (function (w, d, t, r, u) {
+      var f, n, i;
+      w[u] = w[u] || [], f = function () {
+        var o = {ti: "5998452", enableAutoSpaTracking: true};
+        o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad")
+      },
+        n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () {
+        var s = this.readyState;
+        s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null)
+      },
+        i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i)
+    })
+    (window, document, "script", "//bat.bing.com/bat.js", "uetq");
+  </script>
+  <script>
+    $(document).ready(function () {
+        function enableAccordionForMobile() {
+            if ($(window).width() <= 768) {
+                $('.accordion-content').hide(); // hide all initially on mobile
+
+                $('.accordion-header').off('click').on('click', function () {
+                    $(this).toggleClass('active');
+                    $(this).next('.accordion-content').slideToggle(200);
+                });
+            } else {
+                // Reset on desktop
+                $('.accordion-content').show();
+                $('.accordion-header').off('click').removeClass('active');
+            }
+        }
+
+        enableAccordionForMobile();
+
+        $(window).on('resize', function () {
+            enableAccordionForMobile();
+        });
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get inquiryId from URL query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const inquiryId = urlParams.get('inquiryId');
+
+        if (inquiryId) {
+            // Prepare the URL for AJAX call
+            const ajaxUrl = '/myfav/inquiry/trigger?inquiryId=' + encodeURIComponent(inquiryId);
+
+            fetch(ajaxUrl, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('AJAX response:', data);
+            })
+            .catch(error => {
+                console.error('AJAX error:', error);
+            });
+        }
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all caret toggle elements
+        var caretToggles = document.querySelectorAll('.caret-toggle');
+
+        caretToggles.forEach(function(caret) {
+            caret.addEventListener('click', function() {
+                // Get the section ID from the data-section attribute
+                var sectionId = caret.getAttribute('data-section');
+                var section = document.getElementById(sectionId);
+
+                // Toggle the section visibility
+                if (section.style.display === 'none' || section.style.display === '') {
+                    section.style.display = 'block';
+                    caret.classList.remove('collapsed'); // Remove collapsed class
+                    caret.classList.add('expanded'); // Add expanded class
+                } else {
+                    section.style.display = 'none';
+                    caret.classList.remove('expanded'); // Remove expanded class
+                    caret.classList.add('collapsed'); // Add collapsed class
+                }
+            });
+        });
+    });
+    
+</script>
+
+
+{% endblock %}
+{% block base_body_inner %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            $(window).on('scroll', function() {
+                var scrollTop = $(window).scrollTop();
+                var triggerPoint = 200; // Adjust as needed
+
+                if (scrollTop > triggerPoint) {
+                    $('#stickyBuybox').addClass('sticky-buybox');
+                } else {
+                    $('#stickyBuybox').removeClass('sticky-buybox');
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block base_body_classes %}{{ parent() }}{% if page.cmsPage.type == "product_list"%} santa--product-listing{% endif %}{% endblock %}
+
+{#
+{% block base_footer %}
+  <!--Discount Popup -->
+    {% if controllerAction == "home" %}
+      <div class="modal fade santa--discount-coupon" id="santa--discount-modal" tabindex="-1" role="dialog" aria-labelledby="santa--discount-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              Test
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-santa-discount></div>
+    {% endif %}
+{% endblock %}#}
+{% block bodyClass %}
+    {{ parent() }} test
+{% endblock %}

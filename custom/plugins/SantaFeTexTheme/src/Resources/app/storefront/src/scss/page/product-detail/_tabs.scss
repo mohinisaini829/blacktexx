@@ -1,0 +1,141 @@
+.product-detail-tab-preview{
+    display: none;
+}
+
+.card-tabs .product-detail-tab-navigation {
+  border-bottom: 0;
+
+  .nav-tabs {
+    border-bottom: 0;
+  }
+
+  .nav-item-direct-content{
+    transition: transform 0.3s ease-in-out;
+    transform: scaleY(0);
+    transform-origin: top;
+    height: 0;
+    .offcanvas-close{
+      display: none;
+    }
+  }
+
+  .nav-item {
+    max-width: 100%;
+  }
+
+  .nav-link.active {
+    border-color: $border-color;
+    font-weight: bold;
+  }
+
+  .nav-link {
+    text-transform: uppercase;
+    font-size: calc(#{$vio-tab-font-size});
+    border-bottom: 1px solid $border-color;
+
+    .product-detail-tab-navigation-icon {
+      transition: height 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    &.open {
+      .product-detail-tab-navigation-icon {
+        transform: rotate(-90deg);
+      }
+
+      + .nav-item-direct-content {
+        height: auto;
+        transform: scaleY(1);
+      }
+    }
+  }
+}
+
+.table-striped tbody tr.properties-row:nth-of-type(odd) {
+  background-color: transparent;
+}
+.properties-row {
+  display: list-item;
+  position: relative;
+  z-index: 0;
+  top: .25rem;
+  margin-left: 1rem;
+
+  th, td {
+    padding: .25rem;
+    position: relative;
+    top: 0.4rem;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .card-tabs .product-detail-tab-navigation {
+    .product-detail-tab-navigation-link {
+      border-bottom: 1px solid $border-color;
+    }
+
+    .nav-tabs .offcanvas-content-container {
+      padding-top: 1rem;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .card-tabs .product-detail-tab-navigation {
+    .nav-item-direct-content {
+      display: none;
+    }
+
+    .product-detail-tab-navigation-list {
+      border-bottom: 1px solid $border-color;
+    }
+
+    .nav-tabs .nav-item {
+      margin-bottom: 0;
+
+      &:not(:last-of-type) {
+        padding-right: 1rem;
+        margin-right: 5%  ;
+      }
+    }
+
+    .nav-link {
+      text-transform: uppercase;
+      border-bottom: none;
+      font-size: $vio-tab-font-size;
+      padding-bottom: 1.4rem;
+      padding-top: 0;
+      line-height: $vio-tab-font-size;
+      position: relative;
+      z-index: 0;
+      color: $gray-300;
+
+      &:hover {
+        color: $secondary;
+        background-color: transparent;
+        &::after {
+          content: '';
+          position: absolute;
+          z-index: 10;
+          bottom: 0;
+          left: 0;
+          width: 50%;
+          border-bottom: 5px solid $secondary;
+        }
+      }
+
+      &.active {
+        color: $secondary;
+
+        &::after {
+          content: '';
+          position: absolute;
+          z-index: 10;
+          bottom: 0;
+          left: 0;
+          width: 50%;
+          border-bottom: 5px solid $secondary;
+        }
+      }
+    }
+  }
+}

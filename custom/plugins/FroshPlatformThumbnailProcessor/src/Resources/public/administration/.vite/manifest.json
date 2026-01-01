@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/frosh-platform-thumbnail-processor-Cve_qXcS.js",
+    "name": "frosh-platform-thumbnail-processor",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/frosh-platform-thumbnail-processor-Cr_5FTSB.css"
+    ]
+  }
+}

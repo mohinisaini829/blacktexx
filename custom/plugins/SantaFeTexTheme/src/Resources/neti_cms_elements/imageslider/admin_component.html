@@ -1,0 +1,43 @@
+<!--
+Hey mighty developer,
+use your own css or shopware css classes to style the preview of your impressive new element.
+ -->
+
+<style lang="text/css">
+    .neti-next-cms-element-builder-dummy-element .config-elements {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 15px;
+    }
+    .neti-next-cms-element-builder-dummy-element .config-elements .config-element {
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+    }
+    .neti-next-cms-element-builder-dummy-element .config-elements .config-element .config-element-name {
+        width: 250px;
+    }
+    .neti-next-cms-element-builder-dummy-element .config-elements .config-element .config-element-value {
+        flex: 1;
+    }
+    .neti-next-cms-element-builder-dummy-element .config-elements .config-element .config-element-value img {
+        max-height: 100px;
+    }
+    .neti-next-cms-element-builder-dummy-element .config-elements .config-element .config-element-value .config-element-collection {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 5px;
+    }
+</style>
+<div class="neti-next-cms-element-builder-dummy-element">
+    <div class="config-elements">
+        <div class="config-element dummyCollection">
+            <div class="config-element-name">
+                Add Slider Image
+            </div>
+            <div class="config-element-value">
+                <img src="{{ element.config.collectionMedia.url.value }}" />
+            </div>
+        </div>
+    </div>
+</div>

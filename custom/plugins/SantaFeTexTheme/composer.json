@@ -1,0 +1,31 @@
+{
+  "name": "vio/santa-fee-tex-theme",
+  "description": "Theme für Santa Fe Tex",
+  "version": "1.0.7",
+  "type": "shopware-platform-plugin",
+  "authors": [
+    {
+      "name": "VIOSYS AG"
+    }
+  ],
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "SantaFeTexTheme\\": "src/"
+    }
+  },
+  "require": {
+    "shopware/core": "~6.3",
+    "shopware/administration": "~6.3",
+    "shopware/storefront": "~6.3"
+  },
+  "extra": {
+    "copyright": "(c) by VIOSYS AG",
+    "shopware-plugin-class": "SantaFeTexTheme\\SantaFeTexTheme",
+    "label": {
+      "de-DE": "SantaFeTex-Theme-Plugin",
+      "en-GB": "SantaFeTex-Theme plugin"
+    },
+    "plugin-icon": "plugin.png"
+  }
+}

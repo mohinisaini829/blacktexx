@@ -1,0 +1,6 @@
+@mixin link-hover {
+  transition: color .25s ease-in-out;
+  &:hover {
+    color: $primary;
+  }
+}

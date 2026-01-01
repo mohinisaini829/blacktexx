@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Yapımcı:",
+            "ProductNumber": "Makale numarası:"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Ürün numarası",
+            "DetailBuyActionAdd": "Varyantları alışveriş sepetine ekleyin",
+            "UnitPrice": "Birim fiyat",
+            "VariantOrderMatrixColAmount": "Miktar",
+            "VariantStock": "Depo",
+            "quickOrder": "Hızlı sipariş",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Tahmini toplam fiyat"
+        }
+    }
+}

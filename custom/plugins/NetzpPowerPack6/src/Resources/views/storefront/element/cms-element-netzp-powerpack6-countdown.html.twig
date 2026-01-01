@@ -1,0 +1,63 @@
+{% block netzp_powerpack6_countdown %}
+    <div class="netzp-powerpack6-countdown-element p-2"
+         id="countdown_{{ element.id }}"
+         style="text-align: {{ element.config.textAlign.value }}; font-size: {{ element.config.textSize.value }}rem; background-color: {{ element.config.backgroundColor.value }}; color: {{ element.config.textColor.value }}">
+
+        {% if(element.config.title.value) %}
+        <h3 class="mt-2" style="color: {{ element.config.textColor.value }}; text-align: {{ element.config.textAlign.value }}">
+            {{ element.config.title.value }}
+        </h3>
+        {% endif %}
+
+        {% if(element.config.layout.value == 'boxes') %}
+            <div class="countdown {% if(element.config.textAlign.value == "left") %}countdown-left{% endif %}" style="text-align: {{ element.config.textAlign.value }}" data-countdown-{{ element.id }}-container="true">
+                <div class="boxed" style="font-size: {{ element.config.textSize.value }}rem;">
+                    <span class="box1">
+                        <div class="counter" style="background-color: {{ element.config.boxColor.value }}"></div>
+                        <span class="title">{{ "netzp.powerpack.days"|trans }}</span>
+                    </span>
+                    <span class="box2">
+                        <div class="counter" style="background-color: {{ element.config.boxColor.value }}"></div>
+                        <span class="title">{{ "netzp.powerpack.hours"|trans }}</span>
+                    </span>
+                    <span class="box3">
+                        <div class="counter" style="background-color: {{ element.config.boxColor.value }}"></div>
+                        <span class="title">{{ "netzp.powerpack.minutes"|trans }}</span>
+                    </span>
+                    <span class="box4">
+                        <div class="counter" style="background-color: {{ element.config.boxColor.value }}"></div>
+                        <span class="title">{{ "netzp.powerpack.seconds"|trans }}</span>
+                    </span>
+                </div>
+
+                {% if(element.config.buttonText.value) %}
+                    <a href="{{ element.config.buttonLink.value }}" {% if(element.config.buttonTargetBlank.value) %}rel="noopener" target="_blank"{% endif %}
+                       class="netzp-powerpack6-countdown-button btn {% if(element.config.textAlign.value != "center") %}netzp-powerpack6-countdown-button-right{% endif %}" style="background-color: {{ element.config.buttonColor.value }}; color: {{ element.config.buttonTextColor.value }}; font-size: {{ element.config.textSize.value }}rem;">
+                        {{ element.config.buttonText.value }}
+                    </a>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="countdown" style="text-align: {{ element.config.textAlign.value }}" data-countdown-{{ element.id }}-container="true">&nbsp;</div>
+
+            {% if(element.config.buttonText.value) %}
+                <a href="{{ element.config.buttonLink.value }}" {% if(element.config.buttonTargetBlank.value) %}rel="noopener" target="_blank"{% endif %}
+                   class="netzp-powerpack6-countdown-button btn {% if(element.config.textAlign.value != "center") %}netzp-powerpack6-countdown-button-right{% endif %}" style="background-color: {{ element.config.buttonColor.value }}; color: {{ element.config.buttonTextColor.value }}; font-size: {{ element.config.textSize.value }}rem;">
+                    {{ element.config.buttonText.value }}
+                </a>
+            {% endif %}
+        {% endif %}
+
+
+        <template data-netzp-powerpack6-countdown
+                  data-netzp-powerpack6-countdown-options='{
+                    "id": "{{ element.id }}",
+                    "layout": "{{ element.config.layout.value }}",
+                    "enddate": "{{ element.config.enddate.value }}",
+                    "countdown": "{{ element.config.countdown.value }}",
+                    "elapsed": "{{ element.config.elapsed.value }}",
+                    "elapsedHide": "{{ element.config.elapsedHide.value }}"
+                  }'>
+        </template>
+    </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+.sw-cms-block-netzp-powerpack6-grid6 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-gap: 40px;
+
+  .sw-text-editor.is--empty {
+    background-color: #eee;
+  }
+}

@@ -1,0 +1,48 @@
+{% for lineItem in page.inquiryCartEntryCollection %}
+    {% block product_item %}
+        <div class="col-12 col-sm-6 col-md-3 special-offers-item">
+            <div class="special-offers-item-inner">
+                <div class="special-offers-image">
+                    {% sw_thumbnails 'product-image-thumbnails' with {
+                        media: lineItem.product.cover.media,
+                        sizes: {
+                            'default': '200px'
+                        },
+                        attributes: {
+                            'alt': lineItem.product.translated.name,
+                            'title': lineItem.product.translated.name
+                        }
+                    } %}
+                </div>
+                <div class="special-offers-info">
+                    <div class="special-offers-price">
+                        {% set itemUnitPrice = lineItem.product.calculatedPrice.unitPrice %}
+                        <div class="font-weight-bold">{{ (itemUnitPrice * lineItem.quantity)|currency }}</div>
+                    </div>
+                    <a class="special-offers-name" href="{{ path('frontend.detail.page', { productId: lineItem.productId }) }}">
+                        {{ lineItem.product.translated.name }}
+                    </a>
+                    <div class="special-offers-manufacturer">
+                        {{ lineItem.product.manufacturer.translated.name }}
+                    </div>
+                    <div class="special-offers-description">
+                        {{ lineItem.product.translated.description|striptags|raw  }}
+                    </div>
+                </div>
+            </div>
+            <div class="special-offers-checkbox-wrapper">
+                <input
+                    id="special-offers-checkbox-{{ lineItem.id }}"
+                    form="myfav-inquiry-form"
+                    class="special-offers-checkbox"
+                    type="checkbox"
+                    value="{{ lineItem.productId }}"
+                    name="productIds[]"
+                    checked="checked"
+                    aria-label="{{ lineItem.product.translated.name|sw_sanitize }}"
+                />
+                <label for="special-offers-checkbox-{{ lineItem.id }}">&nbsp;</label>
+            </div>
+        </div>
+    {% endblock %}
+{% endfor %}

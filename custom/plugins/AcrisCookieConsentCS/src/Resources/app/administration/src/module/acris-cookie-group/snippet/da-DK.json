@@ -1,0 +1,37 @@
+{
+    "acris-cookie-group": {
+        "general": {
+            "mainMenuItemGeneral": "Cookies",
+            "placeholderSearchBar": "Søg cookies",
+            "description": "Se cookies som er fundet i butikken",
+            "labelName": "Cookiegruppe"
+        },
+        "list": {
+            "textHeadline": "Cookiegrupper",
+            "buttonAdd": "Tilføj",
+            "contextMenuEdit": "Rediger",
+            "contextMenuDelete": "Slet",
+            "columnTitle": "Titel",
+            "columnDescription": "Beskrivelse",
+            "textDeleteConfirm": "Vil du slette cookiegruppen",
+            "modalTitleDelete": "Slet cookiegruppen",
+            "buttonCancel": "Fortryd",
+            "buttonDelete": "Slet",
+            "contentEmpty": "Der er ingen cookiegrupper"
+        },
+        "detail": {
+            "textHeadline": "Indstillinger for cookiepolitikgruppe",
+            "buttonCancel": "Fortryd",
+            "buttonSave": "Gem",
+            "fieldTitleLabel": "Titel",
+            "fieldTitlePlaceholder": "Indsæt cookiegruppe titel",
+            "fieldDescriptionLabel": "Beskrivelse",
+            "fieldDescriptionPlaceholder": "Indsæt beskrivelse",
+            "cardTitle": "Kundeinformation",
+            "notificationSaveErrorMessage": "Der opstod en fejl under gemming af cookiegruppen.",
+            "notificationSaveSuccessMessage": "Cookiegruppen blev gemt succesfuldt.",
+            "notificationSaveSuccessMessageTitle": "Succes",
+            "notificationSaveErrorMessageTitle": "Fejl"
+        }
+    }
+}

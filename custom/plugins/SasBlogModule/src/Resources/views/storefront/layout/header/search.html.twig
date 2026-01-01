@@ -1,0 +1,26 @@
+{% sw_extends '@Storefront/storefront/layout/header/search.html.twig' %}
+
+{% set prioTab = config('SasBlogModule.config.searchTab') %}
+{% set isShowBlog = (prioTab === 'blog') %}
+
+{% block layout_header_search %}
+    {% if app.request.attributes.get('_route') == 'frontend.sas.blog.search' or isShowBlog %}
+        <div class="collapse"
+             id="searchCollapse">
+            <div class="header-search">
+                <form action="{{ path('frontend.sas.blog.search') }}"
+                      method="get"
+                      data-search-widget="true"
+                      data-search-widget-options="{{ searchWidgetOptions|json_encode }}"
+                      data-url="{{ path('frontend.search.suggest') }}?search="
+                      class="header-search-form">
+                    {% block layout_header_search_input_group %}
+                        {{ parent() }}
+                    {% endblock %}
+                </form>
+            </div>
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

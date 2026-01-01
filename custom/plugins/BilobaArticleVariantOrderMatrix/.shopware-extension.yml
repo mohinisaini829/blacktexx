@@ -1,0 +1,291 @@
+store:
+    categories:
+        - Detailseite
+    type: extension
+    automatic_bugfix_version_compatibility: true
+    default_locale: de_DE
+    localizations:
+        - es_ES
+        - fi_FI
+        - fr_FR
+        - it_IT
+        - nb_NO
+        - nl_NL
+        - pl_PL
+        - sv_SE
+        - bg_BG
+        - cs_CZ
+        - pt_PT
+        - hr_HR
+        - tr_TR
+        - da_DK
+        - ru_RU
+        - lv_LV
+        - id_ID
+        - el_GR
+        - de_DE
+        - en_GB
+    availabilities:
+        - German
+        - International
+    description:
+        de: "<p>Mit der Erweiterung <strong>Varianten-Matrix Schnellbestellung</strong> präsentierst du die Varianten eines Artikels übersichtlich in Tabellenform – direkt auf der Produktdetailseite. Deine Kunden sehen auf einen Blick alle verfügbaren Varianten und können direkt Mengen eintragen und mehrere Varianten gleichzeitig in den Warenkorb legen.</p><br>\n<p>Diese Lösung eignet sich besonders für Shops mit vielen Varianten (z.B. Größen, Farben, Formate), bei denen schnelle Bestellung und Klarheit entscheidend sind.</p><br>\n<h3 id=\"flexible-darstellung-und-konfiguration\">Flexible Darstellung und Konfiguration</h3>\n<ul>\n<li>Die Matrix kann abhängig vom Verkaufskanal oder gezielt auf Artikelebene aktiviert oder deaktiviert werden.</li>\n<li>Varianten mit Lagerbestand kleiner 1 lassen sich optional ausblenden (nicht im Standard-Layout).</li>\n<li>Die Position der Matrix lässt sich flexibel auf der Produktseite definieren.</li>\n<li>Du kannst die Darstellung durch verschiedene Layouts individuell anpassen.</li>\n</ul><br>\n<h3 id=\"benutzerfreundliche-zusatzfunktionen\">Benutzerfreundliche Zusatzfunktionen</h3>\n<ul>\n<li>Staffelmengen, Lagerbestände und Preisstaffelungen können je Variante angezeigt werden.</li>\n<li>Große Matrizen brechen automatisch bei kleinen Bildschirmen sinnvoll um (responsive Design).</li>\n<li>Kunden können bequem mehrere Varianten auf einmal in den Warenkorb legen.</li>\n<li>Die Mengenauswahl kann als Dropdown oder Textfeld angezeigt werden – je nach Vorliebe.</li>\n</ul><br>\n<h3 id=\"weiterentwicklung-amp-support\">Weiterentwicklung &amp; Support</h3>\n<p>Die Varianten-Matrix wird kontinuierlich weiterentwickelt. Die im Store gezeigten Screenshots geben einen Eindruck, können aber von der aktuellen Version abweichen.<br />\nTeste die App direkt in deinem Shopware-Backend – und wenn du noch spezielle Wünsche hast, melde dich gerne bei uns!</p><br>\n<h3>Wo finde ich Unterstützung bei meinen Fragen zu diesem Shopware Plugin?</h3><p>Unter https://www.biloba-it.de/shopware-plugin/sw6-varianten-matrix/#faq finden Sie Antworten auf häufig gestellte Fragen.</p><h3>Du brauchst noch weitere Anpassungen?</h3><p>Du willst mehr an Deinem Shop anpassen? Dann nimm Kontakt zu uns auf! Als Shopware Partner Agentur entwickeln wir nicht nur individuelle Plugins sondern betreuen Kunden von der Idee zum Shop, über die Planung bis zur Programmierung und dem Shop Hosting. Schreib uns einfach eine E-Mail an support@biloba-it.de oder rufe uns unter +49 711 13633800 an.</p>"
+        en: "<p>With the extension <strong>Variant Matrix Quick Order</strong>, you present the variants of a product clearly in tabular form—directly on the product detail page. Your customers can see all available variants at a glance, enter quantities directly, and add multiple variants to the cart simultaneously.</p><br>\n<p>This solution is particularly suitable for shops with many variants (e.g., sizes, colors, formats) where quick ordering and clarity are crucial.</p><br>\n<h3 id=\"flexible-display-and-configuration\">Flexible Display and Configuration</h3>\n<ul>\n<li>The matrix can be activated or deactivated depending on the sales channel or specifically on the product level.</li>\n<li>Variants with stock less than 1 can be optionally hidden (not in the standard layout).</li>\n<li>The position of the matrix can be flexibly defined on the product page.</li>\n<li>You can customize the display with various layouts.</li>\n</ul><br>\n<h3 id=\"user-friendly-additional-features\">User-friendly Additional Features</h3>\n<ul>\n<li>Quantity scales, stock levels, and tier pricing can be displayed for each variant.</li>\n<li>Large matrices automatically break sensibly on small screens (responsive design).</li>\n<li>Customers can easily add multiple variants to the cart at once.</li>\n<li>The quantity selection can be displayed as a dropdown or text field—depending on preference.</li>\n</ul><br>\n<h3 id=\"further-development-amp-support\">Further Development &amp; Support</h3>\n<p>The variant matrix is continuously being developed. The screenshots shown in the store give an impression but may differ from the current version.<br />\nTest the app directly in your Shopware backend—and if you have any specific requests, feel free to contact us!</p><br>\n<h3>Where can I find support for my questions about this Shopware plugin?</h3><p>At https://www.biloba-it.de/en/shopware-plugin/sw6-varianten-matrix/#faq you will find answers to frequently asked questions.</p><h3>Do you need further customization?</h3><p>You want to customise your shop more? Then get in touch with us! As a Shopware partner agency, we not only develop individual plugins, but also support customers from the shop idea, through planning to programming and shop hosting. Just write us an email at support@biloba-it.de or call us at +49 711 13633800.</p>"
+    installation_manual:
+        de: "<h3>Wo finde ich Unterstützung bei meinen Fragen zu diesem Shopware Plugin?</h3><p>Unter https://www.biloba-it.de/shopware-plugin/sw6-varianten-matrix/#faq finden Sie Antworten auf häufig gestellte Fragen.</p><h2 id=\"installationsanleitung\">Installationsanleitung</h2>\n<p>Die App installieren und aktivieren.\nDie Varianten Matrix funktioniert, wenn ein Produkt ein oder zwei Variantenoptionen besitzt.\nFalls Sie Custom Products nutzen wollen, müssen Sie die Varianten Matrix für das entsprechende Produkt deaktivieren, da diese nicht miteinander kompatibel sind, siehe Punkt Artikel Varianten Order Matrix Konfiguration.\nDie App bietet folgende Konfigurationsbereiche:</p><br>\n<p>Artikel Varianten Order Matrix Konfiguration</p><br>\n<ul>\n<li>Zusätzlicher Schnellbestellbutton im Produktlisting aktivierbar</li>\n<li>Mengenfeld / Lager</li>\n<li>Layout &quot;Standard&quot;</li>\n<li>Layout &quot;1. Gruppe als Auswahl, 2. Gruppe als Matrix&quot;</li>\n</ul><br>\n<p>Artikel Varianten Order Matrix Konfiguration</p><br>\n<ul>\n<li>Aktivieren und Deaktivierung der Matrix (Konfigurierbar auch in jedem Produkt unter Kataloge/Produkte Zusatzfelder)</li>\n<li>Varianten Matrix Layout, Position und Ausrichtung</li>\n</ul><br>\n<p>Mengenfeld / Lager</p><br>\n<ul>\n<li>Mengenfelder Layout</li>\n<li>Lagerbestand berücksichtigen</li>\n<li>Schwellenwert Lagerbestandsanzeige</li>\n</ul><br>\n<p>Layout &quot;Standard&quot;</p><br>\n<ul>\n<li>Konfiguration Tabellenzeilenumbrüche für bestimmte Auflösungen</li>\n</ul><br>\n<p>Layout &quot;1. Gruppe als Auswahl, 2. Gruppe als Matrix&quot;</p><br>\n<ul>\n<li>Variantenansicht aktivieren für eine Variante</li>\n</ul><br>\n<p><strong>ACHTUNG</strong></p><br>\n<ul>\n<li>Wenn Sie Preisregeln in Varianten hinzufügen, dann sind diese immer abhängig von der ausgewählten Sprache.</li>\n</ul><br>\n<h3 id=\"etwas-ist-bei-der-installation-schief-gelaufen\">Etwas ist bei der Installation schief gelaufen?</h3>\n<p>Wenn Du Unterstützung bei der Installation des Plugins benötigst, kannst Du gerne Kontakt zu uns aufnehmen. Schreib uns einfach eine E-Mail an support@biloba-it.de oder rufe uns unter +49 711 13633800 an.</p><br>\n<h3 id=\"hilf-uns-dir-zu-helfen\">Hilf uns, dir zu helfen!</h3>\n<p>Gefällt dir das Plugin oder hast du Vorschläge für unsere Plugins, dann hinterlasse uns doch eine Bewertung!</p><br>\n"
+        en: "<h3>Where can I find support for my questions about this Shopware plugin?</h3><p>At https://www.biloba-it.de/en/shopware-plugin/sw6-varianten-matrix/#faq you will find answers to frequently asked questions.</p><h2 id=\"installation-guide\">Installation Guide</h2>\n<p>Install and activate the app.<br />\nThe variant matrix functions when a product has one or two variant options.<br />\nIf you want to use Custom Products, you must deactivate the variant matrix for the corresponding product, as they are not compatible, see the point Article Variant Order Matrix Configuration.<br />\nThe app offers the following configuration areas:</p><br>\n<p>Article Variant Order Matrix Configuration</p><br>\n<ul>\n<li>Additional quick order button in the product listing can be activated</li>\n<li>Quantity Field / Stock</li>\n<li>Layout &quot;Standard&quot;</li>\n<li>Layout &quot;1st group as selection, 2nd group as matrix&quot;</li>\n</ul><br>\n<p>Article Variant Order Matrix Configuration</p><br>\n<ul>\n<li>Enable and disable the matrix (Also configurable in each product under Catalogs/Products Additional Fields)</li>\n<li>Variant matrix layout, position, and orientation</li>\n</ul><br>\n<p>Quantity Field / Stock</p><br>\n<ul>\n<li>Quantity fields layout</li>\n<li>Consider stock</li>\n<li>Stock level display threshold</li>\n</ul><br>\n<p>Layout &quot;Standard&quot;</p><br>\n<ul>\n<li>Configuration of table row breaks for certain resolutions</li>\n</ul><br>\n<p>Layout &quot;1st group as selection, 2nd group as matrix&quot;</p><br>\n<ul>\n<li>Enable variant view for one variant</li>\n</ul><br>\n<p><strong>WARNING</strong></p><br>\n<ul>\n<li>When you add price rules in variants, they are always dependent on the selected language.</li>\n</ul><br>\n<h3 id=\"something-went-wrong-during-installation\">Something went wrong during installation?</h3>\n<p>If you need assistance with the installation of the plugin, feel free to contact us. Just send us an email at support@biloba-it.de or call us at +49 711 13633800.</p><br>\n<h3 id=\"help-us-help-you\">Help us help you!</h3>\n<p>If you like the plugin or have suggestions for our plugins, please leave us a review!</p><br>\n"
+    highlights:
+        de:
+            - 'Übersichtliche Darstellung aller Varianten in Tabellenform'
+            - 'Schnellbestellfunktion: mehrere Varianten direkt in den Warenkorb legen'
+            - 'Flexible Positionierung der Matrix auf der Produktdetailseite'
+            - 'Aktivierung je Verkaufskanal oder pro Artikel möglich'
+            - 'Vielfältige Layouts und Anzeigeoptionen für maximale Kontrolle'
+        en:
+            - 'Clear presentation of all variants in tabular form'
+            - 'Quick order function: add multiple variants directly to the cart'
+            - 'Flexible positioning of the matrix on the product detail page'
+            - 'Activation possible per sales channel or per item'
+            - 'Variety of layouts and display options for maximum control'
+    features:
+        de:
+            - 'Klare, tabellarische Darstellung aller Varianten direkt auf der Produktdetailseite'
+            - 'Position der Matrix frei wählbar (z.B. oberhalb oder unterhalb von Inhalten)'
+            - 'Matrix aktivierbar/deaktivierbar je Verkaufskanal oder auf Artikelebene'
+            - 'Varianten mit Lagerbestand 1 ausblendbar (außer im Standard-Layout)'
+            - 'Mehrere Varianten können gleichzeitig in den Warenkorb gelegt werden'
+            - 'Unterstützung für Staffelpreise, Lagerbestände pro Variante darstellbar'
+            - 'Mengenauswahl wahlweise als Textfeld oder Dropdown'
+            - 'Layout bricht bei vielen Varianten spaltenweise viewportabhängig um'
+            - 'Umfangreiche Variantenmatrix-Layouts und Anzeigeoptionen zur Auswahl'
+            - 'Einfache und schnelle Installation ohne technische Vorkenntnisse'
+            - 'Kompatibel mit allen gängigen Shopware 6 Themes'
+        en:
+            - 'Clear, tabular representation of all variants directly on the product detail page'
+            - 'Position of the matrix freely selectable (e.g., above or below content)'
+            - 'Matrix can be activated/deactivated per sales channel or at the item level'
+            - 'Variants with stock level 1 can be hidden (except in the standard layout)'
+            - 'Multiple variants can be added to the cart simultaneously'
+            - 'Support for graduated prices, stock levels per variant can be displayed'
+            - 'Quantity selection optionally as text field or dropdown'
+            - 'Layout adapts column-wise depending on the viewport with many variants'
+            - 'Extensive variant matrix layouts and display options to choose from'
+            - 'Simple and fast installation without technical knowledge'
+            - 'Compatible with all common Shopware 6 themes'
+    faq:
+        de:
+            - { question: 'Wo finde ich Unterstützung bei meinen Fragen zu diesem Shopware Plugin?', answer: 'Unter https://www.biloba-it.de/shopware-plugin/sw6-varianten-matrix/#faq finden Sie Antworten auf häufig gestellte Fragen.' }
+            - { question: 'Kann dieses Plugin auch individuell angepasst werden?', answer: 'Ja, wir passen das Plugin gerne an Ihre individuellen Wünsche an. Schreiben Sie uns einfach eine Nachricht an support@biloba-it.de .' }
+        en:
+            - { question: 'Where can I find support for my questions about this Shopware plugin?', answer: 'At https://www.biloba-it.de/en/shopware-plugin/sw6-varianten-matrix/#faq you will find answers to frequently asked questions.' }
+            - { question: 'Can this plugin also be customized?', answer: 'Yes, we are happy to customize the plugin to your individual requirements. Simply send us a message to support@biloba-it.de .' }
+    tags:
+        de:
+            - varianten
+            - matrix
+            - schnellbestellung
+            - variantenliste
+            - variantenauswahl
+        en:
+            - variants
+            - matrix
+            - 'quick order'
+            - 'variant list'
+            - 'variant selection'
+    meta_description:
+        de: 'Zeige Varianten übersichtlich in Tabellenform auf der Produktseite. Kunden können mehrere Varianten gleichzeitig in den Warenkorb legen – Steigere UX und Conversions'
+        en: 'Display variants clearly in a table format on the product page. Customers can add multiple variants to the cart simultaneously, enhancing UX and boosting conversions efficiently.'
+    meta_title:
+        de: 'Varianten-Matrix | Übersicht & Conversion'
+        en: 'Variants Matrix | Overview & Conversion'
+    images:
+        -
+            file: ./Resources/store/images/de/10_Konfiguration3.png
+            activate: { de: true, en: false }
+            preview: { de: true, en: false }
+            priority: 100
+        -
+            file: ./Resources/store/images/de/11_Produkt_Matrix_deactivate_switch.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 99
+        -
+            file: ./Resources/store/images/de/12_Letzte_Gruppe_als_Matrix_restliche_Gruppen_als_Shopware_Optionen_1.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 98
+        -
+            file: ./Resources/store/images/de/13_Letzte_Gruppe_als_Matrix_restliche_Gruppen_als_Shopware_Optionen_2.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 97
+        -
+            file: ./Resources/store/images/de/14_Letzte_Gruppe_als_Matrix_restliche_Gruppen_als_Shopware_Optionen_4.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 96
+        -
+            file: ./Resources/store/images/de/15_Letzte_Gruppe_als_Matrix_restliche_Gruppen_als_Shopware_Optionen_3.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 95
+        -
+            file: ./Resources/store/images/de/16_Konfiguration01.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 94
+        -
+            file: ./Resources/store/images/de/17_Konfiguration02.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 93
+        -
+            file: ./Resources/store/images/de/18_Eine_Variante_X_DropDown_Matrix_unterhalb_Preis_selector_layout.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 92
+        -
+            file: ./Resources/store/images/de/19_Eine_Variante_X_Input_Matrix_unterhalb_Preis_selector_layout.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 91
+        -
+            file: ./Resources/store/images/de/1_Default2.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 90
+        -
+            file: ./Resources/store/images/de/20_Eine_Variante_Y_DropDown_Matrix_unterhalb_Preis_selector_layout.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 89
+        -
+            file: ./Resources/store/images/de/21_Eine_Variante_Y_Input_Matrix_unterhalb_Preis_selector_layout.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 88
+        -
+            file: ./Resources/store/images/de/22_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_1.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 87
+        -
+            file: ./Resources/store/images/de/23_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_2.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 86
+        -
+            file: ./Resources/store/images/de/24_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_3.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 85
+        -
+            file: ./Resources/store/images/de/25_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_4.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 84
+        -
+            file: ./Resources/store/images/de/26_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_6.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 83
+        -
+            file: ./Resources/store/images/de/27_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_7.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 82
+        -
+            file: ./Resources/store/images/de/2_Default3.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 81
+        -
+            file: ./Resources/store/images/de/3_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_5.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 80
+        -
+            file: ./Resources/store/images/de/4_Drei_Varianten_X_DropDown_Matrix_oberhalb_der_Beschreibung.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 79
+        -
+            file: ./Resources/store/images/de/5_Drei_Varianten_X_DropDown_Matrix_unterhalb_des_Preises.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 78
+        -
+            file: ./Resources/store/images/de/6_Drei_Varianten_Y_DropDown_Matrix_unterhalb_des_Preises.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 77
+        -
+            file: ./Resources/store/images/de/7_Drei_Varianten_Y_DropDown_Matrix_oberhalb_der_Beschreibung.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 76
+        -
+            file: ./Resources/store/images/de/8_Konfiguration1.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 75
+        -
+            file: ./Resources/store/images/de/9_Konfiguration2.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 74
+        -
+            file: ./Resources/store/images/en/1_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_1.png
+            activate: { de: false, en: true }
+            preview: { de: false, en: true }
+            priority: 100
+        -
+            file: ./Resources/store/images/en/2_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_4.png
+            activate: { de: false, en: true }
+            preview: { de: false, en: false }
+            priority: 99
+        -
+            file: ./Resources/store/images/en/3_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_3.png
+            activate: { de: false, en: true }
+            preview: { de: false, en: false }
+            priority: 98
+        -
+            file: ./Resources/store/images/en/4_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_5.png
+            activate: { de: false, en: true }
+            preview: { de: false, en: false }
+            priority: 97
+        -
+            file: ./Resources/store/images/en/5_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_2.png
+            activate: { de: false, en: true }
+            preview: { de: false, en: false }
+            priority: 96
+        -
+            file: ./Resources/store/images/en/6_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_7.png
+            activate: { de: false, en: true }
+            preview: { de: false, en: false }
+            priority: 95
+        -
+            file: ./Resources/store/images/en/7_Erste_Gruppe_als_Auswahl_Zweite_Gruppe_als_Matrix_6.png
+            activate: { de: false, en: true }
+            preview: { de: false, en: false }
+            priority: 94
+        -
+            file: ./Resources/store/images/en/8_Configuration01.png
+            activate: { de: false, en: true }
+            preview: { de: false, en: false }
+            priority: 93
+        -
+            file: ./Resources/store/images/en/9_Configuration02.png
+            activate: { de: false, en: true }
+            preview: { de: false, en: false }
+            priority: 92
+        -
+            file: ./Resources/store/images/sw_plugin_screenshot_endcard_de.png
+            activate: { de: true, en: false }
+            preview: { de: false, en: false }
+            priority: 1
+        -
+            file: ./Resources/store/images/sw_plugin_screenshot_endcard_en.png
+            activate: { de: false, en: true }
+            preview: { de: false, en: false }
+            priority: 1

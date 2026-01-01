@@ -1,0 +1,43 @@
+{
+  "name": "userlike/userlike-plugin",
+  "description": "Userlike Plugin to add a Userlike Widget to your Storefront",
+  "version": "v1.0.3",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Userlike UG",
+      "homepage": "https://www.userlike.com",
+      "role": "Manufacturer"
+    }
+  ],
+  "require": {
+    "shopware/core": ">=6.4.0.0 <6.8.0.0",
+    "shopware/storefront": "*"
+  },
+  "extra": {
+    "shopware-plugin-class": "UserlikeUG\\usrlUserlike6\\usrlUserlike6",
+    "plugin-icon": "src/Resources/config/plugin.png",
+    "label": {
+      "de-DE": "Userlike Plugin für Shopware 6",
+      "en-GB": "Userlike Plugin for Shopware 6"
+    },
+    "description": {
+      "de-DE": "Schnell und einfach Userlike in Shopware 6 einbinden",
+      "en-GB": "Add Userlike to your Shopware 6 shop quicky and easily"
+    },
+    "manufacturerLink": {
+      "de-DE": "https://store.shopware.com/userlike.html",
+      "en-GB": "https://store.shopware.com/en/userlike.html"
+    },
+    "supportLink": {
+      "de-DE": "https://www.userlike.com/de/support",
+      "en-GB": "https://www.userlike.com/en/support"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "UserlikeUG\\usrlUserlike6\\": "src/"
+    }
+  }
+}

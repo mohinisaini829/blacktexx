@@ -1,0 +1,25 @@
+.cookie-permission-actions span .btn {
+  text-transform: capitalize;
+  background: none;
+  color: $sw-black;
+  font-size: 16px;
+  color: $sw-orange;
+}
+
+.cookie-permission-actions .js-cookie-accept-all-button .btn {
+  background: $sw-orange;
+  color: $sw-white;
+}
+
+.cookie-permission-actions .btn:hover {
+  background-color: #ca4c00;
+  color: $sw-white;
+}
+
+.cookie-permission-container {
+  text-align: left;
+}
+
+.cookie-permission-container .header-logo-picture {
+  max-width: 100%;
+}

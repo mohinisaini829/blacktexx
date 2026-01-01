@@ -1,0 +1,103 @@
+{% block component_blog_slider_box %}
+    {% if blog %}
+        {% set name = blog.translated.title %}
+        {% set id = blog.id %}
+        {% set cover = blog.media %}
+
+        <div class="card blog-slider-box box-{{ layout }}">
+            {% block component_blog_slider_box_content %}
+                <div class="card-body">
+                    {% block component_blog_slider_box_image %}
+                        <div class="blog-slider-image-wrapper">
+                            {# fallback if display mode is not set #}
+                            {% set displayMode = displayMode ?: 'standard' %}
+
+                            {# set display mode 'cover' for box-image with standard display mode #}
+                            {% if layout == 'image' and displayMode == 'standard' %}
+                                {% set displayMode = 'cover' %}
+                            {% endif %}
+
+                            {% block component_blog_slider_box_image_link %}
+                                <a href="{{ seoUrl('sas.frontend.blog.detail', { articleId: blog.id }) }}"
+                                   title="{{ name }}"
+                                   class="blog-slider-image-link is-{{ displayMode }}">
+                                    {% block component_blog_slider_box_image_link_inner %}
+                                        {% if cover.url %}
+                                            {% set attributes = {
+                                                'class': 'blog-slider-image is-'~displayMode,
+                                                'alt': (cover.translated.alt ?: name),
+                                                'title': (cover.translated.title ?: name),
+                                                'loading': 'lazy'
+                                            } %}
+
+                                            {% if displayMode == 'cover' or displayMode == 'contain' %}
+                                                {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+                                            {% endif %}
+
+                                            {% block component_blog_slider_box_image_thumbnail %}
+                                                {% sw_thumbnails 'blog-slider-image-thumbnails' with {
+                                                    media: cover,
+                                                    sizes: sizes
+                                                } %}
+                                            {% endblock %}
+                                        {% else %}
+                                            {% block component_blog_slider_box_image_placeholder %}
+                                                <div class="blog-slider-image-placeholder">
+                                                    {% sw_icon 'placeholder' style {
+                                                        'size': 'fluid'
+                                                    } %}
+                                                </div>
+                                            {% endblock %}
+                                        {% endif %}
+                                    {% endblock %}
+                                </a>
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+
+                    {% block component_blog_slider_box_info %}
+                        <div class="blog-slider-info">
+                            {% block component_blog_slider_box_name %}
+                                <a href="{{ seoUrl('sas.frontend.blog.detail', { articleId: blog.id }) }}"
+                                   class="blog-slider-name"
+                                   title="{{ name }}">
+                                    {{ name }}
+                                </a>
+                            {% endblock %}
+
+                            {% block component_blog_slider_box_description %}
+                                <div class="blog-slider-description">
+                                    {{ blog.translated.teaser|striptags|raw }}
+                                </div>
+                            {% endblock %}
+
+                            {% block component_blog_slider_box_action %}
+                                <div class="blog-slider-action">
+                                    {% block component_blog_slider_box_action_detail %}
+                                        <div class="d-grid">
+                                            <a href="{{ seoUrl('sas.frontend.blog.detail', { articleId: blog.id }) }}"
+                                               class="btn btn-read"
+                                               title="{{ name }}">
+                                                {{ "sas-blog.blogAssignment.readArticle"|trans|sw_sanitize }}
+                                            </a>
+                                        </div>
+                                    {% endblock %}
+                                </div>
+
+                                {% block component_blog_slider_box_action_meta %}
+                                    <input type="hidden"
+                                           name="blog-slider-name"
+                                           value="{{ name }}">
+
+                                    <input type="hidden"
+                                           name="blog-slider-id"
+                                           value="{{ id }}">
+                                {% endblock %}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}

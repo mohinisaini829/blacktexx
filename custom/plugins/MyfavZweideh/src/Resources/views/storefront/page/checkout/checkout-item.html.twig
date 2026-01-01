@@ -1,0 +1,68 @@
+{# @deprecated tag:v6.5.0 - Template `checkout-item.html.twig` is deprecated. Use `storefront/component/line-item/line-item.html.twig` instead. #}
+{% sw_extends '@Storefront/storefront/page/checkout/checkout-item.html.twig' %}
+ 
+{% block page_checkout_item_info_image_link %}
+    {% if lineItem.payload.customFields.myfav_zweideh_enabled %}
+        <div
+            class="cart-item-img-link"
+            title="{{ label }}">
+            <img class="img-fluid cart-item-img" style="width: 100px" src="{{ seoUrl('frontend.myfav.zweideh.tmp.cart.image', {'key': lineItem.payload.lumise_tmp_key, 'tmp_cart_id': lineItem.payload.lumise_tmp_cart_id }) }}" />
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_product_detail_buy_quantity %}
+    {% if lineItem.payload.customFields.myfav_zweideh_enabled %}
+        <select name="quantity"
+                class="{{ formSelectClass }} quantity-select">
+
+            {% for quantity in range(lineItem.quantityInformation.minPurchase, config('MyfavZweideh.config.maxOrderQty'), lineItem.quantityInformation.purchaseSteps) %}
+                <option value="{{ quantity }}"
+                    {% if quantity == lineItem.quantity %} selected="selected"{% endif %}>
+                    {{ quantity }}
+                </option>
+            {% endfor %}
+
+        </select>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_checkout_item_info_label %}
+    
+    {% if lineItem.payload.customFields.myfav_zweideh_enabled %}
+        {% if lineItem.type == PRODUCT_LINE_ITEM_TYPE %}
+            {#<a href="#{# {{ seoUrl('frontend.detail.page', {'productId': lineItem.referencedId}) }} #}{#"
+                class="cart-item-label"
+                title="{{ label }}"
+                {% if controllerAction is same as('confirmPage') %}
+                    {{ dataBsToggleAttr }}="modal"
+                    data-modal-class="quickview-modal"
+                    data-url="{{ 
+                        path('widgets.quickview.minimal',{ 
+                            'productId': lineItem.referencedId, 
+                            'myfavZweidehDesignedProduct': true, 
+                            'imgUrl': seoUrl('frontend.myfav.zweideh.tmp.cart.image', {
+                                'key': lineItem.payload.lumise_tmp_key, 
+                                'tmp_cart_id': lineItem.payload.lumise_tmp_cart_id
+                            })
+                        })
+                    }}"
+                {% endif %}
+            >#}
+            <div class="cart-item-label">
+                {{ label|u.truncate(60, '...', false) }}
+            </div>
+            {#</a>#}
+        {% else %}
+            <div class="cart-item-label">
+                {{ label|u.truncate(60, '...', false) }}
+            </div>
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

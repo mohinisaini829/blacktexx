@@ -1,0 +1,50 @@
+{% block sw_cms_element_netzp_powerpack6_map_config %}
+    <div class="sw-cms-el-config-netzp-powerpack6">
+        <sw-container columns="1fr 1fr 1fr 1fr" gap="40px">
+            <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.map.config.height')"
+                             numberType="int" :min="1" :max="100" :step="1"
+                             v-model:value="element.config.height.value">
+            </sw-number-field>
+
+            <sw-select-field :label="$t('sw-cms.netzp-powerpack6.elements.map.config.mapType')"
+                             v-model:value="element.config.mapType.value">
+                <option value="roadmap">
+                    {{ $tc('sw-cms.netzp-powerpack6.elements.map.config.roadmap') }}
+                </option>
+                <option value="satellite">
+                    {{ $tc('sw-cms.netzp-powerpack6.elements.map.config.satellite') }}
+                </option>
+                <option value="hybrid">
+                    {{ $tc('sw-cms.netzp-powerpack6.elements.map.config.hybrid') }}
+                </option>
+                <option value="terrain">
+                    {{ $tc('sw-cms.netzp-powerpack6.elements.map.config.terrain') }}
+                </option>
+            </sw-select-field>
+
+            <sw-switch-field :label="$tc('sw-cms.netzp-powerpack6.elements.map.config.optIn')"
+                             bordered v-model:value="element.config.optIn.value" />
+        </sw-container>
+
+        <sw-container columns="1fr 1fr 1fr 1fr" gap="40px">
+            <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.map.config.lat')"
+                             numberType="float" :min="-90.0" :max="90" :step="0.000001" :digits="6"
+                             v-model:value="element.config.lat.value">
+            </sw-number-field>
+
+            <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.map.config.long')"
+                             numberType="float" :min="-180.0" :max="180" :step="0.000001" :digits="6"
+                             v-model:value="element.config.long.value">
+            </sw-number-field>
+
+            <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.map.config.zoomLevel')"
+                             numberType="int" :min="0" :max="20" :step="1"
+                             v-model:value="element.config.zoomLevel.value">
+            </sw-number-field>
+        </sw-container>
+
+        <sw-text-editor :label="$tc('sw-cms.netzp-powerpack6.elements.map.config.contents')"
+                        v-model:value="element.config.contents.value">
+        </sw-text-editor>
+    </div>
+{% endblock %}

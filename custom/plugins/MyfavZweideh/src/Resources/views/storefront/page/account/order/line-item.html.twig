@@ -1,0 +1,15 @@
+{# @deprecated tag:v6.5.0 - Template `storefront/page/account/order/line-item.html.twig` is deprecated. Use `storefront/component/line-item/line-item.html.twig` instead. #}
+{# This template is for repeating an order or paying an order, out of the customer account. #}
+{% sw_extends '@Storefront/storefront/page/account/order/line-item.html.twig' %}
+
+{% block page_checkout_item_info_image_link %}
+    {% if lineItem.payload.customFields.myfav_zweideh_enabled %}
+        <div
+            class="cart-item-img-link"
+            title="{{ label }}">
+            <img class="img-fluid cart-item-img" style="width: 100px" src="{{ seoUrl('frontend.myfav.zweideh.tmp.cart.image', {'key': lineItem.payload.lumise_tmp_key, 'tmp_cart_id': lineItem.payload.lumise_tmp_cart_id }) }}" />
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

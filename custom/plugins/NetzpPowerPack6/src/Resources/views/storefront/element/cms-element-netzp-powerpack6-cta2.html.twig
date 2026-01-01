@@ -1,0 +1,58 @@
+{% block netzp_powerpack6_cta2 %}
+    <div class="netzp-powerpack6-cta2-element"
+         style='{{ element.data.containerStyle|raw }}'>
+        {% for element in element.data.elements %}
+            {% set imageStyle = '' %}
+
+            {% if element.width == '' or element.width == 'auto' %}
+                {% set imageStyle = imageStyle ~ 'max-width: 100%;' %}
+            {% else %}
+                {% set imageStyle = imageStyle ~ 'width: ' ~ element.width ~ ';' %}
+            {% endif %}
+
+            {% set imageHeight = '100vw' %}
+            {% if element.height == '' or element.height == 'auto' %}
+                {% set imageStyle = imageStyle ~ 'max-height: 100%;' %}
+            {% else %}
+                {% set imageStyle = imageStyle ~ 'height: ' ~ element.height ~ ';' %}
+                {% set imageHeight = element.height %}
+            {% endif %}
+
+            {% if element.type == 'image' %}
+                <div class="element {{ element.class }}" style="{{ element.style }}">
+                    {% if element.url !== '' %}
+                        <a href="{{ element.url }}" {% if element.urlNewWindow %}target="_blank"{% endif %}>
+                    {% endif %}
+
+                    {% sw_thumbnails 'pp_cta2_image_thumbnail' with {
+                        media: element.image.media,
+                        sizes: {
+                            'default': imageHeight,
+                        },
+                        attributes: {
+                            'style': imageStyle,
+                            'alt':   element.image.media.translated.alt ?: '',
+                            'title': element.image.media.translated.title ?: ''
+                        }
+                    } %}
+
+                    {% if element.url !== '' %}
+                        </a>
+                    {% endif %}
+                </div>
+
+            {% elseif element.type == 'text' or element.type == 'button' %}
+                {% if element.url !== '' %}
+                    <a href="{{ element.url }}" {% if element.urlNewWindow %}target="_blank"{% endif %}
+                       class="{{ element.class }}" style="{{ element.style }}">
+                        {{ element.contents|raw|sw_sanitize }}
+                    </a>
+                {% else %}
+                    <div class="element {{ element.class }}" style="{{ element.style }}">
+                        {{ element.contents|raw|sw_sanitize }}
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

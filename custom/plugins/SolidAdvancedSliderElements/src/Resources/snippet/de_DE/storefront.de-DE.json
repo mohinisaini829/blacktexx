@@ -1,0 +1,9 @@
+{
+    "solidAdvancedSliderElements": {
+        "general": {
+            "nextSlide": "Nächster Slide",
+            "previousSlide": "Vorheriger Slide",
+            "skipSlider": "Slider überspringen"
+        }
+    }
+}

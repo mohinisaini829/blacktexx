@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/solid-advanced-slider-elements-D_OW--Ao.js",
+    "name": "solid-advanced-slider-elements",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/solid-advanced-slider-elements-DNqeX1RU.css"
+    ]
+  }
+}

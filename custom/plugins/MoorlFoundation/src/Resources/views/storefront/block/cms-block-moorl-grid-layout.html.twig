@@ -1,0 +1,22 @@
+<div class="col">
+    <div class="moorl-grid-layout">
+        {% for letter in 'a'..'z' %}
+            {% set element = block.slots.getSlot("slot-#{letter}") %}
+            {% if element %}
+                {% set elementContent %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                {% endset %}
+                {% set moorlAnimation = element.config.moorlAnimation.value %}
+                {% if moorlAnimation.in.active or moorlAnimation.out.active or moorlAnimation.hover.active %}
+                    <div data-moorl-animation='{{ moorlAnimation|json_encode|raw }}'>
+                        {{ elementContent }}
+                    </div>
+                {% elseif config('MoorlFoundation.config.cmpGridElementWrapper') %}
+                    <div>{{ elementContent }}</div>
+                {% else %}
+                    {{ elementContent }}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

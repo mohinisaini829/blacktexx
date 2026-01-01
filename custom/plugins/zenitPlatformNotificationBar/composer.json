@@ -1,0 +1,43 @@
+{
+    "name": "zenit/platform-notification-bar",
+    "description": "Plugin for displaying a notification bar in storefront.",
+    "version": "5.0.1",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Zenit Design",
+            "homepage": "https://zenit.design"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.7",
+        "shopware/storefront": "~6.7"
+    },
+    "extra": {
+        "shopware-plugin-class": "zenit\\PlatformNotificationBar\\zenitPlatformNotificationBar",
+        "plugin-icon": "src/Resources/config/plugin-icon.png",
+        "copyright": "(c) by Zenit Design",
+        "label": {
+            "de-DE": "Hinweis Banner",
+            "en-GB": "Notification Banner"
+        },
+        "description": {
+            "de-DE": "Zusätzliches Element in der Storefront zur Anzeige von Hinweistexten und Nachrichten im Kopfbereich der Seite oder (fixiert) am unteren Bildschirmrand. Das Element kann vom Kunden miminiert und maximiert werden. Das Plugin speichert die Kundeneinstellung.",
+            "en-GB": "Additional element in the storefront for displaying notifications in the header area of the page or (fixed) at the bottom of the screen. The item can be eliminated and maximized by the customer. The plugin saves the customer setting."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://store.shopware.com/zenit-design.html",
+            "en-GB": "https://store.shopware.com/en/zenit-design.html"
+        },
+        "supportLink": {
+            "de-DE": "https://help.zenit.design",
+            "en-GB": "https://help.zenit.design"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "zenit\\PlatformNotificationBar\\": "src/"
+        }
+    }
+}

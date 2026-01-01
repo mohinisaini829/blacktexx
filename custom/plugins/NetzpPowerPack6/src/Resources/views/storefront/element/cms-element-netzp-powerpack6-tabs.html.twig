@@ -1,0 +1,33 @@
+{% block netzp_powerpack6_tabs %}
+    <div class="netzp-powerpack6-tabs-element">
+        {% block netzp_powerpack6_tabs_title %}
+            {% if element.config["title"].value %}
+                <h3 class="title">{{ element.config["title"].value }}</h3>
+            {% endif %}
+        {% endblock %}
+
+        <ul class="nav nav-tabs">
+            {% for n in range(1, element.config.numberOfTabs.value) %}
+                {% block netzp_powerpack6_tabs_item %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if(n==1) %}active{% endif %}" data-bs-toggle="tab"
+                           href="#tab{{ element.id }}_{{ n }}">
+                            <strong class="netzp-powerpack6-tabs-header">{{ element.config["tabtitle#{n}"].value|raw }}</strong>
+                        </a>
+                    </li>
+                {% endblock %}
+            {% endfor %}
+        </ul>
+
+        <div class="tab-content">
+            {% for n in range(1, element.config.numberOfTabs.value) %}
+                {% block netzp_powerpack6_tabs_content %}
+                    <div class="tab-pane container {% if(n==1) %}active{% else %}fade{% endif %} pt-4 netzp-powerpack6-tabs-body"
+                         id="tab{{ element.id }}_{{ n }}">
+                            {{ element.config["tabcontents#{n}"].value|raw }}
+                    </div>
+                {% endblock %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

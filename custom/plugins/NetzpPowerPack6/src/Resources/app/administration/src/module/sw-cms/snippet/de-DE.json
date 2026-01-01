@@ -1,0 +1,499 @@
+{
+  "sw-cms": {
+    "netzp-powerpack6": {
+      "sidebarLabelLayouts": "PowerPack Layouts",
+      "sidebarLabelElements": "PowerPack Elemente",
+      "configResponsive": "Responsive Darstellung",
+      "configResponsiveNoBreakpoint": "Achtung: dieses Element wird nie angezeigt!",
+      "configResponsiveDeprecation": "Achtung: diese Funktionalität ist mittlerweile im Shopware-Standard integriert und wird daher in der <b>nächsten Plugin-Version nicht mehr zur Verfügung stehen</b>. Verwenden Sie bitte nur noch die Standard-Funktionen zur responsiven Darstellung von Shopware unter <b>Sichtbarkeit / Anzeigegeräte</b>!",
+
+      "colorGradient": {
+          "label": "Hintergrund Farbverlauf",
+          "color1": "Farbe 1",
+          "color2": "Farbe 2",
+          "colorAngle": "Winkel"
+      },
+
+      "dates": {
+          "label": "Sichtbarkeit",
+          "showFrom": "Anzeigen von",
+          "showUntil": "bis"
+      },
+
+      "rule": {
+        "label": "Rule Builder Regel",
+        "info": "Regel"
+      },
+
+      "blocks": {
+        "grid1": {
+          "label": "1 Spalte"
+        },
+        "grid2": {
+          "label": "2 Spalten"
+        },
+        "grid2-39": {
+          "label": "2 Spalten (3 / 9)"
+        },
+        "grid2-93": {
+          "label": "2 Spalten (9 / 3)"
+        },
+        "grid2-48": {
+          "label": "2 Spalten (4 / 8)"
+        },
+        "grid2-84": {
+          "label": "2 Spalten (8 / 4)"
+        },
+        "grid3": {
+          "label": "3 Spalten"
+        },
+        "grid3a": {
+          "label": "3 Spalten"
+        },
+        "grid4": {
+          "label": "4 Spalten"
+        },
+        "grid5": {
+          "label": "5 Spalten"
+        },
+        "grid6": {
+          "label": "6 Spalten"
+        },
+        "imagetext2": {
+          "label": "2 Spalten, Bild/Text-Karten"
+        },
+        "imagetext4": {
+          "label": "4 Spalten, Bild/Text-Karten"
+        },
+        "tile1": {
+          "label": "Kachel 1"
+        },
+        "tile2": {
+          "label": "Kachel 2"
+        },
+        "testimonial": {
+          "label": "Testimonial"
+        },
+        "alert": {
+          "label": "Alert"
+        },
+        "infobar": {
+          "label": "Infobar / Iconleiste"
+        },
+        "cta": {
+          "label": "CTA (alt)"
+        },
+        "cta2": {
+          "label": "CTA Flex"
+        },
+        "counter": {
+            "label": "Zähler"
+        },
+        "tabs": {
+          "label": "Tabs"
+        },
+        "collapse": {
+          "label": "Akkordion"
+        },
+        "map": {
+          "label": "Karte/Google Map"
+        },
+        "countdown": {
+          "label": "Countdown"
+        },
+        "parallax": {
+          "label": "Parallax-Bild"
+        },
+        "imagecompare": {
+          "label": "Bild-Vergleich"
+        },
+          "card": {
+              "label": "Aktions-Karte"
+          }
+      },
+
+      "elements": {
+          "card": {
+              "label": "Aktions-Karte",
+              "tabs": {
+                  "front": "Vorderseite",
+                  "back": "Rückseite",
+                  "config": "Konfiguration"
+              },
+              "config": {
+                  "image1": "Bild Vorderseite",
+                  "image2": "Bild Rückseite",
+                  "text1": "Text Vorderseite",
+                  "text2": "Text Rückseite",
+                  "imageCover1": "Bild ausfüllen",
+                  "imageCover2": "Bild ausfüllen",
+                  "backgroundColor1": "Hintergrundfarbe",
+                  "backgroundColor2": "Hintergrundfarbe",
+                  "imageOpacity1": "Bild Deckkraft",
+                  "imageOpacity2": "Bild Deckkraft",
+                  "color1": "Textfarbe Vorderseite",
+                  "color2": "Textfarbe Rückseite",
+                  "height": "Höhe (rem)",
+                  "icon": "Icon",
+                  "url": "Link",
+                  "urlNewWindow": "In neuem Fenster öffnen",
+                  "blurText": "Text unscharf",
+                  "urlText": "Link-Text",
+                  "type": {
+                      "label": "Typ",
+                      "flip": "Umdrehen",
+                      "reveal": "Enthüllen",
+                      "blur": "Unschärfe",
+                      "popup": "Popup",
+                      "static": "Statisch"
+                  }
+              }
+          },
+        "imagecompare": {
+            "label": "Bild-Vergleich",
+            "config": {
+                "image1": "Bild 1",
+                "image2": "Bild 2",
+                "height": "Höhe (rem)",
+                "controlColor": "Teiler-Farbe",
+                "smoothing": "Sanfte Bewegung",
+                "addCircle": "Runder Teiler",
+                "verticalMode": "Vertikale Anordnung",
+                "startingPoint": "Startpunkt",
+                "beforeLabel": "Titel Bild 1",
+                "afterLabel": "Titel Bild 2"
+            }
+        },
+        "cta": {
+          "label": "CTA (alt)",
+          "config": {
+            "title": "CTA-Titel",
+
+            "left": "links",
+            "center": "zentriert",
+            "right": "rechts",
+            "top": "oben",
+            "bottom": "unten",
+
+            "align": {
+              "centercenter": "zentriert (X + Y)",
+              "lefttop": "links oben",
+              "rightbottom": "Rechts unten"
+            },
+
+            "auto": "Auto",
+            "contain": "gesamtes Bild (contain)",
+            "cover": "feste Bildgröße (cover)",
+
+            "tabs": {
+              "main": {
+                "label": "Hauptdaten"
+              },
+              "layout": {
+                "label": "Layout",
+                "height": "Höhe (rem)",
+                "borderColor": "Rahmenfarbe",
+                "borderRadius": "Rahmen Radius (px)",
+                "autoLayout": "Auto-Layout",
+                "autoLayoutHelp": "Falls gewählt, werden die Elemente automatisch positioniert. Alternativ kann jedes Element (Titel, Text, Bild, Button) manuell positioniert werden."
+              },
+              "title": {
+                "label": "Titel",
+                "title": "Titel",
+                "color": "Farbe",
+                "backgroundColor": "Hintergrund-Farbe",
+                "size": "Größe (rem)",
+                "align": "Ausrichtung",
+                "posx": "Horizontale (X) Ausrichtung",
+                "posy": "Vertikale (Y) Ausrichtung",
+                "shadow": "Schatten"
+              },
+              "text": {
+                "label": "Text",
+                "text": "Text",
+                "color": "Farbe",
+                "backgroundColor": "Hintergrund-Farbe",
+                "size": "Größe (rem)",
+                "width": "Breite (%)",
+                "align": "Ausrichtung",
+                "posx": "Horizontale (X) Ausrichtung",
+                "posy": "Vertikale (Y) Ausrichtung",
+                "shadow": "Schatten"
+              },
+              "button": {
+                "label": "Button",
+                "text": "Button-Text",
+                "size": "Größe (rem)",
+                "align": "Ausrichtung",
+                "posx": "Horizontale (X) Ausrichtung",
+                "posy": "Vertikale (Y) Ausrichtung",
+                "shadow": "Schatten",
+                "block": "Volle Breite",
+                "rounded": "Abgerundet",
+                "url": "Url",
+                "targetblank": "In neuem Fenster öffnen",
+                "backgroundColor": "Button Hintergrund-Farbe",
+                "color": "Button Text-Farbe",
+                "borderColor": "Rahmenfarbe"
+              },
+              "images": {
+                "label": "Bilder",
+                "image": "Bild",
+                "imagebackground": "Hintergrund-Bild",
+                "backgroundColor": "Hintergrund-Farbe",
+                "backgroundColorHelp": "Nur gültig, falls kein Hintergrund-Bild ausgewählt wird.",
+                "size": "Größe (rem)",
+                "rounded": "Kreisförmig",
+                "block": "Volle Breite",
+                "pos": "Position",
+                "posx": "X-Ausrichtung",
+                "posy": "Y-Ausrichtung",
+                "mode": "Bild-Darstellung",
+                "align": "Bild-Position"
+              }
+            }
+          }
+        },
+
+          "cta2": {
+              "label": "CTA Flex",
+              "tabs": {
+                  "main": "Einstellungen",
+                  "remove": "Dieses Element löschen? Das kann nicht rückgängig gemacht werden."
+              },
+              "config": {
+                  "addElement": "Neues Element hinzufügen",
+                  "removeElement": "Element löschen",
+                  "numberOfElements": "Anzahl Elemente",
+                  "height": "Höhe",
+                  "gap": "Element-Abstand",
+                  "imageBackground": "Hintergrund-Bild",
+                  "direction": {
+                      "label": "Ausrichtung",
+                      "row": "Horizontal",
+                      "column": "Vertikal"
+                  },
+                  "justifyContent": {
+                      "label": "X-Ausrichtung",
+                      "start": "Start",
+                      "center": "Zentrieren",
+                      "end": "Ende",
+                      "spaceBetween": "Platz dazwischen",
+                      "spaceAround": "Platz umgebend"
+                  },
+                  "alignItems": {
+                      "label": "Y-Ausrichtung",
+                      "start": "Start",
+                      "center": "Zentrieren",
+                      "end": "Ende",
+                      "stretch": "Dehnen"
+                  },
+                  "imageMode": {
+                      "label": "Bild-Modus",
+                      "auto": "Auto",
+                      "contain": "gesamtes Bild (contain)",
+                      "cover": "feste Bildgröße (cover)"
+                  },
+                  "imageAlign": {
+                      "label": "Bild-Ausrichtung",
+                      "centercenter": "Zentrieren",
+                      "lefttop": "Links/Oben",
+                      "rightbottom": "Rechts/Unten"
+                  },
+                  "element": {
+                      "type": {
+                          "label": "Typ",
+                          "text": "Text",
+                          "button": "Button",
+                          "image": "Bild"
+                      },
+                      "contents": "Inhalt",
+                      "image": "Bild",
+                      "imageBackground": "Hintergrund-Bild",
+                      "color": "Farbe",
+                      "backgroundColor": "Hintergrund-Farbe",
+                      "borderColor": "Rahmen-Farbe",
+                      "borderWidth": "Rahmen-Breite (px)",
+                      "fontSize": "Schriftgröße",
+                      "width": "Breite",
+                      "height": "Höhe",
+                      "padding": "Innenabstand",
+                      "url": "Link",
+                      "urlNewWindow": "In neuem Fenster öffnen",
+                      "alignSelf": {
+                          "label": "Ausrichtung",
+                          "auto": "Auto",
+                          "start": "Start",
+                          "center": "Zentrieren",
+                          "end": "Ende",
+                          "stretch": "Dehnen"
+                      },
+                      "buttonMode": {
+                          "label": "Button Typ",
+                          "primary": "Primär",
+                          "secondary": "Sekundär",
+                          "success": "Erfolg",
+                          "danger": "Fehler",
+                          "warning": "Warnung",
+                          "info": "Info",
+                          "light": "Hell",
+                          "dark": "Dunkel",
+                          "custom": "Individuell"
+                      }
+                  }
+              }
+          },
+
+        "tabs": {
+          "label": "Tabs",
+          "config": {
+            "numberOfTabs": "Anzahl Tabs",
+            "title": "title",
+            "tabtitle": "Tab Titel",
+            "tabcontents": "Tab Inhalt"
+          }
+        },
+
+        "collapse": {
+          "label": "Akkordion",
+          "config": {
+            "title": "Überschrift",
+            "numberOfItems": "Anzahl Einträge",
+            "firstItemOpened": "Ersten Eintrag geöffnet zeigen",
+            "itemtitle": "Eintrag Titel",
+            "itemcontents": "Eintrag Inhalt"
+          }
+        },
+
+        "testimonial": {
+          "label": "Testimonial",
+          "config": {
+            "image": "Bild",
+            "title": "Titel",
+            "contents": "Inhalt",
+            "name": "Name",
+            "name2": "Name (klein)"
+          }
+        },
+
+        "alert": {
+          "label": "Alert",
+          "config": {
+            "alertType": {
+              "label": "Typ",
+              "info": "Info",
+              "warning": "Warnung",
+              "error": "Fehler",
+              "success": "Erfolg"
+            },
+            "title": "Überschrift (optional)",
+            "contents": "Inhalt"
+          }
+        },
+
+        "infobar": {
+          "label": "Infobar / Icon-Leiste",
+          "config": {
+            "numberOfItems": "Anzahl",
+            "item": "Item",
+            "icon": "Icon",
+            "link": "Link",
+            "linkNewWindow": "In neuem Fenster öffnen",
+            "iconSize": "Icongröße (rem)",
+            "textSize": "Textgröße (rem)",
+            "iconColor": "Iconfarbe",
+            "textColor": "Textfarbe",
+            "circleColor": "Kreisfarbe",
+            "layout": "Layout",
+            "horizontal": "Horizontal",
+            "vertical": "Vertikal"
+          }
+        },
+
+        "html": {
+          "label": "HTML/CSS",
+          "config": {
+            "html": "HTML",
+            "css": "CSS"
+          }
+        },
+
+        "parallax": {
+          "label": "Parallax-Bild",
+          "config": {
+            "image": "Bild",
+            "height": "Höhe (rem)"
+          }
+        },
+
+        "countdown": {
+          "label": "Countdown",
+          "config": {
+            "layout": {
+              "title": "Layout",
+              "text": "Text",
+              "boxes": "Boxen",
+              "days": "Tage",
+              "hours": "Stunden",
+              "minutes": "Minuten",
+              "seconds": "Sekunden"
+            },
+            "textSize": "Textgröße (rem)",
+            "textAlign": "Textausrichtung",
+            "enddate": "Enddatum",
+            "title": "Titel",
+            "countdown": "Countdown-Text",
+            "elapsed": "Text nach Ablauf",
+            "elapsedHide": "Verbergen nach Ablauf",
+            "buttontext": "Button Text",
+            "buttonlink": "Button Link",
+            "buttonTargetBlank": "In neuem Fenster öffnen",
+            "backgroundColor": "Hintergrundfarbe",
+            "textColor": "Textfarbe",
+            "boxColor": "Boxfarbe",
+            "buttonColor": "Button Hintergrundfarbe",
+            "ctaTextColor": "Button Textfarbe",
+            "left": "links",
+            "center": "zentriert",
+            "right": "rechts"
+          }
+        },
+
+        "counter": {
+          "label": "Zähler",
+          "config": {
+              "title": "Titel",
+              "text": "Text / Template",
+              "textHelp": "Es können Platzhalter verwendet werden: {counter} {start} {end}",
+              "start": "Start-Wert",
+              "end": "End-Wert",
+              "speed": "Geschwindigkeit",
+              "speedHelp": "Höhere Werte führen zu langsamerem Zählen, Standardwert: 1000",
+              "icon": "Icon",
+              "iconColor": "Icon-Farbe",
+              "titleColor": "Titel-Farbe",
+              "counterColor": "Zähler-Farbe"
+          }
+        },
+
+        "map": {
+          "label": "Karte/Google Map",
+          "config": {
+            "height": "Höhe (rem)",
+            "mapType": "Kartentyp",
+            "roadmap": "Straße",
+            "satellite": "Satellit",
+            "hybrid": "Hybrid",
+            "terrain": "Terrain",
+            "zoomLevel": "Zoom-Level",
+            "optIn": "Opt-In",
+            "lat": "Lat",
+            "long": "Long",
+            "allowRouting": "Routing erlauben",
+            "contents": "Inhalt des Popups"
+          }
+        }
+      }
+    }
+  }
+}

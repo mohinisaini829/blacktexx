@@ -1,0 +1,2 @@
+window.PluginManager.register('AcrisCookieConsent', () => import('./plugin/acris-cookie-consent/acris-cookie-consent.plugin'), '[data-acris-cookie-consent]');
+window.PluginManager.register('AcrisCookieConfiguration', () => import('./plugin/acris-cookie-consent/acris-cookie-configuration.plugin'), '[data-acris-cookie-consent]');

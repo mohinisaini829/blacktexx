@@ -1,0 +1,57 @@
+.sw-cms-el-netzp-powerpack6-countdown {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: .5rem !important;
+
+  h3 {
+    margin: 0 0 .25rem 0;
+    font-size: 150%;
+  }
+
+  .boxed {
+    margin: .25rem 0 .5rem 0;
+
+    .box {
+      display: inline-block;
+      font-size: 80%;
+      margin-right: 1rem;
+      text-align: center;
+
+      .counter {
+        display: block;
+        border: 1px solid #666;
+        border-radius: 10px;
+        background-color: #eee;
+        font-weight: bold;
+        font-size: 150%;
+      }
+    }
+  }
+  .btn {
+    display: inline-block;
+    border: 1px solid #333;
+    margin-top: .5rem;
+    padding: .25rem .5rem .25rem .5rem;
+  }
+
+  .btn-absolute {
+    position: absolute;
+    right: .5rem;
+    bottom: .5rem;
+  }
+
+  .enddate {
+    position: absolute;
+    top: 1rem;
+    font-size: 75%;
+
+    &.left {
+      left: 1rem;
+    }
+
+    &.right {
+      right: 1rem;
+    }
+  }
+}

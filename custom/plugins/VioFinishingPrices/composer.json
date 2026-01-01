@@ -1,0 +1,40 @@
+{
+    "name": "vio/finishing-prices",
+    "description": "allows the display of finishing prices",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "VIOSYS AG"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.4"
+    },
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Vio\\FinishingPrices\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Vio\\FinishingPrices\\VioFinishingPrices",
+        "copyright": "VIOSYS AG",
+        "label": {
+            "de-DE": "VIO.Veredelungpreise",
+            "en-GB": "VIO.finishing prices"
+        },
+        "description": {
+            "de-DE": "ermöglicht die Anzeige von Veredelungspreisen",
+            "en-GB": "allows the display of finishing prices"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.viosys.de",
+            "en-GB": "https://www.viosys.de"
+        },
+        "supportLink": {
+            "de-DE": "https://www.viosys.de/kontakt",
+            "en-GB": "https://www.viosys.de/kontakt"
+        }
+    }
+}

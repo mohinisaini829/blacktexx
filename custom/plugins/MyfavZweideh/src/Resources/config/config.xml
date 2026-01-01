@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Designer API-Einstellungen</title>
+        <input-field type="text">
+            <name>lumisInstallPath</name>
+            <label>Installations-Pfad (Unterordner, in dem Lumise installiert ist)</label>
+            <defaultValue>lumise/</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Designer Setup</title>
+        
+        <input-field type="bool">
+            <name>limitOrderQty</name>
+            <label>Max. bestellbare Menge limitieren</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        
+        <input-field type="text">
+            <name>maxOrderQty</name>
+            <label>Maximale Bestellmenge</label>
+            <defaultValue>20</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Email</title>
+        <title lang="de-DE">E-Mail</title>
+
+        <component name="sw-entity-single-select">
+            <name>requestFormMail</name>
+            <label>Email template for requesting a print of a design made by the designer.</label>
+            <label lang="de-DE">E-Mail Vorlage für die Druck-Anfrage eines Designs, das über den Designer erstellt wurde.</label>
+            <entity>mail_template</entity>
+            <labelProperty>description</labelProperty>
+        </component>
+    </card>
+
+    <card>
+        <title>Designer-Popup Setup</title>
+        
+        <!-- Button 1 -->
+        <input-field type="single-select">
+            <name>button1ActionType</name>
+            <label>Button 1 - Aktion</label>
+            <options>
+                <option>
+                    <id>stayOnSite</id>
+                    <name>Auf der Seite bleiben</name>
+                    <name lang="de-DE">Auf der Seite bleiben</name>
+                </option>
+                <option>
+                    <id>openSmallAmountDesigner</id>
+                    <name>Designer für Kleinmengen öffnen</name>
+                    <name lang="de-DE">Designer für Kleinmengen öffnen</name>
+                </option>
+                <option>
+                    <id>openCompanyDesigner</id>
+                    <name>Designer für Firmen öffnen</name>
+                    <name lang="de-DE">Designer für Firmen öffnen</name>
+                </option>
+            </options>
+            <defaultValue>stayOnSite</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>button1Style</name>
+            <label>Button 1 - Stil</label>
+            <options>
+                <option>
+                    <id>orangeBordered</id>
+                    <name>Orange umrandet</name>
+                    <name lang="de-DE">Orange umrandet</name>
+                </option>
+                <option>
+                    <id>blueFilled</id>
+                    <name>Blau gefüllt</name>
+                    <name lang="de-DE">Blau gefüllt</name>
+                </option>
+            </options>
+            <defaultValue>orangeBordered</defaultValue>
+        </input-field>
+
+        <!-- Button 2 -->
+        <input-field type="single-select">
+            <name>button2ActionType</name>
+            <label>Button 2 - Aktion</label>
+            <options>
+                <option>
+                    <id>stayOnSite</id>
+                    <name>Auf der Seite bleiben</name>
+                    <name lang="de-DE">Auf der Seite bleiben</name>
+                </option>
+                <option>
+                    <id>openSmallAmountDesigner</id>
+                    <name>Designer für Kleinmengen öffnen</name>
+                    <name lang="de-DE">Designer für Kleinmengen öffnen</name>
+                </option>
+                <option>
+                    <id>openCompanyDesigner</id>
+                    <name>Designer für Firmen öffnen</name>
+                    <name lang="de-DE">Designer für Firmen öffnen</name>
+                </option>
+            </options>
+            <defaultValue>stayOnSite</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>button2Style</name>
+            <label>Button 2 - Stil</label>
+            <options>
+                <option>
+                    <id>orangeBordered</id>
+                    <name>Orange umrandet</name>
+                    <name lang="de-DE">Orange umrandet</name>
+                </option>
+                <option>
+                    <id>blueFilled</id>
+                    <name>Blau gefüllt</name>
+                    <name lang="de-DE">Blau gefüllt</name>
+                </option>
+            </options>
+            <defaultValue>orangeBordered</defaultValue>
+        </input-field>
+
+        <!-- Button 3 -->
+        <input-field type="single-select">
+            <name>button3ActionType</name>
+            <label>Button 3 - Aktion</label>
+            <options>
+                <option>
+                    <id>stayOnSite</id>
+                    <name>Auf der Seite bleiben</name>
+                    <name lang="de-DE">Auf der Seite bleiben</name>
+                </option>
+                <option>
+                    <id>openSmallAmountDesigner</id>
+                    <name>Designer für Kleinmengen öffnen</name>
+                    <name lang="de-DE">Designer für Kleinmengen öffnen</name>
+                </option>
+                <option>
+                    <id>openCompanyDesigner</id>
+                    <name>Designer für Firmen öffnen</name>
+                    <name lang="de-DE">Designer für Firmen öffnen</name>
+                </option>
+            </options>
+            <defaultValue>stayOnSite</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>button3Style</name>
+            <label>Button 3 - Stil</label>
+            <options>
+                <option>
+                    <id>orangeBordered</id>
+                    <name>Orange umrandet</name>
+                    <name lang="de-DE">Orange umrandet</name>
+                </option>
+                <option>
+                    <id>blueFilled</id>
+                    <name>Blau gefüllt</name>
+                    <name lang="de-DE">Blau gefüllt</name>
+                </option>
+            </options>
+            <defaultValue>orangeBordered</defaultValue>
+        </input-field>
+    </card>
+</config>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Settings Company Register</title>
+        <title lang="de-DE">Einstellungen "Nur Firmenanmeldungen"</title>
+        <input-field type="bool">
+            <name>active</name>
+            <label>Active on sale chanel</label>
+            <label lang="de-DE">Aktiv im Verkaufskanal</label>
+                        <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>PreventPrivatInviceAddress</name>
+            <label>Prevent private address as billing address</label>
+            <label lang="de-DE">Private Adresse als Rechnungsadresse verhindern</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>PreventPrivatRegister</name>
+            <label>Prevent private address registration</label>
+            <label lang="de-DE">Private Adresse verhindern</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+    <card>
+        <title>Important Note</title>
+        <title lang="de-DE">Wichtiger Hinweis</title>
+        <input-field type="bool">
+            <name>note</name>
+            <disabled>true</disabled>
+            <defaultValue>true</defaultValue>
+            <label>In addition, activate the option "Show selection between company and customer account" in Shopware 6 under Settings -> Shop -> Login / Registration!</label>
+            <label lang="de-DE">Zusätzlich in Shopware 6 unter Einstellungen -> Shop -> Login / Registrierung die Option "Auswahl zwischen Firma und Kundenkonto anzeigen" aktivieren!</label>
+        </input-field>
+    </card>
+    <card>
+        <title>Messages</title>
+        <title lang="de-DE">Meldungen</title>
+        <input-field type="bool">
+            <name>showHint</name>
+            <label>Show hint on register page</label>
+            <label lang="de-DE">Hinweis bei Registrierung anzeigen?</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <component name="sw-snippet-field">
+            <name>registerHint</name>
+            <label>Register hint</label>
+            <label lang="de-DE">Hinweis bei Registrierung</label>
+            <snippet>wolf-platform-company-register.message.registerhint</snippet>
+        </component>
+
+        <component name="sw-snippet-field">
+            <name>finishFailMessage</name>
+            <label>Message if billing adress is not company</label>
+            <label lang="de-DE">Hinweis wenn Rechnungsadresse nicht Firma</label>
+            <snippet>wolf-platform-company-register.message.orderblocked</snippet>
+        </component>
+
+    </card>
+
+</config>

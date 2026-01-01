@@ -1,0 +1,30 @@
+{% block netzp_powerpack6_testimonial %}
+    <div class="netzp-powerpack6-testimonial-element" id="testimonial_{{ element.id }}">
+        <div class="media netzp-powerpack-flex">
+            {% if element.data.media %}
+                {% sw_thumbnails 'pp_testimonial_thumbnail' with {
+                    media: element.data.media,
+                    sizes: {
+                        'default': '200px'
+                    },
+                    attributes: {
+                        'class': 'rounded-circle netzp-testimonial-circle',
+                        'alt': element.data.name ~ ' - ' ~ element.data.name2,
+                        'title': element.data.mediamedia.translated.title ?: ''
+                    }
+                } %}
+            {% endif %}
+
+            <div class="media-body">
+                <span class="netzp-testimonial-title text-primary">{{ element.data.title|raw }}</span><br>
+                <div class="netzp-testimonial-body">
+                    {{ element.data.contents|raw }}
+                </div>
+                <div class="netzp-testimonial-meta text-secondary">
+                    <b>{{ element.data.name|raw }}</b>{% if element.data.name && element.data.name2 %}, {% endif %}
+                    <small>{{ element.data.name2|raw }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

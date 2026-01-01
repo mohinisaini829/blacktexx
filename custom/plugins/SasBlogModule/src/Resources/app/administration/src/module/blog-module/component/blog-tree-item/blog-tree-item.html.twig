@@ -1,0 +1,31 @@
+{% block sw_tree_item_children_items %}
+    <sas-blog-tree-item
+        v-for="child in item.children"
+        :key="child.id"
+        :active-category-id="activeCategoryId"
+        :item="child"
+        :dragged-item="draggedItem"
+        :new-element-id="newElementId"
+        :translation-context="translationContext"
+        :on-change-route="onChangeRoute"
+        :active-parent-ids="activeParentIds"
+        :active-item-ids="activeItemIds"
+        :mark-inactive="markInactive"
+        :sortable="sortable"
+        :should-focus="shouldFocus"
+        :active-focus-id="activeFocusId"
+        :display-checkbox="displayCheckbox"
+        :disable-context-menu="disableContextMenu"
+        :get-is-highlighted="getIsHighlighted"
+        @check-item="emitCheckedItem"
+    >
+        {% block sw_tree_item_children_items_slots %}
+            {% parent %}
+        {% endblock %}
+    </sas-blog-tree-item>
+{% endblock %}
+{% block sw_tree_items_actions_edit %}
+    <sw-context-menu-item @click="onEditCategory(item)">
+        {{ $tc('sas-blog-tree-item.actions.edit') }}
+    </sw-context-menu-item>
+{% endblock %}

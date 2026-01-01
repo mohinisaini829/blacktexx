@@ -1,0 +1,101 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-image-gallery.html.twig' %}
+
+{% block element_image_gallery %}
+    <div class="image-badges">
+        {% if config('core.cart.wishlistEnabled') %}
+            {% block component_product_box_wishlist_action %}
+                {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
+                    appearance: 'circle',
+                    productId: page.product.id
+                } %}
+            {% endblock %}
+        {% endif %}
+    </div>
+
+    {{ parent() }}
+{% endblock %}
+
+{% block element_image_gallery_inner %}
+    {% set minHeight = '530px' %}
+
+    {% set thumbnailSlider = gallerySliderOptions.thumbnailSlider|merge(
+        {
+            "items": (galleryPosition == "underneath") ? 3 : 5,
+            "slideBy": (galleryPosition == "underneath") ? 3 : 5
+        })
+    %}
+    {% set gallerySliderOptions = gallerySliderOptions|merge({thumbnailSlider}) %}
+
+    {% set slider = gallerySliderOptions.slider|merge(
+        {
+            "items": 1,
+            "slideBy": 1,
+            "gutter": 3,
+            "responsive": {
+                "sm": {
+                    "items": 1,
+                    "slideBy": 1
+                },
+                "md": {
+                    "items": 2,
+                    "slideBy": 2
+                },
+                "lg": {
+                    "items": 2,
+                    "slideBy": 2
+                },
+                "xl": {
+                    "items": 2,
+                    "slideBy": 2
+                },
+                "xxl": {
+                    "items": 2,
+                    "slideBy": 2
+                }
+            }
+        })
+    %}
+    {% set gallerySliderOptions = gallerySliderOptions|merge({slider}) %}
+
+    {{ parent() }}
+    {% if imageCount <= 1 %}
+        {% block vio_overlay_buttons %}
+            {% if page.product and
+                page.product.manufacturer and
+                page.product.manufacturer.translated.customFields and
+                (page.product.manufacturer.translated.customFields.vio_product_catalog or vio_manufacturer_video_slider)%}
+                <div class="image-badges bottom">
+                    {% if page.product.manufacturer.translated.customFields.vio_manufacturer_video_slider is not empty %}
+                        <a class="btn btn-light"
+                           href="#manufacturer-video-slider"
+                           title="{{ 'santa-theme.sw-cms.elements.vio-manufacturer-video-slider.title'|trans }}">
+                            {% sw_icon 'video-camera' %}
+                            {{ 'santa-theme.sw-cms.elements.vio-manufacturer-video-slider.button'|trans }}
+                        </a>
+                    {% endif %}
+                    {% if page.product.manufacturer.translated.customFields.vio_product_catalog is not empty %}
+                        <a class="btn btn-light"
+                           href="#vio_product_catalog"
+                           title="{{ 'santa-theme.sw-cms.elements.vio-manufacturer-catalog.title'|trans }}">
+                            {% sw_icon 'file' %}
+                            {{ 'santa-theme.sw-cms.elements.vio-manufacturer-catalog.button'|trans }}
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endblock %}
+    {% endif %}
+
+{% endblock %}
+
+{% block element_image_gallery_inner_thumbnails_col %}
+    {% if imageCount > 2 %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block element_image_gallery_slider_dots %}
+    {% if imageCount > 2 %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

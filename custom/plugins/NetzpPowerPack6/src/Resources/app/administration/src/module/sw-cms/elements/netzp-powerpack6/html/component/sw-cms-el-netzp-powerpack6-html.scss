@@ -1,0 +1,19 @@
+.sw-cms-el-netzp-powerpack6-html {
+  position: relative;
+  width: 100%;
+  min-height: 3rem;
+
+  .label {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-color: #eee;
+      color: purple;
+      padding: .2rem;
+      font-size: 80%;
+  }
+
+  .empty {
+    padding: 1rem;
+  }
+}

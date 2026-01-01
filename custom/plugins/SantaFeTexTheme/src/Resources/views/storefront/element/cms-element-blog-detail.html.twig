@@ -1,0 +1,25 @@
+{% sw_extends '@SasBlogModule/storefront/element/cms-element-blog-detail.html.twig' %}
+{% block page_product_detail_review_item_info_date %}{% endblock %}
+{% block sas_blog_detail_article_teaser_image %}
+    <div class="d-flex">
+        {% if element.data.detailTeaserImage %}
+            {% set attributes = {
+                'class': 'blog-image-teaser card-img-top mb-4',
+                'alt': (element.data.media.translated.alt ?: element.data.media.fileName),
+                'title': (element.data.media.translated.title ?: element.data.media.fileName)
+            } %}
+
+            {% sw_thumbnails 'blog-image-teaser' with {
+                media: element.data.media,
+                sizes: {
+                    'xs': '400px',
+                    'sm': '650px',
+                    'md': '400px',
+                    'lg': '650px',
+                    'xl': '800px',
+                    'xxl': '800px'
+                }
+            } %}
+        {% endif %}
+    </div>
+{% endblock %}

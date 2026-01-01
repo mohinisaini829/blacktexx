@@ -1,0 +1,26 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-product-slider.html.twig' %}
+
+{% block element_product_slider %}
+    {% if crossSelling %}
+        <h3>
+            {{ crossSelling.translated.name }}
+        </h3>
+        {% set sliderConfig = sliderConfig | merge({ boxLayout: sliderConfig.boxLayout | merge({ value: "image" }) }) %}
+        {% set sliderConfig = sliderConfig | merge({ elMinWidth: sliderConfig.elMinWidth | merge({ value: "350px" }) }) %}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block element_product_slider_controls_items %}
+    <button title="Prev" class="base-slider-controls-prev product-slider-controls-prev{% if sliderConfig.border.value %} has-border{% endif %}">
+        {% block element_product_slider_controls_items_prev_icon %}
+            {% sw_icon 'arrow-head-left' %}
+        {% endblock %}
+    </button>
+    <button title="Next" class="base-slider-controls-next product-slider-controls-next{% if sliderConfig.border.value %} has-border{% endif %}">
+        {% block element_product_slider_controls_items_next_icon %}
+            {% sw_icon 'arrow-head-right' %}
+        {% endblock %}
+    </button>
+{% endblock %}

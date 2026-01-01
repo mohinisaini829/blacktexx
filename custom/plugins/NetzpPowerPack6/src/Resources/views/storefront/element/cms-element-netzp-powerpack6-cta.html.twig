@@ -1,0 +1,172 @@
+{% block netzp_powerpack6_cta %}
+
+    <div class="netzp-powerpack6-cta-element">
+    <a href="{{ element.config.buttonUrl.value }}"
+       {% if(element.config.buttonTargetBlank.value) %}rel="noopener" target="_blank"{% endif %}>
+
+        {% set imagePos = "" %}
+        {% set mainClass = "" %}
+        {% set mainStyle = "height: " ~ element.config.height.value ~ "rem; " %}
+        {% if(element.config.borderColor.value) %}
+            {% set mainStyle = mainStyle ~ " border: 1px solid " ~ element.config.borderColor.value ~ ";" %}
+        {% endif %}
+        {% if(element.config.borderRadius.value) %}
+            {% set mainStyle = mainStyle ~ " border-radius: " ~ element.config.borderRadius.value ~ "px;" %}
+        {% endif %}
+        {% if(element.config.backgroundColor.value) %}
+            {% set mainStyle = mainStyle ~ " background-color: " ~ element.config.backgroundColor.value ~ ";" %}
+        {% endif %}
+        {% if(element.config.autoLayout.value) %}
+            {% set mainClass = "layout-auto" %}
+            {% set autoLayout = true %}
+        {% else %}
+            {% set mainClass = "layout-manual" %}
+            {% set autoLayout = false %}
+        {% endif %}
+
+        {% set backgroundImageStyle = "" %}
+        {% if(element.data.backgroundImage.media) %}
+            {% set backgroundImageStyle = "background: " ~
+                element.config.backgroundColor.value ~ " " ~
+                "url('" ~ element.data.backgroundImage.media.url ~ "')" ~ " " ~
+                "no-repeat" ~ " " ~
+                element.config.backgroundImageAlign.value ~ "; "
+            %}
+            {% set backgroundImageStyle = backgroundImageStyle ~
+                "background-size: " ~ element.config.backgroundImageMode.value
+            %}
+        {% endif %}
+
+        <div class="netzp-cta-wrapper {{ mainClass }}" style="{{ mainStyle }} {{ backgroundImageStyle|raw }}">
+            {% if(element.data.image.media) %}
+                {% if(element.config.imagePosX.value == "center" and element.config.imagePosY.value == "center") %}
+                    {% set imageAlign = "pos-xy-center" %}
+                {% else %}
+                    {% set imageAlign = "pos-x-" ~ element.config.imagePosX.value ~ " pos-y-" ~ element.config.imagePosY.value %}
+                {% endif %}
+
+                {% set imageClass = "" %}
+                {% set imageInnerClass = "" %}
+                {% set imagePos = element.config.imagePosX.value %}
+
+                {% if(element.config.imageBlock.value) %}
+                    {% set imageClass="image-block" %}
+                    {% if(imagePos == "left" or imagePos == "right") %}
+                        {% set imageStyle = "height: " ~ element.config.height.value ~ "rem; width: " ~ element.config.imageSize.value ~ "rem;" %}
+                    {% else %}
+                        {% set imageStyle = "width: 100%; height:" ~ element.config.imageSize.value ~ "rem;" %}
+                    {% endif %}
+                {% else %}
+                    {% set imageStyle = "width:" ~ element.config.imageSize.value ~ "rem; height:" ~ element.config.imageSize.value ~ "rem;" %}
+                    {% set imageInnerClass = (element.config.imageRounded.value) ? "rounded-circle" : "" %}
+                {% endif %}
+
+                <div class="netzp-cta-image {{ imageClass }} {% if not autoLayout %}{{ imageAlign }}{% endif %}">
+                    {% sw_thumbnails 'cta_thumbnail' with {
+                        media: element.data.image.media,
+                        attributes: {
+                            'class': imageInnerClass,
+                            'style': imageStyle,
+                            'alt':   element.data.image.media.translated.alt ?: '',
+                            'title': element.data.image.media.translated.title ?: ''
+                        }
+                    } %}
+                </div>
+            {% endif %}
+
+            {# --- title ---#}
+            {% if(element.data.title) %}
+                {% if(element.config.titlePosX.value == "center" and element.config.titlePosY.value == "center") %}
+                    {% set titleAlign = titleAlign ~ " pos-xy-center" %}
+                {% else %}
+                    {% set titleAlign = titleAlign ~ " pos-x-" ~ element.config.titlePosX.value ~ " pos-y-" ~ element.config.titlePosY.value %}
+                {% endif %}
+
+                {% set titleStyle = "font-size: " ~ element.config.titleSize.value ~ "rem; " ~
+                                    "color: " ~ element.config.titleColor.value ~ "; "
+                %}
+                {% if(element.config.titleBackgroundColor.value) %}
+                    {% set titleStyle = titleStyle ~ "background-color: " ~ element.config.titleBackgroundColor.value ~ ";" %}
+                {% endif %}
+
+                {% if(autoLayout) %}
+                    {% if(imagePos == "left" or imagePos == "right") %}
+                        {% set titleStyle = titleStyle ~ "width: calc(99% - " ~ element.config.imageSize.value ~ "rem);" %}
+                    {% else %}
+                        {% set titleStyle = titleStyle ~ "width: 100%;" %}
+                    {% endif %}
+                {% endif %}
+
+                <div class="netzp-cta-title {% if not autoLayout %}{{ titleAlign }}{% endif %} {% if(element.config.titleShadow.value) %}text-shadow{% endif %}"
+                     style="{{ titleStyle }}">
+                    {{ element.data.title|raw }}
+                </div>
+            {% endif %}
+
+            {# --- text ---#}
+            {% if(element.data.text) %}
+                {% if(element.config.textPosX.value == "center" and element.config.textPosY.value == "center") %}
+                    {% set textAlign = "pos-xy-center" %}
+                {% else %}
+                    {% set textAlign = "pos-x-" ~ element.config.textPosX.value ~ " pos-y-" ~ element.config.textPosY.value %}
+                {% endif %}
+
+                {% if(element.config.textAlign.value == "center") %}
+                    {% set textAlign = textAlign ~ " text-center" %}
+                {% elseif(element.config.textAlign.value == "right") %}
+                    {% set textAlign = textAlign ~ " text-end" %}
+                {% endif %}
+
+                {% set textStyle = "font-size:" ~ element.config.textSize.value ~ "rem; " ~
+                    "color:" ~ element.config.textColor.value ~ "; " ~
+                    "background-color:" ~ element.config.textBackgroundColor.value ~ "; "
+                %}
+
+                {% if(autoLayout) %}
+                    {% if(imagePos == "left" or imagePos == "right") %}
+                        {% set textStyle = textStyle ~ "width: calc(99% - " ~ element.config.imageSize.value ~ "rem);" %}
+                    {% else %}
+                        {% set textStyle = textStyle ~ "width: 100%;" %}
+                    {% endif %}
+                {% endif %}
+
+                <div class="netzp-cta-text {% if not autoLayout %}{{ textAlign }}{% endif %} {% if(element.config.textShadow.value) %}text-shadow{% endif %}"
+                     style="{{ textStyle }}">
+                    {{ element.data.text|raw }}
+                </div>
+            {% endif %}
+
+            {# --- button ---#}
+            {% if(element.data.button) %}
+                {% if autoLayout %}
+                    {% set buttonAlign = "pos-x-right pos-y-bottom" %}
+                {% else %}
+                    {% if(element.config.buttonPosX.value == "center" and element.config.buttonPosY.value == "center") %}
+                        {% set buttonAlign = "pos-xy-center" %}
+                    {% else %}
+                        {% set buttonAlign = "pos-x-" ~ element.config.buttonPosX.value ~ " pos-y-" ~ element.config.buttonPosY.value %}
+                    {% endif %}
+                {% endif %}
+
+                {% set buttonStyle = "background-color:" ~ element.config.buttonBackgroundColor.value ~ "; " ~
+                    "color:" ~ element.config.buttonColor.value ~ ";" ~
+                    "border: 1px solid " ~ element.config.buttonBorderColor.value ~ ";" ~
+                    "line-height: " ~ element.config.buttonSize.value ~ "rem;" ~
+                    "font-size: " ~ element.config.buttonSize.value ~ "rem;" ~
+                    "padding: .5rem"
+                %}
+
+                <a href="{{ element.config.buttonUrl.value }}"
+                   {% if(element.config.buttonTargetBlank.value) %}rel="noopener" target="_blank"{% endif %}
+                   class="netzp-cta-button btn btn-primary btn-lg {{ buttonAlign }}
+                          {% if(element.config.buttonBlock.value) %}btn-block{% endif %}
+                          {% if(element.config.buttonRounded.value) %}btn-rounded{% endif %}
+                          {% if(element.config.buttonShadow.value) %}btn-shadow{% endif %}"
+                   style="{{ buttonStyle }}">
+                    {{ element.data.button|raw }}
+                </a>
+            {% endif %}
+        </div>
+    </a>
+    </div>
+{% endblock %}

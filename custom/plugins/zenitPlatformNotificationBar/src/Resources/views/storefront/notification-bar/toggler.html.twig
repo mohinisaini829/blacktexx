@@ -1,0 +1,23 @@
+{% block zenit_notification_bar_toggler %}
+    {% if position == 'bottom' %}
+        {% set iconArrow = 'arrow-head-up' %}
+    {% else %}
+        {% set iconArrow = 'arrow-head-down' %}
+    {% endif %}
+
+    <button class="notification-bar-collapse-control notification-bar-collapse-toggler"
+            data-bs-target="#notification-bar-collapse"
+            data-bs-toggle="collapse"
+            aria-expanded="{% if not hidden %}true{% else %}false{% endif %}"
+            aria-controls="notification-bar-collapse"
+            aria-label="{{ 'zenit.notificationBar.openclose'|trans }}">
+
+        <span class="toggler-inner">
+            {% if position == 'bottom' %}
+                {% sw_icon 'arrow-head-up' style {'size': 'xs'} %}
+            {% else %}
+                {% sw_icon 'arrow-head-down' style {'size': 'xs'} %}
+            {% endif %}
+        </span>
+    </button>
+{% endblock %}

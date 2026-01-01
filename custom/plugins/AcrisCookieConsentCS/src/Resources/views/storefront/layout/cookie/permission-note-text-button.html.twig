@@ -1,0 +1,48 @@
+{% block acris_cookie_consent_permission_text_button %}
+    {% block acris_cookie_consent_permission_text %}
+        {% if cookieConfig.privacyLink %}{% set privacyLinkId = cookieConfig.privacyLink %}{% else %}{% set privacyLinkId = config('core.basicInformation.privacyPage') %}{% endif %}
+        <div
+            class="cookie-consent-permission-text pb-3 text-center {% if cookieConfig.layout == "modal" %}pb-md-1{% else %}pb-md-0 text-md-left{% endif %}">
+            {% if cookieConfig.displayButtonAcceptCookiesType == 'end-of-info-text' %}
+                {{ "acrisCookieConsent.messageIncludingSave"|trans({'%url%': path('frontend.cms.page', { id: privacyLinkId })})|raw }}
+            {% else %}
+                {{ "acrisCookieConsent.messageNoSave"|trans({'%url%': path('frontend.cms.page', { id: privacyLinkId })})|raw }}
+            {% endif %}
+        </div>
+    {% endblock %}
+
+    {% block acris_cookie_consent_permission_button %}
+        <div
+            class="cookie-consent-permission-button text-center{% if cookieConfig.layout != "modal" %} text-md-left{% endif %}">
+
+            {% set positionPermissionButtonSetting = 40 %}
+            {% set positionPermissionButtonAcceptOnlyFunctional = 30 %}
+            {% set positionPermissionButtonAccept = 20 %}
+            {% set positionPermissionButtonAcceptAll = 10 %}
+
+            {% if cookieConfig.positionPrioCookieSettingsType %}
+                {% set positionPermissionButtonSetting = cookieConfig.positionPrioCookieSettingsType %}
+            {% endif %}
+            {% if cookieConfig.positionPrioFunctionalCookiesType %}
+                {% set positionPermissionButtonAcceptOnlyFunctional = cookieConfig.positionPrioFunctionalCookiesType %}
+            {% endif %}
+            {% if cookieConfig.positionPrioButtonAcceptCookiesType %}
+                {% set positionPermissionButtonAccept = cookieConfig.positionPrioButtonAcceptCookiesType %}
+            {% endif %}
+            {% if cookieConfig.positionPrioAllCookiesType %}
+                {% set positionPermissionButtonAcceptAll = cookieConfig.positionPrioAllCookiesType %}
+            {% endif %}
+
+            {% set buttonPosition = {'permission-buttons-setting':(positionPermissionButtonSetting),
+                'permission-buttons-accept-only-functional': (positionPermissionButtonAcceptOnlyFunctional),
+                'permission-buttons-accept': (positionPermissionButtonAccept),
+                'permission-buttons-accept-all': (positionPermissionButtonAcceptAll)
+            } %}
+
+            {% for key, position in buttonPosition|sort|reverse %}
+                {% sw_include "@Storefront/storefront/layout/cookie/buttons/cookie-consent-" ~ key ~ ".html.twig" ignore missing %}
+            {% endfor %}
+
+        </div>
+    {% endblock %}
+{% endblock %}

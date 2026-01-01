@@ -1,0 +1,42 @@
+{
+  "name": "wolf/wolf-platform-company-register",
+  "description": "SW6 nur Firmenanmeldungen",
+  "type": "shopware-platform-plugin",
+    "version": "v1.6.0",
+    "license": "proprietary",
+    "require": {
+        "shopware/core": ">=6.6.6"
+    },
+    "authors": [
+        {
+            "name": "BlueWolf"
+        }
+    ],
+
+  "autoload": {
+    "psr-4": {
+      "Wolf\\WolfPlatformCompanyRegister\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "Wolf\\WolfPlatformCompanyRegister\\WolfPlatformCompanyRegister",
+    "label": {
+      "de-DE": "Nur Firmenanmeldungen",
+      "en-GB": "Company register only"
+    },
+      "description": {
+          "de-DE": "Zusätzlich in Shopware 6 unter Einstellungen -> Shop -> Login / Registrierung die Option \"Auswahl zwischen Firma und Kundenkonto anzeigen\" aktivieren!",
+
+          "en-GB": "In addition, activate the option \"Show selection between company and customer account\" in Shopware 6 under Settings -> Shop -> Login / Registration!"
+      },
+      "copyright": "(c) by BlueWolf Produktion",
+      "manufacturerLink": {
+          "de-DE": "https://store.shopware.com/bluewolf.html",
+          "en-GB": "https://store.shopware.com/en/bluewolf.html"
+      },
+      "supportLink": {
+          "de-DE": "https://www.bluewolf-produktion.de/plugin-support.html",
+          "en-GB": "https://www.bluewolf-produktion.de/plugin-support.html"
+      }
+  }
+}

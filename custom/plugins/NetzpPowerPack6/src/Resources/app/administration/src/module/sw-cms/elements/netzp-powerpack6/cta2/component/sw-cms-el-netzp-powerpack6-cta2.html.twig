@@ -1,0 +1,12 @@
+{% block sw_cms_element_netzp_powerpack6_cta2 %}
+    <div class="sw-cms-el-netzp-powerpack6-cta2">
+        <div class="container"
+             :style="getContainerStyle()">
+            <div v-for="n in element.config.numberOfElements.value" :key="n"
+                 class="element"
+                 :class="getElementClass(element.config.elements.value[n-1])"
+                 :style="getElementStyle(element.config.elements.value[n-1])"
+                 v-html="getElementBody(element.config.elements.value[n-1], n-1)" />
+        </div>
+    </div>
+{% endblock %}

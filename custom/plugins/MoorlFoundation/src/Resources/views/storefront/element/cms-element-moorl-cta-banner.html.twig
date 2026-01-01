@@ -1,0 +1,166 @@
+{% block element_moorl_cta_banner %}
+    {% set config = element.fieldConfig.elements %}
+    {% set titleTag = config.titleTag.value ?: 'h3' %}
+
+    {% if config.elementUrl.value %}
+        {% set bannerLink = config.elementUrl.value %}
+    {% elseif config.btnUrl.value %}
+        {% set bannerLink = config.btnUrl.value %}
+    {% else %}
+        {% if config.elementType.value == 'category' and element.data.category.id %}
+            {% set bannerLink = seoUrl('frontend.navigation.page', { navigationId: element.data.category.id }) %}
+        {% elseif config.elementType.value == 'product' and element.data.product.id %}
+            {% set bannerLink = seoUrl('frontend.detail.page', { productId: element.data.product.id }) %}
+        {% endif %}
+    {% endif %}
+
+    {% if config.title.value %}
+        {% set bannerTitle = "<#{titleTag}>#{config.title.value}</#{titleTag}>" %}
+    {% else %}
+        {% if config.elementType.value == 'category' and element.data.category.id %}
+            {% set bannerTitle = "<#{titleTag}>#{element.data.category.translated.name}</#{titleTag}>" %}
+        {% elseif config.elementType.value == 'product' and element.data.product.id %}
+            {% set bannerTitle = "<#{titleTag}>#{element.data.product.translated.name}</#{titleTag}>" %}
+        {% endif %}
+    {% endif %}
+
+    {% if config.quote.value %}
+        {% set bannerDescription = '<p>' ~ config.quote.value ~ '</p>' %}
+    {% else %}
+        {% if config.elementType.value == 'category' and element.data.category.id %}
+            {% set bannerDescription = element.data.category.translated.description %}
+        {% elseif config.elementType.value == 'product' and element.data.product.id %}
+            {% set bannerDescription = element.data.product.translated.description %}
+        {% endif %}
+
+        {% if bannerDescription|striptags|length > config.contentLength.value %}
+            {% set bannerDescription = '<p>' ~ bannerDescription|striptags|slice(0, config.contentLength.value) ~ '...</p>' %}
+        {% endif %}
+    {% endif %}
+
+    {% set elementCss = [
+        "min-height:#{config.height.value}",
+        "background:#{config.elementBackground.value}",
+    ] %}
+    {% set backgroundCss = [
+        "background-position:#{config.backgroundVerticalAlign.value} #{config.backgroundHorizontalAlign.value}"
+    ] %}
+
+    {% if config.mediaActive.value and element.data.media %}
+        {% set backgroundCss = backgroundCss|merge([
+            "background-image:url('#{element.data.media.url}')"
+        ]) %}
+    {% elseif config.elementType.value == 'category' %}
+        {% set backgroundCss = backgroundCss|merge([
+            "background-image:url('#{element.data.category.media.url}')"
+        ]) %}
+    {% elseif config.elementType.value == 'product' %}
+        {% set backgroundCss = backgroundCss|merge([
+            "background-image:url('#{element.data.product.cover.media.url}')"
+        ]) %}
+    {% endif %}
+    {% if config.backgroundDisplayMode.value == 'custom' %}
+        {% set backgroundCss = backgroundCss|merge([
+            "background-size:#{config.backgroundSizeX.value} #{config.backgroundSizeY.value}"
+        ]) %}
+    {% else %}
+        {% set backgroundCss = backgroundCss|merge([
+            "background-size:#{config.backgroundDisplayMode.value}"
+        ]) %}
+    {% endif %}
+    {% set overlayCss = [
+        "min-height:#{config.height.value}",
+        "background:#{config.overlayBackground.value ?: 'transparent'}",
+        "align-items:#{config.boxVerticalAlign.value}",
+        "justify-content:#{config.boxHorizontalAlign.value}",
+    ] %}
+    {% set boxCss = [
+        "display:#{config.iconPosition.value == 'top' ? 'block' : 'flex'}",
+        "margin:#{config.boxMargin.value ?: '0'}",
+        "padding:#{config.boxPadding.value}",
+        "background:#{config.boxBackground.value ?: 'transparent'}",
+        "color:#{config.boxColor.value ?: 'inherit'}",
+        "width:#{config.boxWidth.value}",
+        "height:#{config.boxHeight.value}",
+        "border-radius:#{config.boxBorderRadius.value}",
+        "text-align:#{config.boxTextAlign.value}",
+    ] %}
+
+    {% set bannerContent %}
+        {% if config.mediaActive.value and config.videoActive.value %}
+            <video
+                    class="video" playsinline preload="none" muted
+                    {% if element.config.videoAutoplay.value %}autoplay{% endif %}
+                    {% if element.config.videoLoop.value %}loop{% endif %}
+            >
+                <source src="{{ element.data.media.url }}" type="{{ element.data.media.mimeType }}">
+            </video>
+        {% elseif config.mediaActive.value or config.elementType.value == 'category' or config.elementType.value == 'product' %}
+            <div class="background {{ config.mediaHover.value }} {% if element.config.backgroundFixed.value %} bg-fixed{% endif %}"
+                 style="{{ backgroundCss|join(";") }}"></div>
+        {% endif %}
+
+        <div class="banner-layer{% if config.boxMaxWidth.value %} container{% endif %}" style="{{ overlayCss|join(";") }}">
+            <div class="container-box" style="{{ boxCss|join(";") }}">
+                {% if config.iconType.value != 'none' %}
+                    {% set iconCss = [
+                        "margin-right:#{config.iconMarginRight.value}",
+                        "margin-bottom:#{config.iconMarginBottom.value}",
+                        "--icon-size:#{config.iconFontSize.value}",
+                    ] %}
+
+                    <div class="container-icon" style="{{ iconCss|join(";") }}">
+                        {% block element_moorl_cta_banner_container_icon %}
+                        {% if config.iconType.value == 'fa' %}
+                            {% set parts = config.iconClass.value|split('|') %}
+                            {% sw_icon 'icon' style {pack: parts[0], fileName: parts[1], size: parts[2]} %}
+                        {% elseif config.iconType.value == 'svg' %}
+                            <span>{{ config.iconSvg.value|raw }}</span>
+                        {% elseif config.iconType.value == 'media' %}
+                            <img src="{{ element.data.iconMedia.url }}" alt="{{ bannerTitle }}">
+                        {% endif %}
+                        {% endblock %}
+                    </div>
+                {% endif %}
+
+                <div class="container-content">
+                    {% block element_moorl_cta_banner_container_content %}
+                        {% if config.elementType.value == 'custom' %}
+                            {{ config.content.value|raw }}
+                        {% else %}
+                            {{ bannerTitle|raw }}
+                            {{ bannerDescription|raw }}
+                            {% if config.btnActive.value and bannerLink and not config.elementClickable.value %}
+                                <a
+                                        class="btn {{ config.btnClass.value }}"
+                                        href="{{ bannerLink }}"
+                                        {% if config.elementNewTab.value %}target="_blank"{% endif %}
+                                >{{ config.btnText.value }}</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+        {% block element_moorl_cta_banner_overlay %}{% endblock %}
+
+        <style>{{ element.data.scss|raw }}</style>
+    {% endset %}
+
+    {% if config.elementClickable.value and bannerLink %}
+        <a
+                class="d-block cms-element-moorl-cta-banner"
+                id="{{ element.type }}-{{ element.id }}"
+                style="{{ elementCss|join(";") }}"
+                href="{{ bannerLink }}"
+                {% if config.elementNewTab.value %}target="_blank"{% endif %}
+        >{{ bannerContent }}</a>
+    {% else %}
+        <div
+                class="cms-element-moorl-cta-banner"
+                id="{{ element.type }}-{{ element.id }}"
+                style="{{ elementCss|join(";") }}"
+        >{{ bannerContent }}</div>
+    {% endif %}
+{% endblock %}

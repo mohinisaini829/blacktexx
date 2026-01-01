@@ -1,0 +1,66 @@
+{% block cms_element_blog_assignment_tabs_inner %}
+    {% if not sliderConfig %}
+        {% set sliderConfig = element.fieldConfig.elements %}
+    {% endif %}
+    {% if not product %}
+        {% set product = element.data.product %}
+    {% endif %}
+    {% set isRandom = sliderConfig.showRandom ? sliderConfig.showRandom.value : false %}
+    {% if element.data.blogEntries.elements is defined and element.data.blogEntries.elements|length > 0 %}
+        <div class="product-detail-blog-assignment">
+            <div class="card card-tabs" data-blog-assignment="true">
+                {% block cms_element_blog_assignment_tabs_content %}
+                    <div class="product-detail-tabs-content card-body">
+                        {% set title = "sas-blog.blogAssignment.title"|trans({
+                            '%product%': product.name ?: product.translated.name,
+                        }) %}
+                        <div class="blog-assignment-tab tab-pane fade show active"
+                             id="blog-assignment-tab-pane"
+                             role="tabpanel"
+                             aria-labelledby="blog-assignment-tab">
+                            {% set config = {
+                                'title': {
+                                    'value': title
+                                },
+                                'border': {
+                                    'value': false
+                                },
+                                'rotate': {
+                                    'value': false
+                                },
+                                'boxLayout': {
+                                    'value': sliderConfig.boxLayout.value
+                                },
+                                'elMinWidth': {
+                                    'value': sliderConfig.elMinWidth.value
+                                },
+                                'navigation': {
+                                    'value': true
+                                },
+                                'displayMode': {
+                                    'value': sliderConfig.displayMode.value
+                                },
+                                'verticalAlign': {
+                                    'value': center
+                                }
+                            } %}
+
+                            {% block cms_element_blog_assignment_tabs_content_container_slider %}
+                                {% sw_include "@Storefront/storefront/element/cms-element-blog-slider.html.twig" with {
+                                    sliderConfig: config,
+                                    element: {
+                                        'data': {
+                                            'blogEntries': element.data.blogEntries
+                                        },
+                                        type: 'product-slider',
+                                        isRandom: isRandom
+                                    }
+                                } %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Παραγωγός:",
+            "ProductNumber": "Αριθμός άρθρου:"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Αριθμός προϊόντος",
+            "DetailBuyActionAdd": "Προσθέστε παραλλαγές στο καλάθι αγορών",
+            "UnitPrice": "Τιμή μονάδας",
+            "VariantOrderMatrixColAmount": "Ποσότητα",
+            "VariantStock": "Αποθήκη",
+            "quickOrder": "Γρήγορη παραγγελία",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Εκτιμώμενη συνολική τιμή"
+        }
+    }
+}

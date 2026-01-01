@@ -1,0 +1,95 @@
+{% block zenit_notification_bar %}
+    {% set now = "now"|date('U') %}
+
+    {% if zenNotificationBar.startDate is defined %}
+        {% set start = zenNotificationBar.startDate|date('U') %}
+    {% endif %}
+
+    {% if zenNotificationBar.endDate is defined %}
+        {% set end = zenNotificationBar.endDate|date('U') %}
+    {% endif %}
+
+    {% if
+        (start is not defined and end is not defined) or
+        (start and end is not defined and start <= now) or
+        (end and start is not defined and end >= now) or
+        (start and end and start <= now and end >= now) %}
+
+        {# ... prepare statemanager classes for bootstrap 5 #}
+        {% set statemanager = zenNotificationBar.statemanager|join(' ') %}
+        {% if not (statemanager matches '/\\b(d-block)\\b/') %}
+            {% set statemanager = statemanager ~ ' d-none' %}
+        {% endif %}
+
+        {% if 'd-sm-none' in statemanager and 'd-sm-block' in statemanager %}
+            {% set statemanager = statemanager|replace({'d-sm-none':''}) %}
+        {% endif %}
+
+        {% if 'd-md-none' in statemanager and 'd-md-block' in statemanager %}
+            {% set statemanager = statemanager|replace({'d-md-none':''}) %}
+        {% endif %}
+
+        {% if 'd-lg-none' in statemanager and 'd-lg-block' in statemanager %}
+            {% set statemanager = statemanager|replace({'d-lg-none':''}) %}
+        {% endif %}
+
+        {% if 'd-xl-none' in statemanager and 'd-xl-block' in statemanager %}
+            {% set statemanager = statemanager|replace({'d-xl-none':''}) %}
+        {% endif %}
+
+        {% set statemanager = statemanager|replace({'  ':' '}) %}
+
+        {% if context.currentCustomerGroup.id not in zenNotificationBar.excludedCustomerGroups %}
+            <div id="notification-bar"
+                 class="notification-bar notification-bar-{{ position }}{% if zenNotificationBar.expand %} is-expandable{% endif %}{% if zenNotificationBar.collapse %} is-collapsable{% endif %} {{ statemanager }}"
+                 data-zenit-notification-bar="true"
+                 data-zenit-notification-bar-options='{ "id": "{{ zenNotificationBar.configId }}", "btnCloseBanner": "{{ zenNotificationBar.btnCloseBanner }}", "collapsable": "{{ zenNotificationBar.collapse }}", "expandable": "{{ zenNotificationBar.expand }}", "expiration": {% if zenNotificationBar.expiration is not same as ('session') %}{{ zenNotificationBar.expiration }}{% else %}"{{ zenNotificationBar.expiration }}"{% endif %} }'>
+
+                {% block zenit_notification_bar_inner %}
+                    {% block zenit_notification_bar_header %}
+                        {% if (zenNotificationBar.collapse and zenNotificationBar.expand) or (not zenNotificationBar.collapse and zenNotificationBar.expand) %}
+                            <div class="notification-bar-collapse-header{% if not hidden %} is-visible{% endif %}">
+                                {% sw_include '@Storefront/storefront/notification-bar/toggler.html.twig' %}
+                            </div>
+                        {% elseif zenNotificationBar.collapse and not zenNotificationBar.expand %}
+                            <div class="notification-bar-collapse-header{% if not hidden %} is-visible{% endif %}">
+                                {% sw_include '@Storefront/storefront/notification-bar/close-btn.html.twig' %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+
+                    {% block zenit_notification_bar_collapse %}
+                        <div class="notification-bar-collapse-content collapse{% if not hidden %} show{% endif %}" id="notification-bar-collapse" >
+                            <div class="content-inner">
+                                <div class="container">
+                                    <div class="row align-items-center">
+                                        <div class="notification-bar-column column-text col{% if zenNotificationBar.btnLinkShow %} col-lg-9{% endif %}">
+                                            <div class="column-inner">
+                                                {% sw_include '@Storefront/storefront/notification-bar/text.html.twig' %}
+                                            </div>
+                                        </div>
+
+                                        {% if zenNotificationBar.btnLinkShow %}
+                                            <div class="notification-bar-column column-btn col-12 col-lg-3">
+                                                <div class="column-inner">
+                                                    {% sw_include '@Storefront/storefront/notification-bar/btn.html.twig' %}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="row">
+                                        {% if zenNotificationBar.infoText %}
+                                            <div class="notification-bar-column column-info col-12">
+                                                {% sw_include '@Storefront/storefront/notification-bar/info.html.twig' %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock %}
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

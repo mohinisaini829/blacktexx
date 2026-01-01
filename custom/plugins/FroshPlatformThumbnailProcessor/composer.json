@@ -1,0 +1,67 @@
+{
+    "name": "frosh/platform-thumbnail-processor",
+    "keywords": [
+        "shopware",
+        "backend",
+        "admin",
+        "media",
+        "media manager",
+        "cdn",
+        "storage",
+        "thumbnail"
+    ],
+    "description": "This plugins allows you to use variable thumbnails, without having them on storage.",
+    "version": "5.4.0",
+    "type": "shopware-platform-plugin",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "FriendsOfShopware",
+            "homepage": "https://friendsofshopware.de"
+        }
+    ],
+    "minimum-stability": "RC",
+    "require": {
+        "shopware/core": "~6.6.0||~6.7.0",
+        "nikic/php-parser": "^4.13.0|^5.0.0"
+    },
+    "suggest": {
+        "frosh/lazy-sizes": "*"
+    },
+    "extra": {
+        "shopware-plugin-class": "Frosh\\ThumbnailProcessor\\FroshPlatformThumbnailProcessor",
+        "label": {
+            "de-DE": "ThumbnailProcessor mit Webp-Unterstützung",
+            "en-GB": "ThumbnailProcessor incl. Webp-Support"
+        },
+        "description": {
+            "de-DE": "Verschwende nicht Rechenleistung und Speicherplatz durch Thumbnails! Lass diese in Echtzeit beim Besuch durch einen externen Dienst erzeugen und ausliefern.",
+            "en-GB": "Don't waste the computing power and space with thumbnails! Have the thumbnails generated and delivered in real time when you visit an external service."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://github.com/FriendsOfShopware/FroshPlatformThumbnailProcessor",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshPlatformThumbnailProcessor"
+        },
+        "supportLink": {
+            "de-DE": "https://github.com/FriendsOfShopware/FroshPlatformThumbnailProcessor/issues",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshPlatformThumbnailProcessor/issues"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Frosh\\ThumbnailProcessor\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Frosh\\ThumbnailProcessor\\Tests\\Unit\\": "tests/unit",
+            "Frosh\\ThumbnailProcessor\\Tests\\Integration\\": "tests/integration"
+        }
+    },
+    "scripts": {
+        "create-placeholders": [
+            "echo \"<?php\n\ndeclare (strict_types=1);\n\nnamespace Frosh\\ThumbnailProcessor\\DependencyInjection;\n\nclass FileSaver extends \\Shopware\\Core\\Content\\Media\\File\\FileSaver\n{\n}\n\" > src/DependencyInjection/FileSaver.php",
+            "echo \"<?php\n\ndeclare (strict_types=1);\n\nnamespace Frosh\\ThumbnailProcessor\\DependencyInjection;\n\nclass ThumbnailService extends \\Shopware\\Core\\Content\\Media\\Thumbnail\\ThumbnailService\n{\n}\n\" > src/DependencyInjection/ThumbnailService.php"
+        ]
+    }
+}

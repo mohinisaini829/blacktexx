@@ -1,0 +1,29 @@
+<sw-card v-if="offers && offers.length > 0" :isLoading="isLoading">
+    <template #title>
+        <h3>{{ $tc('myfav-inquiry.detail.offerCardTitle') }} ({{ offers.length }})</h3>
+    </template>
+    <sw-data-grid
+        :compact-mode="false"
+        :dataSource="offers"
+        :columns="offerColumns"
+        :isLoading="isLoading"
+        :showSelection="false"
+    >
+        <template #column-createdAt="{ item }">
+            {{ item.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
+        </template>
+        <template #actions="{ item }">
+            <sw-context-menu-item
+                :disabled="!acl.can('myfav_inquiry.viewer')"
+                @click="downloadDocument(item)">
+                {{ $tc('myfav-inquiry.detail.downloadOffer') }}
+            </sw-context-menu-item>
+            <sw-context-menu-item
+                :disabled="!acl.can('myfav_inquiry.deleter')"
+                variant="danger"
+                @click="deleteOffer(item)">
+                {{ $tc('myfav-inquiry.detail.deleteOffer') }}
+            </sw-context-menu-item>
+        </template>
+    </sw-data-grid>
+</sw-card>

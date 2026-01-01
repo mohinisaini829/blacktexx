@@ -1,0 +1,19 @@
+{% set allowDownload = true %}
+{% set tunnelDownload = true %}
+{% set showDownloads = true %}
+{% set showImage = true %}
+
+{% if downloads.count > 0 and showDownloads %}
+    <div class="moorl-download-list">
+        <ul class="moorl-download-list-items">
+            {% for file in downloads %}
+                {% sw_include '@MoorlFoundation/plugin/moorl-foundation/component/download-list/download-item.html.twig' %}
+            {% endfor %}
+        </ul>
+    </div>
+{% elseif emptyText and config('MoorlFoundation.config.cmsEmptyAlert') %}
+    {% sw_include "@Storefront/storefront/utilities/alert.html.twig" with {
+        type: "primary",
+        content: emptyText ?: "moorl-foundation.search.notAvailable"|trans
+    } %}
+{% endif %}

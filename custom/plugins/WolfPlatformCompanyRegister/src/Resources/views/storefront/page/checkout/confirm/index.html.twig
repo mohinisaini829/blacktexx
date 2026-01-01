@@ -1,0 +1,19 @@
+{%  sw_extends '@Storefront/storefront/page/checkout/confirm/index.html.twig' %}
+
+          {% block page_checkout_confirm_form_submit %}
+              {%  set  WolfCompanyRegister =   config('WolfPlatformCompanyRegister.config')  %}
+              {%  if WolfCompanyRegister.active == true and context.customer.defaultBillingAddress.company %}
+                  {{  parent () }}
+                  {%  elseif WolfCompanyRegister.active == true and context.customer.defaultBillingAddress.company =="" %}
+
+                        {% set snippetName =  "wolf-platform-company-register.message.orderblocked"|trans|sw_sanitize %}
+
+
+                      {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                          type: "danger",
+                          content: snippetName
+                      } %}
+                  {% else %}
+                    {{ parent () }}
+              {% endif %}
+          {% endblock %}

@@ -1,0 +1,24 @@
+{% sw_extends '@Storefront/storefront/component/account/register.html.twig' %}
+
+{% block component_account_register %}
+    <div class="card register-card">
+        <div class="card-body">
+            {{ block('component_account_register_form') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block component_account_register_personal %}
+    <div class="register-personal">
+        {% block component_account_register_header %}
+            {% if cardTitle %}
+                <div class="card-title">
+                    {{ cardTitle }}
+                </div>
+            {% endif %}
+        {% endblock %}
+
+        {{ block('component_account_register_personal_fields') }}
+
+    </div>
+{% endblock %}

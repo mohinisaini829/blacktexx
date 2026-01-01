@@ -1,0 +1,10 @@
+<div class="cms-element-{{ element.type }}">
+    {% if element.data.content %}
+        <div data-moorl-toc>
+            <div class="h3">
+                {{ "moorl-foundation.general.toc"|trans }}
+            </div>
+            {{ element.data.content|raw }}
+        </div>
+    {% endif %}
+</div>

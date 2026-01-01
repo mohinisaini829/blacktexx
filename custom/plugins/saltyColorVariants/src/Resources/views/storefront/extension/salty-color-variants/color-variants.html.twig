@@ -1,0 +1,23 @@
+{% block extension_color_variants %}
+    <div class="color-variants--list" style="height: {{ searchResult.extensions.colorVariants.config.size }}px">
+
+        {% set mainId = product.parentId %}
+
+        {% if mainId is null %}
+            {% set mainId = product.id %}
+        {%  endif %}
+
+        {% if searchResult.extensions.colorVariants.data[mainId] %}
+            {% for variant in searchResult.extensions.colorVariants.data[mainId] %}
+                {%  if variant.colorHexCode or variant.optionImage %}
+                    {% if product.customFields.custom_field_list_color_variants is empty or product.customFields.custom_field_list_color_variants == variant.optionGroupId %}
+
+                        {{ include('storefront/extension/salty-color-variants/component/color-option.html.twig') }}
+                    {%  endif %}
+                {%  endif %}
+
+                {{ include('storefront/extension/salty-color-variants/component/more-colors-indicator.html.twig') }}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

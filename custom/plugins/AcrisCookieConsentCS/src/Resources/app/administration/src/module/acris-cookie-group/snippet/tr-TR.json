@@ -1,0 +1,37 @@
+{
+    "acris-cookie-group": {
+        "general": {
+            "mainMenuItemGeneral": "Çerezler",
+            "placeholderSearchBar": "Çerezleri ara",
+            "description": "Dükkan içinde bulunan çerezleri görüntüle",
+            "labelName": "Çerez Grubu"
+        },
+        "list": {
+            "textHeadline": "Çerez grupları",
+            "buttonAdd": "Ekle",
+            "contextMenuEdit": "Düzenle",
+            "contextMenuDelete": "Sil",
+            "columnTitle": "Başlık",
+            "columnDescription": "Açıklama",
+            "textDeleteConfirm": "Çerez grubunu silmek istiyor musunuz",
+            "modalTitleDelete": "Çerez grubunu sil",
+            "buttonCancel": "İptal",
+            "buttonDelete": "Sil",
+            "contentEmpty": "Hiç çerez grubu yok"
+        },
+        "detail": {
+            "textHeadline": "Çerez politikası grup ayarları",
+            "buttonCancel": "İptal",
+            "buttonSave": "Kaydet",
+            "fieldTitleLabel": "Başlık",
+            "fieldTitlePlaceholder": "Çerez grubu başlığını girin",
+            "fieldDescriptionLabel": "Açıklama",
+            "fieldDescriptionPlaceholder": "Açıklama girin",
+            "cardTitle": "Müşteri bilgileri",
+            "notificationSaveErrorMessage": "Çerez grubunu kaydedilirken bir hata oluştu.",
+            "notificationSaveSuccessMessage": "Çerez grubu başarıyla kaydedildi.",
+            "notificationSaveSuccessMessageTitle": "Başarılı",
+            "notificationSaveErrorMessageTitle": "Hata"
+        }
+    }
+}

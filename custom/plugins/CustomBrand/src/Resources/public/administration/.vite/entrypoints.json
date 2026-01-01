@@ -1,0 +1,23 @@
+{
+  "base": "/bundles/custombrand/administration/",
+  "entryPoints": {
+    "custom-brand": {
+      "css": [],
+      "dynamic": [],
+      "js": [
+        "/bundles/custombrand/administration/assets/custom-brand-JDhgWcva.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

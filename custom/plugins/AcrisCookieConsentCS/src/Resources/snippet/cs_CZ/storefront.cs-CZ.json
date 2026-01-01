@@ -1,0 +1,16 @@
+{
+    "acrisCookieConsent": {
+        "heading": "Respektujeme vaše soukromí",
+        "messageIncludingSave": "Tato webová stránka používá cookies, aby zajistila, že získáte nejlepší zážitek na našem webu. Svou volbu ohledně používání cookies můžete kdykoli změnit kliknutím na <a data-bs-dismiss=\"modal\" id=\"ccAcceptButton\" class=\"cookie-consent-accept-button-in-text\" href=\"#\" onclick=\"return false;\">uložit.</a> <a data-ajax-modal=\"true\"\n data-modal-class=\"cookie-consent-permission-footer-modal\" data-url=\"%url%\" href=\"%url%\" title=\"Více informací\">Více informací</a>.",
+        "messageNoSave": "Tato webová stránka používá cookies, aby zajistila, že získáte nejlepší zážitek na našem webu...</a> <a data-ajax-modal=\"true\"\n data-modal-class=\"cookie-consent-permission-footer-modal\" data-url=\"%url%\" href=\"%url%\" title=\"Více informací\">Více informací</a>.",
+        "switchActive": "Aktivní",
+        "switchInactive": "Neaktivní",
+        "settingsButton": "Nastavení cookies",
+        "acceptOnlyFunctionalButton": "Přijmout pouze funkční cookies",
+        "acceptButton": "Přijmout vybrané cookies",
+        "acceptAllButton": "Přijmout všechny cookies",
+        "footerCmsPageLinkPrefixFirst": "- ",
+        "footerCmsPageLinkPrefixSecond": "- ",
+        "footerCmsPageLinkPrefixThird": "- "
+    }
+}

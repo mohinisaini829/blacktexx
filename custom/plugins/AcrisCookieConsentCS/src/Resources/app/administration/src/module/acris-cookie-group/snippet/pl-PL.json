@@ -1,0 +1,37 @@
+{
+    "acris-cookie-group": {
+        "general": {
+            "mainMenuItemGeneral": "Ciasteczka",
+            "placeholderSearchBar": "Szukaj ciasteczek",
+            "description": "Zobacz ciasteczka, które zostały znalezione w sklepie",
+            "labelName": "Grupa ciasteczek"
+        },
+        "list": {
+            "textHeadline": "Grupy ciasteczek",
+            "buttonAdd": "Dodaj",
+            "contextMenuEdit": "Edytuj",
+            "contextMenuDelete": "Usuń",
+            "columnTitle": "Tytuł",
+            "columnDescription": "Opis",
+            "textDeleteConfirm": "Czy chcesz usunąć grupę ciasteczek",
+            "modalTitleDelete": "Usuń grupę ciasteczek",
+            "buttonCancel": "Anuluj",
+            "buttonDelete": "Usuń",
+            "contentEmpty": "Nie ma grup ciasteczek"
+        },
+        "detail": {
+            "textHeadline": "Ustawienia grupy polityki ciasteczek",
+            "buttonCancel": "Anuluj",
+            "buttonSave": "Zapisz",
+            "fieldTitleLabel": "Tytuł",
+            "fieldTitlePlaceholder": "Wprowadź tytuł grupy ciasteczek",
+            "fieldDescriptionLabel": "Opis",
+            "fieldDescriptionPlaceholder": "Wprowadź opis",
+            "cardTitle": "Informacje o kliencie",
+            "notificationSaveErrorMessage": "Wystąpił błąd podczas zapisywania grupy ciasteczek.",
+            "notificationSaveSuccessMessage": "Grupa ciasteczek została pomyślnie zapisana.",
+            "notificationSaveSuccessMessageTitle": "Sukces",
+            "notificationSaveErrorMessageTitle": "Błąd"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+import './default';
+import './replacer';
+import './html-tag';
+import './accordion';
+import './hero-banner';
+import './usp';
+import './newsletter';
+import './sidebar-filter';
+import './product-buy-list';
+import './download-list';
+import './share';
+import './toc';
+import './location';
+import './opening-hours';
+import './address';
+import './contact';
+import './person';

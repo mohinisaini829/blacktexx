@@ -1,0 +1,72 @@
+{% block myfav_inquiry_list %}
+<sw-page class="myfav-inquiry-list">
+    {% block myfav_inquiry_list_smart_header %}
+        <template #smart-bar-header>
+            {% block myfav_inquiry_list_smart_header_title %}
+                <h2>
+                    {% block myfav_inquiry_list_smart_bar_header_title_text %}
+                        {{ $tc('myfav-inquiry.general.mainMenuItemGeneral') }}
+                    {% endblock %}
+
+                    {% block myfav_inquiry_list_smart_bar_header_amount %}
+                        <span v-if="!isLoading">
+                                ({{ total }})
+                            </span>
+                    {% endblock %}
+                </h2>
+            {% endblock %}
+        </template>
+    {% endblock %}
+
+    <template #content>
+        {% block myfav_inquiry_list_content %}
+            <sw-entity-listing
+                v-if="inquiries"
+                :items="inquiries"
+                :repository="repository"
+                :showSelection="true"
+                :sort-by="sortBy"
+                :sort-direction="sortDirection"
+                :is-loading="isLoading"
+                :columns="columns"
+                :allowView="acl.can('myfav_inquiry.viewer')"
+                :allowEdit="acl.can('myfav_inquiry.editor')"
+                :allowInlineEdit="acl.can('myfav_inquiry.editor')"
+                :allowDelete="acl.can('myfav_inquiry.deleter')"
+                detailRoute="myfav.inquiry.detail"
+                @selection-change="updateSelection"
+                @update-records="updateTotal"
+                @column-sort="onSortColumn"
+                @page-change="onPageChange"
+            >
+                <template #column-lastName="{ item }">
+                    {{ item.company }} {{ item.salutation.displayName }} {{ item.firstName }} {{ item.lastName }}
+                </template>
+                <template #column-lineItems="{ item }">
+                    {{ item.lineItems.length  }}
+                </template>
+                <template #column-createdAt="{ item }">
+                    <sw-time-ago :date="item.createdAt"></sw-time-ago>
+                </template>
+                <template #column-deliveryDate="{ item }">
+                    <span v-if="typeof(item.deliveryDate) === 'string'" >{{ item.deliveryDate|date }} </span>
+                    <span v-else>-</span>
+                </template>
+                <template #column-adminUser="{ item }">
+                    {{ item.admin_user }}
+                </template>
+               <template #column-processStatus="{ item }">
+                  <select :value="item.status" @change="event => handleStatusChange(item.id, event.target.value)">
+                    <option v-for="option in statusOptions" :key="option.value" :value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                </template>
+
+
+            </sw-entity-listing>
+
+        {% endblock %}
+    </template>
+</sw-page>
+{% endblock %}

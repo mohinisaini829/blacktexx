@@ -1,0 +1,19 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+    <div class="row mt-4 mb-4">
+        <h1 class="col-12">{{ 'myfavInquiry.confirm.title'|trans }}</h1>
+        <div class="card col-12">
+            <div class="card-body">
+                <h2 class="card-title border-0">{{ 'myfavInquiry.confirm.productListTitle'|trans }}</h2>
+            </div>
+            
+            {% block product_list %}
+                {% include '@MyfavInquiry/storefront/myfav-inquiry/page/confirm/product-list.html.twig' %}
+            {% endblock %}
+        </div>
+        <div class="card col-12 mt-2">
+            {% include '@MyfavInquiry/storefront/myfav-inquiry/page/confirm/form.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

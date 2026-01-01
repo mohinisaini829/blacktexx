@@ -1,0 +1,22 @@
+{% for firstGroupOption in firstGroup.options|slice(sliceStart, sliceEnd) %}
+    {% set groupOptionId = null %}
+    
+    {% for optKey, value in variantMatrixArrayKeysAndValues %}
+        {% set currentKey = firstGroupOption.id %}
+        
+        {% if currentKey == optKey %}
+            {# variant key #}
+            {% set key =  value %}
+            {# option key #}
+            {% set groupOptionId = currentKey %}
+        {% endif %}
+    {% endfor %}
+
+    {% if groupOptionId != null %}
+        {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+        
+        <td>{{childProduct.productNumber}}</td>
+    {% else %}
+        {# <td>&nbsp;</td> #}
+    {% endif %}
+{% endfor %}

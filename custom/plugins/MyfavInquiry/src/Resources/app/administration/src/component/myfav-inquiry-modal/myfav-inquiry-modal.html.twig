@@ -1,0 +1,41 @@
+{% block myfav_inquiry_modal %}
+    <sw-modal
+        class="myfav-inquiry-modal"
+        :title="$tc('myfav-inquiry.titleCreateTag')"
+        @modal-close="onClose"
+    >
+        {% block myfav_inquiry_modal_content %}
+            <sw-multi-tag-select
+                v-model="tags"
+                :label="$tc('myfav-inquiry.labelSendMail')"
+            />
+        {% endblock %}
+
+        {% block myfav_inquiry_modal_footer %}
+            <template #modal-footer>
+                {% block myfav_inquiry_modal_footer_cancel_button %}
+                    <sw-button
+                        class="myfav-inquiry-modal__cancel-button"
+                        size="small"
+                        @click="onClose"
+                    >
+                        {{ $tc('global.default.cancel') }}
+                    </sw-button>
+                {% endblock %}
+
+                {% block myfav_inquiry_modal_footer_save_button %}
+                    <sw-button
+                        class="myfav-inquiry-modal__save-button"
+                        variant="primary"
+                        size="small"
+                        @click="onAddAction"
+                    >
+                        {{ sequence.id
+                        ? $tc('myfav-inquiry.buttonSaveAction')
+                        : $tc('myfav-inquiry.buttonAddAction') }}
+                    </sw-button>
+                {% endblock %}
+            </template>
+        {% endblock %}
+    </sw-modal>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% block netzp_powerpack6_parallax %}
+    <div class="netzp-powerpack6-parallax-element" id="parallax_{{ element.id }}">
+        {% if element.data.media %}
+            <style>
+                .parallax_{{ element.id }} {
+                    background-image: url('{{ element.data.media.url }}');
+                    height: {{ element.config.height.value }}rem;
+                }
+            </style>
+            <div class="parallax_{{ element.id }} parallax-image"></div>
+        {% endif %}
+    </div>
+{% endblock %}

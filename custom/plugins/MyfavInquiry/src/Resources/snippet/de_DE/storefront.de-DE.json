@@ -1,0 +1,37 @@
+{
+    "myfavInquiry": {
+        "add": "Artikel anfragen",
+        "cartTitle": "Meine Produkte",
+        "confirm": {
+            "title": "Kostenlose Anfrage",
+            "productListTitle": "Meine Produkte",
+            "delete": "Löschen",
+            "quantityLabel": "Menge",
+            "unitPrice": "Stückpreis:",
+            "phoneNameLabel": "Telefon für Rückfragen",
+            "phoneNamePlaceholder": "Telefon für Rückfragen",
+            "dateNameLabel": "Liefertermin",
+            "dateNamePlaceholder": "Liefertermin",
+            "commentNameLabel": "Hinweis",
+            "commentNamePlaceholder": "Hinweis",
+            "logoNameLabel": "Benutzerdefiniertes Logo",
+            "logoNamePlaceholder": "Datei auswählen",
+            "submit": "Senden"
+        },
+        "finish": {
+            "title": "Kostenlose Anfrage",
+            "text": "Danke für Ihre Anfrage. Wir melden uns umgehend.",
+            "backToShop": "Weiter Stöbern"
+        },
+        "modal": {
+            "title": "Artikel wurde hinzugefügt",
+            "content": "Der Artikel wurde der Anfrageliste hinzugefügt",
+            "confirmBtn": "Anfrage abschicken",
+            "closeBtn": "Weitere Artikel hinzufügen"
+        }
+    },
+    "document": {
+        "offerNumber": "Angebots-Nr.: %orderNumber%",
+        "inquiryDeliveryDate": "Wunsch-Liefertermin: %date%"
+    }
+}

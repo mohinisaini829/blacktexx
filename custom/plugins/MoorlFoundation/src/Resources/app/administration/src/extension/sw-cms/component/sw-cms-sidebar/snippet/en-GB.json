@@ -1,0 +1,16 @@
+{
+    "apps": {
+        "sw-cms": {
+            "detail": {
+                "label": {
+                    "blockCategory": {
+                        "moorl-cms-old": "CMS - moori Foundation",
+                        "moorl-grid-layout": "Grid - moori Foundation",
+                        "moorl-column-layout": "Columns - moori Foundation",
+                        "moorl-slider": "Slider - moori Foundation"
+                    }
+                }
+            }
+        }
+    }
+}

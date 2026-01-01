@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Ražotājs:",
+            "ProductNumber": "Produkta numurs:"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Produkta numurs",
+            "DetailBuyActionAdd": "Pievienot variantus iepirkumu grozam",
+            "UnitPrice": "Vienības cena",
+            "VariantOrderMatrixColAmount": "Daudzums",
+            "VariantStock": "Noliktava",
+            "quickOrder": "Ātrs pasūtījums",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Paredzamā kopējā cena"
+        }
+    }
+}

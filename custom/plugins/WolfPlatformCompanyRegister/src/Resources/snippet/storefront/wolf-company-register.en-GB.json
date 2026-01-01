@@ -1,0 +1,9 @@
+{
+    "wolf-platform-company-register": {
+        "message": {
+            "registerhint": "Registration is only possible for companies.",
+            "orderblocked": "A company must be selected as the billing address!"
+        }
+    }
+}
+

@@ -1,0 +1,29 @@
+// The values will be overwritten by the subscriber when the plugin is installed and activated
+$zen-notification-bar-background-image-opacity: 0.4 !default;
+$zen-notification-bar-background-image-blur: 0 !default;
+$zen-notification-bar-background-image-blend-mode: normal !default;
+$zen-notification-bar-background-image-repeat: no-repeat !default;
+$zen-notification-bar-background-image-size: cover !default;
+$zen-notification-bar-background-image-position: center center !default;
+
+$zen-notification-bar-background-color: #242734 !default;
+$zen-notification-bar-background-color-opacity: 1 !default;
+
+$zen-notification-bar-text-color: #ffffff !default;
+$zen-notification-bar-font: custom !default;
+$zen-notification-bar-font-stack: 'Poppins', sans-serif !default;
+$zen-notification-bar-font-size: 46px !default;
+$zen-notification-bar-font-weight: 600 !default;
+
+$zen-notification-bar-padding: 80px !default;
+$zen-notification-bar-info-font-size: 12px !default;
+$zen-notification-bar-info-padding: $zen-notification-bar-padding / 4px !default;
+
+$zen-notification-bar-text-slider-speed: 500ms !default;
+
+/*
+ * imports
+ * ---------------------------- */
+@import 'component/notification-bar';
+@import 'component/notification-bar-button';
+@import 'component/notification-bar-slider';

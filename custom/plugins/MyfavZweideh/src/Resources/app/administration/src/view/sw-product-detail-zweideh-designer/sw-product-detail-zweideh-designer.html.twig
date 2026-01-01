@@ -1,0 +1,33 @@
+<sw-card title="Designer">
+    <sw-container columns="repeat(auto-fit, minmax(250px, 1fr))" gap="0px 30px">
+        <sw-entity-single-select
+            :value="getDesignerSetupId()"
+            entity="myfav_designer_setup"
+            label="Designer-Setup"
+            labelProperty="name"
+            @change="onSelectDesignerSetup"
+        >
+        </sw-entity-single-select>
+
+        <div class="sw-field sw-block-field" label="Designer-Produkt">
+            <div class="sw-field__label">Designer-Produkt</div>
+            <div class="sw-block-field__block">
+                <select v-model="designerProduct" @change="onSelectDesignerProduct">
+                    <option v-for="option in designerProducts" :value="option.id">
+                        {{ option.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+{#
+        <sw-select-field
+            :value="getDesignerProductId()"
+            label="Designer-Produkt"
+            labelProperty="name"
+            :options="designerProducts"
+            @change="onSelectDesignerProduct"
+        >
+        </sw-select-field>
+#}
+    </sw-container>
+</sw-card>

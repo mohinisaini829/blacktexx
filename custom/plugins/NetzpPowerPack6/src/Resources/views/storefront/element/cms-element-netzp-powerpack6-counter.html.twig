@@ -1,0 +1,28 @@
+{% block netzp_powerpack6_counter %}
+<div class="netzp-powerpack6-counter-element" id="counter_{{ element.id }}">
+    {% if element.config.icon.value %}
+    <div class="icon" style="color: {{ element.config.iconColor.value }}">
+        <i class="fa {{ element.config.icon.value }}"></i>
+    </div>
+    {% endif %}
+
+    <h3 style="color: {{ element.config.titleColor.value }}">
+        {{ element.config.title.value }}
+    </h3>
+
+    <div class="counter"  style="color: {{ element.config.counterColor.value }}"
+         data-counter-{{ element.id }}-container="true"
+         data-text="{{ element.config.text.value }}"
+         data-start="{{ element.config.start.value }}"
+         data-end="{{ element.config.end.value }}">
+        &nbsp;
+    </div>
+
+    <template data-netzp-powerpack6-counter
+              data-netzp-powerpack6-counter-options='{
+                    "id": "{{ element.id }}",
+                    "speed": "{{ element.config.speed.value }}"
+              }'>
+    </template>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% block acris_cookie_group_detail %}
+    <sw-page class="acris-cookie-group-detail" v-if="item">
+
+        {% block acris_cookie_group_detail_smart_bar_header %}
+            <template #smart-bar-header>
+                {% block acris_cookie_group_detail_smart_bar_header_title %}
+                    <h2>{{ $tc('acris-cookie-group.detail.textHeadline') }}</h2>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_group_list_smart_bar_actions_language %}
+            <template #language-switch>
+                <sw-language-switch
+                        @on-change="onChangeLanguage"
+                        :disabled="$route.params.newItem">
+                </sw-language-switch>
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_group_detail_smart_bar_actions %}
+            <template #smart-bar-actions>
+                {% block acris_cookie_group_detail_smart_bar_actions_cancel %}
+                    <mt-button :disabled="item.isLoading" @click="$router.push({ name: 'acris.cookie.group.index' })" size="default" variant="secondary">
+                        {{ $tc('acris-cookie-group.detail.buttonCancel') }}
+                    </mt-button>
+                {% endblock %}
+
+                {% block acris_cookie_group_detail_smart_bar_actions_save %}
+                    <sw-button-process
+                            class="acris-cookie-group-detail__save-action"
+                            :isLoading="isLoading"
+                            :processSuccess="isSaveSuccessful"
+                            :disabled="item.isLoading || (!item.title)"
+                            variant="primary"
+                            @update:processSuccess="saveFinish"
+                            @click.prevent="onSave">
+                        {{ $tc('acris-cookie-group.detail.buttonSave') }}
+                    </sw-button-process>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_group_detail_content %}
+            <template #content>
+                    <sw-card-view>
+
+                        {% block acris_cookie_group_detail_content_card_title %}
+                            <mt-card :isLoading="isLoading"
+                                     positionIdentifier="acris-cookie-group-detail-title"
+                                     :title="$tc('acris-cookie-group.detail.cardTitle')">
+
+                                {% block acris_cookie_group_detail_content_card_title_input %}
+                                    <mt-text-field v-model="item.title"
+                                              :entity-collection="item.title"
+                                              @update:entity-collection="onChange"
+                                              class="acris-cookie-group-detail__item_title"
+                                              required
+                                              :label="$tc('acris-cookie-group.detail.fieldTitleLabel')"
+                                              :placeholder="placeholder(item, 'title', $tc('acris-cookie-group.detail.fieldTitlePlaceholder'))">
+                                    </mt-text-field>
+                                {% endblock %}
+
+                                {% block acris_cookie_group_detail_content_card_description_input %}
+                                    <sw-text-editor
+                                            :label="$tc('acris-cookie-group.detail.fieldDescriptionLabel')"
+                                            :placeholder="placeholder(item, 'description', $tc('acris-cookie-group.detail.fieldDescriptionPlaceholder'))"
+                                            name="description"
+                                            v-model:value="item.description"
+                                            :entity-collection="item.description"
+                                            @update:entity-collection="onChange">
+                                    </sw-text-editor>
+                                {% endblock %}
+
+                            </mt-card>
+                        {% endblock %}
+                    </sw-card-view>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

@@ -1,0 +1,187 @@
+{% block htc_popup_create %}
+    <sw-page class="htc-popup-create">
+
+        <template #smart-bar-header>
+            <h2>{{ $t('htc-popup-snp.popup.detail.newPopupHeaderTitle') }}</h2>
+        </template>
+
+        <template #smart-bar-actions>
+            <sw-button :routerLink="{ name: 'htc.popup.list' }">
+                {{ $t('htc-popup-snp.general.cancelButtonText') }}
+            </sw-button>
+            <sw-button-process
+                :isLoading="isLoading"
+                :processSuccess="processSuccess"
+                variant="primary"
+                @process-finish="saveFinish"
+                @click="onClickSave">
+                {{ $t('htc-popup-snp.general.saveButtonText') }}
+            </sw-button-process>
+        </template>
+        {% block htc_popup_detail_language_switch %}
+            <template #language-switch>
+                <sw-language-switch
+                        ref="langSwitch"
+                        :saveChangesFunction="saveOnLanguageChange"
+                        :abortChangeFunction="abortOnLanguageChange"
+                        @on-change="onChangeLanguage"
+                        :disabled="!popup || popup.isNew()">
+                </sw-language-switch>
+            </template>
+        {% endblock %}
+        <template #content>
+            <sw-card-view>
+                {% block htc_popup_detail_content_language_info %}
+                <sw-language-info
+                        v-if="popup"
+                        :entityDescription="'Popup'"
+                        :isNewEntity="popup.isNew()">
+                </sw-language-info>
+                {% endblock %}
+
+                <sw-card v-if="popup" :isLoading="isLoading" :title="$t('htc-popup-snp.popup.detail.generalCardLabel')">
+                    <sw-switch-field
+                        :label="$t('htc-popup-snp.popup.detail.statusLabel')"
+                        v-model:value="popup.active">
+                    </sw-switch-field>
+
+                    <sw-text-field
+                        :label="$t('htc-popup-snp.popup.detail.titleLabel')"
+                        v-model:value="popup.title"
+                        :required="true"
+                        :isInvalid="!popup.title"
+                    />
+                    <sw-number-field
+                        numberType="int"
+                        v-model:value="popup.priority"
+                        :required="true"
+                        :label="$t('htc-popup-snp.popup.detail.priorityLabel')"
+                        :isInvalid="(typeof popup.priority !== 'number')">
+                    </sw-number-field>
+
+                    <mt-text-editor
+                        :label="$t('htc-popup-snp.popup.detail.contentLabel')"
+                        :required="true"
+                        v-model="popup.content">
+                    </mt-text-editor>
+
+                    <sw-entity-single-select
+                        v-model:value="popup.stores"
+                        entity="sales_channel"
+                        :label="$tc('sw-mail-template.detail.basic.labelSalesChannels')"
+                        :placeholder="$tc('sw-mail-template.detail.basic.placeholderSalesChannels')"
+                        :required="true"
+                        show-clearable-button />
+                </sw-card>
+
+                <sw-card v-if="popup" :isLoading="isLoading" :title="$t('htc-popup-snp.popup.detail.displayCardlabel')">
+                    <sw-multi-select
+                        :label="$t('htc-popup-snp.popup.detail.pagesShowLabel')"
+                        :options="pageVisibleOptions"
+                        v-model:value="visiblePages"
+                        >
+                    </sw-multi-select>
+
+                    <sw-single-select
+                        :label="$t('htc-popup-snp.popup.detail.frequency')"
+                        :options="frequencyOptions"
+                        v-model:value="popup.frequency"
+                        >
+                    </sw-single-select>
+
+                    <sw-switch-field
+                        :label="$t('htc-popup-snp.popup.detail.showGuestLabel')"
+                        v-model:value="popup.showGuest">
+                    </sw-switch-field>
+                    
+                    <sw-entity-multi-select
+                        :label="$t('htc-popup-snp.popup.detail.customerGroupLabel')"
+                        entity="customer_group"
+                        :entity-collection="customerGroups"
+                        @update:entity-collection="setCustomerGroupIds">
+                    </sw-entity-multi-select>
+                </sw-card>
+
+                <sw-card v-if="popup" :isLoading="isLoading" :title="$t('htc-popup-snp.popup.detail.isRedirectPopupCardlabel')">
+                    <i>{{ $t('htc-popup-snp.popup.detail.isRedirectHelpText') }}</i>
+                    <sw-switch-field
+                        :label="$t('htc-popup-snp.popup.detail.isRedirectLabel')"
+                        v-model:value="popup.isRedirect">
+                    </sw-switch-field>
+                    
+                    <sw-text-field
+                        :label="$t('htc-popup-snp.popup.detail.confirmButtonTitleLable')"
+                        v-model="popup.confirmButtonTitle"
+                        v-if="popup.isRedirect"
+                        >
+                    </sw-text-field>
+
+                    <sw-text-field
+                        :label="$t('htc-popup-snp.popup.detail.denyButtonTitleLable')"
+                        v-model="popup.denyButtonTitle"
+                        v-if="popup.isRedirect"
+                        >
+                    </sw-text-field>
+
+                    <sw-text-field
+                        :label="$t('htc-popup-snp.popup.detail.denyButtonLinkLable')"
+                        v-model="popup.denyButtonLink"
+                        v-if="popup.isRedirect"
+                        >
+                    </sw-text-field>
+
+                    <sw-colorpicker
+                        :label="$t('htc-popup-snp.popup.detail.backgroundColorButton')"
+                        v-model="popup.backgroundColorButton"
+                        v-if="popup.isRedirect"
+                        >
+                    </sw-colorpicker>
+                </sw-card>
+
+                <sw-card v-if="popup" :isLoading="isLoading" :title="$t('htc-popup-snp.popup.detail.styleCardLabel')">
+                    <sw-text-field
+                        :label="$t('htc-popup-snp.popup.detail.classNameLabel')"
+                        v-model="popup.className"
+                        >
+                    </sw-text-field>
+
+                    <sw-number-field
+                        numberType="int"
+                        v-model="popup.width"
+                        :label="$t('htc-popup-snp.popup.detail.widthLabel')"
+                        >
+                    </sw-number-field>
+
+                    <sw-number-field
+                        numberType="int"
+                        v-model="popup.height"
+                        :label="$t('htc-popup-snp.popup.detail.heightLabel')"
+                        >
+                    </sw-number-field>
+
+                    <sw-single-select
+                        :label="$t('htc-popup-snp.popup.detail.alignContentLabel')"
+                        :options="alignContentOptions"
+                        v-model:value="popup.alignContent"
+                        >
+                    </sw-single-select>
+
+                    <sw-media-field
+                        :label="$t('htc-popup-snp.popup.detail.backgroundMediaLabel')"
+                        v-model:value="popup.backgroundMediaId">
+                    </sw-media-field>
+                    
+                    <mt-textarea
+                        :label="$t('htc-popup-snp.popup.detail.customCssLabel')"
+                        v-model="popup.css">
+                    </mt-textarea>
+
+                    <sw-colorpicker
+                        :label="$t('htc-popup-snp.popup.detail.textColorLabel')"
+                        v-model:value="popup.textColor">
+                    </sw-colorpicker>
+                </sw-card>
+            </sw-card-view>
+        </template>
+    </sw-page>
+{% endblock %}

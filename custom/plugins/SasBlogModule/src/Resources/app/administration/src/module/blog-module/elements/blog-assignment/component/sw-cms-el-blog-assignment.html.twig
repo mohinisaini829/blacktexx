@@ -1,0 +1,73 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_cms_element_assignment %}
+    <div class="sw-cms-el-blog-assignment">
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block sw_cms_element_assignment_title %}
+        <h2 class="sw-cms-el-blog-assignment__title">
+            {{ placeholder(assignment, 'name', assignment.name) }}
+        </h2>
+        {% endblock %}
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block sw_cms_element_assignment_content %}
+        <div class="sw-cms-el-blog-assignment__content">
+            <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+            {% block sw_cms_element_assignment_arrow_left %}
+            <div class="sw-cms-el-blog-assignment__navigation">
+                <mt-icon
+                    class="sw-cms-el-blog-assignment__navigation-button"
+                    name="regular-chevron-left"
+                    size="24"
+                />
+            </div>
+            {% endblock %}
+            <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+            {% block sw_cms_element_assignment_product_holder %}
+            <div
+                ref="productHolder"
+                class="sw-cms-el-blog-assignment__product-holder"
+                :style="sliderBoxMinWidth"
+            >
+                <template
+                    v-if="!element.data.product || !element.data.product.extensions?.assignedBlogs?.length"
+                >
+                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                    {% block sw_cms_element_assignment_demo_data %}
+                    <template
+                        v-for="index in sliderBoxLimit"
+                        :key="index"
+                    >
+                        <sw-cms-el-blog-box :element="demoBlogElement" />
+                    </template>
+                    {% endblock %}
+                </template>
+
+                <template v-else>
+                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                    {% block sw_cms_element_assignment_blogs %}
+                    <template
+                        v-for="(blog, index) in assignmentBlogs"
+                        :key="index"
+                    >
+                        <sw-cms-el-blog-box
+                            v-if="index < sliderBoxLimit"
+                            :element="getBlogEl(blog)"
+                        />
+                    </template>
+                    {% endblock %}
+                </template>
+            </div>
+            {% endblock %}
+            <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+            {% block sw_cms_element_assignment_arrow_right %}
+            <div class="sw-cms-el-blog-assignment__navigation">
+                <mt-icon
+                    class="sw-cms-el-blog-assignment__navigation-button"
+                    name="regular-chevron-right"
+                    size="24"
+                />
+            </div>
+            {% endblock %}
+        </div>
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,123 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Entities -->
+        <service id="Acris\CookieConsent\Core\System\SalesChannel\SalesChannelExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="Acris\CookieConsent\Custom\CookieDefinition">
+            <tag name="shopware.entity.definition" entity="acris_cookie" />
+        </service>
+        <service id="Acris\CookieConsent\Custom\CookieGroupDefinition">
+            <tag name="shopware.entity.definition" entity="acris_cookie_group" />
+        </service>
+        <service id="Acris\CookieConsent\Custom\CookieSalesChannelDefinition">
+            <tag name="shopware.entity.definition" entity="acris_cookie_sales_channel" />
+        </service>
+        <service id="Acris\CookieConsent\Custom\Aggregate\CookieTranslation\CookieTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="acris_cookie_translation" />
+        </service>
+        <service id="Acris\CookieConsent\Custom\Aggregate\CookieGroupTranslation\CookieGroupTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="acris_cookie_group_translation" />
+        </service>
+
+        <!-- Controllers -->
+        <service id="Acris\CookieConsent\Storefront\Controller\CookieConsentController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+                <argument type="service" id="twig"/>
+            </call>
+            <argument type="service" id="Acris\CookieConsent\Components\CookiesAcceptService"/>
+            <argument type="service" id="Acris\CookieConsent\Components\CookieService"/>
+        </service>
+
+        <!-- Subscriber -->
+        <service id="Acris\CookieConsent\Subscriber\ResponseSubscriber">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="Acris\CookieConsent\Components\CookieService"/>
+            <argument type="service" id="Acris\CookieConsent\Components\CookiesAcceptService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Acris\CookieConsent\Components\RegisteredCookiesService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Acris\CookieConsent\Storefront\Page\GenericPageLoader"
+                 decorates="Shopware\Storefront\Page\GenericPageLoader">
+            <argument type="service" id="Acris\CookieConsent\Storefront\Page\GenericPageLoader.inner"/>
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="Acris\CookieConsent\Components\CookieService"/>
+            <argument type="service" id="Acris\CookieConsent\Components\CookiesAcceptService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="cms_page.repository"/>
+        </service>
+
+        <service id="Acris\CookieConsent\Storefront\Framework\Cache\CacheStore" decorates="Shopware\Core\Framework\Adapter\Cache\Http\CacheStore" public="true">
+            <argument type="service" id="Acris\CookieConsent\Storefront\Framework\Cache\CacheStore.inner" />
+        </service>
+
+        <!-- Own services -->
+        <service id="Acris\CookieConsent\Components\CookiesAcceptService">
+            <argument type="service" id="service_container" />
+            <argument type="service" id="Acris\CookieConsent\Subscriber\ResponseCacheSubscriber" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="Acris\CookieConsent\Subscriber\ResponseCacheSubscriber">
+            <argument>%shopware.http.cache.enabled%</argument>
+            <argument type="service" id="Shopware\Storefront\Framework\Routing\MaintenanceModeResolver"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Acris\CookieConsent\Subscriber\NotFoundCacheKeySubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Acris\CookieConsent\Subscriber\BeforeResponseSendSubscriber">
+            <argument type="service" id="Acris\CookieConsent\Components\CookieService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Acris\CookieConsent\Components\RegisteredCookiesService">
+            <argument type="service" id="Shopware\Storefront\Framework\Cookie\CookieProviderInterface"/>
+            <argument type="service" id="Acris\CookieConsent\Components\CookieService"/>
+            <argument type="service" id="Shopware\Core\System\Snippet\SnippetService"/>
+            <argument type="service" id="snippet_set.repository"/>
+            <argument type="service" id="acris_cookie_group.repository"/>
+        </service>
+
+        <service id="Acris\CookieConsent\Components\CookieService">
+            <argument type="service" id="service_container" />
+            <argument type="service" id="acris_cookie.repository" />
+            <argument type="service" id="acris_cookie_group.repository" />
+            <argument type="service" id="Acris\CookieConsent\AcrisCookieConsentCS" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="Acris\CookieConsent\Components\CookiesCleanupService">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="logger"/>
+        </service>
+
+        <!-- Scheduled tasks -->
+        <service id="Acris\CookieConsent\ScheduledTask\CleanupTask">
+            <tag name="shopware.scheduled.task" />
+        </service>
+
+        <service id="Acris\CookieConsent\ScheduledTask\CleanupTaskHandler">
+            <argument type="service" id="scheduled_task.repository" />
+            <argument type="service" id="logger" />
+            <argument type="service" id="Acris\CookieConsent\Components\CookiesCleanupService" />
+            <tag name="messenger.message_handler" />
+        </service>
+
+        <!-- TWIG Extension -->
+        <service id="Twig\Extension\StringLoaderExtension">
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>

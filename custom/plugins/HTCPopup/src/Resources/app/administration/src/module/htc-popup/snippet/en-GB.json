@@ -1,0 +1,80 @@
+{
+    "htc-popup-snp": {
+        "list": {
+            "columnLabel": "Title",
+            "columnPriority": "Priority",
+            "columnStatus": "Status"
+        },
+        "general": {
+            "cancelButtonText": "Cancel",
+            "saveButtonText": "Save",
+            "resetStatisticsText": "Reset Statistics",
+            "errorTitle": "Error",
+            "errorMessage": "Something went wrong! Please check again.",
+            "successTitle": "Success",
+            "successSaveMessage": "The popup has been saved.",
+            "navigationTitle": "Popup Management",
+            "navigationDescription": "HTC Popup Management"
+        },
+        "popup": {
+            "detail": {
+                "newPopupHeaderTitle": "New Popup",
+                "generalCardLabel": "General Setting",
+                "displayCardlabel": "Display Setting",
+                "isRedirectPopupCardlabel": "Redirect Popup Setting",
+                "styleCardLabel": "Custom Style Setting",
+                "statisticsCardLabel": "Statistics",
+                "titleLabel": "Title",
+                "statusLabel": "Status",
+                "priorityLabel": "Priority",
+                "contentLabel": "Content",
+                "customCssLabel": "Custom Css",
+                "backgroundMediaLabel": "Background Image",
+                "classNameLabel": "Class Name",
+                "textColorLabel": "Text Color",
+                "pagesShowLabel": "Visible On",
+                "visibleOptionLabels": {
+                    "homePageOptionLabel": "Home Page",
+                    "productPageOptionLabel": "Product Page",
+                    "categoryPageOptionLabel": "Category Page",
+                    "otherPageOptionLabel": "Other Page"
+                },
+                "frequency": "Frequency",
+                "frequencyOptionLabels": {
+                    "alwaysLabel": "Always",
+                    "onlyOneLabel": "Only once"
+                },
+                "alignContentOptions": {
+                    "leftTopLabel": "Left Top",
+                    "leftCenterLabel": "Left Center",
+                    "leftBottomLabel": "Left Bottom",
+                    "centerTopLabel": "Center Top",
+                    "centerCenterLabel": "Center Center",
+                    "centerBottomLabel": "Center Bottom",
+                    "rightTopLabel": "Right Top",
+                    "rightCenterLabel": "Right Center",
+                    "rightBottomLabel": "Right Bottom"           
+                },
+                "showGuestLabel": "Show for Guest",
+                "customerGroupLabel": "Customer Group",
+                "isRedirectLabel": "Is Redirect Popup",
+                "isRedirectHelpText": "The frequency config will be disabled if the popup is a redirect popup.",
+                "confirmButtonTitleLable": "Confirm Button Text",
+                "denyButtonTitleLable": "Deny Button Text",
+                "denyButtonLinkLable": "Deny Button Link",
+                "backgroundColorButton": "Background Color Button",
+                "viewLabel": "View",
+                "clickLabel": "Click",
+                "ctrLabel": "Click-through rate (CTR)",
+                "widthLabel":"Width",
+                "heightLabel":"Height",
+                "alignContentLabel": "Align content"
+            }   
+        },
+        "modules": {
+            "menu": "HTC Popup",
+            "addModulesButton": "Add New Popup",
+            "cancelButton": "Cancel"
+        }
+    }
+}

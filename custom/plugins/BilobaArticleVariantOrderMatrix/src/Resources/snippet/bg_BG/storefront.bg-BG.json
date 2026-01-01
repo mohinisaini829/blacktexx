@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Производител:",
+            "ProductNumber": "Номер на статията:"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Номер на продукта",
+            "DetailBuyActionAdd": "Добавяне на варианти в кошницата за пазаруване",
+            "UnitPrice": "Единична цена",
+            "VariantOrderMatrixColAmount": "Количество",
+            "VariantStock": "Склад",
+            "quickOrder": "Бърза поръчка",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Очаквана обща цена"
+        }
+    }
+}

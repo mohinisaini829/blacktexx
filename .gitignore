@@ -1,0 +1,56 @@
+### IDE / OS ###
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+### Composer ###
+/vendor/
+/auth.json
+
+### Shopware core ###
+.env
+.env.local
+.env.local.php
+.env.*.local
+
+/install.lock
+
+/public/bundles/*
+/public/media/*
+/public/theme/*
+/public/thumbnail/*
+/public/sitemap/*
+/public/asset-manifest.json
+/public/lumise/*
+
+/files/*
+!/files/.htaccess
+
+/var/*
+!/var/.htaccess
+
+### Cache / Logs ###
+/var/cache/*
+/var/log/*
+
+### Node / Build ###
+/node_modules/
+/public/build/
+
+### PHPUnit ###
+/.phpunit.result.cache
+
+### Database & Backup files ###
+*.sql
+*.sql.gz
+*.sql.zip
+*.tar
+*.tar.gz
+*.tgz
+*.backup
+*.bak
+*dump*
+*backup*
+

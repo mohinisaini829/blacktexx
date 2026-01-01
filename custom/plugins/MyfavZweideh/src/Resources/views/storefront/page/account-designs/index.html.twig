@@ -1,0 +1,67 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+    {% block page_account %}
+        <div class="account account-content">
+            {% block page_account_sidebar %}
+                <div class="account-content-aside">
+                    {% if context.customer and not context.customer.guest %}
+                        {% sw_include '@Storefront/storefront/page/account/sidebar.html.twig' %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+
+            {% block page_account_main %}
+                <div class="account-content-main account-designs">
+                    <div class="account-overview">
+                        <div class="account-welcome">
+                            <h1>Meine Designs</h1>
+                            {% block page_account_overview_welcome_intro %}
+                                <p>Hier können Sie Ihre gestalteten Artikel einsehen und bearbeiten.</p>
+                            {% endblock %}
+                        </div>
+
+                        {% if designs|length == 0 %}
+                            {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                                type: 'warning',
+                                content: 'Sie haben noch keine gestalteten Artikel.'
+                            } %}
+                        {% else %}
+                                    <div class="cms-element-product-listing">
+                                        <div class="row cms-listing-row js-listing-wrapper">
+                                            {% for design in designs %}
+                                                <div class="cms-listing-col col-sm-6">
+                                                    <div class="card product-box box-image">
+                                                        <div class="card-body">
+                                                            <div class="product-badges">
+                                                            </div>
+                                                            <div class="product-image-wrapper">
+                                                                <a href="/lumise/editor.php?continue={{ design.tmp_cart_id }}&product_base={{ design.product }}&tmpCartId={{ design.tmp_cart_id }}&key={{ design.key }}" title="" class="product-image-link is-cover">
+                                                                    <img src="{{ seoUrl('frontend.myfav.zweideh.tmp.cart.image', {'key': design.key, 'tmp_cart_id': design.tmp_cart_id }) }}" class="product-image is-cover" alt="Design Cover" title="Design Cover" data-object-fit="cover">
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-info">
+                                                                <a href="/lumise/editor.php?continue={{ design.tmp_cart_id }}&product_base={{ design.product }}&tmpCartId={{ design.tmp_cart_id }}&key={{ design.key }}" class="product-name" title="">{{ design.created|format_datetime('short', 'short', locale='de') }}</a>
+                                                            </div>
+                                                            
+                                                            <div class="product-action">
+                                                                <a href="/lumise/editor.php?continue={{ design.tmp_cart_id }}&product_base={{ design.product }}&tmpCartId={{ design.tmp_cart_id }}&key={{ design.key }}"
+                                                                    title="{{ "account.overviewChangeProfile"|trans|striptags }}"
+                                                                    class="btn btn-light btn-xs">
+                                                                    Details
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                        {% endif %}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

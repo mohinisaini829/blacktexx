@@ -1,0 +1,92 @@
+{% block vio_finishing_prices_list %}
+    <sw-page class="vio-finishing-prices-list">
+        {% block vio_finishing_prices_list_smart_header %}
+            <template #smart-bar-header>
+                {% block vio_finishing_prices_list_smart_header_title %}
+                    <h2>
+                        {% block vio_finishing_prices_list_smart_bar_header_title_text %}
+                            {{ $tc('vio-finishing-prices.general.mainMenuItemGeneral') }}
+                        {% endblock %}
+
+                        {% block vio_finishing_prices_list_smart_bar_header_amount %}
+                            <span v-if="!isLoading">
+                                ({{ total }})
+                            </span>
+                        {% endblock %}
+                    </h2>
+                {% endblock %}
+            </template>
+        {% endblock %}
+        {% block vio_finishing_prices_list_smart_bar_actions %}
+            <template #smart-bar-actions>
+                <sw-button-group>
+                    <sw-button variant="primary"
+                               :routerLink="{ name: 'vio.finishing.prices.create' }"
+                               :disabled="!acl.can('vio_finishing_prices.creator')"
+                               v-tooltip="{
+                                message: $tc('sw-privileges.tooltip.warning'),
+                                disabled: acl.can('vio_finishing_prices.creator'),
+                                showOnDisabledElements: true
+                            }">
+                        {{ $tc('global.default.add') }}
+                    </sw-button>
+                </sw-button-group>
+            </template>
+        {% endblock %}
+
+        {% block vio_finishing_prices_list_language_switch %}
+            <template #language-switch>
+                <sw-language-switch @on-change="onChangeLanguage" />
+            </template>
+        {% endblock %}
+
+        <template #content>
+            {% block vio_finishing_prices_list_content %}
+                <sw-entity-listing
+                    v-if="finishingPrices"
+                    :items="finishingPrices"
+                    :repository="repository"
+                    :showSelection="true"
+                    :columns="columns"
+                    :allowView="acl.can('vio_finishing_prices.viewer')"
+                    :allowEdit="acl.can('vio_finishing_prices.editor')"
+                    :allowInlineEdit="acl.can('vio_finishing_prices.editor')"
+                    :allowDelete="acl.can('vio_finishing_prices.deleter')"
+                    detailRoute="vio.finishing.prices.detail"
+                    @selection-change="updateSelection"
+                    @update-records="updateTotal"
+                >
+                    <template #column-active="{ item, isInlineEdit }">
+                        <template v-if="isInlineEdit">
+                            <sw-field
+                                v-model="item.active"
+                                type="checkbox"
+                            ></sw-field>
+                        </template>
+                        <template v-else>
+                            <sw-icon
+                                v-if="item.active"
+                                name="small-default-checkmark-line-medium"
+                                small
+                                class="is--active"
+                            ></sw-icon>
+                            <sw-icon
+                                v-else
+                                name="small-default-x-line-medium"
+                                small
+                                class="is--inactive"
+                            ></sw-icon>
+                        </template>
+                    </template>
+                    <template #column-name="{ item }">
+                        {{ item.name }}
+                    </template>
+                </sw-entity-listing>
+            {% endblock %}
+
+            {% block vio_finishing_prices_list_grid_loader %}
+                <sw-loader v-if="isLoading" />
+            {% endblock %}
+        </template>
+    </sw-page>
+{% endblock %}

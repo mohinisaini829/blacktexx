@@ -1,0 +1,40 @@
+{
+    "name": "vio/manufacturer-video-slider",
+    "description": "Some plugin description",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "VIOSYS AG"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.4"
+    },
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Vio\\ManufacturerVideoSlider\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Vio\\ManufacturerVideoSlider\\VioManufacturerVideoSlider",
+        "copyright": "Acme",
+        "label": {
+            "de-DE": "VIO.Hersteller Videoslider",
+            "en-GB": "VIO.manufacturer video slider"
+        },
+        "description": {
+            "de-DE": "Some plugin description",
+            "en-GB": "Some plugin description"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.viosys.de",
+            "en-GB": "https://www.viosys.de"
+        },
+        "supportLink": {
+            "de-DE": "https://www.viosys.de/kontakt",
+            "en-GB": "https://www.viosys.de/kontakt"
+        }
+    }
+}

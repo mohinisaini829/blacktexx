@@ -1,0 +1,164 @@
+{% block acris_cookie_group_list %}
+    <sw-page class="acris-cookie-group-list">
+
+        {% block acris_cookie_group_list_search_bar %}
+            <template #search-bar>
+                <sw-search-bar initialSearchType="cookie"
+                               :placeholder="$tc('acris-cookie-group.general.placeholderSearchBar')"
+                               :initialSearch="term"
+                               @search="onSearch">
+                </sw-search-bar>
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_group_list_smart_bar_header %}
+            <template #smart-bar-header>
+                {% block acris_cookie_group_list_smart_bar_header_title %}
+                    <h2>
+                        {% block acris_cookie_group_list_smart_bar_header_title_text %}
+                            {{ $tc('sw-settings.index.title') }}
+                            <mt-icon name="regular-chevron-right-xs" size="16px">
+                            </mt-icon>
+                            {{ $tc('acris-cookie-group.list.textHeadline') }}
+                        {% endblock %}
+
+                        {% block acris_cookie_group_list_smart_bar_header_amount %}
+                            <span v-if="!isLoading" class="sw-page__smart-bar-amount">
+                        ({{ total }})
+                        </span>
+                        {% endblock %}
+                    </h2>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_group_list_smart_bar_actions_language %}
+            <template #language-switch>
+                <sw-language-switch @on-change="onChangeLanguage"></sw-language-switch>
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_group_list_smart_bar_actions %}
+            <template #smart-bar-actions>
+                {% block acris_cookie_group_list_smart_bar_actions_add %}
+                    <mt-button @click="$router.push({ name: 'acris.cookie.group.create' })" variant="primary" size="default">
+                        {{ $tc('acris-cookie-group.list.buttonAdd') }}
+                    </mt-button>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_group_list_cardview %}
+            <template #content>
+                {% block acris_cookie_group_list_card_content %}
+                    <sw-entity-listing
+                            v-if="items && !isLoading"
+                            :items="items"
+                            :repository="entityRepository"
+                            :showSelection="true"
+                            :allowBulkEdit="false"
+                            :allow-delete="allowDelete"
+                            :allowInlineEdit="true"
+                            class="acris-cookie-group-list"
+                            :columns="columns"
+                            :is-loading="isLoading"
+                            :sort-by="sortBy"
+                            :sort-direction="sortDirection"
+                            @selection-change="updateSelection"
+                            @column-sort="onSortColumn"
+                            @page-change="onPageChange">
+
+                        {% block acris_cookie_consent_list_grid_columns_title %}
+                            <template #column-title="{ item, isInlineEdit }">
+                                {% block acris_cookie_list_columns_title_link %}
+                                    <template v-if="!isInlineEdit">
+                                        <router-link :title="$tc('acris-cookie.list.contextMenuEdit')"
+                                                     :to="{ name: 'acris.cookie.group.detail', params: { id: item.id } }">
+                                            {% block acris_cookie_list_columns_title_link %}
+                                                {% if item.title %}
+                                                    {{ item.title }}
+                                                {% else %}
+                                                    {{ placeholder(item, 'title') }}
+                                                {% endif %}
+                                            {% endblock %}
+                                        </router-link>
+                                    </template>
+                                {% endblock %}
+
+                                {% block acris_cookie_list_columns_title_editor %}
+                                    <template v-else>
+                                        <sw-field type="text"
+                                                  :disabled="item.isDefault"
+                                                  :entity-collection="item.title"
+                                                  @update:entity-collection="onChange"
+                                                  #inline-edit>
+                                        </sw-field>
+                                    </template>
+                                {% endblock %}
+                            </template>
+                        {% endblock %}
+
+                        {% block acris_cookie_group_consent_grid_columns_actions %}
+                            <template #actions="{ item }">
+                                {% block acris_cookie_group_consent_grid_columns_actions_edit %}
+                                    <sw-context-menu-item
+                                            :routerLink="{ name: 'acris.cookie.group.detail', params: { id: item.id } }">
+                                        {{ $tc('acris-cookie-group.list.contextMenuEdit') }}
+                                    </sw-context-menu-item>
+                                {% endblock %}
+
+                                {% block acris_cookie_group_list_columns_actions_delete %}
+                                    <sw-context-menu-item variant="danger" v-if="!item.isDefault"
+                                                          @click="onDelete(item.id)">
+                                        {{ $tc('acris-cookie-group.list.buttonDelete') }}
+                                    </sw-context-menu-item>
+                                {% endblock %}
+                            </template>
+                        {% endblock %}
+
+                        {% block acris_cookie_group_consent_grid_columns_actions_delete %}
+                            <template #action-modals="{ item }">
+                                {% block acris_cookie_group_list_delete_modal %}
+                                    <sw-modal v-if="showDeleteModal === item.id"
+                                              @modal-close="onCloseDeleteModal"
+                                              :title="$tc('acris-cookie-group.list.modalTitleDelete')"
+                                              variant="small">
+                                        {% block acris_cookie_group_list_delete_modal_confirm_text %}
+                                            <p>
+                                                {{ $tc('acris-cookie-group.list.textDeleteConfirm') }}
+                                            </p>
+                                        {% endblock %}
+
+                                        {% block acris_cookie_group_list_delete_modal_footer %}
+                                            <template #modal-footer>
+                                                {% block acris_cookie_group_list_delete_modal_actions_cancel %}
+                                                    <mt-button @click="onCloseDeleteModal"
+                                                               size="small" variant="secondary">
+                                                        {{ $tc('acris-cookie-group.list.buttonCancel') }}
+                                                    </mt-button>
+                                                {% endblock %}
+
+                                                {% block acris_cookie_group_list_delete_modal_actions_delete %}
+                                                    <mt-button @click="onConfirmDelete(item.id)"
+                                                               variant="primary"
+                                                               size="small">
+                                                        {{ $tc('acris-cookie-group.list.buttonDelete') }}
+                                                    </mt-button>
+                                                {% endblock %}
+                                            </template>
+                                        {% endblock %}
+                                    </sw-modal>
+                                {% endblock %}
+                            </template>
+                        {% endblock %}
+                    </sw-entity-listing>
+                {% endblock %}
+
+                {% block acris_cookie_group_list_empty_state %}
+                    <sw-empty-state v-if="!isLoading && total === 0"
+                                    :title="$tc('acris-cookie-group.list.contentEmpty')"></sw-empty-state>
+                {% endblock %}
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

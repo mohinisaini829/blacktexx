@@ -1,0 +1,36 @@
+{% block netzp_powerpack6_infobar %}
+    <div class="netzp-powerpack6-infobar-element" id="infobar_{{ element.id }}">
+        {% set iconStyle = "color: " ~ element.config.iconColor.value ~ ";"
+                         ~ "font-size: " ~ element.config.iconSize.value ~ "rem;"
+        %}
+        {% set textStyle = "color: " ~ element.config.textColor.value ~ ";"
+                         ~ "font-size: " ~ element.config.textSize.value ~ "rem;"
+        %}
+
+        {% if(element.config.layout.value == 'vertical') %}
+            {% set iconStyle = iconStyle
+                             ~ "background-color: " ~ element.config.circleColor.value ~ ";"
+                             ~ "width: calc(" ~ element.config.iconSize.value ~ "rem * 2);"
+                             ~ "height: calc(" ~ element.config.iconSize.value ~ "rem * 2);"
+                             ~ "line-height: calc(" ~ element.config.iconSize.value ~ "rem * 2);"
+            %}
+        {% endif %}
+
+        {% for n in range(1, element.config.numberOfItems.value) %}
+            <div class="item {% if(element.config.layout.value == 'vertical') %}vertical{% endif %}">
+                {% set link = element.config["link" ~ n].value %}
+                {% set linkNewWindow = element.config["linkNewWindow" ~ n].value %}
+                <span class="icon" style="{{ iconStyle }}">
+                    {% if(link) %}<a href="{{ link }}" {% if linkNewWindow %}target="_blank" {% endif %} title="{{ link }}" style="color: {{ element.config.iconColor.value }}">{% endif %}
+                    <i class="fa {{ element.config["icon#{n}"].value }}"></i>
+                    {% if(link) %}</a>{% endif %}
+                </span>
+                <span class="info" style="{{ textStyle }}">
+                    {% if(link) %}<a href="{{ link }}" {% if linkNewWindow %}target="_blank" {% endif %} title="{{ link }}" style="color: {{ element.config.textColor.value }}">{% endif %}
+                    {{ element.config["item#{n}"].value|raw }}
+                    {% if(link) %}</a>{% endif %}
+                </span>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

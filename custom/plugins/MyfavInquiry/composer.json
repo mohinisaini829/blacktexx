@@ -1,0 +1,34 @@
+{
+    "name": "myfav/inquiry",
+    "version": "1.0.0",
+    "description": "",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Myfav\\Inquiry\\": "src/"
+        }
+    },
+    "suggest": {
+        "store.shopware.com/bilobaarticlevariantordermatrix": "*"
+    },
+    "extra": {
+        "shopware-plugin-class": "Myfav\\Inquiry\\MyfavInquiry",
+        "label": {
+            "de-DE": "MYFAV.Anfrage",
+            "en-GB": "MYFAV.Inquiry"
+        },
+        "description": {
+            "de-DE": "Myfav Anfrage plugin",
+            "en-GB": "Myfav Inquiry plugin"
+        },
+        "manufacturerLink": {
+            "de-DE": "#",
+            "en-GB": "#"
+        },
+        "supportLink": {
+            "de-DE": "#",
+            "en-GB": "#"
+        }
+    }
+}

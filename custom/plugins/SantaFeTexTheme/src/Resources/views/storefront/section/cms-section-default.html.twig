@@ -1,0 +1,37 @@
+{% sw_extends '@Storefront/storefront/section/cms-section-default.html.twig' %}
+
+{% block page_content_section_default %}
+    {% set subcategories = page.extensions.subcategories %}
+    {% set routeName = app.request.attributes.get('_route') %}
+    {% set navigationId = page.navigationId %}
+
+    {% if routeName == 'frontend.navigation.page' and subcategories is defined and subcategories|length > 0 %}
+        <div class="subcat-section-list-page custom-sub-cat">
+            <div class="container">
+                <div class="subcategory-list mb-4">
+                    {% for subCat in subcategories %}
+                        <div class="subcat-box mb-2 {% if loop.index > 4 %}showhide{% endif %}" data-subcat-index="{{ loop.index }}">
+                            <a href="{{ seoUrl('frontend.navigation.page', { navigationId: subCat.id }) }}">
+                                {% if subCat.media %}
+                                    <img src="{{ subCat.media.url }}" alt="{{ subCat.media.alt }}" class="img-fluid mb-2" style="max-height: 100px;">
+                                {% endif %}
+                                <div class="img-name">{{ subCat.translated.name }}</div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    <!-- <div class="more_categories">
+                        <span class="subcat-box toggle-more"><a href="#">{{ "category_hide_show"|trans }}</a></span>
+                        <span class="subcat-box toggle-less" style="display:none;">
+                            <a href="#">{{ "category_less"|trans }}</a>
+                        </span>
+                    </div> -->
+                </div>
+
+                
+            </div>
+        </div>
+        
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

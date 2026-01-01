@@ -1,0 +1,21 @@
+.sw-cms-el-preview-netzp-powerpack6-collapse {
+  position: relative;
+  width: 100%;
+  font-size: 80%;
+
+  .collapse {
+    overflow: hidden;
+
+    .item {
+      background-color: #eee;
+      font-weight: bold;
+      padding: .25rem;
+      margin-bottom: .1rem;
+    }
+
+    .item-container {
+      display: block;
+      margin: .5rem;
+    }
+  }
+}

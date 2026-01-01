@@ -1,0 +1,37 @@
+{
+    "acris-cookie-group": {
+        "general": {
+            "mainMenuItemGeneral": "Kolačići",
+            "placeholderSearchBar": "Pretraži kolačiće",
+            "description": "Pogledajte kolačiće koji su pronađeni u prodavnici",
+            "labelName": "Grupa kolačića"
+        },
+        "list": {
+            "textHeadline": "Grupe kolačića",
+            "buttonAdd": "Dodaj",
+            "contextMenuEdit": "Uredi",
+            "contextMenuDelete": "Izbriši",
+            "columnTitle": "Naslov",
+            "columnDescription": "Opis",
+            "textDeleteConfirm": "Želite li izbrisati grupu kolačića",
+            "modalTitleDelete": "Izbriši grupu kolačića",
+            "buttonCancel": "Otkaži",
+            "buttonDelete": "Izbriši",
+            "contentEmpty": "Nema grupa kolačića"
+        },
+        "detail": {
+            "textHeadline": "Postavke grupe politika kolačića",
+            "buttonCancel": "Otkaži",
+            "buttonSave": "Sačuvaj",
+            "fieldTitleLabel": "Naslov",
+            "fieldTitlePlaceholder": "Unesite naslov grupe kolačića",
+            "fieldDescriptionLabel": "Opis",
+            "fieldDescriptionPlaceholder": "Unesite opis",
+            "cardTitle": "Informacije o kupcu",
+            "notificationSaveErrorMessage": "Došlo je do greške prilikom čuvanja grupe kolačića.",
+            "notificationSaveSuccessMessage": "Grupa kolačića je uspješno sačuvana.",
+            "notificationSaveSuccessMessageTitle": "Uspjeh",
+            "notificationSaveErrorMessageTitle": "Greška"
+        }
+    }
+}

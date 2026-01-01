@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/zenitplatformnotificationbar/administration/",
+  "entryPoints": {
+    "zenit-platform-notification-bar": {
+      "css": [
+        "/bundles/zenitplatformnotificationbar/administration/assets/zenit-platform-notification-bar-Dg_PFS0T.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/zenitplatformnotificationbar/administration/assets/zenit-platform-notification-bar-CboJMFie.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

@@ -1,0 +1,163 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget.html.twig' %}
+
+{% block buy_widget_data %}
+    {% block buy_widget_product_title %}
+        {% set manufacturerImg = product.manufacturer.media %}
+        <div class="row">
+            <div class="col mt-5 mt-lg-0">
+                <h1 class="mb-0">{{ product.translated.name }}</h1>
+                <span class="product-name-suffix">{{ "detail.nameSuffix"|trans }}</span>
+            </div>
+            <div class="col-{% if manufacturerImg %}auto{% else %}3{% endif%} text-right">
+                <a href="{{ manufacturer.link }}"
+                   class="cms-image-link product-detail-manufacturer-link"
+                   target="_blank" rel="noreferrer noopener"
+                   title="{{ product.manufacturer.name }}">
+
+                {% if manufacturerImg %}
+                {% set attributes = {
+                    'class': 'cms-image product-detail-manufacturer-logo',
+                    'alt': product.manufacturer.alt,
+                    'title': product.manufacturer.name,
+                    'data-object-fit': 'contain'
+                } %}
+
+                {% sw_thumbnails 'cms-image-thumbnails' with {
+                    media: manufacturerImg
+                } %}
+
+                {% else %}
+                    {{ product.manufacturer.name }}
+                {% endif %}
+                </a>
+            </div>
+        </div>
+    {% endblock %}
+    <div class="product-characteristics row">
+        {% set name = product.translated.name %}
+        {% if( product.translated.customFields
+            and product.translated.customFields.vio_product_modelname) %}
+            <div class="col-12">
+                <b>{{ "santa-theme.buybox.model"|trans }}</b>
+                {{ product.translated.customFields.vio_product_modelname }}
+            </div>
+        {% endif %}
+
+        {% block buy_widget_ordernumber_container_new %}
+            {# biloba : if set true else default always false #}
+            {% set hideStackPriceTable = config("BilobaArticleVariantOrderMatrix.config.stackPriceTableDisable")|default(false) %}
+
+            {% if hideStackPriceTable %}
+                {# empty #}
+            {% else %}
+                {% if product.productNumber %}
+                    <div class="col-6">
+                        <span>{{ "detail.productNumberLabel"|trans|sw_sanitize }}</span>
+                            <span>
+                                <meta itemprop="productID"
+                                      content="{{ product.id }}"/>
+                                <span class="product-detail-ordernumber"
+                                      itemprop="sku">
+                                    {{ product.productNumber }}
+                                </span>
+                        </span>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endblock %}
+        {% if 'logged-in' in context.states %}
+            <div class="net-gross-switch custom-control custom-switch col-6">
+                <span class="net-gross-switch-net-label">{{ 'detail.netGrossSwitch.net'|trans|sw_sanitize }}</span>
+                <input type="checkbox"
+                       class="net-gross-switch-input custom-control-input"
+                       id="netGrossSwitch"
+                       {% if context.taxState is same as 'gross' %}checked{% endif %}
+                >
+                <label class="custom-control-label form-label"
+                       for="netGrossSwitch">
+                    &nbsp;
+                </label>
+                <span class="net-gross-switch-gross-label">{{ 'detail.netGrossSwitch.gross'|trans|sw_sanitize }}</span>
+            </div>
+        {% endif %}
+
+        {% block buy_widget_product_material %}
+            {% if( page.product.extensions
+                and page.product.extensions['VioImportantProperty']) %}
+                {# @var vioProperties \Shopware\Core\Framework\Struct\ArrayStruct #}
+                {% set vioProperties = page.product.extensions['VioImportantProperty'] %}
+                {% for vioPropertyName,vioProperty in vioProperties.data %}
+                    <div class="col-12">
+                        {% for vioName, propValue in vioProperty %}
+                            {% set snippet = "santa-theme.property.label." ~ vioName %}
+                            {% set snippetValue = vioName %}
+                            <b>{% if "#{snippet|trans}" != "#{snippet}" %}{{ snippet|trans|raw }}{% else %}{{ vioName }}{% endif %}:</b>
+                                {% for value in propValue %}
+                                    {{ value }}{% if loop.last != true %}{{ 'santa-theme.property.separator'|trans }}{% endif %}
+                                {% endfor %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% elseif page.product.translated.customFields and page.product.translated.customFields.vio_product_material %}
+                <div class="col-12">
+                    <b>{{ "santa-theme.buybox.material"|trans }}</b>{{ product.translated.customFields.vio_product_material }}
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+    {{ parent() }}
+{% endblock %}
+
+{% block buy_widget_ordernumber_container %}{% endblock %}
+{% block buy_widget_tax %}{% endblock %}
+{% block buy_widget_delivery_informations %}{% endblock %}
+{% block buy_widget_wishlist %}{% endblock %}
+{% block buy_widget_price %}
+{% if 'logged-in' in context.states %}
+    <div class="product-detail-price-container">
+        {% sw_include '@Storefront/storefront/component/buy-widget/buy-widget-price.html.twig' %}
+    </div>
+    <div class="product-detail-link-container row justify-content-between">
+
+        <a class="col-auto print-price-list-link" href="#finishing-price-table">{{ "santa-theme.buybox.printPriceListLink"|trans|sw_sanitize }}</a>
+
+        {% set vioPdfCustomField = page.product.manufacturer.translated.customFields.vio_size_table %}
+
+        {% if vioPdfCustomField %}
+            {% set vioMedia = searchMedia({vioPdfCustomField}, context.context) %}
+            {% for media in vioMedia %}
+                <a class="col-auto"
+                   title="{{ "santa-theme.buybox.sizeTableLink"|trans|sw_sanitize }}"
+                   href="{{ media.url }}"
+                   target="_blank">
+                    {{ "santa-theme.buybox.sizeTableLink"|trans|sw_sanitize }}
+                </a>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block buy_widget_buy_form %}
+    <div class="{% if page.product.manufacturer.name == "SantaFeTex" and configuratorSettings|length == 0 %}sf--manufacturer-sf{% endif %}">
+        {{ parent() }}
+    </div>
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('✅ Detail page JS loaded from page_product_detail_head');
+
+            // Example: net/gross toggle
+            var toggle = document.getElementById('netGrossSwitch');
+            var container = document.querySelector('.product-detail-price-container');
+            if (toggle && container) {
+                toggle.addEventListener('change', function () {
+                    if (toggle.checked) {
+                        container.classList.remove('show-net');
+                    } else {
+                        container.classList.add('show-net');
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}

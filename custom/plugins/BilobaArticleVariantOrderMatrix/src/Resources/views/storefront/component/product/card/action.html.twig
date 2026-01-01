@@ -1,0 +1,55 @@
+{% sw_extends '@Storefront/storefront/component/product/card/action.html.twig'%}
+
+{% set productParentId = product.parentId %}
+
+{% if product.variantListingConfig.displayParent == true %}
+    {% set productParentId = product.id %}
+{% endif %}
+
+{% block component_product_box_action_detail %}
+
+    {% if productParentId
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and (config("BilobaArticleVariantOrderMatrix.config.variantMatrixListingEnabled") == 'true' 
+                or config("BilobaArticleVariantOrderMatrix.config.variantMatrixListingEnabled") == 'overlay')
+            and context.context.extensions.bilobaArticleVariantOrderMatrix.elements.parentProducts[productParentId].customFields.biloba_variant_matrix_hide != true %}
+        {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/product-card-action.html.twig' %}
+    {% elseif productParentId 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and (config("BilobaArticleVariantOrderMatrix.config.variantMatrixListingEnabled") == 'inline_standard')
+            and context.context.extensions.bilobaArticleVariantOrderMatrix.elements.parentProducts[productParentId].customFields.biloba_variant_matrix_hide != true %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_box_action_buy %}
+    {% if productParentId 
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and (config("BilobaArticleVariantOrderMatrix.config.variantMatrixListingEnabled") == 'true' 
+                or config("BilobaArticleVariantOrderMatrix.config.variantMatrixListingEnabled") == 'overlay')
+            and context.context.extensions.bilobaArticleVariantOrderMatrix.elements.parentProducts[productParentId].customFields.biloba_variant_matrix_hide != true %}
+        <a href="{{ seoUrl('frontend.detail.page', {'productId': id}) }}"
+            class="btn btn-block btn-light"
+            title="{{ "listing.boxProductDetails"|trans|striptags }}">
+            {{ "listing.boxProductDetails"|trans|sw_sanitize }}
+        </a>
+        {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/product-card-action.html.twig' %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_product_detail_product_buy_button %}
+    {% if productParentId 
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixListingEnabled") == 'inline_standard'
+            and context.context.extensions.bilobaArticleVariantOrderMatrix.elements.parentProducts[productParentId].customFields.biloba_variant_matrix_hide != true %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% block acris_cookie_index %}
+<sw-page class="acris-cookie-index sw-settings-index">
+    {% block acris_cookie_index_smart_bar_header %}
+    <template #smart-bar-header>
+        {% block acris_cookie_index_smart_bar_header_title %}
+        <h2>
+            {% block acris_cookie_index_smart_bar_header_title_text %}
+                {{ $tc('acris-cookie-index.index.textHeadline') }}
+            {% endblock %}
+        </h2>
+        {% endblock %}
+    </template>
+    {% endblock %}
+
+    {% block acris_cookie_index_content %}
+    <template #content>
+        {% block acris_cookie_index_content_card_view %}
+        <sw-card-view>
+            {% block acris_cookie_index_content_card %}
+            <mt-card class="acris-cookie_index__card" positionIdentifier="acris-cookie-index-card">
+                {% block acris_cookie_index_content_grid %}
+                <div class="acris-settings-content-grid sw-settings__content-grid sw-settings__tabs">
+                    {% block acris_cookie_index_card_item %}
+                        {% block sw_settings_acris_cookie_item %}
+                            <sw-settings-item
+                                    id="acris-settings-acris-cookie"
+                                    :label="$tc('acris-cookie.general.mainMenuItemGeneral')"
+                                    :to="{ name: 'acris.cookie.index' }"
+                                    class="acris-settings-item">
+                                <template #icon>
+                                    <mt-icon name="regular-smile-beam"></mt-icon>
+                                </template>
+                            </sw-settings-item>
+                        {% endblock %}
+                        {% block sw_settings_acris_cookie_groups_item %}
+                            <sw-settings-item
+                                    id="acris-settings-acris-cookie-group"
+                                    :label="$tc('acris-cookie-group.general.labelName')"
+                                    :to="{ name: 'acris.cookie.group.index' }"
+                                    class="acris-settings-item">
+                                <template #icon>
+                                    <mt-icon name="regular-users"></mt-icon>
+                                </template>
+                            </sw-settings-item>
+                        {% endblock %}
+                    {% endblock %}
+                </div>
+                {% endblock %}
+            </mt-card>
+            {% endblock %}
+        </sw-card-view>
+        {% endblock %}
+    </template>
+    {% endblock %}
+</sw-page>
+{% endblock %}

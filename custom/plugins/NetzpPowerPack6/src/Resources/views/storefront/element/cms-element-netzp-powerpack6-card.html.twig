@@ -1,0 +1,181 @@
+{% block netzp_powerpack6_card %}
+    {% set cardType = element.config.type.value %}
+    {% set isTwoSided = cardType == 'flip' or cardType == 'reveal' %}
+    {% set isPopup = cardType == 'popup' %}
+    {% set isStatic = cardType == 'static' %}
+    {% set isBlur = cardType == 'blur' %}
+    {% set blurText = isBlur and element.config.blurText.value %}
+    {% set hasUrl = element.config.url.value %}
+    {% set hasUrlText = element.data.urlText != "" %}
+    {% set hasIcon = element.config.icon.value != "" %}
+    {% set styleHeight = "height: " ~ element.config.height.value ~ "rem; width: 100%;" %}
+    {% set styleIcon = "color: " ~ element.config.color1.value ~ ';' %}
+    {% set styleFront = "background-color: " ~ element.config.backgroundColor1.value ~ "; color: " ~ element.config.color1.value ~ ';' %}
+    {% set styleBack = "background-color: " ~ element.config.backgroundColor2.value ~ "; color: " ~ element.config.color2.value ~ ';' %}
+    {% set classImageFront = element.config.imageCover1.value ? 'cover' : 'contain' %}
+    {% set classImageBack = element.config.imageCover2.value ? 'cover' : 'contain' %}
+    {% set styleImageFront = 'opacity: ' ~ element.config.imageOpacity1.value ~ '%;' %}
+    {% set styleImageBack = 'opacity: ' ~ element.config.imageOpacity2.value ~ '%;' %}
+
+    <div class="netzp-powerpack6-card-element"
+         id="card_{{ element.id }}"
+         style="{{ styleHeight }}">
+
+        {% if hasUrl and (not hasUrlText and not isPopup) or isStatic %}
+        <a class="link" href="{{ element.config.url.value }}" {% if element.config.urlNewWindow.value %}target="_blank"{% endif %}>
+        {% endif %}
+            {% block netzp_powerpack6_card_inner %}
+                <div class="card-inner card-{{ cardType }}">
+                    {% block netzp_powerpack6_card_front %}
+                        <div class="card-front" style="{{ styleFront }}"
+                            {% if isPopup %}data-bs-toggle="modal" data-bs-target="#popup_{{ element.id }}"{% endif %}>
+                            {% if element.data.image1.media %}
+                                {% block netzp_powerpack6_card_front_image %}
+                                    {% sw_thumbnails 'pp_card_thumbnail1' with {
+                                        media: element.data.image1.media,
+                                        attributes: {
+                                            'class': classImageFront ~ (isBlur ? ' xblur-effect'),
+                                            'style': styleImageFront,
+                                            'alt':   element.data.image1.media.translated.alt ?: '',
+                                            'title': element.data.image1.media.translated.title ?: ''
+                                        }
+                                    } %}
+
+                                {% endblock %}
+                            {% endif %}
+
+                            {% block netzp_powerpack6_card_front_text %}
+                                <div class="card-text {% if blurText %}blur-effect{% endif %}">
+                                    {{ element.data.text1|raw }}
+                                </div>
+                            {% endblock %}
+
+                            {% if hasUrl and hasUrlText and not isTwoSided and not isPopup %}
+                                {% block netzp_powerpack6_card_front_link %}
+                                    <div class="card-link {% if blurText %}blur-effect{% endif %}">
+                                        <a href="{{ element.config.url.value }}" {% if element.config.urlNewWindow.value %}target="_blank"{% endif %}
+                                           class="btn btn-primary">
+                                            {{ element.data.urlText }}
+                                        </a>
+                                    </div>
+                                {% endblock %}
+                            {% endif %}
+
+                            {% if hasIcon %}
+                                {% block netzp_powerpack6_card_front_icon %}
+                                    <span class="card-icon" style="{{ styleIcon }}">
+                                        <i class="fa {{ element.config.icon.value }}"></i>
+                                    </span>
+                                {% endblock %}
+                            {% endif %}
+                        </div>
+                    {% endblock %}
+
+                    {% if isTwoSided %}
+                        {% block netzp_powerpack6_card_back %}
+                            <div class="card-back" style="{{ styleBack }}">
+                                {% if element.data.image2.media %}
+                                    {% block netzp_powerpack6_card_back_image %}
+                                        {% sw_thumbnails 'pp_card_thumbnail2' with {
+                                            media: element.data.image2.media,
+                                            attributes: {
+                                                'class': classImageBack,
+                                                'style': styleImageBack,
+                                                'alt':   element.data.image2.media.translated.alt ?: '',
+                                                'title': element.data.image2.media.translated.title ?: ''
+                                            }
+                                        } %}
+                                    {% endblock %}
+                                {% endif %}
+
+                                {% block netzp_powerpack6_card_back_text %}
+                                    <div class="card-text">
+                                        {{ element.data.text2|raw }}
+                                    </div>
+                                {% endblock %}
+
+                                {% if hasUrl and hasUrlText %}
+                                    {% block netzp_powerpack6_card_back_link %}
+                                        <div class="card-link">
+                                            <a href="{{ element.config.url.value }}" {% if element.config.urlNewWindow.value %}target="_blank"{% endif %}
+                                               class="btn btn-primary">
+                                                {{ element.data.urlText }}
+                                            </a>
+                                        </div>
+                                    {% endblock %}
+                                {% endif %}
+                            </div>
+                        {% endblock %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+        {% if hasUrl and (not hasUrlText and not isPopup) or isStatic %}
+        </a>
+        {% endif %}
+    </div>
+
+    {% if isPopup %}
+        {% block netzp_powerpack6_card_popup %}
+            <div class="modal fade" id="popup_{{ element.id }}"
+                 role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content netzp-powerpack6-card-element">
+                        <div class="modal-body" style="height: 50vh">
+                            {% block netzp_powerpack6_card_popup_inner %}
+                                <div class="card-inner card-{{ cardType }}">
+                                    <div class="card-back" style="{{ styleBack }}">
+                                        {% if hasUrl and not hasUrlText %}
+                                        <a class="link" href="{{ element.config.url.value }}" {% if element.config.urlNewWindow.value %}target="_blank"{% endif %}>
+                                            {% endif %}
+                                            {% if element.data.image2.media %}
+                                                {% block netzp_powerpack6_card_popup_image %}
+                                                    {% sw_thumbnails 'pp_card_popup_thumbnail' with {
+                                                        media: element.data.image2.media,
+                                                        attributes: {
+                                                            'class': classImageBack,
+                                                            'style': styleImageBack,
+                                                            'alt':   element.data.image2.media.translated.alt ?: '',
+                                                            'title': element.data.image2.media.translated.title ?: ''
+                                                        }
+                                                    } %}
+                                                {% endblock %}
+                                            {% endif %}
+
+                                            {% block netzp_powerpack6_card_popup_text %}
+                                                <div class="card-text">
+                                                    {{ element.data.text2|raw }}
+                                                </div>
+                                            {% endblock %}
+
+                                            {% if hasUrl and not hasUrlText %}
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endblock %}
+                        </div>
+
+                        {% block netzp_powerpack6_card_popup_footer %}
+                            <div class="modal-footer">
+                                {% if hasUrl and hasUrlText %}
+                                    {% block netzp_powerpack6_card_popup_footer_link %}
+                                        <a href="{{ element.config.url.value }}" {% if element.config.urlNewWindow.value %}target="_blank"{% endif %}
+                                           class="btn btn-primary me-auto">
+                                            {{ element.data.urlText }}
+                                        </a>
+                                    {% endblock %}
+                                {% endif %}
+
+                                {% block netzp_powerpack6_card_popup_footer_close %}
+                                    <button type="button" class="btn" data-bs-dismiss="modal">
+                                        {% sw_icon 'x-circle' %}
+                                    </button>
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    {% endif %}
+{% endblock %}

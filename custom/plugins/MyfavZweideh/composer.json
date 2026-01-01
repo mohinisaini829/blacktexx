@@ -1,0 +1,39 @@
+{
+    "name": "myfav/zweideh",
+    "description": "Implementation of the fancy product designer in shopware.",
+    "version": "1.0.0",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Steve Krämer, Mindfav Software"
+        }
+    ],
+    "require": {
+        "shopware/core": "^6.7"
+    },	
+    "extra": {
+        "shopware-plugin-class": "Myfav\\Zweideh\\MyfavZweideh",
+        "label": {
+            "de-DE": "Zweideh Designer",
+            "en-GB": "Zweideh Designer"
+        },
+        "description": {
+            "de-DE": "Integriert den Fancy Product Designer in den Shopware Store. Der Fancy Product Designer ist eine Frontend-App, die es deinen Kunden erlaubt, individuelle Produkte zu gestalten.",
+            "en-GB": "Integrates the fancy product designer into the shopware 6 store. The fancy product designer is a frontend app, that allows your customers to design custom products."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://mindfav.com",
+            "en-GB": "https://mindfav.com"
+        },
+        "supportLink": {
+            "de-DE": "https://www.mindfav.com/impressum/",
+            "en-GB": "https://www.mindfav.com/impressum/"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+          "Myfav\\Zweideh\\": "src/"
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Продюсер:",
+            "ProductNumber": "Номер статьи:"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Номер продукта",
+            "DetailBuyActionAdd": "Добавь варианты в корзину",
+            "UnitPrice": "Цена за единицу",
+            "VariantOrderMatrixColAmount": "Количество",
+            "VariantStock": "Склад",
+            "quickOrder": "Быстрый заказ",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Примерная общая цена"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "sw-cms": {
+        "elements": {
+            "moorl-download-list": {
+                "name": "Downloads",
+                "label": {
+                    "downloads": "Downloads",
+                    "layout": "Layout",
+                    "default": "Standard",
+                    "minimal": "Minimal",
+                    "notAvailable": "Nicht Verfügbar",
+                    "emptyText": "Text wenn keine Ergebnisse"
+                }
+            }
+        }
+    }
+}

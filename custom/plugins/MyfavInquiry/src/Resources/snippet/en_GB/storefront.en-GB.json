@@ -1,0 +1,33 @@
+{
+    "myfavInquiry": {
+        "add": "Inquire about articles",
+        "cartTitle": "Meine Produkte",
+        "confirm": {
+            "title": "Free request",
+            "productListTitle": "My products",
+            "delete": "delete",
+            "quantityLabel": "quantity",
+            "unitPrice": "unit price:",
+            "phoneNameLabel": "Telephone for queries",
+            "phoneNamePlaceholder": "Telephone for queries",
+            "dateNameLabel": "date of delivery",
+            "dateNamePlaceholder": "date of delivery",
+            "commentNameLabel": "comment",
+            "commentNamePlaceholder": "comment",
+            "logoNameLabel": "Custom logo",
+            "logoNamePlaceholder": "Choose a file",
+            "submit": "submit"
+        },
+        "finish": {
+            "title": "Free request",
+            "text": "Thank you for your inquiry. We'll get back to you as soon as possible.",
+            "backToShop": "Keep browsing"
+        },
+        "modal": {
+            "title": "Article was added",
+            "content": "The item was added to the request list",
+            "confirmBtn": "Send request",
+            "closeBtn": "Add more articles"
+        }
+    }
+}

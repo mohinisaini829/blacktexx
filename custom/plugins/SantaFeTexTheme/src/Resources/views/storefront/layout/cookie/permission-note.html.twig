@@ -1,0 +1,103 @@
+{% block acris_cookie_consent %}
+    {% block acris_cookie_consent_script %}
+        {% sw_include '@Storefront/storefront/layout/cookie/script/acris-cookie-script.html.twig' %}
+    {% endblock %}
+
+    {% block acris_cookie_consent_styles %}
+        {% sw_include '@Storefront/storefront/layout/cookie/styles/acris-cookie-styles.html.twig' %}
+    {% endblock %}
+
+    {% block acris_cookie_consent_note %}
+        {% set cookieConfig = config('AcrisCookieConsentCS.config') %}
+        {% if page.extensions.acrisCookieConsent %}
+            {% if cookieConfig.layout == "modal" %}
+                <div class="acris-cookie-consent is--modal{% if page.extensions.acrisCookieConsent.hasAccepted %} has--accepted{% endif %}{% if cookieConfig.displayButtonSameWidth %} same-width-buttons{% endif %}"
+                     data-acris-cookie-consent="true"
+                     data-acris-cookie-consent-options='{
+                                        "acceptCookieSettingsUrl": "{{ path('frontend.cookieConsent.accept') }}",
+                                        "acceptCookieUrl": "{{ path('frontend.cookieConsent.allowCookieGroup') }}",
+                                        "acceptOnlyFunctionalCookiesUrl": "{{ path('frontend.cookieConsent.allowOnlyFunctional') }}",
+                                        "acceptAllCookiesUrl": "{{ path('frontend.cookieConsent.allowAll') }}",
+                                        "csrfTokenAccept": "{{ sw_csrf("frontend.cookieConsent.accept", {"mode": "token"}) }}",
+                                        "csrfTokenAcceptOnlyFunctional": "{{ sw_csrf("frontend.cookieConsent.allowOnlyFunctional", {"mode": "token"}) }}",
+                                        "csrfTokenAcceptAll": "{{ sw_csrf("frontend.cookieConsent.allowAll", {"mode": "token"}) }}",
+                                        "csrfTokenAcceptCookie": "{{ sw_csrf("frontend.cookieConsent.allowCookieGroup", {"mode": "token"}) }}",
+                                        "pageReload": "{{ cookieConfig.pageReload }}",
+                                        "dontAddToDataLayer": "{{ cookieConfig.dontAddToDataLayer }}",
+                                        "showAcceptBtnAfterSettingsClick": "{{ cookieConfig.showAcceptBtnWhen == 'cookieSettingsOpened' and cookieConfig.openCookieSettings is same as false and cookieConfig.displayButtonAcceptCookiesType != 'end-of-info-text' }}"
+                                }'>
+
+                    {% block acris_cookie_consent_modal_permission_container %}
+                        <a href="#cookieActivateModalURL" id="ccActivateModalLink" data-toggle="modal" data-target="#ccAcivateModal" hidden></a>
+                        <div class="modal fade" data-modal="cookieOpenModal" id="ccAcivateModal" tabindex="-1" data-backdrop="static" data-keyboard="false">
+                            {% block acris_cookie_consent_modal_permission_dialog %}
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    {% block acris_cookie_consent_modal_permission_content %}
+                                        <div class="modal-content">
+                                            {% block acris_cookie_consent_modal_note_settings %}
+                                                {% sw_include '@Storefront/storefront/layout/cookie/permission-note-settings.html.twig' %}
+                                            {% endblock %}
+
+                                            {% block acris_cookie_consent_permission_modal_heading %}
+                                                {% sw_include '@Storefront/storefront/layout/cookie/permission-note-heading.html.twig' with { additionalClasses: 'h3 text-center pt-3 mb-0' } %}
+                                            {% endblock %}
+
+                                            {% block acris_cookie_consent_permission_modal_text_buttons %}
+                                                {% sw_include '@Storefront/storefront/layout/cookie/permission-note-text-button.html.twig' %}
+                                            {% endblock %}
+
+                                            {% block acris_cookie_consent_permission_modal_footer %}
+                                                {% sw_include '@Storefront/storefront/layout/cookie/permission-note-footer.html.twig' with { additionalClasses: 'text-center mb-3' } %}
+                                            {% endblock %}
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </div>
+            {% else %}
+                <div class="acris-cookie-consent is--default{% if page.extensions.acrisCookieConsent.hasAccepted %} has--accepted{% endif %}{% if cookieConfig.displayButtonSameWidth %} same-width-buttons{% endif %}"
+                     data-acris-cookie-consent="true"
+                     data-acris-cookie-consent-options='{
+                        "acceptCookieSettingsUrl": "{{ path('frontend.cookieConsent.accept') }}",
+                        "acceptCookieUrl": "{{ path('frontend.cookieConsent.allowCookieGroup') }}",
+                        "acceptOnlyFunctionalCookiesUrl": "{{ path('frontend.cookieConsent.allowOnlyFunctional') }}",
+                        "acceptAllCookiesUrl": "{{ path('frontend.cookieConsent.allowAll') }}",
+                        "csrfTokenAccept": "{{ sw_csrf("frontend.cookieConsent.accept", {"mode": "token"}) }}",
+                        "csrfTokenAcceptOnlyFunctional": "{{ sw_csrf("frontend.cookieConsent.allowOnlyFunctional", {"mode": "token"}) }}",
+                        "csrfTokenAcceptAll": "{{ sw_csrf("frontend.cookieConsent.allowAll", {"mode": "token"}) }}",
+                        "csrfTokenAcceptCookie": "{{ sw_csrf("frontend.cookieConsent.allowCookieGroup", {"mode": "token"}) }}",
+                        "pageReload": "{{ cookieConfig.pageReload }}",
+                        "dontAddToDataLayer": "{{ cookieConfig.dontAddToDataLayer }}",
+                        "showAcceptBtnAfterSettingsClick": "{{ cookieConfig.showAcceptBtnWhen == 'cookieSettingsOpened' and cookieConfig.openCookieSettings is same as false and cookieConfig.displayButtonAcceptCookiesType != 'end-of-info-text' }}"
+                }'>
+
+                    {% block acris_cookie_consent_note_settings %}
+                        {% sw_include '@Storefront/storefront/layout/cookie/permission-note-settings.html.twig' %}
+                    {% endblock %}
+
+                    {% block acris_cookie_consent_permission_container %}
+                        <div class="cookie-consent-permission-container container">
+                            {% block acris_cookie_consent_permission_content %}
+                                {% block acris_cookie_consent_permission_banner_heading %}
+                                    {% sw_include '@Storefront/storefront/layout/cookie/permission-note-heading.html.twig' with { additionalClasses: 'h3 mb-md-0 text-md-left text-center' } %}
+                                {% endblock %}
+
+                                {% block acris_cookie_consent_permission_banner_text_buttons %}
+                                    <div class="cookie-consent-permission-content d-md-flex justify-content-md-between align-items-md-center">
+                                        {% sw_include '@Storefront/storefront/layout/cookie/permission-note-text-button.html.twig' %}
+                                    </div>
+                                {% endblock %}
+
+                                {% block acris_cookie_consent_permission_banner_footer %}
+                                    {% sw_include '@Storefront/storefront/layout/cookie/permission-note-footer.html.twig' with { additionalClasses: 'text-md-left text-center' } %}
+                                {% endblock %}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}

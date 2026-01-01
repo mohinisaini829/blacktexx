@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>CMS PowerPack</title>
+        <title lang="de-DE">CMS PowerPack</title>
+
+        <input-field>
+            <name>googleMapsApiKey</name>
+            <label>Google Maps API Key</label>
+            <label lang="de-DE">Google Maps API Key</label>
+        </input-field>
+
+        <input-field type="bool">
+            <name>snippetsproduct</name>
+            <label>Allow Snippets/Twig in Products and Categories</label>
+            <label lang="de-DE">Snippets in Produkten und Kategorien erlauben</label>
+            <helpText>Also other twig expressions can be used!</helpText>
+            <helpText>Es können auch weitere Twig-Ausdrücke verwendet werden!</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>excludefontawesome</name>
+            <label>Exclude Font Awesome from Frontend</label>
+            <label lang="de-DE">Font Awesome im Frontend ausschließen</label>
+            <helpText>This setting can be enabled if Font Awesome icons are not going to be used in the frontend or Font Awesome is otherwise included. Make sure to compile the theme after changes!</helpText>
+            <helpText>Diese Einstellung kann aktiviert werden, wenn im Frontend keine Font Awesome-Icons verwendet werden sollen oder Font Awesome anderweitig eingebunden wird. Achtung: nach Änderung das Theme neu compilieren!</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+</config>

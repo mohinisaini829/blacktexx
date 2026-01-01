@@ -1,0 +1,212 @@
+{% block page_product_detail_buy_form_inner %}
+    {# @var page \Shopware\Storefront\Page\Product\ProductPage #}
+    {# @var product \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity #}
+    {% set product = page.product %}
+
+    <form
+        id="productDetailPageBuyProductForm"
+        action="{% block page_product_detail_buy_form_action %}{{ path('frontend.checkout.line-item.add') }}{% endblock %}"
+        method="post"
+        class="buy-widget"
+        data-add-to-cart="true">
+
+        {% block page_product_detail_buy_form_inner_csrf %}
+            {{ sw_csrf('frontend.checkout.line-item.add') }}
+        {% endblock %}
+
+        {% set buyable = product.available and product.childCount <= 0 and product.calculatedMaxPurchase > 0 %}
+        {% block page_product_detail_buy_container %}
+            {% if buyable %}
+                <div class="{{ formRowClass }} buy-widget-container">
+                    {% block page_product_detail_buy_quantity_container %}
+                        <div class="col-4">
+                            {% block page_product_detail_buy_quantity %}
+                                <input 
+                                    name="lineItems[{{ product.id }}][quantity]"
+                                    class="{{ formInputClass }} product-detail-quantity-select myfavQtySelect form-control"
+                                    value="1"
+                                    style="myfavQtySelect"
+                                    data-attr-limit-order-qty="{{ config('MyfavZweideh.config.limitOrderQty') }}"
+                                    data-attr-max-order-qty="{{ config('MyfavZweideh.config.maxOrderQty') }}"
+                                    autocomplete='off' />
+
+                                
+                                {#
+                                <select name="lineItems[{{ product.id }}][quantity]"
+                                        class="{{ formSelectClass }} product-detail-quantity-select">
+                                    {% for quantity in range(product.minPurchase, product.calculatedMaxPurchase, product.purchaseSteps) %}
+                                        <option value="{{ quantity }}">
+                                            {{ quantity }}
+                                            {% if quantity == 1 %}
+                                                {% if product.translated.packUnit %} {{ product.translated.packUnit }}{% endif %}
+                                            {% else %}
+                                                {% if product.translated.packUnitPlural %}
+                                                    {{ product.translated.packUnitPlural }}
+                                                {% elseif product.translated.packUnit %}
+                                                    {{ product.translated.packUnit }}
+                                                {% endif %}
+                                            {% endif %}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                #}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+
+                    {% block page_product_detail_buy_redirect_input %}
+                        {# fallback redirect back to detail page is deactivated via js #}
+                        <input type="hidden"
+                               name="redirectTo"
+                               value="frontend.detail.page">
+
+                        <input type="hidden"
+                               name="redirectParameters"
+                               data-redirect-parameters="true"
+                               value='{"productId": "{{ product.id }}"}'>
+                    {% endblock %}
+
+                    {% block page_product_detail_buy_product_buy_info %}
+                        <input type="hidden"
+                               name="lineItems[{{ product.id }}][id]"
+                               value="{{ product.id }}">
+                        <input type="hidden"
+                               name="lineItems[{{ product.id }}][type]"
+                               value="product">
+                        <input type="hidden"
+                               name="lineItems[{{ product.id }}][referencedId]"
+                               value="{{ product.id }}">
+                        <input type="hidden"
+                               name="lineItems[{{ product.id }}][stackable]"
+                               value="1">
+                        <input type="hidden"
+                               name="lineItems[{{ product.id }}][removable]"
+                               value="1">
+                    {% endblock %}
+
+                    {% block page_product_detail_product_buy_meta %}
+                        <input type="hidden"
+                               name="product-name"
+                               value="{{ product.translated.name }}">
+                        <input type="hidden"
+                               name="brand-name"
+                               value="{{ product.manufacturer.getName() }}">
+                    {% endblock %}
+
+                    {% block myfav_custom_product_fields_block %}
+                        <input type="hidden"
+                            name="lumise_tmp_key"
+                            value="{{ lumiseData.key }}">
+                        <input type="hidden"
+                            name="lumise_tmp_cart_id"
+                            value="{{ lumiseData.tmp_cart_id }}">
+                    {% endblock %}
+
+                    {% block page_product_detail_buy_button_container %}
+                        <div class="col-8">
+                            {% block page_product_detail_buy_button %}
+                                {# @deprecated tag:v6.5.0 - Bootstrap v5 removes `btn-block` class, use `d-grid` wrapper instead #}
+                                {% if feature('v6.5.0.0') %}
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary btn-buy myfav-zweideh-buy-button"
+                                                title="{{ "detail.addProduct"|trans|striptags }}"
+                                                aria-label="{{ "detail.addProduct"|trans|striptags }}">
+                                            {{ "detail.addProduct"|trans|sw_sanitize }}
+                                        </button>
+                                    </div>
+                                {% else %}
+                                    <button class="btn btn-primary btn-block btn-buy myfav-zweideh-buy-button"
+                                            title="{{ "detail.addProduct"|trans|striptags }}"
+                                            aria-label="{{ "detail.addProduct"|trans|striptags }}">
+                                        {{ "detail.addProduct"|trans|sw_sanitize }}
+                                    </button>
+                                {% endif %}
+                            {% endblock %}
+
+                            <div class="btn btn-default btn-block myfav-zweideh-request-form-button" style="display: none;">
+                                Anfrage erstellen
+                            </div>
+                        </div>
+
+                        <div class="myfav-zweideh-errors">
+                            <div class="myfav-zweideh-error-qty-invalid text-danger" style="display: none;">
+                                Bitte überprüfen Sie Ihre Eingabe. Sie müssen eine Stückzahl eingeben, um den Artikel in den Warenkorb legen zu können.
+                            </div>
+                            <div class="myfav-zweideh-warning-qty-max text-warning" style="display: none;">
+                                Sie haben die maximale Anzahl von <span class="myfav-zweideh-error-quantity-value"> Stück überschritten.
+                                Für größere Stückzahlen bitten wir Sie, eine Anfrage abzusenden. Wir erstellen Ihnen dann gern ein Angebot.
+                                Wir haben die Anzahl im Warenkorb auf die maximal kaufbare Menge limitiert.
+                            </div>
+                        </div>
+
+                        <div class="myfav-show-contact-form-link">
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <p>Sie können gern auch eine <a href="#">Anfrage</a> erstellen.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="myfav-zweideh-buy-contact" style="display: none;">
+                            <h2>Anfrage</h2>
+                            <p>Für größere Bestellmengen möchten wir Sie bitten, eine Anfrage zu erstellen.
+                            Wir prüfen Ihre Anfrage zeitnah, und nehmen Kontakt zu Ihnen auf.</p>
+
+                            <input type="hidden" id="myfav-zweideh-tmp-cart-id" value="{{ tmp_cart_id }}" />
+                            <input type="hidden" id="myfav-zweideh-key" value="{{ key }}" />
+                            
+                            <form action="#" method="post" class="myfav-zweide-buy-contact-form">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label" for="myfav-request-quantity">Gewünschte Stückzahl</label>
+                                        <input name="myfav_request_quantity" id="myfav-request-quantity" class="form-control myfav-request-quantity" value="1" autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label" for="myfav-freetext">Weitere Informationen / Sonderwünsche</label>
+                                        <textarea name="myfav_request_freetext" id="myfav-freetext" placeholder="Bspw.: Bitte Text als Stickerei aufbringen." class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        {% sw_include '@Storefront/storefront/component/privacy-notice.html.twig' %}
+                                    </div>
+                                </div>
+                                
+                                {#
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <p class="register-required-info">
+                                            {{ "general.requiredFields"|trans|sw_sanitize }}
+                                        </p>
+                                    </div>
+                                </div>
+                                #}
+                                
+                                <div class="form-row">
+                                    <div class="form-group col-md-12 myfav-form-button text-right">
+                                        <div class="login-submit myfav-text-right">
+                                            <button type="submit" class="btn btn-primary btn-myfav-request-send" id="btn-myfav-request-send">
+                                                Anfrage absenden
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row-info">
+                                    <div class="form-group col-md-12 text-right">
+                                        <div id="info-myfav-request-sending" style="display: none;">Ihre Anfrage wird versendet...</div>
+                                        <div id="info-myfav-request-sent" class="text-success" style="display: none;">Ihre Anfrage wurde erfolgreich versendet. Wir melden uns in Kürze bei Ihnen.</div>
+                                        <div id="info-myfav-request-error" class="text-danger" style="display: none;">Es ist ein Fehler aufgetreten.</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endif %}
+        {% endblock %}
+    </form>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% block sw_cms_el_solid_ase_content_slider %}
+    <div class="sw-cms-el-solid-ase-content-slider"
+        :class="{ 'gutter': element.config.sliderSettings.value.gutter && element.config.sliderSettings.value.gutter !== '0'}">
+        <template v-if="previewSlides.length">
+            <div v-for="(slide, index) in previewSlides"
+                :key="slide.id + index"
+                class="slide"
+                :class="{ 'gutter': element.config.sliderSettings.value.gutter && element.config.sliderSettings.value.gutter !== '0'}">
+                <div class="content-container" :class="{ 'has-background-media': slide.backgroundMedia }">
+                    <template v-for="media in previewBackgroundMedia">
+                        <div v-if="media.id === slide.backgroundMedia" class="background">
+                            <img
+                            v-if="media.mimeType.includes('image')"
+                            :src="media.url">
+                            <video
+                            v-if="media.mimeType.includes('video')"
+                            autoplay
+                            playsinline
+                            muted
+                            loop>
+                                <source
+                                :src="media.url"
+                                :type="media.mimeType">
+                            </video>
+                        </div>
+                    </template>
+                    <div class="content" :class="{ 'is-more': slide.isMoreSlide }">
+                        <div v-if="slide.isMoreSlide">
+                            ...
+                        </div>
+                        <div v-else-if="slide.contentType === 'default'">
+                            <p v-if="slide.smallHeadline" class="small-headline">
+                                {{ slide.smallHeadline }}
+                            </p>
+                            <p>
+                                <h2 v-if="slide.headline" class="headline">
+                                    {{ slide.headline }}
+                                </h2>
+                            </p>
+                            <p v-if="slide.text" class="text">
+                                {{ slide.text }}
+                            </p>
+                            <p v-if="slide.buttonLink && slide.buttonLabel" class="btn btn-primary">
+                                {{ slide.buttonLabel }}
+                            </p>
+                        </div>
+                        <div v-else v-html="slide.customContent" />
+                    </div>
+                </div>
+            </div>
+
+            <template v-if="element.config.sliderSettings.value.items <= 6 && element.config.sliderSettings.value.items > previewSlides.length">
+                <div v-for="i in element.config.sliderSettings.value.items - previewSlides.length" class="slide" :key="'placeholder-' + i" />
+            </template>
+        </template>
+
+        <template v-else>
+            <div class="slide no-active-slides-slide">
+                <div class="content-container">
+                    <div class="content">
+                        <div>
+                            <h2>
+                                {{ $t('sw-cms.elements.solid-ase.content-slider.component.no-active-slides-title') }}
+                            </h2>
+                            <p>
+                                {{ $t('sw-cms.elements.solid-ase.content-slider.component.no-active-slides-description') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <div class="controls" v-if="element.config.sliderSettings.value.controls">
+            <div class="btn btn-primary">
+                <mt-icon name="regular-long-arrow-left" />
+            </div>
+            <div class="btn btn-primary">
+                <mt-icon name="regular-long-arrow-right" />
+            </div>
+        </div>
+        <div class="nav" v-if="element.config.sliderSettings.value.nav">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+{% endblock %}

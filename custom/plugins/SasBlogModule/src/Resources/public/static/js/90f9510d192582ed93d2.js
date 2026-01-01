@@ -1,0 +1,1 @@
+"use strict";(window["webpackJsonpPluginsas-blog-module"]=window["webpackJsonpPluginsas-blog-module"]||[]).push([[803],{7803:function(e,s,n){n.r(s),s.default={methods:{createdComponent(){this.indexers["sas.blog.category.indexer"]=[],this.indexers["sas.blog.entities.indexer"]=[],this.$super("createdComponent")}}}}}]);

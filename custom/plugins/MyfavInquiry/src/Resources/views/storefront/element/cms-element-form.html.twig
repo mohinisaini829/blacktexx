@@ -1,0 +1,25 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-form.html.twig' %}
+
+{% block element_form %}
+    {% if element.config.type.value is same as('myfavinquiry') %}
+        {{ element.setType(element.config.type.value) }}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+{% block element_form_wrapper %}
+    {% if element.config.type.value is same as('myfavinquiry') %}
+        {% block element_myfav_inquiry_element %}
+            <div class="card-title mb-4">
+                {% if element.config.title.value %}
+                    {{ element.config.title.value }}
+                {%  else %}
+                    {{ "myfavInquiry.cartTitle"|trans }}
+                {% endif %}
+            </div>
+            {% sw_include '@MyfavInquiry/storefront/myfav-inquiry/page/confirm/form.html.twig' %}
+        {% endblock %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+

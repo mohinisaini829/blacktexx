@@ -1,0 +1,48 @@
+@mixin cms-headline {
+    h2, h3 {
+        &:not(.produkt-zertifizierungen-title) {
+            text-align: center;
+            margin: 0 0 4rem 0;
+            font-weight: normal;
+
+            @include media-breakpoint-up(xl) {
+                white-space: nowrap;
+            }
+            display: flex;
+            align-items: center;
+
+            &::before,
+            &::after {
+                content: '';
+                width: 33.3%;
+                flex-shrink: 1;
+                background: $border-color;
+                height: 1px;
+                display: inline-block;
+                margin: 0;
+
+                @include media-breakpoint-up(md) {
+                    margin: 0 1rem;
+                }
+                @include media-breakpoint-up(lg) {
+                    margin: 0 2rem;
+                }
+                @include media-breakpoint-up(xl) {
+                    margin: 0 4rem;
+                }
+                vertical-align: middle;
+            }
+
+            span {
+                @include media-breakpoint-down(md) {
+                    padding: 0 .5rem;
+                    max-width: 80%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                flex-shrink: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "base": "/bundles/myfavzweideh/administration/",
+  "entryPoints": {
+    "myfav-zweideh": {
+      "css": [],
+      "dynamic": [],
+      "js": [
+        "/bundles/myfavzweideh/administration/assets/myfav-zweideh-yPij80KT.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

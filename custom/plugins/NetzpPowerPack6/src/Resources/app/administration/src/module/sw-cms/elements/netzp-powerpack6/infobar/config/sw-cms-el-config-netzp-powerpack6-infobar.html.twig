@@ -1,0 +1,73 @@
+{% block sw_cms_element_netzp_powerpack6_infobar_config %}
+    <div class="sw-cms-el-config-netzp-powerpack6">
+        <sw-container columns="1fr 1fr 1fr 1fr" gap="20px">
+            <sw-number-field numbertype="int" :min="1" :max="10"
+                             :label="$tc('sw-cms.netzp-powerpack6.elements.infobar.config.numberOfItems')"
+                             v-model:value="element.config.numberOfItems.value" />
+
+            <sw-select-field :label="$tc('sw-cms.netzp-powerpack6.elements.infobar.config.layout')"
+                             v-model:value="element.config.layout.value">
+                <option value="horizontal">
+                    {{ $tc('sw-cms.netzp-powerpack6.elements.infobar.config.horizontal') }}
+                </option>
+                <option value="vertical">
+                    {{ $tc('sw-cms.netzp-powerpack6.elements.infobar.config.vertical') }}
+                </option>
+            </sw-select-field>
+
+            <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.infobar.config.iconSize')"
+                             numberType="float" :min="0.1" :max="5" :step="0.01" :digits="2"
+                             v-model:value="element.config.iconSize.value" />
+
+            <sw-number-field :label="$tc('sw-cms.netzp-powerpack6.elements.infobar.config.textSize')"
+                             numberType="float" :min="0.1" :max="5" :step="0.01" :digits="2"
+                             v-model:value="element.config.textSize.value" />
+        </sw-container>
+
+        <sw-container columns="1fr 1fr 1fr 1fr" gap="20px">
+            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.infobar.config.iconColor')"
+                            v-model:value="element.config.iconColor.value" colorOutput="hex" :zIndex="1001" :alpha="false" />
+
+            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.infobar.config.textColor')"
+                            v-model:value="element.config.textColor.value" colorOutput="hex" :zIndex="1001" :alpha="false" />
+
+            <sw-colorpicker v-if="element.config.layout.value == 'vertical'"
+                            :label="$tc('sw-cms.netzp-powerpack6.elements.infobar.config.circleColor')"
+                            v-model:value="element.config.circleColor.value" colorOutput="hex" :zIndex="1001" :alpha="false" />
+        </sw-container>
+
+        <sw-tabs :small="false" defaultItem="item1" positionIdentifier="netzp-powerpack-infobar-tabs">
+            <template #default="{ active }">
+                <sw-tabs-item v-for="n in element.config.numberOfItems.value" :key="n"
+                              :name="'item' + n" :activeTab="active"
+                              :title="'Item ' + n">
+                    <span v-if="element.config['item' + n].value" v-html="element.config['item' + n].value"></span>
+                    <span v-else>
+                        Item {{ n }}
+                    </span>
+                </sw-tabs-item>
+            </template>
+
+            <template #content="{ active }">
+                <template v-for="n in element.config.numberOfItems.value" :key="n">
+                    <sw-container v-if="active === 'item' + n">
+
+                        <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.infobar.config.item') + ' ' + n"
+                                       v-model:value="element.config['item' + n].value" />
+
+                        <netzp-iconpicker :label="$tc('sw-cms.netzp-powerpack6.elements.infobar.config.icon') + ' ' + n"
+                                          v-model:value="element.config['icon' + n].value" />
+
+                        <sw-container columns="2fr 1fr" gap="20px">
+                            <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.infobar.config.link') + ' ' + n"
+                                           v-model:value="element.config['link' + n].value" />
+
+                            <sw-switch-field :label="$tc('sw-cms.netzp-powerpack6.elements.infobar.config.linkNewWindow')"
+                                             bordered v-model:value="element.config['linkNewWindow' + n].value" />
+                        </sw-container>
+                    </sw-container>
+                </template>
+            </template>
+        </sw-tabs>
+    </div>
+{% endblock %}

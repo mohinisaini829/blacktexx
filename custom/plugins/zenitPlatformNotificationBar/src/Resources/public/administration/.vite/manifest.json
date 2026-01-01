@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/zenit-platform-notification-bar-CboJMFie.js",
+    "name": "zenit-platform-notification-bar",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/zenit-platform-notification-bar-Dg_PFS0T.css"
+    ]
+  }
+}

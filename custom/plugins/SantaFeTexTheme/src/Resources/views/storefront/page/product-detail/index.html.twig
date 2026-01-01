@@ -1,0 +1,24 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig' %}
+
+{% block page_product_detail_media %}
+     <div class="col-lg-7 product-detail-media">
+         {% if page.product.media %}
+             {% sw_include '@Storefront/storefront/element/cms-element-image-gallery.html.twig' with {
+                 'mediaItems': mediaItems,
+                 'zoom': true,
+                 'zoomModal': true,
+                 'displayMode': 'contain',
+                 'gutter': 5,
+                 'minHeight': '530px',
+                 'navigationArrows': 'inside',
+                 'navigationDots': 'inside',
+                 'galleryPosition': 'underneath',
+                 'isProduct': true,
+                 'fallbackImageTitle': page.product.translated.name,
+                 'startIndexThumbnails': page.product.cover.position + 1,
+                 'startIndexSlider': page.product.cover.position + 1,
+                 'keepAspectRatioOnZoom': false
+             } %}
+         {% endif %}
+     </div>
+{% endblock %}

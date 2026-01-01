@@ -1,0 +1,9 @@
+{% block element_produkt_zertifizierungen %}
+    {% set config = element.fieldConfig.elements %}
+
+    <div class="cms-element-{{ element.type }}">
+        {% if page.product %}
+            {% sw_include '@SantaFeTexTheme/storefront/plugin/produkt-zertifizierungen.html.twig' %}
+        {% endif %}
+    </div>
+{% endblock %}

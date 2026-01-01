@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Productor:",
+            "ProductNumber": "Número de artículo"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Número de producto",
+            "DetailBuyActionAdd": "Añadir variantes a la cesta de la compra",
+            "UnitPrice": "Precio unitario",
+            "VariantOrderMatrixColAmount": "Cantidad",
+            "VariantStock": "Almacén",
+            "quickOrder": "Pedido rápido",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Precio total estimado"
+        }
+    }
+}

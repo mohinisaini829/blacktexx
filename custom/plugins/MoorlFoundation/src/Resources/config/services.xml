@@ -1,0 +1,156 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="core/entity-auto-cache.xml"/>
+        <import resource="administration/controllers.xml"/>
+        <import resource="storefront/cms-element-resolver.xml"/>
+        <import resource="storefront/controllers.xml"/>
+        <import resource="core/location.xml"/>
+        <import resource="subscribers.xml"/>
+        <import resource="core/data.xml"/>
+        <import resource="core/client.xml"/>
+        <import resource="core/entity-translation.xml"/>
+        <import resource="core/embedded-media.xml"/>
+    </imports>
+
+    <services>
+        <!-- Services -->
+        <service id="MoorlFoundation\Core\Service\TranslationService" public="true">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+
+            <argument type="tagged" tag="moorl.foundation.entity_translation"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Service\SortingService" public="true">
+            <argument type="service" id="moorl_sorting.repository"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Service\EntityEnricherService" public="true">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Shopware\Core\Content\Product\SalesChannel\Price\ProductPriceCalculator"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Service\ClientService" public="true">
+            <argument type="service" id="moorl_client.repository"/>
+            <argument type="tagged" tag="moorl.foundation.client"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Service\DataService" public="true">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Shopware\Core\Content\Media\MediaService"/>
+            <argument type="service" id="Shopware\Core\Content\Media\File\FileSaver"/>
+            <argument type="service" id="shopware.filesystem.asset"/>
+            <argument type="service" id="Shopware\Storefront\Theme\ThemeService"/>
+            <argument>%kernel.project_dir%</argument>
+
+            <argument type="tagged" tag="moorl.foundation.data"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Service\EntitySearchService" public="true">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="event_dispatcher"/>
+
+            <argument type="tagged" tag="moorl.foundation.entity_search"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Service\EntitySuggestService" public="true">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="event_dispatcher"/>
+
+            <argument type="tagged" tag="moorl.foundation.entity_suggest"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Framework\DataAbstractionLayer\Indexer\EntityBreadcrumb\EntityBreadcrumbUpdater">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Framework\DataAbstractionLayer\Indexing\HtmlContentUpdater">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Framework\DataAbstractionLayer\Indexing\HtmlContentMediaFetcher">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\Content\Media\MediaService"/>
+            <argument type="service" id="Shopware\Core\Content\Media\File\FileSaver"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Framework\Twig\AnimatedExtension">
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Framework\Twig\ListingExtension">
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Framework\Twig\VersionCompareExtension">
+            <argument>%kernel.shopware_version%</argument>
+
+            <tag name="twig.extension"/>
+        </service>
+
+        <!-- Entities -->
+        <service id="MoorlFoundation\Core\Content\CmsElementConfig\CmsElementConfigDefinition">
+            <tag name="shopware.entity.definition" entity="moorl_cms_element_config"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Content\Sorting\SortingDefinition">
+            <tag name="shopware.entity.definition" entity="moorl_sorting"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Content\Sorting\SortingTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="moorl_sorting_translation"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Content\Marker\MarkerDefinition">
+            <tag name="shopware.entity.definition" entity="moorl_marker"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Content\Client\ClientDefinition">
+            <tag name="shopware.entity.definition" entity="moorl_client"/>
+        </service>
+
+        <!-- Listing Route Decorator -->
+        <service id="MoorlFoundation\Core\Content\Product\SalesChannel\Listing\FoundationProductListingRoute"
+                 decorates="Shopware\Core\Content\Product\SalesChannel\Listing\ProductListingRoute"
+                 decoration-priority="-9999"
+                 public="true">
+            <argument type="service" id="MoorlFoundation\Core\Content\Product\SalesChannel\Listing\FoundationProductListingRoute.inner"/>
+            <argument type="service" id="MoorlFoundation\Core\Service\EntitySearchService"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Content\Product\SalesChannel\Search\FoundationProductSearchRoute"
+                 decorates="Shopware\Core\Content\Product\SalesChannel\Search\ProductSearchRoute"
+                 decoration-priority="-9999"
+                 public="true">
+            <argument type="service" id="MoorlFoundation\Core\Content\Product\SalesChannel\Search\FoundationProductSearchRoute.inner"/>
+            <argument type="service" id="MoorlFoundation\Core\Service\EntitySearchService"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <!-- Core\Framework\DAL -->
+        <service id="MoorlFoundation\Core\Framework\DataAbstractionLayer\MoorlFoundationExceptionHandler">
+            <tag name="shopware.dal.exception_handler"/>
+        </service>
+
+        <service id="MoorlFoundation\Core\Framework\DataAbstractionLayer\Cache\CustomerGroupCacheKeyGenerator"
+                 decorates="Shopware\Core\Framework\DataAbstractionLayer\Cache\EntityCacheKeyGenerator"
+                 public="true">
+            <argument type="service" id="MoorlFoundation\Core\Framework\DataAbstractionLayer\Cache\CustomerGroupCacheKeyGenerator.inner"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+        </service>
+    </services>
+</container>

@@ -1,0 +1,24 @@
+{% sw_extends '@Storefront/storefront/layout/header/header.html.twig' %}
+
+{% block layout_header_actions_cart %}
+    {% block layout_header_actions_inquiry_cart %}
+        {% set MyfavInquiryCountPluginOptions = {
+            target: path('frontend.myfav.inquiry.count')
+        } %}
+        <div class="col-auto">
+            <div class="header-cart inquiry-cart">
+                <a class="btn header-cart-btn header-actions-btn"
+                   href="{{ path('frontend.myfav.inquiry.confirm') }}"
+                   data-myfav-inquiry-count="true"
+                   data-myfav-inquiry-count-plugin-options="{{ MyfavInquiryCountPluginOptions|json_encode }}"
+                   title="{{ 'myfavInquiry.cartTitle'|trans|striptags }}"
+                   aria-label="{{ 'myfavInquiry.cartTitle'|trans|striptags }}">
+                    <span class="header-cart-icon">
+                        {% sw_icon 'bookmark' %}
+                    </span>
+                </a>
+            </div>
+        </div>
+    {% endblock %}
+{#    {{ parent() }}#}
+{% endblock %}

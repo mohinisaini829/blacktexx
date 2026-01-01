@@ -1,0 +1,8 @@
+{% block acris_cookie_consent_permission_button_accept %}
+    {% if cookieConfig.displayButtonAcceptCookiesType != 'end-of-info-text' %}
+        <button {% if cookieConfig.layout == "modal" %}data-bs-dismiss="modal"{% endif %} id="ccAcceptButton" {% if cookieConfig.showAcceptBtnWhen == 'cookieSettingsOpened' and cookieConfig.openCookieSettings is same as false %}disabled{% endif %}
+                class="cookie-consent-accept-button btn {{ cookieConfig.displayButtonAcceptCookiesType }} cookie-consent-button-margin{% if cookieConfig.showAcceptBtnWhen == 'cookieSettingsOpened' and cookieConfig.openCookieSettings is same as false %} d-none{% endif %}" aria-label="{{ "acrisCookieConsent.acceptButton"|trans }}">
+            {{ "acrisCookieConsent.acceptButton"|trans }}
+        </button>
+    {% endif %}
+{% endblock %}

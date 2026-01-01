@@ -1,0 +1,34 @@
+{% block element_viomanufacturercatalog %}
+
+    {% if page.product
+        and page.product.manufacturer
+        and page.product.manufacturer.translated
+        and page.product.manufacturer.translated.customFields
+        and page.product.manufacturer.translated.customFields.vio_product_catalog %}
+
+        {% set config = element.fieldConfig.elements %}
+        {% set snippet = "santa-theme.detail.vio-product-catalog." %}
+        {% set snippetKey = snippet ~ page.product.manufacturer.name %}
+        {% set snippetValue = page.product.manufacturer.translated.name ~ " Katalog" %}
+        <div class="cms-element-{{ element.type }}" id="vio_product_catalog">
+            <h3>
+                <span>
+                    {% if snippetKey|trans != snippetKey %}
+                        {{ snippetKey|trans|raw }}
+                    {% else %}
+                        {{ snippetValue }}
+                    {% endif %}
+                </span>
+            </h3>
+
+            {% set catalogUrl = page.product.manufacturer.translated.customFields.vio_product_catalog|replace({'&nbsp;': ''})|trim %}
+
+            <iframe src="{{ catalogUrl|sw_sanitize }}"
+                    class="vio-product-catalog-iframe"
+                    frameborder="0"
+                    allow="fullscreen"
+                    style="width:100%; height:800px;">
+            </iframe>
+        </div>
+    {% endif %}
+{% endblock %}

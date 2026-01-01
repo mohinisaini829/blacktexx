@@ -1,0 +1,83 @@
+{% sw_extends '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-input-fields.html.twig' %}
+
+{% block biloba_variant_matrix_quantiy_block %}
+  {% set variantMatrixPosition = config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") %}
+  {% set variantMatrixLayout = page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout %}
+  {% set VariantMatrixStockQuantityDisplayThresholdHigh = config("BilobaArticleVariantOrderMatrix.config.VariantMatrixStockQuantityDisplayThresholdHigh") %}
+  {% set VariantMatrixStockQuantityDisplayThresholdLow = config("BilobaArticleVariantOrderMatrix.config.VariantMatrixStockQuantityDisplayThresholdLow") %}
+  {% set variantPrice = null %}
+  {% set totalPriceActivate = config("BilobaArticleVariantOrderMatrix.config.totalPriceActivate") %}
+  {% set VariantMatrixImageChange = config("BilobaArticleVariantOrderMatrix.config.changeImageOnClickAmountField") %}
+
+  {# enabling input fields when availableStock > 0 #}
+  {% if (config("BilobaArticleVariantOrderMatrix.config.VariantMatrixDisableIfNotInstock") == true) or (childProduct.isCloseout) %}
+    {% set respectStock = 'true' %}
+
+    {% if childProduct.availableStock > 0 && childProduct.active != false %}
+    {% set condition = 'enabled' %}
+    {% else %}
+      {% set condition = 'disabled' %}
+    {% endif %}
+    {# if VariantMatrixDisableIfNotInstock is not checked #}
+  {% else %}
+    {% if childProduct.active != true %}
+      {% set respectStock = 'false' %}
+      {% set condition = 'disabled' %}
+    {% else %}
+      {% set respectStock = 'false' %}
+      {% set condition = 'enabled' %}
+    {% endif %}
+  {% endif %}
+  {% if page.configuratorSettings %}
+    {% set configuratorSettings = page.configuratorSettings %}
+  {% elseif page.product.configurator %}
+    {% set configuratorSettings = page.product.configurator %}
+  {% else %}
+    {% set configuratorSettings = page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings'] %}
+  {% endif %}
+
+  {% if childProduct.calculatedPrices|length > 0 %}
+    {% set variantPrice = childProduct.calculatedPrices.first().unitPrice %}
+    {% set calculatedPricesArrayExist = "false" %}
+    {% set calculatedPricesPriceArray = [] %}
+    {% set calculatedPricesQuantityArray = [] %}
+
+    {# totalPrice active #}
+    {% if totalPriceActivate != false %}
+      {% for calculatedPrice in childProduct.calculatedPrices.getElements() %}
+        {% set calculatedPricesQuantityArray = calculatedPricesQuantityArray|merge([calculatedPrice.getQuantity()]) %}
+        {% set calculatedPricesPriceArray = calculatedPricesPriceArray|merge([calculatedPrice.getUnitPrice()]) %}
+      {% endfor %}
+
+      {# using variable to determin when to search for the array or just use variant price data-attribute #}
+      {% set calculatedPricesArrayExist = "true" %}
+    {% else %}
+      {% set variantPrice = childProduct.calculatedPrices.first().unitPrice %}
+      {% set calculatedPricesArrayExist = "false" %}
+    {% endif %}
+  {% else %}
+    {% set variantPrice = childProduct.calculatedPrice.unitPrice %}
+    {% set calculatedPricesArrayExist = "false" %}
+  {% endif %}
+
+  {% if configuratorSettings.elements %}
+
+    {% if childProduct.calculatedPrices|length > 0 %}
+      {# totalPrice active #}
+      {% if totalPriceActivate != false %}
+        {# arrays contain information for stackprices #}
+        <script type="text/javascript">
+          var calculatedPricesPriceArray = JSON.parse("{{calculatedPricesPriceArray|json_encode}}");
+          var calculatedPricesQuantityArray = JSON.parse("{{calculatedPricesQuantityArray|json_encode}}");
+        </script>
+      {% endif %}
+    {% endif %}
+
+    {% block biloba_variant_matrix_quantity_wrapper %}
+      {% set variantMatrixPosition = "dummy" %}
+      {{ parent() }}
+      {% set variantMatrixPosition = config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") %}
+    {% endblock %}
+
+  {% endif %}
+{% endblock %}

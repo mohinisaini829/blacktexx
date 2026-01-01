@@ -1,0 +1,13 @@
+{% sw_extends '@Storefront/storefront/component/product/block-price.html.twig' %}
+
+{% block component_product_detail_block_price %}
+    <div class="product-detail-price gross-price">
+        {{ block('component_product_detail_block_price_content') }}
+    </div>
+    {% if price.extensions.netPrice %}
+        {% set price = price.extensions.netPrice %}
+        <div class="product-detail-price net-price">
+            {{ block('component_product_detail_block_price_content') }}
+        </div>
+    {% endif %}
+{% endblock %}

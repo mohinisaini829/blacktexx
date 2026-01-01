@@ -1,0 +1,32 @@
+.sw-cms-el-netzp-powerpack6-testimonial {
+  position: relative;
+  overflow: hidden;
+
+  img {
+    float: left;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    padding: .5rem;
+  }
+
+  .media-body {
+    float: left;
+    margin-left: .5rem;
+    width: calc(100% - 100px - 1rem);
+
+    .title {
+      font-size: 130%;
+      font-weight: bold;
+    }
+
+    .contents {
+      margin-top: .25rem;
+    }
+
+    .meta {
+      margin-top: .25rem;
+    }
+  }
+}

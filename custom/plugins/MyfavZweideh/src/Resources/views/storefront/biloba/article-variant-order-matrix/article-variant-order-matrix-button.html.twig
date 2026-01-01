@@ -1,0 +1,134 @@
+{#
+{% if page.product.customFields.myfav_zweideh_enabled %}
+    <div class="myfav-zweideh-designer-button-container">
+        <p class="myfav-zweideh-designer-description">{# {{ 'MyfavZweidehDesignerDescription' | trans }} #}{# Dieser Artikel ist gestaltbar.</p>
+            <a href="{{ path('frontend.home.page') }}{{ config('MyfavZweideh.config.lumisInstallPath') }}editor.php?product_base={{ page.product.customFields.lumis_designer_article_id }}">
+                <button type="button" class="btn btn-primary" id="myfav-obility-designer-button">
+                    {#{{ 'MyfavObilityDesignerButtonText' | trans }} #}{# } Hier selbst gestalten
+                </button>
+            </a>
+        </div>
+    </div>
+{% else %}
+    {# Tatsächlich erweitert das hier ja eigentlich das MyfavInquiry Plugin... /custom/staticPlugins/MyfavInquiry #}
+    {# {% sw_extends '@BilobaArticleVariantOrderMatrix/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-button.html.twig' %} #}
+    {% if 'logged-in' in context.states %}
+        <div class="biloba-variant-matrix-button-container">
+        {#    {% if bundleExists('VioSampleProduct') and page.product.customFields and page.product.customFields.vio_sample_product %}#}
+        {#    <div class="row">#}
+        {#        <div class="col-12 col-sm-6 col-lg-12 col-xl-6 pr-xl-1 mt-3 mt-sm-0 mt-lg-3 mt-xl-0">#}
+        {#            {% set modalOptions = ['modal-dialog-centered', 'modal-xl'] %}#}
+        {#            <!-- Button trigger modal -->#}
+        {#            <button type="button" class="btn btn-light btn-block vio-sample"#}
+        {#                    data-toggle="modal"#}
+        {#                    data-url="{{ path('frontend.vio.sample-product.open', { productId: page.product.id }) }}"#}
+        {#                    data-modal-class='{{ modalOptions|json_encode }}'>#}
+        {#                {% sw_icon 'products' %}#}
+        {#                {{ "sampleProduct.modal.title"|trans|sw_sanitize }}#}
+        {#            </button>#}
+        {#        </div>#}
+        {#        <div class="col-12 col-sm-6 col-lg-12 col-xl-6 pl-xl-1 mt-3 mt-sm-0 mt-lg-3 mt-xl-0">#}
+        {#            {% endif %}#}
+
+                    <button type="button" data-title="{{ 'santa-theme.buybox.disabled-btn.title'|trans|sw_sanitize }}"
+                            class="btn btn-primary btn-buy btn-block bit-variant-button d-none{% if page.product.manufacturer.name == "SantaFeTex" %}d-none{% endif %}" disabled="disabled">
+                        {% sw_icon 'cart' style {
+                            'size': 'lg'
+                        } %}
+                        {{ 'biloba.ArticleVariantOrderMatrix.DetailBuyActionAdd'|trans }}
+                    </button>
+
+        {#            {% if bundleExists('VioSampleProduct') and page.product.customFields and page.product.customFields.vio_sample_product %}#}
+        {#        </div>#}
+        {#    </div>#}
+        {#    {% endif %}#}
+
+            {% set MyfavInquiryAddPluginOptions = {
+                target: path('frontend.myfav.inquiry.add'),
+                csrf_token: csrf_token('frontend.myfav.inquiry.add')
+            } %}
+            <button type="button"
+                    data-title="{{ 'santa-theme.buybox.disabled-btn.title'|trans|sw_sanitize }}"
+                    form="biloba-variant-matrix-formular"
+                    formaction="{{ path('frontend.myfav.inquiry.add') }}"
+                    name="inquiry"
+                    value="1"
+                    class="btn btn-buy btn-block mt-2 bit-variant-button enquiry_section"
+                    disabled="disabled"
+                    data-myfav-inquiry-add-plugin-options="{{ MyfavInquiryAddPluginOptions|json_encode }}"
+            >
+                {% sw_icon 'paper-pencil' style {
+                    'size': 'lg'
+                } %}{{ 'myfavInquiry.add'|trans|sw_sanitize }}
+            </button>
+
+          {% if page.product.customFields.custom_sports_redirect %}
+                <a class="btn btn-buy btn-block mt-2"
+                   href="https://www.9-seconds.com/">
+                    {% sw_icon 'pencil-brush' style {
+                        'size': 'lg'
+                    } %}
+                    {{ 'santa-theme.buybox.designerOnlineButtonText'|trans|sw_sanitize }}
+                </a>
+              {% else %}
+                <a class="btn btn-buy btn-block mt-2"
+                   href="#"
+                   data-bs-toggle="modal"
+                   data-bs-target="#designerModal">
+                  {% sw_icon 'pencil-brush' style {
+                    'size': 'lg'
+                  } %}
+                  {{ 'santa-theme.buybox.designerOnlineButtonText'|trans|sw_sanitize }}
+                </a>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="login-submit">
+            <button type="submit" class="btn btn-primary">
+                <a href="/account/login">Login And Buy</a>
+            </button>
+        </div>
+    {% endif %}
+{# designer modal #}
+<div class="modal fade" id="designerModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header only-close">
+                <button type="button" class="modal-close close" data-bs-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 designer-modal-upper-heading">
+                        <h2>{{ 'MyfavZweideh.designerModal.upperHeading'|trans }} </h2>
+                    </div>
+
+                    <!-- Section 1 -->
+                    {% set buttonAction = config('MyfavZweideh.config.button1ActionType') %}
+                    {% set buttonStyle = config('MyfavZweideh.config.button1Style') %}
+                    {% set
+                        buttonData =  {
+                        'buttonAction': buttonAction,
+                        'buttonStyle': buttonStyle,
+                        'heading': 'MyfavZweideh.designerModal.option1.heading'|trans|sw_sanitize,
+                        'text': 'MyfavZweideh.designerModal.option1.text'|trans|sw_sanitize,
+                        'btnText': 'MyfavZweideh.designerModal.option1.btnText'|trans|sw_sanitize
+                    } %}
+                    {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/designer-modal-action.html.twig' with buttonData %}
+
+                    <!-- Section 2 -->
+                   {#  {% set buttonAction = config('MyfavZweideh.config.button2ActionType') %}
+                    {% set buttonStyle = config('MyfavZweideh.config.button2Style') %}
+                    {% set
+                        buttonData =  {
+                        'buttonAction': buttonAction,
+                        'buttonStyle': buttonStyle,
+                        'heading': 'MyfavZweideh.designerModal.option2.heading'|trans|sw_sanitize,
+                        'text': 'MyfavZweideh.designerModal.option2.text'|trans|sw_sanitize,
+                        'btnText': 'MyfavZweideh.designerModal.option2.btnText'|trans|sw_sanitize
+                    } %}
+                    {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/designer-modal-action.html.twig' with buttonData %}#}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

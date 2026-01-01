@@ -1,0 +1,6 @@
+.navigation-flyout {
+  background: $vio-header-bg;
+  &, & * {
+    color: $vio-header-color;
+  }
+}

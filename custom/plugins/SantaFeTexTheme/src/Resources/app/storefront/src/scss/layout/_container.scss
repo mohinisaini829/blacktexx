@@ -1,0 +1,7 @@
+.container, .cms-section .boxed {
+  max-width: map-get($container-max-widths, "xxl")
+}
+
+.container-main {
+  padding: 0;
+}

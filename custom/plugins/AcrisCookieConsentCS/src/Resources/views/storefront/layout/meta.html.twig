@@ -1,0 +1,7 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_javascript_token %}
+    {{ parent() }}
+
+    {% sw_include '@Storefront/storefront/layout/cookie/external/acris-load-script.html.twig' with { scriptPosition: 'head' } %}
+{% endblock %}

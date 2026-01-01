@@ -1,0 +1,33 @@
+.sw-cms-el-config-cta2__mapping-preview {
+    display: grid;
+    width: 100%;
+    height: 100px;
+    justify-items: center;
+    align-items: start;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        overflow: hidden;
+    }
+
+    .sw-cms-el-config-image__preview-info {
+        width: 100%;
+    }
+}
+
+.sw-cms-el-config-netzp-powerpack6 {
+    .tabs {
+        margin-top: 5px;
+    }
+
+    .removeButton {
+        color: #aaa;
+        margin-left: 5px;
+    }
+
+    .mainTab {
+        color: purple;
+    }
+}

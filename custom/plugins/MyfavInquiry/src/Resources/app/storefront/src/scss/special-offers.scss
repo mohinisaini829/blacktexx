@@ -1,0 +1,61 @@
+.special-offers-item{
+    padding: 10px;
+    position: relative;
+    transition: opacity .5s ease-in-out;
+    &.unchecked{
+        opacity: 0.4;
+    }
+    .special-offers-checkbox-wrapper{
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        background: #fff;
+        .special-offers-checkbox{
+            display: none;
+            + label{
+                background: #fff url("/bundles/myfavinquiry/checkbox-un.svg") no-repeat;
+                background-size: 100% 100%;
+                display: inline-block;
+                width: 1.2em;
+                height: 1.2em;
+                color: $primary;
+                margin: 2px 0;
+                cursor: pointer;
+            }
+            &:checked{
+                + label{
+                    background: #fff url("/bundles/myfavinquiry/checkbox.svg") no-repeat;
+                    background-size: 100% 100%;
+                }
+            }
+        }
+    }
+}
+.special-offers-item-inner{
+    border: 1px solid $primary;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    .special-offers-image{
+        height: 200px;
+        text-align: center;
+    }
+    .special-offers-price{
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+    .special-offers-name{
+        font-weight: bold;
+        font-size: 1.5em;
+        height: 3em;
+        display: block;
+    }
+    .special-offers-manufacturer{
+        font-size: 1.2em;
+        color: $primary;
+    }
+    .special-offers-description{
+        overflow: hidden;
+        height: 110px;
+    }
+}

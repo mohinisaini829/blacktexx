@@ -1,0 +1,78 @@
+.navigation-flyout-link,
+.main-navigation-menu {
+  font-family: "Lato", sans-serif;
+}
+@include media-breakpoint-up(md) {
+  .navigation-flyout-content {
+    padding-bottom: toRem(40);
+    padding-top: toRem(10);
+  }
+
+  .main-navigation-link .main-navigation-link-text {
+    border-bottom: none;
+  }
+
+  .main-navigation-link {
+    padding-right: 1rem;
+  }
+
+  .main-navigation > .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .navigation-flyout {
+    padding: 0 1.5rem;
+    width: auto;
+    max-width: 100%;
+
+    > .container {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .navigation-flyout-link {
+    padding: 0;
+
+    span {
+      display: inline-block;
+      padding: 0.5rem 0;
+    }
+
+    &.is-level-0 {
+      font-weight: normal;
+    }
+
+    &:hover {
+      padding-left: 0;
+    }
+  }
+
+  .navigation-flyout-categories {
+    &:not(.is-level-0) {
+      margin-left: 0;
+      &.is-level-1 {
+        margin-left: 1rem;
+      }
+    }
+
+    &.is-level-0 {
+      display: block;
+      column-count: 3;
+
+      > .navigation-flyout-col {
+        margin-bottom: 0;
+
+        .main-navigation-link {
+          padding-bottom: 1rem;
+          padding-top: 1rem;
+        }
+
+        &::before {
+          content: none;
+        }
+      }
+    }
+  }
+}

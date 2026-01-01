@@ -1,0 +1,24 @@
+{% for firstGroupOption in firstGroup.options %}
+    {% set groupOptionId = null %}
+    
+    {% for optKey, value in variantMatrixArrayKeysAndValues %}
+        {% set currentKey = firstGroupOption.id %}
+
+        {% if currentKey == optKey %}
+            {# variant key #}
+            {% set key =  value %}
+            {# option key #}
+            {% set groupOptionId = currentKey %}
+        {% endif %}
+    {% endfor %}
+
+    {% if groupOptionId != null %}
+        {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+
+        {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixShowStockQuantity") == true %}
+            <td>{{childProduct.availableStock}}</td>
+        {% endif %}
+    {% else %}
+        {# <td style="width:35%">&nbsp;</td> #}
+    {% endif %}
+{% endfor %}

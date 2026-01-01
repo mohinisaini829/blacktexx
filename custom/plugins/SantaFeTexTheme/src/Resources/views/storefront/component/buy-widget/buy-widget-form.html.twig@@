@@ -1,0 +1,167 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget-form.html.twig' %}
+
+{% block buy_widget_buy_form_inner %}
+  <form
+  id="{% if page.product.manufacturer.name == "SantaFeTex" %}biloba-variant-matrix-formular{% else %}productDetailPageBuyProductForm{% endif %}"
+  action="{% block buy_widget_buy_form_action %}{{ path('frontend.checkout.line-item.add') }}{% endblock %}"
+  method="post"
+  class="buy-widget"
+  data-add-to-cart="true">
+
+  {# @deprecated tag:v6.5.0 - Block buy_widget_buy_form_inner_csrf will be removed. #}
+  {% block buy_widget_buy_form_inner_csrf %}
+    {{ sw_csrf('frontend.checkout.line-item.add') }}
+  {% endblock %}
+
+  {% set DOWNLOAD_STATE = constant('Shopware\\Core\\Content\\Product\\State::IS_DOWNLOAD') %}
+  {% set showQuantitySelect = not product.states is defined or DOWNLOAD_STATE not in product.states or (DOWNLOAD_STATE in product.states and product.maxPurchase !== 1) %}
+
+  {% set buyable = product.available and product.childCount <= 0 and product.calculatedMaxPurchase > 0 %}
+
+  {% block buy_widget_buy_container %}
+    {% if buyable %}
+      <div class="{{ formRowClass }} buy-widget-container">
+        {% block buy_widget_buy_quantity_container %}
+          <div class="biloba-variant-matrix">
+            <form id="biloba-variant-matrix-formular"
+                  method="post"
+                  data-biloba-add-to-cart="true"
+                  action="{{ path('frontend.checkout.line-item.add') }}">
+
+              {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/sw-csfr-token.html.twig' %}
+              <div class="variants-options-input-selector">
+                <div class="biloba-variant-matrix-quantity-block">
+                  {% if product.calculatedPrices|length > 0 %}
+                    {% set variantPrice = product.calculatedPrices.first().unitPrice %}
+                    {% set calculatedPricesArrayExist = "false" %}
+                    {% set calculatedPricesPriceArray = [] %}
+                    {% set calculatedPricesQuantityArray = [] %}
+
+                    {# totalPrice active #}
+                    {% if totalPriceActivate != false %}
+                      {% for calculatedPrice in product.calculatedPrices.getElements() %}
+                        {% set calculatedPricesQuantityArray = calculatedPricesQuantityArray|merge([calculatedPrice.getQuantity()]) %}
+                        {% set calculatedPricesPriceArray = calculatedPricesPriceArray|merge([calculatedPrice.getUnitPrice()]) %}
+                      {% endfor %}
+
+                      {# using variable to determin when to search for the array or just use variant price data-attribute #}
+                      {% set calculatedPricesArrayExist = "true" %}
+                    {% else %}
+                      {% set variantPrice = product.calculatedPrices.first().unitPrice %}
+                      {% set calculatedPricesArrayExist = "false" %}
+                    {% endif %}
+                  {% else %}
+                    {% set variantPrice = product.calculatedPrice.unitPrice %}
+                    {% set calculatedPricesArrayExist = "false" %}
+                  {% endif %}
+
+
+                  {% if product.calculatedPrices|length > 0 %}
+                    {# totalPrice active #}
+                    {% if totalPriceActivate != false %}
+                      {# arrays contain information for stackprices #}
+                      <script type="text/javascript">
+                        var calculatedPricesPriceArray = JSON.parse("{{calculatedPricesPriceArray|json_encode}}");
+                        var calculatedPricesQuantityArray = JSON.parse("{{calculatedPricesQuantityArray|json_encode}}");
+                      </script>
+                    {% endif %}
+                  {% endif %}
+                  <div class="variant-matrix-quantity-wrapper">
+                    <input
+                      type="number"
+                      name="lineItems[{{ product.id }}][quantity]"
+                      min="0"
+                      max="{{ product.availableStock }}"
+                      class="form-control variant-matrix-quantity"
+                      value="0"
+                      data-bit-variant-id="{{ product.id }}"
+                      data-attribute-purchase-steps="{{ product.purchaseSteps }}"
+                      data-attribute-min-purchase="{{ product.minPurchase }}"
+                      data-attribute-max-purchase="{{ product.calculatedMaxPurchase }}"
+                      data-attribute-respect-stock="{{ respectStock }}"
+                      data-attribute-variant-price="{% if product.calculatedPrices|length == 0 %}{{variantPrice}}{% else %}0{% endif %}"
+                      {{ condition }}
+                      style="{% if variantMatrixPosition == 'price' and not(variantMatrixLayout == 'standard') %}width: 90%!important;{% endif %}"
+                      {% if VariantMatrixImageChange %}data-attribute-change-image="true"{% endif %}
+                    >
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </div>
+
+        {% endblock %}
+
+        {% block buy_widget_buy_redirect_input %}
+          {# fallback redirect back to detail page is deactivated via js #}
+          <input type="hidden"
+                 name="redirectTo"
+                 value="frontend.detail.page">
+
+          <input type="hidden"
+                 name="redirectParameters"
+                 data-redirect-parameters="true"
+                 value='{"productId": "{{ product.id }}"}'>
+        {% endblock %}
+
+        {% block buy_widget_buy_product_buy_info %}
+          <input type="hidden"
+                 name="lineItems[{{ product.id }}][id]"
+                 value="{{ product.id }}">
+          <input type="hidden"
+                 name="lineItems[{{ product.id }}][type]"
+                 value="product">
+          <input type="hidden"
+                 name="lineItems[{{ product.id }}][referencedId]"
+                 value="{{ product.id }}">
+          <input type="hidden"
+                 name="lineItems[{{ product.id }}][stackable]"
+                 value="1">
+          <input type="hidden"
+                 name="lineItems[{{ product.id }}][removable]"
+                 value="1">
+        {% endblock %}
+
+        {% block buy_widget_product_buy_meta %}
+          <input type="hidden"
+                 name="product-name"
+                 value="{{ product.translated.name }}">
+          <input type="hidden"
+                 name="brand-name"
+                 value="{{ product.manufacturer.getName() }}">
+        {% endblock %}
+
+        {% block buy_widget_buy_button_container %}
+          <button type="button" data-title="{{ 'santa-theme.buybox.disabled-btn.title'|trans|sw_sanitize }}"
+                  class="btn btn-primary btn-buy btn-block bit-variant-button {% if page.product.manufacturer.name == "SantaFeTex" %}d-none{% endif %}" disabled="disabled">
+            {% sw_icon 'cart' style {
+              'size': 'lg'
+            } %}
+            {{ 'biloba.ArticleVariantOrderMatrix.DetailBuyActionAdd'|trans }}
+          </button>
+
+          {% set MyfavInquiryAddPluginOptions = {
+            target: path('frontend.myfav.inquiry.add'),
+            csrf_token: csrf_token('frontend.myfav.inquiry.add')
+          } %}
+          <button type="button"
+                  data-title="{{ 'santa-theme.buybox.disabled-btn.title'|trans|sw_sanitize }}"
+                  form="biloba-variant-matrix-formular"
+                  formaction="{{ path('frontend.myfav.inquiry.add') }}"
+                  name="inquiry"
+                  value="1"
+                  class="btn btn-buy btn-block mt-2 bit-variant-button"
+                  disabled="disabled"
+                  data-myfav-inquiry-add-plugin-options="{{ MyfavInquiryAddPluginOptions|json_encode }}"
+          >
+            {% sw_icon 'paper-pencil' style {
+              'size': 'lg'
+            } %}{{ 'myfavInquiry.add'|trans|sw_sanitize }}
+          </button>
+        {% endblock %}
+      </div>
+    {% endif %}
+  {% endblock %}
+  </form>
+{% endblock %}

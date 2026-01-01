@@ -1,0 +1,7 @@
+{% sw_extends '@Storefront/storefront/layout/cookie/cookie-permission.html.twig' %}
+
+{% block layout_cookie_permission_inner %}
+    {% if config('AcrisCookieConsentCS.config.active') and activeRoute != 'frontend.maintenance.page' %}
+        {% sw_include '@Storefront/storefront/layout/cookie/permission-note.html.twig' %}
+    {% endif %}
+{% endblock %}

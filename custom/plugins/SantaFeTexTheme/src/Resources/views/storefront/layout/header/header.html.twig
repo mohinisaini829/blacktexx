@@ -1,0 +1,116 @@
+{% sw_extends '@Storefront/storefront/layout/header/header.html.twig' %}
+
+{% block layout_header %}
+
+    {% block layout_header_navigation %}
+        <div class="row align-items-center header-row">
+            {% block layout_header_logo %}
+                <div class="col-5 col-lg-auto header-logo-col pb-sm-2 my-3 m-lg-0">
+                    {% sw_include '@Storefront/storefront/layout/header/logo.html.twig' %}
+                </div>
+                 <div class="custom-navigation ml-3">
+                    {% sw_include '@Storefront/storefront/layout/navigation/custom-top-navigation.html.twig' %}
+                </div>
+            {% endblock %}
+
+            {% block layout_header_search %}
+                <div class="col-auto header-tel-section ">
+                    <a style="color:#fff;font-size:16px;font-weight:bolder" href="tel:+496322948070">Tel: +496322948070</a>
+                </div>
+                <div class="col-12 col-lg-auto header-search-col">
+                    <div class="row">
+                        <div class="col-sm-auto d-none d-sm-block d-lg-none">
+                            {% block layout_header_navigation_toggle_tablet %}
+                                <div class="nav-main-toggle">
+                                    {% block layout_header_navigation_toggle_tablet_button %}
+                                        <button
+                                            class="btn nav-main-toggle-btn header-actions-btn"
+                                            type="button"
+                                            data-off-canvas-menu="true"
+                                            aria-label="{{ 'general.menuLink'|trans|striptags }}"
+                                        >
+                                            {% block layout_header_navigation_toggle_tablet_button_icon %}
+                                                {% sw_icon 'stack' %}
+                                            {% endblock %}
+                                        </button>
+                                    {% endblock %}
+                                </div>
+                            {% endblock %}
+                        </div>
+                        <div class="col">
+                            {% sw_include '@Storefront/storefront/layout/header/search.html.twig' %}
+                        </div>
+<!--                         <div class="col-12 col-lg-auto header-search-col">
+                            <div class="row">
+                                <div class="col">
+                                    {% sw_include '@Storefront/storefront/layout/header/search.html.twig' %}
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block layout_header_actions %}
+                <div class="col-12 order-1 col-sm-auto order-sm-2 header-actions-col ps-lg-0">
+                    <div class="row g-0">
+                        {% block layout_header_navigation_toggle %}
+                            <div class="col d-sm-none me-auto me-lg-0">
+                                <div class="menu-button">
+                                    {% block layout_header_navigation_toggle_button %}
+                                        <button
+                                            class="btn nav-main-toggle-btn header-actions-btn"
+                                            type="button"
+                                            data-off-canvas-menu="true"
+                                            aria-label="{{ 'general.menuLink'|trans|striptags }}"
+                                        >
+                                            {% block layout_header_navigation_toggle_button_icon %}
+                                                {% sw_icon 'stack' %}
+                                            {% endblock %}
+                                        </button>
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        {% endblock %}
+
+                        {% block layout_header_search_toggle %}
+                            <div class="col-auto">
+                                <div class="search-toggle">
+                                    <button class="btn header-actions-btn search-toggle-btn js-search-toggle-btn collapsed"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#searchCollapse"
+                                            aria-expanded="false"
+                                            aria-controls="searchCollapse"
+                                            aria-label="{{ 'header.searchButton'|trans|striptags }}">
+                                        {% sw_icon 'search' %}
+                                    </button>
+                                </div>
+                            </div>
+                        {% endblock %}
+
+                        {% if config('core.cart.wishlistEnabled') %}
+                            {% block layout_header_actions_wishlist %}
+                                <div class="col-auto">
+                                    <div class="header-wishlist">
+                                        <a class="btn header-wishlist-btn header-actions-btn"
+                                           href="{{ path('frontend.wishlist.page') }}"
+                                           title="{{ 'header.wishlist'|trans|striptags }}"
+                                           aria-labelledby="wishlist-basket-live-area"
+                                        >
+                                            {% sw_include '@Storefront/storefront/layout/header/actions/wishlist-widget.html.twig' %}
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endblock %}
+                        {% endif %}
+
+                        {{ block('layout_header_actions_account') }}
+
+                        {{ block('layout_header_actions_cart') }}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

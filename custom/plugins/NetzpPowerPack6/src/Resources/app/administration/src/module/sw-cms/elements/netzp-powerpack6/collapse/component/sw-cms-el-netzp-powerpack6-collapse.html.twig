@@ -1,0 +1,17 @@
+{% block sw_cms_element_netzp_powerpack6_collapse %}
+    <div class="sw-cms-el-netzp-powerpack6-collapse">
+        <h3 class="title" v-if="element.config.title.value">
+            {{ element.config.title.value }}
+        </h3>
+        <div class="collapse">
+            <div v-for="n in element.config.numberOfItems.value" :key="n">
+                <div class="item">
+                    <sw-text-editor v-model:value="element.config['itemtitle' + n].value" :isInlineEdit="true" />
+                </div>
+                <div v-if="n==1 && element.config.firstItemOpened.value" class="item-container">
+                    <sw-text-editor v-model:value="element.config['itemcontents' + n].value" :isInlineEdit="true" />
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

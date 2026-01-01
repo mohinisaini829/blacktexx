@@ -1,0 +1,68 @@
+{
+    "santa-theme": {
+        "Cookie":{
+            "heading": "ÜBER COOKIES AUF DIESER SEITE",
+            "box-text": "Diese Website verwendet Cookies, JavaScript, HTML 5 und andere digitale Technologien („Cookies) auf santafetex.com, um Informationen von Ihrem Gerät zu sammeln. Wir verwenden Cookies für funktionale und analytische Zwecke sowie Social Media und Werbung. Funktionale Cookies sind immer aktiviert, um sicherzustellen, dass unsere Website wie vorgesehen funktioniert. Ob wir die zwei letztgenannten Kategorien verwenden, liegt bei Ihnen. Sie können alle Cookies in diesen beiden Kategorien durch Klicken auf „Alle akzeptieren zulassen. Wenn Sie das nicht möchten, bitte auf „Einstellungen klicken und entsprechend auswählen. Weitere Informationen finden Sie in unserer Datenschutzerklärung."
+        },
+        "footer": {
+            "addressHeadline": "address:",
+            "address": "Waldstraße 110, Wachenheim<br/>67157, Germany",
+            "phoneHeadline": "Phone:",
+            "phoneNumber": "<a href='tel:004906322948070'>0049-(0)6322-94807-0</a>",
+            "contactHeadline": "contact:",
+            "contact": "<a href='mailto:mail@mail.com'>Free Request</a>",
+            "hoursHeadline": "Working days/hours:",
+            "hours": "Mon - Fri / 9:00am - 5:30pm",
+            "newsletterHeadline": "Don't miss a thing",
+            "newsletterGo": "GO",
+            "newsletterText": "Get the latest information on special offers. Sign up for the newsletter today."
+        },
+        "sw-cms": {
+            "elements": {
+                "vio_product_zerts": {
+                    "label": "Product certifications",
+                    "OekoTex": "<img src=\"/bundles/santafetextheme/assets/logos/oekotexLogo.png\">",
+                    "OekotexLink": "https://www.oeko-tex.com/en/our-standards/standard-100-by-oeko-tex"
+                },
+                "vio-manufacturer-video-slider": {
+                    "title": "Video Slider",
+                    "button": "Video"
+                },
+                "vio-manufacturer-catalog": {
+                    "title": "Product catalogue",
+                    "button": "Catalogue"
+                }
+            }
+        },
+        "buybox": {
+            "instock": "In stock",
+            "model": "Model: ",
+            "material": "Material: ",
+            "price-inquiry-text": "For higher quantities please enquire",
+            "unit": "Pc",
+            "designerOnlineButtonText": "Design Online",
+            "designerOnlineLink": "#",
+            "disabled-btn": {
+                "title": "Please select the desired variant / specify the number of pieces!"
+            },
+            "designerModal": {
+                "content": "In our online designer you can design products yourself. However, the range is smaller. It's worth it financially under 15 parts. Above that, it makes sense to browse further here and make a request. Please select:",
+                "linkBtn": "To the Online Designer",
+                "closeBtn": "Stay and request here"
+            },
+            "printPriceListLink": "Embroidery & print prices",
+            "sizeTableLink": "Size table"
+        },
+        "property": {
+            "separator": ", "
+        }
+    },
+    "detail": {
+        "descriptionTitle": {
+            "before": ""
+        },
+        "pdfDescriptionTitle": "Size Tables",
+        "pdfDescription": "Size Tables of %manufacturer%",
+        "nameSuffix": "for embroidery and printing"
+    }
+}

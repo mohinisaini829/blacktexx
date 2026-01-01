@@ -1,0 +1,26 @@
+{% for firstGroupOption in xAxis.options|slice(subTableIndex * viewportValue, viewportValue) %}
+    {% set groupOptionId = null %}
+
+    {% for optKey, value in variantMatrixArrayKeysAndValues %}
+        {% set currentKey = firstGroupOption.id %}
+
+        {% if currentKey == optKey %}
+            {% set key =  value %}
+            {% set groupOptionId = currentKey %}
+        {% endif %}
+    {% endfor %}
+
+    {% if groupOptionId != null %}
+        {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+        {% set currencyID = context.currency.id %}
+
+        {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+            <td>
+                <div class="variant-options-price">
+                    {# include calculatedPrice #}
+                    {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/calculatedPrice.html.twig" with {"childProduct":childProduct} %}
+                </div>
+            </td>
+        {% endif %}
+    {% endif %}
+{% endfor %}

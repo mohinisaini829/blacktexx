@@ -1,0 +1,39 @@
+
+{% block extension_color_variants %}
+    <div class="color-variants--list" style="height: {{ searchResult.extensions.colorVariants.config.size }}px">
+        {% if product.parentId and searchResult.extensions.colorVariants.data[product.parentId] %}
+            {% for variant in searchResult.extensions.colorVariants.data[product.parentId] %}
+                {%  if variant.optionImage %}
+                    {% if product.customFields.custom_field_list_color_variants is empty or product.customFields.custom_field_list_color_variants == variant.optionGroupId %}
+                        <div class="color-variants--option
+                                            {% if  searchResult.extensions.colorVariants.config.isRound == true %}color-variants--option-isRound{% endif %}
+                                            {% if  searchResult.extensions.colorVariants.config.provideDirectLinks == true %}color-variants--option-isLink{% endif %}
+                                            {% if variant.optionImage %}color-variants--option-hasImage{% endif %}" style="{% if variant.optionImage %}background-image: url(' {{ asset(variant.optionImage) }} ');{% else %}background-color: {{  variant.colorHexCode }};{% endif %}
+                                height: {{ searchResult.extensions.colorVariants.config.size }}px; width: {{ searchResult.extensions.colorVariants.config.size }}px;" title="{{ variant.colorName }}"
+                             {% if  searchResult.extensions.colorVariants.config.provideDirectLinks == true %}data-url="{{ seoUrl('frontend.detail.page', {'productId': variant.productId}) }}"{% endif %}
+                        >
+                            {% if  variant.cover %}
+                                {% sw_thumbnails 'product-image-thumbnails' with {
+                                media: variant.cover,
+                                sizes: {
+                                'xs': '501px',
+                                'sm': '315px',
+                                'md': '427px',
+                                'lg': '333px',
+                                'xl': '284px'
+                                }
+                                } %}
+                            {% endif %}
+                        </div>
+                    {%  endif %}
+                {%  endif %}
+
+                {% if variant.hasMoreColors == true %}
+                    <a href="{{ seoUrl('frontend.detail.page', {'productId': product.parentId}) }}" class="color-variants--more color-variants--option-isLink" title="{{ 'saltyColorVariants.moreColors' | trans }}">
+                        <span class="icon icon-align-justify icon-sm">{% sw_icon 'plus-small' style { 'pack': 'solid' } %}</span>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

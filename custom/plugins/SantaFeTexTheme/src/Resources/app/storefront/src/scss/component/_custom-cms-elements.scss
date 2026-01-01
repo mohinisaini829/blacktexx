@@ -1,0 +1,344 @@
+.linien {
+    @include cms-headline;
+}
+
+.is-ctl-product .cms-block-container {
+  @include cms-headline;
+    h2, h3 {
+        &:not(.produkt-zertifizierungen-title) {
+            font-size: calc(#{$vio-cms-title-font-size * .65});
+            @include media-breakpoint-up(md) {
+                font-size: $vio-cms-title-font-size;
+            }
+        }
+    }
+  .cms-element-vio_matching_products,
+  .cms-element-viomanufacturercatalog {
+
+    iframe {
+      display: block;
+      width: 100%;
+      margin: auto;
+      height: 40rem;
+      border: none;
+    }
+  }
+}
+
+.cms-element-text li::marker {
+  color: inherit;
+}
+
+.cms-element-image-gallery {
+  position: relative;
+}
+
+.is-act-index .cms-element-text,
+.landing_textfield {
+
+    p {
+        line-height: 1.75;
+    }
+}
+//cus banner
+.cus-banner {
+  background-image: url('/media/80/50/d4/1691482073/StartPageFoto SantaFeTex Stickerei Textildruckerei Besticken.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position:center;
+  .cus-banner-content{
+    min-height:500px;
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .cms-element-text {
+      width:100%;
+      max-height:300px;
+      text-align: center;
+      .cus-higlight {
+        color: white;
+        background-color: rgba(169, 169, 169, 0.314);
+      }
+    }
+  }
+}
+
+.santafetex--category-teasers {
+    .cms-block-moorl-column-layout-1-1-1-1 {
+        .moorl-column-layout {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+.santa--sub-categories {
+    overflow-x: scroll;
+
+    /* width */
+    &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: none;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .cms-section-default {
+        &.boxed {
+            display: flex;
+            justify-content: flex-start;
+        }
+    }
+
+    .moorl-column-layout {
+        display: flex;
+        justify-content: center;
+        height: 140px;
+        grid-gap: 40px;
+
+        .netzp-powerpack6-cta2-element {
+            width: 80px !important;
+            height: 80px !important;
+            border-radius: 100%;
+            background-color: #fff;
+            overflow: visible;
+            border: 1px solid #ccc;
+            position: relative;
+            display: block;
+            margin: 0;
+            padding: 0 !important;
+
+            a {
+                position: absolute;
+                /*top: 100%;*/
+                margin-top: 10px;
+                display: block !important;
+                width: 100% !important;
+                text-align: center;
+                background: none !important;
+                color: #000 !important;
+                font-weight: 700;
+                padding: 100% 0 0 0 !important;
+                word-wrap: break-word;
+            }
+        }
+    }
+}
+
+.santa--seo-text-links-home,
+.cms-element-myfavinquiry .privacy-notice,
+.cookie-consent-permission-text {
+    a {
+        text-decoration: underline;
+    }
+}
+
+.santafetex--sonderproduktion {
+    loading: lazy;
+
+    h2 {
+        a {
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.santa--captcha-refresh-btn {
+    border: 1px solid #ccc;
+    line-height: 42px;
+    cursor: pointer;
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.is-ctl-landingpage {
+    .cms-element-text blockquote {
+        font-style: normal;
+    }
+}
+
+// media-breakpoint-down(md)  // Less-Than 768px
+@include media-breakpoint-down(md) {
+    .netzp-powerpack6-infobar-element {
+        flex-wrap: wrap;
+    }
+
+    //Services & Production Page
+    .santafetex--serv-and-prod-page {
+        .moorl-column-layout {
+            margin-bottom: 40px;
+        }
+
+        .cms-block.pos-0,
+        .cms-block.pos-2,
+        .cms-block.pos-4 {
+            .moorl-column-layout {
+                padding-left: 15px;
+            }
+        }
+
+        .cms-block.pos-1,
+        .cms-block.pos-3,
+        .cms-block.pos-5 {
+            .moorl-column-layout {
+                padding-right: 15px;
+
+                .cms-element-text {
+                    order: 2;
+                }
+
+                .cms-element-image {
+                    order: 1;
+                }
+            }
+        }
+    }
+}
+
+// media-breakpoint-up(md)  // Greater-Than 768px
+@include media-breakpoint-up(md) {
+    .santafetex--category-teasers {
+        .cms-block-moorl-column-layout-1-1-1-1 {
+            .moorl-column-layout {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    }
+
+
+
+    .modal-body {
+        .card-body.sample-product-card {
+            .col-md-6.basic-captcha-content {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    }
+
+    .santa--sub-categories {
+        .cms-section-default {
+            &.boxed {
+                justify-content: center;
+            }
+        }
+    }
+}
+
+// media-breakpoint-down(lg)  // Less-Than 992px
+@include media-breakpoint-down(lg) {
+    .linien {
+        h2:not(.produkt-zertifizierungen-title),
+        h3:not(.produkt-zertifizierungen-title) {
+            span {
+                text-overflow: inherit;
+                white-space: normal;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+.cms-section[class*="bg-"] h1,
+.rl-advanced-banner-text h1,
+.rl-advanced-banner-text h2 {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+}
+
+.santafetex--banner-mobile {
+    .rl-advanced-banner-text {
+        p {
+            .btn.btn-primary {
+                background: $sw-white;
+                border-color: $sw-white;
+                text-transform: capitalize;
+                color: #152B48;
+                font-weight: bold;
+                font-size: 18pt;
+
+                &:hover {
+                    background: $sw-orange;
+                    color: $sw-white;
+                    border-color: $sw-orange;
+                }
+            }
+        }
+    }
+}
+
+
+@include media-breakpoint-down(sm) {
+    .santafetex--banner-mobile {
+        .rl-advanced-banner-text {
+            &.text-align-y-bottom {
+                .btn.btn-primary {
+                    background: $sw-white;
+                    border-color: $sw-white;
+                    text-transform: capitalize;
+                    color: #152B48;
+                    font-weight: bold;
+                    font-size: 17px;
+
+                    &:hover {
+                        background: $sw-orange;
+                        color: $sw-white;
+                        border-color: $sw-orange;
+                    }
+                }
+            }
+        }
+    }
+
+    .santafetex--banner-ronaldo {
+        img {
+            object-position: calc(100% - -260px) center !important;
+        }
+    }
+}
+
+// media-breakpoint-down(sm)  // Less-Than 576px
+@media only screen and (max-width: 576px) {
+    .santafetex--category-teasers {
+        .cms-block-moorl-column-layout-1-1-1-1 {
+            .moorl-column-layout {
+                & > {
+                    div {
+                        height: 150px !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .netzp-powerpack6-infobar-element {
+        display: block;
+        column-count: 2;
+        column-gap: 30px;
+    }
+
+    .santa--info-points-bottom {
+        .cms-block-container {
+            padding: 20px !important;
+        }
+    }
+}

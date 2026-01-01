@@ -1,0 +1,41 @@
+{
+  "name": "studiosolid/advanced-slider-elements",
+  "description": "Advanced CMS slider elements and blocks for Shopware 6 shopping experiences",
+  "version": "5.0.0",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Studio Solid",
+      "homepage": "https://www.studiosolid.de"
+    }
+  ],
+  "require": {
+    "shopware/core": "6.7.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "StudioSolid\\AdvancedSliderElements\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "StudioSolid\\AdvancedSliderElements\\SolidAdvancedSliderElements",
+    "copyright": "(c) by Studio Solid",
+    "label": {
+      "de-DE": "Advanced Slider Elements",
+      "en-GB": "Advanced Slider Elements"
+    },
+    "description" : {
+      "de-DE": "Advanced CMS slider elements and blocks for Shopware 6 shopping experiences",
+      "en-GB": "Erweiterte CMS-Slider Elemente und Blöcke für Shopware 6 Erlebniswelten"
+    },
+    "manufacturerLink" : {
+      "de-DE" : "https://www.studiosolid.de/",
+      "en-GB" : "https://www.studiosolid.de/"
+    },
+    "supportLink" : {
+      "de-DE" : "https://www.studiosolid.de/",
+      "en-GB" : "https://www.studiosolid.de/"
+    }
+  }
+}

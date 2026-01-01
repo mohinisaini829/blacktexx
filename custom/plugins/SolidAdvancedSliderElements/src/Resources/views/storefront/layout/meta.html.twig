@@ -1,0 +1,452 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_stylesheet %}
+  {{ parent() }}
+
+  {% block solid_ase_content_slider_styles %}
+    {% set cmsPage = page.cmsPage %}
+
+    {% if page.landingPage.cmsPage %}
+        {% set cmsPage = page.landingPage.cmsPage %}
+    {% endif %}
+
+    {% if cmsPage %}
+      {% for section in cmsPage.sections %}
+        {% for block in section.blocks %}
+          {% for element in block.slots.elements %}
+            {% if element.type == 'solid-ase-content-slider' %}
+              {% set sliderSettings = element.translated.config.sliderSettings.value %}
+              {% set settings = element.translated.config.settings.value %}
+
+              {% block solid_ase_content_slider_style_tag %}
+                <style>
+                  {% block solid_ase_content_slider_styles_responsive_min_height %}
+                    {# responsive min height #}
+                    {% if settings.sizingMode == 'responsive-min-height' %}
+                      {% if settings.minHeightMobile %}
+                        .solid-ase-content-slider-{{ element.id }}
+                          .slide-container {
+                          min-height: {{ settings.minHeightMobile }};
+                        }
+                      {% endif %}
+
+                      {% if settings.minHeightTablet %}
+                        @media (min-width: 768px) {
+                          .solid-ase-content-slider-{{ element.id }}
+                            .slide-container {
+                            min-height: {{ settings.minHeightTablet }};
+                          }
+                        }
+                      {% endif %}
+
+                      {% if settings.minHeightDesktop %}
+                        @media (min-width: 1200px) {
+                          .solid-ase-content-slider-{{ element.id }}
+                            .slide-container {
+                            min-height: {{ settings.minHeightDesktop }};
+                          }
+                        }
+                      {% endif %}
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_min_aspect_ratio %}
+                    {# min aspect ratio #}
+                    {% if settings.sizingMode == 'min-aspect-ratio' %}
+                      {% if settings.minAspectRatioWidth and
+                        settings.minAspectRatioHeight %}
+                        .solid-ase-content-slider-{{ element.id }}::before {
+                          padding-top: {{ (settings.minAspectRatioHeight /
+                            settings.minAspectRatioWidth * 100) ~ '%' }};
+                        }
+                      {% endif %}
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_content_animation %}
+                    {# content animation #}
+                    {% if settings.contentAnimation != 'none' %}
+                      .solid-ase-content-slider-{{ element.id }} .content {
+                        transition-delay: {{ (sliderSettings.speed + 200) ~ 'ms' }};
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_small_headline_size %}
+                    {# small headline size #}
+                    {% if settings.smallHeadlineSizeMobile %}
+                      .solid-ase-content-slider-{{ element.id }} .content .small-headline {
+                        font-size: {{ settings.smallHeadlineSizeMobile }};
+                      }
+                    {% endif %}
+
+                    {% if settings.smallHeadlineSizeTablet %}
+                      @media (min-width: 768px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .small-headline {
+                          font-size: {{ settings.smallHeadlineSizeTablet }};
+                        }
+                      }
+                    {% endif %}
+
+                    {% if settings.smallHeadlineSizeDesktop %}
+                      @media (min-width: 1200px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .small-headline {
+                          font-size: {{ settings.smallHeadlineSizeDesktop }};
+                        }
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_small_headline_weight %}
+                    {# small headline weight #}
+                    {% if settings.smallHeadlineWeight %}
+                      .solid-ase-content-slider-{{ element.id }} .content .small-headline {
+                        font-weight: {{ settings.smallHeadlineWeight }};
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_headline_size %}
+                    {# headline size #}
+                    {% if settings.headlineSizeMobile %}
+                      .solid-ase-content-slider-{{ element.id }} .content .headline {
+                        font-size: {{ settings.headlineSizeMobile }};
+                      }
+                    {% endif %}
+
+                    {% if settings.headlineSizeTablet %}
+                      @media (min-width: 768px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .headline {
+                          font-size: {{ settings.headlineSizeTablet }};
+                        }
+                      }
+                    {% endif %}
+
+                    {% if settings.headlineSizeDesktop %}
+                      @media (min-width: 1200px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .headline {
+                          font-size: {{ settings.headlineSizeDesktop }};
+                        }
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_headline_weight %}
+                    {# headline weight #}
+                    {% if settings.headlineWeight %}
+                      .solid-ase-content-slider-{{ element.id }} .content .headline {
+                        font-weight: {{ settings.headlineWeight }};
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_text_size %}
+                    {# text size #}
+                    {% if settings.textSizeMobile %}
+                      .solid-ase-content-slider-{{ element.id }} .content .text {
+                        font-size: {{ settings.textSizeMobile }};
+                      }
+                    {% endif %}
+
+                    {% if settings.textSizeTablet %}
+                      @media (min-width: 768px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .text {
+                          font-size: {{ settings.textSizeTablet }};
+                        }
+                      }
+                    {% endif %}
+
+                    {% if settings.textSizeDesktop %}
+                      @media (min-width: 1200px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .text {
+                          font-size: {{ settings.textSizeDesktop }};
+                        }
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_text_weight %}
+                    {# text weight #}
+                    {% if settings.textWeight %}
+                      .solid-ase-content-slider-{{ element.id }} .content .text {
+                        font-weight: {{ settings.textWeight }};
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_button_label_size %}
+                    {# button label size #}
+                    {% if settings.buttonLabelSizeMobile %}
+                      .solid-ase-content-slider-{{ element.id }} .content .btn {
+                        font-size: {{ settings.buttonLabelSizeMobile }};
+                      }
+                    {% endif %}
+
+                    {% if settings.buttonLabelSizeTablet %}
+                      @media (min-width: 768px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .btn {
+                          font-size: {{ settings.buttonLabelSizeTablet }};
+                        }
+                      }
+                    {% endif %}
+
+                    {% if settings.buttonLabelSizeDesktop %}
+                      @media (min-width: 1200px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .btn {
+                          font-size: {{ settings.buttonLabelSizeDesktop }};
+                        }
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_button_label_weight %}
+                    {# button label weight #}
+                    {% if settings.buttonLabelWeight %}
+                      .solid-ase-content-slider-{{ element.id }} .content .btn {
+                        font-weight: {{ settings.buttonLabelWeight }};
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_small_headline_margin_bottom %}
+                    {# small headline margin bottom #}
+                    {% if settings.smallHeadlineMarginBottomMobile %}
+                      .solid-ase-content-slider-{{ element.id }} .content .small-headline {
+                        margin-bottom: {{ settings.smallHeadlineMarginBottomMobile }};
+                      }
+                    {% endif %}
+
+                    {% if settings.smallHeadlineMarginBottomTablet %}
+                      @media (min-width: 768px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .small-headline {
+                          margin-bottom: {{ settings.smallHeadlineMarginBottomTablet }};
+                        }
+                      }
+                    {% endif %}
+
+                    {% if settings.smallHeadlineMarginBottomDesktop %}
+                      @media (min-width: 1200px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .small-headline {
+                          margin-bottom: {{ settings.smallHeadlineMarginBottomDesktop }};
+                        }
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_headline_margin_bottom %}
+                    {# headline margin bottom #}
+                    {% if settings.headlineMarginBottomMobile %}
+                      .solid-ase-content-slider-{{ element.id }} .content .headline {
+                        margin-bottom: {{ settings.headlineMarginBottomMobile }};
+                      }
+                    {% endif %}
+
+                    {% if settings.headlineMarginBottomTablet %}
+                      @media (min-width: 768px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .headline {
+                          margin-bottom: {{ settings.headlineMarginBottomTablet }};
+                        }
+                      }
+                    {% endif %}
+
+                    {% if settings.headlineMarginBottomDesktop %}
+                      @media (min-width: 1200px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .headline {
+                          margin-bottom: {{ settings.headlineMarginBottomDesktop }};
+                        }
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_text_margin_bottom %}
+                    {# text margin bottom #}
+                    {% if settings.textMarginBottomMobile %}
+                      .solid-ase-content-slider-{{ element.id }} .content .text {
+                        margin-bottom: {{ settings.textMarginBottomMobile }};
+                      }
+                    {% endif %}
+
+                    {% if settings.textMarginBottomTablet %}
+                      @media (min-width: 768px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .text {
+                          margin-bottom: {{ settings.textMarginBottomTablet }};
+                        }
+                      }
+                    {% endif %}
+
+                    {% if settings.textMarginBottomDesktop %}
+                      @media (min-width: 1200px) {
+                        .solid-ase-content-slider-{{ element.id }} .content .text {
+                          margin-bottom: {{ settings.textMarginBottomDesktop }};
+                        }
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_small_headline_color %}
+                    {# small headline color #}
+                    {% if settings.smallHeadlineColor %}
+                      .solid-ase-content-slider-{{ element.id }} .content .small-headline {
+                        color: {{ settings.smallHeadlineColor }};
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_headline_color %}
+                    {# headline color #}
+                    {% if settings.headlineColor %}
+                      .solid-ase-content-slider-{{ element.id }} .content .headline {
+                        color: {{ settings.headlineColor }} !important;
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_text_color %}
+                    {# text color #}
+                    {% if settings.textColor %}
+                      .solid-ase-content-slider-{{ element.id }} .content .text {
+                        color: {{ settings.textColor }};
+                      }
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_button_color %}
+                    {# button color #}
+                    {% if settings.buttonColor %}
+                      {% if 'outline' in settings.buttonVariant %}
+                        .solid-ase-content-slider-{{ element.id }} .content .btn {
+                          color: {{ settings.buttonColor }};
+                          border-color: {{ settings.buttonColor }};
+                        }
+
+                        .solid-ase-content-slider-{{ element.id }} .content .btn:hover,
+                        .solid-ase-content-slider-{{ element.id }} .content .btn:active {
+                          color: {{ hexContrast(settings.buttonColor) }} !important;
+                          border-color: {{ settings.buttonColor }} !important;
+                          background-color: {{ settings.buttonColor }} !important;
+                        }
+                      {% else %}
+                        .solid-ase-content-slider-{{ element.id }} .content .btn {
+                          color: {{ hexContrast(settings.buttonColor) }};
+                          border-color: {{ settings.buttonColor }};
+                          background-color: {{ settings.buttonColor }};
+                        }
+
+                        .solid-ase-content-slider-{{ element.id }} .content .btn:hover {
+                          border-color: {{ hexDarken(settings.buttonColor, '36%') }} !important;
+                          background-color: {{ hexDarken(settings.buttonColor, '24%') }} !important;
+                        }
+
+                        .solid-ase-content-slider-{{ element.id }} .content .btn:active {
+                          color: {{ hexContrast(settings.buttonColor) }} !important;
+                          border-color: {{ hexDarken(settings.buttonColor, '45%') }} !important;
+                          background-color: {{ hexDarken(settings.buttonColor, '36%') }} !important;
+                        }
+                      {% endif %}
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_content_background_color %}
+                    {# content background color #}
+                    {% if settings.contentBackgroundColor %}
+                      {% if 'boxed' in settings.layoutVariant %}
+                        .solid-ase-content-slider-{{ element.id }} .content {
+                          background-color: {{ settings.contentBackgroundColor }} !important;
+                        }
+                      {% elseif settings.layoutVariant == 'gradient-top' %}
+                        .solid-ase-content-slider-{{ element.id }} .content-container {
+                          background: linear-gradient({{ settings.contentBackgroundColor }}, {{ hexOpacity(settings.contentBackgroundColor, 0) }}) !important;
+                        }
+                      {% elseif settings.layoutVariant == 'gradient-bottom' %}
+                        .solid-ase-content-slider-{{ element.id }} .content-container {
+                          background: linear-gradient({{ hexOpacity(settings.contentBackgroundColor, 0) }}, {{ settings.contentBackgroundColor }}) !important;
+                        }
+                      {% else %}
+                        .solid-ase-content-slider-{{ element.id }} .content-container {
+                          background-color: {{ settings.contentBackgroundColor }} !important;
+                        }
+                      {% endif %}
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_controls_color %}
+                    {# controls color #}
+                    {% if settings.controlsColor %}
+                      {% if 'icon' in settings.controlsVariant %}
+                        .solid-ase-content-slider-{{ element.id }} .solid-ase-content-slider-control:not(:disabled) .icon {
+                          color: {{ settings.controlsColor }};
+                        }
+
+                        {% if 'outside' in settings.controlsPosition %}
+                          .solid-ase-content-slider-{{ element.id }} .solid-ase-content-slider-control:hover:not(:disabled) .icon {
+                            color: {{ hexDarken(settings.controlsColor, '24%') }};
+                          }
+                        {% endif %}
+
+                        .solid-ase-content-slider-{{ element.id }} .solid-ase-content-slider-control:active:not(:disabled) .icon {
+                          color: {{ hexDarken(settings.controlsColor, '36%') }};
+                        }
+                      {% else %}
+                        .solid-ase-content-slider-{{ element.id }} .solid-ase-content-slider-control:not(:disabled) {
+                          border-color: {{ settings.controlsColor }};
+                          background-color: {{ settings.controlsColor }};
+                        }
+
+                        .solid-ase-content-slider-{{ element.id }} .solid-ase-content-slider-control:not(:disabled) .icon {
+                          color: {{ hexContrast(settings.controlsColor) }};
+                        }
+
+                        {% if 'inside' in settings.controlsPosition %}
+                          .solid-ase-content-slider-{{ element.id }} .solid-ase-content-slider-control:hover:not(:disabled) {
+                            border-color: {{ settings.controlsColor }} !important;
+                            background-color: {{ settings.controlsColor }} !important;
+                          }
+                        {% else %}
+                          .solid-ase-content-slider-{{ element.id }} .solid-ase-content-slider-control:hover:not(:disabled) {
+                            border-color: {{ hexDarken(settings.controlsColor, '36%') }} !important;
+                            background-color: {{ hexDarken(settings.controlsColor, '24%') }} !important;
+                          }
+                        {% endif %}
+
+                        .solid-ase-content-slider-{{ element.id }} .solid-ase-content-slider-control:active:not(:disabled) {
+                          border-color: {{ hexDarken(settings.controlsColor, '45%') }} !important;
+                          background-color: {{ hexDarken(settings.controlsColor, '36%') }} !important;
+                        }
+                      {% endif %}
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_nav_color %}
+                    {# nav color #}
+                    {% if settings.navColor %}
+                      {% if settings.navVariant == 'dots-fill' %}
+                        .solid-ase-content-slider-{{ element.id }} .tns-nav button {
+                          border-color: {{ settings.navColor }} !important;
+                        }
+
+                        .solid-ase-content-slider-{{ element.id }} .tns-nav button::after {
+                          background-color: {{ settings.navColor }} !important;
+                        }
+                      {% else %}
+                        .solid-ase-content-slider-{{ element.id }} .tns-nav button {
+                          background-color: {{ settings.navColor }} !important;
+                        }
+                      {% endif %}
+                    {% endif %}
+                  {% endblock %}
+
+                  {% block solid_ase_content_slider_styles_custom_css %}
+                    {# custom css #}
+                    {% if settings.customCss %}
+                      {{ settings.customCss | raw }}
+                    {% endif %}
+                  {% endblock %}
+                </style>
+              {% endblock %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+  {% endblock %}
+{% endblock %}

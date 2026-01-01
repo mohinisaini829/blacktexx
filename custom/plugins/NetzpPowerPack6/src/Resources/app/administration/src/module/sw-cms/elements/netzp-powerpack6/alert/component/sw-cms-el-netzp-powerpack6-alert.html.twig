@@ -1,0 +1,30 @@
+{% block sw_cms_element_netzp_powerpack6_alert %}
+    <div class="sw-cms-el-netzp-powerpack6-alert">
+        <sw-alert :variant="getAppearance(element.config.alertType.value)" appearance="default" :showIcon="false" :closable="false">
+            <h3>
+                <div v-if="element.config.title.source === 'mapped'"
+                     class="sw-cms-el-text__mapping-preview content-editor"
+                     v-html="$sanitize(demoValueTitle)" />
+
+                <sw-text-editor v-else
+                                :placeholder="$t('sw-cms.netzp-powerpack6.elements.alert.config.title')"
+                                v-model:value="element.config.title.value"
+                                :isInlineEdit="true"
+                                :allow-inline-data-mapping="true"
+                                sanitize-input>
+                </sw-text-editor>
+            </h3>
+
+            <div v-if="element.config.contents.source === 'mapped'"
+                 class="sw-cms-el-text__mapping-preview content-editor"
+                 v-html="$sanitize(demoValueContents)" />
+
+            <sw-text-editor v-else
+                            :placeholder="$t('sw-cms.netzp-powerpack6.elements.alert.config.contents')"
+                            v-model:value="element.config.contents.value"
+                            :allow-inline-data-mapping="true"
+                            :isInlineEdit="true">
+            </sw-text-editor>
+        </sw-alert>
+    </div>
+{% endblock %}

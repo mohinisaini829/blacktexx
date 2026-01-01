@@ -1,0 +1,41 @@
+{
+    "name": "moorl/foundation",
+    "description": "Foundation",
+    "version": "1.7.2",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "moori"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.7.0"
+    },
+    "type": "shopware-platform-plugin",
+"minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "MoorlFoundation\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "MoorlFoundation\\MoorlFoundation",
+        "copyright": "(c) by moori",
+        "label": {
+            "de-DE": "[moori] Foundation",
+            "en-GB": "[moori] Foundation"
+        },
+        "description": {
+            "de-DE": "Das moori Basis Plugin",
+            "en-GB": "The moori basic plugin"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://docs.moori.net/",
+            "en-GB": "https://docs.moori.net/"
+        },
+        "supportLink": {
+            "de-DE": "https://docs.moori.net/",
+            "en-GB": "https://docs.moori.net/"
+        }
+    }
+}

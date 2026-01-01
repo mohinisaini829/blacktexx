@@ -1,0 +1,12 @@
+{
+    "sw-cms": {
+        "elements": {
+          "vio_product_zerts": {
+            "label": "Product certifications"
+          },
+          "viomanufacturercatalog": {
+            "label": "Manufacturer catalogue"
+          }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{% sw_extends '@Storefront/storefront/page/account/register/index.html.twig' %}
+
+{% block page_account_register_inner %}
+    {% if page.extensions.myfavZweideh.get('tmpCartId') %}
+        <div class="myfav-zweideh-register-container">
+            <h1>Jetzt anmelden</h1>
+            <div class="row">
+                <div class="col">
+                    <p>Bitte melden Sie sich an, um das von Ihnen gestaltete Design zu speichern.</p>
+                    <img class="img-fluid" style="max-width: 200px;" src="{{ seoUrl('frontend.myfav.zweideh.tmp.cart.image', {'key': page.extensions.myfavZweideh.get('designKey'), 'tmp_cart_id': page.extensions.myfavZweideh.get('tmpCartId') }) }}" />
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

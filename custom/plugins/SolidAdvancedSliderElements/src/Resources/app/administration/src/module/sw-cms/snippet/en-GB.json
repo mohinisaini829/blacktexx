@@ -1,0 +1,799 @@
+{
+    "apps": {
+        "sw-cms": {
+            "detail": {
+                "label": {
+                    "blockCategory": {
+                        "solid-advanced-slider-elements": "Advanced Slider Elements"
+                    }
+                }
+            }
+        }
+    },
+    "sw-cms": {
+        "elements": {
+            "solid-ase": {
+                "content-slider": {
+                    "label": "Content slider - Advanced Slider Elements",
+                    "component": {
+                        "no-active-slides-title": "No active slides",
+                        "no-active-slides-description": "The slider will not be displayed because no slides are active."
+                    },
+                    "config": {
+                        "slides": {
+                            "label": "Slides",
+                            "scheduled": "Scheduled",
+                            "fields": {
+                                "name": {
+                                    "label": "Name",
+                                    "default": "New slide"
+                                },
+                                "active": {
+                                    "label": "Active"
+                                }
+                            },
+                            "content": {
+                                "label": "Content",
+                                "fields": {
+                                    "content-type": {
+                                        "label": "Content type",
+                                        "options": {
+                                            "default": {
+                                                "label": "Default"
+                                            },
+                                            "custom": {
+                                                "label": "Custom"
+                                            }
+                                        }
+                                    },
+                                    "small-headline": {
+                                        "label": "Small headline"
+                                    },
+                                    "headline": {
+                                        "label": "Headline"
+                                    },
+                                    "text": {
+                                        "label": "Text"
+                                    },
+                                    "button-label": {
+                                        "label": "Button label"
+                                    },
+                                    "button-link": {
+                                        "type": {
+                                            "label": "Button link type",
+                                            "options": {
+                                                "internal": {
+                                                    "label": "Internal"
+                                                },
+                                                "external": {
+                                                    "label": "External"
+                                                }
+                                            }
+                                        },
+                                        "entity": {
+                                            "label": "Entity",
+                                            "options": {
+                                                "category": {
+                                                    "label": "Category"
+                                                },
+                                                "landingPage": {
+                                                    "label": "Landing page"
+                                                },
+                                                "product": {
+                                                    "label": "Product"
+                                                }
+                                            },
+                                            "types": {
+                                                "category": {
+                                                    "label": "Category",
+                                                    "placeholder": "Choose a category..."
+                                                },
+                                                "landingPage": {
+                                                    "label": "Landing page",
+                                                    "placeholder": "Choose a landing page..."
+                                                },
+                                                "product": {
+                                                    "label": "Product",
+                                                    "placeholder": "Choose a product..."
+                                                }
+                                            }
+                                        },
+                                        "link": {
+                                            "label": "Link to",
+                                            "placeholder": "Enter url"
+                                        },
+                                        "internalQuery": {
+                                            "label": "Query",
+                                            "placeholder": "Enter query parameters (e.g. param1=value1&param2=value2)"
+                                        },
+                                        "targetBlank": {
+                                            "label": "Open link in new tab"
+                                        },
+                                        "title": {
+                                            "label": "Button link title",
+                                            "placeholder": "Title attribute"
+                                        }
+                                    },
+                                    "custom-content": {
+                                        "label": "Custom content"
+                                    }
+                                }
+                            },
+                            "background": {
+                                "label": "Background",
+                                "fields": {
+                                    "background-color": {
+                                        "label": "Background color"
+                                    },
+                                    "background-media": {
+                                        "label": "Background (image or video)"
+                                    },
+                                    "background-sizing-mode": {
+                                        "label": "Background sizing mode",
+                                        "options": {
+                                            "contain": {
+                                                "label": "Contain"
+                                            },
+                                            "cover": {
+                                                "label": "Cover"
+                                            }
+                                        }
+                                    },
+                                    "background-position": {
+                                        "label": "Background position",
+                                        "options": {
+                                            "center": {
+                                                "label": "Center"
+                                            },
+                                            "top": {
+                                                "label": "Top"
+                                            },
+                                            "right": {
+                                                "label": "Right"
+                                            },
+                                            "bottom": {
+                                                "label": "Bottom"
+                                            },
+                                            "left": {
+                                                "label": "Left"
+                                            }
+                                        }
+                                    },
+                                    "background-animation": {
+                                        "label": "Background animation",
+                                        "options": {
+                                            "none": {
+                                                "label": "None"
+                                            },
+                                            "zoom": {
+                                                "label": "Zoom"
+                                            },
+                                            "move": {
+                                                "label": "Move"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "link": {
+                                "label": "Link",
+                                "fields": {
+                                    "type": {
+                                        "label": "Link type",
+                                        "options": {
+                                            "internal": {
+                                                "label": "Internal"
+                                            },
+                                            "external": {
+                                                "label": "External"
+                                            }
+                                        }
+                                    },
+                                    "entity": {
+                                        "label": "Entity",
+                                        "options": {
+                                            "category": {
+                                                "label": "Category"
+                                            },
+                                            "landingPage": {
+                                                "label": "Landing page"
+                                            },
+                                            "product": {
+                                                "label": "Product"
+                                            }
+                                        },
+                                        "types": {
+                                            "category": {
+                                                "label": "Category",
+                                                "placeholder": "Choose a category..."
+                                            },
+                                            "landingPage": {
+                                                "label": "Landing page",
+                                                "placeholder": "Choose a landing page..."
+                                            },
+                                            "product": {
+                                                "label": "Product",
+                                                "placeholder": "Choose a product..."
+                                            }
+                                        }
+                                    },
+                                    "link": {
+                                        "label": "Link to",
+                                        "placeholder": "Enter url"
+                                    },
+                                    "internalQuery": {
+                                        "label": "Query",
+                                        "placeholder": "Enter query parameters (e.g. param1=value1&param2=value2)"
+                                    },
+                                    "targetBlank": {
+                                        "label": "Open link in new tab"
+                                    },
+                                    "title": {
+                                        "label": "Link title",
+                                        "placeholder": "Title attribute"
+                                    }
+                                }
+                            },
+                            "publishing": {
+                                "label": "Publishing",
+                                "cli-worker-info": "To use this feature, <strong>setup of a CLI worker is required</strong> to regularly execute scheduled tasks in the background. For more information see <a href=\"https://docs.shopware.com/en/shopware-6-en/tutorials-and-faq/message-queue-and-scheduled-tasks\" target=\"_blank\" rel=\"noopener noreferrer\">documentation</a>.",
+                                "fields": {
+                                    "type": {
+                                        "label": "Publishing type",
+                                        "options": {
+                                            "instant": {
+                                                "label": "Instant"
+                                            },
+                                            "scheduled": {
+                                                "label": "Scheduled"
+                                            }
+                                        }
+                                    },
+                                    "scheduledPublishingDateTime": {
+                                        "label": "Scheduled publishing date/time"
+                                    },
+                                    "scheduledUnpublishingDateTime": {
+                                        "label": "Scheduled unpublishing date/time"
+                                    }
+                                }
+                            },
+                            "slide-class": "Slide class",
+                            "copy-slide": {
+                                "suffix": "copy"
+                            },
+                            "add-slide": {
+                                "label": "Add slide"
+                            }
+                        },
+                        "general": {
+                            "label": "General",
+                            "fields": {
+                                "animation": {
+                                    "label": "Animation",
+                                    "options": {
+                                        "slider-horizontal-ease-in-out-sine": {
+                                            "label": "Slide horizontal ease in out sine"
+                                        },
+                                        "slider-horizontal-ease-out-sine": {
+                                            "label": "Slide horizontal ease out sine"
+                                        },
+                                        "slider-horizontal-ease-in-out-quad": {
+                                            "label": "Slide horizontal ease in out quad"
+                                        },
+                                        "slider-horizontal-ease-out-quad": {
+                                            "label": "Slide horizontal ease out quad"
+                                        },
+                                        "slider-horizontal-ease-in-out-cubic": {
+                                            "label": "Slide horizontal ease in out cubic"
+                                        },
+                                        "slider-horizontal-ease-out-cubic": {
+                                            "label": "Slide horizontal ease out cubic"
+                                        },
+                                        "slider-horizontal-ease-in-out-quart": {
+                                            "label": "Slide horizontal ease in out quart"
+                                        },
+                                        "slider-horizontal-ease-out-quart": {
+                                            "label": "Slide horizontal ease out quart"
+                                        },
+                                        "slider-horizontal-ease-in-out-quint": {
+                                            "label": "Slide horizontal ease in out quint"
+                                        },
+                                        "slider-horizontal-ease-out-quint": {
+                                            "label": "Slide horizontal ease out quint"
+                                        },
+                                        "slider-horizontal-ease-in-out-expo": {
+                                            "label": "Slide horizontal ease in out expo"
+                                        },
+                                        "slider-horizontal-ease-out-expo": {
+                                            "label": "Slide horizontal ease out expo"
+                                        },
+                                        "slider-horizontal-ease-in-out-circ": {
+                                            "label": "Slide horizontal ease in out circ"
+                                        },
+                                        "slider-horizontal-ease-out-circ": {
+                                            "label": "Slide horizontal ease out circ"
+                                        },
+                                        "slider-horizontal-ease-in-out-back": {
+                                            "label": "Slide horizontal ease in out back"
+                                        },
+                                        "slider-horizontal-ease-out-back": {
+                                            "label": "Slide horizontal ease out back"
+                                        },
+                                        "gallery-fade": {
+                                            "label": "Fade"
+                                        }
+                                    }
+                                },
+                                "itemsMode": {
+                                    "label": "Slides to show mode",
+                                    "options": {
+                                        "responsive-automatic": {
+                                            "label": "Responsive automatic"
+                                        },
+                                        "responsive-custom": {
+                                            "label": "Responsive custom"
+                                        }
+                                    }
+                                },
+                                "items": {
+                                    "label": "Maximum slides to show"
+                                },
+                                "items-mobile": {
+                                    "label": "Max. slides to show mobile"
+                                },
+                                "items-tablet": {
+                                    "label": "Max. slides to show tablet"
+                                },
+                                "items-desktop": {
+                                    "label": "Max. slides to show desktop"
+                                },
+                                "slide-by": {
+                                    "label": "Maximum slides to move"
+                                },
+                                "slide-by-mobile": {
+                                    "label": "Max. slides to move mobile"
+                                },
+                                "slide-by-tablet": {
+                                    "label": "Max. slides to move tablet"
+                                },
+                                "slide-by-desktop": {
+                                    "label": "Max. slides to move desktop"
+                                },
+                                "start-index": {
+                                    "label": "Start index"
+                                },
+                                "speed": {
+                                    "label": "Animation time (ms)"
+                                },
+                                "gutter": {
+                                    "label": "Gutter between slides (px)"
+                                },
+                                "loop": {
+                                    "label": "Loop slides"
+                                },
+                                "rewind": {
+                                    "label": "Rewind slides"
+                                },
+                                "sizing-mode": {
+                                    "label": "Sizing mode",
+                                    "options": {
+                                        "responsive-min-height": {
+                                            "label": "Responsive minimum height"
+                                        },
+                                        "min-aspect-ratio": {
+                                            "label": "Minimum aspect ratio"
+                                        }
+                                    }
+                                },
+                                "min-height-mobile": {
+                                    "label": "Minimum height mobile"
+                                },
+                                "min-height-tablet": {
+                                    "label": "Minimum height tablet"
+                                },
+                                "min-height-desktop": {
+                                    "label": "Minimum height desktop"
+                                },
+                                "min-aspect-ratio-width": {
+                                    "label": "Minimum aspect ratio width"
+                                },
+                                "min-aspect-ratio-height": {
+                                    "label": "Minimum aspect ratio height"
+                                }
+                            }
+                        },
+                        "content": {
+                            "label": "Content",
+                            "layout": {
+                                "label": "Layout"
+                            },
+                            "typography": {
+                                "label": "Typography"
+                            },
+                            "spacing": {
+                                "label": "Spacing"
+                            },
+                            "colors": {
+                                "label": "Colors"
+                            },
+                            "fields": {
+                                "layout-variant": {
+                                    "label": "Layout variant",
+                                    "options": {
+                                        "overlay-center": {
+                                            "label": "Overlay center"
+                                        },
+                                        "overlay-center-right": {
+                                            "label": "Overlay center right"
+                                        },
+                                        "overlay-center-left": {
+                                            "label": "Overlay center left"
+                                        },
+                                        "overlay-top-right": {
+                                            "label": "Overlay top right"
+                                        },
+                                        "overlay-top-left": {
+                                            "label": "Overlay top left"
+                                        },
+                                        "overlay-bottom-right": {
+                                            "label": "Overlay bottom right"
+                                        },
+                                        "overlay-bottom-left": {
+                                            "label": "Overlay bottom left"
+                                        },
+                                        "gradient-top": {
+                                            "label": "Gradient top"
+                                        },
+                                        "gradient-bottom": {
+                                            "label": "Gradient bottom"
+                                        },
+                                        "boxed-center": {
+                                            "label": "Boxed center"
+                                        },
+                                        "boxed-center-right": {
+                                            "label": "Boxed center right"
+                                        },
+                                        "boxed-center-left": {
+                                            "label": "Boxed center left"
+                                        },
+                                        "boxed-top-right": {
+                                            "label": "Boxed top right"
+                                        },
+                                        "boxed-top-left": {
+                                            "label": "Boxed top left"
+                                        },
+                                        "boxed-bottom-right": {
+                                            "label": "Boxed bottom right"
+                                        },
+                                        "boxed-bottom-left": {
+                                            "label": "Boxed bottom left"
+                                        }
+                                    }
+                                },
+                                "content-animation": {
+                                    "label": "Content animation",
+                                    "options": {
+                                        "none": {
+                                            "label": "None"
+                                        },
+                                        "fade-in": {
+                                            "label": "Fade in"
+                                        },
+                                        "fade-in-up": {
+                                            "label": "Fade in up"
+                                        },
+                                        "fade-in-right": {
+                                            "label": "Fade in right"
+                                        },
+                                        "fade-in-down": {
+                                            "label": "Fade in down"
+                                        },
+                                        "fade-in-left": {
+                                            "label": "Fade in left"
+                                        }
+                                    }
+                                },
+                                "small-headline-size-mobile": {
+                                    "label": "Small headline size mobile up"
+                                },
+                                "small-headline-size-tablet": {
+                                    "label": "Small headline size tablet up"
+                                },
+                                "small-headline-size-desktop": {
+                                    "label": "Small headline size desktop up"
+                                },
+                                "small-headline-weight": {
+                                    "label": "Small headline weight",
+                                    "options": {
+                                        "default": {
+                                            "label": "Default"
+                                        }
+                                    }
+                                },
+                                "headline-size-mobile": {
+                                    "label": "Headline size mobile up"
+                                },
+                                "headline-size-tablet": {
+                                    "label": "Headline size tablet up"
+                                },
+                                "headline-size-desktop": {
+                                    "label": "Headline size desktop up"
+                                },
+                                "headline-weight": {
+                                    "label": "Headline weight",
+                                    "options": {
+                                        "default": {
+                                            "label": "Default"
+                                        }
+                                    }
+                                },
+                                "text-size-mobile": {
+                                    "label": "Text size mobile up"
+                                },
+                                "text-size-tablet": {
+                                    "label": "Text size tablet up"
+                                },
+                                "text-size-desktop": {
+                                    "label": "Text size desktop up"
+                                },
+                                "text-weight": {
+                                    "label": "Text weight",
+                                    "options": {
+                                        "default": {
+                                            "label": "Default"
+                                        }
+                                    }
+                                },
+                                "button-label-size-mobile": {
+                                    "label": "Button label size mobile up"
+                                },
+                                "button-label-size-tablet": {
+                                    "label": "Button label size tablet up"
+                                },
+                                "button-label-size-desktop": {
+                                    "label": "Button label size desktop up"
+                                },
+                                "button-label-weight": {
+                                    "label": "Button label weight",
+                                    "options": {
+                                        "default": {
+                                            "label": "Default"
+                                        }
+                                    }
+                                },
+                                "button-variant": {
+                                    "label": "Button variant",
+                                    "options": {
+                                        "primary": {
+                                            "label": "Primary"
+                                        },
+                                        "secondary": {
+                                            "label": "Secondary"
+                                        },
+                                        "outline-primary": {
+                                            "label": "Outline primary"
+                                        },
+                                        "outline-secondary": {
+                                            "label": "Outline secondary"
+                                        }
+                                    }
+                                },
+                                "small-headline-margin-bottom-mobile": {
+                                    "label": "Small headline margin bottom mobile up"
+                                },
+                                "small-headline-margin-bottom-tablet": {
+                                    "label": "Small headline margin bottom tablet up"
+                                },
+                                "small-headline-margin-bottom-desktop": {
+                                    "label": "Small headline margin bottom desktop up"
+                                },
+                                "headline-margin-bottom-mobile": {
+                                    "label": "Headline margin bottom mobile up"
+                                },
+                                "headline-margin-bottom-tablet": {
+                                    "label": "Headline margin bottom tablet up"
+                                },
+                                "headline-margin-bottom-desktop": {
+                                    "label": "Headline margin bottom desktop up"
+                                },
+                                "text-margin-bottom-mobile": {
+                                    "label": "Text margin bottom mobile up"
+                                },
+                                "text-margin-bottom-tablet": {
+                                    "label": "Text margin bottom tablet up"
+                                },
+                                "text-margin-bottom-desktop": {
+                                    "label": "Text margin bottom desktop up"
+                                },
+                                "small-headline-color": {
+                                    "label": "Small headline color"
+                                },
+                                "headline-color": {
+                                    "label": "Headline color"
+                                },
+                                "text-color": {
+                                    "label": "Text color"
+                                },
+                                "button-color": {
+                                    "label": "Button color"
+                                },
+                                "content-background-color": {
+                                    "label": "Content background color"
+                                }
+                            }
+                        },
+                        "navigation": {
+                            "label": "Navigation",
+                            "controls": {
+                                "label": "Controls"
+                            },
+                            "navigation": {
+                                "label": "Navigation (dots)"
+                            },
+                            "fields": {
+                                "controls": {
+                                    "label": "Show controls"
+                                },
+                                "mouse-drag": {
+                                    "label": "Drag slides with mouse"
+                                },
+                                "controls-variant": {
+                                    "label": "Controls variant",
+                                    "options": {
+                                        "icon": {
+                                            "label": "Icon"
+                                        },
+                                        "round": {
+                                            "label": "Round"
+                                        },
+                                        "rounded": {
+                                            "label": "Rounded"
+                                        },
+                                        "square": {
+                                            "label": "Square"
+                                        },
+                                        "pill": {
+                                            "label": "Pill"
+                                        },
+                                        "block": {
+                                            "label": "Block"
+                                        }
+                                    }
+                                },
+                                "controls-icon-variant": {
+                                    "label": "Controls icon variant",
+                                    "options": {
+                                        "caret": {
+                                            "label": "Caret"
+                                        },
+                                        "caret-circle": {
+                                            "label": "Caret circle"
+                                        },
+                                        "arrow": {
+                                            "label": "Arrow"
+                                        }
+                                    }
+                                },
+                                "controls-position": {
+                                    "label": "Controls position",
+                                    "options": {
+                                        "horizontal-inside-center-edges": {
+                                            "label": "Horizontal inside center edges"
+                                        },
+                                        "horizontal-outside-center-edges": {
+                                            "label": "Horizontal outside center edges"
+                                        }
+                                    }
+                                },
+                                "controls-color": {
+                                    "label": "Controls color"
+                                },
+                                "controls-custom-image-previous": {
+                                    "label": "Controls custom image previous"
+                                },
+                                "controls-custom-image-next": {
+                                    "label": "Controls custom image next"
+                                },
+                                "nav": {
+                                    "label": "Show navigation (dots)"
+                                },
+                                "nav-variant": {
+                                    "label": "Navigation variant",
+                                    "options": {
+                                        "dots-opacity": {
+                                            "label": "Dots opacity"
+                                        },
+                                        "dots-fill": {
+                                            "label": "Dots fill"
+                                        },
+                                        "dots-size": {
+                                            "label": "Dots size"
+                                        }
+                                    }
+                                },
+                                "nav-position": {
+                                    "label": "Navigation position",
+                                    "options": {
+                                        "vertical-center-right": {
+                                            "label": "Vertical center right"
+                                        },
+                                        "vertical-center-left": {
+                                            "label": "Vertical center left"
+                                        },
+                                        "horizontal-bottom-center": {
+                                            "label": "Horizontal bottom center"
+                                        },
+                                        "horizontal-bottom-right": {
+                                            "label": "Horizontal bottom right"
+                                        },
+                                        "horizontal-bottom-left": {
+                                            "label": "Horizontal bottom left"
+                                        }
+                                    }
+                                },
+                                "nav-size": {
+                                    "label": "Navigation size",
+                                    "options": {
+                                        "small": {
+                                            "label": "Small"
+                                        },
+                                        "medium": {
+                                            "label": "Medium"
+                                        },
+                                        "large": {
+                                            "label": "Large"
+                                        }
+                                    }
+                                },
+                                "nav-color": {
+                                    "label": "Navigation color"
+                                }
+                            }
+                        },
+                        "autoplay": {
+                            "label": "Autoplay",
+                            "fields": {
+                                "autoplay": {
+                                    "label": "Autoplay"
+                                },
+                                "autoplay-hover-pause": {
+                                    "label": "Pause on hover"
+                                },
+                                "autoplay-direction": {
+                                    "label": "Direction",
+                                    "options": {
+                                        "forward": {
+                                            "label": "Forward"
+                                        },
+                                        "backward": {
+                                            "label": "Backward"
+                                        }
+                                    }
+                                },
+                                "autoplay-timeout": {
+                                    "label": "Animation interval (ms)"
+                                }
+                            }
+                        },
+                        "custom": {
+                            "label": "Custom",
+                            "fields": {
+                                "custom-css": {
+                                    "label": "Custom CSS",
+                                    "slider-class": "Slider class"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "blocks": {
+            "solid-ase": {
+                "content-slider": {
+                    "label": "Content slider"
+                }
+            }
+        }
+    }
+}

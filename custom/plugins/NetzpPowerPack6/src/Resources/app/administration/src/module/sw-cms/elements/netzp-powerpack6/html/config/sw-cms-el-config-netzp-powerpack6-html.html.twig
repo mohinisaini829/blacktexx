@@ -1,0 +1,13 @@
+{% block sw_cms_element_netzp_powerpack6_html_config %}
+    <div class="sw-cms-el-config-netzp-powerpack6">
+        <sw-code-editor :completerFunction="null" completionMode="text" mode="text" :softWraps="true" :setFocus="false"
+                        :label="$tc('sw-cms.netzp-powerpack6.elements.html.config.html')"
+                        v-model:value="element.config.html.value">
+        </sw-code-editor>
+
+        <sw-code-editor :completerFunction="null" completionMode="text" mode="text" :softWraps="true" :setFocus="false"
+                        :label="$tc('sw-cms.netzp-powerpack6.elements.html.config.css')"
+                        v-model:value="element.config.css.value">
+        </sw-code-editor>
+    </div>
+{% endblock %}

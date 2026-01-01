@@ -1,0 +1,18 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{# Include the notification bar #}
+{% block base_body_inner %}
+    {% block zenit_notification_bar_extends %}
+        {% set zenNotificationBar = context.context.extensions['zenitPlatformNotificationBar'].config %}
+
+        {% if zenNotificationBar.active %}
+            {% sw_include '@Storefront/storefront/notification-bar/notification-bar.html.twig' with {
+                position: zenNotificationBar.position,
+                hidden: true
+            } %}
+        {% endif %}
+    {% endblock %}
+
+    {{ parent() }}
+{% endblock %}
+

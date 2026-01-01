@@ -1,0 +1,37 @@
+{
+    "acris-cookie-group": {
+        "general": {
+            "mainMenuItemGeneral": "Kakor",
+            "placeholderSearchBar": "Sök kakor",
+            "description": "Visa kakor som har hittats i butiken",
+            "labelName": "Kakgrupp"
+        },
+        "list": {
+            "textHeadline": "Kakgrupper",
+            "buttonAdd": "Lägg till",
+            "contextMenuEdit": "Redigera",
+            "contextMenuDelete": "Ta bort",
+            "columnTitle": "Titel",
+            "columnDescription": "Beskrivning",
+            "textDeleteConfirm": "Vill du ta bort kakgruppen",
+            "modalTitleDelete": "Ta bort kakgrupp",
+            "buttonCancel": "Avbryt",
+            "buttonDelete": "Ta bort",
+            "contentEmpty": "Det finns inga kakgrupper"
+        },
+        "detail": {
+            "textHeadline": "Inställningar för kakpolicygruppen",
+            "buttonCancel": "Avbryt",
+            "buttonSave": "Spara",
+            "fieldTitleLabel": "Titel",
+            "fieldTitlePlaceholder": "Ange titel för kakgrupp",
+            "fieldDescriptionLabel": "Beskrivning",
+            "fieldDescriptionPlaceholder": "Ange beskrivning",
+            "cardTitle": "Kundinformation",
+            "notificationSaveErrorMessage": "Ett fel inträffade vid sparning av kakgruppen.",
+            "notificationSaveSuccessMessage": "Kakgruppen har sparats framgångsrikt.",
+            "notificationSaveSuccessMessageTitle": "Framgång",
+            "notificationSaveErrorMessageTitle": "Fel"
+        }
+    }
+}

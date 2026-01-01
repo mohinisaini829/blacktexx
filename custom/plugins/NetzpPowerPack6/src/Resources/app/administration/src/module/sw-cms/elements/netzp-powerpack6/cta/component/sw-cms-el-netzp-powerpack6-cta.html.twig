@@ -1,0 +1,46 @@
+{% block sw_cms_element_netzp_powerpack6_cta %}
+    <div class="sw-cms-el-netzp-powerpack6-cta">
+
+        <div class="netzp-cta-wrapper" :class="mainClass" :style="mainStyle">
+            <div v-if="element.config.image.value"
+                 class="netzp-cta-image" :class="imageClass">
+                <img :class="imageInnerClass"
+                     :style="imageInnerStyle"
+                     :src="imageUrl" alt="">
+            </div>
+
+            <div class="netzp-cta-title" :class="titleClass" :style="titleStyle">
+                <div v-if="element.config.title.source === 'mapped'"
+                     class="sw-cms-el-text__mapping-preview content-editor"
+                     v-html="$sanitize(demoValueTitle)" />
+
+                <sw-text-editor v-else
+                                v-model:value="element.config.title.value"
+                                :isInlineEdit="true"
+                                :allow-inline-data-mapping="true"/>
+            </div>
+
+            <div class="netzp-cta-text" :class="textClass" :style="textStyle">
+                <div v-if="element.config.text.source === 'mapped'"
+                     class="sw-cms-el-text__mapping-preview content-editor"
+                     v-html="$sanitize(demoValueText)" />
+
+                <sw-text-editor v-else
+                                v-model:value="element.config.text.value"
+                                :isInlineEdit="true"
+                                :allow-inline-data-mapping="true"/>
+            </div>
+
+            <div class="netzp-cta-button" :class="buttonClass" :style="buttonStyle">
+                <div v-if="element.config.button.source === 'mapped'"
+                     class="sw-cms-el-text__mapping-preview content-editor"
+                     v-html="$sanitize(demoValueButton)" />
+
+                <sw-text-editor v-else
+                                v-model:value="element.config.button.value"
+                                :isInlineEdit="true"
+                                :allow-inline-data-mapping="true"/>
+            </div>
+        </div>
+    </div>
+{% endblock %}

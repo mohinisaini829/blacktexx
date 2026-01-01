@@ -1,0 +1,22 @@
+{
+  "MyfavZweideh": {
+    "designerModal": {
+      "upperHeading": "ARTIKEL GESTALTEN",
+      "option1": {
+        "heading": "Bis zu 15 Stück",
+        "text": "Für Stückzahlen bis zu 15 Artikel empfehlen wir unseren Designer.",
+        "btnText": "Projekt-Designer"
+      },
+      "option2": {
+        "heading": "Designer für Firmen",
+        "text": "Firmen bieten wir mit unserem gestaltbaren Sortiment für Firmen einen besonderen Service. Dies lohnt sich allerdings erst ab größeren Stückzahlen.",
+        "btnText": "Kleinmengen-Designer"
+      },
+      "option3": {
+        "heading": "Weiter stöbern",
+        "text": "Verschaffen Sie sich alternativ gern einen Überblick über unserem Sortiment, oder erstellen Sie eine individuelle Anfrage.",
+        "btnText": "Hier bleiben"
+      }
+    }
+  }
+}

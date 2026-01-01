@@ -1,0 +1,13 @@
+{% block zenit_notification_bar_close_btn %}
+    <button class="notification-bar-collapse-control notification-bar-collapse-btn"
+            data-bs-target="#notification-bar-collapse"
+            data-bs-toggle="collapse"
+            aria-expanded="false"
+            aria-controls="notification-bar-collapse"
+            aria-label="{{ 'zenit.notificationBar.close'|trans }}">
+
+        <span class="btn-inner">
+            {% sw_icon 'x' style {'size': 'md'} %}
+        </span>
+    </button>
+{% endblock %}

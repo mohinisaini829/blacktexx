@@ -1,0 +1,111 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget.html.twig'%}
+
+{% if page.configuratorSettings %}
+    {% set configuratorSettings = page.configuratorSettings %}
+{% elseif page.product.configurator %}
+    {% set configuratorSettings = page.product.configurator %}
+{% else %}
+    {% set configuratorSettings = page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings'] %}
+{% endif %}
+
+{% set cmsPageExists = cmsPage %}
+{% set matrixPosition = config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition")%}
+
+{# added lastGroupAsMatrixAndOtherGroupsAsSwOptions condition #}
+{% block buy_widget_buy_form %}
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true
+            and ((page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "selector" 
+                and configuratorSettings.elements|length >= 1) or page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout != "selector") %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+{# stack price table in product-detail #}
+{% block buy_widget_price %}
+    {# if set true else default always false #}
+    {% set hideStackPriceTable = config("BilobaArticleVariantOrderMatrix.config.stackPriceTableDisable")|default(false) %}
+
+    {% if hideStackPriceTable 
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds") %}
+        {# empty #}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block buy_widget_delivery_informations %}
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds") %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block buy_widget_configurator_include %}
+    {# if set true else default always false #}
+    {% set hideStackPriceTable = config("BilobaArticleVariantOrderMatrix.config.stackPriceTableDisable")|default(false) %}
+
+    {% if hideStackPriceTable %}
+        
+    {% else %}
+        {% if cmsPageExists is not null 
+                and page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "lastGroupAsMatrixAndOtherGroupsAsSwOptions" 
+                and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+                and configuratorSettings.elements|length >= 2 %}
+            {{ parent() }}
+        {% endif %}
+    {% endif %}
+
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+        and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+        and page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true %}
+        {% if cmsPageExists is not null %}
+            {# added lastGroupAsMatrixAndOtherGroupsAsSwOptions condition #}
+            {% if (configuratorSettings.elements|length >= 1) or (page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout != "selector") %}
+                {# checking if lastGroupAsMatrixAndOtherGroupsAsSwOptions selected and at least 2 groups are available #}
+                {% if page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "lastGroupAsMatrixAndOtherGroupsAsSwOptions" and configuratorSettings.elements|length >= 2 %}
+                    {% if cmsPageExists is null %}
+                        {{ parent() }}
+                    {% endif %}
+                {% endif %}
+                
+                {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") == "price" %}
+                    {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix.html.twig' %}
+                {% endif %}
+            {% else %}
+                {{ parent() }}
+            {% endif %}
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block buy_widget_ordernumber_container %}
+    {# if set true else default always false #}
+    {% set hideStackPriceTable = config("BilobaArticleVariantOrderMatrix.config.stackPriceTableDisable")|default(false) %}
+
+    {% if hideStackPriceTable  
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds") %}
+        {# empty #}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block buy_widget_tax %}
+    {# if set true else default always false #}
+    {% set hideStackPriceTable = config("BilobaArticleVariantOrderMatrix.config.stackPriceTableDisable")|default(false) %}
+
+    {% if hideStackPriceTable  
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds") %}
+        {# empty #}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

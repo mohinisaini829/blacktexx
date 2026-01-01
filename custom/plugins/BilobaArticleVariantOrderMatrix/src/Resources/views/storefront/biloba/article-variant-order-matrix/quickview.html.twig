@@ -1,0 +1,127 @@
+{% sw_extends '@Storefront/storefront/component/product/quickview/minimal.html.twig'%}
+
+{% if page.configuratorSettings %}
+    {% set configuratorSettings = page.configuratorSettings %}
+{% elseif page.product.configurator %}
+    {% set configuratorSettings = page.product.configurator %}
+{% else %}
+    {% set configuratorSettings = page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings'] %}
+{% endif %}
+
+{% block component_product_quickview_minimal_top %}
+    {{ parent() }}
+
+    {% if page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "standard" %}
+        {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix.html.twig' %}
+    {% elseif page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "selector" and page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings']|length > 1 %}
+        {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix.html.twig' %}
+    {# if selector layout selected for 1 variant #}
+    {% elseif page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "selector" and page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings']|length == 1 %}
+        {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix.html.twig' %}
+    {% else %}
+        {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix.html.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_quickview_minimal_product_number %}
+    {{ parent() }}
+
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true
+                and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+                and page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true 
+                and ((page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "lastGroupAsMatrixAndOtherGroupsAsSwOptions" 
+                    and configuratorSettings.elements|length >= 2)) %}
+        {% set lastGroup = false %}
+
+        {% set productParentId = page.product.parentId %}
+
+        {% if page.product.variantListingConfig.displayParent == true %}
+            {% set productParentId = page.product.id %}
+        {% endif %}
+
+        <div class="product-detail-configurator">
+            <form data-biloba-variant-matrix-variant-switch="true" 
+                    data-biloba-variant-matrix-variant-url="{{ url('store-api.biloba.article-variant-order-matrix.quickorder', { productId: productParentId }) }}">
+                {% for group in configuratorSettings %}
+                    {% if loop.last %}
+                        {% set lastGroup = true %}
+                    {% endif %}
+                            
+                    {% if not lastGroup %}
+                        <div class="product-detail-configurator-group">
+                            <div class="product-detail-configurator-group-title">
+                                    {{ group.translated.name }}
+                            </div>
+
+                            <div class="product-detail-configurator-options">
+                                {% for option in group.options %}
+                                    {% set optionIdentifier = [group.id, option.id]|join('-') %}
+                                    {% set isActive = false %}
+                                    {% set isCombinableCls = 'is-combinable' %}
+
+                                    {% if option.id in page.product.optionIds %}
+                                        {% set isActive = true %}
+                                    {% endif %}
+
+                                    {% if not option.combinable %}
+                                        {% set isCombinableCls = false %}
+                                    {% endif %}
+
+                                    {% if option.configuratorSetting.media %}
+                                        {% set displayType = 'media' %}
+                                        {% set media = option.configuratorSetting.media %}
+                                    {% else %}
+                                        {% set displayType = group.displayType %}
+                                        {% if option.media %}
+                                            {% set media = option.media %}
+                                        {% else %}
+                                            {% set media = false %}
+                                        {% endif %}
+                                    {% endif %}
+
+                                    <div class="product-detail-configurator-option">
+                                        <input type="radio"
+                                                name="{{ group.id }}"
+                                                value="{{ option.id }}"
+                                                class="product-detail-configurator-option-input{% if isCombinableCls %} {{ isCombinableCls }}{% endif %}"
+                                                title="{{ optionIdentifier }}"
+                                                id="{{ optionIdentifier }}"
+                                                {% if isActive %}checked="checked"{% endif %}>
+
+                                        <label class="product-detail-configurator-option-label{% if isCombinableCls %} {{ isCombinableCls }}{% endif %} is-display-{{ displayType }}"
+                                                {% if displayType == 'color' and option.colorHexCode %}
+                                                style="background-color: {{ option.colorHexCode }}"
+                                                {% endif %}
+                                                title="{{ option.translated.name }}"
+                                                for="{{ optionIdentifier }}">
+
+                                            {% if displayType == 'media' and media %}
+                                                    {% sw_thumbnails 'configurator-option-img-thumbnails' with {
+                                                        media: media,
+                                                        sizes: {
+                                                            'default': '52px'
+                                                        },
+                                                        attributes: {
+                                                            'class': 'product-detail-configurator-option-image',
+                                                            'alt': option.translated.name,
+                                                            'title': option.translated.name
+                                                        }
+                                                    } %}
+                                                
+                                            {% elseif displayType == 'text' or
+                                                        (displayType == 'media' and not media) or
+                                                        (displayType == 'color' and not option.colorHexCode) %}
+                                                    {{ option.translated.name }}
+                                                
+                                            {% endif %}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

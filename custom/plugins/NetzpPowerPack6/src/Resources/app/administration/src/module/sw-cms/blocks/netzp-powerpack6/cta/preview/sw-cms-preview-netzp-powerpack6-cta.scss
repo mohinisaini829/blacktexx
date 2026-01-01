@@ -1,0 +1,29 @@
+.sw-cms-preview-netzp-powerpack6-cta {
+  position: relative;
+  width: 100%;
+  font-size: 80%;
+  padding: 15px;
+
+  .netzp-cta-title {
+    display: block;
+    font-weight: bold;
+  }
+
+  .netzp-cta-text {
+    display: block;
+    margin-top: .25rem;
+    font-size: .7rem;
+    clear: both;
+  }
+
+  .netzp-cta-button {
+    display: inline-block;
+    padding: .25rem;
+    margin-top: -1.75rem;
+    float: right;
+    border: 1px solid #333;
+    background-color: #eee;
+    font-size: .9rem;
+    font-weight: bold;
+  }
+}

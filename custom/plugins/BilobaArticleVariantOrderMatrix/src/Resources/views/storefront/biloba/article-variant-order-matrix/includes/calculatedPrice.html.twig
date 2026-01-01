@@ -1,0 +1,13 @@
+{% if childProduct.calculatedPrices|length > 0 %}
+    {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+        {% if childProduct.calculatedPrices|length > 1 %}
+            {# Fetching variant price with currency id #}
+            {{ 'biloba.ArticleVariantOrderMatrix.stackPricePrefix'|trans }}&nbsp;
+        {% endif %}
+        {{ childProduct.calculatedPrices.first().unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}
+    {% endif %}
+{% else %}
+    {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+        {{ childProduct.calculatedPrice.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}
+    {% endif %}
+{% endif %}

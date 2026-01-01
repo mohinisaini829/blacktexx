@@ -1,0 +1,44 @@
+{% block sw_cms_element_netzp_powerpack6_counter_config %}
+    <div class="sw-cms-el-config-netzp-powerpack6">
+        <sw-container columns="1fr 1fr 1fr" gap="20px">
+            <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.counter.config.title')"
+                           v-model:value="element.config.title.value" />
+
+            <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.counter.config.text')"
+                           :helpText="$t('sw-cms.netzp-powerpack6.elements.counter.config.textHelp')"
+                           v-model:value="element.config.text.value" />
+
+            <netzp-iconpicker :label="$tc('sw-cms.netzp-powerpack6.elements.counter.config.icon')"
+                              v-model:value="element.config.icon.value" />
+        </sw-container>
+
+        <sw-container columns="1fr 1fr 1fr" gap="20px">
+            <sw-number-field numbertype="int" :min="0" :digits="0"
+                             :label="$tc('sw-cms.netzp-powerpack6.elements.counter.config.start')"
+                             v-model:value="element.config.start.value" />
+
+            <sw-number-field numbertype="int" :min="1" :digits="0"
+                             :label="$tc('sw-cms.netzp-powerpack6.elements.counter.config.end')"
+                             v-model:value="element.config.end.value" />
+
+            <sw-number-field numbertype="int" :min="1" :max="10000" :digits="0"
+                             :label="$tc('sw-cms.netzp-powerpack6.elements.counter.config.speed')"
+                             :helpText="$t('sw-cms.netzp-powerpack6.elements.counter.config.speedHelp')"
+                             v-model:value="element.config.speed.value" />
+        </sw-container>
+
+        <sw-container columns="1fr 1fr 1fr" gap="20px">
+            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.counter.config.iconColor')"
+                            v-model:value="element.config.iconColor.value" colorOutput="hex" :zIndex="1001" :alpha="true">
+            </sw-colorpicker>
+
+            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.counter.config.titleColor')"
+                            v-model:value="element.config.titleColor.value" colorOutput="hex" :zIndex="1001" :alpha="true">
+            </sw-colorpicker>
+
+            <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.elements.counter.config.counterColor')"
+                            v-model:value="element.config.counterColor.value" colorOutput="hex" :zIndex="1001" :alpha="true">
+            </sw-colorpicker>
+        </sw-container>
+    </div>
+{% endblock %}

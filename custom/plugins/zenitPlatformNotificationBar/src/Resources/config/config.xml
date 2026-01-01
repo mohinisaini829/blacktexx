@@ -1,0 +1,1033 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Info</title>
+        <title lang="de-DE">Info</title>
+
+        <component name="zen-alert-info">
+            <name>compilerInfo</name>
+            <placeholder><![CDATA[<strong>After saving - compile the theme:</strong><br> We optimize your loading times and transfer the layout settings of the configuration to the theme compiler. In this way, plug-in resources are optimized in the storefront together with the theme resources. Styling settings are therefore only visible once the theme has been saved.<br>Get more? <a href="https://docs-compile.zenit.design" target="_blank" rel="noopener">https://docs-compile.zenit.design</a>]]></placeholder>
+            <placeholder lang="de-DE"><![CDATA[<strong>Nach dem Speichern - Theme kompilieren:</strong><br> Wir optimieren Deine Ladezeiten und übergeben Styling-Einstellungen der Konfiguration an den Theme-Kompiler. Plugin-Ressourcen werden so gemeinsam mit den Theme-Ressouren optimiert in der Storefront ausgespielt. Styling-Einstellungen werden daher erst sichtbar, wenn das Theme gespeichert wurde.<br>Mehr erfahren unter: <a href="https://docs-compile.zenit.design" target="_blank" rel="noopener">https://docs-compile.zenit.design</a>]]></placeholder>
+        </component>
+
+        <component name="zen-alert-translation">
+            <name>translationInfo</name>
+            <placeholder><![CDATA[<strong>Translations:</strong><br>Translate the text fields using snippets. Search for <strong>zenit.notification</strong> in the snippets module and replace the <strong>%placeholder%</strong> text with your translation. Click on the "Go to snippet" Links in Help-Tooltips to jump directly into the snippet.<br>Get more: <a href="https://docs-multilingual.zenit.design" target="_blank" rel="noopener">https://docs-multilingual.zenit.design</a>]]></placeholder>
+            <placeholder lang="de-DE"><![CDATA[<strong>Übersetzungen:</strong><br>Übersetzen der Textfelder mit Snippets. Suche nach <strong>zenit.notification</strong> im Snippets-Modul und ersetze den <strong>%placeholder%</strong> Text mit Deiner Übersetzung. Klicke in den Hilfe-Tooltips auf die Links „Zum Textbaustein“, um direkt zum Snippet zu gelangen. <br>Mehr erfahren unter: <a href="https://docs-multilingual.zenit.design" target="_blank" rel="noopener">https://docs-multilingual.zenit.design</a>]]></placeholder>
+        </component>
+    </card>
+
+    <card>
+        <title>Basic settings</title>
+        <title lang="de-DE">Grundeinstellungen</title>
+
+        <input-field type="bool">
+            <name>active</name>
+            <label>Active</label>
+            <label lang="de-DE">Aktiv</label>
+            <helpText>If selected, plugin will be shown in this shop or saleschannel.</helpText>
+            <helpText lang="de-DE">Wenn gewählt, wird das Plugin in diesem Verkaufskanal angezeigt.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="multi-select">
+            <name>allowedControllers</name>
+            <label>Display on</label>
+            <label lang="de-DE">Anzeigen auf</label>
+            <placeholder>Blank = always displayed.</placeholder>
+            <placeholder lang="de-DE">Leer = immer anzeigen.</placeholder>
+            <helpText><![CDATA[Select the pagetypes on which the plugin is displayed.<br/><br/><b>Blank:</b> Leave this field blank to avoid filtering. The plugin will be displayed on every pagetype.]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Wähle die Seitentypen, auf welchen das Plugin sichtbar sein soll.<br/><br/><b>Leere Eingabe:</b> Lasse dieses Feld leer, um keine Filterung vorzunehmen. Das Plugin wird dann auf allen Seitentypen angezeigt.]]></helpText>
+            <options>
+                <option>
+                    <id>Navigation.home</id>
+                    <name>Home</name>
+                    <name lang="de-DE">Startseite</name>
+                </option>
+                <option>
+                    <id>LandingPage.index</id>
+                    <name>Landing pages</name>
+                    <name lang="de-DE">Landingpages</name>
+                </option>
+                <option>
+                    <id>Navigation.index</id>
+                    <name>Category pages</name>
+                    <name lang="de-DE">Kategorieseiten</name>
+                </option>
+                <option>
+                    <id>Product.index</id>
+                    <name>Product pages</name>
+                    <name lang="de-DE">Produktseiten</name>
+                </option>
+                <option>
+                    <id>Search.search</id>
+                    <name>Search pages</name>
+                    <name lang="de-DE">Suchergebnisseiten</name>
+                </option>
+                <option>
+                    <id>Wishlist.index</id>
+                    <name>Wishlist</name>
+                    <name lang="de-DE">Merkzettel</name>
+                </option>
+                <option>
+                    <id>Auth.loginPage</id>
+                    <name>Login</name>
+                    <name lang="de-DE">Login</name>
+                </option>
+                <option>
+                    <id>AccountProfile.index</id>
+                    <name>Account - Overview</name>
+                    <name lang="de-DE">Account - Übersicht</name>
+                </option>
+                <option>
+                    <id>AccountProfile.profileOverview</id>
+                    <name>Account - Your Profile</name>
+                    <name lang="de-DE">Account - Persönliches Profil</name>
+                </option>
+                <option>
+                    <id>Address.accountAddressOverview</id>
+                    <name>Account - Addresses</name>
+                    <name lang="de-DE">Account - Adressen</name>
+                </option>
+                <option>
+                    <id>AccountPayment.paymentOverview</id>
+                    <name>Account - Payment methods</name>
+                    <name lang="de-DE">Account - Zahlungsarten</name>
+                </option>
+                <option>
+                    <id>AccountOrder.orderOverview</id>
+                    <name>Account - Orders</name>
+                    <name lang="de-DE">Account - Bestellungen</name>
+                </option>
+                <option>
+                    <id>Checkout.cartPage</id>
+                    <name>Checkout - Cart</name>
+                    <name lang="de-DE">Kasse - Warenkorb</name>
+                </option>
+                <option>
+                    <id>Register.checkoutRegisterPage</id>
+                    <name>Checkout - Register page</name>
+                    <name lang="de-DE">Kasse - Registrieren</name>
+                </option>
+                <option>
+                    <id>Checkout.confirmPage</id>
+                    <name>Checkout - Confirm page</name>
+                    <name lang="de-DE">Kasse - Bestellung abschließen</name>
+                </option>
+                <option>
+                    <id>Checkout.finishPage</id>
+                    <name>Checkout - Finish page</name>
+                    <name lang="de-DE">Kasse - Bestellbestätigung</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="multi-select">
+            <name>statemanager</name>
+            <label>Select Devices</label>
+            <label lang="de-DE">Sichtbare Viewports</label>
+            <helpText><![CDATA[Select the devices on which the plugin will be displayed. <br/><br/><b>Desktop:</b><br/>(&gt;= 1200px) <br/><br/><b>Tablet Landscape:</b><br/>(992px - 1199px) <br/><br/><b>Tablet Portrait:</b><br/>(768px - 991px) <br/><br/><b>Mobile Landscape:</b><br/>(576px - 767px) <br/><br/><b>Mobile Portrait:</b><br/>(&lt; 576px)]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Wähle die Geräte aus, auf denen das Plugin sichtbar sein soll. <br/><br/><b>Desktop:</b><br/>(&gt;= 1200px) <br/><br/><b>Tablet Landscape:</b><br/>(992px - 1199px) <br/><br/><b>Tablet Portrait:</b><br/>(768px - 991px) <br/><br/><b>Mobile Landscape:</b><br/>(576px - 767px) <br/><br/><b>Mobile Portrait:</b><br/>(&lt; 576px)]]></helpText>
+            <options>
+                <option>
+                    <id>d-xl-block</id>
+                    <name>Desktop</name>
+                    <name lang="de-DE">Desktop</name>
+                </option>
+                <option>
+                    <id>d-lg-block d-xl-none</id>
+                    <name>Tablet Landscape</name>
+                    <name lang="de-DE">Tablet Landscape</name>
+                </option>
+                <option>
+                    <id>d-md-block d-lg-none</id>
+                    <name>Tablet Portrait</name>
+                    <name lang="de-DE">Tablet Portrait</name>
+                </option>
+                <option>
+                    <id>d-sm-block d-md-none</id>
+                    <name>Mobile Landscape</name>
+                    <name lang="de-DE">Mobile Landscape</name>
+                </option>
+                <option>
+                    <id>d-block d-sm-none</id>
+                    <name>Mobile Portrait</name>
+                    <name lang="de-DE">Mobile Portrait</name>
+                </option>
+            </options>
+        </input-field>
+
+        <component name="sw-entity-multi-id-select">
+            <name>excludedCustomerGroups</name>
+            <entity>customer_group</entity>
+            <label>Excluded customer groups</label>
+            <label lang="de-DE">Ausgeschlossene Kundengruppen</label>
+            <helpText>The selected customer groups are not authorized to see the banner.</helpText>
+            <helpText lang="de-DE">Die ausgewählten Kundengruppen sind nicht berechtigt, den Banner zu sehen.</helpText>
+        </component>
+
+        <input-field type="single-select">
+            <name>position</name>
+            <label>Position</label>
+            <label lang="de-DE">Position</label>
+            <helpText>Where should the bar be lowered positioned?</helpText>
+            <helpText lang="de-DE">Wo soll die Angebotsleiste positioniert werden?</helpText>
+            <options>
+                <option>
+                    <id>top</id>
+                    <name>Above TopBar</name>
+                    <name lang="de-DE">Über TopBar</name>
+                </option>
+                <option>
+                    <id>bottom</id>
+                    <name>Bottom of the screen</name>
+                    <name lang="de-DE">Unterer Bildschirmrand (scrollt mit)</name>
+                </option>
+            </options>
+            <defaultValue>top</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>collapse</name>
+            <label>Collapsable</label>
+            <label lang="de-DE">Einklappbar</label>
+            <helpText>If active, the banner can be collapsed by the customer.</helpText>
+            <helpText lang="de-DE">Wenn gewählt, kann der Banner vom Kunden eingeklappt werden.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>expand</name>
+            <label>Expandable</label>
+            <label lang="de-DE">Ausklappbar</label>
+            <helpText>If active, the banner can be expanded by the customer.</helpText>
+            <helpText lang="de-DE">Wenn gewählt, kann der Banner vom Kunden ausgeklappt werden.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>expiration</name>
+            <label>Cookie Lifetime </label>
+            <label lang="de-DE">Cookielaufzeit</label>
+            <helpText>Length of time the cookie is stored.</helpText>
+            <helpText lang="de-DE">Dauer, wie lange der Cookie gespeichert wird.</helpText>
+            <options>
+                <option>
+                    <id>session</id>
+                    <name>For the duration of the session</name>
+                    <name lang="de-DE">Für die Dauer der Session</name>
+                </option>
+                <option>
+                    <id>30</id>
+                    <name>30 days</name>
+                    <name lang="de-DE">30 Tage</name>
+                </option>
+                <option>
+                    <id>90</id>
+                    <name>90 days</name>
+                    <name lang="de-DE">90 Tage</name>
+                </option>
+                <option>
+                    <id>180</id>
+                    <name>180 days</name>
+                    <name lang="de-DE">180 Tage</name>
+                </option>
+                <option>
+                    <id>365</id>
+                    <name>365 days</name>
+                    <name lang="de-DE">365 Tage</name>
+                </option>
+            </options>
+            <defaultValue>365</defaultValue>
+        </input-field>
+
+        <component name="zen-alert-text-only">
+            <name>cookieInfo</name>
+            <placeholder><![CDATA[The status "collapsed" or "expanded" is stored in a <strong>cookie</strong> of the <strong>comfort functions</strong> category and is registered in the Cookie Consent Manager. <i>(The classification of the cookie in the comfort function group is mandatory for us.)<i> The cookie is <strong>reset each time this configuration is changed</strong>. So your customers can see the new information right away.]]></placeholder>
+            <placeholder lang="de-DE"><![CDATA[Der Zustand "eingeklappt" oder "ausgeklappt" wird in einem <strong>Cookie</strong> der Kategorie <strong>Komfortfunktionen</strong> gespeichert und ist im Cookie Consent Manager registriert. <i>(Die Klassifizierung des Cookies in die Gruppe der Komfortfunktion ist für uns verpflichtend vorgeschrieben.)</i> Der Cookie wird <strong>nach jeder Änderung in dieser Konfiguration zurückgesetzt</strong>. So können Deine Kunden die neue Information direkt sehen.]]></placeholder>
+        </component>
+    </card>
+
+    <card>
+        <title>Text Slider</title>
+        <title lang="de-DE">Text Slider</title>
+
+        <input-field type="textarea">
+            <name>text</name>
+            <label>TEXT - animation per row</label>
+            <label lang="de-DE">TEXT - Animation pro Zeile</label>
+            <placeholder>Lorem ipsum dolor sit amet</placeholder>
+            <placeholder lang="de-DE">Lorem ipsum dolor sit amet</placeholder>
+            <helpText><![CDATA[Text for Notification. This text will be animated with every row in a vertical slider.<br><br>Translate with Snippets - Phrase: <strong>zenit.notificationBar.text</strong><br><br>Please use a semicolon "<strong>;</strong>" to separate individual lines.<br><br><a href="#/sw/settings/snippet/detail/zenit.notificationBar.text" target="_blank">Go to snippet</a>]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Text für die Nachricht. Dieser Text wird mit jeder Zeile in einem vertikalen Karussell animiert.<br><br>Übersetzung über Textbausteine - Phrase: <strong>zenit.notificationBar.text</strong><br><br>Trenner für einzelne Zeile bitte ein Semikolon "<strong>;</strong>" verwenden.<br><br><a href="#/sw/settings/snippet/detail/zenit.notificationBar.text" target="_blank">Zum Textbaustein</a>]]></helpText>
+        </input-field>
+
+        <input-field type="int">
+            <name>textSliderInterval</name>
+            <label>Text Slider Interval (ms)</label>
+            <label lang="de-DE">Text Slider Interval (ms)</label>
+            <placeholder>4000</placeholder>
+            <helpText>Interval of textslider in milliseconds.</helpText>
+            <helpText lang="de-DE">Interval des Textsliders in Millisekunden.</helpText>
+            <defaultValue>4000</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>textSliderSpeed</name>
+            <label>Text Slider Speed (ms)</label>
+            <label lang="de-DE">Text Slider Geschwindigkeit (ms)</label>
+            <placeholder>500</placeholder>
+            <helpText>Animation speed of textslider in milliseconds.</helpText>
+            <helpText lang="de-DE">Animationsgeschwindigkeit des Textsliders in Millisekunden.</helpText>
+            <defaultValue>500</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Notes Text</title>
+        <title lang="de-DE">Hinweis Text</title>
+
+        <input-field>
+            <name>infoText</name>
+            <label>Info text</label>
+            <label lang="de-DE">Hinweistext</label>
+            <helpText><![CDATA[Here is space for the information obligation of your notification bar. <br><br>Translate with Snippets - Phrase: <strong>zenit.notificationBar.infoText</strong><br><br><a href="#/sw/settings/snippet/detail/zenit.notificationBar.infoText" target="_blank">Go to snippet</a>]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Text für Bedingungen einer Aktion.<br><br>Übersetzung über Textbausteine - Phrase: <strong>zenit.notificationBar.infoText</strong><br><br><a href="#/sw/settings/snippet/detail/zenit.notificationBar.infoText" target="_blank">Zum Textbaustein</a>]]></helpText>
+        </input-field>
+
+        <input-field type="int">
+            <name>infoTextFontSize</name>
+            <label>Info text size</label>
+            <label lang="de-DE">Schriftgröße</label>
+            <placeholder>12</placeholder>
+            <helpText>Font size in pixels for the info text of the information obligation.</helpText>
+            <helpText lang="de-DE">Schriftgröße in Pixeln für den Informationstext zur Informationspflicht.</helpText>
+            <defaultValue>12</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>infoTextAlign</name>
+            <label>Info text align</label>
+            <label lang="de-DE">Horizontale Ausrichtung</label>
+            <helpText lang="de-DE">Horizontale Ausrichtung für den Informationstext zur Informationspflicht.</helpText>
+            <helpText>Text Align for the info text of the information obligation.</helpText>
+            <options>
+                <option>
+                    <id>left</id>
+                    <name>left</name>
+                    <name lang="de-DE">Links</name>
+                </option>
+                <option>
+                    <id>right</id>
+                    <name>right</name>
+                    <name lang="de-DE">Rechts</name>
+                </option>
+                <option>
+                    <id>center</id>
+                    <name>center</name>
+                    <name lang="de-DE">Mitte</name>
+                </option>
+            </options>
+            <defaultValue>right</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Button</title>
+        <title lang="de-DE">Button</title>
+
+        <input-field>
+            <name>btnLink</name>
+            <label>Link Url</label>
+            <label lang="de-DE">Link Url</label>
+            <helpText><![CDATA[The URL, which is called by clicking the button.<br><br>If the "Display button" option is deactivated, the banner text becomes the clickable link.<br><br>Translate with Snippets - Phrase: <strong>zenit.notificationBar.btnLink</strong><br><br><a href="#/sw/settings/snippet/detail/zenit.notificationBar.btnLink" target="_blank">Go to snippet</a>]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Der Link, welcher durch Drücken des Buttons aufgerufen wird.<br><br>Wird die "Option Button" anzeigen deaktiviert, wird der Banner-Text zum klickbaren Link.<br><br>Übersetzung über Textbausteine - Phrase: <strong>zenit.notificationBar.btnLink</strong><br><br><a href="#/sw/settings/snippet/detail/zenit.notificationBar.btnLink" target="_blank">Zum Textbaustein</a>]]></helpText>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>btnLinkTarget</name>
+            <label>Link Target</label>
+            <label lang="de-DE">Link Ziel</label>
+            <helpText>Choose whether the link should open in the same window or in a new window.</helpText>
+            <helpText lang="de-DE">Wähle aus, ob sich der Link im selben oder in einem neuen Fenster öffnen soll.</helpText>
+            <options>
+                <option>
+                    <id>_self</id>
+                    <name>Intern</name>
+                    <name lang="de-DE">Intern</name>
+                </option>
+                <option>
+                    <id>_blank</id>
+                    <name>Extern</name>
+                    <name lang="de-DE">Extern</name>
+                </option>
+            </options>
+            <defaultValue>_self</defaultValue>
+        </input-field>
+
+        <input-field>
+            <name>btnLinkText</name>
+            <label>Link Text</label>
+            <label lang="de-DE">Link Text</label>
+            <placeholder>Visit now!</placeholder>
+            <placeholder lang="de-DE">Jetzt ansehen!</placeholder>
+            <helpText><![CDATA[Text on button.<br><br>Translate with Snippets - Phrase: <strong>zenit.notificationBar.btnLinkText</strong><br><br><a href="#/sw/settings/snippet/detail/zenit.notificationBar.btnLinkText" target="_blank">Go to snippet</a>]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Text auf dem Button.<br><br>Übersetzung über Textbausteine - Phrase: <strong>zenit.notificationBar.btnLinkText</strong><br><br><a href="#/sw/settings/snippet/detail/zenit.notificationBar.btnLinkText" target="_blank">Zum Textbaustein</a>]]></helpText>
+            <defaultValue>Lorem ipsum</defaultValue>
+        </input-field>
+
+        <input-field>
+            <name>btnLinkTitle</name>
+            <label>Link Title</label>
+            <label lang="de-DE">Link Title</label>
+            <helpText><![CDATA[Text that appears on mouseover tooltips. <br><br>Translate with Snippets - Phrase: <strong>zenit.notificationBar.btnLinkTitle</strong><br><br><a href="#/sw/settings/snippet/detail/zenit.notificationBar.btnLinkTitle" target="_blank">Go to snippet</a>]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Text, der beim Mouseover im Tooltip erscheint.<br><br>Übersetzung über Textbausteine - Phrase: <strong>zenit.notificationBar.btnLinkTitle</strong><br><br><a href="#/sw/settings/snippet/detail/zenit.notificationBar.btnLinkTitle" target="_blank">Zum Textbaustein</a>]]></helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>btnLinkShow</name>
+            <label>Display button</label>
+            <label lang="de-DE">Button anzeigen</label>
+            <helpText>If active the button will be displayed.</helpText>
+            <helpText lang="de-DE">Wenn gewählt, wird der Button angezeigt.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>btnCloseBanner</name>
+            <label>Button click closes banner</label>
+            <label lang="de-DE">Button Click schließt Banner</label>
+            <helpText>If active, the button will close the Banner for the target-page on click.</helpText>
+            <helpText lang="de-DE">Wenn gewählt, wird auf der Ziel-Seite der Banner eingeklappt dargestellt. Das ist sinnvoll, wenn z.B. kein Gutscheincode auf dem Banner angezeigt wird und die Information für den Kunden auf der neuen Seite nicht wiederholt werden muss.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Time Settings</title>
+        <title lang="de-DE">Zeit Einstellungen</title>
+
+        <input-field type="datetime">
+            <name>startDate</name>
+            <label>Start date</label>
+            <label lang="de-DE">Startdatum</label>
+            <helpText>Banner is displayed from the start date.</helpText>
+            <helpText lang="de-DE">Banner wird ab Startdatum angezeigt.</helpText>
+        </input-field>
+
+        <input-field type="datetime">
+            <name>endDate</name>
+            <label>End date</label>
+            <label lang="de-DE">Enddatum</label>
+            <helpText>Banner is hidden from end date.</helpText>
+            <helpText lang="de-DE">Banner wird ab Enddatum ausgeblendet.</helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Background-Image</title>
+        <title lang="de-DE">Hintergrundbild</title>
+
+        <component name="sw-media-field">
+            <name>backgroundImageId</name>
+            <label>Upload media or choose one from the media manager</label>
+            <label lang="de-DE">Laden Sie Medien hoch oder wählen Sie eine aus dem Medienmanager aus</label>
+            <defaultFolder>zenit_notification_banner_media</defaultFolder>
+        </component>
+    </card>
+
+    <card>
+        <title>Background-Image Settings</title>
+        <title lang="de-DE">Hintergrundbild Einstellungen</title>
+
+        <component name="zen-alert-info">
+            <name>compilerInfoShortBackground</name>
+            <placeholder><![CDATA[<strong>Please note:</strong> Styling settings are only visible once the theme has been saved.]]></placeholder>
+            <placeholder lang="de-DE"><![CDATA[<strong>Hinweis:</strong> Styling-Einstellungen werden erst sichtbar, wenn das Theme gespeichert wurde.]]></placeholder>
+        </component>
+
+        <input-field type="bool">
+            <name>backgroundImageShow</name>
+            <label>Show Background-Image?</label>
+            <label lang="de-DE">Hintergrundbild anzeigen</label>
+            <helpText>If selected, background image will be displayed.</helpText>
+            <helpText lang="de-DE">Wenn gewählt, wird das Hintergrundbild angezeigt.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>backgroundImageOpacity</name>
+            <label>Image Opacity (%)</label>
+            <label lang="de-DE">Deckkraft (%)</label>
+            <helpText>Set the opacity of the image - if less than 100%, the Background-Color will show through.</helpText>
+            <helpText lang="de-DE">Stellt die Sichtbarkeit des Hintergrundbildes ein - ist diese unter 100%, scheint die Hintergrundfarbe durch.</helpText>
+            <options>
+                <option>
+                    <id>.05</id>
+                    <name>5%</name>
+                    <name lang="de-DE">5%</name>
+                </option>
+                <option>
+                    <id>.10</id>
+                    <name>10%</name>
+                    <name lang="de-DE">10%</name>
+                </option>
+                <option>
+                    <id>.15</id>
+                    <name>15%</name>
+                    <name lang="de-DE">15%</name>
+                </option>
+                <option>
+                    <id>.20</id>
+                    <name>20%</name>
+                    <name lang="de-DE">20%</name>
+                </option>
+                <option>
+                    <id>.25</id>
+                    <name>25%</name>
+                    <name lang="de-DE">25%</name>
+                </option>
+                <option>
+                    <id>.30</id>
+                    <name>30%</name>
+                    <name lang="de-DE">30%</name>
+                </option>
+                <option>
+                    <id>.35</id>
+                    <name>35%</name>
+                    <name lang="de-DE">35%</name>
+                </option>
+                <option>
+                    <id>.40</id>
+                    <name>40%</name>
+                    <name lang="de-DE">40%</name>
+                </option>
+                <option>
+                    <id>.45</id>
+                    <name>45%</name>
+                    <name lang="de-DE">45%</name>
+                </option>
+                <option>
+                    <id>.50</id>
+                    <name>50%</name>
+                    <name lang="de-DE">50%</name>
+                </option>
+                <option>
+                    <id>.55</id>
+                    <name>55%</name>
+                    <name lang="de-DE">55%</name>
+                </option>
+                <option>
+                    <id>.60</id>
+                    <name>60%</name>
+                    <name lang="de-DE">60%</name>
+                </option>
+                <option>
+                    <id>.65</id>
+                    <name>65%</name>
+                    <name lang="de-DE">65%</name>
+                </option>
+                <option>
+                    <id>.70</id>
+                    <name>70%</name>
+                    <name lang="de-DE">70%</name>
+                </option>
+                <option>
+                    <id>.75</id>
+                    <name>75%</name>
+                    <name lang="de-DE">75%</name>
+                </option>
+                <option>
+                    <id>.80</id>
+                    <name>80%</name>
+                    <name lang="de-DE">80%</name>
+                </option>
+                <option>
+                    <id>.85</id>
+                    <name>85%</name>
+                    <name lang="de-DE">85%</name>
+                </option>
+                <option>
+                    <id>.90</id>
+                    <name>90%</name>
+                    <name lang="de-DE">90%</name>
+                </option>
+                <option>
+                    <id>.95</id>
+                    <name>95%</name>
+                    <name lang="de-DE">95%</name>
+                </option>
+                <option>
+                    <id>1</id>
+                    <name>100%</name>
+                    <name lang="de-DE">100%</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="int">
+            <name>backgroundBlur</name>
+            <label>Blur (px)</label>
+            <label lang="de-DE">Unschärfe (px)</label>
+            <placeholder>0</placeholder>
+            <helpText>Blurs the background, so that the text is easier to read. Example Value: 5; Attention: Not supported by Internet Explorer.</helpText>
+            <helpText lang="de-DE">Zeichnet das Hintergrundbild unscharf. Dadurch wird der Text auf dem Hintergrundbild besser lesbar. Wert z.B.: 5; Achtung: Dieser Effekt wird vom Internet Explorer nicht unterstützt.</helpText>
+            <defaultValue>0</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>backgroundBlendMode</name>
+            <label>blend mode</label>
+            <label lang="de-DE">Mischmodus</label>
+            <helpText><![CDATA[Experimental: Blend mode - how to blend the content of the input-field with its input-fields and the input-field background.<br/><br/><b>Browser support:</b><br/>86.36% - no support for IE 6-11 and Edge.]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Experimentell: Mischmodus - beschreibt, wie sich der Inhalt des Elements mit dem Inhalt des Elements unter ihm und dem Element-Hintergrund vermischen soll.<br/><br/><b>Browser Unterstützung:</b><br/>86.36% - keine Unterstützung bei IE 6-11 sowie Edge.]]></helpText>
+            <options>
+                <option>
+                    <id>normal</id>
+                    <name>Normal</name>
+                    <name lang="de-DE">Normal</name>
+                </option>
+                <option>
+                    <id>multiply</id>
+                    <name>Multiply</name>
+                    <name lang="de-DE">Multiplizieren</name>
+                </option>
+                <option>
+                    <id>screen</id>
+                    <name>Screen</name>
+                    <name lang="de-DE">Negativ Multiplizieren</name>
+                </option>
+                <option>
+                    <id>overlay</id>
+                    <name>Overlay</name>
+                    <name lang="de-DE">Überlagern</name>
+                </option>
+                <option>
+                    <id>darken</id>
+                    <name>Darken</name>
+                    <name lang="de-DE">Abdunkeln</name>
+                </option>
+                <option>
+                    <id>lighten</id>
+                    <name>Lighten</name>
+                    <name lang="de-DE">Aufhellen</name>
+                </option>
+                <option>
+                    <id>color-dodge</id>
+                    <name>Color-dodge</name>
+                    <name lang="de-DE">Farbig abwedeln</name>
+                </option>
+                <option>
+                    <id>color-burn</id>
+                    <name>Color-burn</name>
+                    <name lang="de-DE">Farbig nachbelichten</name>
+                </option>
+                <option>
+                    <id>hard-light</id>
+                    <name>Hard-light</name>
+                    <name lang="de-DE">Hartes Licht</name>
+                </option>
+                <option>
+                    <id>soft-light</id>
+                    <name>Soft-light</name>
+                    <name lang="de-DE">Weiches Licht</name>
+                </option>
+                <option>
+                    <id>difference</id>
+                    <name>Difference</name>
+                    <name lang="de-DE">Differenz</name>
+                </option>
+                <option>
+                    <id>exclusion</id>
+                    <name>Exclusion</name>
+                    <name lang="de-DE">Ausschluss</name>
+                </option>
+                <option>
+                    <id>hue</id>
+                    <name>Hue</name>
+                    <name lang="de-DE">Farbton</name>
+                </option>
+                <option>
+                    <id>saturation</id>
+                    <name>Saturation</name>
+                    <name lang="de-DE">Sättigung</name>
+                </option>
+                <option>
+                    <id>color</id>
+                    <name>Color</name>
+                    <name lang="de-DE">Farbe</name>
+                </option>
+                <option>
+                    <id>luminosity</id>
+                    <name>Luminosity</name>
+                    <name lang="de-DE">Luminanz</name>
+                </option>
+            </options>
+            <defaultValue>normal</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>backgroundRepeat</name>
+            <label>Repeat</label>
+            <label lang="de-DE">Wiederholung</label>
+            <helpText>Let the background horizontal and / or vertical repeat - or not.</helpText>
+            <helpText lang="de-DE">horizontal und/oder vertikal wiederholen - oder nicht.</helpText>
+            <options>
+                <option>
+                    <id>repeat</id>
+                    <name>repeat</name>
+                    <name lang="de-DE">repeat</name>
+                </option>
+                <option>
+                    <id>no-repeat</id>
+                    <name>no-repeat</name>
+                    <name lang="de-DE">no-repeat</name>
+                </option>
+                <option>
+                    <id>repeat-x</id>
+                    <name>repeat-x</name>
+                    <name lang="de-DE">repeat-x</name>
+                </option>
+                <option>
+                    <id>repeat-y</id>
+                    <name>repeat-y</name>
+                    <name lang="de-DE">repeat-y</name>
+                </option>
+            </options>
+            <defaultValue>no-repeat</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>backgroundSize</name>
+            <label>Size</label>
+            <label lang="de-DE">Größe</label>
+            <helpText>Adjust the size of the background.</helpText>
+            <helpText lang="de-DE">strecken, wiederholen usw.</helpText>
+            <options>
+                <option>
+                    <id>cover</id>
+                    <name>cover</name>
+                    <name lang="de-DE">cover</name>
+                </option>
+                <option>
+                    <id>contain</id>
+                    <name>contain</name>
+                    <name lang="de-DE">contain</name>
+                </option>
+                <option>
+                    <id>auto</id>
+                    <name>auto</name>
+                    <name lang="de-DE">auto</name>
+                </option>
+            </options>
+            <defaultValue>cover</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>backgroundPosition</name>
+            <label>Position</label>
+            <label lang="de-DE">Position</label>
+            <helpText>Adjust the Position of the background.</helpText>
+            <helpText lang="de-DE">positionieren.</helpText>
+            <options>
+                <option>
+                    <id>left top</id>
+                    <name>left top</name>
+                    <name lang="de-DE">left top</name>
+                </option>
+                <option>
+                    <id>left center</id>
+                    <name>left center</name>
+                    <name lang="de-DE">left center</name>
+                </option>
+                <option>
+                    <id>left bottom</id>
+                    <name>left bottom</name>
+                    <name lang="de-DE">left bottom</name>
+                </option>
+                <option>
+                    <id>right top</id>
+                    <name>right top</name>
+                    <name lang="de-DE">right top</name>
+                </option>
+                <option>
+                    <id>right center</id>
+                    <name>right center</name>
+                    <name lang="de-DE">right center</name>
+                </option>
+                <option>
+                    <id>right bottom</id>
+                    <name>right bottom</name>
+                    <name lang="de-DE">right bottom</name>
+                </option>
+                <option>
+                    <id>center top</id>
+                    <name>center top</name>
+                    <name lang="de-DE">center top</name>
+                </option>
+                <option>
+                    <id>center center</id>
+                    <name>center center</name>
+                    <name lang="de-DE">center center</name>
+                </option>
+                <option>
+                    <id>center bottom</id>
+                    <name>center bottom</name>
+                    <name lang="de-DE">center bottom</name>
+                </option>
+            </options>
+            <defaultValue>center center</defaultValue>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>backgroundColor</name>
+            <label>Color</label>
+            <label lang="de-DE">Farbe</label>
+            <placeholder>#5F7285</placeholder>
+            <helpText>color of the bar. Pay attention to sufficient contrast between foreground and background colors.</helpText>
+            <helpText lang="de-DE">Hintergrundfarbe der Leiste. Achte auf ausreichenden Kontrast zwischen Vorder- &amp; Hintergrundfarben.</helpText>
+            <defaultValue>#242734</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>backgroundColorOpacity</name>
+            <label>Color Opacity (%)</label>
+            <label lang="de-DE">Farbe Deckkraft (%)</label>
+            <helpText>Set the opacity of the image - if less than 100% and background imaage opacity less than 100%, the onlineshop will show through.</helpText>
+            <helpText lang="de-DE">Stellt die Sichtbarkeit der Hintergrundfarbe ein - ist diese und die Deckkraft des Bildes unter 100%, scheint der Shop durch.</helpText>
+            <options>
+                <option>
+                    <id>5%</id>
+                    <name>5%</name>
+                    <name lang="de-DE">5%</name>
+                </option>
+                <option>
+                    <id>10%</id>
+                    <name>10%</name>
+                    <name lang="de-DE">10%</name>
+                </option>
+                <option>
+                    <id>15%</id>
+                    <name>15%</name>
+                    <name lang="de-DE">15%</name>
+                </option>
+                <option>
+                    <id>20%</id>
+                    <name>20%</name>
+                    <name lang="de-DE">20%</name>
+                </option>
+                <option>
+                    <id>25%</id>
+                    <name>25%</name>
+                    <name lang="de-DE">25%</name>
+                </option>
+                <option>
+                    <id>30%</id>
+                    <name>30%</name>
+                    <name lang="de-DE">30%</name>
+                </option>
+                <option>
+                    <id>35%</id>
+                    <name>35%</name>
+                    <name lang="de-DE">35%</name>
+                </option>
+                <option>
+                    <id>40%</id>
+                    <name>40%</name>
+                    <name lang="de-DE">40%</name>
+                </option>
+                <option>
+                    <id>45%</id>
+                    <name>45%</name>
+                    <name lang="de-DE">45%</name>
+                </option>
+                <option>
+                    <id>50%</id>
+                    <name>50%</name>
+                    <name lang="de-DE">50%</name>
+                </option>
+                <option>
+                    <id>55%</id>
+                    <name>55%</name>
+                    <name lang="de-DE">55%</name>
+                </option>
+                <option>
+                    <id>60%</id>
+                    <name>60%</name>
+                    <name lang="de-DE">60%</name>
+                </option>
+                <option>
+                    <id>65%</id>
+                    <name>65%</name>
+                    <name lang="de-DE">65%</name>
+                </option>
+                <option>
+                    <id>70%</id>
+                    <name>70%</name>
+                    <name lang="de-DE">70%</name>
+                </option>
+                <option>
+                    <id>75%</id>
+                    <name>75%</name>
+                    <name lang="de-DE">75%</name>
+                </option>
+                <option>
+                    <id>80%</id>
+                    <name>80%</name>
+                    <name lang="de-DE">80%</name>
+                </option>
+                <option>
+                    <id>85%</id>
+                    <name>85%</name>
+                    <name lang="de-DE">85%</name>
+                </option>
+                <option>
+                    <id>90%</id>
+                    <name>90%</name>
+                    <name lang="de-DE">90%</name>
+                </option>
+                <option>
+                    <id>95%</id>
+                    <name>95%</name>
+                    <name lang="de-DE">95%</name>
+                </option>
+                <option>
+                    <id>100%</id>
+                    <name>100%</name>
+                    <name lang="de-DE">100%</name>
+                </option>
+            </options>
+            <defaultValue>100%</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Styling</title>
+        <title lang="de-DE">Styling</title>
+
+        <component name="zen-alert-info">
+            <name>compilerInfoShortStyling</name>
+            <placeholder><![CDATA[<strong>Please note:</strong> Styling settings are only visible once the theme has been saved.]]></placeholder>
+            <placeholder lang="de-DE"><![CDATA[<strong>Hinweis:</strong> Styling-Einstellungen werden erst sichtbar, wenn das Theme gespeichert wurde.]]></placeholder>
+        </component>
+
+        <input-field type="colorpicker">
+            <name>textColor</name>
+            <label>Font Color</label>
+            <label lang="de-DE">Schrift Farbe</label>
+            <placeholder>#ffffff</placeholder>
+            <helpText>Color of the text. Pay attention to sufficient contrast between foreground and background colors.</helpText>
+            <helpText lang="de-DE">Farbe des Textes. Achte auf ausreichenden Kontrast zwischen Vorder- &amp; Hintergrundfarben.</helpText>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>font</name>
+            <label>Font-Family</label>
+            <label lang="de-DE">Schrift Familie</label>
+            <helpText>The default font options use the theme fonts. The custom fonts option uses the font from the following font configuration.</helpText>
+            <helpText lang="de-DE">Die Optionen für Standard-Schriften verwenden die Schriften des Themes. Die Option für Eigene-Schriften verwendet die Schrift auf der folgenden Schriftkonfiguration.</helpText>
+            <options>
+                <option>
+                    <id>custom</id>
+                    <name>Custom (e.g. Google Fonts)</name>
+                    <name lang="de-DE">Benutzerdefiniert (z.B. Google Fonts)</name>
+                </option>
+                <option>
+                    <id>base</id>
+                    <name>Default text font</name>
+                    <name lang="de-DE">Standard Text Schriftart</name>
+                </option>
+                <option>
+                    <id>headline</id>
+                    <name>Default headline font</name>
+                    <name lang="de-DE">Standard Überschriften Schriftart</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field>
+            <name>fontStack</name>
+            <label>Custom Font-Family*</label>
+            <label lang="de-DE">Benutzerdefinierte Schrift Familie*</label>
+            <helpText><![CDATA[<strong>Only active if font family is set to "Custom".</strong><br><br>Add the name of the font family. Example: 'Viga', sans-serif <br><br>Get free fonts from https://fonts.google.com]]]></helpText>
+            <helpText lang="de-DE"><![CDATA[<strong>Nur aktiv, wenn Schriftfamilie auf "Benutzerdefiniert" steht.</strong><br><br>Mit Google Fonts: Name der Schriftfamilie angeben. Beispiel: 'Viga', sans-serif <br><br>Finde kostenlose Schriften auf https://fonts.google.com]]></helpText>
+            <defaultValue>'Poppins', sans-serif</defaultValue>
+        </input-field>
+
+        <input-field>
+            <name>fontStackUrl</name>
+            <label>Custom Font Url*</label>
+            <label lang="de-DE">Benutzerdefinierte Schrift Url*</label>
+            <helpText><![CDATA[<strong>Only active if font family is set to "Custom".</strong><br><br>Insert the URL of the fonts. Example: ]]>&lt;link href=&quot;https://fonts.googleapis.com/css?family=Viga&quot; rel=&quot;stylesheet&quot;&gt;<![CDATA[<br><br>Get free fonts from https://fonts.google.com]]></helpText>
+            <helpText lang="de-DE"><![CDATA[<strong>Nur aktiv, wenn Schriftfamilie auf "Benutzerdefiniert" steht.</strong><br><br>Mit Google Fonts: Füge die URL der Schrift ein. - Beispiel: ]]>&amp;lt;link href=&amp;quot;https://fonts.googleapis.com/css?family=Viga&amp;quot; rel=&amp;quot;stylesheet&amp;quot;&amp;gt;<![CDATA[<br><br>Finde kostenlose Schriften auf https://fonts.google.com]]></helpText>
+            <defaultValue><![CDATA[<link href="https://fonts.googleapis.com/css?family=Poppins:500" rel="stylesheet">]]></defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>fontSize</name>
+            <label>Text Size</label>
+            <label lang="de-DE">Schrift Größe</label>
+            <placeholder>46</placeholder>
+            <helpText>Font size in pixels for the text of the offer. Should be selected to be large.</helpText>
+            <helpText lang="de-DE">Schriftgröße in Pixeln für den Angebotstext. Sollte groß gewählt sein.</helpText>
+            <defaultValue>46</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>fontWeight</name>
+            <label>Font Weight</label>
+            <label lang="de-DE">Schrift Gewicht</label>
+            <placeholder>normal (400)</placeholder>
+            <placeholder lang="de-DE">Normal (400)</placeholder>
+            <options>
+                <option>
+                    <id>200</id>
+                    <name>thin (200)</name>
+                    <name lang="de-DE">Dünn (200)</name>
+                </option>
+                <option>
+                    <id>400</id>
+                    <name>normal (400)</name>
+                    <name lang="de-DE">Normal (400)</name>
+                </option>
+                <option>
+                    <id>600</id>
+                    <name>bold (600)</name>
+                    <name lang="de-DE">Dicker (600)</name>
+                </option>
+                <option>
+                    <id>800</id>
+                    <name>bolder (800)</name>
+                    <name lang="de-DE">Fett (800)</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="int">
+            <name>padding</name>
+            <label>Padding / Height</label>
+            <label lang="de-DE">Innenabstand &amp; Höhe</label>
+            <placeholder>80</placeholder>
+            <helpText>Sets the inner distance between the input-fields and the edge. This will increase the height of the banner.</helpText>
+            <helpText lang="de-DE">Legt den inneren Abstand zwischen den Elementen und dem Rand fest. Dadurch erhöht sich die Höhe des Banners.</helpText>
+            <defaultValue>80</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Advanced Settings</title>
+        <title lang="de-DE">Erweiterte Einstellungen</title>
+
+        <input-field type="textarea">
+            <name>customCSS</name>
+            <label>Custom CSS</label>
+            <label lang="de-DE">Eigenes CSS</label>
+            <helpText><![CDATA[Enter CSS Code without &lt;style&gt;-Tags. Your custom CSS code e.g.:<br><br>body { background: #fff; }]]></helpText>
+            <helpText lang="de-DE"><![CDATA[Gib hier CSS Code ohne &lt;style&gt;-Tags ein. Dein individueller CSS Code, z.B.:<br><br>body { background: #fff; }]]></helpText>
+        </input-field>
+    </card>
+
+</config>

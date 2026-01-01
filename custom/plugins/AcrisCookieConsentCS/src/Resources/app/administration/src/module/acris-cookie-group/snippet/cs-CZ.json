@@ -1,0 +1,37 @@
+{
+    "acris-cookie-group": {
+        "general": {
+            "mainMenuItemGeneral": "Sušenky",
+            "placeholderSearchBar": "Hledat sušenky",
+            "description": "Zobrazit sušenky, které byly nalezeny v obchodě",
+            "labelName": "Skupina sušenek"
+        },
+        "list": {
+            "textHeadline": "Skupiny sušenek",
+            "buttonAdd": "Přidat",
+            "contextMenuEdit": "Upravit",
+            "contextMenuDelete": "Smazat",
+            "columnTitle": "Název",
+            "columnDescription": "Popis",
+            "textDeleteConfirm": "Opravdu chcete smazat skupinu sušenek",
+            "modalTitleDelete": "Smazat skupinu sušenek",
+            "buttonCancel": "Zrušit",
+            "buttonDelete": "Smazat",
+            "contentEmpty": "Žádné skupiny sušenek neexistují"
+        },
+        "detail": {
+            "textHeadline": "Nastavení skupiny zásad sušenek",
+            "buttonCancel": "Zrušit",
+            "buttonSave": "Uložit",
+            "fieldTitleLabel": "Název",
+            "fieldTitlePlaceholder": "Vložte název skupiny sušenek",
+            "fieldDescriptionLabel": "Popis",
+            "fieldDescriptionPlaceholder": "Vložte popis",
+            "cardTitle": "Informace o zákazníkovi",
+            "notificationSaveErrorMessage": "Při ukládání skupiny sušenek došlo k chybě.",
+            "notificationSaveSuccessMessage": "Skupina sušenek byla úspěšně uložena.",
+            "notificationSaveSuccessMessageTitle": "Úspěch",
+            "notificationSaveErrorMessageTitle": "Chyba"
+        }
+    }
+}

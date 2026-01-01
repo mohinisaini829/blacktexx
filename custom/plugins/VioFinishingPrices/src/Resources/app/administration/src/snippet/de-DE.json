@@ -1,0 +1,25 @@
+{
+    "vio-finishing-prices": {
+        "general": {
+            "mainMenuItemGeneral": "Veredelungspreise"
+        },
+        "list": {
+            "columnActive": "aktiv",
+            "columnName": "Name"
+        },
+        "detail": {
+            "errorTitle": "Beim speichern des Veredelungspreises ist ein Fehler aufgetreten!",
+            "activeLabel": "Aktiv",
+            "nameLabel": "Name",
+            "positionLabel": "Position",
+            "textLabel": "Text"
+        }
+    },
+    "sw-cms": {
+        "elements": {
+            "finishing-price-table": {
+                "label": "Veredelungspreise"
+            }
+        }
+    }
+}

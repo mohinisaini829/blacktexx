@@ -1,0 +1,66 @@
+{% block vio_finishing_prices_detail %}
+    <sw-page class="vio-finishing-prices-detail">
+        <template #smart-bar-actions>
+            <sw-button :routerLink="{ name: 'vio.finishing.prices.list' }">
+                {{ $tc('global.default.cancel') }}
+            </sw-button>
+
+            <sw-button-process
+                :isLoading="isLoading"
+                :processSuccess="processSuccess"
+                variant="primary"
+                :disabled="!acl.can('vio_finishing_prices.editor')"
+                @process-finish="saveFinish"
+                @click="onClickSave">
+                {{ $tc('global.default.save') }}
+            </sw-button-process>
+        </template>
+
+        <template #language-switch>
+            <sw-language-switch
+                :disabled="finishingPrice.id == null"
+                :save-changes-function="saveOnLanguageChange"
+                :abort-change-function="abortOnLanguageChange"
+                @on-change="onChangeLanguage"
+            ></sw-language-switch>
+        </template>
+
+        <template #content>
+            <sw-card-view>
+                <sw-card v-if="finishingPrice" :isLoading="isLoading">
+                    <sw-checkbox-field
+                        :label="$tc('vio-finishing-prices.detail.activeLabel')"
+                        v-model="finishingPrice.active"
+                        name="active"
+                        :disabled="!acl.can('vio_finishing_prices.editor')"
+                    ></sw-checkbox-field>
+                    <sw-text-field
+                        :label="$tc('vio-finishing-prices.detail.nameLabel')"
+                        v-model="finishingPrice.name"
+                        :placeholder="placeholder(finishingPrice, 'name', $tc('vio-finishing-prices.detail.nameLabel'))"
+                        name="name"
+                        validation="required"
+                        :disabled="!acl.can('vio_finishing_prices.editor')"
+                    ></sw-text-field>
+                    <sw-number-field
+                        :label="$tc('vio-finishing-prices.detail.positionLabel')"
+                        v-model="finishingPrice.position"
+                        :placeholder="placeholder(finishingPrice, 'name', $tc('vio-finishing-prices.detail.positionLabel'))"
+                        name="position"
+                        validation="required"
+                        :disabled="!acl.can('vio_finishing_prices.editor')"
+                    ></sw-number-field>
+
+                    <sw-textarea-field
+                        :label="$tc('vio-finishing-prices.detail.textLabel')"
+                        v-model="finishingPrice.text"
+                        :placeholder="placeholder(finishingPrice, 'name', $tc('vio-finishing-prices.detail.textLabel'))"
+                        name="text"
+                        :disabled="!acl.can('vio_finishing_prices.editor')"
+                    ></sw-textarea-field>
+
+                </sw-card>
+            </sw-card-view>
+        </template>
+    </sw-page>
+{% endblock %}

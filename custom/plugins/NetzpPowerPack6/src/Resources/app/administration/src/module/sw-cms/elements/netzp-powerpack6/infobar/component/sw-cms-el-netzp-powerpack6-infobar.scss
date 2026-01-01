@@ -1,0 +1,41 @@
+.sw-cms-el-netzp-powerpack6-infobar {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  .infobar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+
+    &.vertical {
+      flex-direction: column;
+
+      .icon {
+        border-radius: 50%;
+        margin-right: 0 !important;
+      }
+
+      .info {
+        margin-top: .25rem;
+      }
+    }
+
+    .icon {
+      display: inline-block;
+      width: auto;
+      height: auto;
+      text-align: center;
+      margin-right: .5rem;
+    }
+
+    .info {
+      font-weight: bold;
+    }
+  }
+}

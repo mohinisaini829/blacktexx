@@ -1,0 +1,36 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig'%}
+
+{% block page_product_detail_main %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        window.bilobaVariantMatrixActiveIt = {% if page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive != true %}false{% else %}true{% endif %};
+    </script>
+
+    {% if page.configuratorSettings %}
+        {% set configuratorSettings = page.configuratorSettings %}
+    {% elseif page.product.configurator %}
+        {% set configuratorSettings = page.product.configurator %}
+    {% else %}
+        {% set configuratorSettings = page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings'] %}
+    {% endif %}
+     
+    {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixActive == true %}
+        {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") == "price" %}
+        
+        {% else %}
+            {% if page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "standard" %}
+                {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix.html.twig' %}
+            {% elseif page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "selector" and configuratorSettings.elements|length > 1 %}
+                {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix.html.twig' %}
+            {# if selector layout selected for 1 variant #}
+            {% elseif page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "selector" and configuratorSettings.elements|length == 1 %}
+                {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix.html.twig' %}
+            {% else %}
+                {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix.html.twig' %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endblock %}

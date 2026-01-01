@@ -1,0 +1,5 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/meta.html.twig' %}
+
+{% block layout_head_title_inner %}
+    {{ parent() }} {{ "detail.nameSuffix"|trans|sw_sanitize|e }}
+{% endblock %}

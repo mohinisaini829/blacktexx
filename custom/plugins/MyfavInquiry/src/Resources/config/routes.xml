@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing
+        https://symfony.com/schema/routing/routing-1.0.xsd">
+    <import resource="../../Storefront/Controller/**/*Controller.php" type="attribute" />
+    <route id="api.myfav.designer.geturl"
+           path="/api/myfav/designer/geturl"
+           controller="Myfav\Inquiry\Administration\Controllers\AdminApi\DesignerDataController::getUrl"
+           methods="GET">
+         <default key="_routeScope">
+            <list>
+                <string>api</string>
+            </list>
+        </default>
+    </route>
+
+    <route id="api.myfav.designer.get.items"
+           path="/api/myfav/designer/getItems"
+           controller="Myfav\Inquiry\Administration\Controllers\AdminApi\DesignerDataController::getItems"
+           methods="POST">
+        <default key="_routeScope">
+            <list>
+                <string>api</string>
+            </list>
+        </default>
+    </route>
+    <route id="api.designer.inquiry.update_status"
+           path="/api/_action/inquiry/update-status"
+           controller="Myfav\Inquiry\Administration\Controllers\InquiryMediaController::updateInquiryStatus"
+           methods="POST">
+        <default key="_routeScope">
+            <list>
+                <string>api</string>
+            </list>
+        </default>
+    </route> 
+    <route id="api.myfav_inquiry.media"
+           path="/api/_action/myfav_inquiry_media/media/{mediaId}"
+           controller="Myfav\Inquiry\Administration\Controllers\InquiryMediaController::getMedia"
+           methods="GET">
+         <default key="_routeScope">
+            <list>
+                <string>api</string>
+            </list>
+        </default>
+    </route>
+    <!-- <route id="api.myfav_inquiry.offer.create"
+           path="/api/_action/myfav_inquiry_offer/create/{inquiryId}"
+           controller="Myfav\Inquiry\Administration\Controllers\InquiryOfferController::create"
+           methods="POST">
+         <default key="_routeScope">
+            <list>
+                <string>api</string>
+            </list>
+        </default>
+    </route> -->
+</routes>

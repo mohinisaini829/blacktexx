@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss version="2.0">
+    <channel>
+        {% if page.header.navigation.active.translated.metaTitle %}
+            <title>{{ page.header.navigation.active.translated.metaTitle|striptags|trim }}</title>
+        {% else %}
+            <title>Blog</title>
+        {% endif %}
+        <link>{{ app.request.schemeAndHttpHost }}</link>
+        <language>{{ app.request.locale }}</language>
+        {% if page.header.navigation.active.translated.metaDescription %}
+            <description>{{ page.header.navigation.active.translated.metaDescription|striptags|trim|u.truncate(maxLength ?? 160, '…') }}</description>
+        {% endif %}
+        {% for result in results %}
+            <item>
+                {% set title = result.translated.metaTitle ?? result.translated.title %}
+                <title>{{ title|striptags|trim }}</title>
+                <link>{{ seoUrl('sas.frontend.blog.detail', {'articleId': result.id}) }}</link>
+                <guid isPermaLink="true">{{ seoUrl('sas.frontend.blog.detail', {'articleId': result.id}) }}</guid>
+                <description>{{ result.translated.metaDescription|striptags|trim|u.truncate(maxLength ?? 160, '…') }}</description>
+                {% if result.blogAuthor.email != "N/A" %}
+                    <author>{{ result.blogAuthor.email ~ " (" ~ result.blogAuthor.displayName ~ ")"}}</author>
+                {% endif %}
+                <pubDate>{{ result.publishedAt | date("d M Y H:i:s T") }}</pubDate>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

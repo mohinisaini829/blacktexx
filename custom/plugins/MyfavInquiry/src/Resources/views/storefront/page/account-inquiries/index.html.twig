@@ -1,0 +1,74 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+    {% block page_account %}
+        <div class="account account-content">
+            {% block page_account_sidebar %}
+            {% endblock %}
+
+            {% block page_account_main %}
+                <div class="account-content-main account-inquiries">
+                    <div class="account-overview">
+                        <div class="account-welcome">
+                            <h1>Meine Anfragen</h1>
+                            {% block page_account_overview_welcome_intro %}
+                                <p>Verwalten von Anfragen und Antworten.</p>
+                            {% endblock %}
+                        </div>
+
+                        {% if inquiries|length == 0 %}
+                            {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                                type: 'warning',
+                                content: 'Sie haben noch keine Anfragen erstellt.'
+                            } %}
+                        {% else %}
+                            <div class="cms-element-product-listing">
+                                <div class="row cms-listing-row js-listing-wrapper">
+                                    <div class="account-orders-overview">
+                                        {% for inquiry in inquiries %}
+                                            <div class="{% if not feature('v6.5.0.0') %}table {% endif %}order-table" data-order-detail-loader="true">
+                                                <div class="order-wrapper">
+                                                    <div class="order-item-header" style="width: 100%;">
+                                                        <div class="row flex-wrap">
+                                                            <h3 class="col-auto order-table-header-heading">Anfrage {{ inquiry.created|format_date('short', locale=app.request.locale) }}</h3>
+                                                        </div>
+
+                                                        {#
+                                                        <div class="col-12 row order-table-header-order-table-header">
+                                                            <div class="col-12 col-sm order-table-header-order-table-header-cell">Vorname</div>
+                                                            <div class="col-12 col-sm order-table-header-order-table-header-cell">Nachname</div>
+                                                            <div class="col-12 col-sm order-table-header-order-table-header-cell">E-Mail</div>
+                                                        </div>
+                                                        #}
+
+                                                        <table>
+                                                            <tr>
+                                                                <th>Vorname:</th>
+                                                                <td><span class="order-table-body-value">{{ inquiry.firstName }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Nachname:</th>
+                                                                <td><span class="order-table-body-value">{{ inquiry.lastName }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>E-Mail:</th>
+                                                                <td><span class="order-table-body-value">{{ inquiry.email }}</td>
+                                                            </tr>
+                                                            
+                                                        </table>
+
+                                                        <button type="button" class="btn btn-primary btn-sm btn-mv-full-width">Details anzeigen</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

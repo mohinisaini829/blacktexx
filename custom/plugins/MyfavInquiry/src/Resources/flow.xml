@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flow-extensions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/Framework/App/Flow/Schema/flow-1.0.xsd">
+
+    <flow-events>
+        <flow-event>
+            <name>inquiry.send</name>
+            <label>sw-flow.triggers.inquiry</label>
+            <description>Trigger when inquiry is submitted</description>
+            <aware>mailAware</aware>
+            <aware>salesChannelAware</aware>
+        </flow-event>
+    </flow-events>
+
+</flow-extensions>

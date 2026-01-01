@@ -1,0 +1,65 @@
+{% block sas_tag_list %}
+    <sw-page class="sas-tag-list">
+        <template #smart-bar-header>
+            <h2>
+                {% block sas_tag_list_smart_bar_header_title_text %}
+                {{ $tc('sas-tag.list.textBlogOverview') }}
+                {% endblock %}
+                {% block sas_tag_list_smart_bar_header_amount %}
+                <span
+                    v-if="!isLoading"
+                    class="sw-page__smart-bar-amount"
+                >
+                ({{ total }})
+                </span>
+                {% endblock %}
+            </h2>
+        </template>
+
+        <template #language-switch>
+            <sw-language-switch @on-change="changeLanguage" />
+        </template>
+        {% block sas_tag_list_smart_bar_actions %}
+        <template #smart-bar-actions>
+            {% block sas_tag_list_smart_bar_actions_add %}
+            <mt-button
+                variant="primary"
+                @click="$router.push({ name: 'blog.module.tag.create' })"
+            >
+                {{ $tc('sas-tag.list.buttonAdd') }}
+            </mt-button>
+            {% endblock %}
+        </template>
+        {% endblock %}
+        <template #sidebar>
+            <sas-blog-vertical-tabs :default-item="'tag'" />
+        </template>
+
+        <template #content>
+            {% block sas_tag_list_content %}
+            <sw-entity-listing
+                v-if="tags"
+                :items="tags"
+                :repository="tagRepository"
+                :show-selection="false"
+                :columns="columns"
+                detail-route="blog.module.tag.detail"
+            >
+
+        {% block sas_tag_list_column %}
+        {% endblock %}
+
+        </sw-entity-listing>
+            {% endblock %}
+
+        {% block sas_tag_list_empty_state %}
+            <sw-empty-state
+                v-if="!isLoading && !total"
+                :title="$tc('sas-tag.list.messageEmpty')"
+            >
+                {{ $tc('sas-tag.list.messageEmpty') }}
+            </sw-empty-state>
+            {% endblock %}
+        </template>
+    </sw-page>
+{% endblock %}

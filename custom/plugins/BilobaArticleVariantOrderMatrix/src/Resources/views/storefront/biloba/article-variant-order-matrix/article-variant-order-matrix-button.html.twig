@@ -1,0 +1,22 @@
+{% block biloba_variant_matrix_button_block %}
+    <div class="biloba-variant-matrix-button-container mb-3" >
+        {% set totalPriceActivate = config("BilobaArticleVariantOrderMatrix.config.totalPriceActivate") %}
+        {% set langCode = page.header.activeLanguage.translationCode.code|lower|split('-')[0]|default('de') %}
+
+        {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+            {% if totalPriceActivate != false %}
+                <span class="variants-total-price">{{ 'biloba.ArticleVariantOrderMatrix.variantsTotalPrice'|trans }}{{": "}}
+                    {% if langCode == 'de' %}
+                        <span id="variants-total-price-value">{{0}},{{"%02d"|format(0, ",")}}</span> {{ context.getCurrency().getSymbol() }}
+                    {% elseif langCode == 'en' %}
+                        <span id="variants-total-price-value">{{0}}.{{"%02d"|format(0, ".")}}</span> {{ context.getCurrency().getSymbol() }}
+                    {% else %}
+                        <span id="variants-total-price-value">{{0}},{{"%02d"|format(0, ",")}}</span> {{ context.getCurrency().getSymbol() }}
+                    {% endif %}
+                </span>
+            {% endif %}
+        
+            <button type="button" class="btn btn-primary btn-buy bit-variant-button" disabled="true">{{ 'biloba.ArticleVariantOrderMatrix.DetailBuyActionAdd'|trans }}</button>
+        {% endif %}
+    </div>
+{% endblock %}

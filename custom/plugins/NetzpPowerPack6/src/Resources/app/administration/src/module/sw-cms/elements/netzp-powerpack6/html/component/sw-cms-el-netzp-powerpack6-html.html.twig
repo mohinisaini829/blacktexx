@@ -1,0 +1,7 @@
+{% block sw_cms_element_netzp_powerpack6_html %}
+    <div class="sw-cms-el-netzp-powerpack6-html">
+        <span class="label">HTML/CSS</span>
+        <div v-if="element.config.html.value" v-html="getHtml"></div>
+        <div v-else class="empty"><pre>&lt;HTML + CSS /&gt;</pre></div>
+    </div>
+{% endblock %}

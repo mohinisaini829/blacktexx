@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+      <service id="SantaFeTexTheme\Storefront\Controller\MyfavNewsletterCaptcha" public="true">
+        <argument type="service" id="Shopware\Core\Content\ContactForm\SalesChannel\ContactFormRoute"/>
+        <argument type="service" id="Shopware\Core\Content\Newsletter\SalesChannel\NewsletterSubscribeRoute"/>
+        <argument type="service" id="Shopware\Core\Content\Newsletter\SalesChannel\NewsletterUnsubscribeRoute"/>
+
+        <call method="setContainer">
+          <argument type="service" id="service_container"/>
+        </call>
+        <call method="setTwig">
+          <argument type="service" id="twig"/>
+        </call>
+      </service>
+
+        <service id="SantaFeTexTheme\Storefront\Controller\NewsletterFooter">
+            <tag name="controller.service_arguments"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <argument type="service" id="Shopware\Core\Content\Newsletter\SalesChannel\NewsletterSubscribeRoute"/>
+        </service>
+
+        <service id="SantaFeTexTheme\Storefront\Subscriber\ManufacturerMedia">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="SantaFeTexTheme\Storefront\Subscriber\ProductPageImportantProperty">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="SantaFeTexTheme\Twig\Extensions\Bundles">
+            <argument id="service_container" type="service"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="SantaFeTexTheme\Core\Content\Product\SalesChannel\Price\ProductPriceCalculator"
+                 decorates="Shopware\Core\Content\Product\SalesChannel\Price\ProductPriceCalculator"
+        >
+            <argument id="SantaFeTexTheme\Core\Content\Product\SalesChannel\Price\ProductPriceCalculator.inner" type="service"/>
+            <tag name="kernel.reset" method="reset"/>
+        </service>
+
+        <service id="SantaFeTexTheme\Storefront\Subscriber\SantaManufacturerHomePage" public="true">
+            <argument type="service" id="product_manufacturer.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="SantaFeTexTheme\Subscriber\NavigationSubscriber">
+            <argument type="service" id="category.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>

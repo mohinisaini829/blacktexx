@@ -1,0 +1,8 @@
+{
+  "name": "storefront",
+  "version": "1.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.6"
+  }
+}

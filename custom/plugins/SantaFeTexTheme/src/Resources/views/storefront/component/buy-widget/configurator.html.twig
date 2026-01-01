@@ -1,0 +1,27 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/configurator.html.twig' %}
+
+{% block buy_widget_configurator_option_radio_label_text %}
+    <span>{{ option.translated.name }}</span>
+{% endblock %}
+
+{% block buy_widget_configurator_group_title %}
+    <div class="product-detail-configurator-group-title{% if group.options|length > 9 %} many-options{% endif %}">
+        {% block buy_widget_configurator_group_title_text %}
+            {{ group.translated.name }}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block buy_widget_configurator_option_radio_label_media %}
+  {% sw_thumbnails 'configurator-option-img-thumbnails' with {
+    media: media,
+    sizes: {
+      'default': '52px'
+    },
+    attributes: {
+      'class': 'product-detail-configurator-option-image',
+      'alt': option.translated.name,
+      'title': option.translated.name
+    }
+  } %}
+{% endblock %}

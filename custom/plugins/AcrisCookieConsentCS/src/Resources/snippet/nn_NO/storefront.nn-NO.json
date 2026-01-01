@@ -1,0 +1,16 @@
+{
+    "acrisCookieConsent": {
+        "heading": "Vi respekterer ditt personvern",
+        "messageIncludingSave": "Denne nettsiden bruker informasjonskapsler for å sikre at du får den beste opplevelsen på vår nettside. Du kan endre ditt valg av bruk av informasjonskapsler når som helst ved å <a data-bs-dismiss=\"modal\" id=\"ccAcceptButton\" class=\"cookie-consent-accept-button-in-text\" href=\"#\" onclick=\"return false;\">lagre.</a> <a data-ajax-modal=\"true\"\n data-modal-class=\"cookie-consent-permission-footer-modal\" data-url=\"%url%\" href=\"%url%\" title=\"Mer informasjon\">Mer informasjon</a>.",
+        "messageNoSave": "Denne nettsiden bruker informasjonskapsler for å sikre at du får den beste opplevelsen på vår nettside...</a> <a data-ajax-modal=\"true\"\n data-modal-class=\"cookie-consent-permission-footer-modal\" data-url=\"%url%\" href=\"%url%\" title=\"Mer informasjon\">Mer informasjon</a>.",
+        "switchActive": "Aktiv",
+        "switchInactive": "Inaktiv",
+        "settingsButton": "Innstillinger for informasjonskapsler",
+        "acceptOnlyFunctionalButton": "Aksepter kun funksjonelle informasjonskapsler",
+        "acceptButton": "Aksepter valgte informasjonskapsler",
+        "acceptAllButton": "Aksepter alle informasjonskapsler",
+        "footerCmsPageLinkPrefixFirst": "- ",
+        "footerCmsPageLinkPrefixSecond": "- ",
+        "footerCmsPageLinkPrefixThird": "- "
+    }
+}

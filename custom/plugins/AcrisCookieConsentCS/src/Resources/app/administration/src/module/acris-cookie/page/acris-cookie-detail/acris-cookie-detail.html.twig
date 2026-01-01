@@ -1,0 +1,232 @@
+{% block acris_cookie_detail %}
+    <sw-page class="acris-cookie-detail" v-if="item">
+
+        {% block acris_cookie_detail_smart_bar_header %}
+            <template #smart-bar-header>
+                {% block acris_cookie_detail_smart_bar_header_title %}
+                    <h2>{{ $tc('acris-cookie.detail.textHeadline') }}</h2>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_group_list_smart_bar_actions_language %}
+            <template #language-switch>
+                <sw-language-switch
+                        @on-change="onChangeLanguage"
+                        :disabled="$route.params.newItem || this.item.unknown">
+                </sw-language-switch>
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_detail_smart_bar_actions %}
+            <template #smart-bar-actions>
+                {% block acris_cookie_detail_smart_bar_actions_cancel %}
+                    <mt-button :disabled="item.isLoading" @click="$router.push({ name: 'acris.cookie.index' })" size="default" variant="secondary">
+                        {{ $tc('acris-cookie.detail.buttonCancel') }}
+                    </mt-button>
+                {% endblock %}
+
+                {% block acris_cookie_detail_smart_bar_actions_save %}
+                    <sw-button-process
+                            class="acris-cookie-detail__save-action"
+                            :isLoading="isLoading"
+                            :processSuccess="processSuccess"
+                            variant="primary"
+                            :disabled="item.isLoading || (!item.cookieId || !item.title || !item.cookieGroupId)"
+                            @update:processSuccess="saveFinish"
+                            @click="onClickSave">
+                        {{ $tc('acris-cookie.detail.buttonSave') }}
+                    </sw-button-process>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block acris_cookie_detail_content %}
+            <template #content>
+                <sw-card-view>
+
+                    {% block acris_cookie_detail_content_card_id %}
+                        <mt-card :isLoading="isLoading" v-if="item"
+                                 positionIdentifier="acris-cookie-detail-content"
+                                 :title="$tc('acris-cookie.detail.cardId')">
+
+                            {% block acris_cookie_detail_content_card_id_input %}
+                                <mt-text-field v-model="item.cookieId"
+                                          :entity-collection="item.cookieId"
+                                          @update:entity-collection="onChange"
+                                          required
+                                          :disabled="item.isDefault"
+                                          class="acris-cookie-detail__item_id"
+                                          :label="$tc('acris-cookie.detail.fieldTitleLabelCardId')"
+                                          :placeholder="placeholder(item, 'cookieId', $tc('acris-cookie.detail.fieldTitlePlaceholderCardId'))"
+                                          :helpText="$tc('acris-cookie.detail.fieldTitleTooltipCardId')">
+                                </mt-text-field>
+                            {% endblock %}
+
+                            {% block acris_cookie_detail_content_card_id_input_checkbox_select %}
+                                <mt-switch v-model="item.active"
+                                          :entity-collection="item.active"
+                                          @update:entity-collection="onChange"
+                                          :disabled="item.isDefault"
+                                          class="acris-detail-detail__cookie_active"
+                                          :label="$tc('acris-cookie.detail.fieldActiveLabelCardId')">
+                                </mt-switch>
+                            {% endblock %}
+
+                            {% block acris_cookie_detail_content_card_id__select %}
+                                <div class="acris-cookie-groups" v-if="!cookieGroups.length">
+                                    {{ $tc('acris-cookie.detail.emptyCookieGroup') }}
+                                </div>
+                                <div class="acris-cookie-groups" v-else>
+                                    <mt-select :label="$tc('acris-cookie.detail.fieldCookieGroupLabelCardId')"
+                                              required
+                                              :disabled="item.isDefault"
+                                              v-model="item.cookieGroupId"
+                                              :entity-collection="item.cookieGroupId"
+                                              @update:entity-collection="onChange"
+                                              :placeholder="$tc('acris-cookie.detail.fieldCookieGroupPlaceholderCardId')"
+                                              :options="cookieGroupOptions">
+                                    </mt-select>
+                                </div>
+                            {% endblock %}
+                        </mt-card>
+                    {% endblock %}
+
+                    {% block acris_cookie_detail_content_card_customer_information %}
+                        <mt-card :isLoading="isLoading" v-if="item"
+                                 positionIdentifier="acris-cookie-detail-customer"
+                                 :title="$tc('acris-cookie.detail.cardCustomerInformation')">
+
+                            {% block acris_cookie_detail_content_card_customer_information_input_title %}
+                                <mt-text-field v-model="item.title"
+                                          :entity-collection="item.title"
+                                          @update:entity-collection="onChange"
+                                          class="acris-cookie-detail__item_title"
+                                          required
+                                          :label="$tc('acris-cookie.detail.fieldTitleLabelCustomerInformation')"
+                                          :placeholder="placeholder(item, 'title', $tc('acris-cookie.detail.fieldTitlePlaceholderCustomerInformation'))">
+                                </mt-text-field>
+                            {% endblock %}
+
+                            {% block acris_cookie_detail_content_card_customer_information_input_providers %}
+                                <mt-text-field v-model="item.provider"
+                                          :entity-collection="item.provider"
+                                          @update:entity-collection="onChange"
+                                          class="acris-cookie-detail__item_providers"
+                                          :label="$tc('acris-cookie.detail.fieldProvidersLabelCustomerInformation')"
+                                          :placeholder="$tc('acris-cookie.detail.fieldProvidersPlaceholderCustomerInformation')">
+                                </mt-text-field>
+                            {% endblock %}
+
+                        </mt-card>
+                    {% endblock %}
+
+                    {% block acris_cookie_detail_content_card_description %}
+                        <mt-card :isLoading="isLoading" v-if="item"
+                                 positionIdentifier="acris-cookie-detail-description"
+                                 :title="$tc('acris-cookie.detail.cardDescription')">
+                            {% block acris_cookie_detail_content_card_description_input %}
+                                <sw-text-editor
+                                        :placeholder="placeholder(item, 'description', $tc('acris-cookie.detail.fieldDescriptionPlaceholderDescription'))"
+                                        name="description"
+                                        v-model:value="item.description"
+                                        :entity-collection="item.description"
+                                        @update:entity-collection="onChange" >
+                                </sw-text-editor>
+                            {% endblock %}
+                        </mt-card>
+                    {% endblock %}
+
+                    {% block acris_cookie_detail_content_card_sales_channel %}
+                        <mt-card :isLoading="isLoading" v-if="item"
+                                 positionIdentifier="acris-cookie-detail-sales-channel"
+                                 :title="$tc('acris-cookie.detail.cardSalesChannel')"
+                                 class="acris-cookie-sales-channel">
+
+                            <sw-entity-many-to-many-select
+                                    :disabled="item.isDefault"
+                                    :localMode="item.isNew()"
+                                    :placeholder="$tc('acris-cookie.detail.SalesChannelFieldPlaceholder')"
+                                    :entity-collection="item.salesChannels"
+                                    @update:entity-collection="onChangeSalesChannels" >
+                            </sw-entity-many-to-many-select>
+                        </mt-card>
+                    {% endblock %}
+
+                    {% block acris_cookie_detail_content_card_script %}
+                        <mt-card :isLoading="isLoading" v-if="item"
+                                 positionIdentifier="acris-cookie-detail-script"
+                                 :title="$tc('acris-cookie.detail.cardScript')"
+                                 class="acris-cookie-script">
+
+                            {% block acris_cookie_detail_content_card_script_alert %}
+                                <mt-banner variant="info">
+                                    {{ $tc('acris-cookie.detail.fieldScriptHelpText') }}
+                                </mt-banner>
+                            {% endblock %}
+
+                            {% block acris_cookie_detail_content_card_script_input %}
+                                <mt-textarea
+                                        :placeholder="placeholder(item, 'script', $tc('acris-cookie.detail.fieldScriptPlaceholder'))"
+                                        name="script"
+                                        size="large"
+                                        v-model="item.script"
+                                        :entity-collection="item.script"
+                                        @update:entity-collection="onChange"
+                                        :label="$tc('acris-cookie.detail.cardScript')">
+                                </mt-textarea>
+                            {% endblock %}
+
+                            {% block acris_cookie_detail_content_card_script_position %}
+                                <mt-select
+                                        v-model="item.scriptPosition"
+                                        :entity-collection="item.scriptPosition"
+                                          @update:entity-collection="onChange"
+                                          :label="$tc('acris-cookie.detail.fieldScripPositionLabel')"
+                                          :options="scriptPositionOptions">
+                                </mt-select>
+                            {% endblock %}
+                        </mt-card>
+                    {% endblock %}
+
+                    {% block acris_cookie_detail_content_card_value %}
+                    <mt-card :isLoading="isLoading" v-if="item"
+                             positionIdentifier="acris-cookie-detail-value"
+                             :title="$tc('acris-cookie.detail.cardValue')"
+                             class="acris-cookie-value">
+
+                            {% block acris_cookie_detail_content_card_value_default_value %}
+                                    <mt-text-field v-model="item.defaultValue"
+                                                   :entity-collection="item.defaultValue"
+                                                   @update:entity-collection="onChange"
+                                                   class="acris-cookie-detail__item_default_value"
+                                                   :disabled="item.fromExtension || item.script"
+                                                   :label="$tc('acris-cookie.detail.fieldDefaultValueLabel')"
+                                                   :helpText="$tc('acris-cookie.detail.fieldDefaultValueHelpText')">
+                                    </mt-text-field>
+                            {% endblock %}
+                    </mt-card>
+                    {% endblock %}
+
+                    {% block acris_cookie_detail_content_card_google_consent_mode_options %}
+                        <mt-card
+                                :isLoading="isLoading" v-if="item"
+                                positionIdentifier="acris-cookie-detail-google-cookie-consent-mode"
+                                :title="$tc('acris-cookie.detail.cardGoogleCookieConsentMode')"
+                                class="acris-cookie-google-cookie-consent-mode">
+                            {% block acris_cookie_detail_content_google_cookie_consent_mode_select %}
+                                <sw-multi-select v-model:value="item.googleCookieConsentMode"
+                                                 :entity-collection="item.googleCookieConsentMode"
+                                                 @update:entity-collection="onChange"
+                                                 :label="$tc('acris-cookie.detail.fieldGoogleCookieConsentModeLabel')"
+                                                 :placeholder="$tc('acris-cookie.detail.fieldGoogleCookieConsentModePlaceholder')"
+                                                 :options="googleCookieConsentModeOptions">
+                                </sw-multi-select>
+                            {% endblock %}
+                        </mt-card>
+                    {% endblock %}
+                </sw-card-view>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

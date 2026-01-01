@@ -1,0 +1,10 @@
+{% block netzp_powerpack6_html %}
+    <div class="netzp-powerpack6-html-element" id="html_{{ element.id }}">
+        {% if(element.config.css.value) %}
+            <style>{{ element.config.css.value }}</style>
+        {% endif %}
+        {% if(element.config.html.value) %}
+            {{ element.config.html.value|raw }}
+        {% endif %}
+    </div>
+{% endblock %}

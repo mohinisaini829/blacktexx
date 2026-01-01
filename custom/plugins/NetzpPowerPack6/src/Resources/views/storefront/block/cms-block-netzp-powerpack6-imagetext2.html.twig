@@ -1,0 +1,48 @@
+{% block block_netzp_powerpack6_imagetext2 %}
+{% set columns = 2 %}
+{% set id = element.id %}
+
+{% block block_netzp_powerpack6_imagetext2_col1 %}
+<div class="col-md-6">
+    <div class="image-text-gallery-card">
+        {% block block_image_text_gallery_left_image %}
+        {% set element = block.slots.getSlot('left-image') %}
+
+        <div data-cms-element-id="{{ element.id }}">
+            {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+        </div>
+        {% endblock %}
+
+        {% block block_image_text_gallery_left_text %}
+        {% set element = block.slots.getSlot('left-text') %}
+
+        <div data-cms-element-id="{{ element.id }}">
+            {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block block_netzp_powerpack6_imagetext2_col2 %}
+<div class="col-md-6">
+    <div class="image-text-gallery-card">
+        {% block block_image_text_gallery_right_image %}
+        {% set element = block.slots.getSlot('right-image') %}
+
+        <div data-cms-element-id="{{ element.id }}">
+            {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+        </div>
+        {% endblock %}
+
+        {% block block_image_text_gallery_right_text %}
+        {% set element = block.slots.getSlot('right-text') %}
+
+        <div data-cms-element-id="{{ element.id }}">
+            {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+{% endblock %}

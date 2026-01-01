@@ -1,0 +1,42 @@
+{
+    "name": "acris/cookie-consent",
+    "description": "EU Cookie Richtlinie Pro + automatischer Cookie Erkennung",
+    "version": "v9.2.2",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Acris\\CookieConsent\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ACRIS E-Commerce GmbH",
+            "homepage": "https://www.acris.at/"
+        }
+    ],
+    "require": {
+        "shopware/core": ">=6.7.0.0 <6.8.0.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "Acris\\CookieConsent\\AcrisCookieConsentCS",
+        "plugin-icon": "src/Resources/config/plugin.png",
+        "copyright": "(c) by ACRIS E-Commerce GmbH",
+        "label": {
+            "de-DE": "EU Cookie Richtlinie Pro",
+            "en-GB": "EU Cookie Policy Pro"
+        },
+        "description": {
+            "de-DE": "Die EU Cookie Richtlinie konforme Datenschutz Erweiterung für Ihren Webshop.",
+            "en-GB": "The EU Cookie Policy compliant privacy enhancement for your webshop."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.acris.at",
+            "en-GB": "https://www.acris.at/en"
+        },
+        "supportLink": {
+            "de-DE": "https://www.acris.at/kontakt/",
+            "en-GB": "https://www.acris.at/en/contact"
+        }
+    }
+}

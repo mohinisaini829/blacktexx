@@ -1,0 +1,5 @@
+{% sw_extends '@Storefront/storefront/page/content/detail.html.twig' %}
+
+{% block page_content_section %}
+    {% sw_include "@Storefront/storefront/partials/responsive.html.twig" with { model: section, parentBlock: parent() } %}
+{% endblock %}

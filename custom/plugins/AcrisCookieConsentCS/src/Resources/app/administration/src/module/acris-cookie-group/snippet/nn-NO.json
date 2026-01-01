@@ -1,0 +1,37 @@
+{
+    "acris-cookie-group": {
+        "general": {
+            "mainMenuItemGeneral": "Informasjonskapsler",
+            "placeholderSearchBar": "Søk etter informasjonskapsler",
+            "description": "Vis informasjonskapsler som er funnet i butikken",
+            "labelName": "Informasjonskapselgruppe"
+        },
+        "list": {
+            "textHeadline": "Informasjonskapselgrupper",
+            "buttonAdd": "Legg til",
+            "contextMenuEdit": "Rediger",
+            "contextMenuDelete": "Slett",
+            "columnTitle": "Tittel",
+            "columnDescription": "Beskrivelse",
+            "textDeleteConfirm": "Vil du slette informasjonskapselgruppen",
+            "modalTitleDelete": "Slett informasjonskapselgruppe",
+            "buttonCancel": "Avbryt",
+            "buttonDelete": "Slett",
+            "contentEmpty": "Det er ingen informasjonskapselgrupper"
+        },
+        "detail": {
+            "textHeadline": "Innstillinger for informasjonskapselpolicygruppe",
+            "buttonCancel": "Avbryt",
+            "buttonSave": "Lagre",
+            "fieldTitleLabel": "Tittel",
+            "fieldTitlePlaceholder": "Sett inn tittel for informasjonskapselgruppe",
+            "fieldDescriptionLabel": "Beskrivelse",
+            "fieldDescriptionPlaceholder": "Sett inn beskrivelse",
+            "cardTitle": "Kundeinformasjon",
+            "notificationSaveErrorMessage": "Det oppstod en feil under lagring av informasjonskapselgruppen.",
+            "notificationSaveSuccessMessage": "Informasjonskapselgruppen ble lagret.",
+            "notificationSaveSuccessMessageTitle": "Suksess",
+            "notificationSaveErrorMessageTitle": "Feil"
+        }
+    }
+}

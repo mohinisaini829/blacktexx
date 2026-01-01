@@ -1,0 +1,64 @@
+{% sw_extends '@Storefront/storefront/component/product/card/box-standard.html.twig' %}
+
+{% block component_product_box_image %}
+    <div class="product-image-wrapper">
+        {# fallback if display mode is not set #}
+        {% set displayMode = displayMode ?: 'standard' %}
+
+        {# set display mode 'cover' for box-image with standard display mode #}
+        {% if layout == 'image' and displayMode == 'standard' %}
+            {% set displayMode = 'cover' %}
+        {% endif %}
+
+        <a href="{{ specialOffersLink }}"
+           title="{{ name }}"
+           class="product-image-link is-{{ displayMode }}">
+            {% if cover.url %}
+                {% set attributes = {
+                    'class': 'product-image is-'~displayMode,
+                    'alt': (cover.translated.alt ?: name),
+                    'title': (cover.translated.title ?: name)
+                } %}
+
+                {% if displayMode == 'cover' or displayMode == 'contain' %}
+                    {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+                {% endif %}
+
+                {% sw_thumbnails 'product-image-thumbnails' with {
+                    media: cover,
+                    sizes: sizes
+                } %}
+            {% else %}
+                <div class="product-image-placeholder">
+                    {% sw_icon 'placeholder' style {
+                        'size': 'fluid'
+                    } %}
+                </div>
+            {% endif %}
+        </a>
+
+        {% if config('core.cart.wishlistEnabled') %}
+            {% block component_product_box_wishlist_action %}
+                {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
+                    appearance: 'circle',
+                    productId: id
+                } %}
+            {% endblock %}
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+{% block component_product_box_name %}
+    <a href="{{ specialOffersLink }}"
+       class="product-name"
+       title="{{ name }}">
+        {{ name }}
+    </a>
+{% endblock %}
+
+{% block component_product_box_rating %}{% endblock %}
+{% block component_product_box_variant_characteristics %}{% endblock %}
+{% block component_product_box_description %}{% endblock %}
+{% block component_product_box_price %}{% endblock %}
+{% block component_product_box_action %}{% endblock %}

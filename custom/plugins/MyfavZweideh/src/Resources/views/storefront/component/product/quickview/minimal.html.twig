@@ -1,0 +1,46 @@
+{% sw_extends '@Storefront/storefront/component/product/quickview/minimal.html.twig' %}
+
+{% block component_product_quickview_minimal_img %}
+    {% if app.request.query.get('myfavZweidehDesignedProduct') == "1" %}
+        <div class="col-12 col-md-6 quickview-minimal-image">
+            <img src="{{ app.request.query.get('imgUrl') }}" class="img-fluid quickview-minimal-img" />
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_quickview_minimal_product_name %}
+    {% if app.request.query.get('myfavZweidehDesignedProduct') == "1" %}
+        <div class="h4 quickview-minimal-product-name">
+            {{ name }}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_quickview_minimal_product_manufacturer %}
+    {% if app.request.query.get('myfavZweidehDesignedProduct') == "1" %}
+        {% if manufacturer %}
+            <div class="quickview-minimal-product-manufacturer">
+                {% if manufacturer.media %}
+                    {% sw_thumbnails 'quickview-minimal-product-manufacturer-logo' with {
+                        media: manufacturer.media,
+                        sizes: {
+                            'default': '360px'
+                        },
+                        attributes: {
+                            'class': 'quickview-minimal-product-manufacturer-logo',
+                            'alt': ( manufacturer.translated.name ?: '')
+                        }
+                    } %}
+                {% else %}
+                    {{ manufacturer.translated.name }}
+                {% endif %}
+            </div>
+        {% endif %}
+     {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

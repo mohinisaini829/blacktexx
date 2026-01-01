@@ -1,0 +1,41 @@
+{% block element_produkt_zertifizierungen_content %}
+    {% set certGroupId = theme_config('vio-product-cert-property-group') %}
+    {% set certProperties = page.product.properties.filterByProperty('groupId', certGroupId) %}
+    {% if certProperties.count > 0 %}
+        <h3 class="produkt-zertifizierungen-title">{{ 'santa-theme.sw-cms.elements.vio_product_zerts.label'|trans }}</h3>
+        <div class="product-zert-content">
+            {% set snippet = "santa-theme.sw-cms.elements.vio_product_zerts." %}
+            {% for cert in certProperties %}
+                {% set certLink = "" %}
+                {% set zert = cert.translated.name|escape('html_attr') %}
+                <div>
+                    {% if "#{snippet ~ zert ~ '.link'}"|trans != "#{snippet ~ zert}" ~ ".link" %}
+                        {% set certLink = "#{snippet ~ zert ~ '.link'}"|trans %}
+                    {% endif %}
+                    {% if certLink %}
+                        <a href="{{ certLink }}" title="{{ cert.translated.name }}" target="_blank">
+                    {% endif %}
+
+                        {% if cert.media %}
+                            {% sw_thumbnails 'product-cert-thumbnails' with {
+                                media: cert.media,
+                                sizes: {
+                                    'default': '200px'
+                                },
+                                attributes: {
+                                    'alt': cert.translated.name,
+                                    'title': cert.translated.name
+                                }
+                            } %}
+                        {% else %}
+                            {{ cert.translated.name }}
+                        {% endif %}
+
+                    {% if certLink %}
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

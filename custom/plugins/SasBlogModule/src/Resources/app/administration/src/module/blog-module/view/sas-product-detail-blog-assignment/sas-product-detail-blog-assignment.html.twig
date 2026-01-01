@@ -1,0 +1,36 @@
+{% block sas_product_detail_blog_assignments %}
+    <div class="sas-product-detail-blog-assignment">
+        <mt-card
+            v-if="product"
+            position-identifier="sas-product-detail-blog-assignment"
+        >
+            {% block sas_product_detail_blog_assignments_toggle %}
+            <mt-switch
+                v-if="product.customFields"
+                v-model="product.customFields.isAssignBlogByTag"
+                :label="$tc('sas-blog.product.detail.isAssignBlogByTag')"
+            />
+            {% endblock %}
+
+            {% block sas_product_detail_blog_assignments_tags %}
+            <sw-entity-tag-select
+                v-if="product.extensions && product.customFields?.isAssignBlogByTag"
+                v-model:entityCollection="product.extensions.blogTags"
+                name="sw-field--blog-tags"
+                :label="$tc('sw-customer.baseForm.labelTags')"
+                size="medium"
+            />
+            {% endblock %}
+
+            {% block sw_settings_user_detail_grid_content_acl_roles %}
+            <sw-entity-multi-select
+                v-if="product.extensions && !product.customFields?.isAssignBlogByTag"
+                v-model:entityCollection="product.extensions.assignedBlogs"
+                name="sw-field--blog-assigned"
+                :label="$tc('sas-blog.product.detail.assignedBlogs')"
+                label-property="title"
+            />
+            {% endblock %}
+        </mt-card>
+    </div>
+{% endblock %}

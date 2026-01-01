@@ -1,0 +1,9 @@
+{% block biloba_article_variant_order_matrix_product_card_action %}
+    <button class="btn btn-block btn-buy biloba-variant-button-card"
+            title="{{ "biloba.ArticleVariantOrderMatrix.quickOrder"|trans|striptags }}"
+            data-ajax-modal="true"
+            data-modal-class="quickview-modal" 
+            data-url="{{ path('store-api.biloba.article-variant-order-matrix.quickorder', { 'productId': product.id }) }}">
+        {{ "biloba.ArticleVariantOrderMatrix.quickOrder"|trans|sw_sanitize }}
+    </button>
+{% endblock %}

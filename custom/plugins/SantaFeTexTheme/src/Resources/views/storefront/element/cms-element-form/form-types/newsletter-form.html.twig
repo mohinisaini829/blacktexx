@@ -1,0 +1,29 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-form/form-types/newsletter-form.html.twig' %}
+
+{% block cms_form_newsletter_select_action %}
+    {{ parent()|replace({"form-group col-12": "form-group col-6 col-md-4"})|raw }}
+    {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+        with {
+        fieldName: 'email',
+        type: 'email',
+        required: true,
+        additionalClass: 'col-6 col-md-4',
+        label: 'newsletter.labelMail',
+        placeholder: 'newsletter.placeholderMail'
+    }
+    %}
+{% endblock %}
+
+{% block cms_form_newsletter_input_email %}{% endblock %}
+{% block cms_form_newsletter_captcha %}
+    <div class="form-row">
+        <div class="col-12 col-md-8 col-lg-9">
+            {{ parent() }}
+{% endblock %}
+{% block cms_form_newsletter_submit %}
+        </div>
+        <div class="mt-1 col-12 col-md-4 col-lg-3 d-flex align-items-end justify-content-end">
+            {{ parent() }}
+        </div>
+    </div>
+{% endblock %}

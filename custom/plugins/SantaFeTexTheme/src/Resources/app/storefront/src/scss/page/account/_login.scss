@@ -1,0 +1,29 @@
+.is-act-loginpage {
+    .login-card,
+    .register-personal,
+    .register-address,
+    .login-advantages {
+        background: $login-card-background;
+        border-radius: 2px;
+        box-shadow: 0 0 50px 0 rgb(0 0 0 / 8%);
+        padding: 1rem;
+    }
+
+    .login-card,
+    .register-personal {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+    }
+
+    .register-address {
+        margin-bottom: 1rem;
+    }
+
+    .card-title {
+        font-size: $login-font-size-title;
+    }
+
+    .register-submit {
+        margin-bottom: 3rem;
+    }
+}

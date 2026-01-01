@@ -1,0 +1,34 @@
+<li class="moorl-download-list-item">
+    <div class="download-icon">
+        {% if file.fileExtension in ['png','gif','jpg','jpeg','bmp','webp'] %}
+            {% sw_icon 'file-image' style {pack: 'far'} %}
+        {% elseif file.fileExtension in ['pdf'] %}
+            {% sw_icon 'file-pdf' style {pack: 'far'} %}
+        {% elseif file.fileExtension in ['csv','xls'] %}
+            {% sw_icon 'file-excel' style {pack: 'far'} %}
+        {% elseif file.fileExtension in ['zip','rar','gz'] %}
+            {% sw_icon 'file-archive' style {pack: 'far'} %}
+        {% else %}
+            {% sw_icon 'file-alt' style {pack: 'far'} %}
+        {% endif %}
+    </div>
+
+    <div class="download-content">
+        <div class="download-title" title="{{ file.fileName }}">
+            {{ file.fileName }}
+        </div>
+
+        <div class="download-meta">
+            ({{ file.fileSize|moorl_format_bytes }})
+        </div>
+    </div>
+
+    <div class="download-form">
+        <a class="btn btn-light"
+           href="{{ file.url }}"
+           title="{{ file.fileName }}"
+           download="{{ file.fileName }}.{{ file.fileExtension }}">
+            {% sw_icon 'cloud-download' %}
+        </a>
+    </div>
+</li>

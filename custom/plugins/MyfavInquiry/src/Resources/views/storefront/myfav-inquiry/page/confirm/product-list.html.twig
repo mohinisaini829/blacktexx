@@ -1,0 +1,206 @@
+<ul class="list-group list-group-flush" data-count="{{ page.inquiryCartEntryCollection.count }}">
+    {# @var lineItem \Myfav\Inquiry\Entity\InquiryCartEntry\InquiryCartEntryEntity #}
+    {% for lineItem in page.inquiryCartEntryCollection %}
+  {% set extendedDataArray = lineItem.extendedData|json_decode %}
+<!-- {{ dump(extendedDataArray.color) }} -->
+<!-- {% if extendedData is not null %}
+    {% set extendedDataArray = extendedData | json_decode %}
+    <p>Color: {{ extendedDataArray.color }}</p>
+{% else %}
+    <p>No color available.</p>
+{% endif %} -->
+
+        {% if lineItem.product == null %}
+            {% block designed_product_item %}
+                <li class="list-group-item">
+                    
+
+                    {% block designed_product_item_inner %}
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2">
+                                {% if 
+                                    lineItem.extensions.myfavZweidehProductData.designedPreviewImages is null ||
+                                    lineItem.extensions.myfavZweidehProductData.designedPreviewImages|length == 0
+                                 %}
+                                    <img class="img-fluid cart-item-img" style="width: 200px; height: 200px!important;" src="{{ url('frontend.home.page') }}{{ lineItem.extensions.myfavZweidehProductData.imageUrl }}" />
+                                {% else %}
+                                    {# Output the first image. The other designed images are presented below. #}
+                                    <img class="img-fluid cart-item-img" style="width: 100%; height: auto;" src="{{ url('frontend.home.page') }}{{ lineItem.extensions.myfavZweidehProductData.designedPreviewImages[0].realFilename }}" />
+                                {% endif %}
+                            </div>
+                            <!-- <div class="col-sm-12 col-md-8">
+                                {{ lineItem.extensions.myfavZweidehProductData.productName }}
+                                <dl>
+                                    Größe: {{ lineItem.extensions.myfavZweidehProductData.productSize }}
+                                </dl>
+                                <dl>
+
+                                    Farbe: {{ extendedDataArray.color }}
+                                </dl>
+                                <dl>
+
+                                    Marke: {{ extendedDataArray.brand }}
+                                </dl>
+                                <dl>
+                                    Individuell gestaltet
+                                </dl>
+                                <a href="{{ path('frontend.myfav.inquiry.delete', { id: lineItem.id}) }}">
+                                    {% sw_icon 'trash' %}
+                                    {{ 'myfavInquiry.confirm.delete'|trans }}
+                                </a>
+
+                                {% if 
+                                    lineItem.extensions.myfavZweidehProductData.designedPreviewImages is not null &&
+                                    lineItem.extensions.myfavZweidehProductData.designedPreviewImages|length > 1
+                                 %}
+                                    <div class="cart-item-img-more-container">
+                                    {% for previewImage in lineItem.extensions.myfavZweidehProductData.designedPreviewImages %}
+                                        {% if loop.index > 1 %}
+                                            <img class="img-fluid cart-item-img cart-item-img-more" src="{{ url('frontend.home.page') }}{{ previewImage.realFilename }}" />
+                                        {% endif %}
+                                    {% endfor %}
+                                    </div>
+                                 {% endif %}
+                            </div> -->
+                            
+                            <div class="col-sm-12 col-md-8">
+                                {{ lineItem.extensions.myfavZweidehProductData.productName }}
+
+                                <!-- Caret Toggle for All Information -->
+                                <span class="caret-toggle" data-section="infoSection{{ lineItem.id }}"></span> <!-- Right-facing caret (▶) -->
+
+                                <!-- All Product Details in One Div -->
+                                <div class="toggle-section" id="infoSection{{ lineItem.id }}" style="display: none;">
+                                    <dl>
+                                        <dt>Größe:</dt>
+                                        <dd>{{ lineItem.extensions.myfavZweidehProductData.productSize }}</dd>
+                                    </dl>
+                                    
+                                    <dl>
+                                        <dt>Farbe:</dt>
+                                        <dd>{{ extendedDataArray.color }}</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Marke:</dt>
+                                        <dd>{{ extendedDataArray.brand }}</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Individuell gestaltet:</dt>
+                                        <dd></dd>
+                                    </dl>
+
+                                    <a href="{{ path('frontend.myfav.inquiry.delete', { id: lineItem.id}) }}">
+                                        
+                                        {{ 'myfavInquiry.confirm.delete'|trans }}
+                                    </a>
+
+                                    {% if 
+                                        lineItem.extensions.myfavZweidehProductData.designedPreviewImages is not null &&
+                                        lineItem.extensions.myfavZweidehProductData.designedPreviewImages|length > 1
+                                     %}
+                                        <div class="cart-item-img-more-container">
+                                            {% for previewImage in lineItem.extensions.myfavZweidehProductData.designedPreviewImages %}
+                                                {% if loop.index > 1 %}
+                                                    <img class="img-fluid cart-item-img cart-item-img-more" src="{{ url('frontend.home.page') }}{{ previewImage.realFilename }}" />
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-2 pt-1">
+                                <form action="{{ path('frontend.myfav.inquiry.quantity', { id: lineItem.id}) }}"
+                                    method="post"
+                                    data-form-auto-submit="true"
+                                >
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('frontend.myfav.inquiry.quantity') }}">
+                                    <div class="form-group">
+                                        <input type="number"
+                                            min="1"
+                                            name="quantity"
+                                            step="1"
+                                            {# step="{{ lineItem.product.purchaseSteps }}" #}
+                                            value="{{ lineItem.quantity }}"
+                                            aria-label="{{ 'myfavInquiry.confirm.quantityLabel'|trans|sw_sanitize }}"
+                                            title="{{ 'myfavInquiry.confirm.quantityLabel'|trans|sw_sanitize }}"
+                                            placeholder="{{ 'myfavInquiry.confirm.quantityLabel'|trans|sw_sanitize }}"
+                                        >
+                                    </div>
+                                </form>
+
+                                {% set itemUnitPrice = lineItem.product.calculatedPrice.unitPrice %}
+                                <div class="font-weight-bold">Preis auf Anfrage</div>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock %}
+                </li>
+            {% endblock %}
+        {% else %}
+            {% block product_item %}
+                <li class="list-group-item">
+                    {% block product_item_inner %}
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2">
+                                <!-- {{ dump(lineItem.product.cover.media) }} -->
+                                {% sw_thumbnails 'product-image-thumbnails' with {
+                                    media: lineItem.product.cover.media,
+                                    sizes: {
+                                        'default': '200px'
+                                    },
+                                    attributes: {
+                                        'alt': lineItem.product.translated.name,
+                                        'title': lineItem.product.translated.name
+                                    }
+                                } %}
+                            </div>
+                            <div class="col-sm-12 col-md-8">
+                                <a href="{{ path('frontend.detail.page', { productId: lineItem.productId }) }}">
+                                    {{ lineItem.product.translated.name }}
+                                </a>
+                                <dl>
+                                    {% for option in lineItem.product.options %}
+                                        <dt>{{ option.group.translated.name }}: {{ option.translated.name }}</dt>
+                                    {% endfor %}
+                                </dl>
+                                <a href="{{ path('frontend.myfav.inquiry.delete', { id: lineItem.id}) }}">
+                                    
+                                    {{ 'myfavInquiry.confirm.delete'|trans }}
+                                </a>
+                            </div>
+                            <div class="col-sm-12 col-md-2 pt-1">
+                                <form action="{{ path('frontend.myfav.inquiry.quantity', { id: lineItem.id}) }}"
+                                    method="post"
+                                    data-form-auto-submit="true"
+                                >
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('frontend.myfav.inquiry.quantity') }}">
+                                    <div class="form-group">
+                                        <input type="number"
+                                            min="1"
+                                            name="quantity"
+                                            step="{{ lineItem.product.purchaseSteps }}"
+                                            value="{{ lineItem.quantity }}"
+                                            aria-label="{{ 'myfavInquiry.confirm.quantityLabel'|trans|sw_sanitize }}"
+                                            title="{{ 'myfavInquiry.confirm.quantityLabel'|trans|sw_sanitize }}"
+                                            placeholder="{{ 'myfavInquiry.confirm.quantityLabel'|trans|sw_sanitize }}"
+                                        >
+                                    </div>
+                                </form>
+                                {% set itemUnitPrice = lineItem.product.calculatedPrice.unitPrice %}
+                                <div class="font-weight-bold">{{ (itemUnitPrice * lineItem.quantity)|currency }}</div>
+                                <div>
+                                    <span class="font-weight-light">{{ 'myfavInquiry.confirm.unitPrice'|trans }}</span>
+                                    {{ itemUnitPrice|currency }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock %}
+                </li>
+            {% endblock %}
+        {% endif %}
+    {% endfor %}
+</ul>

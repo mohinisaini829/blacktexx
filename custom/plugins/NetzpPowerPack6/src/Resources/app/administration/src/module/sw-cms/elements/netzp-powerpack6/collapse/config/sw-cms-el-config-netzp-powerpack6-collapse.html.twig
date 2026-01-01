@@ -1,0 +1,42 @@
+{% block sw_cms_element_netzp_powerpack6_collapse_config %}
+    <div class="sw-cms-el-config-netzp-powerpack6">
+        <sw-container columns="1fr 2fr 1fr" gap="20px">
+            <sw-number-field numbertype="int" :min="1" :max="20"
+                             :label="$tc('sw-cms.netzp-powerpack6.elements.collapse.config.numberOfItems')"
+                             v-model:value="element.config.numberOfItems.value">
+            </sw-number-field>
+
+            <sw-checkbox-field :label="$tc('sw-cms.netzp-powerpack6.elements.collapse.config.firstItemOpened')"
+                               v-model:value="element.config.firstItemOpened.value">
+            </sw-checkbox-field>
+        </sw-container>
+
+        <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.collapse.config.title')"
+                       v-model:value="element.config.title.value" />
+
+        <sw-tabs :small="false" defaultItem="item1" positionIdentifier="netzp-powerpack-collapse-tabs">
+            <template #default="{ active }">
+                <sw-tabs-item v-for="n in element.config.numberOfItems.value" :key="n"
+                              :name="'item' + n" :activeTab="active"
+                              :title="'Item ' + n">
+                    <span v-if="element.config['itemtitle' + n].value" v-html="element.config['itemtitle' + n].value"></span>
+                    <span v-else>
+                        Item {{ n }}
+                    </span>
+                </sw-tabs-item>
+            </template>
+
+            <template #content="{ active }">
+                <template v-for="n in element.config.numberOfItems.value" :key="n">
+                    <sw-container v-if="active === 'item' + n">
+                        <sw-text-field :label="$tc('sw-cms.netzp-powerpack6.elements.collapse.config.itemtitle') + ' ' + n"
+                                       v-model:value="element.config['itemtitle' + n].value" />
+
+                        <sw-text-editor :label="$tc('sw-cms.netzp-powerpack6.elements.collapse.config.itemcontents') + ' ' + n"
+                                        v-model:value="element.config['itemcontents' + n].value" />
+                    </sw-container>
+                </template>
+            </template>
+        </sw-tabs>
+    </div>
+{% endblock %}

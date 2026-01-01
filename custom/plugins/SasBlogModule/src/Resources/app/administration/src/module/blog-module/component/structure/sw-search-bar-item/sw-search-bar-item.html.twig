@@ -1,0 +1,21 @@
+{% block sw_search_bar_item_cms_page %}
+    {% parent() %}
+
+    <!-- eslint-disable vue/valid-v-else-if -->
+    <router-link
+        v-else-if="type === 'sas_blog_entries'"
+        ref="routerLink"
+        :to="{ name: 'blog.module.detail', params: { id: item.id } }"
+        class="sw-search-bar-item__link"
+        @click.native="onClickSearchResult('sas_blog_entries', item.id)"
+    >
+        {% block sw_search_bar_item_sas_blog_entries_label %}
+        <span class="sw-search-bar-item__label">
+            <sw-highlight-text
+                :search-term="searchTerm"
+                :text="item.title"
+            />
+        </span>
+        {% endblock %}
+    </router-link>
+{% endblock %}

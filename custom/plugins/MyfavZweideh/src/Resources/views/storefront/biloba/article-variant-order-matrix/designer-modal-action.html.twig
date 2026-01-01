@@ -1,0 +1,15 @@
+<div class="col-12 option1">
+    <h2>{{ buttonData.heading }}</h2>
+    <p>{{ buttonData.text|sw_sanitize }}</p>
+    {% if buttonData.buttonAction == 'openSmallAmountDesigner' %}
+        <a href="{{ path('frontend.myfav.designer.start') }}?productId={{ page.product.id }}">
+    {% elseif buttonData.buttonAction == 'openCompanyDesigner' %}
+        <a href="https://www.tiny-tex.com/" target="_blank">
+    {% else %}
+        <a href="#" data-dismiss="modal">
+    {% endif %}
+        <button type="button" class="btn {% if buttonData.buttonStyle == 'blueFilled' %}btn-outline-secondary{% else %}btn-outline-primary{% endif %}">
+            {{ buttonData.btnText }}
+        </button>
+    </a>
+</div>

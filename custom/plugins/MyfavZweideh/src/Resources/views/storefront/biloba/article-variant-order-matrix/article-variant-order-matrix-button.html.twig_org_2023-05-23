@@ -1,0 +1,30 @@
+{% if page.product.customFields.myfav_zweideh_enabled %}
+    <div class="myfav-zweideh-designer-button-container">
+        <p class="myfav-zweideh-designer-description">{# {{ 'MyfavZweidehDesignerDescription' | trans }} #} Dieser Artikel ist gestaltbar.</p>
+            <a href="{{ path('frontend.home.page') }}{{ config('MyfavZweideh.config.lumisInstallPath') }}editor.php?product_base={{ page.product.customFields.lumis_designer_article_id }}">
+                <button type="button" class="btn btn-primary" id="myfav-obility-designer-button">
+                    {#{{ 'MyfavObilityDesignerButtonText' | trans }}#} Hier selbst gestalten
+                </button>
+            </a>
+        </div>
+    </div>
+{% else %}
+    <div class="biloba-variant-matrix-button-container" >
+        {% set totalPriceActivate = config("BilobaArticleVariantOrderMatrix.config.totalPriceActivate") %}
+        {% set langCode = page.header.activeLanguage.translationCode.code|lower|split('-')[0]|default('de') %}
+
+        {% if totalPriceActivate != false %}
+            <span class="variants-total-price">{{ 'biloba.ArticleVariantOrderMatrix.variantsTotalPrice'|trans }}{{": "}}
+                {% if langCode == 'de' %}
+                    <span id="variants-total-price-value">{{0}},{{"%02d"|format(0, ",")}}</span> {{ context.getCurrency().getSymbol() }}
+                {% elseif langCode == 'en' %}
+                    <span id="variants-total-price-value">{{0}}.{{"%02d"|format(0, ".")}}</span> {{ context.getCurrency().getSymbol() }}
+                {% else %}
+                    <span id="variants-total-price-value">{{0}},{{"%02d"|format(0, ",")}}</span> {{ context.getCurrency().getSymbol() }}
+                {% endif %}
+            </span>
+        {% endif %}
+        
+        <button type="button" class="btn btn-primary btn-buy bit-variant-button" disabled="true">{{ 'biloba.ArticleVariantOrderMatrix.DetailBuyActionAdd'|trans }}</button>
+    </div>
+{% endif %}

@@ -1,0 +1,41 @@
+{
+    "acris-cookie-group": {
+        "general": {
+            "mainMenuItemGeneral": "Cookies",
+            "placeholderSearchBar": "Search cookies",
+            "description": "View cookies which had been found in the shop",
+            "labelName": "Cookie Group"
+        },
+        "list": {
+            "textHeadline": "Cookie groups",
+            "buttonAdd": "Add",
+            "contextMenuEdit": "Edit",
+            "contextMenuDelete": "Delete",
+            "columnTitle": "Title",
+            "columnDescription": "Description",
+            "textDeleteConfirm": "Do you want to delete cookie group",
+            "modalTitleDelete": "Delete cookie group",
+            "buttonCancel": "Cancel",
+            "buttonDelete": "Delete",
+            "contentEmpty": "There are no cookie groups"
+        },
+        "detail": {
+            "textHeadline": "Cookie policy group settings",
+            "buttonCancel": "Cancel",
+            "buttonSave": "Save",
+
+            "fieldTitleLabel": "Title",
+            "fieldTitlePlaceholder": "Insert cookie group title",
+
+            "fieldDescriptionLabel": "Description",
+            "fieldDescriptionPlaceholder": "Insert description",
+
+            "cardTitle": "Customer information",
+
+            "notificationSaveErrorMessage": "An error occurred on saving the cookie group.",
+            "notificationSaveSuccessMessage": "The cookie group was saved successfully.",
+            "notificationSaveSuccessMessageTitle": "Success",
+            "notificationSaveErrorMessageTitle": "Error"
+        }
+    }
+}

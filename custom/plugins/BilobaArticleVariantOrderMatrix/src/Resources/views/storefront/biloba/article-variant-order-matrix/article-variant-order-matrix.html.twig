@@ -1,0 +1,22 @@
+{% set children = page.extensions.bilobaArticleVariantOrderMatrix.elements.children %}
+{% set key = null %}
+{% set variantMatrixArrayKeysAndValues = page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrix %}
+{% set groupOptionId = null %}
+{% set viewportSet = false %}
+{% set viewport = ['VariantMatrixViewportColsMobileportrait','VariantMatrixViewportColsTabletLandscape','VariantMatrixViewportColsTabletportrait','VariantMatrixViewportColsMobilelandscape','VariantMatrixViewportColsDesktop'] %}
+
+{% if  (config("BilobaArticleVariantOrderMatrix.config.VariantMatrixViewportColsDesktop") == 0) or (config("BilobaArticleVariantOrderMatrix.config.VariantMatrixViewportColsTabletportrait") == 0)
+or (config("BilobaArticleVariantOrderMatrix.config.VariantMatrixViewportColsTabletLandscape") == 0) or (config("BilobaArticleVariantOrderMatrix.config.VariantMatrixViewportColsMobileportrait") == 0)
+or (config("BilobaArticleVariantOrderMatrix.config.VariantMatrixViewportColsMobilelandscape") == 0) %}
+    {% set viewportSet = false %}
+{% else %}
+    {% set viewportSet = true %}
+{% endif %}
+
+{% if  page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == "selector" %}
+    {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-selector.html.twig' %}
+{% elseif page.extensions.bilobaArticleVariantOrderMatrix.elements.variantMatrixLayout == 'standard' %}
+    {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-standard.html.twig' %}
+{% else %}
+    {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-last-group-as-matrix.html.twig' %}
+{% endif %}

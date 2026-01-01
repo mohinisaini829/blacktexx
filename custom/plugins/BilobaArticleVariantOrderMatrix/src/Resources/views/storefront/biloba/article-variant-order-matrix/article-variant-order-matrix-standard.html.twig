@@ -1,0 +1,141 @@
+{% set cmsPageExists = cmsPage %}
+{% set matrixPosition = config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition")%}
+
+{% if page.extensions.bilobaArticleVariantOrderMatrix.elements.showShopwareSelection 
+        && config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") == "price"%}
+    {% sw_include '@Storefront/storefront/page/product-detail/buy-widget-form.html.twig' %}
+{% endif %}
+
+{% if bilobaVariantMatrixDisableInline != true %}
+    <div class="biloba-variant-matrix">
+        <form id="biloba-variant-matrix-formular"
+            method="post"
+            data-biloba-add-to-cart="true"
+            action="{{ path('frontend.checkout.line-item.add') }}">
+        
+            {% if page.configuratorSettings %}
+                {% set configuratorSettings = page.configuratorSettings %}
+            {% elseif page.product.configurator %}
+                {% set configuratorSettings = page.product.configurator %}
+            {% else %}
+                {% set configuratorSettings = page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings'] %}
+            {% endif %}
+
+            {% set firstGroup = configuratorSettings.elements|first %}
+            
+            {% if configuratorSettings.elements|length > 1 %}
+                {% set secondGroup = configuratorSettings.elements|last %}
+            {% endif %}
+            
+            {% set xAxis = firstGroup %}
+            {% set yAxis = secondGroup %}
+            
+            {% if configuratorSettings.elements|length == 1 %}
+                {% set caseOneVariant = true %}
+            {% else %}
+                {% set caseOneVariant = false %}
+            {% endif %}
+
+            {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixOneGroupOrientation") == 'orientation_y' %}
+                {% set caseOrientY = true %}
+            {# if orientation_x true or everything else including field deleted #}
+            {% else %}
+                {% set caseOrientY = false %}
+            {% endif %}
+
+            {# If there is more then 1 variant#}
+            {% if configuratorSettings.elements|length > 1 %}
+                {% if caseOrientY %}
+                    {% set xAxis = secondGroup %}
+                    {% set yAxis = firstGroup %}
+                {% else %}
+                    {% set xAxis = firstGroup %}
+                    {% set yAxis = secondGroup %}
+                {% endif %}
+            {% else %}
+                {% if caseOrientY %}
+                    {% set xAxis = 'biloba.ArticleVariantOrderMatrix.VariantOrderMatrixColAmount'|trans %}
+                    {% set yAxis = firstGroup %}
+                {% else %}
+                    {% set xAxis = firstGroup %}
+                    {% set yAxis = 'biloba.ArticleVariantOrderMatrix.VariantOrderMatrixColAmount'|trans %}
+                {% endif %}
+            {% endif %}
+
+            {% set viewport = ['VariantMatrixViewportColsMobileportrait','VariantMatrixViewportColsTabletLandscape','VariantMatrixViewportColsTabletportrait','VariantMatrixViewportColsMobilelandscape','VariantMatrixViewportColsDesktop'] %}
+            
+            {% set bitArticleVariantMatrix = config("BilobaArticleVariantOrderMatrix.config") %}
+            {# iterate through viewports #}
+            {% for viewportKey in viewport %}
+                {# check if viewportKey is defined #}
+                {% set viewportValue = xAxis.options|length %}
+                {% if bitArticleVariantMatrix[viewportKey] is defined and bitArticleVariantMatrix[viewportKey] > 0%}
+                    
+                    {% if caseOneVariant %}
+                        {% if caseOrientY %}
+                            {# if y_orientation selected table doesnt breake because it would look very weard #}
+                            {% set viewportValue = yAxis.options|length %}
+                            {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-standard-table.html.twig' with {'viewportValue': viewportValue, 'viewportKey': viewportKey, 'bitArticleVariantMatrix': bitArticleVariantMatrix} %}
+                        {# x_orientation selected #}
+                        {% else %}
+                            {% set viewportValue = bitArticleVariantMatrix[viewportKey] %}
+                            {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-standard-table.html.twig' with {'viewportValue': viewportValue, 'viewportKey': viewportKey, 'bitArticleVariantMatrix': bitArticleVariantMatrix} %}
+                        {% endif %}
+                    {# more then one variant #}
+                    {% else %}
+                        {% if caseOrientY %}
+                            {% set viewportValue = bitArticleVariantMatrix[viewportKey] %}
+                            {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-standard-table.html.twig' with {'viewportValue': viewportValue, 'viewportKey': viewportKey, 'bitArticleVariantMatrix': bitArticleVariantMatrix} %}
+                        {# x_orientation selected #}
+                        {% else %}
+                            {% set viewportValue = bitArticleVariantMatrix[viewportKey] %}
+                            {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-standard-table.html.twig' with {'viewportValue': viewportValue, 'viewportKey': viewportKey, 'bitArticleVariantMatrix': bitArticleVariantMatrix} %}
+                        {% endif %}
+                    {% endif %}
+                {# when viewportKey is undefined #}
+                {% else %}
+                    {% if caseOneVariant %}
+                        {% if caseOrientY %}
+                            {# if viewport undefined then table columns shouldnt break #}
+                            {% set viewportValue = yAxis.options|length %}
+                            
+                            {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-standard-table.html.twig' with {'viewportValue': viewportValue, 'viewportKey': viewportKey, 'bitArticleVariantMatrix': bitArticleVariantMatrix} %}
+                        {# x_orientation selected #}
+                        {% else %}
+                            {# if viewport undefined then table columns shouldnt break #}
+                            {% set viewportValue = xAxis.options|length %}
+
+                            {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-standard-table.html.twig' with {'viewportValue': viewportValue, 'viewportKey': viewportKey, 'bitArticleVariantMatrix': bitArticleVariantMatrix} %}
+                        {% endif %}
+                    {# more then one variant #}
+                    {% else %}
+                        {% if caseOrientY %}
+                            {# if viewport undefined then table columns shouldnt break #}
+                            {% set viewportValue = xAxis.options|length %}
+
+                            {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-standard-table.html.twig' with {'viewportValue': viewportValue, 'viewportKey': viewportKey, 'bitArticleVariantMatrix': bitArticleVariantMatrix} %}
+                        {# x_orientation selected #}
+                        {% else %}
+                            {# if viewport undefined then table columns shouldnt break #}
+                            {% set viewportValue = xAxis.options|length %}  
+
+                            {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-standard-table.html.twig' with {'viewportValue': viewportValue, 'viewportKey': viewportKey, 'bitArticleVariantMatrix': bitArticleVariantMatrix} %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if cmsPageExists is not null and matrixPosition == "description_top" %}
+                <div class="row">
+                    <div class="col">
+                        {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-button.html.twig' %}
+                    </div>
+                <div>
+            {% else %}
+                <div>
+                    {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-button.html.twig' %}
+                </div>
+            {% endif %}
+        </form>
+    </div>
+{% endif %}

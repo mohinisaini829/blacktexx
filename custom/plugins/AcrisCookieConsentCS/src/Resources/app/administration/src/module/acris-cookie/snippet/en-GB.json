@@ -1,0 +1,88 @@
+{
+    "acris-cookie": {
+        "general": {
+            "mainMenuItemGeneral": "Cookies",
+            "placeholderSearchBar": "Search cookies",
+            "description": "View cookies which had been found in the shop"
+        },
+        "list": {
+            "textHeadline": "Cookie settings",
+            "buttonAdd": "Add",
+            "contextMenuEdit": "Edit",
+            "buttonDelete": "Delete",
+            "columnCookieId": "Cookie ID",
+            "columnTitle": "Title",
+            "columnCookieGroup": "Cookie Group",
+            "providers": "Provider",
+            "columnDefault": "Default",
+            "columnActive": "Active",
+            "columnCreatedAt": "Creation date",
+            "columnDescription": "Description",
+            "contentEmpty": "There are no cookies",
+            "textDeleteConfirm": "Do you want to delete cookie",
+            "modalTitleDelete": "Delete",
+            "buttonCancel": "Cancel",
+            "titleSidebarItemRefresh": "Refresh"
+        },
+        "detail": {
+            "textHeadline": "Cookie settings",
+            "buttonCancel": "Cancel",
+            "buttonSave": "Save",
+
+            "cardSalesChannel": "Sales Channel",
+            "fieldSalesChannel": "Choose sale channel",
+            "emptyCookieGroup": "There are no cookie groups!",
+            "fieldTitleLabelCardId": "Cookie-ID",
+            "fieldTitlePlaceholderCardId": "Insert cookie ID",
+            "fieldTitleTooltipCardId": "The cookie ID is used to clearly identify the cookie.",
+            "fieldActiveLabelCardId": "Active",
+            "fieldCookieGroupLabelCardId": "Cookie group:",
+            "fieldCookieGroupPlaceholderCardId": "Select cookie group",
+
+            "SalesChannelFieldPlaceholder": "Select sales channel",
+            "fieldDescriptionPlaceholder": "Insert description",
+
+            "fieldActiveLabel": "Active",
+
+            "cardDescription": "Description",
+            "cardId": "Identification",
+            "cardCustomerInformation": "Customer information",
+
+            "fieldTitleLabelCustomerInformation": "Title",
+            "fieldTitlePlaceholderCustomerInformation": "Insert title",
+            "fieldProvidersLabelCustomerInformation": "Providers",
+            "fieldProvidersPlaceholderCustomerInformation": "Insert providers",
+
+            "fieldDescriptionPlaceholderDescription": "Insert description",
+
+            "notificationSaveErrorMessage": "An error occurred on saving the cookie.",
+            "notificationSaveSuccessMessage": "The cookie was saved successfully.",
+            "notificationSaveSuccessMessageTitle": "Success",
+            "notificationSaveErrorMessageTitle": "Error",
+
+            "cardValue": "Value",
+            "fieldDefaultValueLabel": "Default Value",
+            "fieldDefaultValueHelpText": "If a default value is chosen, the cookie will always be set as soon as it is accepted. This is useful when custom cookies are defined, which should then be handled in the storefront via JavaScript.",
+
+            "cardScript": "Script code",
+            "fieldScriptPlaceholder": "Insert script",
+            "fieldScriptHelpText": "The script code is executed when the cookie is accepted by the user. The script can be specified with the <script> tag or without. An external script (src attribute) can also be included. In addition, TWIG code can be entered and TWIG variables can be used.",
+            "fieldScripPositionLabel": "Script position",
+            "fieldScripPositionOptionHead": "At end of HTML head",
+            "fieldScripPositionOptionBodyStart": "At beginning of HTML body",
+            "fieldScripPositionOptionBodyEnd": "At end of HTML body",
+
+            "cardGoogleCookieConsentMode": "Google Cookie Consent Mode",
+            "fieldGoogleCookieConsentModeLabel": "Google Cookie Consent Mode",
+            "fieldGoogleCookieConsentModePlaceholder": "Select a Google Cookie Consent Mode Option",
+
+            "googleCookieConsentModeOption1": "ad_storage - Enables storage (such as cookies) related to advertising.",
+            "googleCookieConsentModeOption2": "ad_user_data - Sets consent for sending user data related to advertising to Google.",
+            "googleCookieConsentModeOption3": "ad_personalization - Sets consent for personalized advertising.",
+            "googleCookieConsentModeOption4": "analytics_storage - Enables storage (such as cookies) related to analytics e.g. visit duration.",
+            "googleCookieConsentModeOption5": "functionality_storage - Enables storage that supports the functionality of the website or app e.g. language settings.",
+            "googleCookieConsentModeOption6": "personalization_storage - Enables storage related to personalization e.g. video recommendations",
+            "googleCookieConsentModeOption7": "security_storage - Enables storage related to security such as authentication functionality, fraud prevention, and other user protection."
+        }
+    }
+}

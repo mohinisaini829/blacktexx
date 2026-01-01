@@ -1,0 +1,6 @@
+{% sw_extends '@Storefront/storefront/page/error/error-404.html.twig' %}
+
+{% block base_content %}
+  <script> window.location.replace("{{ path('frontend.home.page') }}"); </script>
+  {{ parent() }}
+{% endblock %}

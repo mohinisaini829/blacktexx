@@ -1,0 +1,14 @@
+{
+    "netzp": {
+        "powerpack": {
+            "days": "Tage",
+            "hours": "Stunden",
+            "minutes": "Minuten",
+            "seconds": "Sekunden",
+            "googlemapsPolicyTitle": "Google Map",
+            "googlemapsPolicyText": "Wenn Sie die Map auf dieser Seite sehen möchten, werden personenbezogene Daten an Google gesendet und Cookies durch den Betreiber gesetzt.\nDaher ist es möglich, dass der Anbieter Ihre Zugriffe speichert und Ihr Verhalten analysieren kann. Die Datenschutzerklärung von Google Maps finden Sie unter: <a href=\"https://policies.google.com/privacy\" target=\"_blank\" title=\"https://policies.google.com/privacy\">https://policies.google.com/privacy</a>",
+            "googlemapsPolicyButton": "Diese Karte laden",
+            "googlemapsPolicyButtonAll": "Karten immer laden"
+        }
+    }
+}

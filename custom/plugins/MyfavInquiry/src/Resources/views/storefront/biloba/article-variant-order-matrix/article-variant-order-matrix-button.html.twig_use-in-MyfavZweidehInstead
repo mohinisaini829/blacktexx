@@ -1,0 +1,83 @@
+{#{% sw_extends '@BilobaArticleVariantOrderMatrix/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-button.html.twig' %}#}
+<div class="biloba-variant-matrix-button-container" >
+    {% if bundleExists('MyfavSampleProduct') and page.product.customFields and page.product.customFields.myfav_sample_product %}
+        <div class="row">
+            <div class="col-12 col-sm-6 col-lg-12 col-xl-6 pr-xl-1 mt-3 mt-sm-0 mt-lg-3 mt-xl-0">
+                {% set modalOptions = ['modal-dialog-centered', 'modal-xl'] %}
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-light btn-block myfav-sample"
+                        data-toggle="modal"
+                        data-url="{{ path('frontend.myfav.sample-product.open', { productId: page.product.id }) }}"
+                        data-modal-class='{{ modalOptions|json_encode }}'>
+                    {% sw_icon 'products' %}
+                    {{ "sampleProduct.modal.title"|trans|sw_sanitize }}
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-12 col-xl-6 pl-xl-1 mt-3 mt-sm-0 mt-lg-3 mt-xl-0">
+    {% endif %}
+
+    <button type="button" data-title="{{ 'santa-theme.buybox.disabled-btn.title'|trans|sw_sanitize }}" class="btn btn-primary btn-buy btn-block bit-variant-button" disabled="disabled">
+        {% sw_icon 'cart' style {
+            'size': 'lg'
+        } %}
+        {{ 'biloba.ArticleVariantOrderMatrix.DetailBuyActionAdd'|trans }}
+    </button>
+
+    {% if bundleExists('MyfavSampleProduct') and page.product.customFields and page.product.customFields.myfav_sample_product %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% set MyfavInquiryAddPluginOptions = {
+        target: path('frontend.myfav.inquiry.add'),
+        csrf_token: csrf_token('frontend.myfav.inquiry.add')
+    } %}
+    <button type="button"
+            data-title="{{ 'santa-theme.buybox.disabled-btn.title'|trans|sw_sanitize }}"
+            form="biloba-variant-matrix-formular"
+            formaction="{{ path('frontend.myfav.inquiry.add') }}"
+            name="inquiry"
+            value="1"
+            class="btn btn-buy btn-block mt-2 bit-variant-button"
+            disabled="disabled"
+            data-myfav-inquiry-add-plugin-options="{{ MyfavInquiryAddPluginOptions|json_encode }}"
+    >
+        {% sw_icon 'paper-pencil' style {
+            'size': 'lg'
+        } %}{{ 'myfavInquiry.add'|trans|sw_sanitize }}
+    </button>
+    <a class="btn btn-buy btn-block mt-2"
+       href="#designerModal"
+       data-toggle="modal"
+       data-target="#designerModal"
+    >
+        {% sw_icon 'pencil-brush' style {
+            'size': 'lg'
+        } %}
+        {{ 'santa-theme.buybox.designerOnlineButtonText'|trans|sw_sanitize }}
+    </a>
+</div>
+{# designer modal #}
+<div class="modal fade" id="designerModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="mb-3">
+                    {{ 'santa-theme.buybox.designerModal.content'|trans|sw_sanitize }}**
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <a href="{{ "santa-theme.buybox.designerOnlineLink"|trans }}" class="btn btn-outline-primary">
+                            {{ 'santa-theme.buybox.designerModal.linkBtn'|trans|sw_sanitize }}****
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                            {{ 'santa-theme.buybox.designerModal.closeBtn'|trans|sw_sanitize }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

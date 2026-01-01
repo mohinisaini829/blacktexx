@@ -1,0 +1,38 @@
+.breadcrumb {
+  padding: 0.5rem 0;
+  background: $vio-breadcrumb-bg;
+  margin-bottom: 0;
+  line-height:1.5;
+
+  &, a, & a.is-active {
+    color: $vio-breadcrumb-color;
+    font-weight: normal;
+  }
+
+  a.is-active:hover {
+    color: $primary;
+  }
+
+  &.cms-breadcrumb {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  ol {
+    .icon {
+      color: #878787;
+      svg {
+        height: .875rem;
+        fill: #878787;
+      }
+    }
+    li {
+      a {
+        font-size: .875rem;
+        text-decoration: none;
+        &:hover {
+          color: #c24900!important;
+        }
+      }
+    }
+  }
+}

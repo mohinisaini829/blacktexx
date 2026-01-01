@@ -1,0 +1,45 @@
+{
+    "myfav-inquiry": {
+        "label": "Anfrageformular",
+        "general": {
+            "mainMenuItemGeneral": "Anfragen",
+            "descriptionTextModule": "Übersicht aller Anfragen über die Anfragefunktion."
+        },
+        "list": {
+            "columnName": "Name",
+            "columnCount": "Artikelanzahl",
+            "columnCreatedAt": "gestellt am",
+            "columnDeliveryDateAt": "Liefertermin",
+            "columnProcessStatus": "Status",
+            "columnAdminUser": "Admin-Benutzer"
+        },
+        "detail": {
+            "companyLabel": "Firma",
+            "firstNameLabel": "Vorname",
+            "lastNameLabel": "Nachname",
+            "emailLabel": "E-Mail",
+            "phoneNumberLabel": "Telefon",
+            "deliveryDateLabel": "Liefertermin",
+            "commentLabel": "Kundenkommentar",
+            "lineItemsCardTitle": "Artikel",
+            "itemNameColumn": "Name",
+            "itemQuantityColumn": "Menge",
+            "deleteLineItem": "lösche Position",
+            "addLineItem": "Position anlegen",
+            "mediaCardTitle": "Logos",
+            "offerCardTitle": "Angebote",
+            "offerNumber": "Angebotsnummer",
+            "offerCreatedAt": "erstellt am",
+            "deleteOffer": "Angebot löschen",
+            "downloadOffer": "Angebot herunterladen",
+            "itemPriceColumn": "Preis",
+            "itemImageColumn": "Afbeelding",
+            "itemBrandColumn": "Marke",
+            "itemColorColumn": "Farbe",
+            "itemSizeColumn": "Größe"
+        },
+        "create": {
+            "offerDocument": "Angebotsdokument erstellen"
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-product-listing.html.twig'%}
+
+{% set inlineVariantMatrix = false %}
+{% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+        and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+        and config("BilobaArticleVariantOrderMatrix.config.variantMatrixListingEnabled") == 'inline_standard' %}
+    {% set inlineVariantMatrix = true %}
+{% endif %}
+
+{% block element_product_listing_wrapper %}
+    {% if inlineVariantMatrix %}
+        {% set listingColumns = 'col-sm-12 biloba-variant-matrix-listing' %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

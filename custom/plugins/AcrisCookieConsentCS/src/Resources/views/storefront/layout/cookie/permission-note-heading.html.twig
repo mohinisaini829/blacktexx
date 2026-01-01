@@ -1,0 +1,5 @@
+{% block acris_cookie_consent_permission_heading %}
+    {% if cookieConfig.displayHeading %}
+        <div class="cookie-consent-permission-heading{% if additionalClasses %} {{ additionalClasses }}{% endif %}">{{ "acrisCookieConsent.heading"|trans }}</div>
+    {% endif %}
+{% endblock %}

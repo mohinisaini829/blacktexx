@@ -1,0 +1,1732 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Basic Configuration</title>
+        <title lang="de-DE">Grundeinstellungen</title>
+        <title lang="nl-NL">Basisconfiguratie</title>
+        <title lang="fr-FR">Configuration de base</title>
+        <title lang="es-ES">Configuración básica</title>
+        <title lang="fi-FI">Perusasetukset</title>
+        <title lang="nn-NO">Grunnkonfigurasjon</title>
+        <title lang="sv-SE">Grundkonfiguration</title>
+        <title lang="cs-CZ">Základní konfigurace</title>
+        <title lang="pt-PT">Configuração básica</title>
+        <title lang="tr-TR">Temel Yapılandırma</title>
+        <title lang="da-DK">Basisindstillinger</title>
+        <title lang="it-IT">Configurazione di base</title>
+        <title lang="pl-PL">Podstawowa konfiguracja</title>
+        <title lang="bs-BA">Osnovna konfiguracija</title>
+        <input-field type="bool">
+            <name>active</name>
+            <label>Active</label>
+            <label lang="de-DE">Aktiv</label>
+            <label lang="nl-NL">Actief</label>
+            <label lang="fr-FR">Actif</label>
+            <label lang="es-ES">Activo</label>
+            <label lang="fi-FI">Aktiivinen</label>
+            <label lang="nn-NO">Aktiv</label>
+            <label lang="sv-SE">Aktiv</label>
+            <label lang="cs-CZ">Aktivní</label>
+            <label lang="pt-PT">Ativo</label>
+            <label lang="tr-TR">Aktif</label>
+            <label lang="da-DK">Aktiv</label>
+            <label lang="it-IT">Attivo</label>
+            <label lang="pl-PL">Aktywny</label>
+            <label lang="bs-BA">Aktivan</label>
+            <defaultValue>true</defaultValue>
+            <helpText>Sets the cookie notification and the blocking of non functional cookies without agreement active in the sales channel.</helpText>
+            <helpText lang="de-DE">Schaltet die Funktion des Cookie Hinweises und der Blockierung von nicht funktionalen Cookies ohne Zustimmung im Verkaufskanal aktiv.</helpText>
+            <helpText lang="nl-NL">Stelt de cookie-melding en de blokkering van niet-functionele cookies zonder toestemming in het verkoopkanaal in.</helpText>
+            <helpText lang="fr-FR">Active la notification de cookie et le blocage des cookies non fonctionnels sans accord dans le canal de vente.</helpText>
+            <helpText lang="es-ES">Establece la notificación de cookies y el bloqueo de cookies no funcionales sin acuerdo activo en el canal de ventas.</helpText>
+            <helpText lang="fi-FI">Asettaa evästeilmoituksen ja toimimattomien evästeiden estämisen ilman suostumusta myyntikanavassa.</helpText>
+            <helpText lang="nn-NO">Setter informasjonskapselvarslingen og blokkeringen av ikke-funksjonelle informasjonskapsler uten avtale aktiv i salgs kanalen.</helpText>
+            <helpText lang="sv-SE">Ställer in cookie-notisen och blockeringen av icke-funktionella cookies utan avtal aktiva i försäljningskanalen.</helpText>
+            <helpText lang="cs-CZ">Nastaví oznámení o cookies a blokování nefunkčních cookies bez souhlasu aktivním v prodeji.</helpText>
+            <helpText lang="pt-PT">Define a notificação de cookies e o bloqueio de cookies não funcionais sem acordo ativo no canal de vendas.</helpText>
+            <helpText lang="tr-TR">Pasta bildirimini ve onaysız işlevsel olmayan çerezlerin satış kanalında aktif bir şekilde engellenmesini ayarlar.</helpText>
+            <helpText lang="da-DK">Indstiller cookie-meddelelsen og blokeringen af ikke-funktionelle cookies uden accept aktiv i salgskanalen.</helpText>
+            <helpText lang="it-IT">Imposta la notifica dei cookie e il blocco dei cookie non funzionali senza accordo attivo nel canale di vendita.</helpText>
+            <helpText lang="pl-PL">Ustawia powiadomienie o plikach cookie i blokowanie plików cookie niefunkcjonalnych bez zgody aktywne w kanale sprzedaży.</helpText>
+            <helpText lang="bs-BA">Postavlja obavijest o kolačićima i blokiranje nefunkcionalnih kolačića bez odobrenja aktivnim u prodajnom kanalu.</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>autoDetectionActive</name>
+            <label>Auto cookie detection active</label>
+            <label lang="de-DE">Automatische Cookie-Erkennung Aktiv</label>
+            <label lang="nl-NL">Automatische cookie-detectie actief</label>
+            <label lang="fr-FR">Détection automatique des cookies active</label>
+            <label lang="es-ES">Detección automática de cookies activa</label>
+            <label lang="fi-FI">Automaattinen evästeentunnistus aktiivinen</label>
+            <label lang="nn-NO">Automatisk informasjonskapselgjenkjenning aktiv</label>
+            <label lang="sv-SE">Automatisk cookie-detektering aktiv</label>
+            <label lang="cs-CZ">Automatické rozpoznávání cookies aktivní</label>
+            <label lang="pt-PT">Deteção automática de cookies ativa</label>
+            <label lang="tr-TR">Otomatik çerez tespiti aktif</label>
+            <label lang="da-DK">Automatisk cookie-detektering aktiv</label>
+            <label lang="it-IT">Rilevazione automatica dei cookie attiva</label>
+            <label lang="pl-PL">Automatyczne wykrywanie plików cookie aktywne</label>
+            <label lang="bs-BA">Automatsko otkrivanje kolačića aktivno</label>
+            <defaultValue>true</defaultValue>
+            <helpText>The automatic cookie recognition can be switched inactive. The option to deactivate is recommended if all tools used have already been recognized. In this way, further unwanted cookies are no longer automatically added to the notification.</helpText>
+            <helpText lang="de-DE">Die automatische Cookie Erkennung kann inaktiv geschalten werden. Die Option zu deaktiveren wird empfohlen, sofern bereits alle eingesetzten Tools erkannt wurden. So werden weitere unerwünschte Cookies nicht mehr automatisch im Hinweis hinzugefügt.</helpText>
+            <helpText lang="nl-NL">De automatische cookie-herkenning kan inactief worden geschakeld. De optie om te deactiveren wordt aanbevolen als alle gebruikte tools al zijn herkend. Op deze manier worden verdere ongewenste cookies niet langer automatisch aan de melding toegevoegd.</helpText>
+            <helpText lang="fr-FR">La détection automatique des cookies peut être désactivée. L'option de désactivation est recommandée si tous les outils utilisés ont déjà été reconnus. De cette manière, d'autres cookies indésirables ne sont plus automatiquement ajoutés à la notification.</helpText>
+            <helpText lang="es-ES">La detección automática de cookies se puede desactivar. Se recomienda desactivar la opción si todas las herramientas utilizadas ya han sido reconocidas. De esta manera, ya no se agregan automáticamente más cookies no deseadas a la notificación.</helpText>
+            <helpText lang="fi-FI">Automaattinen evästeen tunnistus voidaan vaihtaa pois päältä. Deaktivoimisvaihtoehto on suositeltava, jos kaikki käytetyt työkalut on jo tunnistettu. Näin ei enää lisätä muita ei-toivottuja evästeitä automaattisesti ilmoitukseen.</helpText>
+            <helpText lang="nn-NO">Den automatiske informasjonskapselgjenkjenningen kan slås av. Muligheten for å deaktivere anbefales dersom alle verktøy som brukes allerede er gjenkjent. På denne måten blir flere uønskede informasjonskapsler ikke lenger automatisk lagt til varslingen.</helpText>
+            <helpText lang="sv-SE">Den automatiska cookie-detekteringen kan stängas av. Alternativet att inaktivera rekommenderas om alla verktyg som används redan har blivit erkända. På så sätt läggs fler oönskade cookies inte längre till meddelandet automatiskt.</helpText>
+            <helpText lang="cs-CZ">Automatické rozpoznávání cookies může být přepnuto na neaktivní. Možnost deaktivace se doporučuje, pokud byla všechna použitá nástroje již rozpoznána. Tímto způsobem již nebudou další nežádoucí cookies automaticky přidány k oznámení.</helpText>
+            <helpText lang="pt-PT">O reconhecimento automático de cookies pode ser desativado. A opção de desativar é recomendada se todas as ferramentas utilizadas já foram reconhecidas. Desta forma, mais cookies indesejados não são mais adicionados automaticamente à notificação.</helpText>
+            <helpText lang="tr-TR">Otomatik çerez tanıma devre dışı bırakılabilir. Kullanılan tüm araçların zaten tanındığı durumlarda devre dışı bırakma seçeneği önerilir. Bu şekilde, daha fazla istenmeyen çerez otomatik olarak bildirime eklenmez.</helpText>
+            <helpText lang="da-DK">Den automatiske cookie-genkendelse kan slukkes. Muligheden for at deaktivere anbefales, hvis alle anvendte værktøjer allerede er blevet anerkendt. På denne måde bliver yderligere uønskede cookies ikke længere automatisk tilføjet til meddelelsen.</helpText>
+            <helpText lang="it-IT">Il riconoscimento automatico dei cookie può essere disattivato. Si consiglia di disattivare l'opzione se tutti gli strumenti utilizzati sono già stati riconosciuti. In questo modo, ulteriori cookie indesiderati non vengono più aggiunti automaticamente alla notifica.</helpText>
+            <helpText lang="pl-PL">Automatyczne rozpoznawanie plików cookie może być wyłączone. Zaleca się dezaktywację opcji, jeśli wszystkie używane narzędzia zostały już rozpoznane. W ten sposób dalsze niepożądane pliki cookie nie będą już automatycznie dodawane do powiadomienia.</helpText>
+            <helpText lang="bs-BA">Automatsko prepoznavanje kolačića može se isključiti. Opcija za onemogućavanje se preporučuje ako su svi korišteni alati već prepoznati. Na taj način, dalji neželjeni kolačići se više ne dodaju automatski obavještenju.</helpText>
+        </input-field>
+        <component name="sw-entity-single-select">
+            <name>privacyLink</name>
+            <label>Cookie info cms page</label>
+            <label lang="de-DE">Cookie Information Shopseite</label>
+            <label lang="nl-NL">Cookie-informatie cms-pagina</label>
+            <label lang="fr-FR">Page CMS d'informations sur les cookies</label>
+            <label lang="es-ES">Página cms de información sobre cookies</label>
+            <label lang="fi-FI">Evästeiden tietosivun cms-sivu</label>
+            <label lang="nn-NO">Informasjonskapsel-info cms-side</label>
+            <label lang="sv-SE">Cookie-info cms-sida</label>
+            <label lang="cs-CZ">Stránka CMS s informacemi o cookies</label>
+            <label lang="pt-PT">Página cms de informações sobre cookies</label>
+            <label lang="tr-TR">Çerez bilgisi cms sayfası</label>
+            <label lang="da-DK">Cookie-info cms-side</label>
+            <label lang="it-IT">Pagina cms di informazioni sui cookie</label>
+            <label lang="pl-PL">Strona cms z informacjami o plikach cookie</label>
+            <label lang="bs-BA">Cms stranica s informacijama o kolačićima</label>
+            <helpText>Selection of the privacy cms page of the shop for display it at the advanced cookie hint. As a fallback the data privacy protection page of the basic information settings is used.</helpText>
+            <helpText lang="de-DE">Auswahl der Datenschutz Seite des Webshops zur Anzeige auf dem erweiterten Cookie Hinweis (wenn aktiv). Als Fallback wird die in den Stammdaten hinterlegte Datenschutz Seite verwendet.</helpText>
+            <helpText lang="nl-NL">Selectie van de privacy cms-pagina van de winkel voor weergave op de uitgebreide cookie-aanwijzing. Als fallback wordt de pagina voor gegevensbescherming van de basisinstellingen gebruikt.</helpText>
+            <helpText lang="fr-FR">Sélection de la page CMS de confidentialité de la boutique pour l'afficher dans l'invite de cookie avancée. En tant que solution de secours, la page de protection des données des paramètres de base est utilisée.</helpText>
+            <helpText lang="es-ES">Selección de la página cms de privacidad de la tienda para mostrarla en el aviso avanzado de cookies. Como solución alternativa, se utiliza la página de protección de datos de la configuración básica.</helpText>
+            <helpText lang="fi-FI">Valinta verkkokaupan tietosuojaa käsittelevälle cms-sivulle, joka näytetään kehittyneessä evästevinkeissä. Varmuuskopiona käytetään perusasetuksissa olevaa tietosuojan sivua.</helpText>
+            <helpText lang="nn-NO">Utvalg av databeskyttelse cms-siden til butikken for visning av det i den avanserte cookie-hinweis. Som fallback brukes siden for databeskyttelse i grunninformasjonen.</helpText>
+            <helpText lang="sv-SE">Val av integritet cms-sidan för att visa den på den avancerade cookie-inviten. Som reserv används sidan för dataskydd i grundinformationen.</helpText>
+            <helpText lang="cs-CZ">Výběr stránky CMS o ochraně soukromí obchodu pro zobrazení v pokročilém cookie upozornění. Jako záloha se používá stránka ochrany osobních údajů z nastavení základních informací.</helpText>
+            <helpText lang="pt-PT">Seleção da página cms de privacidade da loja para a exibição no aviso avançado de cookies. Como uma opção de backup, é utilizada a página de proteção de dados das configurações básicas.</helpText>
+            <helpText lang="tr-TR">Gelişmiş çerez işaretinde göstermek için mağazanın gizlilik cms sayfasının seçimi. Yedek olarak, temel bilgi ayarlarının veri koruma sayfası kullanılır.</helpText>
+            <helpText lang="da-DK">Valg af butikens privatliv cms-side til visning i den avancerede cookie-hinweis. Som fallback bruges databeskyttelsessiden fra grundlæggende indstillinger.</helpText>
+            <helpText lang="it-IT">Selezione della pagina cms sulla privacy del negozio per visualizzarla nel messaggio avanzato sui cookie. Come backup viene utilizzata la pagina di protezione dei dati delle impostazioni di base.</helpText>
+            <helpText lang="pl-PL">Wybór strony cms o prywatności sklepu do wyświetlenia w zaawansowanej informacji o plikach cookie. Jako alternatywne rozwiązanie wykorzystywana jest strona ochrony danych z podstawowych ustawień.</helpText>
+            <helpText lang="bs-BA">Odabir cms stranice o privatnosti trgovine za prikazivanje u naprednoj obavijesti o kolačićima. Kao rezervna opcija koristi se stranica o zaštiti podataka iz osnovnih postavki.</helpText>
+            <entity>cms_page</entity>
+        </component>
+        <component name="sw-entity-single-select">
+            <name>privacyLinkFooterOne</name>
+            <label>Footer cms page 1 (e.g. legal notice)</label>
+            <label lang="de-DE">Footer Shopseite 1 (z.B. Impressum)</label>
+            <label lang="nl-NL">Footer cms-pagina 1 (bijv. juridische kennisgeving)</label>
+            <label lang="fr-FR">Page cms de pied 1 (ex. avis légal)</label>
+            <label lang="es-ES">Página cms de pie 1 (p. ej. aviso legal)</label>
+            <label lang="fi-FI">Footer cms-sivu 1 (esim. lakisääteinen ilmoitus)</label>
+            <label lang="nn-NO">Footer cms-side 1 (f.eks. juridisk merknad)</label>
+            <label lang="sv-SE">Footer cms-sida 1 (t.ex. juridisk information)</label>
+            <label lang="cs-CZ">Zápatí cms stránky 1 (např. právní upozornění)</label>
+            <label lang="pt-PT">Página cms do rodapé 1 (ex. aviso legal)</label>
+            <label lang="tr-TR">Footer cms sayfası 1 (örn. yasal bildirim)</label>
+            <label lang="da-DK">Footer cms-side 1 (f.eks. juridisk meddelelse)</label>
+            <label lang="it-IT">Pagina cms nel footer 1 (es. avviso legale)</label>
+            <label lang="pl-PL">Strona cms w stopce 1 (np. informacja prawna)</label>
+            <label lang="bs-BA">Cms stranica u podnožju 1 (npr. pravne obavijesti)</label>
+            <helpText>Selection of a CMS page for display in the footer. As an example, this could be the legal notice page for privacy compliant display in the modal window.</helpText>
+            <helpText lang="de-DE">Auswahl einer CMS-Seite für die Anzeige im Footer. Als Beispiel kann dies die Impressum-Seite zur Datenschutz konformen Anzeige im Modalfenster sein.</helpText>
+            <helpText lang="nl-NL">Selectie van een CMS-pagina voor weergave in de footer. Dit kan bijvoorbeeld de juridische kennisgevingspagina zijn voor privacy-conforme weergave in het modale venster.</helpText>
+            <helpText lang="fr-FR">Sélection d'une page CMS à afficher dans le pied de page. Par exemple, il pourrait s'agir de la page de mentions légales pour un affichage conforme à la vie privée dans la fenêtre modale.</helpText>
+            <helpText lang="es-ES">Selección de una página cms para mostrar en el pie de página. Como ejemplo, esta podría ser la página de aviso legal para mostrar conforme a la privacidad en la ventana modal.</helpText>
+            <helpText lang="fi-FI">Valinta CMS-sivusta, joka näytetään alatunnisteessa. Esimerkiksi tämä voisi olla oikeudellinen ilmoitus sivu tietosuojan mukaiselle näyttämiselle modaalissa.</helpText>
+            <helpText lang="nn-NO">Utvalg av en CMS-side for visning i bunnfeltet. Som eksempel kan dette være siden for juridiske merknader for personvernbekymret visning i modalvinduet.</helpText>
+            <helpText lang="sv-SE">Val av en CMS-sida för visning i sidfoten. Som exempel kan detta vara sidan för juridisk information för integritetskompatibel visning i modalfönstret.</helpText>
+            <helpText lang="cs-CZ">Výběr stránky CMS pro zobrazení v zápatí. Například by to mohla být stránka s právními upozorněními pro zobrazení v souladu s ochranou soukromí v modálním okně.</helpText>
+            <helpText lang="pt-PT">Seleção de uma página CMS para exibição no rodapé. Como exemplo, esta pode ser a página de aviso legal para exibição em conformidade com a privacidade na janela modal.</helpText>
+            <helpText lang="tr-TR">Footer'da gösterilecek bir CMS sayfasının seçimi. Örneğin, bu bir modal pencerede gizlilik uyumlu gösterim için yasal uyarı sayfası olabilir.</helpText>
+            <helpText lang="da-DK">Valg af en CMS-side til visning i bunden. Dette kunne f.eks. være den juridiske meddelelsesside til privacy-kompatibel visning i modalvinduet.</helpText>
+            <helpText lang="it-IT">Selezione di una pagina cms da visualizzare nel footer. Ad esempio, questa potrebbe essere la pagina della nota legale per la visualizzazione conforme alla privacy nella finestra modale.</helpText>
+            <helpText lang="pl-PL">Wybór strony cms do wyświetlenia w stopce. Na przykład może to być strona z informacjami prawnymi do wyświetlenia zgodnie z zasadami ochrony prywatności w oknie modalnym.</helpText>
+            <helpText lang="bs-BA">Odabir CMS stranice za prikazivanje u podnožju. Na primjer, to bi mogla biti stranica s pravnim obavijestima za prikazivanje u skladu s privatnošću u modalu.</helpText>
+            <entity>cms_page</entity>
+        </component>
+        <component name="sw-entity-single-select">
+            <name>privacyLinkFooterTwo</name>
+            <label>Footer cms page 2</label>
+            <label lang="de-DE">Footer Shopseite 2</label>
+            <label lang="nl-NL">Footer cms-pagina 2</label>
+            <label lang="fr-FR">Page cms de pied 2</label>
+            <label lang="es-ES">Página cms de pie 2</label>
+            <label lang="fi-FI">Footer cms-sivu 2</label>
+            <label lang="nn-NO">Footer cms-side 2</label>
+            <label lang="sv-SE">Footer cms-sida 2</label>
+            <label lang="cs-CZ">Zápatí cms stránky 2</label>
+            <label lang="pt-PT">Página cms do rodapé 2</label>
+            <label lang="tr-TR">Footer cms sayfası 2</label>
+            <label lang="da-DK">Footer cms-side 2</label>
+            <label lang="it-IT">Pagina cms nel footer 2</label>
+            <label lang="pl-PL">Strona cms w stopce 2</label>
+            <label lang="bs-BA">Cms stranica u podnožju 2</label>
+            <helpText>Selection of a CMS page for display in the footer.</helpText>
+            <helpText lang="de-DE">Auswahl einer CMS-Seite für die Anzeige im Footer.</helpText>
+            <helpText lang="nl-NL">Selectie van een CMS-pagina voor weergave in de footer.</helpText>
+            <helpText lang="fr-FR">Sélection d'une page CMS à afficher dans le pied de page.</helpText>
+            <helpText lang="es-ES">Selección de una página cms para mostrar en el pie de página.</helpText>
+            <helpText lang="fi-FI">Valinta CMS-sivusta, joka näytetään alatunnisteessa.</helpText>
+            <helpText lang="nn-NO">Utvalg av en CMS-side for visning i bunnfeltet.</helpText>
+            <helpText lang="sv-SE">Val av en CMS-sida för visning i sidfoten.</helpText>
+            <helpText lang="cs-CZ">Výběr stránky CMS pro zobrazení v zápatí.</helpText>
+            <helpText lang="pt-PT">Seleção de uma página CMS para exibição no rodapé.</helpText>
+            <helpText lang="tr-TR">Footer'da gösterilecek bir CMS sayfasının seçimi.</helpText>
+            <helpText lang="da-DK">Valg af en CMS-side til visning i bunden.</helpText>
+            <helpText lang="it-IT">Selezione di una pagina cms da visualizzare nel footer.</helpText>
+            <helpText lang="pl-PL">Wybór strony cms do wyświetlenia w stopce.</helpText>
+            <helpText lang="bs-BA">Odabir CMS stranice za prikazivanje u podnožju.</helpText>
+            <entity>cms_page</entity>
+        </component>
+        <component name="sw-entity-single-select">
+            <name>privacyLinkFooterThree</name>
+            <label>Footer cms page 3</label>
+            <label lang="de-DE">Footer Shopseite 3</label>
+            <label lang="nl-NL">Footer cms-pagina 3</label>
+            <label lang="fr-FR">Page cms de pied 3</label>
+            <label lang="es-ES">Página cms de pie 3</label>
+            <label lang="fi-FI">Footer cms-sivu 3</label>
+            <label lang="nn-NO">Footer cms-side 3</label>
+            <label lang="sv-SE">Footer cms-sida 3</label>
+            <label lang="cs-CZ">Zápatí cms stránky 3</label>
+            <label lang="pt-PT">Página cms do rodapé 3</label>
+            <label lang="tr-TR">Footer cms sayfası 3</label>
+            <label lang="da-DK">Footer cms-side 3</label>
+            <label lang="it-IT">Pagina cms nel footer 3</label>
+            <label lang="pl-PL">Strona cms w stopce 3</label>
+            <label lang="bs-BA">Cms stranica u podnožju 3</label>
+            <helpText>Selection of a CMS page for display in the footer.</helpText>
+            <helpText lang="de-DE">Auswahl einer CMS-Seite für die Anzeige im Footer.</helpText>
+            <helpText lang="nl-NL">Selectie van een CMS-pagina voor weergave in de footer.</helpText>
+            <helpText lang="fr-FR">Sélection d'une page CMS à afficher dans le pied de page.</helpText>
+            <helpText lang="es-ES">Selección de una página cms para mostrar en el pie de página.</helpText>
+            <helpText lang="fi-FI">Valinta CMS-sivusta, joka näytetään alatunnisteessa.</helpText>
+            <helpText lang="nn-NO">Utvalg av en CMS-side for visning i bunnfeltet.</helpText>
+            <helpText lang="sv-SE">Val av en CMS-sida för visning i sidfoten.</helpText>
+            <helpText lang="cs-CZ">Výběr stránky CMS pro zobrazení v zápatí.</helpText>
+            <helpText lang="pt-PT">Seleção de uma página CMS para exibição no rodapé.</helpText>
+            <helpText lang="tr-TR">Footer'da gösterilecek bir CMS sayfasının seçimi.</helpText>
+            <helpText lang="da-DK">Valg af en CMS-side til visning i bunden.</helpText>
+            <helpText lang="it-IT">Selezione di una pagina cms da visualizzare nel footer.</helpText>
+            <helpText lang="pl-PL">Wybór strony cms do wyświetlenia w stopce.</helpText>
+            <helpText lang="bs-BA">Odabir CMS stranice za prikazivanje u podnožju.</helpText>
+            <entity>cms_page</entity>
+        </component>
+        <input-field type="int">
+            <name>daysToDeleteUnconfirmedCookies</name>
+            <label>Delete unconfirmed cookies after X days</label>
+            <label lang="de-DE">Nicht bestätigte Cookies nach X Tagen löschen</label>
+            <label lang="nl-NL">Verwijder niet-bevestigde cookies na X dagen</label>
+            <label lang="fr-FR">Supprimer les cookies non confirmés après X jours</label>
+            <label lang="es-ES">Eliminar cookies no confirmadas después de X días</label>
+            <label lang="fi-FI">Poista vahvistamattomat evästeet X päivän jälkeen</label>
+            <label lang="nn-NO">Slett ikke bekreftede informasjonskapsler etter X dager</label>
+            <label lang="sv-SE">Ta bort icke bekräftade cookies efter X dagar</label>
+            <label lang="cs-CZ">Odstranit nepotvrzené cookies po X dnech</label>
+            <label lang="pt-PT">Eliminar cookies não confirmadas após X dias</label>
+            <label lang="tr-TR">Onaylanmamış çerezleri X günden sonra sil</label>
+            <label lang="da-DK">Slet ikke bekræftede cookies efter X dage</label>
+            <label lang="it-IT">Elimina i cookie non confermati dopo X giorni</label>
+            <label lang="pl-PL">Usuń niepotwierdzone pliki cookie po X dniach</label>
+            <label lang="bs-BA">Izbriši nepotvrđene kolačiće nakon X dana</label>
+            <defaultValue>30</defaultValue>
+            <helpText>Unconfirmed cookies are automatically deleted via a cronjob. If the value 0 is entered, no automatic deletion takes place.</helpText>
+            <helpText lang="de-DE">Nicht bestätigte Cookies werden über einen Cronjob automatisch gelöscht. Wird der Wert 0 eingetragen, findet keine automatische Löschung statt.</helpText>
+            <helpText lang="nl-NL">Niet-bevestigde cookies worden automatisch verwijderd via een cronjob. Als de waarde 0 is ingevoerd, vindt er geen automatische verwijdering plaats.</helpText>
+            <helpText lang="fr-FR">Les cookies non confirmés sont automatiquement supprimés via un cronjob. Si la valeur 0 est saisie, aucune suppression automatique n'a lieu.</helpText>
+            <helpText lang="es-ES">Las cookies no confirmadas se eliminan automáticamente mediante un cronjob. Si se introduce el valor 0, no se realiza ninguna eliminación automática.</helpText>
+            <helpText lang="fi-FI">Vahvistamattomat evästeet poistetaan automaattisesti cronjobin kautta. Jos arvo 0 on syötetty, ei tapahdu automaattista poistoa.</helpText>
+            <helpText lang="nn-NO">Ikke bekreftede informasjonskapsler slettes automatisk via en cronjob. Hvis verdien 0 blir skrevet inn, skjer det ikke noe automatisk sletting.</helpText>
+            <helpText lang="sv-SE">Icke bekräftade cookies tas bort automatiskt via en cronjob. Om värdet 0 anges, sker ingen automatisk radering.</helpText>
+            <helpText lang="cs-CZ">Nepotvrzené cookies jsou automaticky odstraněny prostřednictvím cronjobu. Pokud je zadána hodnota 0, nedojde k žádnému automatickému odstranění.</helpText>
+            <helpText lang="pt-PT">Cookies não confirmadas são automaticamente eliminados através de um cronjob. Se o valor 0 for inserido, não ocorre eliminação automática.</helpText>
+            <helpText lang="tr-TR">Onaylanmamış çerezler otomatik olarak bir cronjob aracılığıyla silinir. Değer 0 girildiğinde otomatik silme gerçekleşmez.</helpText>
+            <helpText lang="da-DK">Ikke bekræftede cookies slettes automatisk via en cronjob. Hvis værdien 0 indtastes, sker der ingen automatisk sletning.</helpText>
+            <helpText lang="it-IT">I cookie non confermati vengono rimossi automaticamente tramite un cronjob. Se viene inserito il valore 0, non viene eseguita alcuna eliminazione automatica.</helpText>
+            <helpText lang="pl-PL">Niepotwierdzone pliki cookie są automatycznie usuwane za pomocą cronjobu. Jeśli wprowadzona zostanie wartość 0, nie nastąpi automatyczne usunięcie.</helpText>
+            <helpText lang="bs-BA">Nepotvrđeni kolačići se automatski brišu putem cronjob-a. Ako se unese vrednost 0, ne dolazi do automatskog brisanja.</helpText>
+        </input-field>
+    </card>
+    <card>
+        <title>Functions</title>
+        <title lang="de-DE">Funktionen</title>
+        <title lang="nl-NL">Functies</title>
+        <title lang="fr-FR">Fonctions</title>
+        <title lang="es-ES">Funciones</title>
+        <title lang="fi-FI">Toiminnot</title>
+        <title lang="nn-NO">Funksjoner</title>
+        <title lang="sv-SE">Funktioner</title>
+        <title lang="cs-CZ">Funkce</title>
+        <title lang="pt-PT">Funções</title>
+        <title lang="tr-TR">Fonksiyonlar</title>
+        <title lang="da-DK">Funktioner</title>
+        <title lang="it-IT">Funzioni</title>
+        <title lang="pl-PL">Funkcje</title>
+        <title lang="bs-BA">Funkcije</title>
+        <input-field type="bool">
+            <name>defaultActive</name>
+            <label>Non functional Cookies selection active for default in store</label>
+            <label lang="de-DE">Nicht funktionale Cookies Auswahl im Standard im Store aktiv</label>
+            <label lang="nl-NL">Selectie van niet-functionele cookies standaard actief in de winkel</label>
+            <label lang="fr-FR">Sélection de cookies non fonctionnels active par défaut dans le magasin</label>
+            <label lang="es-ES">Selección de cookies no funcionales activa por defecto en la tienda</label>
+            <label lang="fi-FI">Ei-toiminnallisten evästeiden valinta oletusarvoisesti aktiivinen kaupasta</label>
+            <label lang="nn-NO">Ikke-funksjonelle informasjonskapsler valgt som standard i butikken</label>
+            <label lang="sv-SE">Icke-funktionella kakor valda som standard i butiken</label>
+            <label lang="cs-CZ">Výběr nefunkčních cookies aktivní ve výchozím nastavení v obchodě</label>
+            <label lang="pt-PT">Seleção de cookies não funcionais ativa por padrão na loja</label>
+            <label lang="tr-TR">Fonksiyonel olmayan çerezlerin varsayılan olarak mağazada etkin seçimi</label>
+            <label lang="da-DK">Ikke-funktionelle cookies valg aktiv som standard i butikken</label>
+            <label lang="it-IT">Selezione di cookie non funzionali attiva per impostazione predefinita nel negozio</label>
+            <label lang="pl-PL">Wybór ciasteczek niefunkcjonalnych aktywny domyślnie w sklepie</label>
+            <label lang="bs-BA">Odabir nefunkcionalnih kolačića aktivan kao zadano u trgovini</label>
+            <defaultValue>false</defaultValue>
+            <helpText>If true, the selection of non-functional cookies are enabled in the store at the privacy settings for default. If no, the user explicitly has to turn on non-functional cookies cookies before accepting them.</helpText>
+            <helpText lang="de-DE">Wenn ja, wird die Auswahl der nicht funktionalen Cookies im Store bei den Datenschutzeinstellungen im Standard aktiviert. Wenn nein, muss der Benutzer vor dem Akzeptieren der Cookies nicht funktionale Cookies explizit aktivieren.</helpText>
+            <helpText lang="nl-NL">Als ja, wordt de selectie van niet-functionele cookies standaard ingeschakeld in de privacy-instellingen van de winkel. Als nee, moet de gebruiker niet-functionele cookies expliciet inschakelen voordat hij deze accepteert.</helpText>
+            <helpText lang="fr-FR">Si vrai, la sélection des cookies non fonctionnels est activée dans le magasin dans les paramètres de confidentialité par défaut. Sinon, l'utilisateur doit explicitement activer les cookies non fonctionnels avant de les accepter.</helpText>
+            <helpText lang="es-ES">Si es verdadero, la selección de cookies no funcionales está habilitada en la tienda en la configuración de privacidad por defecto. Si no, el usuario debe activar explícitamente las cookies no funcionales antes de aceptarlas.</helpText>
+            <helpText lang="fi-FI">Jos tämä on totta, ei-toiminnallisten evästeiden valinta on oletusarvoisesti käytössä kaupan tietosuojasetuksissa. Jos ei, käyttäjän on eksplisiittisesti käytettävä ei-toiminnallisia evästeitä ennen niiden hyväksymistä.</helpText>
+            <helpText lang="nn-NO">Hvis ja, er valget av ikke-funksjonelle informasjonskapsler aktivert i butikken under personverninnstillingene som standard. Hvis nei, må brukeren eksplisitt aktivere ikke-funksjonelle informasjonskapsler før de aksepterer dem.</helpText>
+            <helpText lang="sv-SE">Om ja, aktiveras valet av icke-funktionella kakor i butiken under integritetsinställningarna som standard. Om nej måste användaren uttryckligen slå på icke-funktionella kakor innan de accepterar dem.</helpText>
+            <helpText lang="cs-CZ">Pokud je to pravda, je výběr nefunkčních cookies ve výchozím nastavení aktivován v obchodě v nastavení ochrany osobních údajů. Pokud ne, musí uživatel však před jejich přijetím výslovně zapnout nefunkční cookies.</helpText>
+            <helpText lang="pt-PT">Se for verdadeiro, a seleção de cookies não funcionais é ativada na loja nas configurações de privacidade por padrão. Se não, o usuário deve ativar explicitamente os cookies não funcionais antes de aceitá-los.</helpText>
+            <helpText lang="tr-TR">Evetse, işlevsel olmayan çerezlerin seçimi varsayılan olarak mağazada gizlilik ayarlarında etkinleştirilmiştir. Hayırsa, kullanıcı bunları kabul etmeden önce işlevsel olmayan çerezleri açıkça etkinleştirmelidir.</helpText>
+            <helpText lang="da-DK">Hvis ja, aktiveres valget af ikke-funktionelle cookies i butikken under privatlivsindstillingerne som standard. Hvis nej, skal brugeren eksplicit aktivere ikke-funktionelle cookies, før de accepterer dem.</helpText>
+            <helpText lang="it-IT">Se è vero, la selezione dei cookie non funzionali è attivata per impostazione predefinita nel negozio nelle impostazioni sulla privacy. Se no, l'utente deve attivare esplicitamente i cookie non funzionali prima di accettarli.</helpText>
+            <helpText lang="pl-PL">Jeśli to prawda, wybór ciasteczek niefunkcjonalnych jest domyślnie włączony w sklepie w ustawieniach prywatności. Jeśli nie, użytkownik musi wyraźnie włączyć ciasteczka niefunkcjonalne przed ich zaakceptowaniem.</helpText>
+            <helpText lang="bs-BA">Ako je tačno, izbor nefunkcionalnih kolačića je prema zadanim postavkama omogućen u trgovini u postavkama privatnosti. Ako nije, korisnik mora eksplicitno aktivirati nefunkcionalne kolačiće prije nego što ih prihvati.</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showAcceptOnlyFunctionalButton</name>
+            <label>Show button "Accept only functional cookies"</label>
+            <label lang="de-DE">Button "Nur funktionale Cookies akzeptieren" einblenden</label>
+            <label lang="nl-NL">Toon knop "Alleen functionele cookies accepteren"</label>
+            <label lang="fr-FR">Afficher le bouton "Accepter uniquement les cookies fonctionnels"</label>
+            <label lang="es-ES">Mostrar botón "Aceptar solo cookies funcionales"</label>
+            <label lang="fi-FI">Näytä painike "Hyväksy vain toiminnalliset evästeet"</label>
+            <label lang="nn-NO">Vis knapp "Bare aksepter funksjonelle informasjonskapsler"</label>
+            <label lang="sv-SE">Visa knapp "Acceptera endast funktionella kakor"</label>
+            <label lang="cs-CZ">Zobrazit tlačítko "Přijmout pouze funkční cookies"</label>
+            <label lang="pt-PT">Mostrar botão "Aceitar apenas cookies funcionais"</label>
+            <label lang="tr-TR">"Sadece işlevsel çerezleri kabul et" düğmesini göster</label>
+            <label lang="da-DK">Vis knappen "Accepter kun funktionelle cookies"</label>
+            <label lang="it-IT">Mostra il pulsante "Accetta solo cookie funzionali"</label>
+            <label lang="pl-PL">Pokaż przycisk "Akceptuj tylko funkcjonalne ciasteczka"</label>
+            <label lang="bs-BA">Prikaži dugme "Prihvati samo funkcionalne kolačiće"</label>
+            <defaultValue>false</defaultValue>
+            <helpText>If true, in addition to the button "Accept selected cookies" a button "Accept only functional cookies" will be displayed.</helpText>
+            <helpText lang="de-DE">Wenn ja, wird zusätzlich zum Button für "Ausgewählte Cookies akzeptieren" ein Button "Nur funktionale Cookies akzeptieren" angezeigt.</helpText>
+            <helpText lang="nl-NL">Als ja, wordt naast de knop "Geselecteerde cookies accepteren" ook een knop "Alleen functionele cookies accepteren" weergegeven.</helpText>
+            <helpText lang="fr-FR">Si vrai, en plus du bouton "Accepter les cookies sélectionnés", un bouton "Accepter uniquement les cookies fonctionnels" sera affiché.</helpText>
+            <helpText lang="es-ES">Si es verdadero, además del botón "Aceptar cookies seleccionadas", se mostrará un botón "Aceptar solo cookies funcionales".</helpText>
+            <helpText lang="fi-FI">Jos tämä on totta, "Hyväksy valitut evästeet" -painikkeen lisäksi näytetään myös "Hyväksy vain toiminnalliset evästeet" -painike.</helpText>
+            <helpText lang="nn-NO">Hvis ja, i tillegg til knappen "Aksepter valgte informasjonskapsler", vil en knapp "Aksepter bare funksjonelle informasjonskapsler" vises.</helpText>
+            <helpText lang="sv-SE">Om ja, utöver knappen "Acceptera valda kakor" visas en knapp "Acceptera endast funktionella kakor".</helpText>
+            <helpText lang="cs-CZ">Pokud je pravda, kromě tlačítka "Přijmout vybrané cookies" se zobrazí také tlačítko "Přijmout pouze funkční cookies".</helpText>
+            <helpText lang="pt-PT">Se for verdadeiro, além do botão "Aceitar cookies selecionados", será exibido um botão "Aceitar apenas cookies funcionais".</helpText>
+            <helpText lang="tr-TR">Evetse, "Seçilen çerezleri kabul et" düğmesinin yanı sıra "Sadece işlevsel çerezleri kabul et" düğmesi de görüntülenecektir.</helpText>
+            <helpText lang="da-DK">Hvis ja, vises der ud over knappen "Accepter valgte cookies" også en knap "Accepter kun funktionelle cookies".</helpText>
+            <helpText lang="it-IT">Se è vero, oltre al pulsante "Accetta cookie selezionati" verrà visualizzato anche un pulsante "Accetta solo cookie funzionali".</helpText>
+            <helpText lang="pl-PL">Jeśli to prawda, oprócz przycisku "Akceptuj wybrane pliki cookie", wyświetli się również przycisk "Akceptuj tylko pliki cookie funkcjonalne".</helpText>
+            <helpText lang="bs-BA">Ako je tačno, pored dugmeta "Prihvati odabrane kolačiće", biće prikazano i dugme "Prihvati samo funkcionalne kolačiće".</helpText>
+        </input-field>
+        <input-field type="single-select">
+            <name>showAcceptBtnWhen</name>
+            <label>Show "Accept selected Cookies" button if</label>
+            <label lang="de-DE">Button "Ausgewählte Cookies akzeptieren anzeigen, wenn</label>
+            <label lang="nl-NL">Toon knop "Cookies accepteren" als</label>
+            <label lang="fr-FR">Afficher le bouton "Accepter les cookies" si</label>
+            <label lang="es-ES">Mostrar el botón "Aceptar cookies" si</label>
+            <label lang="fi-FI">Näytä "Hyväksy evästeet" -painike, jos</label>
+            <label lang="nn-NO">Vis knapp "Aksepter informasjonskapsler" hvis</label>
+            <label lang="sv-SE">Visa knappen "Acceptera kakor" om</label>
+            <label lang="cs-CZ">Zobrazit tlačítko "Přijmout cookies", pokud</label>
+            <label lang="pt-PT">Mostrar botão "Aceitar Cookies" se</label>
+            <label lang="tr-TR">"Çerezleri kabul et" düğmesini göster</label>
+            <label lang="da-DK">Vis "Accepter Cookies" knap hvis</label>
+            <label lang="it-IT">Mostra il pulsante "Accetta cookie" se</label>
+            <label lang="pl-PL">Pokaż przycisk "Akceptuj ciasteczka" jeśli</label>
+            <label lang="bs-BA">Prikaži dugme "Prihvati kolačiće" ako</label>
+            <defaultValue>always</defaultValue>
+            <options>
+                <option>
+                    <id>always</id>
+                    <name>Show always</name>
+                    <name lang="de-DE">Immer anzeigen</name>
+                    <name lang="nl-NL">Altijd weergeven</name>
+                    <name lang="fr-FR">Toujours afficher</name>
+                    <name lang="es-ES">Mostrar siempre</name>
+                    <name lang="fi-FI">Näytä aina</name>
+                    <name lang="nn-NO">Vis alltid</name>
+                    <name lang="sv-SE">Visa alltid</name>
+                    <name lang="cs-CZ">Zobrazit vždy</name>
+                    <name lang="pt-PT">Mostrar sempre</name>
+                    <name lang="tr-TR">Her zaman göster</name>
+                    <name lang="da-DK">Vis altid</name>
+                    <name lang="it-IT">Mostra sempre</name>
+                    <name lang="pl-PL">Zawsze pokaż</name>
+                    <name lang="bs-BA">Uvijek prikaži</name>
+                </option>
+                <option>
+                    <id>cookieSettingsOpened</id>
+                    <name>Only if the cookie settings are opened once</name>
+                    <name lang="de-DE">Nur wenn die Cookie Einstellungen geöffnet wurden</name>
+                    <name lang="nl-NL">Alleen als de cookie-instellingen eenmaal zijn geopend</name>
+                    <name lang="fr-FR">Uniquement si les paramètres des cookies ont été ouverts une fois</name>
+                    <name lang="es-ES">Solo si se han abierto las configuraciones de las cookies una vez</name>
+                    <name lang="fi-FI">Vain jos evästeasetukset on avattu kerran</name>
+                    <name lang="nn-NO">Bare hvis cookie-innstillingene har blitt åpnet en gang</name>
+                    <name lang="sv-SE">Endast om cookie-inställningarna har öppnats en gång</name>
+                    <name lang="cs-CZ">Pouze pokud byla nastavení cookies otevřena jednou</name>
+                    <name lang="pt-PT">Apenas se as definições de cookies forem abertas uma vez</name>
+                    <name lang="tr-TR">Sadece çerez ayarları bir kez açıldığı takdirde</name>
+                    <name lang="da-DK">Kun hvis cookieindstillingerne er åbnet én gang</name>
+                    <name lang="it-IT">Solo se le impostazioni dei cookie sono state aperte una volta</name>
+                    <name lang="pl-PL">Tylko jeśli ustawienia plików cookie zostały otwarte raz</name>
+                    <name lang="bs-BA">Samo ako su postavke kolačića jednom otvorene</name>
+                </option>
+            </options>
+        </input-field>
+        <input-field type="bool">
+            <name>showAcceptAllButton</name>
+            <label>Show button "Accept all cookies"</label>
+            <label lang="de-DE">Button "Alle Cookies akzeptieren" einblenden</label>
+            <label lang="nl-NL">Toon knop "Alle cookies accepteren"</label>
+            <label lang="fr-FR">Afficher le bouton "Accepter tous les cookies"</label>
+            <label lang="es-ES">Mostrar botón "Aceptar todas las cookies"</label>
+            <label lang="fi-FI">Näytä painike "Hyväksy kaikki evästeet"</label>
+            <label lang="nn-NO">Vis knapp "Aksepter alle informasjonskapsler"</label>
+            <label lang="sv-SE">Visa knapp "Acceptera alla kakor"</label>
+            <label lang="cs-CZ">Zobrazit tlačítko "Přijmout všechny cookies"</label>
+            <label lang="pt-PT">Mostrar botão "Aceitar todos os cookies"</label>
+            <label lang="tr-TR">"Tüm çerezleri kabul et" düğmesini göster</label>
+            <label lang="da-DK">Vis knappen "Accepter alle cookies"</label>
+            <label lang="it-IT">Mostra il pulsante "Accetta tutti i cookie"</label>
+            <label lang="pl-PL">Pokaż przycisk "Akceptuj wszystkie ciasteczka"</label>
+            <label lang="bs-BA">Prikaži dugme "Prihvati sve kolačiće"</label>
+            <defaultValue>true</defaultValue>
+            <helpText>If true, in addition to the button "Accept selected cookies" a button "Accept all cookies" will be displayed. If this button is clicked, all cookies displayed in the note are automatically accepted, regardless of the shop customers choice.</helpText>
+            <helpText lang="de-DE">Wenn ja, wird zusätzlich zum Button für "Ausgewählte Cookies akzeptieren" ein Button "Alle Cookies akzeptieren" angezeigt. Wird dieser Button geklickt, werden automatisch alle im Hinweis angezeigten Cookies akezptiert, unabhängig von der Auswahl des Shopkunden.</helpText>
+            <helpText lang="nl-NL">Als ja, wordt naast de knop "Geselecteerde cookies accepteren" ook een knop "Alle cookies accepteren" weergegeven. Als op deze knop wordt geklikt, worden automatisch alle in de opmerking weergegeven cookies geaccepteerd, ongeacht de keuze van de winkelklant.</helpText>
+            <helpText lang="fr-FR">Si vrai, en plus du bouton "Accepter les cookies sélectionnés", un bouton "Accepter tous les cookies" sera affiché. Si ce bouton est cliqué, tous les cookies affichés dans la note sont automatiquement acceptés, quel que soit le choix du client de la boutique.</helpText>
+            <helpText lang="es-ES">Si es verdadero, además del botón "Aceptar cookies seleccionadas", se mostrará un botón "Aceptar todas las cookies". Si se hace clic en este botón, se aceptan automáticamente todas las cookies que se muestran en la nota, independientemente de la elección del cliente de la tienda.</helpText>
+            <helpText lang="fi-FI">Jos tämä on totta, "Hyväksy valitut evästeet" -painikkeen lisäksi näytetään myös "Hyväksy kaikki evästeet" -painike. Kun tätä painiketta napsautetaan, kaikki huomiotinäytettävät evästeet hyväksytään automaattisesti, käyttämättä asiakkaan valintaa.</helpText>
+            <helpText lang="nn-NO">Hvis ja, vil det bli vist en knapp "Aksepter alle informasjonskapsler" i tillegg til knappen "Aksepter valgte informasjonskapsler". Hvis denne knappen klikkes, aksepteres automatisk alle informasjonskapsler som vises i notatet, uavhengig av butikkens kundes valg.</helpText>
+            <helpText lang="sv-SE">Om ja, utöver knappen "Acceptera valda kakor" visas också en knapp "Acceptera alla kakor". Om den här knappen klickas accepteras automatiskt alla cookies som visas i noten, oavsett butikskundens val.</helpText>
+            <helpText lang="cs-CZ">Pokud je to pravda, vedle tlačítka "Přijmout vybrané cookies" se zobrazí také tlačítko "Přijmout všechny cookies". Pokud je na toto tlačítko kliknuto, všechny cookies zobrazené v poznámce jsou automaticky přijaty, bez ohledu na volbu zákazníka obchodu.</helpText>
+            <helpText lang="pt-PT">Se for verdadeiro, além do botão "Aceitar cookies selecionados", será exibido um botão "Aceitar todos os cookies". Se este botão for clicado, todos os cookies exibidos na nota são automaticamente aceitos, independentemente da escolha dos clientes da loja.</helpText>
+            <helpText lang="tr-TR">Evetse, "Seçilen çerezleri kabul et" düğmesinin yanı sıra "Tüm çerezleri kabul et" düğmesi de görüntülenecektir. Bu düğmeye tıklandığında, notta görüntülenen tüm çerezler otomatik olarak kabul edilir, müşteri seçimine bakılmaksızın.</helpText>
+            <helpText lang="da-DK">Hvis ja, vises der ud over knappen "Accepter valgte cookies" også en knap "Accepter alle cookies". Hvis denne knap klikkes, accepteres alle i notatet viste cookies automatisk, uanset butikskundens valg.</helpText>
+            <helpText lang="it-IT">Se è vero, oltre al pulsante "Accetta cookie selezionati" verrà visualizzato anche un pulsante "Accetta tutti i cookie". Se si fa clic su questo pulsante, tutti i cookie visualizzati nella nota vengono automaticamente accettati, indipendentemente dalla scelta del cliente del negozio.</helpText>
+            <helpText lang="pl-PL">Jeśli to prawda, oprócz przycisku "Akceptuj wybrane pliki cookie" wyświetli się również przycisk "Akceptuj wszystkie pliki cookie". Jeśli klikniesz ten przycisk, wszystkie pliki cookie wyświetlane w uwadze są automatycznie akceptowane, niezależnie od wyboru klienta sklepu.</helpText>
+            <helpText lang="bs-BA">Ako je tačno, osim dugmeta "Prihvati odabrane kolačiće", biće prikazano i dugme "Prihvati sve kolačiće". Ako se na ovo dugme klikne, svi kolačići prikazani u obaveštenju automatski se prihvataju, bez obzira na izbor kupca u prodavnici.</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>openCookieSettings</name>
+            <label>Open cookie settings on page loading</label>
+            <label lang="de-DE">Cookie Einstellungen beim Seitenaufruf aufklappen</label>
+            <label lang="nl-NL">Open cookie-instellingen bij het laden van de pagina</label>
+            <label lang="fr-FR">Ouvrir les paramètres des cookies lors du chargement de la page</label>
+            <label lang="es-ES">Abrir la configuración de cookies al cargar la página</label>
+            <label lang="fi-FI">Avaa evästeasetukset sivun lataamisen yhteydessä</label>
+            <label lang="nn-NO">Åpne informasjonskapselinnstillinger ved innlasting av siden</label>
+            <label lang="sv-SE">Öppna cookie-inställningar vid sidladdning</label>
+            <label lang="cs-CZ">Otevřít nastavení cookies při načítání stránky</label>
+            <label lang="pt-PT">Abrir configurações de cookies ao carregar a página</label>
+            <label lang="tr-TR">Sayfa yüklenirken çerez ayarlarını aç</label>
+            <label lang="da-DK">Åbn cookieindstillinger ved indlæsning af siden</label>
+            <label lang="it-IT">Apri le impostazioni dei cookie al caricamento della pagina</label>
+            <label lang="pl-PL">Otwórz ustawienia plików cookie podczas ładowania strony</label>
+            <label lang="bs-BA">Otvorite postavke kolačića prilikom učitavanja stranice</label>
+            <defaultValue>false</defaultValue>
+            <helpText>If true, the cookie settings are opened on loading the page.</helpText>
+            <helpText lang="de-DE">Wenn ja, sind die Cookie Einstellungen beim Seitenaufruf bereits aufgeklappt.</helpText>
+            <helpText lang="nl-NL">Als ja, worden de cookie-instellingen geopend bij het laden van de pagina.</helpText>
+            <helpText lang="fr-FR">Si vrai, les paramètres des cookies sont ouverts lors du chargement de la page.</helpText>
+            <helpText lang="es-ES">Si es verdadero, la configuración de cookies se abrirá al cargar la página.</helpText>
+            <helpText lang="fi-FI">Jos tämä on totta, evästeasetukset avautuvat sivua ladattaessa.</helpText>
+            <helpText lang="nn-NO">Hvis ja, åpnes informasjonskapselinnstillingene når siden lastes inn.</helpText>
+            <helpText lang="sv-SE">Om ja, öppnas cookie-inställningarna vid sidladdning.</helpText>
+            <helpText lang="cs-CZ">Pokud je to pravda, otevřou se nastavení cookies při načítání stránky.</helpText>
+            <helpText lang="pt-PT">Se for verdadeiro, as configurações de cookies serão abertas ao carregar a página.</helpText>
+            <helpText lang="tr-TR">Evetse, sayfa yüklenirken çerez ayarları açılır.</helpText>
+            <helpText lang="da-DK">Hvis ja, åbnes cookieindstillingerne, når siden indlæses.</helpText>
+            <helpText lang="it-IT">Se è vero, le impostazioni dei cookie si apriranno al caricamento della pagina.</helpText>
+            <helpText lang="pl-PL">Jeśli to prawda, ustawienia plików cookie zostaną otwarte podczas ładowania strony.</helpText>
+            <helpText lang="bs-BA">Ako je tačno, postavke kolačića će se otvoriti prilikom učitavanja stranice.</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>pageReload</name>
+            <label>Reload page on accept cookies</label>
+            <label lang="de-DE">Seite automatisch neu laden beim Akzeptieren der Cookies</label>
+            <label lang="nl-NL">Herlaad pagina bij accepteren van cookies</label>
+            <label lang="fr-FR">Recharger la page lors de l'acceptation des cookies</label>
+            <label lang="es-ES">Recargar página al aceptar cookies</label>
+            <label lang="fi-FI">Lataa sivu uudelleen evästeet hyväksyttäessä</label>
+            <label lang="nn-NO">Last siden på nytt når informasjonskapslene aksepteres</label>
+            <label lang="sv-SE">Ladda om sidan när kakor accepteras</label>
+            <label lang="cs-CZ">Znovu načíst stránku po přijetí cookies</label>
+            <label lang="pt-PT">Recarregar a página ao aceitar cookies</label>
+            <label lang="tr-TR">Çerezleri kabul ettiğinizde sayfayı yeniden yükleyin</label>
+            <label lang="da-DK">Genindlæs siden ved accept af cookies</label>
+            <label lang="it-IT">Ricarica la pagina all'accettazione dei cookie</label>
+            <label lang="pl-PL">Ponownie załaduj stronę po zaakceptowaniu ciasteczek</label>
+            <label lang="bs-BA">Ponovo učitaj stranicu kada se prihvate kolačići</label>
+            <defaultValue>false</defaultValue>
+            <helpText>If true, the page will automatically reload as soon as the cookies are accepted. However, this is only the case if you click on the "Accept selected cookies" or "Accept all Cookies" button. With the button "Accept only functional cookies" no page reload is necessary.</helpText>
+            <helpText lang="de-DE">Wenn ja, wird die Seite automatisch neu geladen, sobald die Cookies akzeptiert wurden. Dies trifft jedoch nur zu beim Klicken auf den Button "Ausgewählte Cookies akzeptieren" oder "Alle Cookies akzeptieren". Beim Button "Nur funktionale Cookies akzeptieren" ist kein Seitenreload notwendig.</helpText>
+            <helpText lang="nl-NL">Als dit waar is, wordt de pagina automatisch herladen zodra de cookies zijn geaccepteerd. Dit is echter alleen het geval als u op de knop "Cookies accepteren" of "Alle cookies accepteren" klikt. Bij de knop "Alleen functionele cookies accepteren" is geen pagina-herlaad nodig.</helpText>
+            <helpText lang="fr-FR">Si vrai, la page sera automatiquement rechargée dès que les cookies seront acceptés. Cependant, cela ne s'applique que si vous cliquez sur le bouton "Accepter les cookies" ou "Accepter tous les cookies". Avec le bouton "Accepter uniquement les cookies fonctionnels", aucun rechargement de la page n'est nécessaire.</helpText>
+            <helpText lang="es-ES">Si es verdadero, la página se recargará automáticamente tan pronto como se acepten las cookies. Sin embargo, esto solo será el caso si haces clic en el botón "Aceptar cookies" o "Aceptar todas las cookies". Con el botón "Aceptar solo cookies funcionales", no es necesario volver a cargar la página.</helpText>
+            <helpText lang="fi-FI">Jos tämä on totta, sivu ladataan automaattisesti heti kun evästeet on hyväksytty. Tämä koskee kuitenkin vain, jos napsautat painiketta "Hyväksy evästeet" tai "Hyväksy kaikki evästeet". Painikkeen "Hyväksy vain toiminnalliset evästeet" kohdalla sivun uudelleen lataaminen ei ole tarpeen.</helpText>
+            <helpText lang="nn-NO">Hvis ja, vil siden automatisk lastes inn så snart informasjonskapslene aksepteres. Dette gjelder imidlertid bare hvis du klikker på "Aksepter informasjonskapsler" eller "Aksepter alle informasjonskapsler" knappen. Med knappen "Bare aksepter funksjonelle informasjonskapsler" er det ikke nødvendig å laste inn siden på nytt.</helpText>
+            <helpText lang="sv-SE">Om ja, kommer sidan att laddas om automatiskt så snart kakorna accepteras. Detta gäller dock endast om du klickar på knappen "Acceptera kakor" eller "Acceptera alla kakor". Med knappen "Acceptera endast funktionella kakor" behöver ingen sidladdning göras.</helpText>
+            <helpText lang="cs-CZ">Pokud je pravda, stránka se automaticky znovu načte, jakmile budou cookies přijaty. Toto platí však pouze v případě, že kliknete na tlačítko "Přijmout cookies" nebo "Přijmout všechny cookies". U tlačítka "Přijmout pouze funkční cookies" není potřeba žádné znovu načtení stránky.</helpText>
+            <helpText lang="pt-PT">Se for verdadeiro, a página será recarregada automaticamente assim que os cookies forem aceitos. No entanto, isso só ocorre se você clicar no botão "Aceitar Cookies" ou "Aceitar todos os Cookies". Com o botão "Aceitar apenas cookies funcionais", não é necessário recarregar a página.</helpText>
+            <helpText lang="tr-TR">Evetse, sayfa çerezler kabul edildiğinde otomatik olarak yeniden yüklenecektir. Ancak, bu yalnızca "Çerezleri kabul et" veya "Tüm Çerezleri kabul et" butonuna tıkladığınızda geçerlidir. "Sadece işlevsel çerezleri kabul et" butonu ile sayfanın yeniden yüklenmesi gerekli değildir.</helpText>
+            <helpText lang="da-DK">Hvis ja, loades siden automatisk igen, så snart cookies accepteres. Dette gælder dog kun, hvis du klikker på knappen "Accepter cookies" eller "Accepter alle cookies". Med knappen "Accepter kun funktionelle cookies" er der ikke behov for yderligere indlæsning af siden.</helpText>
+            <helpText lang="it-IT">Se è vero, la pagina verrà ricaricata automaticamente non appena i cookie vengono accettati. Tuttavia, questo vale solo se fai clic sul pulsante "Accetta cookie" o "Accetta tutti i cookie". Con il pulsante "Accetta solo cookie funzionali", non è necessario ricaricare la pagina.</helpText>
+            <helpText lang="pl-PL">Jeśli to prawda, strona zostanie automatycznie przeładowana, gdy tylko ciasteczka zostaną zaakceptowane. Jednak dotyczy to tylko sytuacji, gdy klikniesz przycisk "Akceptuj ciasteczka" lub "Akceptuj wszystkie ciasteczka". W przypadku przycisku "Akceptuj tylko funkcjonalne ciasteczka" ponowne ładowanie strony nie jest konieczne.</helpText>
+            <helpText lang="bs-BA">Ako je tačno, stranica će se automatski ponovo učitati čim se kolačići prihvate. Međutim, to važi samo ako kliknete na dugme "Prihvati kolačiće" ili "Prihvati sve kolačiće". Sa dugmetom "Prihvati samo funkcionalne kolačiće" ponovo učitavanje stranice nije potrebno.</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>dontAddToDataLayer</name>
+            <label>Don't add cookie state to data layer</label>
+            <label lang="de-DE">Cookie Status NICHT in den Data Layer übernehmen</label>
+            <label lang="nl-NL">Voeg de cookie-status NIET toe aan de gegevenslaag</label>
+            <label lang="fr-FR">Ne pas ajouter l'état des cookies à la couche de données</label>
+            <label lang="es-ES">No agregar el estado de cookies a la capa de datos</label>
+            <label lang="fi-FI">Älä lisää evästeiden tilaa tietokerrokseen</label>
+            <label lang="nn-NO">Ikke legg cookie-status til data laget</label>
+            <label lang="sv-SE">Lägg inte till cookie-status i datalagret</label>
+            <label lang="cs-CZ">Nehodnoťte stav cookie do datové vrstvy</label>
+            <label lang="pt-PT">Não adicionar o estado do cookie à camada de dados</label>
+            <label lang="tr-TR">Çerez durumunu veri katmanına ekleme</label>
+            <label lang="da-DK">Tilsæt ikke cookie-status til datalagret</label>
+            <label lang="it-IT">Non aggiungere lo stato dei cookie al livello dati</label>
+            <label lang="pl-PL">Nie dodawaj stanu plików cookie do warstwy danych</label>
+            <label lang="bs-BA">Ne dodaj stanje kolačića u sloj podataka</label>
+            <defaultValue>false</defaultValue>
+            <helpText>If active, the cookie state is not added to the data layer. In this case the cookie state can't be used in further tools like Google Tag Manager.</helpText>
+            <helpText lang="de-DE">Wenn aktiv, wird der Cookie Status nicht in den DataLayer übernommen. In diesem Fall kann der Cookie Status nicht in anderen Anwendungen weiter verarbeitet werden (z.B. Google Tag Manager).</helpText>
+            <helpText lang="nl-NL">Als actief, wordt de cookie-status NIET aan de gegevenslaag toegevoegd. In dit geval kan de cookie-status niet worden gebruikt in andere hulpmiddelen, zoals Google Tag Manager.</helpText>
+            <helpText lang="fr-FR">Si actif, l'état des cookies n'est pas ajouté à la couche de données. Dans ce cas, l'état du cookie ne peut pas être utilisé dans d'autres outils tels que Google Tag Manager.</helpText>
+            <helpText lang="es-ES">Si está activo, el estado de las cookies no se agrega a la capa de datos. En este caso, el estado de la cookie no se puede utilizar en otras herramientas como Google Tag Manager.</helpText>
+            <helpText lang="fi-FI">Jos tämä on aktiivinen, evästeen tila ei lisätä tietokerrokseen. Tässä tapauksessa evästeen tilaa ei voi käyttää muissa työkaluissa, kuten Google Tag Managerissa.</helpText>
+            <helpText lang="nn-NO">Hvis aktiv, legges ikke cookie-status til datalaget. I dette tilfellet kan ikke cookie-status brukes i andre verktøy som Google Tag Manager.</helpText>
+            <helpText lang="sv-SE">Om aktivt läggs inte cookie-status till datalagret. I detta fall kan inte cookie-status användas i andra verktyg, som Google Tag Manager.</helpText>
+            <helpText lang="cs-CZ">Pokud je aktivní, stav cookie není přidán do datové vrstvy. V tomto případě stav cookie nelze použít v dalších nástrojích, jako je Google Tag Manager.</helpText>
+            <helpText lang="pt-PT">Se ativo, o estado do cookie não é adicionado à camada de dados. Neste caso, o estado do cookie não pode ser usado em outras ferramentas, como o Google Tag Manager.</helpText>
+            <helpText lang="tr-TR">Eğer aktifse, çerez durumu veri katmanına eklenmez. Bu durumda, çerez durumu Google Tag Manager gibi diğer araçlarda kullanılamaz.</helpText>
+            <helpText lang="da-DK">Hvis aktiv, tilføjes cookie-status ikke til datalagret. I dette tilfælde kan cookie-status ikke bruges i andre værktøjer som Google Tag Manager.</helpText>
+            <helpText lang="it-IT">Se attivo, lo stato dei cookie non viene aggiunto al livello dati. In questo caso, lo stato del cookie non può essere utilizzato in altri strumenti come Google Tag Manager.</helpText>
+            <helpText lang="pl-PL">Jeśli jest aktywny, stan pliku cookie nie jest dodawany do warstwy danych. W takim przypadku stan plików cookie nie może być używany w innych narzędziach, takich jak Google Tag Manager.</helpText>
+            <helpText lang="bs-BA">Ako je aktivno, stanje kolačića se ne dodaje u sloj podataka. U ovom slučaju, stanje kolačića ne može se koristiti u drugim alatima poput Google Tag Manager-a.</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>forceConsent</name>
+            <label>Obtain cookie consent again (force)</label>
+            <label lang="de-DE">Erneute Cookie Zustimmung einholen (erzwingen)</label>
+            <label lang="nl-NL">Vraag opnieuw om cookie toestemming (dwingen)</label>
+            <label lang="fr-FR">Obtenir à nouveau le consentement des cookies (forcé)</label>
+            <label lang="es-ES">Obtener nuevamente el consentimiento de cookies (forzar)</label>
+            <label lang="fi-FI">Hanki evästehyväksyntä uudelleen (pakota)</label>
+            <label lang="nn-NO">Innkreve samtykke til informasjonskapsler igjen (tvinge)</label>
+            <label lang="sv-SE">Mata om samtycke för cookies igen (tvinga)</label>
+            <label lang="cs-CZ">Znovu získat souhlas s cookies (nutit)</label>
+            <label lang="pt-PT">Obter novamente o consentimento de cookies (forçar)</label>
+            <label lang="tr-TR">Çerez iznini tekrar almak (zorla)</label>
+            <label lang="da-DK">Få cookie-samtykke igen (tving)</label>
+            <label lang="it-IT">Ottenere nuovamente il consenso ai cookie (forzare)</label>
+            <label lang="pl-PL">Ponownie uzyskaj zgodę na pliki cookie (wymuś)</label>
+            <label lang="bs-BA">Ponovo dobiti saglasnost za kolačiće (prisilno)</label>
+            <defaultValue>false</defaultValue>
+            <helpText>Forces the cookie notice to be displayed for each session - regardless of the consent cookies already set. This is useful if new cookies are recorded in the system and their functions are to be used immediately.</helpText>
+            <helpText lang="de-DE">Erzwingt das Einblenden vom Cookie Hinweis je Session - unabhängig von den bereits gesetzten Consent Cookies. Dies ist sinnvoll wenn neue Cookies im System erfasst werden und deren Funktionen sofort genutzt werden sollen.</helpText>
+            <helpText lang="nl-NL">Dwingt cookie-meldingen til å vises for hver sesjon - uavhengig av samtykke-meldingene som allerede er satt. Dette er nyttig hvis nye informasjonskapsler er registrert i systemet og deres funksjoner skal brukes umiddelbart.</helpText>
+            <helpText lang="fr-FR">Force l'affichage de l'avis sur les cookies pour chaque session - indépendamment des cookies de consentement déjà définis. Cela est utile si de nouveaux cookies sont enregistrés dans le système et que leurs fonctions doivent être utilisées immédiatement.</helpText>
+            <helpText lang="es-ES">Obliga a que se muestre el aviso de cookies en cada sesión, independientemente de las cookies de consentimiento que ya estén configuradas. Esto es útil si se registran nuevas cookies en el sistema y se deben utilizar sus funciones de inmediato.</helpText>
+            <helpText lang="fi-FI">Pakottaa evästeilmoituksen näkymään jokaisessa istunnossa - riippumatta samtykkeistä, jotka allerede er satt. Tämä on hyödyllistä, jos järjestelmään tallennetaan uusia evästeitä ja niiden toimintoja halutaan käyttää heti.</helpText>
+            <helpText lang="nn-NO">Tvinger cookie-meldingen til å vises for hver økt - uavhengig av samtykke-informasjonen som allerede er satt. Dette er nyttig hvis nye informasjonskapsler registreres i systemet og funksjonene deres umiddelbart skal brukes.</helpText>
+            <helpText lang="sv-SE">Tvingar cookie-meddelandet att visas för varje session - oavsett de samtyckescookies som redan är inställda. Detta är användbart om nya cookies registreras i systemet och deras funktioner ska användas omedelbart.</helpText>
+            <helpText lang="cs-CZ">Nutí oznámení o cookies, aby se zobrazovalo při každé relaci - bez ohledu na již stanovené souhlasy s cookies. To je užitečné, pokud jsou v systému zaznamenány nové soubory cookie a jejich funkce mají být okamžitě použity.</helpText>
+            <helpText lang="pt-PT">Força a exibição do aviso de cookies para cada sessão - independentemente dos cookies de consentimento já definidos. Isso é útil se novos cookies forem registrados no sistema e suas funções devem ser usadas imediatamente.</helpText>
+            <helpText lang="tr-TR">Her oturumda çerez bildirimini göstermeyi zorlar - zaten ayarlanmış olan onay çerezlerine bakılmaksızın. Bu, sisteme yeni çerezler kaydediliyorsa ve işlevlerinin hemen kullanılmasını istiyorsanız yararlıdır.</helpText>
+            <helpText lang="da-DK">Tvinger cookie-meddelelsen til at blive vist for hver session - uanset de samtykke-cookies, der allerede er angivet. Dette er nyttigt, hvis der registreres nye cookies i systemet, og deres funktioner skal bruges med det samme.</helpText>
+            <helpText lang="it-IT">Costringe la visualizzazione dell'avviso sui cookie per ogni sessione, indipendentemente dai cookie di consenso già impostati. Questo è utile se vengono registrati nuovi cookie nel sistema e le loro funzioni devono essere utilizzate immediatamente.</helpText>
+            <helpText lang="pl-PL">Wymusza wyświetlanie powiadomienia o cookies w każdej sesji - niezależnie od już ustawionych zgód na pliki cookie. Jest to przydatne, jeśli w systemie rejestrowane są nowe pliki cookie i ich funkcje mają być natychmiast używane.</helpText>
+            <helpText lang="bs-BA">Prisiljava prikazivanje obaveštenja o kolačićima za svaku sesiju - bez obzira na već postavljene kolačiće za saglasnost. Ovo je korisno ako su novi kolačići registrovani u sistemu i njihova funkcionalnost treba odmah koristiti.</helpText>
+        </input-field>
+    </card>
+    <card>
+        <title>Layout</title>
+        <title lang="de-DE">Layout</title>
+        <title lang="nl-NL">Indeling</title>
+        <title lang="fr-FR">Mise en page</title>
+        <title lang="es-ES">Diseño</title>
+        <title lang="fi-FI">Asettelu</title>
+        <title lang="nn-NO">Layout</title>
+        <title lang="sv-SE">Layout</title>
+        <title lang="cs-CZ">Rozvržení</title>
+        <title lang="pt-PT">Layout</title>
+        <title lang="tr-TR">Düzen</title>
+        <title lang="da-DK">Layout</title>
+        <title lang="it-IT">Layout</title>
+        <title lang="pl-PL">Układ</title>
+        <title lang="bs-BA">Raspored</title>
+
+        <input-field type="single-select">
+            <name>layout</name>
+            <label>Layout</label>
+            <label lang="de-DE">Layout</label>
+            <label lang="nl-NL">Indeling</label>
+            <label lang="fr-FR">Mise en page</label>
+            <label lang="es-ES">Diseño</label>
+            <label lang="fi-FI">Asettelu</label>
+            <label lang="nn-NO">Layout</label>
+            <label lang="sv-SE">Layout</label>
+            <label lang="cs-CZ">Rozvržení</label>
+            <label lang="pt-PT">Layout</label>
+            <label lang="tr-TR">Düzen</label>
+            <label lang="da-DK">Layout</label>
+            <label lang="it-IT">Layout</label>
+            <label lang="pl-PL">Układ</label>
+            <label lang="bs-BA">Raspored</label>
+            <defaultValue>default</defaultValue>
+            <options>
+                <option>
+                    <id>default</id>
+                    <name>Default cookie notice bottom</name>
+                    <name lang="de-DE">Standard Cookie Hinweis Unten</name>
+                    <name lang="nl-NL">Standaard cookie melding onderaan</name>
+                    <name lang="fr-FR">Avertissement de cookie par défaut en bas</name>
+                    <name lang="es-ES">Aviso de cookies por defecto en la parte inferior</name>
+                    <name lang="fi-FI">Oletusseloste evästeitä varten alareunassa</name>
+                    <name lang="nn-NO">Standard informasjonsmelding om informasjonskapsler nederst</name>
+                    <name lang="sv-SE">Standard cookie-meddelande längst ner</name>
+                    <name lang="cs-CZ">Výchozí oznámení o cookies dole</name>
+                    <name lang="pt-PT">Aviso de cookies padrão em baixo</name>
+                    <name lang="tr-TR">Varsayılan çerez bildirimi altta</name>
+                    <name lang="da-DK">Standard cookie meddelelse nederst</name>
+                    <name lang="it-IT">Avviso cookie predefinito in basso</name>
+                    <name lang="pl-PL">Domyślna informacja o plikach cookie poniżej</name>
+                    <name lang="bs-BA">Zadnja obavijest o kolačićima</name>
+                </option>
+                <option>
+                    <id>modal</id>
+                    <name>Modal window</name>
+                    <name lang="de-DE">Modal Fenster</name>
+                    <name lang="nl-NL">Modaal venster</name>
+                    <name lang="fr-FR">Fenêtre modale</name>
+                    <name lang="es-ES">Ventana modal</name>
+                    <name lang="fi-FI">Modaalinen ikkuna</name>
+                    <name lang="nn-NO">Modalvindu</name>
+                    <name lang="sv-SE">Modal fönster</name>
+                    <name lang="cs-CZ">Modální okno</name>
+                    <name lang="pt-PT">Janela modal</name>
+                    <name lang="tr-TR">Modal pencere</name>
+                    <name lang="da-DK">Modal vindue</name>
+                    <name lang="it-IT">Finestra modale</name>
+                    <name lang="pl-PL">Okno modalne</name>
+                    <name lang="bs-BA">Modal prozor</name>
+                </option>
+            </options>
+            <helpText>Sets the display options for the cookie note.</helpText>
+            <helpText lang="de-DE">Bestimmt die Erscheinungsform des Cookie Hinweises.</helpText>
+            <helpText lang="nl-NL">Stelt de weergaveopties voor de cookie-melding in.</helpText>
+            <helpText lang="fr-FR">Définit les options d'affichage pour l'avis de cookie.</helpText>
+            <helpText lang="es-ES">Establece las opciones de visualización para el aviso de cookies.</helpText>
+            <helpText lang="fi-FI">Asettaa evästehuomautuksen näyttöasetukset.</helpText>
+            <helpText lang="nn-NO">Setter visningsalternativene for informasjonskapsel-meldingen.</helpText>
+            <helpText lang="sv-SE">Ställer in visningsalternativen för cookie-meddelandet.</helpText>
+            <helpText lang="cs-CZ">Nastaví možnosti zobrazení pro oznámení o cookies.</helpText>
+            <helpText lang="pt-PT">Define as opções de exibição para o aviso de cookies.</helpText>
+            <helpText lang="tr-TR">Çerez bildirim için görüntüleme seçeneklerini ayarlar.</helpText>
+            <helpText lang="da-DK">Indstiller visningsmuligheder for cookie-meddelelsen.</helpText>
+            <helpText lang="it-IT">Imposta le opzioni di visualizzazione per l'avviso sui cookie.</helpText>
+            <helpText lang="pl-PL">Ustawia opcje wyświetlania dla powiadomienia o plikach cookie.</helpText>
+            <helpText lang="bs-BA">Postavlja prikaz opcija za obavijest o kolačićima.</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>displayHeading</name>
+            <label>Show heading in cookie notice</label>
+            <label lang="de-DE">Überschrift im Cookie Hinweis anzeigen</label>
+            <label lang="nl-NL">Toon kop in cookie-melding</label>
+            <label lang="fr-FR">Afficher le titre dans l'avis sur les cookies</label>
+            <label lang="es-ES">Mostrar título en el aviso de cookies</label>
+            <label lang="fi-FI">Näytä otsikko evästeilmoituksessa</label>
+            <label lang="nn-NO">Vis overskrift i informasjonskapselmelding</label>
+            <label lang="sv-SE">Visa rubrik i cookie-meddelandet</label>
+            <label lang="cs-CZ">Zobrazit nadpis v oznámení o cookies</label>
+            <label lang="pt-PT">Mostrar cabeçalho no aviso de cookies</label>
+            <label lang="tr-TR">Çerez bildiriminde başlığı göster</label>
+            <label lang="da-DK">Vis overskrift i cookie-meddelelse</label>
+            <label lang="it-IT">Mostra intestazione nell'avviso sui cookie</label>
+            <label lang="pl-PL">Pokaż nagłówek w powiadomieniu o plikach cookie</label>
+            <label lang="bs-BA">Prikaži naslov u obavijesti o kolačićima</label>
+            <defaultValue>false</defaultValue>
+            <helpText>If active, a heading is displayed in the cookie notification. This can be changed using the snippet "acrisCookieConsent.heading".</helpText>
+            <helpText lang="de-DE">Wenn aktiv, wird eine Überschrift im Cookie Hinweis angezeigt. Diese kann über den Textbaustein "acrisCookieConsent.heading" abgeändert werden.</helpText>
+            <helpText lang="nl-NL">Als actief, wordt er een kop weergegeven in de cookie-melding. Dit kan worden gewijzigd met de snippet "acrisCookieConsent.heading".</helpText>
+            <helpText lang="fr-FR">Si actif, un titre est affiché dans l'avis sur les cookies. Cela peut être modifié à l'aide de l'extrait "acrisCookieConsent.heading".</helpText>
+            <helpText lang="es-ES">Si está activo, se mostrará un título en el aviso de cookies. Esto se puede cambiar utilizando el fragmento "acrisCookieConsent.heading".</helpText>
+            <helpText lang="fi-FI">Jos aktiivinen, otsikko näkyy evästeilmoituksessa. Tämä voi vaihtua käytettäessä pätkää "acrisCookieConsent.heading".</helpText>
+            <helpText lang="nn-NO">Hvis aktiv, vil en overskrift vises i informasjonskapselmeldingen. Dette kan endres ved å bruke klippet "acrisCookieConsent.heading".</helpText>
+            <helpText lang="sv-SE">Om aktivt visas en rubrik i cookie-meddelandet. Detta kan ändras med hjälp av snippetet "acrisCookieConsent.heading".</helpText>
+            <helpText lang="cs-CZ">Pokud je aktivní, bude v oznámení o cookies zobrazen nadpis. To lze změnit pomocí úryvku "acrisCookieConsent.heading".</helpText>
+            <helpText lang="pt-PT">Se ativo, um cabeçalho é exibido no aviso de cookies. Isso pode ser alterado usando o trecho "acrisCookieConsent.heading".</helpText>
+            <helpText lang="tr-TR">Aktifse, çerez bildiriminde bir başlık gösterilir. Bu, "acrisCookieConsent.heading" kod parçası kullanılarak değiştirilebilir.</helpText>
+            <helpText lang="da-DK">Hvis aktiv, vises en overskrift i cookie-meddelelsen. Dette kan ændres ved hjælp af snipset "acrisCookieConsent.heading".</helpText>
+            <helpText lang="it-IT">Se attivo, verrà visualizzato un titolo nell'avviso sui cookie. Questo può essere modificato utilizzando il frammento "acrisCookieConsent.heading".</helpText>
+            <helpText lang="pl-PL">Jeśli aktywne, w powiadomieniu o plikach cookie wyświetli się nagłówek. Można go zmienić, używając fragmentu "acrisCookieConsent.heading".</helpText>
+            <helpText lang="bs-BA">Ako je aktivno, prikazat će se naslov u obavijesti o kolačićima. Ovo se može promijeniti pomoću isječka "acrisCookieConsent.heading".</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>displayMainBackgroundColor</name>
+            <label>Custom background color cookie notice</label>
+            <label lang="de-DE">Alternative Hintergrundfarbe Cookie Hinweis</label>
+            <label lang="nl-NL">Aangepaste achtergrondkleur cookie melding</label>
+            <label lang="fr-FR">Couleur de fond personnalisée pour l'avis de cookie</label>
+            <label lang="es-ES">Color de fondo personalizado para el aviso de cookies</label>
+            <label lang="fi-FI">Mukautettu taustaväri evästeilmoituksessa</label>
+            <label lang="nn-NO">Egendefinert bakgrunnsfarge for informasjonskapselmelding</label>
+            <label lang="sv-SE">Anpassad bakgrundsfärg för cookie-meddelandet</label>
+            <label lang="cs-CZ">Vlastní barva pozadí pro oznámení o cookies</label>
+            <label lang="pt-PT">Cor de fundo personalizada para o aviso de cookies</label>
+            <label lang="tr-TR">Özel arka plan rengi çerez bildiriminde</label>
+            <label lang="da-DK">Brugerdefineret baggrundsfarve til cookie-meddelelse</label>
+            <label lang="it-IT">Colore di sfondo personalizzato per l'avviso sui cookie</label>
+            <label lang="pl-PL">Niestandardowy kolor tła dla powiadomienia o plikach cookie</label>
+            <label lang="bs-BA">Prilagođena pozadinska boja za obavijest o kolačićima</label>
+            <placeholder>#fff</placeholder>
+            <placeholder lang="de-DE">#fff</placeholder>
+            <placeholder lang="nl-NL">#fff</placeholder>
+            <placeholder lang="fr-FR">#fff</placeholder>
+            <placeholder lang="es-ES">#fff</placeholder>
+            <placeholder lang="fi-FI">#fff</placeholder>
+            <placeholder lang="nn-NO">#fff</placeholder>
+            <placeholder lang="sv-SE">#fff</placeholder>
+            <placeholder lang="cs-CZ">#fff</placeholder>
+            <placeholder lang="pt-PT">#fff</placeholder>
+            <placeholder lang="tr-TR">#fff</placeholder>
+            <placeholder lang="da-DK">#fff</placeholder>
+            <placeholder lang="it-IT">#fff</placeholder>
+            <placeholder lang="pl-PL">#fff</placeholder>
+            <placeholder lang="bs-BA">#fff</placeholder>
+            <helpText>Please input an hex code - e.g.: #fff. If you do not want to overwrite the default color value, leave the color field empty.</helpText>
+            <helpText lang="de-DE">Die Eingabe erfolgt im Hex-Code - z.B.: #fff. Wenn Sie den im Standard hinterlegten Farbwert nicht überschreiben wollen, lassen Sie das Farbfeld einfach leer.</helpText>
+            <helpText lang="nl-NL">Voer een hex-code in - bijv.: #fff. Als u de standaardkleurwaarde niet wilt overschrijven, laat u het kleurenveld leeg.</helpText>
+            <helpText lang="fr-FR">Veuillez saisir un code hexadécimal - par exemple : #fff. Si vous ne souhaitez pas remplacer la valeur de couleur par défaut, laissez le champ de couleur vide.</helpText>
+            <helpText lang="es-ES">Por favor, introduzca un código hexadecimal - por ejemplo: #fff. Si no desea sobrescribir el valor de color predeterminado, deje el campo de color vacío.</helpText>
+            <helpText lang="fi-FI">Syötä heksakoodia - esim.: #fff. Jos et halua kirjoittaa oletusvärin arvoa yli, jätä väri kenttä tyhjäksi.</helpText>
+            <helpText lang="nn-NO">Vennligst legg inn en hex-kode - f.eks.: #fff. Hvis du ikke ønsker å overskrive standard fargeverdi, kan du la fargefeltet stå tomt.</helpText>
+            <helpText lang="sv-SE">Vänligen ange en hex-kod - t.ex.: #fff. Om du inte vill skriva över standardfärgvärdet, lämna färgfältet tomt.</helpText>
+            <helpText lang="cs-CZ">Zadejte prosím hexadecimální kód - např.: #fff. Pokud nechcete přepsat výchozí hodnotu barvy, nechte pole barvy prázdné.</helpText>
+            <helpText lang="pt-PT">Insira um código hexadecimal - ex.: #fff. Se não quiser sobrescrever o valor de cor padrão, deixe o campo de cor vazio.</helpText>
+            <helpText lang="tr-TR">Lütfen bir hex kodu girin - örn.: #fff. Varsayılan renk değerini yazmak istemiyorsanız, renk alanını boş bırakın.</helpText>
+            <helpText lang="da-DK">Indtast venligst en hex-kode - f.eks.: #fff. Hvis du ikke ønsker at overskrive standardfarveværdien, skal du lade farvefeltet stå tomt.</helpText>
+            <helpText lang="it-IT">Inserisci un codice esadecimale - ad esempio: #fff. Se non desideri sovrascrivere il valore di colore predefinito, lascia vuoto il campo colore.</helpText>
+            <helpText lang="pl-PL">Proszę wprowadzić kod szesnastkowy - np.: #fff. Jeśli nie chcesz nadpisywać domyślnej wartości koloru, zostaw pole koloru puste.</helpText>
+            <helpText lang="bs-BA">Molimo unesite hex kod - npr.: #fff. Ako ne želite prepisati zadanu boju, ostavite polje za boju prazno.</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>displaySwitchTabBackgroundColor</name>
+            <label>Custom background color group name drop down</label>
+            <label lang="de-DE">Alternative Hintergrundfarbe Gruppennamen Drop Down</label>
+            <label lang="nl-NL">Aangepaste achtergrondkleur voor groepsnaam keuzelijst</label>
+            <label lang="fr-FR">Couleur de fond personnalisée pour le menu déroulant du nom du groupe</label>
+            <label lang="es-ES">Color de fondo personalizado para el desplegable del nombre del grupo</label>
+            <label lang="fi-FI">Mukautettu taustaväri ryhmän nimen avautuvalle valikolle</label>
+            <label lang="nn-NO">Egendefinert bakgrunnsfarge for nedtrekksmeny for gruppenavn</label>
+            <label lang="sv-SE">Anpassad bakgrundsfärg för listrutan med gruppnamn</label>
+            <label lang="cs-CZ">Vlastní barva pozadí pro rozbalovací nabídku názvu skupiny</label>
+            <label lang="pt-PT">Cor de fundo personalizada para o menu suspenso do nome do grupo</label>
+            <label lang="tr-TR">Grup adı açılır menüsü için özel arka plan rengi</label>
+            <label lang="da-DK">Brugerdefineret baggrundsfarve til gruppenavn drop-down</label>
+            <label lang="it-IT">Colore di sfondo personalizzato per il menu a discesa del nome del gruppo</label>
+            <label lang="pl-PL">Niestandardowy kolor tła dla rozwijanego menu nazwy grupy</label>
+            <label lang="bs-BA">Prilagođena pozadinska boja za padajući izbornik imena grupe</label>
+            <placeholder>#f5f5f8</placeholder>
+            <placeholder lang="de-DE">#f5f5f8</placeholder>
+            <placeholder lang="nl-NL">#f5f5f8</placeholder>
+            <placeholder lang="fr-FR">#f5f5f8</placeholder>
+            <placeholder lang="es-ES">#f5f5f8</placeholder>
+            <placeholder lang="fi-FI">#f5f5f8</placeholder>
+            <placeholder lang="nn-NO">#f5f5f8</placeholder>
+            <placeholder lang="sv-SE">#f5f5f8</placeholder>
+            <placeholder lang="cs-CZ">#f5f5f8</placeholder>
+            <placeholder lang="pt-PT">#f5f5f8</placeholder>
+            <placeholder lang="tr-TR">#f5f5f8</placeholder>
+            <placeholder lang="da-DK">#f5f5f8</placeholder>
+            <placeholder lang="it-IT">#f5f5f8</placeholder>
+            <placeholder lang="pl-PL">#f5f5f8</placeholder>
+            <placeholder lang="bs-BA">#f5f5f8</placeholder>
+            <helpText>Please input an hex code - e.g.: #f5f5f8. If you do not want to overwrite the default color value, leave the color field empty.</helpText>
+            <helpText lang="de-DE">Die Eingabe erfolgt im Hex-Code - z.B.: #f5f5f8. Wenn Sie den im Standard hinterlegten Farbwert nicht überschreiben wollen, lassen Sie das Farbfeld einfach leer.</helpText>
+            <helpText lang="nl-NL">Voer een hex-code in - bijv.: #f5f5f8. Als u de standaardkleurwaarde niet wilt overschrijven, laat u het kleurenveld leeg.</helpText>
+            <helpText lang="fr-FR">Veuillez saisir un code hexadécimal - par exemple : #f5f5f8. Si vous ne souhaitez pas remplacer la valeur de couleur par défaut, laissez le champ de couleur vide.</helpText>
+            <helpText lang="es-ES">Por favor, introduzca un código hexadecimal - por ejemplo: #f5f5f8. Si no desea sobrescribir el valor de color predeterminado, deje el campo de color vacío.</helpText>
+            <helpText lang="fi-FI">Syötä heksakoodia - esim.: #f5f5f8. Jos et halua kirjoittaa oletusvärin arvoa yli, jätä väri kenttä tyhjäksi.</helpText>
+            <helpText lang="nn-NO">Vennligst legg inn en hex-kode - f.eks.: #f5f5f8. Hvis du ikke ønsker å overskrive standard fargeverdi, kan du la fargefeltet stå tomt.</helpText>
+            <helpText lang="sv-SE">Vänligen ange en hex-kod - t.ex.: #f5f5f8. Om du inte vill skriva över standardfärgvärdet, lämna färgfältet tomt.</helpText>
+            <helpText lang="cs-CZ">Zadejte prosím hexadecimální kód - např.: #f5f5f8. Pokud nechcete přepsat výchozí hodnotu barvy, nechte pole barvy prázdné.</helpText>
+            <helpText lang="pt-PT">Insira um código hexadecimal - ex.: #f5f5f8. Se não quiser sobrescrever o valor de cor padrão, deixe o campo de cor vazio.</helpText>
+            <helpText lang="tr-TR">Lütfen bir hex kodu girin - örn.: #f5f5f8. Varsayılan renk değerini yazmak istemiyorsanız, renk alanını boş bırakın.</helpText>
+            <helpText lang="da-DK">Indtast venligst en hex-kode - f.eks.: #f5f5f8. Hvis du ikke ønsker at overskrive standardfarveværdien, skal du lade farvefeltet stå tomt.</helpText>
+            <helpText lang="it-IT">Inserisci un codice esadecimale - ad esempio: #f5f5f8. Se non desideri sovrascrivere il valore di colore predefinito, lascia vuoto il campo colore.</helpText>
+            <helpText lang="pl-PL">Proszę wprowadzić kod szesnastkowy - np.: #f5f5f8. Jeśli nie chcesz nadpisywać domyślnej wartości koloru, zostaw pole koloru puste.</helpText>
+            <helpText lang="bs-BA">Molimo unesite hex kod - npr.: #f5f5f8. Ako ne želite prepisati zadanu boju, ostavite polje za boju prazno.</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>displayFontColor</name>
+            <label>Custom font color</label>
+            <label lang="de-DE">Alternative Schriftfarbe</label>
+            <label lang="nl-NL">Aangepaste letterkleuren</label>
+            <label lang="fr-FR">Couleur de police personnalisée</label>
+            <label lang="es-ES">Color de fuente personalizado</label>
+            <label lang="fi-FI">Mukautettu fonttiväri</label>
+            <label lang="nn-NO">Egendefinert skriftfarge</label>
+            <label lang="sv-SE">Anpassad textfärg</label>
+            <label lang="cs-CZ">Vlastní barva písma</label>
+            <label lang="pt-PT">Cor de fonte personalizada</label>
+            <label lang="tr-TR">Özel yazı rengi</label>
+            <label lang="da-DK">Brugerdefineret skrifttypefarve</label>
+            <label lang="it-IT">Colore del carattere personalizzato</label>
+            <label lang="pl-PL">Niestandardowy kolor czcionki</label>
+            <label lang="bs-BA">Prilagođena boja fonta</label>
+            <placeholder>#5f7285</placeholder>
+            <placeholder lang="de-DE">#5f7285</placeholder>
+            <placeholder lang="nl-NL">#5f7285</placeholder>
+            <placeholder lang="fr-FR">#5f7285</placeholder>
+            <placeholder lang="es-ES">#5f7285</placeholder>
+            <placeholder lang="fi-FI">#5f7285</placeholder>
+            <placeholder lang="nn-NO">#5f7285</placeholder>
+            <placeholder lang="sv-SE">#5f7285</placeholder>
+            <placeholder lang="cs-CZ">#5f7285</placeholder>
+            <placeholder lang="pt-PT">#5f7285</placeholder>
+            <placeholder lang="tr-TR">#5f7285</placeholder>
+            <placeholder lang="da-DK">#5f7285</placeholder>
+            <placeholder lang="it-IT">#5f7285</placeholder>
+            <placeholder lang="pl-PL">#5f7285</placeholder>
+            <placeholder lang="bs-BA">#5f7285</placeholder>
+            <helpText>Please input an hex code - e.g.: #5f7285. If you do not want to overwrite the default color value, leave the color field empty.</helpText>
+            <helpText lang="de-DE">Die Eingabe erfolgt im Hex-Code - z.B.: #5f7285. Wenn Sie den im Standard hinterlegten Farbwert nicht überschreiben wollen, lassen Sie das Farbfeld einfach leer.</helpText>
+            <helpText lang="nl-NL">Voer een hex-code in - bijv.: #5f7285. Als u de standaardkleurwaarde niet wilt overschrijven, laat u het kleurenveld leeg.</helpText>
+            <helpText lang="fr-FR">Veuillez saisir un code hexadécimal - par exemple : #5f7285. Si vous ne souhaitez pas remplacer la valeur de couleur par défaut, laissez le champ de couleur vide.</helpText>
+            <helpText lang="es-ES">Por favor, introduzca un código hexadecimal - por ejemplo: #5f7285. Si no desea sobrescribir el valor de color predeterminado, deje el campo de color vacío.</helpText>
+            <helpText lang="fi-FI">Syötä heksakoodia - esim.: #5f7285. Jos et halua kirjoittaa oletusvärin arvoa yli, jätä väri kenttä tyhjäksi.</helpText>
+            <helpText lang="nn-NO">Vennligst legg inn en hex-kode - f.eks.: #5f7285. Hvis du ikke ønsker å overskrive standard fargeverdi, kan du la fargefeltet stå tomt.</helpText>
+            <helpText lang="sv-SE">Vänligen ange en hex-kod - t.ex.: #5f7285. Om du inte vill skriva över standardfärgvärdet, lämna färgfältet tomt.</helpText>
+            <helpText lang="cs-CZ">Zadejte prosím hexadecimální kód - např.: #5f7285. Pokud nechcete přepsat výchozí hodnotu barvy, nechte pole barvy prázdné.</helpText>
+            <helpText lang="pt-PT">Insira um código hexadecimal - ex.: #5f7285. Se não quiser sobrescrever o valor de cor padrão, deixe o campo de cor vazio.</helpText>
+            <helpText lang="tr-TR">Lütfen bir hex kodu girin - örn.: #5f7285. Varsayılan renk değerini yazmak istemiyorsanız, renk alanını boş bırakın.</helpText>
+            <helpText lang="da-DK">Indtast venligst en hex-kode - f.eks.: #5f7285. Hvis du ikke ønsker at overskrive standardfarveværdien, skal du lade farvefeltet stå tomt.</helpText>
+            <helpText lang="it-IT">Inserisci un codice esadecimale - ad esempio: #5f7285. Se non desideri sovrascrivere il valore di colore predefinito, lascia vuoto il campo colore.</helpText>
+            <helpText lang="pl-PL">Proszę wprowadzić kod szesnastkowy - np.: #5f7285. Jeśli nie chcesz nadpisywać domyślnej wartości koloru, zostaw pole koloru puste.</helpText>
+            <helpText lang="bs-BA">Molimo unesite hex kod - npr.: #5f7285. Ako ne želite prepisati zadanu boju, ostavite polje za boju prazno.</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>displayBorderColor</name>
+            <label>Custom border color</label>
+            <label lang="de-DE">Alternative Rahmenfarbe</label>
+            <label lang="nl-NL">Aangepaste randkleur</label>
+            <label lang="fr-FR">Couleur de bordure personnalisée</label>
+            <label lang="es-ES">Color de borde personalizado</label>
+            <label lang="fi-FI">Mukautettu reunaväri</label>
+            <label lang="nn-NO">Egendefinert rammefarge</label>
+            <label lang="sv-SE">Anpassad kantfärg</label>
+            <label lang="cs-CZ">Vlastní barva okraje</label>
+            <label lang="pt-PT">Cor de borda personalizada</label>
+            <label lang="tr-TR">Özel kenar rengi</label>
+            <label lang="da-DK">Brugerdefineret kantfarve</label>
+            <label lang="it-IT">Colore del bordo personalizzato</label>
+            <label lang="pl-PL">Niestandardowy kolor krawędzi</label>
+            <label lang="bs-BA">Prilagođena boja ivice</label>
+            <placeholder>#dadae5</placeholder>
+            <placeholder lang="de-DE">#dadae5</placeholder>
+            <placeholder lang="nl-NL">#dadae5</placeholder>
+            <placeholder lang="fr-FR">#dadae5</placeholder>
+            <placeholder lang="es-ES">#dadae5</placeholder>
+            <placeholder lang="fi-FI">#dadae5</placeholder>
+            <placeholder lang="nn-NO">#dadae5</placeholder>
+            <placeholder lang="sv-SE">#dadae5</placeholder>
+            <placeholder lang="cs-CZ">#dadae5</placeholder>
+            <placeholder lang="pt-PT">#dadae5</placeholder>
+            <placeholder lang="tr-TR">#dadae5</placeholder>
+            <placeholder lang="da-DK">#dadae5</placeholder>
+            <placeholder lang="it-IT">#dadae5</placeholder>
+            <placeholder lang="pl-PL">#dadae5</placeholder>
+            <placeholder lang="bs-BA">#dadae5</placeholder>
+            <helpText>Please input an hex code - e.g.: #dadae5. If you do not want to overwrite the default color value, leave the color field empty.</helpText>
+            <helpText lang="de-DE">Die Eingabe erfolgt im Hex-Code - z.B.: #dadae5. Wenn Sie den im Standard hinterlegten Farbwert nicht überschreiben wollen, lassen Sie das Farbfeld einfach leer.</helpText>
+            <helpText lang="nl-NL">Voer een hex-code in - bijv.: #dadae5. Als u de standaardkleurwaarde niet wilt overschrijven, laat u het kleurenveld leeg.</helpText>
+            <helpText lang="fr-FR">Veuillez saisir un code hexadécimal - par exemple : #dadae5. Si vous ne souhaitez pas remplacer la valeur de couleur par défaut, laissez le champ de couleur vide.</helpText>
+            <helpText lang="es-ES">Por favor, introduzca un código hexadecimal - por ejemplo: #dadae5. Si no desea sobrescribir el valor de color predeterminado, deje el campo de color vacío.</helpText>
+            <helpText lang="fi-FI">Syötä heksakoodia - esim.: #dadae5. Jos et halua kirjoittaa oletusvärin arvoa yli, jätä väri kenttä tyhjäksi.</helpText>
+            <helpText lang="nn-NO">Vennligst legg inn en hex-kode - f.eks.: #dadae5. Hvis du ikke ønsker å overskrive standard fargeverdi, kan du la fargefeltet stå tomt.</helpText>
+            <helpText lang="sv-SE">Vänligen ange en hex-kod - t.ex.: #dadae5. Om du inte vill skriva över standardfärgvärdet, lämna färgfältet tomt.</helpText>
+            <helpText lang="cs-CZ">Zadejte prosím hexadecimální kód - např.: #dadae5. Pokud nechcete přepsat výchozí hodnotu barvy, nechte pole barvy prázdné.</helpText>
+            <helpText lang="pt-PT">Insira um código hexadecimal - ex.: #dadae5. Se não quiser sobrescrever o valor de cor padrão, deixe o campo de cor vazio.</helpText>
+            <helpText lang="tr-TR">Lütfen bir hex kodu girin - örn.: #dadae5. Varsayılan renk değerini yazmak istemiyorsanız, renk alanını boş bırakın.</helpText>
+            <helpText lang="da-DK">Indtast venligst en hex-kode - f.eks.: #dadae5. Hvis du ikke ønsker at overskrive standardfarveværdien, skal du lade farvefeltet stå tomt.</helpText>
+            <helpText lang="it-IT">Inserisci un codice esadecimale - ad esempio: #dadae5. Se non desideri sovrascrivere il valore di colore predefinito, lascia vuoto il campo colore.</helpText>
+            <helpText lang="pl-PL">Proszę wprowadzić kod szesnastkowy - np.: #dadae5. Jeśli nie chcesz nadpisywać domyślnej wartości koloru, zostaw pole koloru puste.</helpText>
+            <helpText lang="bs-BA">Molimo unesite hex kod - npr.: #dadae5. Ako ne želite prepisati zadanu boju, ostavite polje za boju prazno.</helpText>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>titleDescLayout</name>
+            <label>Title / Description layout</label>
+            <label lang="de-DE">Titel / Beschreibung Layout</label>
+            <label lang="nl-NL">Titel / Beschrijving lay-out</label>
+            <label lang="fr-FR">Mise en page Titre / Description</label>
+            <label lang="es-ES">Diseño de Título / Descripción</label>
+            <label lang="fi-FI">Otsikko / Kuvaus asettelu</label>
+            <label lang="nn-NO">Tittel / Beskrivelse layout</label>
+            <label lang="sv-SE">Titel / Beskrivningslayout</label>
+            <label lang="cs-CZ">Rozvržení názvu / popisu</label>
+            <label lang="pt-PT">Layout do Título / Descrição</label>
+            <label lang="tr-TR">Başlık / Açıklama düzeni</label>
+            <label lang="da-DK">Titel / Beskrivelse layout</label>
+            <label lang="it-IT">Layout Titolo / Descrizione</label>
+            <label lang="pl-PL">Układ Tytuł / Opis</label>
+            <label lang="bs-BA">Raspored Naslov / Opis</label>
+            <defaultValue>default</defaultValue>
+            <options>
+                <option>
+                    <id>default</id>
+                    <name>Title to the left of the description</name>
+                    <name lang="de-DE">Titel links von der Beschreibung</name>
+                    <name lang="nl-NL">Titel links van de beschrijving</name>
+                    <name lang="fr-FR">Titre à gauche de la description</name>
+                    <name lang="es-ES">Título a la izquierda de la descripción</name>
+                    <name lang="fi-FI">Otsikko vasemmalla puolella kuvausta</name>
+                    <name lang="nn-NO">Tittel til venstre for beskrivelsen</name>
+                    <name lang="sv-SE">Titel till vänster om beskrivningen</name>
+                    <name lang="cs-CZ">Nadpis nalevo od popisu</name>
+                    <name lang="pt-PT">Título à esquerda da descrição</name>
+                    <name lang="tr-TR">Başlık açıklamanın solunda</name>
+                    <name lang="da-DK">Titel til venstre for beskrivelsen</name>
+                    <name lang="it-IT">Titolo a sinistra della descrizione</name>
+                    <name lang="pl-PL">Tytuł po lewej stronie opisu</name>
+                    <name lang="bs-BA">Naslov lijevo od opisa</name>
+                </option>
+                <option>
+                    <id>titleAbove</id>
+                    <name>Title above the description</name>
+                    <name lang="de-DE">Titel über der Beschreibung</name>
+                    <name lang="nl-NL">Titel boven de beschrijving</name>
+                    <name lang="fr-FR">Titre au-dessus de la description</name>
+                    <name lang="es-ES">Título sobre la descripción</name>
+                    <name lang="fi-FI">Otsikko kuvauksen yläpuolella</name>
+                    <name lang="nn-NO">Tittel over beskrivelsen</name>
+                    <name lang="sv-SE">Titel över beskrivningen</name>
+                    <name lang="cs-CZ">Nadpis nad popisem</name>
+                    <name lang="pt-PT">Título acima da descrição</name>
+                    <name lang="tr-TR">Başlık açıklamanın üzerinde</name>
+                    <name lang="da-DK">Titel over beskrivelsen</name>
+                    <name lang="it-IT">Titolo sopra la descrizione</name>
+                    <name lang="pl-PL">Tytuł nad opisem</name>
+                    <name lang="bs-BA">Naslov iznad opisa</name>
+                </option>
+            </options>
+            <helpText>Sets the display options for the cookie note.</helpText>
+            <helpText lang="de-DE">Bestimmt die Erscheinungsform des Cookie Hinweises.</helpText>
+            <helpText lang="nl-NL">Stelt de weergaveopties voor de cookie-melding in.</helpText>
+            <helpText lang="fr-FR">Définit les options d'affichage pour l'avis de cookie.</helpText>
+            <helpText lang="es-ES">Establece las opciones de visualización para el aviso de cookies.</helpText>
+            <helpText lang="fi-FI">Asettaa evästehuomautuksen näyttöasetukset.</helpText>
+            <helpText lang="nn-NO">Setter visningsalternativene for informasjonskapsel-meldingen.</helpText>
+            <helpText lang="sv-SE">Ställer in visningsalternativen för cookie-meddelandet.</helpText>
+            <helpText lang="cs-CZ">Nastaví možnosti zobrazení pro oznámení o cookies.</helpText>
+            <helpText lang="pt-PT">Define as opções de exibição para o aviso de cookies.</helpText>
+            <helpText lang="tr-TR">Çerez bildirim için görüntüleme seçeneklerini ayarlar.</helpText>
+            <helpText lang="da-DK">Indstiller visningsmuligheder for cookie-meddelelsen.</helpText>
+            <helpText lang="it-IT">Imposta le opzioni di visualizzazione per l'avviso sui cookie.</helpText>
+            <helpText lang="pl-PL">Ustawia opcje wyświetlania dla powiadomienia o plikach cookie.</helpText>
+            <helpText lang="bs-BA">Postavlja prikaz opcija za obavijest o kolačićima.</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>displayButtonSameWidth</name>
+            <label>Show buttons in the same width</label>
+            <label lang="de-DE">Buttons in gleicher Breite darstellen</label>
+            <label lang="nl-NL">Toon knoppen in dezelfde breedte</label>
+            <label lang="fr-FR">Afficher les boutons à la même largeur</label>
+            <label lang="es-ES">Mostrar botones del mismo ancho</label>
+            <label lang="fi-FI">Näytä painikkeet samassa leveydessä</label>
+            <label lang="nn-NO">Vis knapper i samme bredde</label>
+            <label lang="sv-SE">Visa knappar med samma bredd</label>
+            <label lang="cs-CZ">Zobrazit tlačítka se stejnou šířkou</label>
+            <label lang="pt-PT">Mostrar botões na mesma largura</label>
+            <label lang="tr-TR">Butonları aynı genişlikte göster</label>
+            <label lang="da-DK">Vis knapper i samme bredde</label>
+            <label lang="it-IT">Mostra i pulsanti alla stessa larghezza</label>
+            <label lang="pl-PL">Pokaż przyciski o tej samej szerokości</label>
+            <label lang="bs-BA">Prikaži dugmad iste širine</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>displayButtonWidth</name>
+            <label>Button width in px</label>
+            <label lang="de-DE">Button Breite in px</label>
+            <label lang="nl-NL">Knophoogte in px</label>
+            <label lang="fr-FR">Largeur du bouton en px</label>
+            <label lang="es-ES">Ancho del botón en px</label>
+            <label lang="fi-FI">Painikkeiden leveys pikseleinä</label>
+            <label lang="nn-NO">Bredde på knapp i px</label>
+            <label lang="sv-SE">Knapoläns bredd i px</label>
+            <label lang="cs-CZ">Šířka tlačítka v px</label>
+            <label lang="pt-PT">Largura do botão em px</label>
+            <label lang="tr-TR">Buton genişliği px cinsinden</label>
+            <label lang="da-DK">Knapbredde i px</label>
+            <label lang="it-IT">Larghezza del pulsante in px</label>
+            <label lang="pl-PL">Szerokość przycisku w px</label>
+            <label lang="bs-BA">Širina dugmeta u px</label>
+            <placeholder>e.g 210</placeholder>
+            <placeholder lang="de-DE">z.B. 210</placeholder>
+            <placeholder lang="nl-NL">bijv. 210</placeholder>
+            <placeholder lang="fr-FR">ex.: 210</placeholder>
+            <placeholder lang="es-ES">p.ej.: 210</placeholder>
+            <placeholder lang="fi-FI">esim.: 210</placeholder>
+            <placeholder lang="nn-NO">f.eks.: 210</placeholder>
+            <placeholder lang="sv-SE">t.ex.: 210</placeholder>
+            <placeholder lang="cs-CZ">např.: 210</placeholder>
+            <placeholder lang="pt-PT">ex.: 210</placeholder>
+            <placeholder lang="tr-TR">örn.: 210</placeholder>
+            <placeholder lang="da-DK">f.eks.: 210</placeholder>
+            <placeholder lang="it-IT">es.: 210</placeholder>
+            <placeholder lang="pl-PL">np.: 210</placeholder>
+            <placeholder lang="bs-BA">npr.: 210</placeholder>
+            <defaultValue>210</defaultValue>
+            <helpText>The button width is only used, when "Show buttons in the same width" is active.</helpText>
+            <helpText lang="de-DE">Die Button Breite wird nur verwendet, wenn der Kenner "Buttons in gleicher Breite darstellen" aktiv ist.</helpText>
+            <helpText lang="nl-NL">De breedte van de knop wordt alleen gebruikt als "Toon knoppen in dezelfde breedte" actief is.</helpText>
+            <helpText lang="fr-FR">La largeur du bouton n'est utilisée que lorsque "Afficher les boutons à la même largeur" est actif.</helpText>
+            <helpText lang="es-ES">El ancho del botón solo se usa cuando "Mostrar botones del mismo ancho" está activo.</helpText>
+            <helpText lang="fi-FI">Painikkeiden leveys käytetään vain, kun "Näytä painikkeet samassa leveydessä" on aktiivinen.</helpText>
+            <helpText lang="nn-NO">Bredde på knappen brukes kun når "Vis knapper i samme bredde" er aktiv.</helpText>
+            <helpText lang="sv-SE">Knapplängden används endast när "Visa knappar med samma bredd" är aktivt.</helpText>
+            <helpText lang="cs-CZ">Šířka tlačítka se používá pouze tehdy, když je aktivní "Zobrazit tlačítka se stejnou šířkou".</helpText>
+            <helpText lang="pt-PT">A largura do botão é usada apenas quando "Mostrar botões na mesma largura" está ativa.</helpText>
+            <helpText lang="tr-TR">Buton genişliği yalnızca "Butonları aynı genişlikte göster" etkin olduğunda kullanılır.</helpText>
+            <helpText lang="da-DK">Knappens bredde anvendes kun, når "Vis knapper i samme bredde" er aktiv.</helpText>
+            <helpText lang="it-IT">La larghezza del pulsante viene utilizzata solo quando "Mostra i pulsanti alla stessa larghezza" è attivo.</helpText>
+            <helpText lang="pl-PL">Szerokość przycisku jest używana tylko wtedy, gdy "Pokaż przyciski o tej samej szerokości" jest aktywne.</helpText>
+            <helpText lang="bs-BA">Širina dugmeta se koristi samo kada je "Prikaži dugmad iste širine" aktivno.</helpText>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>displayButtonAcceptCookiesType</name>
+            <label>Button "Accept selected cookies" type / position</label>
+            <label lang="de-DE">Button "Ausgewählte Cookies akzeptieren" Typ / Position</label>
+            <label lang="nl-NL">Knop "Cookies accepteren" type / positie</label>
+            <label lang="fr-FR">Bouton "Accepter les cookies" type / position</label>
+            <label lang="es-ES">Botón "Aceptar cookies" tipo / posición</label>
+            <label lang="fi-FI">Nappi "Hyväksy evästeet" tyyppi / sijainti</label>
+            <label lang="nn-NO">Knapp "Godta informasjonskapsler" type / posisjon</label>
+            <label lang="sv-SE">Knapptype / placering "Acceptera cookies"</label>
+            <label lang="cs-CZ">Tlačítko "Přijmout cookies" typ / pozice</label>
+            <label lang="pt-PT">Botão "Aceitar cookies" tipo / posição</label>
+            <label lang="tr-TR">Buton "Çerezleri kabul et" türü / pozisyonu</label>
+            <label lang="da-DK">Knap "Accepter cookies" type / position</label>
+            <label lang="it-IT">Pulsante "Accetta i cookie" tipo / posizione</label>
+            <label lang="pl-PL">Przycisk "Akceptuj pliki cookie" typ / pozycja</label>
+            <label lang="bs-BA">Dugme "Prihvati kolačiće" tip / pozicija</label>
+            <defaultValue>btn-primary</defaultValue>
+            <options>
+                <option>
+                    <id>end-of-info-text</id>
+                    <name>Display as link at end of privacy text</name>
+                    <name lang="de-DE">Anzeige als Link am Ende des Informationstextes</name>
+                    <name lang="nl-NL">Weergeven als link aan het einde van de privacytekst</name>
+                    <name lang="fr-FR">Afficher en tant que lien à la fin du texte de confidentialité</name>
+                    <name lang="es-ES">Mostrar como enlace al final del texto de privacidad</name>
+                    <name lang="fi-FI">Näytä linkkinä tietosuojatekstin lopussa</name>
+                    <name lang="nn-NO">Vis som lenke på slutten av personvernteksten</name>
+                    <name lang="sv-SE">Visa som länk i slutet av sekretessmeddelandet</name>
+                    <name lang="cs-CZ">Zobrazit jako odkaz na konci textu o ochraně soukromí</name>
+                    <name lang="pt-PT">Exibir como link no final do texto de privacidade</name>
+                    <name lang="tr-TR">Gizlilik metninin sonunda bağlantı olarak göster</name>
+                    <name lang="da-DK">Vis som link i slutningen af privatlivsteksten</name>
+                    <name lang="it-IT">Visualizza come link alla fine del testo sulla privacy</name>
+                    <name lang="pl-PL">Wyświetl jako link na końcu tekstu o prywatności</name>
+                    <name lang="bs-BA">Prikaži kao link na kraju teksta o privatnosti</name>
+                </option>
+                <option>
+                    <id>btn-primary</id>
+                    <name>Primary</name>
+                    <name lang="de-DE">Primär</name>
+                    <name lang="nl-NL">Primaire</name>
+                    <name lang="fr-FR">Primaire</name>
+                    <name lang="es-ES">Primario</name>
+                    <name lang="fi-FI">Pääasiallinen</name>
+                    <name lang="nn-NO">Primær</name>
+                    <name lang="sv-SE">Primär</name>
+                    <name lang="cs-CZ">Primární</name>
+                    <name lang="pt-PT">Primário</name>
+                    <name lang="tr-TR">Ana</name>
+                    <name lang="da-DK">Primær</name>
+                    <name lang="it-IT">Primario</name>
+                    <name lang="pl-PL">Podstawowy</name>
+                    <name lang="bs-BA">Primarni</name>
+                </option>
+                <option>
+                    <id>btn-secondary</id>
+                    <name>Secondary</name>
+                    <name lang="de-DE">Sekundär</name>
+                    <name lang="nl-NL">Secundair</name>
+                    <name lang="fr-FR">Secondaire</name>
+                    <name lang="es-ES">Secundario</name>
+                    <name lang="fi-FI">Toissijainen</name>
+                    <name lang="nn-NO">Sekundær</name>
+                    <name lang="sv-SE">Sekundär</name>
+                    <name lang="cs-CZ">Sekundární</name>
+                    <name lang="pt-PT">Secundário</name>
+                    <name lang="tr-TR">İkincil</name>
+                    <name lang="da-DK">Sekundær</name>
+                    <name lang="it-IT">Secondario</name>
+                    <name lang="pl-PL">Szwecja</name>
+                    <name lang="bs-BA">Sekundarni</name>
+                </option>
+                <option>
+                    <id>btn-link</id>
+                    <name>Link</name>
+                    <name lang="de-DE">Link</name>
+                    <name lang="nl-NL">Link</name>
+                    <name lang="fr-FR">Lien</name>
+                    <name lang="es-ES">Enlace</name>
+                    <name lang="fi-FI">Linkki</name>
+                    <name lang="nn-NO">Lenke</name>
+                    <name lang="sv-SE">Länk</name>
+                    <name lang="cs-CZ">Odkaz</name>
+                    <name lang="pt-PT">Link</name>
+                    <name lang="tr-TR">Bağlantı</name>
+                    <name lang="da-DK">Link</name>
+                    <name lang="it-IT">Collegamento</name>
+                    <name lang="pl-PL">Link</name>
+                    <name lang="bs-BA">Link</name>
+                </option>
+                <option>
+                    <id>btn-info</id>
+                    <name>Info</name>
+                    <name lang="de-DE">Info</name>
+                    <name lang="nl-NL">Info</name>
+                    <name lang="fr-FR">Info</name>
+                    <name lang="es-ES">Información</name>
+                    <name lang="fi-FI">Tietoa</name>
+                    <name lang="nn-NO">Info</name>
+                    <name lang="sv-SE">Information</name>
+                    <name lang="cs-CZ">Informace</name>
+                    <name lang="pt-PT">Informação</name>
+                    <name lang="tr-TR">Bilgi</name>
+                    <name lang="da-DK">Info</name>
+                    <name lang="it-IT">Informazioni</name>
+                    <name lang="pl-PL">Informacja</name>
+                    <name lang="bs-BA">Informacija</name>
+                </option>
+                <option>
+                    <id>btn-light</id>
+                    <name>Light</name>
+                    <name lang="de-DE">Hell</name>
+                    <name lang="nl-NL">Licht</name>
+                    <name lang="fr-FR">Clair</name>
+                    <name lang="es-ES">Claro</name>
+                    <name lang="fi-FI">Vaalea</name>
+                    <name lang="nn-NO">Lys</name>
+                    <name lang="sv-SE">Ljus</name>
+                    <name lang="cs-CZ">Světlý</name>
+                    <name lang="pt-PT">Claro</name>
+                    <name lang="tr-TR">Açık</name>
+                    <name lang="da-DK">Lys</name>
+                    <name lang="it-IT">Chiaro</name>
+                    <name lang="pl-PL">Jasne</name>
+                    <name lang="bs-BA">Svijetlo</name>
+                </option>
+                <option>
+                    <id>btn-dark</id>
+                    <name>Dark</name>
+                    <name lang="de-DE">Dunkel</name>
+                    <name lang="nl-NL">Donker</name>
+                    <name lang="fr-FR">Sombre</name>
+                    <name lang="es-ES">Oscuro</name>
+                    <name lang="fi-FI">Tumma</name>
+                    <name lang="nn-NO">Mørk</name>
+                    <name lang="sv-SE">Mörk</name>
+                    <name lang="cs-CZ">Tmavý</name>
+                    <name lang="pt-PT">Escuro</name>
+                    <name lang="tr-TR">Koyu</name>
+                    <name lang="da-DK">Mørk</name>
+                    <name lang="it-IT">Scuro</name>
+                    <name lang="pl-PL">Ciemny</name>
+                    <name lang="bs-BA">Tamno</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="int">
+            <name>positionPrioButtonAcceptCookiesType</name>
+            <label>Button "Accept selected cookies" priority</label>
+            <label lang="de-DE">Button "Ausgewählte Cookies akzeptieren" Priorität</label>
+            <label lang="nl-NL">Knop "Cookies accepteren" prioriteit</label>
+            <label lang="fr-FR">Priorité du bouton "Accepter les cookies"</label>
+            <label lang="es-ES">Prioridad del botón "Aceptar cookies"</label>
+            <label lang="fi-FI">Nappi "Hyväksy evästeet" prioriteetti</label>
+            <label lang="nn-NO">Prioritet for knappen "Godta informasjonskapsler"</label>
+            <label lang="sv-SE">Prioritet för knappen "Acceptera cookies"</label>
+            <label lang="cs-CZ">Priorita tlačítka "Přijmout cookies"</label>
+            <label lang="pt-PT">Prioridade do botão "Aceitar cookies"</label>
+            <label lang="tr-TR">Buton "Çerezleri kabul et" önceliği</label>
+            <label lang="da-DK">Prioritet for knappen "Accepter cookies"</label>
+            <label lang="it-IT">Priorità del pulsante "Accetta i cookie"</label>
+            <label lang="pl-PL">Priorytet przycisku "Akceptuj pliki cookie"</label>
+            <label lang="bs-BA">Prioritet dugmeta "Prihvati kolačiće"</label>
+            <placeholder>20</placeholder>
+            <placeholder lang="de-DE">20</placeholder>
+            <placeholder lang="nl-NL">20</placeholder>
+            <placeholder lang="fr-FR">20</placeholder>
+            <placeholder lang="es-ES">20</placeholder>
+            <placeholder lang="fi-FI">20</placeholder>
+            <placeholder lang="nn-NO">20</placeholder>
+            <placeholder lang="sv-SE">20</placeholder>
+            <placeholder lang="cs-CZ">20</placeholder>
+            <placeholder lang="pt-PT">20</placeholder>
+            <placeholder lang="tr-TR">20</placeholder>
+            <placeholder lang="da-DK">20</placeholder>
+            <placeholder lang="it-IT">20</placeholder>
+            <placeholder lang="pl-PL">20</placeholder>
+            <placeholder lang="bs-BA">20</placeholder>
+            <defaultValue>20</defaultValue>
+            <helpText>The priority can be used to determine at which position the button is displayed in the cookie hint. The higher the priority, the further forward the button is displayed.</helpText>
+            <helpText lang="de-DE">Anhand der Prioriät kann bestimmt werden, an welcher Position der Button im Cookie Hinweis angezeigt wird. Je höher die Priorität desto weiter vorne wird der Button angezeigt.</helpText>
+            <helpText lang="nl-NL">De prioriteit kan worden gebruikt om te bepalen op welke positie de knop in de cookie-melding wordt weergegeven. Hoe hoger de prioriteit, jo closer knappen vises.</helpText>
+            <helpText lang="fr-FR">La priorité peut être utilisée pour déterminer à quelle position le bouton est affiché dans l'avis sur les cookies. Plus la priorité est élevée, plus le bouton est affiché en avant.</helpText>
+            <helpText lang="es-ES">La prioridad se puede usar para determinar en qué posición se muestra el botón en el aviso de cookies. Cuanto mayor sea la prioridad, más adelante se mostrará el botón.</helpText>
+            <helpText lang="fi-FI">Prioriteetti voidaan käyttää määrittämään, missä paikassa painike näkyy evästeilmoituksessa. Mitä korkeampi prioriteetti, sitä eteenpäin painike näytetään.</helpText>
+            <helpText lang="nn-NO">Prioriteten kan brukes til å bestemme hvilken posisjon knappen vises i informasjonskapselmeldingen. Jo høyere prioritet, jo lenger frem vises knappen.</helpText>
+            <helpText lang="sv-SE">Prioriteten kan användas för att bestämma i vilken position knappen visas i cookie-meddelandet. Ju högre prioritet, desto längre fram visas knappen.</helpText>
+            <helpText lang="cs-CZ">Priorita se může použít k určení, na které pozici se tlačítko zobrazuje v oznámení o cookies. Čím vyšší priorita, tím blíže se tlačítko zobrazuje.</helpText>
+            <helpText lang="pt-PT">A prioridade pode ser usada para determinar em que posição o botão é exibido no aviso de cookies. Quanto maior a prioridade, mais à frente o botão é exibido.</helpText>
+            <helpText lang="tr-TR">Öncelik, çerez bildiriminde butonun nerede görüneceğini belirlemek için kullanılabilir. Öncelik ne kadar yüksekse, buton o kadar ileri gösterilir.</helpText>
+            <helpText lang="da-DK">Prioriteten kan bruges til at bestemme, hvilken position knappen vises i cookie-meddelelsen. Jo højere prioritet, desto længere frem vises knappen.</helpText>
+            <helpText lang="it-IT">La priorità può essere utilizzata per determinare in quale posizione viene visualizzato il pulsante nell'avviso sui cookie. Maggiore è la priorità, più avanzato è il pulsante.</helpText>
+            <helpText lang="pl-PL">Priorytet można wykorzystać do określenia, na której pozycji przycisk jest wyświetlany w powiadomieniu o plikach cookie. Im wyższy priorytet, tym dalej na przód wyświetlany jest przycisk.</helpText>
+            <helpText lang="bs-BA">Prioritet se može koristiti za određivanje na kojoj poziciji se dugme prikazuje u obavijesti o kolačićima. Što je prioritet viši, dugme se dalje unaprijed prikazuje.</helpText>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>displayButtonFunctionalCookiesType</name>
+            <label>Button "Accept only functional cookies" type</label>
+            <label lang="de-DE">Button "Nur funktionale Cookies akzeptieren" Typ</label>
+            <label lang="nl-NL">Knop "Accepteer alleen functionele cookies" type</label>
+            <label lang="fr-FR">Bouton "Accepter uniquement les cookies fonctionnels" type</label>
+            <label lang="es-ES">Botón "Aceptar solo cookies funcionales" tipo</label>
+            <label lang="fi-FI">Nappi "Hyväksy vain toiminnalliset evästeet" tyyppi</label>
+            <label lang="nn-NO">Knapp "Godta bare funksjonelle informasjonskapsler" type</label>
+            <label lang="sv-SE">Knapptype "Acceptera endast funktionella cookies"</label>
+            <label lang="cs-CZ">Tlačítko "Přijmout pouze funkční cookies" typ</label>
+            <label lang="pt-PT">Botão "Aceitar apenas cookies funcionais" tipo</label>
+            <label lang="tr-TR">Buton "Sadece işlevsel çerezleri kabul et" türü</label>
+            <label lang="da-DK">Knap "Accepter kun funktionelle cookies" type</label>
+            <label lang="it-IT">Pulsante "Accetta solo i cookie funzionali" tipo</label>
+            <label lang="pl-PL">Przycisk "Akceptuj tylko funkcjonalne pliki cookie" typ</label>
+            <label lang="bs-BA">Dugme "Prihvati samo funkcionalne kolačiće" tip</label>
+            <defaultValue>btn-secondary</defaultValue>
+            <options>
+                <option>
+                    <id>btn-primary</id>
+                    <name>Primary</name>
+                    <name lang="de-DE">Primär</name>
+                    <name lang="nl-NL">Primaire</name>
+                    <name lang="fr-FR">Primaire</name>
+                    <name lang="es-ES">Primario</name>
+                    <name lang="fi-FI">Pääasiallinen</name>
+                    <name lang="nn-NO">Primær</name>
+                    <name lang="sv-SE">Primär</name>
+                    <name lang="cs-CZ">Primární</name>
+                    <name lang="pt-PT">Primário</name>
+                    <name lang="tr-TR">Ana</name>
+                    <name lang="da-DK">Primær</name>
+                    <name lang="it-IT">Primario</name>
+                    <name lang="pl-PL">Podstawowy</name>
+                    <name lang="bs-BA">Primarni</name>
+                </option>
+                <option>
+                    <id>btn-secondary</id>
+                    <name>Secondary</name>
+                    <name lang="de-DE">Sekundär</name>
+                    <name lang="nl-NL">Secundair</name>
+                    <name lang="fr-FR">Secondaire</name>
+                    <name lang="es-ES">Secundario</name>
+                    <name lang="fi-FI">Toissijainen</name>
+                    <name lang="nn-NO">Sekundær</name>
+                    <name lang="sv-SE">Sekundär</name>
+                    <name lang="cs-CZ">Sekundární</name>
+                    <name lang="pt-PT">Secundário</name>
+                    <name lang="tr-TR">İkincil</name>
+                    <name lang="da-DK">Sekundær</name>
+                    <name lang="it-IT">Secondario</name>
+                    <name lang="pl-PL">Szwecja</name>
+                    <name lang="bs-BA">Sekundarni</name>
+                </option>
+                <option>
+                    <id>btn-link</id>
+                    <name>Link</name>
+                    <name lang="de-DE">Link</name>
+                    <name lang="nl-NL">Link</name>
+                    <name lang="fr-FR">Lien</name>
+                    <name lang="es-ES">Enlace</name>
+                    <name lang="fi-FI">Linkki</name>
+                    <name lang="nn-NO">Lenke</name>
+                    <name lang="sv-SE">Länk</name>
+                    <name lang="cs-CZ">Odkaz</name>
+                    <name lang="pt-PT">Link</name>
+                    <name lang="tr-TR">Bağlantı</name>
+                    <name lang="da-DK">Link</name>
+                    <name lang="it-IT">Collegamento</name>
+                    <name lang="pl-PL">Link</name>
+                    <name lang="bs-BA">Link</name>
+                </option>
+                <option>
+                    <id>btn-info</id>
+                    <name>Info</name>
+                    <name lang="de-DE">Info</name>
+                    <name lang="nl-NL">Info</name>
+                    <name lang="fr-FR">Info</name>
+                    <name lang="es-ES">Información</name>
+                    <name lang="fi-FI">Tietoa</name>
+                    <name lang="nn-NO">Info</name>
+                    <name lang="sv-SE">Information</name>
+                    <name lang="cs-CZ">Informace</name>
+                    <name lang="pt-PT">Informação</name>
+                    <name lang="tr-TR">Bilgi</name>
+                    <name lang="da-DK">Info</name>
+                    <name lang="it-IT">Informazioni</name>
+                    <name lang="pl-PL">Informacja</name>
+                    <name lang="bs-BA">Informacija</name>
+                </option>
+                <option>
+                    <id>btn-light</id>
+                    <name>Light</name>
+                    <name lang="de-DE">Hell</name>
+                    <name lang="nl-NL">Licht</name>
+                    <name lang="fr-FR">Clair</name>
+                    <name lang="es-ES">Claro</name>
+                    <name lang="fi-FI">Vaalea</name>
+                    <name lang="nn-NO">Lys</name>
+                    <name lang="sv-SE">Ljus</name>
+                    <name lang="cs-CZ">Světlý</name>
+                    <name lang="pt-PT">Claro</name>
+                    <name lang="tr-TR">Açık</name>
+                    <name lang="da-DK">Lys</name>
+                    <name lang="it-IT">Chiaro</name>
+                    <name lang="pl-PL">Jasne</name>
+                    <name lang="bs-BA">Svijetlo</name>
+                </option>
+                <option>
+                    <id>btn-dark</id>
+                    <name>Dark</name>
+                    <name lang="de-DE">Dunkel</name>
+                    <name lang="nl-NL">Donker</name>
+                    <name lang="fr-FR">Sombre</name>
+                    <name lang="es-ES">Oscuro</name>
+                    <name lang="fi-FI">Tumma</name>
+                    <name lang="nn-NO">Mørk</name>
+                    <name lang="sv-SE">Mörk</name>
+                    <name lang="cs-CZ">Tmavý</name>
+                    <name lang="pt-PT">Escuro</name>
+                    <name lang="tr-TR">Koyu</name>
+                    <name lang="da-DK">Mørk</name>
+                    <name lang="it-IT">Scuro</name>
+                    <name lang="pl-PL">Ciemny</name>
+                    <name lang="bs-BA">Tamno</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="int">
+            <name>positionPrioFunctionalCookiesType</name>
+            <label>Button "Accept only functional cookies" priority</label>
+            <label lang="de-DE">Button "Nur funktionale Cookies akzeptieren" Priorität</label>
+            <label lang="nl-NL">Knop "Alleen functionele cookies accepteren" prioriteit</label>
+            <label lang="fr-FR">Priorité du bouton "Accepter uniquement les cookies fonctionnels"</label>
+            <label lang="es-ES">Prioridad del botón "Aceptar solo cookies funcionales"</label>
+            <label lang="fi-FI">Nappi "Hyväksy vain toiminnalliset evästeet" prioriteetti</label>
+            <label lang="nn-NO">Prioritet for knappen "Godta bare funksjonelle informasjonskapsler"</label>
+            <label lang="sv-SE">Prioritet för knappen "Acceptera endast funktionella cookies"</label>
+            <label lang="cs-CZ">Priorita tlačítka "Přijmout pouze funkční cookies"</label>
+            <label lang="pt-PT">Prioridade do botão "Aceitar apenas cookies funcionais"</label>
+            <label lang="tr-TR">Buton "Sadece işlevsel çerezleri kabul et" önceliği</label>
+            <label lang="da-DK">Prioritet for knappen "Accepter kun funktionelle cookies"</label>
+            <label lang="it-IT">Priorità del pulsante "Accetta solo i cookie funzionali"</label>
+            <label lang="pl-PL">Priorytet przycisku "Akceptuj tylko funkcjonalne pliki cookie"</label>
+            <label lang="bs-BA">Prioritet dugmeta "Prihvati samo funkcionalne kolačiće"</label>
+            <placeholder>30</placeholder>
+            <placeholder lang="de-DE">30</placeholder>
+            <defaultValue>30</defaultValue>
+            <helpText>The priority can be used to determine at which position the button is displayed in the cookie hint. The higher the priority, the further forward the button is displayed.</helpText>
+            <helpText lang="de-DE">Anhand der Prioriät kann bestimmt werden, an welcher Position der Button im Cookie Hinweis angezeigt wird. Je höher die Priorität desto weiter vorne wird der Button angezeigt.</helpText>
+            <helpText lang="nl-NL">De prioriteit bepaalt op welke positie de knop in de cookiemelding wordt weergegeven. Hoe hoger de prioriteit, hoe verder naar voren de knop wordt weergegeven.</helpText>
+            <helpText lang="fr-FR">La priorité détermine la position du bouton dans l'avis sur les cookies. Plus la priorité est élevée, plus le bouton est affiché en avant.</helpText>
+            <helpText lang="es-ES">La prioridad determina en qué posición se muestra el botón en el aviso de cookies. Cuanto mayor sea la prioridad, más adelante se mostrará el botón.</helpText>
+            <helpText lang="fi-FI">Prioriteetti määrittää, missä kohdassa painike näkyy evästeilmoituksessa. Mitä korkeampi prioriteetti, sitä edempänä painike näkyy.</helpText>
+            <helpText lang="nn-NO">Prioriteten bestemmer hvilken posisjon knappen vises i informasjonskapselmeldingen. Jo høyere prioritet, jo lenger frem vises knappen.</helpText>
+            <helpText lang="sv-SE">Prioriteten avgör vilken position knappen visas på i cookie-meddelandet. Ju högre prioritet, desto längre fram visas knappen.</helpText>
+            <helpText lang="cs-CZ">Priorita určuje, na které pozici se tlačítko zobrazuje v oznámení o cookies. Čím vyšší priorita, tím blíže se tlačítko zobrazuje.</helpText>
+            <helpText lang="pt-PT">A prioridade determina em que posição o botão é exibido no aviso de cookies. Quanto maior a prioridade, mais à frente o botão é exibido.</helpText>
+            <helpText lang="tr-TR">Öncelik, çerez bildiriminde butonun nerede görüneceğini belirler. Öncelik ne kadar yüksekse, buton o kadar ileri gösterilir.</helpText>
+            <helpText lang="da-DK">Prioriteten bestemmer, hvilken position knappen vises i cookie-meddelelsen. Jo højere prioritet, desto længere frem vises knappen.</helpText>
+            <helpText lang="it-IT">La priorità determina in quale posizione viene visualizzato il pulsante nell'avviso sui cookie. Maggiore è la priorità, più avanzato è il pulsante.</helpText>
+            <helpText lang="pl-PL">Priorytet określa, na której pozycji przycisk jest wyświetlany w powiadomieniu o plikach cookie. Im wyższy priorytet, tym dalej na przód wyświetlany jest przycisk.</helpText>
+            <helpText lang="bs-BA">Prioritet određuje na kojoj poziciji se dugme prikazuje u obavijesti o kolačićima. Što je prioritet viši, dugme se dalje unaprijed prikazuje.</helpText>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>displayButtonAllCookiesType</name>
+            <label>Button "Accept all cookies" type</label>
+            <label lang="de-DE">Button "Alle Cookies akzeptieren" Typ</label>
+            <label lang="nl-NL">Knop "Alle cookies accepteren" type</label>
+            <label lang="fr-FR">Bouton "Accepter tous les cookies" type</label>
+            <label lang="es-ES">Botón "Aceptar todas las cookies" tipo</label>
+            <label lang="fi-FI">Nappi "Hyväksy kaikki evästeet" tyyppi</label>
+            <label lang="nn-NO">Knapp "Godta alle informasjonskapsler" type</label>
+            <label lang="sv-SE">Knapptype "Acceptera alla cookies"</label>
+            <label lang="cs-CZ">Tlačítko "Přijmout všechny cookies" typ</label>
+            <label lang="pt-PT">Botão "Aceitar todos os cookies" tipo</label>
+            <label lang="tr-TR">Buton "Tüm çerezleri kabul et" türü</label>
+            <label lang="da-DK">Knap "Accepter alle cookies" type</label>
+            <label lang="it-IT">Pulsante "Accetta tutti i cookie" tipo</label>
+            <label lang="pl-PL">Przycisk "Akceptuj wszystkie pliki cookie" typ</label>
+            <label lang="bs-BA">Dugme "Prihvati sve kolačiće" tip</label>
+            <defaultValue>btn-primary</defaultValue>
+            <options>
+                <option>
+                    <id>btn-primary</id>
+                    <name>Primary</name>
+                    <name lang="de-DE">Primär</name>
+                    <name lang="nl-NL">Primair</name>
+                    <name lang="fr-FR">Principal</name>
+                    <name lang="es-ES">Primario</name>
+                    <name lang="fi-FI">Ensisijainen</name>
+                    <name lang="nn-NO">Primær</name>
+                    <name lang="sv-SE">Primär</name>
+                    <name lang="cs-CZ">Primární</name>
+                    <name lang="pt-PT">Primário</name>
+                    <name lang="tr-TR">Birincil</name>
+                    <name lang="da-DK">Primær</name>
+                    <name lang="it-IT">Primario</name>
+                    <name lang="pl-PL">Podstawowy</name>
+                    <name lang="bs-BA">Primarno</name>
+                </option>
+                <option>
+                    <id>btn-secondary</id>
+                    <name>Secondary</name>
+                    <name lang="de-DE">Sekundär</name>
+                    <name lang="nl-NL">Secundair</name>
+                    <name lang="fr-FR">Secondaire</name>
+                    <name lang="es-ES">Secundario</name>
+                    <name lang="fi-FI">Toissijainen</name>
+                    <name lang="nn-NO">Sekundær</name>
+                    <name lang="sv-SE">Sekundär</name>
+                    <name lang="cs-CZ">Sekundární</name>
+                    <name lang="pt-PT">Secundário</name>
+                    <name lang="tr-TR">İkincil</name>
+                    <name lang="da-DK">Sekundær</name>
+                    <name lang="it-IT">Secondario</name>
+                    <name lang="pl-PL">Drugorzędny</name>
+                    <name lang="bs-BA">Sekundarno</name>
+                </option>
+                <option>
+                    <id>btn-link</id>
+                    <name>Link</name>
+                    <name lang="de-DE">Link</name>
+                    <name lang="nl-NL">Link</name>
+                    <name lang="fr-FR">Lien</name>
+                    <name lang="es-ES">Enlace</name>
+                    <name lang="fi-FI">Linkki</name>
+                    <name lang="nn-NO">Lenke</name>
+                    <name lang="sv-SE">Länk</name>
+                    <name lang="cs-CZ">Odkaz</name>
+                    <name lang="pt-PT">Link</name>
+                    <name lang="tr-TR">Bağlantı</name>
+                    <name lang="da-DK">Link</name>
+                    <name lang="it-IT">Collegamento</name>
+                    <name lang="pl-PL">Link</name>
+                    <name lang="bs-BA">Link</name>
+                </option>
+                <option>
+                    <id>btn-info</id>
+                    <name>Info</name>
+                    <name lang="de-DE">Info</name>
+                    <name lang="nl-NL">Info</name>
+                    <name lang="fr-FR">Info</name>
+                    <name lang="es-ES">Info</name>
+                    <name lang="fi-FI">Info</name>
+                    <name lang="nn-NO">Info</name>
+                    <name lang="sv-SE">Info</name>
+                    <name lang="cs-CZ">Info</name>
+                    <name lang="pt-PT">Info</name>
+                    <name lang="tr-TR">Bilgi</name>
+                    <name lang="da-DK">Info</name>
+                    <name lang="it-IT">Info</name>
+                    <name lang="pl-PL">Info</name>
+                    <name lang="bs-BA">Info</name>
+                </option>
+                <option>
+                    <id>btn-light</id>
+                    <name>Light</name>
+                    <name lang="de-DE">Hell</name>
+                    <name lang="nl-NL">Licht</name>
+                    <name lang="fr-FR">Clair</name>
+                    <name lang="es-ES">Claro</name>
+                    <name lang="fi-FI">Vaalea</name>
+                    <name lang="nn-NO">Lys</name>
+                    <name lang="sv-SE">Ljus</name>
+                    <name lang="cs-CZ">Světlý</name>
+                    <name lang="pt-PT">Claro</name>
+                    <name lang="tr-TR">Açık</name>
+                    <name lang="da-DK">Lys</name>
+                    <name lang="it-IT">Chiaro</name>
+                    <name lang="pl-PL">Jasny</name>
+                    <name lang="bs-BA">Svijetlo</name>
+                </option>
+                <option>
+                    <id>btn-dark</id>
+                    <name>Dark</name>
+                    <name lang="de-DE">Dunkel</name>
+                    <name lang="nl-NL">Donker</name>
+                    <name lang="fr-FR">Sombre</name>
+                    <name lang="es-ES">Oscuro</name>
+                    <name lang="fi-FI">Tumma</name>
+                    <name lang="nn-NO">Mørk</name>
+                    <name lang="sv-SE">Mörk</name>
+                    <name lang="cs-CZ">Tmavý</name>
+                    <name lang="pt-PT">Escuro</name>
+                    <name lang="tr-TR">Koyu</name>
+                    <name lang="da-DK">Mørk</name>
+                    <name lang="it-IT">Scuro</name>
+                    <name lang="pl-PL">Ciemny</name>
+                    <name lang="bs-BA">Tamno</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="int">
+            <name>positionPrioAllCookiesType</name>
+            <label>Button "Accept all cookies" priority</label>
+            <label lang="de-DE">Button "Alle Cookies akzeptieren" Priorität</label>
+            <label lang="nl-NL">Knop "Alle cookies accepteren" prioriteit</label>
+            <label lang="fr-FR">Priorité du bouton "Accepter tous les cookies"</label>
+            <label lang="es-ES">Prioridad del botón "Aceptar todas las cookies"</label>
+            <label lang="fi-FI">Nappi "Hyväksy kaikki evästeet" prioriteetti</label>
+            <label lang="nn-NO">Prioritet for knappen "Godta alle informasjonskapsler"</label>
+            <label lang="sv-SE">Prioritet för knappen "Acceptera alla cookies"</label>
+            <label lang="cs-CZ">Priorita tlačítka "Přijmout všechny cookies"</label>
+            <label lang="pt-PT">Prioridade do botão "Aceitar todos os cookies"</label>
+            <label lang="tr-TR">Buton "Tüm çerezleri kabul et" önceliği</label>
+            <label lang="da-DK">Prioritet for knappen "Accepter alle cookies"</label>
+            <label lang="it-IT">Priorità del pulsante "Accetta tutti i cookie"</label>
+            <label lang="pl-PL">Priorytet przycisku "Akceptuj wszystkie pliki cookie"</label>
+            <label lang="bs-BA">Prioritet dugmeta "Prihvati sve kolačiće"</label>
+            <placeholder>10</placeholder>
+            <defaultValue>10</defaultValue>
+            <helpText>The priority can be used to determine at which position the button is displayed in the cookie hint. The higher the priority, the further forward the button is displayed.</helpText>
+            <helpText lang="de-DE">Anhand der Prioriät kann bestimmt werden, an welcher Position der Button im Cookie Hinweis angezeigt wird. Je höher die Priorität desto weiter vorne wird der Button angezeigt.</helpText>
+            <helpText lang="nl-NL">De prioriteit bepaalt op welke positie de knop in de cookiemelding wordt weergegeven. Hoe hoger de prioriteit, hoe verder naar voren de knop wordt weergegeven.</helpText>
+            <helpText lang="fr-FR">La priorité détermine la position du bouton dans l'avis sur les cookies. Plus la priorité est élevée, plus le bouton est affiché en avant.</helpText>
+            <helpText lang="es-ES">La prioridad determina en qué posición se muestra el botón en el aviso de cookies. Cuanto mayor sea la prioridad, más adelante se mostrará el botón.</helpText>
+            <helpText lang="fi-FI">Prioriteetti määrittää, missä kohdassa painike näkyy evästeilmoituksessa. Mitä korkeampi prioriteetti, sitä edempänä painike näkyy.</helpText>
+            <helpText lang="nn-NO">Prioriteten bestemmer hvilken posisjon knappen vises i informasjonskapselmeldingen. Jo høyere prioritet, jo lenger frem vises knappen.</helpText>
+            <helpText lang="sv-SE">Prioriteten avgör vilken position knappen visas på i cookie-meddelandet. Ju högre prioritet, desto längre fram visas knappen.</helpText>
+            <helpText lang="cs-CZ">Priorita určuje, na které pozici se tlačítko zobrazuje v oznámení o cookies. Čím vyšší priorita, tím blíže se tlačítko zobrazuje.</helpText>
+            <helpText lang="pt-PT">A prioridade determina em que posição o botão é exibido no aviso de cookies. Quanto maior a prioridade, mais à frente o botão é exibido.</helpText>
+            <helpText lang="tr-TR">Öncelik, çerez bildiriminde butonun nerede görüneceğini belirler. Öncelik ne kadar yüksekse, buton o kadar ileri gösterilir.</helpText>
+            <helpText lang="da-DK">Prioriteten bestemmer, hvilken position knappen vises i cookie-meddelelsen. Jo højere prioritet, desto længere frem vises knappen.</helpText>
+            <helpText lang="it-IT">La priorità determina in quale posizione viene visualizzato il pulsante nell'avviso sui cookie. Maggiore è la priorità, più avanzato è il pulsante.</helpText>
+            <helpText lang="pl-PL">Priorytet określa, na której pozycji przycisk jest wyświetlany w powiadomieniu o plikach cookie. Im wyższy priorytet, tym dalej na przód wyświetlany jest przycisk.</helpText>
+            <helpText lang="bs-BA">Prioritet određuje na kojoj poziciji se dugme prikazuje u obavijesti o kolačićima. Što je prioritet viši, dugme se dalje unaprijed prikazuje.</helpText>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>displayButtonCookieSettingsType</name>
+            <label>Button "Cookie settings" type</label>
+            <label lang="de-DE">Button "Datenschutzeinstellungen" Typ</label>
+            <label lang="nl-NL">Knop "Cookie-instellingen" type</label>
+            <label lang="fr-FR">Bouton "Paramètres des cookies" type</label>
+            <label lang="es-ES">Botón "Configuración de cookies" tipo</label>
+            <label lang="fi-FI">Nappi "Evästeasetukset" tyyppi</label>
+            <label lang="nn-NO">Knapp "Innstillinger for informasjonskapsler" type</label>
+            <label lang="sv-SE">Knapptype "Cookie-inställningar"</label>
+            <label lang="cs-CZ">Tlačítko "Nastavení cookies" typ</label>
+            <label lang="pt-PT">Botão "Configurações de cookies" tipo</label>
+            <label lang="tr-TR">Buton "Çerez ayarları" türü</label>
+            <label lang="da-DK">Knap "Cookie-indstillinger" type</label>
+            <label lang="it-IT">Pulsante "Impostazioni cookie" tipo</label>
+            <label lang="pl-PL">Przycisk "Ustawienia plików cookie" typ</label>
+            <label lang="bs-BA">Dugme "Postavke kolačića" tip</label>
+            <defaultValue>btn-light</defaultValue>
+            <options>
+                <option>
+                    <id>btn-primary</id>
+                    <name>Primary</name>
+                    <name lang="de-DE">Primär</name>
+                    <name lang="nl-NL">Primair</name>
+                    <name lang="fr-FR">Principal</name>
+                    <name lang="es-ES">Primario</name>
+                    <name lang="fi-FI">Ensisijainen</name>
+                    <name lang="nn-NO">Primær</name>
+                    <name lang="sv-SE">Primär</name>
+                    <name lang="cs-CZ">Primární</name>
+                    <name lang="pt-PT">Primário</name>
+                    <name lang="tr-TR">Birincil</name>
+                    <name lang="da-DK">Primær</name>
+                    <name lang="it-IT">Primario</name>
+                    <name lang="pl-PL">Podstawowy</name>
+                    <name lang="bs-BA">Primarno</name>
+                </option>
+                <option>
+                    <id>btn-secondary</id>
+                    <name>Secondary</name>
+                    <name lang="de-DE">Sekundär</name>
+                    <name lang="nl-NL">Secundair</name>
+                    <name lang="fr-FR">Secondaire</name>
+                    <name lang="es-ES">Secundario</name>
+                    <name lang="fi-FI">Toissijainen</name>
+                    <name lang="nn-NO">Sekundær</name>
+                    <name lang="sv-SE">Sekundär</name>
+                    <name lang="cs-CZ">Sekundární</name>
+                    <name lang="pt-PT">Secundário</name>
+                    <name lang="tr-TR">İkincil</name>
+                    <name lang="da-DK">Sekundær</name>
+                    <name lang="it-IT">Secondario</name>
+                    <name lang="pl-PL">Drugorzędny</name>
+                    <name lang="bs-BA">Sekundarno</name>
+                </option>
+                <option>
+                    <id>btn-link</id>
+                    <name>Link</name>
+                    <name lang="de-DE">Link</name>
+                    <name lang="nl-NL">Link</name>
+                    <name lang="fr-FR">Lien</name>
+                    <name lang="es-ES">Enlace</name>
+                    <name lang="fi-FI">Linkki</name>
+                    <name lang="nn-NO">Lenke</name>
+                    <name lang="sv-SE">Länk</name>
+                    <name lang="cs-CZ">Odkaz</name>
+                    <name lang="pt-PT">Link</name>
+                    <name lang="tr-TR">Bağlantı</name>
+                    <name lang="da-DK">Link</name>
+                    <name lang="it-IT">Collegamento</name>
+                    <name lang="pl-PL">Link</name>
+                    <name lang="bs-BA">Link</name>
+                </option>
+                <option>
+                    <id>btn-info</id>
+                    <name>Info</name>
+                    <name lang="de-DE">Info</name>
+                    <name lang="nl-NL">Info</name>
+                    <name lang="fr-FR">Info</name>
+                    <name lang="es-ES">Info</name>
+                    <name lang="fi-FI">Info</name>
+                    <name lang="nn-NO">Info</name>
+                    <name lang="sv-SE">Info</name>
+                    <name lang="cs-CZ">Info</name>
+                    <name lang="pt-PT">Info</name>
+                    <name lang="tr-TR">Bilgi</name>
+                    <name lang="da-DK">Info</name>
+                    <name lang="it-IT">Info</name>
+                    <name lang="pl-PL">Info</name>
+                    <name lang="bs-BA">Info</name>
+                </option>
+                <option>
+                    <id>btn-light</id>
+                    <name>Light</name>
+                    <name lang="de-DE">Hell</name>
+                    <name lang="nl-NL">Licht</name>
+                    <name lang="fr-FR">Clair</name>
+                    <name lang="es-ES">Claro</name>
+                    <name lang="fi-FI">Vaalea</name>
+                    <name lang="nn-NO">Lys</name>
+                    <name lang="sv-SE">Ljus</name>
+                    <name lang="cs-CZ">Světlý</name>
+                    <name lang="pt-PT">Claro</name>
+                    <name lang="tr-TR">Açık</name>
+                    <name lang="da-DK">Lys</name>
+                    <name lang="it-IT">Chiaro</name>
+                    <name lang="pl-PL">Jasny</name>
+                    <name lang="bs-BA">Svijetlo</name>
+                </option>
+                <option>
+                    <id>btn-dark</id>
+                    <name>Dark</name>
+                    <name lang="de-DE">Dunkel</name>
+                    <name lang="nl-NL">Donker</name>
+                    <name lang="fr-FR">Sombre</name>
+                    <name lang="es-ES">Oscuro</name>
+                    <name lang="fi-FI">Tumma</name>
+                    <name lang="nn-NO">Mørk</name>
+                    <name lang="sv-SE">Mörk</name>
+                    <name lang="cs-CZ">Tmavý</name>
+                    <name lang="pt-PT">Escuro</name>
+                    <name lang="tr-TR">Koyu</name>
+                    <name lang="da-DK">Mørk</name>
+                    <name lang="it-IT">Scuro</name>
+                    <name lang="pl-PL">Ciemny</name>
+                    <name lang="bs-BA">Tamno</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="int">
+            <name>positionPrioCookieSettingsType</name>
+            <label>Button "Cookie settings" priority</label>
+            <label lang="de-DE">Button "Datenschutzeinstellungen" Priorität</label>
+            <label lang="nl-NL">Knop "Cookie-instellingen" prioriteit</label>
+            <label lang="fr-FR">Priorité du bouton "Paramètres des cookies"</label>
+            <label lang="es-ES">Prioridad del botón "Configuración de cookies"</label>
+            <label lang="fi-FI">Nappi "Evästeasetukset" prioriteetti</label>
+            <label lang="nn-NO">Prioritet for knappen "Innstillinger for informasjonskapsler"</label>
+            <label lang="sv-SE">Prioritet för knappen "Cookie-inställningar"</label>
+            <label lang="cs-CZ">Priorita tlačítka "Nastavení cookies"</label>
+            <label lang="pt-PT">Prioridade do botão "Configurações de cookies"</label>
+            <label lang="tr-TR">Buton "Çerez ayarları" önceliği</label>
+            <label lang="da-DK">Prioritet for knappen "Cookie-indstillinger"</label>
+            <label lang="it-IT">Priorità del pulsante "Impostazioni cookie"</label>
+            <label lang="pl-PL">Priorytet przycisku "Ustawienia plików cookie"</label>
+            <label lang="bs-BA">Prioritet dugmeta "Postavke kolačića"</label>
+            <placeholder>40</placeholder>
+            <defaultValue>40</defaultValue>
+            <helpText>The priority can be used to determine at which position the button is displayed in the cookie hint. The higher the priority, the further forward the button is displayed.</helpText>
+            <helpText lang="de-DE">Anhand der Prioriät kann bestimmt werden, an welcher Position der Button im Cookie Hinweis angezeigt wird. Je höher die Priorität desto weiter vorne wird der Button angezeigt.</helpText>
+            <helpText lang="nl-NL">De prioriteit bepaalt op welke positie de knop in de cookiemelding wordt weergegeven. Hoe hoger de prioriteit, hoe verder naar voren de knop wordt weergegeven.</helpText>
+            <helpText lang="fr-FR">La priorité détermine la position du bouton dans l'avis sur les cookies. Plus la priorité est élevée, plus le bouton est affiché en avant.</helpText>
+            <helpText lang="es-ES">La prioridad determina en qué posición se muestra el botón en el aviso de cookies. Cuanto mayor sea la prioridad, más adelante se mostrará el botón.</helpText>
+            <helpText lang="fi-FI">Prioriteetti määrittää, missä kohdassa painike näkyy evästeilmoituksessa. Mitä korkeampi prioriteetti, sitä edempänä painike näkyy.</helpText>
+            <helpText lang="nn-NO">Prioriteten bestemmer hvilken posisjon knappen vises i informasjonskapselmeldingen. Jo høyere prioritet, jo lenger frem vises knappen.</helpText>
+            <helpText lang="sv-SE">Prioriteten avgör vilken position knappen visas på i cookie-meddelandet. Ju högre prioritet, desto längre fram visas knappen.</helpText>
+            <helpText lang="cs-CZ">Priorita určuje, na které pozici se tlačítko zobrazuje v oznámení o cookies. Čím vyšší priorita, tím blíže se tlačítko zobrazuje.</helpText>
+            <helpText lang="pt-PT">A prioridade determina em que posição o botão é exibido no aviso de cookies. Quanto maior a prioridade, mais à frente o botão é exibido.</helpText>
+            <helpText lang="tr-TR">Öncelik, çerez bildiriminde butonun nerede görüneceğini belirler. Öncelik ne kadar yüksekse, buton o kadar ileri gösterilir.</helpText>
+            <helpText lang="da-DK">Prioriteten bestemmer, hvilken position knappen vises i cookie-meddelelsen. Jo højere prioritet, desto længere frem vises knappen.</helpText>
+            <helpText lang="it-IT">La priorità determina in quale posizione viene visualizzato il pulsante nell'avviso sui cookie. Maggiore è la priorità, più avanzato è il pulsante.</helpText>
+            <helpText lang="pl-PL">Priorytet określa, na której pozycji przycisk jest wyświetlany w powiadomieniu o plikach cookie. Im wyższy priorytet, tym dalej na przód wyświetlany jest przycisk.</helpText>
+            <helpText lang="bs-BA">Prioritet određuje na kojoj poziciji se dugme prikazuje u obavijesti o kolačićima. Što je prioritet viši, dugme se dalje unaprijed prikazuje.</helpText>
+        </input-field>
+    </card>
+</config>

@@ -1,0 +1,13 @@
+.sw-cms-block-netzp-powerpack6-tile1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+  grid-gap: 40px;
+
+  .sw-text-editor.is--empty {
+    background-color: #eee;
+  }
+
+  .sw-cms-slot:first-child {
+    grid-row: 1 / span 2;
+  }
+}

@@ -1,0 +1,27 @@
+<?php declare(strict_types=1);
+
+namespace MoorlFoundation\Core\Framework\DataAbstractionLayer\Collection;
+
+use MoorlFoundation\Core\Framework\DataAbstractionLayer\Field\Flags\EditField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
+use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
+
+class FieldCompanyCollection extends FieldCollection
+{
+    public static function getFieldItems(bool $flag = true): array
+    {
+        if (!$flag) return [];
+
+        return [
+            (new StringField('executive_director', 'executiveDirector'))->addFlags(new EditField(EditField::TEXT)),
+            (new StringField('place_of_fulfillment', 'placeOfFulfillment'))->addFlags(new EditField(EditField::TEXT)),
+            (new StringField('place_of_jurisdiction', 'placeOfJurisdiction'))->addFlags(new EditField(EditField::TEXT)),
+            (new StringField('bank_bic', 'bankBic'))->addFlags(new EditField(EditField::TEXT)),
+            (new StringField('bank_iban', 'bankIban'))->addFlags(new EditField(EditField::TEXT)),
+            (new StringField('bank_name', 'bankName'))->addFlags(new EditField(EditField::TEXT)),
+            (new StringField('tax_office', 'taxOffice'))->addFlags(new EditField(EditField::TEXT)),
+            (new StringField('tax_number', 'taxNumber'))->addFlags(new EditField(EditField::TEXT)),
+            (new StringField('vat_id', 'vatId'))->addFlags(new EditField(EditField::TEXT)),
+        ];
+    }
+}

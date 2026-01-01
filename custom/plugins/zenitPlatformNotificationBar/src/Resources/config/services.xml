@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="zenit\PlatformNotificationBar\Subscriber\StorefrontRenderSubscriber">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="zenit\PlatformNotificationBar\Service\GetControllerInfo"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="zenit\PlatformNotificationBar\Subscriber\ThemeVariablesSubscriber">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="zenit\PlatformNotificationBar\Service\GetControllerInfo">
+            <argument type="service" id="Symfony\Component\HttpFoundation\RequestStack"/>
+        </service>
+
+        <service id="zenit\PlatformNotificationBar\Framework\Cookie\CustomCookieProvider"
+                 decorates="Shopware\Storefront\Framework\Cookie\CookieProviderInterface">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="zenit\PlatformNotificationBar\Framework\Cookie\CustomCookieProvider.inner" />
+        </service>
+    </services>
+</container>

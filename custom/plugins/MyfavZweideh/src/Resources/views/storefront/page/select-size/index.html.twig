@@ -1,0 +1,91 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+    <div class="product-detail"
+             itemscope
+             itemtype="https://schema.org/Product">
+        <div class="product-detail-content">
+            <div class="row align-items-center product-detail-headline">
+                <div class="col product-detail-name-container">
+                    <h1 class="product-detail-name"
+                        itemprop="name">
+                        {{ page.product.translated.name }}
+                    </h1>
+                </div>
+                <div class="col-md-auto product-detail-manufacturer">
+                    <a href="{{ page.product.manufacturer.link }}"
+                       class="product-detail-manufacturer-link"
+                       rel="noreferrer noopener"
+                       target="_blank"
+                       title="{{ page.product.manufacturer.translated.name }}">
+                        {% if page.product.manufacturer.media %}
+                            {% block page_product_detail_manufacturer_logo %}
+                                <img src="{{ page.product.manufacturer.media|sw_encode_media_url }}"
+                                    class="product-detail-manufacturer-logo"
+                                    alt="{{ page.product.manufacturer.translated.name }}"/>
+                            {% endblock %}
+                        {% else %}
+                            {% block page_product_detail_manufacturer_text %}
+                                {{ page.product.manufacturer.translated.name }}
+                            {% endblock %}
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+
+            {% set mediaItems = page.product.media.media %}
+
+            <div class="row product-detail-main">
+                <div class="col-lg-7 product-detail-media">
+                    <div class="cms-element-">
+                        <div class="row gallery-slider-row is-single-image js-gallery-zoom-modal-container" data-magnifier="true" data-magnifier-options="{&quot;keepAspectRatioOnZoom&quot;:false}">
+                            <div class="gallery-slider-col col order-1 order-md-2" data-zoom-modal="true">
+                                <div class="base-slider gallery-slider">
+                                    <div class="gallery-slider-single-image is-contain js-magnifier-container" style="min-height: 430px">
+                                        <img src="{{ path('frontend.home.page') ~ config('MyfavZweideh.config.lumisInstallPath') ~ lumiseImage }}" class="img-fluid gallery-slider-image" alt="Hauptprodukt mit erweiterten Preisen" title="Hauptprodukt mit erweiterten Preisen" data-object-fit="contain" itemprop="image" style="cursor: default;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 product-detail-buy">
+                    <div class="js-magnifier-zoom-image-container">
+                        <div class="product-detail-price-container">
+                            {% sw_include '@Storefront/storefront/page/product-detail/buy-widget-price.html.twig' %}
+                        </div>
+
+                        <div class="product-detail-tax-container">
+                            {% if context.taxState == "gross" %}
+                                {% set taxText = "general.grossTaxInformation"|trans|sw_sanitize %}
+                            {% else %}
+                                {% set taxText = "general.netTaxInformation"|trans|sw_sanitize %}
+                            {% endif %}
+
+                            <p class="product-detail-tax">
+                                <a class="product-detail-tax-link"
+                                    href="{{ path('frontend.cms.page',{ id: config('core.basicInformation.shippingPaymentInfoPage') }) }}"
+                                    title="{{ taxText }}"
+                                    {{ dataBsToggleAttr }}="modal"
+                                    data-url="{{ path('frontend.cms.page',{ id: config('core.basicInformation.shippingPaymentInfoPage') }) }}">
+                                    {{ taxText }}
+                                </a>
+                            </p>
+                        </div>
+
+                        <div class="product-detail-delivery-information">
+                            {% sw_include '@Storefront/storefront/component/delivery-information.html.twig' %}
+                        </div>
+
+                        <div>
+                            {% sw_include '@Storefront/storefront/page/select-size/buy-widget-form.html.twig' %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

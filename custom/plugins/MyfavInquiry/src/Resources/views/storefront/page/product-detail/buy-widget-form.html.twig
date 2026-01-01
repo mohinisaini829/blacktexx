@@ -1,0 +1,20 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/buy-widget-form.html.twig' %}
+
+{% block page_product_detail_buy_button_container %}
+    {{ parent() }}
+    {% set MyfavInquiryAddPluginOptions = {
+        target: path('frontend.myfav.inquiry.add'),
+        csrf_token: csrf_token('frontend.myfav.inquiry.add')
+    } %}
+    <div class="offset-4 col-8 mt-2">
+        <button
+            formaction="{{ path('frontend.myfav.inquiry.add') }}"
+            name="inquiry"
+            value="1"
+            class="btn btn-secondary myfav-inquiry-add"
+            data-myfav-inquiry-add-plugin-options="{{ MyfavInquiryAddPluginOptions|json_encode }}"
+        >
+            {{ 'myfavInquiry.add'|trans|sw_sanitize }}
+        </button>
+    </div>
+{% endblock %}

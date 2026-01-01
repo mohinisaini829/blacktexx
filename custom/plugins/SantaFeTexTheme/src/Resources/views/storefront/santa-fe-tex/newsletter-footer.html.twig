@@ -1,0 +1,9 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+    {% block page_newsletter_response %}
+        {% if response is not empty %}
+            {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with { type: response.type, list: response.alert } %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}

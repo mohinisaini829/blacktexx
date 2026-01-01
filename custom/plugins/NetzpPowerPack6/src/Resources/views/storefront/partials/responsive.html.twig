@@ -1,0 +1,27 @@
+{% block netzp_pp_responsive_wrapper %}
+    {% set responsiveClasses = [] %}
+    {% set styles = [] %}
+
+    {% if model and model.customFields and model.customFields.netzp_pp %}
+        {% set responsiveClasses = responsiveClasses|merge(model.customFields.netzp_pp.xs ? ['d-block'] : ['d-none']) %}
+        {% set responsiveClasses = responsiveClasses|merge(model.customFields.netzp_pp.sm ? ['d-sm-block'] : ['d-sm-none']) %}
+        {% set responsiveClasses = responsiveClasses|merge(model.customFields.netzp_pp.md ? ['d-md-block'] : ['d-md-none']) %}
+        {% set responsiveClasses = responsiveClasses|merge(model.customFields.netzp_pp.lg ? ['d-lg-block'] : ['d-lg-none']) %}
+        {% set responsiveClasses = responsiveClasses|merge(model.customFields.netzp_pp.xl ? ['d-xl-block'] : ['d-xl-none']) %}
+
+        {% set color1 = model.customFields.netzp_pp.color1 %}
+        {% set color2 = model.customFields.netzp_pp.color2 %}
+        {% set colorAngle = model.customFields.netzp_pp.colorAngle %}
+
+        {% if color1 != "" and color2 != "" %}
+            {% set styleColorGradient = 'background-image: linear-gradient(' ~ colorAngle ~ 'deg, ' ~ color1 ~ ', ' ~ color2 ~ ')' %}
+            {% set styles = styles|merge([styleColorGradient]) %}
+        {% endif %}
+
+        <div class="{{ responsiveClasses|join(' ') }}" style="{{ styles|join('; ') }}">
+            {{ parentBlock|raw }}
+        </div>
+    {% else %}
+        {{ parentBlock|raw }}
+    {% endif %}
+{% endblock %}

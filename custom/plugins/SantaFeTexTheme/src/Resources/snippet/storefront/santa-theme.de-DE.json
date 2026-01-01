@@ -1,0 +1,72 @@
+{
+    "santa-theme": {
+        "Cookie":{
+            "heading": "ÜBER COOKIES AUF DIESER SEITE",
+            "box-text": "Diese Website verwendet Cookies, JavaScript, HTML 5 und andere digitale Technologien (Cookies) auf santafetex.com, um Informationen von Ihrem Gerät zu sammeln. Wir verwenden Cookies für funktionale und analytische Zwecke sowie Social Media und Werbung. Funktionale Cookies sind immer aktiviert, um sicherzustellen, dass unsere Website wie vorgesehen funktioniert. Ob wir die zwei letztgenannten Kategorien verwenden, liegt bei Ihnen. Sie können alle Cookies in diesen beiden Kategorien durch Klicken auf „Alle akzeptieren zulassen. Wenn Sie das nicht möchten, bitte auf „Einstellungen klicken und entsprechend auswählen. Weitere Informationen finden Sie in unserer <a href=\"/wichtige-links/datenschutz/\">Datenschutzerklärung</a>."
+        },
+        "footer": {
+            "addressHeadline": "Addresse:",
+            "address": "Waldstraße 110, Wachenheim<br/>67157, Deutschland",
+            "phoneHeadline": "Telefon:",
+            "phoneNumber": "<a href='tel:004906322948070'>0049-(0)6322-94807-0</a>",
+            "contactHeadline": "Kontakt:",
+            "contact": "<a href='mailto:mail@mail.com'>Kostenlose Anfrage</a>",
+            "hoursHeadline": "Arbeitstage / Stunden:",
+            "hours": "Mo - Fr / 9:00 - 17:30 Uhr",
+            "newsletterHeadline": "Nichts mehr verpassen",
+            "newsletterGo": "GO",
+            "newsletterText": "Erhalten Sie die neuesten Informationen zu Sonderangeboten. Melden Sie sich noch heute für den Newsletter an."
+        },
+        "sw-cms": {
+            "elements": {
+                "vio_product_zerts": {
+                    "label": "Produkt-Zertifizierungen",
+                    "OekoTex": "<img src=\"/bundles/santafetextheme/assets/logos/oekotexLogo.png\">",
+                    "OekotexLink": "https://www.oeko-tex.com/de/unsere-standards/standard-100-by-oeko-tex"
+                },
+                "vio-manufacturer-video-slider": {
+                    "button": "Video",
+                    "title": "Video Slider"
+                },
+                "vio-manufacturer-catalog": {
+                    "title": "Produkt Katalog",
+                    "button": "Katalog"
+                }
+            }
+        },
+        "buybox": {
+            "instock": "auf Lager",
+            "model": "Modell: ",
+            "material": "Material: ",
+            "price-inquiry-text": "Höhere&nbsp;Mengen bitte&nbsp;anfragen",
+            "unit": "Stk",
+            "designerOnlineButtonText": "Design Online",
+            "designerOnlineLink": "#",
+            "disabled-btn": {
+                "title": "Bitte die gewünschte Variante auswählen / Stückzahl angeben!"
+            },
+            "designerModal": {
+                "content": "In unserem Online-Designer können Sie Produkte selbst gestalten. Das Sortiment ist jedoch kleiner. Das lohnt sich finanziell unter 15 Teilen. Darüber ist es sinnvoll, hier weiter zu stöbern und eine Anfrage zu stellen. Bitte wählen Sie:",
+                "linkBtn": "Zum Online Designer",
+                "closeBtn": "Hier bleiben und anfragen"
+            },
+            "printPriceListLink": "Stick- & Druckpreise",
+            "sizeTableLink": "Größentabelle"
+        },
+        "property": {
+            "separator": ", "
+        }
+    },
+    "detail": {
+        "descriptionTitle": {
+            "before": ""
+        },
+        "pdfDescriptionTitle": "Größentabellen",
+        "pdfDescription": "Größentabellen für %manufacturer%",
+        "nameSuffix": "zum Besticken und Bedrucken",
+        "netGrossSwitch": {
+            "net": "Netto",
+            "gross": "Brutto"
+        }
+    }
+}

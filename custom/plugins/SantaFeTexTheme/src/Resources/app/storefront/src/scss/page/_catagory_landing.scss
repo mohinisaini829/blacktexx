@@ -1,0 +1,226 @@
+.top-page-banner {
+    .cms-section-default.boxed {
+        .banner_header_img {
+            .cms-block-container {
+                .cms-element-text {
+                    h3 {
+                        text-align: left !important;
+                        font-size:1.5rem;
+                        color: #fff;
+                        margin-bottom: 15px;
+                        margin-top:20px;
+                        padding-bottom: 5px;
+                        color: #fff;font-family: "Lato";
+                        &.top-sub-head {
+                            color: #7e8c8d;
+                        }
+                    }
+                    ul.list-space-top {
+                        list-style:none;
+                        margin:0;
+                        padding:0;
+                        li {
+                            margin-bottom: 1rem;
+                            color: #ced4d9;
+                            font-size:1.2rem;
+                            display: flex;
+                            align-items: center;
+                            gap:10px;
+                            img {
+                                width: 20px;
+                            }
+                        }
+                        & + p.btn-orage {
+                            margin-bottom:1rem;
+                            a.btn {
+                                color: #fff;
+                                background-color: #c24900;
+                                border-color: #c24900;
+                                text-transform: capitalize;
+                                font-weight: bold;
+                                font-size: 18pt;
+                                &:hover {
+                                    color: #fff;
+                                    background-color: #9c3b00;
+                                    border-color: #8f3600;
+                                }
+                            }
+                        }
+                        &.list-space-gray {
+                            li {
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+            }  
+            &.banner_gray_contnet {
+                .cms-block-container {
+                    .cms-element-text {
+                        h1,h3 {
+                            color:#7e8c8d;
+                            &.top-sub-head {
+                                color: #7e8c8d;
+                            }
+                        }
+                        ul.list-space-top {
+                            li {
+                                color:#7e8c8d;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.info-finishing-section {
+    .netzp-powerpack6-cta2-element {
+        .content-text p {
+            display: inline-block;
+            width: auto;
+            height: auto;
+            padding: 0 .5rem;
+            font-size:14px;
+            color: #000000;
+            background-color: #ffffff;
+            margin: 0;
+        }
+    }
+}
+/*************************/
+.cms-sections {
+    .subcat-section-list-page.custom-sub-cat {
+        padding: 20px 20px 0 20px;
+        .subcategory-list {
+            display: flex;
+            gap: 0 15px;
+            justify-content: center;
+            text-align: center;
+            .subcat-box {
+                margin-bottom: 0;
+                a{
+                    color: #000;
+                    font-weight: 600;
+                    text-decoration: none;
+                    font-size: 15px;
+                }
+                .img-fluid {
+                    border: 1px solid #ccc;
+                    padding: 10px;
+                    border-radius: 100%;
+                    height: 90px;
+                    width: 90px;
+                }
+            }
+        }
+    }
+    .cms-section-default.boxed {
+        .cms-block-text {
+            text-align: center;
+            margin-top: 4px;
+        }
+    }
+}
+.is-ctl-navigation {
+    .offcanvas.js-offcanvas-singleton.offcanvas-filter{
+        height: 100%;
+        border-radius: 0;
+        left: -400px;
+        right: inherit;
+        top:0;
+        bottom:0;
+        .filter-panel-offcanvas-title {
+            color: #4a545b;
+        }
+        &.show{
+            left: 0;
+            bottom:0;
+            top:0;
+            transform: none;
+        }
+        &.show.hiding {
+            left: 0;
+            bottom: 0;
+            top: 0;
+            transform: none;
+        }
+    }
+}
+.cat-product-sec {
+    .cms-element-product-listing {
+        .row.cms-listing-row {
+            .cms-listing-col {
+                .card.product-box {
+                    .product-image-wrapper {
+                        height:auto;
+                        .product-image {
+                            max-height: 350px;
+                            width: 100%;
+                            background: #fff;
+                        }
+                    }
+                    .product-info {
+                        .product-name {
+                            color: #4a545b;
+                        }
+                    }
+                    .product-wishlist {
+                        .product-wishlist-action-circle {
+                            padding: 0;
+                            background: #f9f9f9;
+                            border-radius: 100%;
+                            height: 40px;
+                            width: 40px;
+                            text-align: center;
+                            .icon.icon-heart{
+                                margin-right: 0;
+                            } 
+                        }
+                    }
+                    .product-price-wrapper {
+                        color: #4a545b;
+                        .product-price {
+                            font-size: 24px;
+                            color: #4a545b;
+                        }
+                        .product-cheapest-price {
+                            font-size: .75rem;
+                            color: #4a545b;
+                            line-height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+        .pagination-nav {
+            .pagination {
+                .page-item {
+                    &.active {
+                        .page-link {
+                            background: #c24900;
+                            color: #fff;
+                        }
+                    }
+                    .page-link{
+                        color: #c24900;
+                        border: 1px solid #bcc1c7;
+                        padding: .5rem .75rem;
+                        border-right: none;
+                    }
+                    &:last-child{
+                        .page-link{
+                           border-right: 1px solid #bcc1c7;
+                        }
+                    }
+                    &.page-first {
+                        background: #eee;
+                        a{
+                            color: #878787;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

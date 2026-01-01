@@ -1,0 +1,18 @@
+{
+    "biloba": {
+        "ArticleBoxProperties": {
+            "Manufacturer": "Výrobce:",
+            "ProductNumber": "Číslo článku:"
+        },
+        "ArticleVariantOrderMatrix": {
+            "ArticleNo": "Číslo výrobku",
+            "DetailBuyActionAdd": "Přidat varianty do nákupního košíku",
+            "UnitPrice": "Jednotková cena",
+            "VariantOrderMatrixColAmount": "Množství",
+            "VariantStock": "Sklad",
+            "quickOrder": "Rychlá objednávka",
+            "stackPricePrefix": "Ab",
+            "variantsTotalPrice": "Odhadovaná celková cena"
+        }
+    }
+}

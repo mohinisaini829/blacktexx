@@ -1,0 +1,279 @@
+.cookie-consent-permission-footer-modal.show {
+    background: rgba(0, 0, 0, 0.2);
+    //transition: background-color;
+    z-index: 9999999;
+}
+
+.acris-cookie-consent {
+    &.is--default {
+        border-top: 1px solid $border-color;
+        padding-top: $grid-gutter-width / 2;
+        padding-bottom: $grid-gutter-width / 2;
+        width: 100%;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 8000;
+        background: #fff;
+    }
+
+    &.is--modal {
+        .cookie-consent-setting-container {
+            padding-top: $grid-gutter-width / 2;
+        }
+
+        .cookie-consent-group {
+            .cookie-item-info {
+                width: 70%;
+
+                &.is-default {
+                    width: 100%;
+                }
+            }
+        }
+
+        .cookie-consent-permission-text, .cookie-consent-permission-button {
+            padding: 1rem 1rem 0.2rem 1rem;
+        }
+
+        .cookie-consent-button-margin {
+            margin-bottom: $spacer-sm;
+        }
+    }
+
+    &.has--accepted {
+        display: none;
+    }
+
+    .cookie-consent-setting-container {
+        padding-bottom: $grid-gutter-width / 2;
+    }
+
+    .cookie-consent-settings {
+        padding-bottom: $grid-gutter-width / 2;
+        border-bottom: 1px solid $border-color;
+        max-height: 60vh;
+        overflow: auto;
+    }
+
+    .cookie-consent-group {
+        .btn-link {
+            text-decoration: none;
+            text-overflow: clip;
+            overflow: visible;
+
+            .icon {
+                transition: all 0.4s ease;
+                transform: rotate(180deg);
+                position: relative;
+                top: 5px;
+
+                & > svg {
+                    top: 0;
+                }
+            }
+
+            &.collapsed {
+                .icon {
+                    transform: rotate(0);
+                }
+            }
+        }
+
+        .card-body {
+            padding: $card-spacer-x;
+        }
+
+        .cookie-item-info {
+            width: 75%;
+
+            &.has-title-above {
+                flex-wrap: wrap;
+
+                .cookie-title,
+                .cookie-description {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .cookie-consent-switch {
+        width: 44px;
+        height: 20px;
+        position: relative;
+        display: inline-block;
+
+        input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch-checkbox {
+            float: right;
+        }
+
+        .switch-slider {
+            transition: all 0.4s ease;
+            border-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            cursor: pointer;
+            background-color: $gray-300;
+
+            &:before {
+                transition: all 0.4s ease;
+                border-radius: 50%;
+                width: 14px;
+                height: 14px;
+                position: absolute;
+                left: 3px;
+                bottom: 3px;
+                content: "";
+                background-color: #fff;
+            }
+        }
+
+        .switch-slider-enabled {
+            position: absolute;
+            right: 60px;
+            display: block;
+
+            &.switch-slider-active {
+                display: none;
+            }
+        }
+
+        input:checked + .switch-slider {
+            background-color: $primary;
+        }
+
+        input:checked ~ .switch-slider-active {
+            display: block;
+        }
+
+        input:checked ~ .switch-slider-inactive {
+            display: none;
+        }
+
+        input:focus + .switch-slider {
+            box-shadow: 0 0 0 2px $primary;
+            outline: 2px solid $primary;
+            outline-offset: 2px;
+        }
+
+        input:checked + .switch-slider:before {
+            transform: translateX(24px);
+        }
+
+        input:disabled + .switch-slider {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+    }
+
+    .cookie-consent-setting-description {
+        border-bottom: 1px solid $border-color;
+        padding-bottom: $spacer;
+    }
+
+    .cookie-consent-setting-cookies {
+        .cookie-item {
+            margin-bottom: $spacer / 2;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .cookie-title {
+            font-weight: bold;
+        }
+    }
+}
+
+.cookie-consent-button-margin {
+    margin-left: $spacer-xs;
+    margin-bottom: $spacer-xs;
+}
+
+.modal-content {
+    box-shadow: 0px 0px 0px 7px rgba(0, 0, 0, 0.25);
+}
+
+.acris-cookie-info {
+    display: none;
+}
+
+iframe[data-acriscookie="true"] {
+    display: none;
+}
+
+@include media-breakpoint-up(md) {
+    .acris-cookie-consent {
+        .cookie-consent-group {
+            .cookie-item-info {
+                width: 80%;
+            }
+        }
+
+        .cookie-consent-settings {
+            max-height: 40vh;
+        }
+
+        .cookie-consent-setting-cookies {
+            .cookie-title {
+                width: 20%;
+                flex-shrink: 0;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .acris-cookie-consent {
+        &.is--modal {
+            .cookie-consent-group {
+                .cookie-item-info {
+                    width: 80%;
+                }
+            }
+        }
+
+        .cookie-consent-group {
+            .cookie-item-info {
+                width: 80%;
+            }
+        }
+
+        .cookie-consent-setting-cookies {
+            .cookie-title {
+                width: 20%;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .acris-cookie-consent {
+        &.is--modal {
+            .cookie-consent-permission-text {
+                max-height: 30vh;
+                overflow-y: auto;
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+                margin: 1rem 0;
+            }
+        }
+
+        &.is--default {
+            max-height: 100%;
+            overflow-y: auto;
+        }
+    }
+}

@@ -1,0 +1,734 @@
+{% if page.configuratorSettings %}
+    {% set configuratorSettings = page.configuratorSettings %}
+{% elseif page.product.configurator %}
+    {% set configuratorSettings = page.product.configurator %}
+{% else %}
+    {% set configuratorSettings = page.extensions['bilobaArticleVariantOrderMatrix'].elements['configuratorSettings'] %}
+{% endif %}
+
+{% set cmsPageExists = cmsPage %}
+{% set matrixPosition = config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition")%}
+
+{% if page.extensions.bilobaArticleVariantOrderMatrix.elements.showShopwareSelection 
+        && config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") == "price" %}
+    {% sw_include '@Storefront/storefront/page/product-detail/buy-widget-form.html.twig' %}
+{% endif %}
+
+{% if configuratorSettings.elements|length == 2 %}
+    {% block biloba_variant_matrix_selector %}
+        <div class="{% if cmsPageExists is not null and matrixPosition == "description_top" %}container {% endif %}{% if matrixPosition == "description_top" %}pos-descr-top {% endif %}biloba-variant-matrix {% if page.extensions.bilobaArticleVariantOrderMatrix.elements.showShopwareSelection && config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") == "price" %}mt-4{% endif%}">
+            <div {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") == "price" %} class="bit-var-matrix-pos-price"{% else %} class="bit-var-matrix-pos-descr-top" {% endif %}>
+
+                {% set firstGroup = configuratorSettings.elements|first %}
+                {% set secondGroup = configuratorSettings.elements|last %}
+                
+                {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixOneGroupOrientation") == 'orientation_y' %}
+                    {% set caseOrientY = true %}
+                {# if orientation_x true or everything else including field deleted #}
+                {% else %}
+                    {% set caseOrientY = false %}
+                {% endif %}
+
+                {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixQuantityField") == "dropdown" %}
+                    {% set dropdown = true %}
+                {% else %}
+                    {% set dropdown = false %}
+                {% endif %}
+                {% block biloba_variant_matrix_selector_first_group %}
+                    <div class="product-detail-configurator-group biloba-variant-matrix-selector-options mb-3">
+                        <div class="product-detail-configurator-group-title">
+                            <h4>{{ firstGroup.translated.name }}</h4>
+                            <div class="product-detail-configurator-options d-flex flex-wrap gap-2">
+                                {% for optionFirstGroup in firstGroup.options %}
+                                    {% set tmpVariantId = null %}
+                                    {% set tmpVariantElement = null %}
+                                    {% for optKey, value in variantMatrixArrayKeysAndValues %}
+                                        {% if optionFirstGroup.id in optKey %}
+                                            {% set tmpVariantId = value %}
+                                            {% set tmpVariantElement = page.extensions['bilobaArticleVariantOrderMatrix'].elements.children[tmpVariantId] %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% set imageChangeConfig = {
+                                        url: url('frontend.biloba.article-variant-order-matrix.load-imagegallery', { variantId: tmpVariantId }),
+                                    } %}
+
+                                    <div class="product-detail-configurator-option">
+                                        <button 
+                                            class="btn btn-block  product-detail-configurator-option-variant-tabs 
+                                            {% if loop.first %} btn-primary {% endif %}
+                                            {% if config("BilobaArticleVariantOrderMatrix.config.useVariantImageOnSelectionButton") %} media-image {% endif %}
+                                            " 
+                                            id="product-detail-configurator-option-variant-{{ optionFirstGroup.id }}" 
+                                            data-biloba-variant-matrix-selection-id="{{ optionFirstGroup.id }}"
+                                            {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %} 
+                                            data-bit-variant-id="{{ tmpVariantId }}" 
+                                        >
+                                            {% if config("BilobaArticleVariantOrderMatrix.config.useVariantImageOnSelectionButton") %}
+                                                {% set media = tmpVariantElement.media.elements|sort((a, b) => a.position <=> b.position) %}
+                                                <img src="{{ ((media|first).media.thumbnails.elements|first).url }}"
+                                                    class="product-detail-configurator-option-image bit-variant-opt-img"
+                                                    alt="{{ optionFirstGroup.translated.name }}"
+                                                    title="{{ optionFirstGroup.translated.name }}" />
+                                            {% else %}
+                                                {{ optionFirstGroup.translated.name }} 
+                                            {% endif %}
+                                        </button>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+                {% block biloba_variant_matrix_selector_matrix %}
+                    <form id="biloba-variant-matrix-formular"
+                        method="post"
+                        data-biloba-add-to-cart="true"
+                        action="{{ path('frontend.checkout.line-item.add') }}"
+                        class="table-responsive">
+
+                        {% for firstGroupOption in firstGroup.options %}
+                        
+                            <table class="table table-borderless table-sm biloba-variant-matrix-selected-groupoptions biloba-variant-matrix-selected-groupoptions-{{firstGroupOption.id}}" data-biloba-variant-matrix-table-id="{{firstGroupOption.id}}" style="{% if loop.first %}display: table;{% else %}display:none;{% endif %}">
+                            
+                            {# If y_orientation selected #}
+                            {% if caseOrientY %}
+                                {% block biloba_variant_matrix_selector_matrix_y_orientation %}
+                                    {% block biloba_variant_matrix_selector_matrix_y_orientation_table_head %}
+                                        <thead class="bit-variant-matrix-head">
+                                            <tr>  
+                                                <th>{{ secondGroup.translated.name }}</th>
+                                                {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorShowArticleNo") %}
+                                                    <th>{{ 'biloba.ArticleVariantOrderMatrix.ArticleNo'|trans }}</th>
+                                                {% endif %}
+                                                {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixShowStockQuantity") == true %}
+                                                    <th>{{ 'biloba.ArticleVariantOrderMatrix.VariantStock'|trans }}</th>
+                                                {% endif %}
+                                                {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+                                                    <th>{{ 'biloba.ArticleVariantOrderMatrix.UnitPrice'|trans }}</th>
+                                                    <th>{{ 'biloba.ArticleVariantOrderMatrix.VariantOrderMatrixColAmount'|trans }}</th>
+                                                {% endif %}
+                                            </tr>
+                                        </thead>
+                                    {% endblock %}
+
+                                    {% block biloba_variant_matrix_selector_matrix_y_orientation_table_body %}
+                                        <tbody>
+                                        {% for secondGroupOption in secondGroup.options %}
+                                            {% set groupOptionId = null %}
+
+                                            {% for optKey, value in variantMatrixArrayKeysAndValues %}
+                                                {% set currentKey = firstGroupOption.id ~ '_' ~ secondGroupOption.id %}
+
+                                                {% if currentKey == optKey %}
+                                                    {# variant key #}
+                                                    {% set key =  value %}
+                                                    {# option key #}
+                                                    {% set groupOptionId = currentKey %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            
+                                            {% if groupOptionId != null %}
+                                                {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+                                                
+                                                <tr>
+                                                    {% block biloba_variant_matrix_selector_matrix_y_orientation_table_body_variant_name %}
+                                                        <td>
+                                                            <div class="variant-options name">
+                                                                {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+                                                                {% if config("BilobaArticleVariantOrderMatrix.config.useVariantImageOnYAxis") %}
+                                                                    <div class="variant-options media">
+                                                                        {% set media = childProduct.media.elements|sort((a, b) => a.position <=> b.position) %}
+                                                                        <img src="{{ ((media|first).media.thumbnails.elements|first).url }}"
+                                                                            class="product-detail-configurator-option-image bit-variant-opt-img"
+                                                                            alt="{{ secondGroupOption.translated.name }}"
+                                                                            title="{{ secondGroupOption.translated.name }}"  />
+                                                                    </div>
+                                                                {% else %}
+                                                                    {{ secondGroupOption.translated.name }}
+                                                                {% endif %}
+                                                            </div>
+                                                        </td>
+                                                    {% endblock %}  
+                                                    
+                                                    {% block biloba_variant_matrix_selector_matrix_y_orientation_table_body_article_no %}
+                                                        {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorShowArticleNo") %}
+                                                            <td>
+                                                                <div class="variant-options articleno">
+                                                                    {{childProduct.productNumber}}
+                                                                </div>
+                                                            </td>
+                                                        {% endif %}
+                                                    {% endblock %}  
+                                                    
+                                                    {% block biloba_variant_matrix_selector_matrix_y_orientation_table_body_stock %}
+                                                        {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") && config("BilobaArticleVariantOrderMatrix.config.VariantMatrixShowStockQuantity") == true %}
+                                                            <td>
+                                                                <div class="variant-options stock">
+                                                                    {{childProduct.availableStock}}
+                                                                </div>
+                                                            </td>
+                                                        {% endif %}
+                                                    {% endblock %}
+                                                    {% block biloba_variant_matrix_selector_matrix_y_orientation_table_body_variant_price %}
+                                                        {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+                                                            <td>
+                                                                <div class="variant-options price">
+                                                                    {# include calculatedPrice #}
+                                                                    {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/calculatedPrice.html.twig" with {"childProduct":childProduct} %}
+                                                                </div>
+                                                            </td>
+                                                        {% endif %}
+                                                    {% endblock %}
+
+                                                    {% if dropdown %}
+                                                        <td class="variants-options-dropdown-selector">{% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-dropdown-list.html.twig' with {'currentKey': currentKey, 'childProduct': childProduct, 'key': key} %}</td>
+                                                    {% else %}
+                                                        <td class="variants-options-input-selector">{% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-input-fields.html.twig' with {'currentKey': currentKey, 'childProduct': childProduct, 'key': key} %}</td>
+                                                    {% endif %}
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                        </tbody>
+                                    {% endblock %}
+                                {% endblock %}
+                            {# If x_orientation selected #}
+                            {% else %}
+                                {% block biloba_variant_matrix_selector_matrix_x_orientation %}
+                                    {% block biloba_variant_matrix_selector_matrix_x_orientation_table_head %}
+                                        <thead class="bit-variant-matrix-head">
+                                            <tr>
+                                                <th>
+                                                    <div class="variant-options-header">
+                                                        {{ secondGroup.translated.name }}
+                                                    </div>
+                                                </th>
+                                                
+                                                {% for secondGroupOption in secondGroup.options %}
+                                                    {% set groupOptionId = null %}
+
+                                                    {% for optKey, value in variantMatrixArrayKeysAndValues %}
+                                                        {% set currentKey = firstGroupOption.id ~ '_' ~ secondGroupOption.id %}
+
+                                                        {% if currentKey == optKey %}
+                                                            {# variant key #}
+                                                            {% set key =  value %}
+                                                            {# option key #}
+                                                            {% set groupOptionId = currentKey %}
+                                                        {% endif %}
+                                                    {% endfor %}
+
+                                                    {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+                                                    {% if config("BilobaArticleVariantOrderMatrix.config.useVariantImageOnXAxis") %}
+                                                        <th scope="col">
+                                                            <div class="variant-options media">
+                                                                {% set media = childProduct.media.elements|sort((a, b) => a.position <=> b.position) %}
+                                                                <img src="{{ ((media|first).media.thumbnails.elements|first).url }}"
+                                                                    class="product-detail-configurator-option-image bit-variant-opt-img"
+                                                                    alt="{{ secondGroupOption.translated.name }}"
+                                                                    title="{{ secondGroupOption.translated.name }}"  />
+                                                            </div>
+                                                        </td>
+                                                    {% elseif childProduct != null %}
+                                                        <th scope="col"> {{ secondGroupOption.translated.name }} </th>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                        </thead>
+                                    {% endblock %}
+                                    {% block biloba_variant_matrix_selector_matrix_x_orientation_table_body %}
+                                        <tbody>
+                                            {% block biloba_variant_matrix_selector_matrix_x_orientation_table_body_amount %}
+                                                <tr>
+                                                    <td scope="col">{{ 'biloba.ArticleVariantOrderMatrix.VariantOrderMatrixColAmount'|trans }}</td>
+                                                    
+                                                    {# include secondGroupOption iteration for option selectors #}
+                                                    {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/selectorLayout/moreThenOneGroupOption/optionSelectors/secondGroupOptionIteration.html.twig" %}
+                                                </tr>
+                                            {% endblock %}
+                                            
+                                            {% block biloba_variant_matrix_selector_matrix_x_orientation_table_body_article_no %}
+                                                {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorShowArticleNo") %}
+                                                    <tr>
+                                                        <td scope="col">{{ 'biloba.ArticleVariantOrderMatrix.ArticleNo'|trans }}</td>
+                                                        
+                                                        {# include secondGroupOption iteration for article no #}
+                                                        {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/selectorLayout/moreThenOneGroupOption/articleNo/secondGroupOptionIteration.html.twig" %}
+                                                    </tr>
+                                                {% endif %}
+                                            {% endblock %}
+
+                                            {% block biloba_variant_matrix_selector_matrix_x_orientation_table_body_stock %}
+                                                {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+                                                    <tr>
+                                                        {# variant stock #}
+                                                        {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixShowStockQuantity") == true %}
+                                                            <td scope="col">{{ 'biloba.ArticleVariantOrderMatrix.VariantStock'|trans }}</td>
+                                                        {% endif %}
+
+                                                        {# include secondGroupOption iteration for available stock #}
+                                                        {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/selectorLayout/moreThenOneGroupOption/availableStock/secondGroupOptionIteration.html.twig" %}
+                                                    </tr>
+                                                {% endif %}
+                                            {% endblock %}
+                                            {% block biloba_variant_matrix_selector_matrix_x_orientation_table_body_variant_price %}  
+                                                {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+                                                    <tr>
+                                                        {# unit price #}
+                                                        <td scope="col">{{ 'biloba.ArticleVariantOrderMatrix.UnitPrice'|trans }}</td>
+
+                                                        {# include secondGroupOption iteration for calculated price #}
+                                                        {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/selectorLayout/moreThenOneGroupOption/calculatedPrice/secondGroupOptionIteration.html.twig" %}
+                                                    </tr>
+                                                {% endif %}
+                                            {% endblock %}  
+                                        </tbody>
+                                    {% endblock %}
+                                {% endblock %}
+                            {% endif %}
+                            </table>
+                        {% endfor %}
+                        <div>
+                            {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-button.html.twig' %}
+                        </div>
+                    </form>
+                {% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+{% elseif configuratorSettings.elements|length == 1 %}
+    {% block biloba_variant_matrix_selector_one_variant %}
+        {% set firstGroup = configuratorSettings.elements|first %}
+        
+        {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixQuantityField") == "dropdown" %}
+            {% set dropdown = true %}
+        {% else %}
+            {% set dropdown = false %}
+        {% endif %}
+        {# When displayGroupMatrix is enabled #}
+        {% if config("BilobaArticleVariantOrderMatrix.config.EnableGroupMatrix") %}
+            <div class="{% if cmsPageExists is not null and matrixPosition == "description_top" %}container {% endif %}{% if matrixPosition == "description_top" %}pos-descr-top {% endif %}biloba-variant-matrix">
+                <div {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixPosition") == "price" %} class="bit-var-matrix-pos-price"{% else %} class="bit-var-matrix-pos-descr-top" {% endif %}>
+                    <form id="biloba-variant-matrix-formular"
+                        method="post"
+                        data-biloba-add-to-cart="true"
+                        action="{{ path('frontend.checkout.line-item.add') }}"
+                        class="table-responsive">
+                        
+                        {% if config("BilobaArticleVariantOrderMatrix.config.variantMatrixOneGroupOrientation") == 'orientation_y' %}
+                            {% set caseOrientY = true %}
+                        {# if orientation_x true or everything else including field deleted #}
+                        {% else %}
+                            {% set caseOrientY = false %}
+                        {% endif %}
+
+                        {% block biloba_variant_matrix_selector_one_variant_table %}
+                            <table class="table table-borderless table-sm biloba-variant-matrix-selected-groupoptions" data-biloba-variant-matrix-table-id="{% for firstGroupOption in firstGroup.options %}{{firstGroupOption.id}}{% if not loop.last %},{% endif %}{% endfor %}" style="display: table;">
+                                {# If y_orientation selected #}
+                                {% if caseOrientY %}
+                                    {% block biloba_variant_matrix_selector_one_variant_y_orientation %}
+                                        {% block biloba_variant_matrix_selector_one_variant_y_orientation_table_head %}
+                                            <thead class="bit-variant-matrix-head">
+                                                <tr>  
+                                                    <th>
+                                                        <div class="variant-options-header">
+                                                            {{ firstGroup.translated.name }}
+                                                        </div>
+                                                    </th>
+
+                                                    {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorShowArticleNo") %}
+                                                        <th>{{ 'biloba.ArticleVariantOrderMatrix.ArticleNo'|trans }}</th>
+                                                    {% endif %}
+
+                                                    {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") && config("BilobaArticleVariantOrderMatrix.config.VariantMatrixShowStockQuantity") == true %}
+                                                        <th>{{ 'biloba.ArticleVariantOrderMatrix.VariantStock'|trans }}</th>
+                                                    {% endif %}
+                                                    {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+                                                        <th>{{ 'biloba.ArticleVariantOrderMatrix.UnitPrice'|trans }} </th>
+                                                    {% endif %}
+                                                    <th>{{ 'biloba.ArticleVariantOrderMatrix.VariantOrderMatrixColAmount'|trans }}</th>
+                                                </tr>
+                                            </thead>
+                                        {% endblock %}
+                                        {% block biloba_variant_matrix_selector_one_variant_y_orientation_table_body %}
+                                            <tbody>
+                                                {% for firstGroupOption in firstGroup.options %}
+                                                    {% set groupOptionId = null %}
+
+                                                    {% for optKey, value in variantMatrixArrayKeysAndValues %}
+                                                        {% set currentKey = firstGroupOption.id %}
+
+                                                        {% if currentKey == optKey %}
+                                                            {# variant key #}
+                                                            {% set key =  value %}
+                                                            {# option key #}
+                                                            {% set groupOptionId = currentKey %}
+                                                        {% endif %}
+                                                    {% endfor %}
+
+                                                    {% if groupOptionId != null %}
+                                                        {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+                                                        {% set currencyID = context.currency.id %}
+                                                        {% set imageChangeConfig = {
+                                                            url: url('frontend.biloba.article-variant-order-matrix.load-imagegallery', { variantId: variantMatrixArrayKeysAndValues[groupOptionId] }),
+                                                        } %}
+                                                        <tr>
+                                                            {% set optionIdentifier = [firstGroupOption.group.id, firstGroupOption.id]|join('-') %}
+                                                            {% if config("BilobaArticleVariantOrderMatrix.config.useVariantImageOnYAxis") %}
+                                                                <td scope="col">
+                                                                    <div class="variant-options media">
+                                                                        {% set media = childProduct.media.elements|sort((a, b) => a.position <=> b.position) %}
+                                                                        <img 
+                                                                            {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                                                                            src="{{ ((media|first).media.thumbnails.elements|first).url }}"
+                                                                            class="product-detail-configurator-option-image bit-variant-opt-img"
+                                                                            alt="{{ firstGroupOption.translated.name }}"
+                                                                            title="{{ firstGroupOption.translated.name }}"  />
+                                                                    </div>
+                                                                </td>
+                                                            {% else %}
+                                                                {% if firstGroupOption.group.displayType == "color" %}
+                                                                    {% block biloba_variant_matrix_selector_one_variant_y_orientation_table_body_color %}
+                                                                        {% if firstGroupOption.colorHexCode != null %}
+                                                                            <td scope="col">
+                                                                                <div class="variant-options color">
+                                                                                    <label 
+                                                                                        {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                                                                                        class="product-detail-configurator-option-label is-combinable is-display-color" 
+                                                                                        style="background-color: {{firstGroupOption.colorHexCode}}" 
+                                                                                        for="{{optionIdentifier}}" 
+                                                                                        title="{{ firstGroupOption.translated.name }}">
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        {% else %}
+                                                                            <td scope="col">
+                                                                                <div class="variant-options text">
+                                                                                    <label 
+                                                                                        {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                                                                                        class="product-detail-configurator-option-label is-combinable is-display-color" 
+                                                                                        for="{{optionIdentifier}}" 
+                                                                                        title="{{ firstGroupOption.translated.name }}">{{ firstGroupOption.translated.name }}
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        {% endif %}
+                                                                    {% endblock %}  
+                                                                {% elseif firstGroupOption.group.displayType == "media" %}
+                                                                    {% block biloba_variant_matrix_selector_one_variant_y_orientation_table_body_media %}
+
+                                                                        {% set media = firstGroupOption.media %}
+                                                                        <td scope="col">
+                                                                            {# if variant has a img src #}
+                                                                            {% if firstGroupOption.media != null %}
+                                                                                <div class="variant-options media">
+                                                                                    <img 
+                                                                                        {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                                                                                        src="{{ media|sw_encode_media_url }}"
+                                                                                        class="product-detail-configurator-option-image bit-variant-opt-img"
+                                                                                        alt="{{ firstGroupOption.translated.name }}"
+                                                                                        title="{{ firstGroupOption.translated.name }}" />
+                                                                                </div>
+                                                                            {% else %}
+                                                                                <div class="variant-options text">
+                                                                                    <label 
+                                                                                        {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                                                                                        class="product-detail-configurator-option-label is-combinable is-display-media" 
+                                                                                        for="{{optionIdentifier}}" 
+                                                                                        title="{{ firstGroupOption.translated.name }}">{{ firstGroupOption.translated.name }}
+                                                                                    </label>
+                                                                                </div>
+                                                                            {% endif %}
+                                                                        </td>
+                                                                    {% endblock %}  
+                                                                {# DisplayType == text #}
+                                                                {% else %}
+                                                                    {% block biloba_variant_matrix_selector_one_variant_y_orientation_table_body_text %}
+                                                                        <td scope="col">
+                                                                            <div class="variant-options text">
+                                                                                <label 
+                                                                                    {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                                                                                    class="product-detail-configurator-option-label is-combinable is-display-text" 
+                                                                                    for="{{optionIdentifier}}" 
+                                                                                    title="{{ firstGroupOption.translated.name }}">{{ firstGroupOption.translated.name }}
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    {% endblock %} 
+                                                                {% endif %}
+                                                            {% endif %}
+                                                            
+                                                            {% block biloba_variant_matrix_selector_one_variant_y_orientation_table_body_article_no %}
+                                                                {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorShowArticleNo") %}
+                                                                    <td>
+                                                                        <div class="variant-options articleno">
+                                                                            {{ childProduct.productNumber }}
+                                                                        </div>
+                                                                    </td>
+                                                                {% endif %}
+                                                            {% endblock %}  
+
+                                                            {% block biloba_variant_matrix_selector_one_variant_y_orientation_table_body_stock %}
+                                                                {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") 
+                                                                        && config("BilobaArticleVariantOrderMatrix.config.VariantMatrixShowStockQuantity") == true %}
+                                                                    <td>
+                                                                        <div class="variant-options stock">
+                                                                            {{childProduct.availableStock}}
+                                                                        </div>
+                                                                    </td>
+                                                                {% endif %}
+                                                            {% endblock %} 
+                                                            {% block biloba_variant_matrix_selector_one_variant_y_orientation_table_body_variant_price %}
+                                                                {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+                                                                    <td>
+                                                                        <div class="variant-options price">
+                                                                            {# include calculated price #}
+                                                                            {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/calculatedPrice.html.twig" %}
+                                                                        </div>
+                                                                    </td>
+                                                                {% endif %}
+                                                            {% endblock %} 
+
+                                                            {% if dropdown %}
+                                                                <td class="variants-options-dropdown-selector">{% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-dropdown-list.html.twig' with {'currentKey': currentKey, 'childProduct': childProduct, 'key': key} %}</td>
+                                                            {% else %}
+                                                                <td class="variants-options-input-selector">{% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-input-fields.html.twig' with {'currentKey': currentKey, 'childProduct': childProduct, 'key': key} %}</td>
+                                                            {% endif %}
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+                                        {% endblock %}
+                                    {% endblock %}
+                                {# If x_orientation selected #}
+                                {% else %}
+                                    {% block biloba_variant_matrix_selector_one_variant_x_orientation %}
+                                        {% block biloba_variant_matrix_selector_one_variant_x_orientation_table_head %}
+                                            <thead class="bit-variant-matrix-head">
+                                                <tr>
+                                                    {% if config("BilobaArticleVariantOrderMatrix.config.useVariantImageOnXAxis") %}
+                                                        {% block biloba_variant_matrix_selector_one_variant_x_orientation_table_head_variant_media %}
+                                                            <th>
+                                                                <div class="variant-options-header">
+                                                                    {{ firstGroup.translated.name }}
+                                                                </div>
+                                                            </th>
+
+                                                            {# slice displays elements (index start, length) #}
+                                                            {% for firstGroupOption in firstGroup.options|slice(subTableIndex * viewportValue, viewportValue) %}
+                                                                {% set groupOptionId = null %}
+
+                                                                {% for optKey, value in variantMatrixArrayKeysAndValues %}
+                                                                    {% set currentKey = firstGroupOption.id %}
+
+                                                                    {% if currentKey == optKey %}
+                                                                        {# variant key #}
+                                                                        {% set key =  value %}
+                                                                        {# option key #}
+                                                                        {% set groupOptionId = currentKey %}
+                                                                    {% endif %}
+                                                                {% endfor %}
+
+                                                                {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+                                                                {% set imageChangeConfig = {
+                                                                    url: url('frontend.biloba.article-variant-order-matrix.load-imagegallery', { variantId: variantMatrixArrayKeysAndValues[groupOptionId] }),
+                                                                } %}
+                                                                <th scope="col">
+                                                                    <div class="variant-options media">
+                                                                        {% set media = childProduct.media.elements|sort((a, b) => a.position <=> b.position) %}
+                                                                        <img
+                                                                            {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %} 
+                                                                            src="{{ ((media|first).media.thumbnails.elements|first).url }}"
+                                                                            class="product-detail-configurator-option-image bit-variant-opt-img"
+                                                                            alt="{{ firstGroupOption.translated.name }}"
+                                                                            title="{{ firstGroupOption.translated.name }}" />
+                                                                    </div>
+                                                                </th>
+                                                            {% endfor %}
+                                                        {% endblock %}
+                                                    {% else %}
+                                                        {% if firstGroup.displayType == "color" %}
+                                                            {% block biloba_variant_matrix_selector_one_variant_x_orientation_table_head_color %}
+                                                                <th>
+                                                                    <div class="variant-options-header">
+                                                                        {{ firstGroup.translated.name }}
+                                                                    </div>
+                                                                </th>
+                                                                {# slice displays elements (index start, length) #}
+                                                                {% for firstGroupOption in firstGroup.options|slice(subTableIndex * viewportValue, viewportValue) %}
+                                                                    {% set optionIdentifier = [firstGroupOption.group.id, firstGroupOption.id]|join('-') %}
+                                                                    {% set imageChangeConfig = {
+                                                                        url: url('frontend.biloba.article-variant-order-matrix.load-imagegallery', { variantId: variantMatrixArrayKeysAndValues[firstGroupOption.id] }),
+                                                                    } %}
+                                                                    
+                                                                    {% if firstGroupOption.colorHexCode != null %}
+                                                                        <th scope="col">
+                                                                            <div class="variant-options color">
+                                                                                <label 
+                                                                                    {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                                                                                    class="product-detail-configurator-option-label is-combinable is-display-color" 
+                                                                                    style="background-color: {{ firstGroupOption.colorHexCode }}" 
+                                                                                    for="{{ optionIdentifier }}" 
+                                                                                    title="{{ firstGroupOption.translated.name }}">
+                                                                                </label>
+                                                                            </div>
+                                                                        </th>
+                                                                    {% else %}
+                                                                        <th scope="col">{{ firstGroupOption.translated.name }}</th>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            {% endblock %}
+                                                        {% elseif firstGroup.displayType == "media" %}
+                                                            {% block biloba_variant_matrix_selector_one_variant_x_orientation_table_head_media %}
+                                                                <th>
+                                                                    <div class="variant-options-header">
+                                                                        {{ firstGroup.translated.name }}
+                                                                    </div>
+                                                                </th>
+                                                                {# slice displays elements (index start, length) #}
+                                                                {% for firstGroupOption in firstGroup.options|slice(subTableIndex * viewportValue, viewportValue) %}
+                                                                    {% set media = firstGroupOption.media %}
+                                                                    {% set imageChangeConfig = {
+                                                                        url: url('frontend.biloba.article-variant-order-matrix.load-imagegallery', { variantId: variantMatrixArrayKeysAndValues[firstGroupOption.id] }),
+                                                                    } %}
+                                                                    <th scope="col">
+                                                                        {% if firstGroupOption.media != null %}
+                                                                            <div class="variant-options media">
+                                                                                <img
+                                                                                    {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %} 
+                                                                                    src="{{ media|sw_encode_media_url }}"
+                                                                                    class="product-detail-configurator-option-image bit-variant-opt-img"
+                                                                                    alt="{{ firstGroupOption.translated.name }}"
+                                                                                    title="{{ firstGroupOption.translated.name }}" />
+                                                                            </div>
+                                                                        {% else %}
+                                                                            <div class="variant-options text">
+                                                                                <label 
+                                                                                    {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                                                                                    class="product-detail-configurator-option-label is-combinable is-display-media" 
+                                                                                    for="{{ optionIdentifier }}" 
+                                                                                    title="{{ firstGroupOption.translated.name }}">{{ firstGroupOption.translated.name }}
+                                                                                </label>
+                                                                            </div>
+                                                                        {% endif %}
+                                                                    </th>
+                                                                {% endfor %}
+                                                            {% endblock %}
+                                                        {# DiplayType = text #}
+                                                        {% else %}
+                                                            {% block biloba_variant_matrix_selector_one_variant_x_orientation_table_head_text %}
+                                                                <th>{{ firstGroup.translated.name }}</th>
+                                                                {# slice displays elements (index start, length) #}
+                                                                {% for firstGroupOption in firstGroup.options|slice(subTableIndex * viewportValue, viewportValue) %}
+                                                                    {% set imageChangeConfig = {
+                                                                        url: url('frontend.biloba.article-variant-order-matrix.load-imagegallery', { variantId: variantMatrixArrayKeysAndValues[firstGroupOption.id] }),
+                                                                    } %}
+                                                                    <th scope="col">
+                                                                        <div class="variant-options text">
+                                                                            <label 
+                                                                                {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorChangeImageOnButtons") %}data-attribute-change-image="true" data-attribute-change-image-options="{{ imageChangeConfig|json_encode }}"{% endif %}
+                                                                                class="product-detail-configurator-option-label is-combinable is-display-media" 
+                                                                                for="{{ optionIdentifier }}" 
+                                                                                title="{{ firstGroupOption.translated.name }}">{{ firstGroupOption.translated.name }}
+                                                                            </label>
+                                                                        </div>
+                                                                    </th>
+                                                                {% endfor %}
+                                                            {% endblock %}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </tr>
+                                            </thead>
+                                        {% endblock %} 
+
+                                        {% block biloba_variant_matrix_selector_one_variant_x_orientation_table_body %}
+                                            <tbody>
+                                                {% block biloba_variant_matrix_selector_one_variant_x_orientation_table_body_amount %}
+                                                    <tr>
+                                                        <td scope="col">{{ 'biloba.ArticleVariantOrderMatrix.VariantOrderMatrixColAmount'|trans }}</td>
+                                                        
+                                                        {# include firstGroupOption iteration for option selectors #}
+                                                        {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/selectorLayout/oneGroupOption/optionSelectors/firstGroupOptionIteration.html.twig" %}
+                                                    </tr>
+                                                {% endblock %} 
+
+                                                {% block biloba_variant_matrix_selector_one_variant_x_orientation_table_body_article_no %}
+                                                    {% if config("BilobaArticleVariantOrderMatrix.config.layoutSelectorShowArticleNo") %}
+                                                        <tr>
+                                                            <td scope="col">{{ 'biloba.ArticleVariantOrderMatrix.ArticleNo'|trans }}</td>
+                                                            
+                                                            {# include firstGroupOption iteration for option selectors #}
+                                                            {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/selectorLayout/oneGroupOption/articleNo/firstGroupOptionIteration.html.twig" %}
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endblock %}  
+
+                                                {% block biloba_variant_matrix_selector_one_variant_x_orientation_table_body_stock %}
+                                                    {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+                                                        <tr>
+                                                            {% if config("BilobaArticleVariantOrderMatrix.config.VariantMatrixShowStockQuantity") == true %}
+                                                                <td scope="col">{{ 'biloba.ArticleVariantOrderMatrix.VariantStock'|trans }}</td>
+                                                            {% endif %}
+
+                                                            {# include firstGroupOption iteration for available stock #}
+                                                            {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/selectorLayout/oneGroupOption/availableStock/firstGroupOptionIteration.html.twig" %}
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endblock %} 
+                                                {% block biloba_variant_matrix_selector_one_variant_x_orientation_table_body_variant_price %}
+                                                    {% if context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.hidePriceForCustomerIds") %}
+                                                        <tr>
+                                                            <td scope="col">{{ 'biloba.ArticleVariantOrderMatrix.UnitPrice'|trans }}</td>
+                                                            {% for firstGroupOption in firstGroup.options %}
+                                                                {% set groupOptionId = null %}
+
+                                                                {% for optKey, value in variantMatrixArrayKeysAndValues %}
+                                                                    {% set currentKey = firstGroupOption.id %}
+
+                                                                    {% if currentKey == optKey %}
+                                                                        {# variant key #}
+                                                                        {% set key =  value %}
+                                                                        {# option key #}
+                                                                        {% set groupOptionId = currentKey %}
+                                                                    {% endif %}
+                                                                {% endfor %}
+
+                                                                {% set imageChangeConfig = {
+                                                                    url: url('frontend.biloba.article-variant-order-matrix.load-imagegallery', { variantId: variantMatrixArrayKeysAndValues[groupOptionId] }),
+                                                                } %}
+
+                                                                {% if groupOptionId != null %}
+                                                                    {% set childProduct = children[variantMatrixArrayKeysAndValues[groupOptionId]] %}
+                                                                    {% set imageChangeConfig = {
+                                                                        url: url('frontend.biloba.article-variant-order-matrix.load-imagegallery', { variantId: variantMatrixArrayKeysAndValues[groupOptionId] }),
+                                                                    } %}
+
+                                                                    <td>
+                                                                        {# include calculated price #}
+                                                                        {% sw_include "@Storefront/storefront/biloba/article-variant-order-matrix/includes/calculatedPrice.html.twig" %}
+                                                                    </td>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endblock %} 
+                                            </tbody>
+                                        {% endblock %} 
+                                    {% endblock %} 
+                                {% endif %}
+                            </table>
+                        {% endblock %}
+                    </form>
+                </div>
+                <div>
+                    {% sw_include '@Storefront/storefront/biloba/article-variant-order-matrix/article-variant-order-matrix-button.html.twig' %}
+                </div>
+            </div>
+        {# EnableGroupMatrix deactivated #}
+        {% else %}
+            
+        {% endif %}
+    {% endblock %}
+{% else %}
+    {# More than two variants , also layout deactivated #}
+{% endif %}

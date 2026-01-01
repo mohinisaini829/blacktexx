@@ -1,0 +1,89 @@
+{% block sw_cms_element_netzp_powerpack6_testimonial_config %}
+    <div class="sw-cms-el-config-netzp-powerpack6-testimonial">
+        <sw-cms-mapping-field :label="$tc('sw-cms.netzp-powerpack6.elements.testimonial.config.image')"
+                              valueTypes="entity"
+                              entity="media"
+                              v-model:config="element.config.media">
+            <sw-media-upload-v2 variant="regular"
+                                :uploadTag="uploadTag"
+                                :source="previewSource"
+                                :allowMultiSelect="false"
+                                :defaultFolder="cmsPageState.pageEntityName"
+                                :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                                @media-upload-sidebar-open="onOpenMediaModal"
+                                @media-upload-remove-image="onImageRemove" />
+
+            <template #preview="{ demoValue }">
+                <div class="sw-cms-el-config-testimonial__mapping-preview">
+                    <img v-if="demoValue.url" :src="demoValue.url" alt="">
+
+                    <sw-alert class="sw-cms-el-config-testimonial__preview-info" variant="info" v-else>
+                        {{ $tc('sw-cms.detail.label.mappingEmptyPreview') }}
+                    </sw-alert>
+                </div>
+            </template>
+        </sw-cms-mapping-field>
+
+        <sw-upload-listener :uploadTag="uploadTag" autoUpload @media-upload-finish="onImageUpload" />
+
+        <sw-cms-mapping-field v-model:config="element.config.title"
+                              :label="$tc('sw-cms.netzp-powerpack6.elements.testimonial.config.title')"
+                              value-types="string">
+            <sw-text-field v-model:value="element.config.title.value" />
+
+            <template #preview="{ demoValue }">
+                <div class="sw-cms-el-config-text__mapping-preview">
+                    <div v-html="$sanitize(demoValue)"></div>
+                </div>
+            </template>
+        </sw-cms-mapping-field>
+
+        <sw-cms-mapping-field v-model:config="element.config.contents"
+                              :label="$tc('sw-cms.netzp-powerpack6.elements.testimonial.config.contents')"
+                              value-types="string">
+            <sw-text-editor :allow-inline-data-mapping="true"
+                            v-model:value="element.config.contents.value" />
+
+            <template #preview="{ demoValue }">
+                <div class="sw-cms-el-config-text__mapping-preview">
+                    <div v-html="$sanitize(demoValue)"></div>
+                </div>
+            </template>
+        </sw-cms-mapping-field>
+
+        <sw-cms-mapping-field v-model:config="element.config.name"
+                              :label="$tc('sw-cms.netzp-powerpack6.elements.testimonial.config.name')"
+                              value-types="string">
+            <sw-text-field v-model:value="element.config.name.value" />
+
+            <template #preview="{ demoValue }">
+                <div class="sw-cms-el-config-text__mapping-preview">
+                    <div v-html="$sanitize(demoValue)"></div>
+                </div>
+            </template>
+        </sw-cms-mapping-field>
+
+        <sw-cms-mapping-field v-model:config="element.config.name2"
+                              :label="$tc('sw-cms.netzp-powerpack6.elements.testimonial.config.name2')"
+                              value-types="string">
+            <sw-text-field v-model:value="element.config.name2.value" />
+
+            <template #preview="{ demoValue }">
+                <div class="sw-cms-el-config-text__mapping-preview">
+                    <div v-html="$sanitize(demoValue)"></div>
+                </div>
+            </template>
+        </sw-cms-mapping-field>
+
+        <sw-media-modal-v2 variant="full"
+                           v-if="mediaModalIsOpen"
+                           :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                           :entityContext="cmsPageState.entityName"
+                           :allowMultiSelect="false"
+                           :initialFolderId="cmsPageState.defaultMediaFolderId"
+                           @media-upload-remove-image="onImageRemove"
+                           @media-modal-selection-change="onSelectionChanges"
+                           @modal-close="onCloseModal">
+        </sw-media-modal-v2>
+    </div>
+{% endblock %}

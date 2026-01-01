@@ -1,0 +1,48 @@
+<div class="netzp-responsive-buttons" v-if="model && getCustomFields">
+    <div class="label" @click="swapColors()">
+        {{ $tc('sw-cms.netzp-powerpack6.colorGradient.label') }}
+    </div>
+    <sw-container columns="1fr 1fr .4fr" gap="5px">
+        <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.colorGradient.color1')"
+                        v-model:value="model.customFields.netzp_pp['color1']" colorOutput="hex" :zIndex="1001" :alpha="false">
+        </sw-colorpicker>
+        <sw-colorpicker :label="$tc('sw-cms.netzp-powerpack6.colorGradient.color2')"
+                        v-model:value="model.customFields.netzp_pp['color2']" colorOutput="hex" :zIndex="1001" :alpha="false">
+        </sw-colorpicker>
+        <sw-number-field numberType="int" :min="-180" :max="180"
+                         :label="$tc('sw-cms.netzp-powerpack6.colorGradient.colorAngle')"
+                         v-model:value="model.customFields.netzp_pp['colorAngle']" />
+    </sw-container>
+
+    <div class="label">
+        {{ $tc('sw-cms.netzp-powerpack6.dates.label') }}
+    </div>
+    <sw-select-rule-create :placeholder="$tc('sw-cms.netzp-powerpack6.rule.label')"
+                           :rule-id="model.customFields.netzp_pp['ruleId']"
+                           @save-rule="saveRule"
+                           @dismiss-rule="dismissRule" />
+
+    <sw-container columns="1fr 1fr" gap="5px">
+        <sw-datepicker dateType="date" size="default"
+                       :label="$t('sw-cms.netzp-powerpack6.dates.showFrom')"
+                       v-model:value="model.customFields.netzp_pp['showFrom']" />
+
+        <sw-datepicker dateType="date" size="default"
+                       :label="$t('sw-cms.netzp-powerpack6.dates.showUntil')"
+                       v-model:value="model.customFields.netzp_pp['showUntil']" />
+    </sw-container>
+
+    <div @click="toggleAll(true)" class="label">{{ $tc('sw-cms.netzp-powerpack6.configResponsive') }}</div>
+    <div v-if="noBreakpointSelected" class="label warning">{{ $tc('sw-cms.netzp-powerpack6.configResponsiveNoBreakpoint') }}</div>
+    <sw-container columns="1fr 1fr 1fr 1fr 1fr" gap="0px" v-if="model.customFields && model.customFields.netzp_pp">
+        <sw-switch-field noMarginTop v-model:value="model.customFields.netzp_pp['xs']" label="XS" />
+        <sw-switch-field noMarginTop v-model:value="model.customFields.netzp_pp['sm']" label="SM" />
+        <sw-switch-field noMarginTop v-model:value="model.customFields.netzp_pp['md']" label="MD" />
+        <sw-switch-field noMarginTop v-model:value="model.customFields.netzp_pp['lg']" label="LG" />
+        <sw-switch-field noMarginTop v-model:value="model.customFields.netzp_pp['xl']" label="XL" />
+    </sw-container>
+    <div class="mb-0" v-if="breakpointsSelected">
+        <sw-icon name="regular-exclamation-triangle" />
+        <small v-html="$tc('sw-cms.netzp-powerpack6.configResponsiveDeprecation')" />
+    </div>
+</div>

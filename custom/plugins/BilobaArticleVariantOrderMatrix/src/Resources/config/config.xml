@@ -1,0 +1,1861 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+  <card>
+    <title>Article Variant Order Matrix</title>
+    <title lang="de-DE">Artikel-Varianten-Bestellmatrix</title>
+    <title lang="es-ES">Matriz de orden de variantes de artículos</title>
+    <title lang="fi-FI">Artiklan muunnosjärjestysmatriisi</title>
+    <title lang="fr-FR">Article Variante Matrice de commande</title>
+    <title lang="it-IT">Matrice d'ordine delle varianti di articolo</title>
+    <title lang="nb-NO">Matrise for rekkefølge av artikkelvarianter</title>
+    <title lang="nl-NL">Matrix artikelvarianten</title>
+    <title lang="pl-PL">Matryca kolejności wariantów artykułów</title>
+    <title lang="sv-SE">Artikel Variant Ordermatris</title>
+    <title lang="bg-BG">Матрица за поръчка на варианти на артикули</title>
+    <title lang="cs-CZ">Matice pořadí variant článku</title>
+    <title lang="pt-PT">Matriz de ordem de variantes de artigos</title>
+    <title lang="hr-HR">Cikkváltozat sorrendmátrix</title>
+    <title lang="tr-TR">Makale Varyant Sıralama Matrisi</title>
+    <title lang="da-DK">Matrix for rækkefølge af artikelvarianter</title>
+    <title lang="ru-RU">Матрица заказов вариантов статей</title>
+    <title lang="lv-LV">Izstrādājumu variantu secības matrica</title>
+    <title lang="id-ID">Matriks Urutan Varian Artikel</title>
+    <title lang="el-GR">Πίνακας παραγγελίας παραλλαγής άρθρου</title>
+    <title lang="de-CH">Artikel-Varianten-Bestellmatrix</title>
+    <title>Article Variant Order Matrix Configuration</title>
+    <title lang="de-DE">Artikelvariante Bestellmatrix Konfiguration</title>
+    <title lang="es-ES">Artículo Variante Orden Matriz Configuración</title>
+    <title lang="fi-FI">Artikkeli Vaihtoehto Tilausmatriisi Konfiguraatio</title>
+    <title lang="fr-FR">Article Variante Commande Matrice Configuration</title>
+    <title lang="it-IT">Articolo Variante Ordine Matrice Configurazione</title>
+    <title lang="nb-NO">Artikkelvariant Bestillingsmatrise Konfigurasjon</title>
+    <title lang="nl-NL">Artikel Variant Volgorde Matrix Configuratie</title>
+    <title lang="pl-PL">Wariant artykułu Zamówienie Konfiguracja matrycy</title>
+    <title lang="sv-SE">Artikel Variant Order Matris Konfiguration</title>
+    <title lang="bg-BG">Член Вариант на поръчката Конфигурация на матрицата</title>
+    <title lang="cs-CZ">Konfigurace matice pořadí variant článku</title>
+    <title lang="pt-PT">Artigo Variante Ordem Matriz Configuração</title>
+    <title lang="hr-HR">Cikkváltozat Rendelési mátrix konfiguráció</title>
+    <title lang="tr-TR">Makale Varyant Sipariş Matrisi Konfigürasyonu</title>
+    <title lang="da-DK">Artikel Variant Ordre Matrix Konfiguration</title>
+    <title lang="ru-RU">Артикул Вариант Заказ Матрица Конфигурация</title>
+    <title lang="lv-LV">Izstrādājuma variants Pasūtījuma matricas konfigurācija</title>
+    <title lang="id-ID">Konfigurasi Matriks Urutan Varian Artikel</title>
+    <title lang="el-GR">Άρθρο Παραλλαγή Παραγγελία Διαμόρφωση πίνακα παραγγελιών</title>
+    <title lang="de-CH">Artikelvariante Bestellmatrix Konfiguration</title>
+    <input-field type="bool">
+      <name>variantMatrixEnabled</name>
+      <label>Variant matrix active</label>
+      <label lang="de-DE">Variantenmatrix aktiv</label>
+      <label lang="es-ES">Variante matriz activa</label>
+      <label lang="fi-FI">Vaihtelumatriisi aktiivinen</label>
+      <label lang="fr-FR">Variante matrice active</label>
+      <label lang="it-IT">Matrice variante attiva</label>
+      <label lang="nb-NO">Variantmatrise aktiv</label>
+      <label lang="nl-NL">Variant matrix actief</label>
+      <label lang="pl-PL">Aktywna matryca wariantu</label>
+      <label lang="sv-SE">Variantmatris aktiv</label>
+      <label lang="bg-BG">Активна матрица на варианта</label>
+      <label lang="cs-CZ">Varianta matice aktivní</label>
+      <label lang="pt-PT">Matriz de variantes ativa</label>
+      <label lang="hr-HR">Variáns mátrix aktív</label>
+      <label lang="tr-TR">Varyant matris aktif</label>
+      <label lang="da-DK">Variantmatrix aktiv</label>
+      <label lang="ru-RU">Вариант матрицы активный</label>
+      <label lang="lv-LV">Variantu matrica aktīva</label>
+      <label lang="id-ID">Matriks varian aktif</label>
+      <label lang="el-GR">Παραλλακτικός πίνακας ενεργός</label>
+      <label lang="de-CH">Variantenmatrix aktiv</label>
+      <helpText>Cannot be used with custom products, please deactivate the variant matrix for the relevant product.</helpText>
+      <helpText lang="de-DE">Kann nicht mit kundenspezifischen Produkten verwendet werden, bitte deaktivieren Sie die Variantenmatrix für das entsprechende Produkt.</helpText>
+      <helpText lang="es-ES">No se puede utilizar con productos personalizados; desactive la matriz de variantes del producto en cuestión.</helpText>
+      <helpText lang="fi-FI">Ei voida käyttää mukautettujen tuotteiden kanssa, ota kyseisen tuotteen varianttimatriisi pois käytöstä.</helpText>
+      <helpText lang="fr-FR">Ne peut être utilisé avec des produits personnalisés, veuillez désactiver la matrice de variantes pour le produit concerné.</helpText>
+      <helpText lang="it-IT">Non può essere utilizzato con prodotti personalizzati; disattivare la matrice di varianti per il prodotto in questione.</helpText>
+      <helpText lang="nb-NO">Kan ikke brukes med egendefinerte produkter, vennligst deaktiver variantmatrisen for det aktuelle produktet.</helpText>
+      <helpText lang="nl-NL">Kan niet worden gebruikt met aangepaste producten. Deactiveer de variantenmatrix voor het betreffende product.</helpText>
+      <helpText lang="pl-PL">Nie można używać z produktami niestandardowymi, należy dezaktywować matrycę wariantów dla odpowiedniego produktu.</helpText>
+      <helpText lang="sv-SE">Kan inte användas med anpassade produkter, vänligen avaktivera variantmatrisen för den relevanta produkten.</helpText>
+      <helpText lang="bg-BG">Не може да се използва с персонализирани продукти, моля, деактивирайте матрицата на вариантите за съответния продукт.</helpText>
+      <helpText lang="cs-CZ">Nelze použít s vlastními produkty, deaktivujte prosím matici variant pro příslušný produkt.</helpText>
+      <helpText lang="pt-PT">Não pode ser utilizado com produtos personalizados, desativar a matriz de variantes para o produto em causa.</helpText>
+      <helpText lang="hr-HR">Egyedi termékekkel nem használható, kérjük, kapcsolja ki az adott termék variánsmátrixát.</helpText>
+      <helpText lang="tr-TR">Özel ürünlerle kullanılamaz, lütfen ilgili ürün için varyant matrisini devre dışı bırakın.</helpText>
+      <helpText lang="da-DK">Kan ikke bruges med brugerdefinerede produkter, deaktiver venligst variantmatrixen for det relevante produkt.</helpText>
+      <helpText lang="ru-RU">Невозможно использовать с пользовательскими продуктами, пожалуйста, отключите матрицу вариантов для соответствующего продукта.</helpText>
+      <helpText lang="lv-LV">Nevar izmantot ar pielāgotiem produktiem, lūdzu, deaktivizējiet attiecīgā produkta variantu matricu.</helpText>
+      <helpText lang="id-ID">Tidak dapat digunakan dengan produk khusus, harap nonaktifkan matriks varian untuk produk yang bersangkutan.</helpText>
+      <helpText lang="el-GR">Δεν μπορεί να χρησιμοποιηθεί με προσαρμοσμένα προϊόντα, παρακαλούμε απενεργοποιήστε τον πίνακα παραλλαγών για το σχετικό προϊόν.</helpText>
+      <helpText lang="de-CH">Kann nicht mit kundenspezifischen Produkten verwendet werden, bitte deaktivieren Sie die Variantenmatrix für das entsprechende Produkt.</helpText>
+      <defaultValue>true</defaultValue>
+    </input-field>
+    <component name="sw-entity-multi-id-select">
+      <name>disableMatrixForCustomersIds</name>
+      <entity>customer_group</entity>
+      <label>Hide matrix for following customer groups</label>
+      <label lang="de-DE">Matrix für folgende Kundengruppen ausblenden</label>
+      <label lang="es-ES">Matriz de ocultación para los siguientes grupos de clientes</label>
+      <label lang="fi-FI">Piilotaulukko seuraaville asiakasryhmille</label>
+      <label lang="fr-FR">Masquer la matrice pour les groupes de clients suivants</label>
+      <label lang="it-IT">Matrice di occultamento per i seguenti gruppi di clienti</label>
+      <label lang="nb-NO">Skjul matrise for følgende kundegrupper</label>
+      <label lang="nl-NL">Verberg matrix voor volgende klantgroepen</label>
+      <label lang="pl-PL">Ukryj matrycę dla następujących grup klientów</label>
+      <label lang="sv-SE">Dölj matris för följande kundgrupper</label>
+      <label lang="bg-BG">Скриване на матрицата за следните групи клиенти</label>
+      <label lang="cs-CZ">Skrýt matici pro následující skupiny zákazníků</label>
+      <label lang="pt-PT">Ocultar a matriz para os seguintes grupos de clientes</label>
+      <label lang="hr-HR">Mátrix elrejtése a következő ügyfélcsoportok számára</label>
+      <label lang="tr-TR">Aşağıdaki müşteri grupları için matrisi gizle</label>
+      <label lang="da-DK">Skjul matrix for følgende kundegrupper</label>
+      <label lang="ru-RU">Скрыть матрицу для следующих групп клиентов</label>
+      <label lang="lv-LV">Slēpt matricu šādām klientu grupām</label>
+      <label lang="id-ID">Sembunyikan matriks untuk grup pelanggan berikut</label>
+      <label lang="el-GR">Πίνακας απόκρυψης για τις ακόλουθες ομάδες πελατών</label>
+      <label lang="de-CH">Matrix für folgende Kundengruppen ausblenden</label>
+    </component>
+    <input-field type="single-select">
+      <name>variantMatrixListingEnabled</name>
+      <label>Variants matrix active in product listing</label>
+      <label lang="de-DE">Variantenmatrix aktiv im Produktverzeichnis</label>
+      <label lang="es-ES">Matriz de variantes activa en el listado de productos</label>
+      <label lang="fi-FI">Vaihtoehtomatriisi aktiivinen tuoteluettelossa</label>
+      <label lang="fr-FR">Matrice des variantes active dans la liste des produits</label>
+      <label lang="it-IT">Matrice delle varianti attiva nell'elenco dei prodotti</label>
+      <label lang="nb-NO">Variantmatrise aktiv i produktlisten</label>
+      <label lang="nl-NL">Variantenmatrix actief in productvermelding</label>
+      <label lang="pl-PL">Matryca wariantów aktywna na liście produktów</label>
+      <label lang="sv-SE">Variantmatris aktiv i produktlistan</label>
+      <label lang="bg-BG">Матрица на вариантите, активна в списъка с продукти</label>
+      <label lang="cs-CZ">Matice variant aktivní v seznamu produktů</label>
+      <label lang="pt-PT">Matriz de variantes ativa na listagem de produtos</label>
+      <label lang="hr-HR">A terméklistában aktív változatok mátrixa</label>
+      <label lang="tr-TR">Ürün listelemede aktif olan varyant matrisi</label>
+      <label lang="da-DK">Variantmatrix aktiv i produktlisten</label>
+      <label lang="ru-RU">Матрица вариантов активна в листинге продуктов</label>
+      <label lang="lv-LV">Variantu matrica, kas ir aktīva produktu sarakstā</label>
+      <label lang="id-ID">Matriks varian aktif dalam daftar produk</label>
+      <label lang="el-GR">Πίνακας παραλλαγών ενεργός στη λίστα προϊόντων</label>
+      <label lang="de-CH">Variantenmatrix aktiv im Produktverzeichnis</label>
+      <helpText>Will be displayed as an additional button with overlay in the product listing or directly in the listing</helpText>
+      <helpText lang="de-DE">Wird als zusätzliche Schaltfläche mit Overlay in der Produktliste oder direkt in der Liste angezeigt</helpText>
+      <helpText lang="es-ES">Se mostrará como un botón adicional con superposición en el listado de productos o directamente en el listado</helpText>
+      <helpText lang="fi-FI">Näytetään lisäpainikkeena, joka on päällekkäin tuoteluettelossa tai suoraan luettelossa.</helpText>
+      <helpText lang="fr-FR">Sera affiché sous forme de bouton supplémentaire dans la liste des produits ou directement dans la liste.</helpText>
+      <helpText lang="it-IT">Verrà visualizzato come pulsante aggiuntivo con sovrimpressione nell'elenco dei prodotti o direttamente nell'elenco.</helpText>
+      <helpText lang="nb-NO">Vises som en ekstra knapp med overlegg i produktoppføringen eller direkte i produktoppføringen</helpText>
+      <helpText lang="nl-NL">Wordt weergegeven als een extra knop met overlay in de productvermelding of direct in de vermelding</helpText>
+      <helpText lang="pl-PL">Będzie wyświetlany jako dodatkowy przycisk z nakładką na liście produktów lub bezpośrednio na liście.</helpText>
+      <helpText lang="sv-SE">Visas som en extra knapp med överlagring i produktlistan eller direkt i listan</helpText>
+      <helpText lang="bg-BG">Ще се показва като допълнителен бутон с наслагване в списъка с продукти или директно в списъка</helpText>
+      <helpText lang="cs-CZ">Zobrazí se jako další tlačítko s překryvem ve výpisu produktu nebo přímo ve výpisu.</helpText>
+      <helpText lang="pt-PT">Será apresentado como um botão adicional com sobreposição na listagem de produtos ou diretamente na listagem</helpText>
+      <helpText lang="hr-HR">Megjelenik egy további gombként a terméklistában vagy közvetlenül a listában.</helpText>
+      <helpText lang="tr-TR">Ürün listesinde yer paylaşımlı ek bir düğme olarak veya doğrudan listede görüntülenecektir</helpText>
+      <helpText lang="da-DK">Vil blive vist som en ekstra knap med overlay i produktlisten eller direkte i listen</helpText>
+      <helpText lang="ru-RU">Будет отображаться в виде дополнительной кнопки с наложением в листинге товаров или непосредственно в листинге</helpText>
+      <helpText lang="lv-LV">Tiks parādīts kā papildu poga ar pārklājumu produktu sarakstā vai tieši sarakstā.</helpText>
+      <helpText lang="id-ID">Akan ditampilkan sebagai tombol tambahan dengan hamparan di daftar produk atau langsung di daftar</helpText>
+      <helpText lang="el-GR">Θα εμφανίζεται ως πρόσθετο κουμπί με επικάλυψη στην καταχώριση του προϊόντος ή απευθείας στην καταχώριση.</helpText>
+      <helpText lang="de-CH">Wird als zusätzliche Schaltfläche mit Overlay in der Produktliste oder direkt in der Liste angezeigt</helpText>
+      <defaultValue>none</defaultValue>
+      <options>
+        <option>
+          <id>none</id>
+          <name>No display in product listing</name>
+          <name lang="de-DE">Keine Anzeige in der Produktliste</name>
+          <name lang="es-ES">No se muestra en el listado de productos</name>
+          <name lang="fi-FI">Ei näyttöä tuoteluettelossa</name>
+          <name lang="fr-FR">Pas d'affichage dans la liste des produits</name>
+          <name lang="it-IT">Nessuna visualizzazione nell'elenco dei prodotti</name>
+          <name lang="nb-NO">Ingen visning i produktlisten</name>
+          <name lang="nl-NL">Geen weergave in productlijst</name>
+          <name lang="pl-PL">Brak wyświetlania na liście produktów</name>
+          <name lang="sv-SE">Ingen visning i produktlistan</name>
+          <name lang="bg-BG">Няма показване в списъка с продукти</name>
+          <name lang="cs-CZ">Žádné zobrazení ve výpisu produktů</name>
+          <name lang="pt-PT">Sem apresentação na listagem de produtos</name>
+          <name lang="hr-HR">Nincs megjelenítés a terméklistában</name>
+          <name lang="tr-TR">Ürün listesinde gösterilmiyor</name>
+          <name lang="da-DK">Ingen visning i produktlisten</name>
+          <name lang="ru-RU">Не отображается в листинге товаров</name>
+          <name lang="lv-LV">Nav rādīšanas produktu sarakstā</name>
+          <name lang="id-ID">Tidak ada tampilan dalam daftar produk</name>
+          <name lang="el-GR">Δεν εμφανίζεται στη λίστα προϊόντων</name>
+          <name lang="de-CH">Keine Anzeige in der Produktliste</name>
+        </option>
+        <option>
+          <id>overlay</id>
+          <name>Display as extra Overlay</name>
+          <name lang="de-DE">Anzeige als zusätzliches Overlay</name>
+          <name lang="es-ES">Mostrar como superposición adicional</name>
+          <name lang="fi-FI">Näytä ylimääräisenä Overlay</name>
+          <name lang="fr-FR">Affichage en superposition supplémentaire</name>
+          <name lang="it-IT">Visualizzazione come sovrapposizione extra</name>
+          <name lang="nb-NO">Vis som ekstra overlegg</name>
+          <name lang="nl-NL">Weergeven als extra overlay</name>
+          <name lang="pl-PL">Wyświetlanie jako dodatkowa nakładka</name>
+          <name lang="sv-SE">Visa som extra overlay</name>
+          <name lang="bg-BG">Показване като допълнително наслагване</name>
+          <name lang="cs-CZ">Zobrazení jako extra překryv</name>
+          <name lang="pt-PT">Apresentar como sobreposição extra</name>
+          <name lang="hr-HR">Megjelenítés extra overlay-ként</name>
+          <name lang="tr-TR">Ekstra Kaplama olarak görüntüle</name>
+          <name lang="da-DK">Vis som ekstra overlay</name>
+          <name lang="ru-RU">Отображение в виде дополнительного наложения</name>
+          <name lang="lv-LV">Rādīt kā papildu pārklājumu</name>
+          <name lang="id-ID">Tampilan sebagai Hamparan ekstra</name>
+          <name lang="el-GR">Εμφάνιση ως επιπλέον επικάλυψη</name>
+          <name lang="de-CH">Anzeige als zusätzliches Overlay</name>
+        </option>
+        <option>
+          <id>inline_standard</id>
+          <name>Display inline as default layout in the listing</name>
+          <name lang="de-DE">Inline als Standardlayout in der Auflistung anzeigen</name>
+          <name lang="es-ES">Mostrar inline como diseño por defecto en el listado</name>
+          <name lang="fi-FI">Näytä rivissä oletusasetteluna listauksessa</name>
+          <name lang="fr-FR">Afficher en ligne comme mise en page par défaut dans la liste</name>
+          <name lang="it-IT">Visualizzare inline come layout predefinito nell'elenco</name>
+          <name lang="nb-NO">Vis inline som standardoppsett i oppføringen</name>
+          <name lang="nl-NL">Inline weergeven als standaard lay-out in de listing</name>
+          <name lang="pl-PL">Wyświetlaj inline jako domyślny układ na liście</name>
+          <name lang="sv-SE">Visa inline som standardlayout i annonsen</name>
+          <name lang="bg-BG">Показване на inline като оформление по подразбиране в списъка</name>
+          <name lang="cs-CZ">Zobrazení inline jako výchozího rozvržení ve výpisu</name>
+          <name lang="pt-PT">Apresentar em linha como esquema predefinido na listagem</name>
+          <name lang="hr-HR">Inline megjelenítés alapértelmezett elrendezésként a listában</name>
+          <name lang="tr-TR">Listelemede varsayılan düzen olarak satır içi görüntüle</name>
+          <name lang="da-DK">Vis inline som standardlayout i listen</name>
+          <name lang="ru-RU">Отображение в листинге в качестве макета по умолчанию</name>
+          <name lang="lv-LV">Rādīt inline kā noklusējuma izkārtojumu sarakstā</name>
+          <name lang="id-ID">Tampilkan sebaris sebagai tata letak default dalam daftar</name>
+          <name lang="el-GR">Εμφάνιση σε γραμμή ως προεπιλεγμένη διάταξη στην καταχώριση</name>
+          <name lang="de-CH">Inline als Standardlayout in der Auflistung anzeigen</name>
+        </option>
+      </options>
+    </input-field>
+    <component name="sw-entity-multi-id-select">
+      <name>hidePriceForCustomerIds</name>
+      <entity>customer_group</entity>
+      <label>Hide prices, stock and cart button in the matrix for following customer groups</label>
+      <label lang="de-DE">Preise, Lagerbestand und Warenkorb-Button in der Matrix für folgende Kundengruppen ausblenden</label>
+      <label lang="es-ES">Ocultar precios, stock y botón de carrito en la matriz para los siguientes grupos de clientes</label>
+      <label lang="fi-FI">Piilota hinnat, varastot ja ostoskoripainike matriisissa seuraaville asiakasryhmille.</label>
+      <label lang="fr-FR">Masquer les prix, le stock et le bouton du panier dans la matrice pour les groupes de clients suivants</label>
+      <label lang="it-IT">Nascondere i prezzi, le scorte e il pulsante del carrello nella matrice per i seguenti gruppi di clienti</label>
+      <label lang="nb-NO">Skjul priser, lagerbeholdning og handlekurvknapp i matrisen for følgende kundegrupper</label>
+      <label lang="nl-NL">Verberg prijzen, voorraad en winkelwagenknop in de matrix voor de volgende klantgroepen</label>
+      <label lang="pl-PL">Ukryj ceny, stany magazynowe i przycisk koszyka w macierzy dla następujących grup klientów</label>
+      <label lang="sv-SE">Dölj priser, lager och varukorgsknapp i matrisen för följande kundgrupper</label>
+      <label lang="bg-BG">Скриване на цените, наличностите и бутона за количка в матрицата за следните групи клиенти</label>
+      <label lang="cs-CZ">Skrytí cen, skladových zásob a tlačítka košíku v matici pro následující skupiny zákazníků</label>
+      <label lang="pt-PT">Ocultar preços, stock e botão do carrinho na matriz para os seguintes grupos de clientes</label>
+      <label lang="hr-HR">Az árak, a készlet és a kosár gomb elrejtése a mátrixban a következő vásárlói csoportok számára</label>
+      <label lang="tr-TR">Aşağıdaki müşteri grupları için matristeki fiyatları, stokları ve sepet düğmesini gizleyin</label>
+      <label lang="da-DK">Skjul priser, lager og kurv-knap i matrixen for følgende kundegrupper</label>
+      <label lang="ru-RU">Скрыть цены, акции и кнопку корзины в матрице для следующих групп покупателей</label>
+      <label lang="lv-LV">Paslēpt cenas, krājumus un grozu pogu matricā šādām klientu grupām</label>
+      <label lang="id-ID">Sembunyikan harga, stok, dan tombol keranjang di matriks untuk grup pelanggan berikut</label>
+      <label lang="el-GR">Απόκρυψη τιμών, αποθεμάτων και κουμπιού καλαθιού στη μήτρα για τις ακόλουθες ομάδες πελατών</label>
+      <label lang="de-CH">Preise, Lagerbestand und Warenkorb-Button in der Matrix für folgende Kundengruppen ausblenden</label>
+    </component>
+    <input-field type="bool">
+      <name>totalPriceActivate</name>
+      <label>Activate total price</label>
+      <label lang="de-DE">Gesamtpreis aktivieren</label>
+      <label lang="es-ES">Activar precio total</label>
+      <label lang="fi-FI">Aktivoi kokonaishinta</label>
+      <label lang="fr-FR">Activer le prix total</label>
+      <label lang="it-IT">Attivare il prezzo totale</label>
+      <label lang="nb-NO">Aktiver totalpris</label>
+      <label lang="nl-NL">Activeer totale prijs</label>
+      <label lang="pl-PL">Aktywuj cenę całkowitą</label>
+      <label lang="sv-SE">Aktivera totalpris</label>
+      <label lang="bg-BG">Активиране на общата цена</label>
+      <label lang="cs-CZ">Aktivovat celkovou cenu</label>
+      <label lang="pt-PT">Ativar o preço total</label>
+      <label lang="hr-HR">Teljes ár aktiválása</label>
+      <label lang="tr-TR">Toplam fiyatı etkinleştir</label>
+      <label lang="da-DK">Aktiver samlet pris</label>
+      <label lang="ru-RU">Активировать общую цену</label>
+      <label lang="lv-LV">Aktivizēt kopējo cenu</label>
+      <label lang="id-ID">Aktifkan harga total</label>
+      <label lang="el-GR">Ενεργοποίηση συνολικής τιμής</label>
+      <label lang="de-CH">Gesamtpreis aktivieren</label>
+      <helpText>Activation of the display of the expected total price of the selected variants.</helpText>
+      <helpText lang="de-DE">Aktivierung der Anzeige des voraussichtlichen Gesamtpreises der ausgewählten Varianten.</helpText>
+      <helpText lang="es-ES">Activación de la visualización del precio total previsto de las variantes seleccionadas.</helpText>
+      <helpText lang="fi-FI">Valittujen vaihtoehtojen odotetun kokonaishinnan näytön aktivointi.</helpText>
+      <helpText lang="fr-FR">Activation de l'affichage du prix total prévu pour les variantes sélectionnées.</helpText>
+      <helpText lang="it-IT">Attivazione della visualizzazione del prezzo totale previsto per le varianti selezionate.</helpText>
+      <helpText lang="nb-NO">Aktivering av visning av forventet totalpris for de valgte variantene.</helpText>
+      <helpText lang="nl-NL">Activering van de weergave van de verwachte totaalprijs van de geselecteerde varianten.</helpText>
+      <helpText lang="pl-PL">Aktywacja wyświetlania oczekiwanej łącznej ceny wybranych wariantów.</helpText>
+      <helpText lang="sv-SE">Aktivering av visning av det förväntade totalpriset för de valda varianterna.</helpText>
+      <helpText lang="bg-BG">Активиране на показването на очакваната обща цена на избраните варианти.</helpText>
+      <helpText lang="cs-CZ">Aktivace zobrazení předpokládané celkové ceny vybraných variant.</helpText>
+      <helpText lang="pt-PT">Ativação da visualização do preço total previsto das variantes selecionadas.</helpText>
+      <helpText lang="hr-HR">A kiválasztott változatok várható teljes árának megjelenítésének aktiválása.</helpText>
+      <helpText lang="tr-TR">Seçilen varyantların beklenen toplam fiyatının görüntülenmesinin etkinleştirilmesi.</helpText>
+      <helpText lang="da-DK">Aktivering af visning af den forventede samlede pris for de valgte varianter.</helpText>
+      <helpText lang="ru-RU">Активация отображения ожидаемой общей цены выбранных вариантов.</helpText>
+      <helpText lang="lv-LV">Izvēlēto variantu paredzamās kopējās cenas rādīšanas aktivizēšana.</helpText>
+      <helpText lang="id-ID">Aktivasi tampilan harga total yang diharapkan dari varian yang dipilih.</helpText>
+      <helpText lang="el-GR">Ενεργοποίηση της εμφάνισης της αναμενόμενης συνολικής τιμής των επιλεγμένων παραλλαγών.</helpText>
+      <helpText lang="de-CH">Aktivierung der Anzeige des voraussichtlichen Gesamtpreises der ausgewählten Varianten.</helpText>
+      <defaultValue>false</defaultValue>
+    </input-field>
+    <input-field type="bool">
+      <name>stackPriceTableDisable</name>
+      <label>Deactivate stack price table</label>
+      <label lang="de-DE">Stapelpreistabelle deaktivieren</label>
+      <label lang="es-ES">Desactivar tabla de precios de pila</label>
+      <label lang="fi-FI">Deaktivoi pinon hintataulukko</label>
+      <label lang="fr-FR">Désactiver le tableau des prix de la pile</label>
+      <label lang="it-IT">Disattivare la tabella dei prezzi di pila</label>
+      <label lang="nb-NO">Deaktiver stabelpristabellen</label>
+      <label lang="nl-NL">Stapelprijstabel deactiveren</label>
+      <label lang="pl-PL">Dezaktywacja tabeli cen stosu</label>
+      <label lang="sv-SE">Avaktivera stapelpristabell</label>
+      <label lang="bg-BG">Деактивиране на таблицата с цените на стековете</label>
+      <label lang="cs-CZ">Deaktivace tabulky zásobníkových cen</label>
+      <label lang="pt-PT">Desativar a tabela de preços da pilha</label>
+      <label lang="hr-HR">A veremár táblázat kikapcsolása</label>
+      <label lang="tr-TR">Yığın fiyat tablosunu devre dışı bırak</label>
+      <label lang="da-DK">Deaktiver stakpristabel</label>
+      <label lang="ru-RU">Деактивировать таблицу цен на стеки</label>
+      <label lang="lv-LV">Deaktivizēt kaudzes cenu tabulu</label>
+      <label lang="id-ID">Menonaktifkan tabel harga tumpukan</label>
+      <label lang="el-GR">Απενεργοποίηση πίνακα τιμών στοίβας</label>
+      <label lang="de-CH">Stapelpreistabelle deaktivieren</label>
+      <helpText>Please do not display table if different variants stack prices exist. Because that would be misleading.</helpText>
+      <helpText lang="de-DE">Bitte zeigen Sie die Tabelle nicht an, wenn verschiedene Varianten von Stapelpreisen existieren. Das wäre nämlich irreführend.</helpText>
+      <helpText lang="es-ES">Por favor, no muestre la tabla si existen diferentes variantes de precios apilados. Porque sería engañoso.</helpText>
+      <helpText lang="fi-FI">Älä näytä taulukkoa, jos on olemassa eri vaihtoehtoja pinohinnoittelussa. Koska se olisi harhaanjohtavaa.</helpText>
+      <helpText lang="fr-FR">Veuillez ne pas afficher le tableau s'il existe différentes variantes de prix de pile. Cela serait trompeur.</helpText>
+      <helpText lang="it-IT">Si prega di non visualizzare la tabella se esistono diversi prezzi di pila di varianti. Perché sarebbe fuorviante.</helpText>
+      <helpText lang="nb-NO">Vennligst ikke vis tabellen hvis det finnes ulike varianter av stabelpriser. Fordi det ville være villedende.</helpText>
+      <helpText lang="nl-NL">Geef de tabel niet weer als er verschillende varianten stapelprijzen bestaan. Dat zou misleidend zijn.</helpText>
+      <helpText lang="pl-PL">Nie wyświetlaj tabeli, jeśli istnieją różne warianty cen stosu. Ponieważ byłoby to mylące.</helpText>
+      <helpText lang="sv-SE">Vänligen visa inte tabellen om det finns olika varianter av stackpriser. Det skulle nämligen vara vilseledande.</helpText>
+      <helpText lang="bg-BG">Моля, не показвайте таблицата, ако съществуват различни цени на вариантите на стека. Защото това би било подвеждащо.</helpText>
+      <helpText lang="cs-CZ">Nezobrazujte prosím tabulku, pokud existují různé ceny zásobníku variant. Bylo by to zavádějící.</helpText>
+      <helpText lang="pt-PT">Não apresentar o quadro se existirem diferentes variantes de preços de pilha. Porque isso seria enganador.</helpText>
+      <helpText lang="hr-HR">Kérjük, ne jelenítse meg a táblázatot, ha különböző változatok halom árai léteznek. Mert ez félrevezető lenne.</helpText>
+      <helpText lang="tr-TR">Lütfen farklı varyant yığın fiyatları varsa tabloyu göstermeyin. Çünkü bu yanıltıcı olur.</helpText>
+      <helpText lang="da-DK">Vis ikke tabellen, hvis der findes forskellige varianter af stakpriser. Det ville være vildledende.</helpText>
+      <helpText lang="ru-RU">Пожалуйста, не отображайте таблицу, если существуют разные варианты цен на стеки. Это будет вводить в заблуждение.</helpText>
+      <helpText lang="lv-LV">Lūdzu, nerādiet tabulu, ja pastāv dažādi variantu kaudžu cenas. Jo tas būtu maldinoši.</helpText>
+      <helpText lang="id-ID">Tolong jangan tampilkan tabel jika ada harga tumpukan varian yang berbeda. Karena itu akan menyesatkan.</helpText>
+      <helpText lang="el-GR">Παρακαλούμε μην εμφανίζετε τον πίνακα εάν υπάρχουν διαφορετικές παραλλαγές τιμών στοίβας. Επειδή αυτό θα ήταν παραπλανητικό.</helpText>
+      <helpText lang="de-CH">Bitte zeigen Sie die Tabelle nicht an, wenn verschiedene Varianten von Stapelpreisen existieren. Das wäre nämlich irreführend.</helpText>
+      <defaultValue>false</defaultValue>
+    </input-field>
+    <input-field type="bool">
+      <name>hideVariantsWithNoStock</name>
+      <label>Hide variants that have a stock level of less than 1</label>
+      <label lang="de-DE">Varianten ausblenden, die einen Lagerbestand von weniger als 1 haben</label>
+      <label lang="es-ES">Ocultar las variantes con un nivel de existencias inferior a 1</label>
+      <label lang="fi-FI">Piilota variantit, joiden varastotaso on alle 1.</label>
+      <label lang="fr-FR">Masquer les variantes dont le niveau de stock est inférieur à 1</label>
+      <label lang="it-IT">Nascondere le varianti che hanno un livello di scorte inferiore a 1</label>
+      <label lang="nb-NO">Skjul varianter som har et lagernivå på mindre enn 1</label>
+      <label lang="nl-NL">Verberg varianten met een voorraadniveau van minder dan 1</label>
+      <label lang="pl-PL">Ukryj warianty, których poziom zapasów jest mniejszy niż 1.</label>
+      <label lang="sv-SE">Dölj varianter som har en lagernivå på mindre än 1</label>
+      <label lang="bg-BG">Скриване на варианти, чието ниво на наличност е по-малко от 1</label>
+      <label lang="cs-CZ">Skrýt varianty, které mají skladovou zásobu nižší než 1</label>
+      <label lang="pt-PT">Ocultar as variantes que têm um nível de stock inferior a 1</label>
+      <label lang="hr-HR">Az olyan változatok elrejtése, amelyek készletszintje kevesebb, mint 1</label>
+      <label lang="tr-TR">Stok seviyesi 1'den az olan varyantları gizle</label>
+      <label lang="da-DK">Skjul varianter, der har et lagerniveau på mindre end 1</label>
+      <label lang="ru-RU">Скрыть варианты, уровень запасов которых меньше 1</label>
+      <label lang="lv-LV">Paslēpt variantus, kuru krājumu līmenis ir mazāks par 1</label>
+      <label lang="id-ID">Sembunyikan varian yang memiliki tingkat stok kurang dari 1</label>
+      <label lang="el-GR">Απόκρυψη παραλλαγών που έχουν επίπεδο αποθέματος μικρότερο από 1</label>
+      <label lang="de-CH">Varianten ausblenden, die einen Lagerbestand von weniger als 1 haben</label>
+      <helpText>Has no effect on Default Layout</helpText>
+      <helpText lang="de-DE">Hat keine Auswirkung auf das Standardlayout</helpText>
+      <helpText lang="es-ES">No afecta a la presentación por defecto</helpText>
+      <helpText lang="fi-FI">Ei vaikuta oletusasetteluun</helpText>
+      <helpText lang="fr-FR">N'a pas d'effet sur la présentation par défaut</helpText>
+      <helpText lang="it-IT">Non ha effetto sul layout predefinito</helpText>
+      <helpText lang="nb-NO">Har ingen effekt på standardoppsettet</helpText>
+      <helpText lang="nl-NL">Heeft geen effect op standaardlay-out</helpText>
+      <helpText lang="pl-PL">Nie ma wpływu na układ domyślny</helpText>
+      <helpText lang="sv-SE">Har ingen effekt på Standardlayout</helpText>
+      <helpText lang="bg-BG">Няма ефект върху оформлението по подразбиране</helpText>
+      <helpText lang="cs-CZ">Nemá vliv na výchozí rozložení</helpText>
+      <helpText lang="pt-PT">Não tem efeito no Layout padrão</helpText>
+      <helpText lang="hr-HR">Nincs hatással az alapértelmezett elrendezésre</helpText>
+      <helpText lang="tr-TR">Varsayılan Düzen üzerinde etkisi yoktur</helpText>
+      <helpText lang="da-DK">Har ingen effekt på standardlayout</helpText>
+      <helpText lang="ru-RU">Не влияет на макет по умолчанию</helpText>
+      <helpText lang="lv-LV">Nav ietekmes uz noklusējuma izkārtojumu</helpText>
+      <helpText lang="id-ID">Tidak berpengaruh pada Tata Letak Default</helpText>
+      <helpText lang="el-GR">Δεν έχει καμία επίδραση στην προεπιλεγμένη διάταξη</helpText>
+      <helpText lang="de-CH">Hat keine Auswirkung auf das Standardlayout</helpText>
+      <defaultValue>false</defaultValue>
+    </input-field>
+    <input-field type="single-select">
+      <name>variantMatrixLayout</name>
+      <label>Layout of the Matrix</label>
+      <label lang="de-DE">Aufbau der Matrix</label>
+      <label lang="es-ES">Disposición de la matriz</label>
+      <label lang="fi-FI">Matriisin asettelu</label>
+      <label lang="fr-FR">Présentation de la matrice</label>
+      <label lang="it-IT">Layout della matrice</label>
+      <label lang="nb-NO">Oppsett av matrisen</label>
+      <label lang="nl-NL">Lay-out van de matrix</label>
+      <label lang="pl-PL">Układ matrycy</label>
+      <label lang="sv-SE">Layout för matrisen</label>
+      <label lang="bg-BG">Разположение на матрицата</label>
+      <label lang="cs-CZ">Rozložení matice</label>
+      <label lang="pt-PT">Disposição da matriz</label>
+      <label lang="hr-HR">A mátrix elrendezése</label>
+      <label lang="tr-TR">Matrisin Yerleşimi</label>
+      <label lang="da-DK">Layout af matrixen</label>
+      <label lang="ru-RU">Макет матрицы</label>
+      <label lang="lv-LV">Matricas izkārtojums</label>
+      <label lang="id-ID">Tata Letak Matriks</label>
+      <label lang="el-GR">Διάταξη του πίνακα</label>
+      <label lang="de-CH">Aufbau der Matrix</label>
+      <helpText>Layout of the Variant Matrix:
+Default: Default display of options in a table.
+Selection / Matrix: Combination of selection and variant matrix.</helpText>
+      <helpText lang="de-DE">Layout der Variantenmatrix:
+Standard: Standardanzeige der Optionen in einer Tabelle.
+Auswahl / Matrix: Kombination aus Auswahl und Variantenmatrix.</helpText>
+      <helpText lang="es-ES">Disposición de la matriz de variantes:
+Por defecto: Presentación por defecto de las opciones en una tabla.
+Selección / Matriz: Combinación de selección y matriz de variantes.</helpText>
+      <helpText lang="fi-FI">Vaihtelumatriisin asettelu:
+Oletus: Vaihtoehtojen oletusnäyttö taulukossa.
+Valinta / matriisi: Valinnan ja varianttimatriisin yhdistelmä.</helpText>
+      <helpText lang="fr-FR">Présentation de la matrice des variantes :
+Défaut : Affichage par défaut des options dans un tableau.
+Sélection / Matrice : Combinaison de la sélection et de la matrice des variantes.</helpText>
+      <helpText lang="it-IT">Layout della matrice delle varianti:
+Predefinito: Visualizzazione predefinita delle opzioni in una tabella.
+Selezione / Matrice: Combinazione di selezione e matrice di varianti.</helpText>
+      <helpText lang="nb-NO">Layout for variantmatrisen:
+Standard: Standardvisning av alternativer i en tabell.
+Utvalg / Matrise: Kombinasjon av utvalg og variantmatrise.</helpText>
+      <helpText lang="nl-NL">Lay-out van de variantiematrix:
+Standaard: Standaard weergave van opties in een tabel.
+Selectie / Matrix: Combinatie van selectie en variantenmatrix.</helpText>
+      <helpText lang="pl-PL">Układ macierzy wariantów:
+Domyślny: Domyślne wyświetlanie opcji w tabeli.
+Wybór / Macierz: Połączenie wyboru i macierzy wariantów.</helpText>
+      <helpText lang="sv-SE">Layout för variantmatrisen:
+Standard: Standardvisning av alternativ i en tabell.
+Urval / Matris: Kombination av urval och variantmatris.</helpText>
+      <helpText lang="bg-BG">Разположение на матрицата на вариантите:
+По подразбиране: По подразбиране вариантите се показват в таблица.
+Избор / Матрица: Комбинация от селекция и матрица на вариантите.</helpText>
+      <helpText lang="cs-CZ">Rozložení matice variant:
+Výchozí nastavení: Výchozí zobrazení variant v tabulce.
+Výběr / matice: Kombinace výběru a matice variant.</helpText>
+      <helpText lang="pt-PT">Disposição da matriz de variantes:
+Padrão: Apresentação predefinida das opções numa tabela.
+Seleção / Matriz: Combinação de seleção e matriz de variantes.</helpText>
+      <helpText lang="hr-HR">A változatmátrix elrendezése:
+Alapértelmezett: A lehetőségek táblázatban történő alapértelmezett megjelenítése.
+Kiválasztás / Mátrix: A kiválasztás és a variánsmátrix kombinációja.</helpText>
+      <helpText lang="tr-TR">Varyant Matrisinin Düzeni:
+Varsayılan: Seçeneklerin bir tabloda varsayılan gösterimi.
+Seçim / Matris: Seçim ve varyant matrisinin kombinasyonu.</helpText>
+      <helpText lang="da-DK">Layout af variantmatrixen:
+Standard: Standardvisning af valgmuligheder i en tabel.
+Valg / matrix: Kombination af udvælgelse og variantmatrix.</helpText>
+      <helpText lang="ru-RU">Макет матрицы вариантов:
+По умолчанию: Отображение вариантов в таблице по умолчанию.
+Выбор / матрица: Комбинация выбора и матрицы вариантов.</helpText>
+      <helpText lang="lv-LV">Variantu matricas izkārtojums:
+Noklusējuma iestatījums: Variantu tabulas izvietojums pēc noklusējuma.
+Atlase / Matrica: Izvēles un variantu matricas kombinācija.</helpText>
+      <helpText lang="id-ID">Tata letak Matriks Varian:
+Default: Tampilan default opsi dalam tabel.
+Pilihan / Matriks: Kombinasi matriks pilihan dan varian.</helpText>
+      <helpText lang="el-GR">Διάταξη του πίνακα παραλλαγών:
+Προεπιλογή: Προεπιλεγμένη εμφάνιση των επιλογών σε πίνακα.
+Επιλογή / Πίνακας: Συνδυασμός επιλογής και πίνακα παραλλαγών.</helpText>
+      <helpText lang="de-CH">Layout der Variantenmatrix:
+Standard: Standardanzeige der Optionen in einer Tabelle.
+Auswahl / Matrix: Kombination aus Auswahl und Variantenmatrix.</helpText>
+      <defaultValue>standard</defaultValue>
+      <options>
+        <option>
+          <id>standard</id>
+          <name>Default layout</name>
+          <name lang="de-DE">Standard-Layout</name>
+          <name lang="es-ES">Diseño por defecto</name>
+          <name lang="fi-FI">Oletusasettelu</name>
+          <name lang="fr-FR">Disposition par défaut</name>
+          <name lang="it-IT">Layout predefinito</name>
+          <name lang="nb-NO">Standard layout</name>
+          <name lang="nl-NL">Standaard lay-out</name>
+          <name lang="pl-PL">Układ domyślny</name>
+          <name lang="sv-SE">Standardlayout</name>
+          <name lang="bg-BG">Оформление по подразбиране</name>
+          <name lang="cs-CZ">Výchozí rozložení</name>
+          <name lang="pt-PT">Estrutura predefinida</name>
+          <name lang="hr-HR">Alapértelmezett elrendezés</name>
+          <name lang="tr-TR">Varsayılan düzen</name>
+          <name lang="da-DK">Standard-layout</name>
+          <name lang="ru-RU">Макет по умолчанию</name>
+          <name lang="lv-LV">Noklusējuma izkārtojums</name>
+          <name lang="id-ID">Tata letak default</name>
+          <name lang="el-GR">Προεπιλεγμένη διάταξη</name>
+          <name lang="de-CH">Standard-Layout</name>
+        </option>
+        <option>
+          <id>selector</id>
+          <name>1. Group as selection, 2. group as matrix</name>
+          <name lang="de-DE">1. Gruppe als Auswahl, 2. Gruppe als Matrix</name>
+          <name lang="es-ES">1. Grupo como selección, 2. grupo como matriz</name>
+          <name lang="fi-FI">1. Ryhmä valintana, 2. ryhmä matriisina.</name>
+          <name lang="fr-FR">1. Groupe en tant que sélection, 2. groupe en tant que matrice</name>
+          <name lang="it-IT">1. Gruppo come selezione, 2. gruppo come matrice</name>
+          <name lang="nb-NO">1. Gruppe som utvalg, 2. gruppe som matrise</name>
+          <name lang="nl-NL">1. Groep als selectie, 2. Groep als matrix</name>
+          <name lang="pl-PL">1. Grupa jako wybór, 2. Grupa jako macierz</name>
+          <name lang="sv-SE">1. Gruppera som urval, 2. Gruppera som matris</name>
+          <name lang="bg-BG">1. Група като селекция, 2. група като матрица</name>
+          <name lang="cs-CZ">1. Skupina jako výběr, 2. skupina jako matice</name>
+          <name lang="pt-PT">1. Grupo como seleção, 2. grupo como matriz</name>
+          <name lang="hr-HR">1. Csoport mint kiválasztás, 2. csoport mint mátrix</name>
+          <name lang="tr-TR">1. Seçim olarak grup, 2. Matris olarak grup</name>
+          <name lang="da-DK">1. Gruppe som valg, 2. gruppe som matrix</name>
+          <name lang="ru-RU">1. Группа как выбор, 2. группа как матрица</name>
+          <name lang="lv-LV">1. Grupa kā atlase, 2. grupa kā matrica</name>
+          <name lang="id-ID">1. 1. Kelompok sebagai seleksi, 2. Kelompok sebagai matriks</name>
+          <name lang="el-GR">1. Ομάδα ως επιλογή, 2. ομάδα ως πίνακας</name>
+          <name lang="de-CH">1. Gruppe als Auswahl, 2. Gruppe als Matrix</name>
+        </option>
+        <option>
+          <id>lastGroupAsMatrixAndOtherGroupsAsSwOptions</id>
+          <name>Last group as matrix, remaining groups as shopware options</name>
+          <name lang="de-DE">Letzte Gruppe als Matrix, restliche Gruppen als Shopware-Optionen</name>
+          <name lang="es-ES">Último grupo como matriz, resto de grupos como opciones de tienda</name>
+          <name lang="fi-FI">Viimeinen ryhmä matriisina, loput ryhmät kauppatavaravaihtoehtoina.</name>
+          <name lang="fr-FR">Dernier groupe en tant que matrice, les autres groupes en tant qu'options d'achat.</name>
+          <name lang="it-IT">L'ultimo gruppo come matrice, i restanti gruppi come opzioni shopware</name>
+          <name lang="nb-NO">Siste gruppe som matrise, resterende grupper som butikkalternativer</name>
+          <name lang="nl-NL">Laatste groep als matrix, overige groepen als shopware-opties</name>
+          <name lang="pl-PL">Ostatnia grupa jako matryca, pozostałe grupy jako opcje oprogramowania sklepowego</name>
+          <name lang="sv-SE">Sista gruppen som matris, resterande grupper som shopware-alternativ</name>
+          <name lang="bg-BG">Последната група като матрица, останалите групи като опции за магазин</name>
+          <name lang="cs-CZ">Poslední skupina jako matice, zbývající skupiny jako možnosti shopware</name>
+          <name lang="pt-PT">Último grupo como matriz, restantes grupos como opções de artigos</name>
+          <name lang="hr-HR">Az utolsó csoport mint mátrix, a többi csoport mint shopware opciók</name>
+          <name lang="tr-TR">Son grup matris olarak, kalan gruplar alışveriş seçenekleri olarak</name>
+          <name lang="da-DK">Sidste gruppe som matrix, resterende grupper som shopware-muligheder</name>
+          <name lang="ru-RU">Последняя группа - матрица, остальные группы - варианты магазинов</name>
+          <name lang="lv-LV">Pēdējā grupa kā matrica, pārējās grupas kā veikala programmatūras opcijas</name>
+          <name lang="id-ID">Kelompok terakhir sebagai matriks, kelompok lainnya sebagai opsi shopware</name>
+          <name lang="el-GR">Τελευταία ομάδα ως μήτρα, οι υπόλοιπες ομάδες ως επιλογές shopware</name>
+          <name lang="de-CH">Letzte Gruppe als Matrix, restliche Gruppen als Shopware-Optionen</name>
+        </option>
+      </options>
+    </input-field>
+    <input-field type="single-select">
+      <name>variantMatrixPosition</name>
+      <label>Position of the variant matrix</label>
+      <label lang="de-DE">Position der Variantenmatrix</label>
+      <label lang="es-ES">Posición de la matriz variante</label>
+      <label lang="fi-FI">Vaihtelumatriisin sijainti</label>
+      <label lang="fr-FR">Position de la matrice de la variante</label>
+      <label lang="it-IT">Posizione della matrice della variante</label>
+      <label lang="nb-NO">Posisjonen til variantmatrisen</label>
+      <label lang="nl-NL">Positie van de variantenmatrix</label>
+      <label lang="pl-PL">Pozycja macierzy wariantu</label>
+      <label lang="sv-SE">Position för variantmatrisen</label>
+      <label lang="bg-BG">Позиция на матрицата на варианта</label>
+      <label lang="cs-CZ">Poloha variantní matice</label>
+      <label lang="pt-PT">Posição da matriz de variantes</label>
+      <label lang="hr-HR">A variáns mátrix helyzete</label>
+      <label lang="tr-TR">Varyant matrisinin konumu</label>
+      <label lang="da-DK">Placering af variantmatrixen</label>
+      <label lang="ru-RU">Положение матрицы вариантов</label>
+      <label lang="lv-LV">Varianta matricas atrašanās vieta</label>
+      <label lang="id-ID">Posisi matriks varian</label>
+      <label lang="el-GR">Θέση του πίνακα παραλλαγών</label>
+      <label lang="de-CH">Position der Variantenmatrix</label>
+      <defaultValue>description_top</defaultValue>
+      <options>
+        <option>
+          <id>price</id>
+          <name>Price</name>
+          <name lang="de-DE">Preis</name>
+          <name lang="es-ES">Precio</name>
+          <name lang="fi-FI">Hinta</name>
+          <name lang="fr-FR">Prix</name>
+          <name lang="it-IT">Prezzo</name>
+          <name lang="nb-NO">Pris</name>
+          <name lang="nl-NL">Prijs</name>
+          <name lang="pl-PL">Cena</name>
+          <name lang="sv-SE">Pris</name>
+          <name lang="bg-BG">Цена</name>
+          <name lang="cs-CZ">Cena</name>
+          <name lang="pt-PT">Preço</name>
+          <name lang="hr-HR">Ár</name>
+          <name lang="tr-TR">Fiyat</name>
+          <name lang="da-DK">Pris</name>
+          <name lang="ru-RU">Цена</name>
+          <name lang="lv-LV">Cena</name>
+          <name lang="id-ID">Harga</name>
+          <name lang="el-GR">Τιμή</name>
+          <name lang="de-CH">Preis</name>
+          <name>Display below the price</name>
+        </option>
+        <option>
+          <id>description_top</id>
+          <name>Description top</name>
+          <name lang="de-DE">Beschreibung oben</name>
+          <name lang="es-ES">Descripción</name>
+          <name lang="fi-FI">Kuvaus top</name>
+          <name lang="fr-FR">Description top</name>
+          <name lang="it-IT">Descrizione top</name>
+          <name lang="nb-NO">Beskrivelse topp</name>
+          <name lang="nl-NL">Beschrijving top</name>
+          <name lang="pl-PL">Opis top</name>
+          <name lang="sv-SE">Beskrivning topp</name>
+          <name lang="bg-BG">Описание top</name>
+          <name lang="cs-CZ">Popis top</name>
+          <name lang="pt-PT">Descrição do topo</name>
+          <name lang="hr-HR">Leírás top</name>
+          <name lang="tr-TR">Açıklama üst</name>
+          <name lang="da-DK">Beskrivelse top</name>
+          <name lang="ru-RU">Описание верхнее</name>
+          <name lang="lv-LV">Apraksts top</name>
+          <name lang="id-ID">Deskripsi atas</name>
+          <name lang="el-GR">Περιγραφή κορυφή</name>
+          <name lang="de-CH">Beschreibung oben</name>
+          <name>Display above description</name>
+        </option>
+      </options>
+    </input-field>
+    <input-field type="single-select">
+      <name>variantMatrixOneGroupOrientation</name>
+      <label>Variant Alignment</label>
+      <label lang="de-DE">Ausrichtung der Varianten</label>
+      <label lang="es-ES">Alineación de variantes</label>
+      <label lang="fi-FI">Variantin kohdistaminen</label>
+      <label lang="fr-FR">Alignement des variants</label>
+      <label lang="it-IT">Allineamento delle varianti</label>
+      <label lang="nb-NO">Justering av varianter</label>
+      <label lang="nl-NL">Variant uitlijning</label>
+      <label lang="pl-PL">Wyrównanie wariantów</label>
+      <label lang="sv-SE">Justering av varianter</label>
+      <label lang="bg-BG">Подравняване на варианти</label>
+      <label lang="cs-CZ">Zarovnání variant</label>
+      <label lang="pt-PT">Alinhamento de variantes</label>
+      <label lang="hr-HR">Változó összehangolása</label>
+      <label lang="tr-TR">Varyant Hizalama</label>
+      <label lang="da-DK">Justering af varianter</label>
+      <label lang="ru-RU">Выравнивание вариантов</label>
+      <label lang="lv-LV">Variantu izlīdzināšana</label>
+      <label lang="id-ID">Penyelarasan Varian</label>
+      <label lang="el-GR">Ευθυγράμμιση παραλλαγών</label>
+      <label lang="de-CH">Ausrichtung der Varianten</label>
+      <value>orientation_x</value>
+      <helpText>Direction in which the options are displayed</helpText>
+      <helpText lang="de-DE">Richtung, in der die Optionen angezeigt werden</helpText>
+      <helpText lang="es-ES">Dirección en la que se muestran las opciones</helpText>
+      <helpText lang="fi-FI">Vaihtoehtojen näyttösuunta</helpText>
+      <helpText lang="fr-FR">Sens d'affichage des options</helpText>
+      <helpText lang="it-IT">Direzione di visualizzazione delle opzioni</helpText>
+      <helpText lang="nb-NO">Retningen alternativene vises i</helpText>
+      <helpText lang="nl-NL">Richting waarin de opties worden weergegeven</helpText>
+      <helpText lang="pl-PL">Kierunek wyświetlania opcji</helpText>
+      <helpText lang="sv-SE">Riktning i vilken alternativen visas</helpText>
+      <helpText lang="bg-BG">Посока, в която се показват опциите</helpText>
+      <helpText lang="cs-CZ">Směr zobrazení možností</helpText>
+      <helpText lang="pt-PT">Direção em que as opções são apresentadas</helpText>
+      <helpText lang="hr-HR">Az opciók megjelenítési iránya</helpText>
+      <helpText lang="tr-TR">Seçeneklerin görüntülendiği yön</helpText>
+      <helpText lang="da-DK">Retning, som indstillingerne vises i</helpText>
+      <helpText lang="ru-RU">Направление, в котором отображаются опции</helpText>
+      <helpText lang="lv-LV">Virziens, kurā tiek rādītas opcijas</helpText>
+      <helpText lang="id-ID">Arah di mana opsi ditampilkan</helpText>
+      <helpText lang="el-GR">Κατεύθυνση προς την οποία εμφανίζονται οι επιλογές</helpText>
+      <helpText lang="de-CH">Richtung, in der die Optionen angezeigt werden</helpText>
+      <defaultValue>orientation_x</defaultValue>
+      <options>
+        <option>
+          <id>orientation_x</id>
+          <name>Orientation X</name>
+          <name lang="de-DE">Orientierung X</name>
+          <name lang="es-ES">Orientación X</name>
+          <name lang="fi-FI">Orientaatio X</name>
+          <name lang="fr-FR">Orientation X</name>
+          <name lang="it-IT">Orientamento X</name>
+          <name lang="nb-NO">Orientering X</name>
+          <name lang="nl-NL">Oriëntatie X</name>
+          <name lang="pl-PL">Orientacja X</name>
+          <name lang="sv-SE">Orientering X</name>
+          <name lang="bg-BG">Ориентация X</name>
+          <name lang="cs-CZ">Orientace X</name>
+          <name lang="pt-PT">Orientação X</name>
+          <name lang="hr-HR">Orientáció X</name>
+          <name lang="tr-TR">Oryantasyon X</name>
+          <name lang="da-DK">Orientering X</name>
+          <name lang="ru-RU">Ориентация X</name>
+          <name lang="lv-LV">Orientēšanās X</name>
+          <name lang="id-ID">Orientasi X</name>
+          <name lang="el-GR">Προσανατολισμός X</name>
+          <name lang="de-CH">Orientierung X</name>
+          <name>Show first group options on X axis</name>
+        </option>
+        <option>
+          <id>orientation_y</id>
+          <name>Orientation Y</name>
+          <name lang="de-DE">Orientierung Y</name>
+          <name lang="es-ES">Orientación Y</name>
+          <name lang="fi-FI">Suuntautuminen Y</name>
+          <name lang="fr-FR">Orientation Y</name>
+          <name lang="it-IT">Orientamento Y</name>
+          <name lang="nb-NO">Orientering Y</name>
+          <name lang="nl-NL">Oriëntatie Y</name>
+          <name lang="pl-PL">Orientacja Y</name>
+          <name lang="sv-SE">Orientering Y</name>
+          <name lang="bg-BG">Ориентация Y</name>
+          <name lang="cs-CZ">Orientace Y</name>
+          <name lang="pt-PT">Orientação Y</name>
+          <name lang="hr-HR">Orientáció Y</name>
+          <name lang="tr-TR">Oryantasyon Y</name>
+          <name lang="da-DK">Orientering Y</name>
+          <name lang="ru-RU">Ориентация Y</name>
+          <name lang="lv-LV">Orientēšanās Y</name>
+          <name lang="id-ID">Orientasi Y</name>
+          <name lang="el-GR">Προσανατολισμός Y</name>
+          <name lang="de-CH">Orientierung Y</name>
+          <name>Show first group options on Y axis</name>
+        </option>
+      </options>
+    </input-field>
+    <input-field type="bool">
+      <name>changeImageOnClickAmountField</name>
+      <label>Image change when clicking in the quantity field (replaces image slider)</label>
+      <label lang="de-DE">Bildwechsel beim Anklicken des Mengenfeldes (ersetzt den Image Slider)</label>
+      <label lang="es-ES">Cambio de imagen al hacer clic en el campo de cantidad (sustituye al deslizador de imágenes)</label>
+      <label lang="fi-FI">Kuvan vaihtaminen, kun napsautat määräkenttää (korvaa kuvan liukusäätimen).</label>
+      <label lang="fr-FR">Changement d'image lorsque l'on clique dans le champ de la quantité (remplace le curseur d'image)</label>
+      <label lang="it-IT">Modifica dell'immagine quando si fa clic nel campo della quantità (sostituisce il cursore dell'immagine)</label>
+      <label lang="nb-NO">Bildeendring når du klikker i mengdefeltet (erstatter bildeglidebryteren)</label>
+      <label lang="nl-NL">Afbeelding verandert wanneer in het hoeveelheidveld wordt geklikt (vervangt de afbeelding-schuifregelaar)</label>
+      <label lang="pl-PL">Zmiana obrazu po kliknięciu w polu ilości (zastępuje suwak obrazu)</label>
+      <label lang="sv-SE">Bildbyte när du klickar i kvantitetsfältet (ersätter bildslider)</label>
+      <label lang="bg-BG">Смяна на изображението при щракване върху полето за количество (замества плъзгача за изображения)</label>
+      <label lang="cs-CZ">Změna obrázku při kliknutí do pole množství (nahrazuje posuvník obrázku)</label>
+      <label lang="pt-PT">Mudança de imagem ao clicar no campo de quantidade (substitui o cursor de imagem)</label>
+      <label lang="hr-HR">Képváltás a mennyiség mezőre kattintva (helyettesíti a kép csúszkát)</label>
+      <label lang="tr-TR">Miktar alanına tıklandığında görüntü değişimi (görüntü kaydırıcısının yerini alır)</label>
+      <label lang="da-DK">Billedskift ved klik i mængdefeltet (erstatter billedslider)</label>
+      <label lang="ru-RU">Смена изображения при нажатии на поле количества (заменяет ползунок изображения)</label>
+      <label lang="lv-LV">Attēla maiņa, noklikšķinot uz daudzuma lauka (aizstāj attēla slīdni)</label>
+      <label lang="id-ID">Perubahan gambar saat mengklik di bidang kuantitas (menggantikan penggeser gambar)</label>
+      <label lang="el-GR">Αλλαγή εικόνας όταν κάνετε κλικ στο πεδίο ποσότητας (αντικαθιστά το ρυθμιστικό εικόνας)</label>
+      <label lang="de-CH">Bildwechsel beim Anklicken des Mengenfeldes (ersetzt den Image Slider)</label>
+      <defaultValue>true</defaultValue>
+    </input-field>
+    <input-field type="single-select">
+      <name>positionThumbsImageSlider</name>
+      <label>Position of thumbnails in the image slider after changing images</label>
+      <label lang="de-DE">Position der Thumbnails im Bildslider nach einem Bildwechsel</label>
+      <label lang="es-ES">Posición de las miniaturas en el deslizador de imágenes después de cambiar las imágenes</label>
+      <label lang="fi-FI">Pienoiskuvien sijainti kuvien liukusäätimessä kuvien vaihtamisen jälkeen</label>
+      <label lang="fr-FR">Position des vignettes dans la barre de défilement des images après modification des images</label>
+      <label lang="it-IT">Posizione delle miniature nel cursore immagini dopo la modifica delle immagini</label>
+      <label lang="nb-NO">Plassering av miniatyrbilder i bildeglidebryteren etter endring av bilder</label>
+      <label lang="nl-NL">Positie van miniaturen in de schuifregelaar na het wijzigen van afbeeldingen</label>
+      <label lang="pl-PL">Pozycja miniatur w suwaku obrazów po zmianie obrazów</label>
+      <label lang="sv-SE">Miniatyrbildernas position i bildreglaget efter att bilderna har bytts ut</label>
+      <label lang="bg-BG">Позиция на миниатюрите в плъзгача за изображения след промяна на изображенията</label>
+      <label lang="cs-CZ">Pozice miniatur v posuvníku obrázků po změně obrázků</label>
+      <label lang="pt-PT">Posição das miniaturas no seletor de imagens depois de alterar as imagens</label>
+      <label lang="hr-HR">A miniatűrök pozíciója a képcsúszkában a képek módosítása után</label>
+      <label lang="tr-TR">Görüntüleri değiştirdikten sonra görüntü kaydırıcısındaki küçük resimlerin konumu</label>
+      <label lang="da-DK">Placering af thumbnails i billedslideren efter ændring af billeder</label>
+      <label lang="ru-RU">Положение миниатюр в слайдере изображений после смены изображений</label>
+      <label lang="lv-LV">Miniatūru atrašanās vieta attēlu slīdnē pēc attēlu maiņas</label>
+      <label lang="id-ID">Posisi gambar mini dalam penggeser gambar setelah mengubah gambar</label>
+      <label lang="el-GR">Θέση των μικρογραφιών στο ρυθμιστικό εικόνων μετά την αλλαγή εικόνων</label>
+      <label lang="de-CH">Position der Thumbnails im Bildslider nach einem Bildwechsel</label>
+      <defaultValue>left</defaultValue>
+      <options>
+        <option>
+          <id>left</id>
+          <name>Left</name>
+          <name lang="de-DE">Links</name>
+          <name lang="es-ES">Izquierda</name>
+          <name lang="fi-FI">Vasen</name>
+          <name lang="fr-FR">Gauche</name>
+          <name lang="it-IT">A sinistra</name>
+          <name lang="nb-NO">Venstre</name>
+          <name lang="nl-NL">Links</name>
+          <name lang="pl-PL">Lewa</name>
+          <name lang="sv-SE">Vänster</name>
+          <name lang="bg-BG">Вляво</name>
+          <name lang="cs-CZ">Vlevo</name>
+          <name lang="pt-PT">Esquerda</name>
+          <name lang="hr-HR">Balra</name>
+          <name lang="tr-TR">Sol</name>
+          <name lang="da-DK">Til venstre</name>
+          <name lang="ru-RU">Слева</name>
+          <name lang="lv-LV">Kreisā</name>
+          <name lang="id-ID">Kiri</name>
+          <name lang="el-GR">Αριστερά</name>
+          <name lang="de-CH">Links</name>
+        </option>
+        <option>
+          <id>underneath</id>
+          <name>Unterneath</name>
+          <name lang="de-DE">Unterhalb</name>
+          <name lang="es-ES">Unterneath</name>
+          <name lang="fi-FI">Unterneath</name>
+          <name lang="fr-FR">En dessous</name>
+          <name lang="it-IT">Sottoterra</name>
+          <name lang="nb-NO">Under</name>
+          <name lang="nl-NL">Onder</name>
+          <name lang="pl-PL">Unterneath</name>
+          <name lang="sv-SE">Under ytan</name>
+          <name lang="bg-BG">Унтернейт</name>
+          <name lang="cs-CZ">Pod</name>
+          <name lang="pt-PT">Unterneath</name>
+          <name lang="hr-HR">Unterneath</name>
+          <name lang="tr-TR">Unterneath</name>
+          <name lang="da-DK">Underneden</name>
+          <name lang="ru-RU">Unterneath</name>
+          <name lang="lv-LV">Zem</name>
+          <name lang="id-ID">Unterneath</name>
+          <name lang="el-GR">Unterneath</name>
+          <name lang="de-CH">Unterhalb</name>
+        </option>
+      </options>
+    </input-field>
+    <input-field type="bool">
+      <name>useVariantImageOnXAxis</name>
+      <label>Use the variant image as a table header on the X-axis</label>
+      <label lang="de-DE">Verwenden Sie das Variantenbild als Tabellenkopf auf der X-Achse</label>
+      <label lang="es-ES">Utilice la imagen de la variante como cabecera de la tabla en el eje X</label>
+      <label lang="fi-FI">Käytä muunnoskuvaa X-akselin taulukkootsikkona.</label>
+      <label lang="fr-FR">Utiliser l'image de la variante comme en-tête de tableau sur l'axe des X</label>
+      <label lang="it-IT">Utilizzare l'immagine della variante come intestazione della tabella sull'asse X.</label>
+      <label lang="nb-NO">Bruk variantbildet som tabelloverskrift på X-aksen</label>
+      <label lang="nl-NL">Gebruik de variantafbeelding als tabelkop op de X-as</label>
+      <label lang="pl-PL">Użyj obrazu wariantu jako nagłówka tabeli na osi X</label>
+      <label lang="sv-SE">Använd variantbilden som tabellrubrik på X-axeln</label>
+      <label lang="bg-BG">Използвайте изображението на варианта като заглавие на таблицата по оста X</label>
+      <label lang="cs-CZ">Použití obrázku varianty jako záhlaví tabulky na ose X</label>
+      <label lang="pt-PT">Utilizar a imagem da variante como cabeçalho de tabela no eixo X</label>
+      <label lang="hr-HR">A változat képének használata táblázatfejlécként az X-tengelyen</label>
+      <label lang="tr-TR">Varyant görüntüsünü X ekseninde tablo başlığı olarak kullanın</label>
+      <label lang="da-DK">Brug variantbilledet som tabeloverskrift på X-aksen</label>
+      <label lang="ru-RU">Используйте изображение варианта в качестве заголовка таблицы по оси X</label>
+      <label lang="lv-LV">Izmantojiet varianta attēlu kā tabulas galveni uz X ass</label>
+      <label lang="id-ID">Gunakan gambar varian sebagai tajuk tabel pada sumbu X</label>
+      <label lang="el-GR">Χρησιμοποιήστε την εικόνα παραλλαγής ως επικεφαλίδα πίνακα στον άξονα Χ.</label>
+      <label lang="de-CH">Verwenden Sie das Variantenbild als Tabellenkopf auf der X-Achse</label>
+      <defaultValue>false</defaultValue>
+    </input-field>
+    <input-field type="bool">
+      <name>useVariantImageOnYAxis</name>
+      <label>Use the variant image as a table header on the Y-axis</label>
+      <label lang="de-DE">Verwenden Sie das Variantenbild als Tabellenkopf auf der Y-Achse</label>
+      <label lang="es-ES">Utilice la imagen de la variante como cabecera de la tabla en el eje Y</label>
+      <label lang="fi-FI">Käytä muunnoskuvaa Y-akselin taulukkootsikkona.</label>
+      <label lang="fr-FR">Utiliser l'image de la variante comme en-tête de tableau sur l'axe des ordonnées</label>
+      <label lang="it-IT">Utilizzare l'immagine della variante come intestazione della tabella sull'asse Y.</label>
+      <label lang="nb-NO">Bruk variantbildet som tabelloverskrift på Y-aksen</label>
+      <label lang="nl-NL">Gebruik de variantafbeelding als tabelkop op de Y-as</label>
+      <label lang="pl-PL">Użyj obrazu wariantu jako nagłówka tabeli na osi Y.</label>
+      <label lang="sv-SE">Använd variantbilden som en tabellrubrik på Y-axeln</label>
+      <label lang="bg-BG">Използвайте изображението на варианта като заглавие на таблицата по оста Y</label>
+      <label lang="cs-CZ">Použití obrázku varianty jako záhlaví tabulky na ose Y</label>
+      <label lang="pt-PT">Utilizar a imagem da variante como cabeçalho de tabela no eixo Y</label>
+      <label lang="hr-HR">Használja a változat képét táblázatfejlécként az Y-tengelyen.</label>
+      <label lang="tr-TR">Varyant görüntüsünü Y ekseninde tablo başlığı olarak kullanın</label>
+      <label lang="da-DK">Brug variantbilledet som tabeloverskrift på Y-aksen</label>
+      <label lang="ru-RU">Используйте изображение варианта в качестве заголовка таблицы по оси Y</label>
+      <label lang="lv-LV">Izmantojiet varianta attēlu kā tabulas galveni uz Y ass</label>
+      <label lang="id-ID">Gunakan gambar varian sebagai tajuk tabel pada sumbu Y</label>
+      <label lang="el-GR">Χρησιμοποιήστε την εικόνα παραλλαγής ως επικεφαλίδα πίνακα στον άξονα Υ.</label>
+      <label lang="de-CH">Verwenden Sie das Variantenbild als Tabellenkopf auf der Y-Achse</label>
+      <defaultValue>false</defaultValue>
+    </input-field>
+  </card>
+  <card>
+    <title>Quantity field / warehouse</title>
+    <title lang="de-DE">Menge Feld/Lager</title>
+    <title lang="es-ES">Cantidad campo / almacén</title>
+    <title lang="fi-FI">Määrä kentällä / varastossa</title>
+    <title lang="fr-FR">Champ de quantité / entrepôt</title>
+    <title lang="it-IT">Quantità campo / magazzino</title>
+    <title lang="nb-NO">Mengde felt/lager</title>
+    <title lang="nl-NL">Hoeveelheid veld / magazijn</title>
+    <title lang="pl-PL">Pole ilości / magazyn</title>
+    <title lang="sv-SE">Kvantitet fält / lager</title>
+    <title lang="bg-BG">Количествено поле/склад</title>
+    <title lang="cs-CZ">Množstevní pole / sklad</title>
+    <title lang="pt-PT">Campo de quantidade / armazém</title>
+    <title lang="hr-HR">Mennyiség mező / raktár</title>
+    <title lang="tr-TR">Miktar alanı / depo</title>
+    <title lang="da-DK">Mængdefelt/lager</title>
+    <title lang="ru-RU">Количество поле / склад</title>
+    <title lang="lv-LV">Daudzuma lauks / noliktava</title>
+    <title lang="id-ID">Bidang kuantitas / gudang</title>
+    <title lang="el-GR">Ποσότητα πεδίου/αποθήκης</title>
+    <title lang="de-CH">Menge Feld/Lager</title>
+    <input-field type="single-select">
+      <name>VariantMatrixQuantityField</name>
+      <label>Quantity field / Stock</label>
+      <label lang="de-DE">Mengenfeld / Lagerbestand</label>
+      <label lang="es-ES">Campo Cantidad / Stock</label>
+      <label lang="fi-FI">Määräkenttä / Varasto</label>
+      <label lang="fr-FR">Champ de quantité / Stock</label>
+      <label lang="it-IT">Campo quantità / Stock</label>
+      <label lang="nb-NO">Mengdefelt / Lager</label>
+      <label lang="nl-NL">Hoeveelheid veld / Voorraad</label>
+      <label lang="pl-PL">Pole ilości / stan magazynowy</label>
+      <label lang="sv-SE">Kvantitetsfält / Lager</label>
+      <label lang="bg-BG">Поле за количество / запас</label>
+      <label lang="cs-CZ">Množstevní pole / Skladové zásoby</label>
+      <label lang="pt-PT">Campo de quantidade / stock</label>
+      <label lang="hr-HR">Mennyiség mező / Készlet</label>
+      <label lang="tr-TR">Miktar alanı / Stok</label>
+      <label lang="da-DK">Mængdefelt / lager</label>
+      <label lang="ru-RU">Поле количества / Запас</label>
+      <label lang="lv-LV">Daudzuma lauks / Krājumi</label>
+      <label lang="id-ID">Bidang kuantitas / Stok</label>
+      <label lang="el-GR">Πεδίο ποσότητας / Απόθεμα</label>
+      <label lang="de-CH">Mengenfeld / Lagerbestand</label>
+      <defaultValue>text</defaultValue>
+      <helpText>Quantity field as text field or dropdown. The text field has better performance.</helpText>
+      <helpText lang="de-DE">Mengenfeld als Textfeld oder Dropdown. Das Textfeld hat eine bessere Leistung.</helpText>
+      <helpText lang="es-ES">Campo de cantidad como campo de texto o desplegable. El campo de texto tiene un mejor rendimiento.</helpText>
+      <helpText lang="fi-FI">Määräkenttä tekstikenttänä tai pudotusvalikkona. Tekstikentän suorituskyky on parempi.</helpText>
+      <helpText lang="fr-FR">Le champ de quantité peut être un champ de texte ou une liste déroulante. Le champ texte est plus performant.</helpText>
+      <helpText lang="it-IT">Il campo quantità è un campo di testo o un menu a tendina. Il campo di testo ha prestazioni migliori.</helpText>
+      <helpText lang="nb-NO">Mengdefelt som tekstfelt eller rullegardinmeny. Tekstfeltet har bedre ytelse.</helpText>
+      <helpText lang="nl-NL">Hoeveelheid veld als tekstveld of dropdown. Het tekstveld werkt beter.</helpText>
+      <helpText lang="pl-PL">Pole ilości jako pole tekstowe lub rozwijane. Pole tekstowe ma lepszą wydajność.</helpText>
+      <helpText lang="sv-SE">Kvantitetsfält som textfält eller rullgardinsmeny. Textfältet har bättre prestanda.</helpText>
+      <helpText lang="bg-BG">Полето за количество като текстово поле или падащо меню. Текстовото поле има по-добра производителност.</helpText>
+      <helpText lang="cs-CZ">Pole množství jako textové pole nebo rozevírací seznam. Textové pole má lepší výkon.</helpText>
+      <helpText lang="pt-PT">O campo de quantidade é um campo de texto ou um menu pendente. O campo de texto tem um melhor desempenho.</helpText>
+      <helpText lang="hr-HR">Mennyiség mező szöveges mezőként vagy legördülő mezőként. A szöveges mező jobb teljesítményt nyújt.</helpText>
+      <helpText lang="tr-TR">Metin alanı veya açılır menü olarak miktar alanı. Metin alanı daha iyi performansa sahiptir.</helpText>
+      <helpText lang="da-DK">Mængdefelt som tekstfelt eller dropdown. Tekstfeltet har bedre ydeevne.</helpText>
+      <helpText lang="ru-RU">Поле "Количество" может быть текстовым или выпадающим. Текстовое поле имеет лучшую производительность.</helpText>
+      <helpText lang="lv-LV">Daudzuma lauks kā teksta lauks vai nolaižamais lauks. Teksta laukam ir labāka veiktspēja.</helpText>
+      <helpText lang="id-ID">Bidang kuantitas sebagai bidang teks atau dropdown. Kolom teks memiliki performa yang lebih baik.</helpText>
+      <helpText lang="el-GR">Πεδίο ποσότητας ως πεδίο κειμένου ή πτυσσόμενο πεδίο. Το πεδίο κειμένου έχει καλύτερη απόδοση.</helpText>
+      <helpText lang="de-CH">Mengenfeld als Textfeld oder Dropdown. Das Textfeld hat eine bessere Leistung.</helpText>
+      <options>
+        <option>
+          <id>text</id>
+          <name>text</name>
+          <name lang="de-DE">Text</name>
+          <name lang="es-ES">texto</name>
+          <name lang="fi-FI">teksti</name>
+          <name lang="fr-FR">texte</name>
+          <name lang="it-IT">testo</name>
+          <name lang="nb-NO">tekst</name>
+          <name lang="nl-NL">tekst</name>
+          <name lang="pl-PL">tekst</name>
+          <name lang="sv-SE">text</name>
+          <name lang="bg-BG">текст</name>
+          <name lang="cs-CZ">text</name>
+          <name lang="pt-PT">texto</name>
+          <name lang="hr-HR">szöveg</name>
+          <name lang="tr-TR">Metin</name>
+          <name lang="da-DK">tekst</name>
+          <name lang="ru-RU">текст</name>
+          <name lang="lv-LV">teksts</name>
+          <name lang="id-ID">teks</name>
+          <name lang="el-GR">κείμενο</name>
+          <name lang="de-CH">Text</name>
+          <name>Text field</name>
+        </option>
+        <option>
+          <id>dropdown</id>
+          <name>dropdown</name>
+          <name lang="de-DE">Auswahlliste</name>
+          <name lang="es-ES">desplegable</name>
+          <name lang="fi-FI">pudotusvalikko</name>
+          <name lang="fr-FR">liste déroulante</name>
+          <name lang="it-IT">discesa</name>
+          <name lang="nb-NO">nedtrekksmeny</name>
+          <name lang="nl-NL">uitklapbaar</name>
+          <name lang="pl-PL">rozwijany</name>
+          <name lang="sv-SE">rullgardinsmeny</name>
+          <name lang="bg-BG">падащо меню</name>
+          <name lang="cs-CZ">rozevírací seznam</name>
+          <name lang="pt-PT">lista pendente</name>
+          <name lang="hr-HR">legördülő</name>
+          <name lang="tr-TR">açılır menü</name>
+          <name lang="da-DK">dropdown</name>
+          <name lang="ru-RU">выпадающий список</name>
+          <name lang="lv-LV">nolaižamais</name>
+          <name lang="id-ID">dropdown</name>
+          <name lang="el-GR">dropdown</name>
+          <name lang="de-CH">Auswahlliste</name>
+          <name>Dropdown list</name>
+        </option>
+      </options>
+    </input-field>
+    <input-field type="bool">
+      <name>VariantMatrixDisableIfNotInstock</name>
+      <label>Respect stock quantity</label>
+      <label lang="de-DE">Bestandsmenge beachten</label>
+      <label lang="es-ES">Respetar la cantidad de existencias</label>
+      <label lang="fi-FI">Varaston määrän kunnioittaminen</label>
+      <label lang="fr-FR">Respecter la quantité en stock</label>
+      <label lang="it-IT">Rispettare la quantità di scorte</label>
+      <label lang="nb-NO">Respekter lagermengde</label>
+      <label lang="nl-NL">Voorraadhoeveelheid respecteren</label>
+      <label lang="pl-PL">Przestrzeganie ilości zapasów</label>
+      <label lang="sv-SE">Respektera lagerkvantitet</label>
+      <label lang="bg-BG">Спазвайте количеството на запасите</label>
+      <label lang="cs-CZ">Respektovat množství zásob</label>
+      <label lang="pt-PT">Respeitar a quantidade em stock</label>
+      <label lang="hr-HR">A készlet mennyiségének tiszteletben tartása</label>
+      <label lang="tr-TR">Stok miktarına saygı gösterin</label>
+      <label lang="da-DK">Respekter lagermængden</label>
+      <label lang="ru-RU">Соблюдать количество запасов</label>
+      <label lang="lv-LV">Respektēt krājumu daudzumu</label>
+      <label lang="id-ID">Hormati kuantitas stok</label>
+      <label lang="el-GR">Σεβασμός της ποσότητας του αποθέματος</label>
+      <label lang="de-CH">Bestandsmenge beachten</label>
+      <defaultValue>false</defaultValue>
+      <helpText>If activated, you can only order as much as is in stock.</helpText>
+      <helpText lang="de-DE">Falls aktiviert, können Sie nur so viel bestellen, wie vorrätig ist.</helpText>
+      <helpText lang="es-ES">Si está activado, sólo puede pedir la cantidad que haya en stock.</helpText>
+      <helpText lang="fi-FI">Jos se aktivoidaan, voit tilata vain niin paljon kuin varastossa on.</helpText>
+      <helpText lang="fr-FR">Si elle est activée, vous ne pouvez commander que la quantité en stock.</helpText>
+      <helpText lang="it-IT">Se attivata, è possibile ordinare solo la quantità disponibile in magazzino.</helpText>
+      <helpText lang="nb-NO">Hvis den er aktivert, kan du bare bestille så mye som finnes på lager.</helpText>
+      <helpText lang="nl-NL">Als dit geactiveerd is, kun je alleen zoveel bestellen als er op voorraad is.</helpText>
+      <helpText lang="pl-PL">W przypadku aktywacji można zamówić tylko tyle, ile znajduje się w magazynie.</helpText>
+      <helpText lang="sv-SE">Om den är aktiverad kan du bara beställa så mycket som finns i lager.</helpText>
+      <helpText lang="bg-BG">Ако е активирана, можете да поръчате само толкова, колкото има в наличност.</helpText>
+      <helpText lang="cs-CZ">Pokud je aktivován, můžete si objednat pouze tolik, kolik je na skladě.</helpText>
+      <helpText lang="pt-PT">Se estiver ativado, só pode encomendar a quantidade existente em stock.</helpText>
+      <helpText lang="hr-HR">Ha aktiválja, csak annyit rendelhet, amennyi a készleten van.</helpText>
+      <helpText lang="tr-TR">Etkinleştirilirse, yalnızca stokta olduğu kadar sipariş verebilirsiniz.</helpText>
+      <helpText lang="da-DK">Hvis den er aktiveret, kan du kun bestille så meget, som der er på lager.</helpText>
+      <helpText lang="ru-RU">Если он активирован, вы можете заказать только то количество, которое есть на складе.</helpText>
+      <helpText lang="lv-LV">Ja tas ir aktivizēts, varat pasūtīt tikai tik daudz, cik ir noliktavā.</helpText>
+      <helpText lang="id-ID">Jika diaktifkan, Anda hanya dapat memesan sebanyak yang tersedia.</helpText>
+      <helpText lang="el-GR">Εάν ενεργοποιηθεί, μπορείτε να παραγγείλετε μόνο όση ποσότητα υπάρχει σε απόθεμα.</helpText>
+      <helpText lang="de-CH">Falls aktiviert, können Sie nur so viel bestellen, wie vorrätig ist.</helpText>
+    </input-field>
+    <input-field type="bool">
+      <name>VariantMatrixShowStockQuantity</name>
+      <label>Show stock quantity</label>
+      <label lang="de-DE">Bestandsmenge anzeigen</label>
+      <label lang="es-ES">Mostrar cantidad de existencias</label>
+      <label lang="fi-FI">Näytä varastomäärä</label>
+      <label lang="fr-FR">Afficher la quantité en stock</label>
+      <label lang="it-IT">Mostra la quantità di scorte</label>
+      <label lang="nb-NO">Vis antall på lager</label>
+      <label lang="nl-NL">Voorraadaantal tonen</label>
+      <label lang="pl-PL">Pokaż ilość zapasów</label>
+      <label lang="sv-SE">Visa lagerkvantitet</label>
+      <label lang="bg-BG">Показване на количеството на склад</label>
+      <label lang="cs-CZ">Zobrazit skladové množství</label>
+      <label lang="pt-PT">Mostrar a quantidade em stock</label>
+      <label lang="hr-HR">Készletmennyiség megjelenítése</label>
+      <label lang="tr-TR">Stok miktarını göster</label>
+      <label lang="da-DK">Vis lagermængde</label>
+      <label lang="ru-RU">Показать количество на складе</label>
+      <label lang="lv-LV">Rādīt krājumu daudzumu</label>
+      <label lang="id-ID">Tampilkan jumlah stok</label>
+      <label lang="el-GR">Εμφάνιση ποσότητας αποθέματος</label>
+      <label lang="de-CH">Bestandsmenge anzeigen</label>
+      <defaultValue>false</defaultValue>
+    </input-field>
+    <input-field type="int">
+      <name>VariantMatrixStockQuantityDisplayThresholdLow</name>
+      <label>Threshold stock level display below</label>
+      <label lang="de-DE">Schwellenwert der Bestandsanzeige unten</label>
+      <label lang="es-ES">Indicación del nivel de existencias por debajo del umbral</label>
+      <label lang="fi-FI">Kynnysvarastotason näyttö alla</label>
+      <label lang="fr-FR">Seuil d'affichage du niveau de stock en dessous de</label>
+      <label lang="it-IT">Visualizzazione del livello di scorte di soglia inferiore</label>
+      <label lang="nb-NO">Terskelverdien for lagernivået vises under</label>
+      <label lang="nl-NL">Weergave drempel voorraadniveau onder</label>
+      <label lang="pl-PL">Wyświetlanie progowego poziomu zapasów poniżej</label>
+      <label lang="sv-SE">Tröskelvärde för lagernivå visas under</label>
+      <label lang="bg-BG">Показване на праговото ниво на запасите под</label>
+      <label lang="cs-CZ">Zobrazení prahové úrovně zásob pod</label>
+      <label lang="pt-PT">Indicação do nível de existências abaixo do limiar</label>
+      <label lang="hr-HR">Készletszint küszöbérték alatti kijelzés</label>
+      <label lang="tr-TR">Eşik stok seviyesi göstergesi aşağıda</label>
+      <label lang="da-DK">Visning af tærskellagerniveau under</label>
+      <label lang="ru-RU">Отображение порогового уровня запасов ниже</label>
+      <label lang="lv-LV">Zemāka krājumu sliekšņa līmeņa displejs</label>
+      <label lang="id-ID">Tampilan tingkat stok ambang batas di bawah ini</label>
+      <label lang="el-GR">Εμφάνιση κατώτατου επιπέδου αποθέματος κάτω από το κατώτατο όριο</label>
+      <label lang="de-CH">Schwellenwert der Bestandsanzeige unten</label>
+      <defaultValue>0</defaultValue>
+      <helpText>Threshold, but the actual warehouse stock is displayed. Below this threshold, the system displays that the warehouse stock is less than this value. Display warehouse stock must be activated.</helpText>
+      <helpText lang="de-DE">Schwellenwert, aber der tatsächliche Lagerbestand wird angezeigt. Unterhalb dieses Schwellenwertes zeigt das System an, dass der Lagerbestand unter diesem Wert liegt. Lagerbestand anzeigen muss aktiviert sein.</helpText>
+      <helpText lang="es-ES">Umbral, pero se muestra el stock real del almacén. Por debajo de este umbral, el sistema muestra que las existencias del almacén son inferiores a este valor. La visualización de las existencias en almacén debe estar activada.</helpText>
+      <helpText lang="fi-FI">Kynnysarvo, mutta todellinen varastovarasto näytetään. Tämän kynnysarvon alapuolella järjestelmä näyttää, että varastovarasto on alle tämän arvon. Varastovaraston näyttäminen on aktivoitava.</helpText>
+      <helpText lang="fr-FR">En dessous de ce seuil, le système affiche que le stock magasin est inférieur à cette valeur. En dessous de ce seuil, le système affiche que le stock magasin est inférieur à cette valeur. L'affichage du stock magasin doit être activé.</helpText>
+      <helpText lang="it-IT">Soglia, ma viene visualizzata l'effettiva giacenza di magazzino. Al di sotto di questa soglia, il sistema visualizza che le scorte di magazzino sono inferiori a questo valore. È necessario attivare la visualizzazione delle scorte di magazzino.</helpText>
+      <helpText lang="nb-NO">Terskelverdi, men den faktiske lagerbeholdningen vises. Under denne terskelen viser systemet at lagerbeholdningen er mindre enn denne verdien. Vis lagerbeholdning må være aktivert.</helpText>
+      <helpText lang="nl-NL">Drempel, maar de werkelijke magazijnvoorraad wordt weergegeven. Onder deze drempel geeft het systeem aan dat de magazijnvoorraad lager is dan deze waarde. De magazijnvoorraad moet worden weergegeven.</helpText>
+      <helpText lang="pl-PL">Próg, ale wyświetlany jest rzeczywisty stan magazynu. Poniżej tego progu system wyświetla, że stan magazynu jest mniejszy niż ta wartość. Wyświetlanie stanu magazynu musi być aktywowane.</helpText>
+      <helpText lang="sv-SE">Tröskelvärde, men det faktiska lagret visas. Under detta tröskelvärde visar systemet att lagret är mindre än detta värde. Visning av lager måste vara aktiverat.</helpText>
+      <helpText lang="bg-BG">Праг, но се показва действителната складова наличност. Под този праг системата показва, че складовата наличност е по-малка от тази стойност. Трябва да се активира функцията за показване на складовата наличност.</helpText>
+      <helpText lang="cs-CZ">Threshold, ale zobrazí se skutečná skladová zásoba. Pod touto prahovou hodnotou systém zobrazí, že skladová zásoba je nižší než tato hodnota. Zobrazení skladové zásoby musí být aktivováno.</helpText>
+      <helpText lang="pt-PT">Limiar, mas o estoque real em depósito é exibido. Abaixo desse limite, o sistema exibe que o estoque em depósito é menor que esse valor. A exibição do estoque em depósito deve ser ativada.</helpText>
+      <helpText lang="hr-HR">Küszöbérték, de a tényleges raktárkészlet jelenik meg. A küszöbérték alatt a rendszer azt jeleníti meg, hogy a raktárkészlet kevesebb, mint ez az érték. A raktárkészlet megjelenítését aktiválni kell.</helpText>
+      <helpText lang="tr-TR">Eşik, ancak gerçek depo stoğu görüntülenir. Bu eşiğin altında, sistem depo stokunun bu değerden daha az olduğunu görüntüler. Depo stoğunun gösterilmesi etkinleştirilmelidir.</helpText>
+      <helpText lang="da-DK">Tærskel, men den faktiske lagerbeholdning vises. Under denne tærskel viser systemet, at lagerbeholdningen er mindre end denne værdi. Vis lagerbeholdning skal være aktiveret.</helpText>
+      <helpText lang="ru-RU">Порог, но отображается фактический складской запас. Ниже этого порога система отображает, что складской запас меньше этого значения. Необходимо активировать отображение складского запаса.</helpText>
+      <helpText lang="lv-LV">Robežvērtība, bet tiek parādīts faktiskais noliktavas krājums. Zem šīs robežvērtības sistēma parāda, ka noliktavas krājumi ir mazāki par šo vērtību. Jāaktivizē noliktavas krājumu rādīšana.</helpText>
+      <helpText lang="id-ID">Ambang batas, tetapi stok gudang yang sebenarnya ditampilkan. Di bawah ambang batas ini, sistem akan menampilkan bahwa stok gudang kurang dari nilai ini. Tampilan stok gudang harus diaktifkan.</helpText>
+      <helpText lang="el-GR">Κατώτατο όριο, αλλά εμφανίζεται το πραγματικό απόθεμα της αποθήκης. Κάτω από αυτό το όριο, το σύστημα εμφανίζει ότι το απόθεμα της αποθήκης είναι μικρότερο από αυτή την τιμή. Πρέπει να είναι ενεργοποιημένη η εμφάνιση του αποθέματος αποθήκης.</helpText>
+      <helpText lang="de-CH">Schwellenwert, aber der tatsächliche Lagerbestand wird angezeigt. Unterhalb dieses Schwellenwertes zeigt das System an, dass der Lagerbestand unter diesem Wert liegt. Lagerbestand anzeigen muss aktiviert sein.</helpText>
+    </input-field>
+    <input-field type="int">
+      <name>VariantMatrixStockQuantityDisplayThresholdHigh</name>
+      <label>Threshold stock level display above</label>
+      <label lang="de-DE">Schwellenwert für die Bestandsanzeige oben</label>
+      <label lang="es-ES">Indicación del nivel de existencias por encima del umbral</label>
+      <label lang="fi-FI">Kynnysvarastotason näyttö edellä</label>
+      <label lang="fr-FR">Seuil d'affichage du niveau de stock au-dessus</label>
+      <label lang="it-IT">Visualizzazione del livello di scorta sopra la soglia</label>
+      <label lang="nb-NO">Terskelverdi for visning av lagernivå over</label>
+      <label lang="nl-NL">Weergave drempel voorraadniveau boven</label>
+      <label lang="pl-PL">Wyświetlanie progowego poziomu zapasów powyżej</label>
+      <label lang="sv-SE">Tröskelvärde för visning av lagernivå ovan</label>
+      <label lang="bg-BG">Показване на нивото на запасите над прага</label>
+      <label lang="cs-CZ">Zobrazení prahové úrovně zásob nad</label>
+      <label lang="pt-PT">Indicação do nível de existências acima do limiar</label>
+      <label lang="hr-HR">Készletszint küszöbérték kijelzés felett</label>
+      <label lang="tr-TR">Yukarıdaki eşik stok seviyesi göstergesi</label>
+      <label lang="da-DK">Tærskel for visning af lagerniveau over</label>
+      <label lang="ru-RU">Отображение порогового уровня запасов выше</label>
+      <label lang="lv-LV">Krājumu līmeņa sliekšņa rādījums virs</label>
+      <label lang="id-ID">Tampilan tingkat stok ambang batas di atas</label>
+      <label lang="el-GR">Εμφάνιση επιπέδου αποθέματος κατωφλίου παραπάνω</label>
+      <label lang="de-CH">Schwellenwert für die Bestandsanzeige oben</label>
+      <defaultValue>0</defaultValue>
+      <helpText>Threshold, but the actual stock level is hidden. Above this threshold, the system displays that the warehouse stock is greater than this value. Display warehouse stock must be activated.</helpText>
+      <helpText lang="de-DE">Schwellenwert, aber der tatsächliche Lagerbestand wird ausgeblendet. Oberhalb dieses Schwellenwerts zeigt das System an, dass der Lagerbestand größer als dieser Wert ist. Lagerbestand anzeigen muss aktiviert sein.</helpText>
+      <helpText lang="es-ES">Umbral, pero se oculta el nivel real de existencias. Por encima de este umbral, el sistema muestra que las existencias del almacén son superiores a este valor. Visualizar stock de almacén debe estar activado.</helpText>
+      <helpText lang="fi-FI">Kynnysarvo, mutta todellinen varastotaso on piilotettu. Tämän kynnysarvon yläpuolella järjestelmä näyttää, että varaston varasto on suurempi kuin tämä arvo. Varastovaraston näyttäminen on aktivoitava.</helpText>
+      <helpText lang="fr-FR">mais le niveau de stock réel est caché. Au-dessus de ce seuil, le système affiche que le stock de l'entrepôt est supérieur à cette valeur. L'affichage du stock magasin doit être activé.</helpText>
+      <helpText lang="it-IT">Soglia, ma il livello effettivo delle scorte è nascosto. Al di sopra di questa soglia, il sistema visualizza che le scorte di magazzino sono superiori a questo valore. La visualizzazione delle scorte di magazzino deve essere attivata.</helpText>
+      <helpText lang="nb-NO">Terskelverdi, men det faktiske lagernivået er skjult. Over denne terskelen viser systemet at lagerbeholdningen er større enn denne verdien. Vis lagerbeholdning må være aktivert.</helpText>
+      <helpText lang="nl-NL">Drempel, maar het werkelijke voorraadniveau is verborgen. Boven deze drempel geeft het systeem aan dat de magazijnvoorraad groter is dan deze waarde. De magazijnvoorraad moet worden weergegeven.</helpText>
+      <helpText lang="pl-PL">Próg, ale rzeczywisty poziom zapasów jest ukryty. Powyżej tego progu system wyświetla, że stan magazynu jest większy niż ta wartość. Wyświetlanie stanu magazynu musi być włączone.</helpText>
+      <helpText lang="sv-SE">Tröskelvärde, men den faktiska lagernivån är dold. Över detta tröskelvärde visar systemet att lagernivån är större än detta värde. Visning av lager måste vara aktiverat.</helpText>
+      <helpText lang="bg-BG">Праг, но действителното ниво на запасите е скрито. При надвишаване на този праг системата показва, че складовата наличност е по-голяма от тази стойност. Трябва да се активира функцията Display warehouse stock (Показване на складовата наличност).</helpText>
+      <helpText lang="cs-CZ">Threshold, ale skutečný stav zásob je skrytý. Při překročení této prahové hodnoty systém zobrazí, že skladové zásoby jsou vyšší než tato hodnota. Zobrazení skladové zásoby musí být aktivováno.</helpText>
+      <helpText lang="pt-PT">Limiar, mas o nível real de estoque está oculto. Acima desse limite, o sistema exibe que o estoque em depósito é maior que esse valor. Exibir estoque em depósito deve ser ativado.</helpText>
+      <helpText lang="hr-HR">Küszöbérték, de a tényleges készletszint rejtve marad. E küszöbérték felett a rendszer megjeleníti, hogy a raktárkészlet meghaladja ezt az értéket. A raktárkészlet megjelenítését aktiválni kell.</helpText>
+      <helpText lang="tr-TR">Eşik, ancak gerçek stok seviyesi gizlenir. Bu eşiğin üzerinde, sistem depo stokunun bu değerden daha yüksek olduğunu gösterir. Depo stoğunun gösterilmesi etkinleştirilmelidir.</helpText>
+      <helpText lang="da-DK">Tærskel, men det faktiske lagerniveau er skjult. Over denne tærskel viser systemet, at lagerbeholdningen er større end denne værdi. Vis lagerbeholdning skal være aktiveret.</helpText>
+      <helpText lang="ru-RU">Порог, но фактический уровень запасов скрыт. При превышении этого порога система отображает, что складской запас превышает это значение. Отображение складских запасов должно быть активировано.</helpText>
+      <helpText lang="lv-LV">Robežvērtība, bet faktiskais krājumu līmenis ir slēpts. Virs šīs robežvērtības sistēma parāda, ka noliktavas krājumi ir lielāki par šo vērtību. Jāaktivizē noliktavas krājumu rādīšana.</helpText>
+      <helpText lang="id-ID">Ambang batas, tetapi tingkat stok yang sebenarnya tersembunyi. Di atas ambang batas ini, sistem akan menampilkan bahwa stok gudang lebih besar dari nilai ini. Tampilan stok gudang harus diaktifkan.</helpText>
+      <helpText lang="el-GR">Κατώφλι, αλλά το πραγματικό επίπεδο αποθέματος είναι κρυφό. Πάνω από αυτό το όριο, το σύστημα εμφανίζει ότι το απόθεμα της αποθήκης είναι μεγαλύτερο από αυτή την τιμή. Πρέπει να είναι ενεργοποιημένη η επιλογή Εμφάνιση αποθέματος αποθήκης.</helpText>
+      <helpText lang="de-CH">Schwellenwert, aber der tatsächliche Lagerbestand wird ausgeblendet. Oberhalb dieses Schwellenwerts zeigt das System an, dass der Lagerbestand größer als dieser Wert ist. Lagerbestand anzeigen muss aktiviert sein.</helpText>
+    </input-field>
+  </card>
+  <card>
+    <title>For layout "Standard"</title>
+    <title lang="de-DE">Für Layout "Standard"</title>
+    <title lang="es-ES">Para el diseño "Estándar</title>
+    <title lang="fi-FI">Asettelua "Standard" varten</title>
+    <title lang="fr-FR">Pour la mise en page "Standard"</title>
+    <title lang="it-IT">Per il layout "Standard"</title>
+    <title lang="nb-NO">For layout "Standard"</title>
+    <title lang="nl-NL">Voor opmaak "Standaard"</title>
+    <title lang="pl-PL">Dla układu "Standard"</title>
+    <title lang="sv-SE">För layout "Standard"</title>
+    <title lang="bg-BG">За оформление "Стандарт"</title>
+    <title lang="cs-CZ">Pro rozložení "Standardní"</title>
+    <title lang="pt-PT">Para a apresentação "Standard"</title>
+    <title lang="hr-HR">"Standard" elrendezés esetén</title>
+    <title lang="tr-TR">"Standart" düzeni için</title>
+    <title lang="da-DK">For layout "Standard"</title>
+    <title lang="ru-RU">Для макета "Стандарт"</title>
+    <title lang="lv-LV">Par izkārtojumu "Standarta"</title>
+    <title lang="id-ID">Untuk tata letak "Standar"</title>
+    <title lang="el-GR">Για διάταξη "Standard"</title>
+    <title lang="de-CH">Für Layout "Standard"</title>
+    <input-field type="bool">
+      <name>variantMatrixLayoutStandardEnableShopwareSelection</name>
+      <label>Additionally show Shopware variant selection with shopping cart</label>
+      <label lang="de-DE">Shopware Variantenauswahl zusätzlich mit Warenkorb anzeigen</label>
+      <label lang="es-ES">Mostrar adicionalmente la selección de variantes de Shopware con el carrito de la compra</label>
+      <label lang="fi-FI">Näytä lisäksi Shopware-varianttivalikoima ostoskorin kanssa</label>
+      <label lang="fr-FR">Afficher en plus la sélection des variantes Shopware avec le panier d'achat</label>
+      <label lang="it-IT">Mostra inoltre la selezione di varianti Shopware con il carrello degli acquisti</label>
+      <label lang="nb-NO">Vis i tillegg Shopware-variantvalg med handlekurv</label>
+      <label lang="nl-NL">Shopware-variant selectie toevoegen aan winkelwagen</label>
+      <label lang="pl-PL">Dodatkowo pokaż wybór wariantu Shopware z koszykiem zakupów</label>
+      <label lang="sv-SE">Visa dessutom Shopware-variantval med kundvagn</label>
+      <label lang="bg-BG">Допълнително покажете избора на вариант на Shopware с количката за пазаруване</label>
+      <label lang="cs-CZ">Zobrazit navíc výběr variant Shopware s nákupním košíkem</label>
+      <label lang="pt-PT">Mostrar adicionalmente a seleção de variantes do Shopware com o carrinho de compras</label>
+      <label lang="hr-HR">Továbbá a Shopware variáns kiválasztás megjelenítése a kosárral együtt</label>
+      <label lang="tr-TR">Ayrıca Shopware varyant seçimini alışveriş sepetiyle birlikte gösterme</label>
+      <label lang="da-DK">Vis desuden valg af Shopware-variant med indkøbskurven</label>
+      <label lang="ru-RU">Дополнительно отображайте выбор вариантов Shopware в корзине покупок</label>
+      <label lang="lv-LV">Papildus parādīt Shopware variantu izvēli ar iepirkumu grozu</label>
+      <label lang="id-ID">Selain itu, tampilkan pilihan varian Shopware dengan keranjang belanja</label>
+      <label lang="el-GR">Επιπλέον, εμφανίστε την επιλογή παραλλαγής Shopware με το καλάθι αγορών</label>
+      <label lang="de-CH">Shopware Variantenauswahl zusätzlich mit Warenkorb anzeigen</label>
+      <label lang="es-ES">Mostrar adicionalmente la selección de variantes de Shopware con el carrito de la compra</label>
+      <label lang="fi-FI">Näytä lisäksi Shopware-varianttivalikoima ostoskorin kanssa</label>
+      <label lang="fr-FR">Afficher en plus la sélection des variantes Shopware avec le panier d'achat</label>
+      <label lang="it-IT">Mostra inoltre la selezione di varianti Shopware con il carrello degli acquisti</label>
+      <label lang="nb-NO">Vis i tillegg Shopware-variantvalg med handlekurv</label>
+      <label lang="nl-NL">Shopware-variant selectie toevoegen aan winkelwagen</label>
+      <label lang="pl-PL">Dodatkowo pokaż wybór wariantu Shopware z koszykiem zakupów</label>
+      <label lang="sv-SE">Visa dessutom Shopware-variantval med kundvagn</label>
+      <label lang="bg-BG">Допълнително покажете избора на вариант на Shopware с количката за пазаруване</label>
+      <label lang="cs-CZ">Zobrazit navíc výběr variant Shopware s nákupním košíkem</label>
+      <label lang="pt-PT">Mostrar adicionalmente a seleção de variantes do Shopware com o carrinho de compras</label>
+      <label lang="hr-HR">Továbbá a Shopware variáns kiválasztás megjelenítése a kosárral együtt</label>
+      <label lang="tr-TR">Ayrıca alışveriş sepeti ile Shopware varyant seçimini gösterme</label>
+      <label lang="da-DK">Vis desuden valg af Shopware-variant med indkøbskurven</label>
+      <label lang="ru-RU">Дополнительно отображайте выбор вариантов Shopware в корзине покупок</label>
+      <label lang="lv-LV">Papildus parādīt Shopware variantu izvēli ar iepirkumu grozu</label>
+      <label lang="id-ID">Selain itu, tampilkan pilihan varian Shopware dengan keranjang belanja</label>
+      <label lang="el-GR">Επιπλέον, εμφανίστε την επιλογή παραλλαγής Shopware με το καλάθι αγορών</label>
+      <label lang="de-CH">Shopware Variantenauswahl zusätzlich mit Warenkorb anzeigen</label>
+      <helpText>With this option, the showpare variant selection is additionally displayed</helpText>
+      <helpText lang="de-DE">Mit dieser Option wird zusätzlich die Auswahl der Showpare-Variante angezeigt</helpText>
+      <helpText lang="es-ES">Con esta opción, se muestra además la selección de variantes showpare</helpText>
+      <helpText lang="fi-FI">Tämän vaihtoehdon avulla näytetään lisäksi showpare-vaihtoehdon valinta.</helpText>
+      <helpText lang="fr-FR">Cette option permet d'afficher en plus la sélection de la variante showpare.</helpText>
+      <helpText lang="it-IT">Con questa opzione, viene visualizzata in aggiunta la selezione della variante di showpare</helpText>
+      <helpText lang="nb-NO">Med dette alternativet vises i tillegg showpare-variantvalget</helpText>
+      <helpText lang="nl-NL">Met deze optie wordt de selectie van de showvariant extra weergegeven</helpText>
+      <helpText lang="pl-PL">W przypadku tej opcji dodatkowo wyświetlany jest wybór wariantu showpare</helpText>
+      <helpText lang="sv-SE">Med detta alternativ visas dessutom valet av showpare-variant</helpText>
+      <helpText lang="bg-BG">При тази опция се показва допълнително изборът на вариант на шоупар</helpText>
+      <helpText lang="cs-CZ">Při této možnosti se navíc zobrazí výběr varianty showpare.</helpText>
+      <helpText lang="pt-PT">Com esta opção, a seleção da variante showpare é apresentada adicionalmente</helpText>
+      <helpText lang="hr-HR">Ezzel az opcióval a showpare variáns kiválasztása is megjelenik.</helpText>
+      <helpText lang="tr-TR">Bu seçenekle, showpare varyant seçimi ek olarak görüntülenir</helpText>
+      <helpText lang="da-DK">Med denne indstilling vises valget af showpare-variant desuden</helpText>
+      <helpText lang="ru-RU">С помощью этой опции дополнительно отображается выбор варианта показа</helpText>
+      <helpText lang="lv-LV">Izmantojot šo opciju, papildus tiek parādīta parādītarī variantu izvēle.</helpText>
+      <helpText lang="id-ID">Dengan opsi ini, pilihan varian showpare juga ditampilkan</helpText>
+      <helpText lang="el-GR">Με αυτή την επιλογή, εμφανίζεται επιπλέον η επιλογή παραλλαγής showpare</helpText>
+      <helpText lang="de-CH">Mit dieser Option wird zusätzlich die Auswahl der Showpare-Variante angezeigt</helpText>
+      <helpText lang="es-ES">Con esta opción, se muestra además la selección de variantes showpare</helpText>
+      <helpText lang="fi-FI">Tämän vaihtoehdon avulla näytetään lisäksi showpare-vaihtoehdon valinta.</helpText>
+      <helpText lang="fr-FR">Cette option permet d'afficher en plus la sélection de la variante showpare.</helpText>
+      <helpText lang="it-IT">Con questa opzione, viene visualizzata in aggiunta la selezione della variante di showpare</helpText>
+      <helpText lang="nb-NO">Med dette alternativet vises i tillegg showpare-variantvalget</helpText>
+      <helpText lang="nl-NL">Met deze optie wordt de selectie van de showvariant extra weergegeven</helpText>
+      <helpText lang="pl-PL">W przypadku tej opcji dodatkowo wyświetlany jest wybór wariantu showpare</helpText>
+      <helpText lang="sv-SE">Med detta alternativ visas dessutom valet av showpare-variant</helpText>
+      <helpText lang="bg-BG">При тази опция се показва допълнително изборът на вариант на шоупар</helpText>
+      <helpText lang="cs-CZ">Při této možnosti se navíc zobrazí výběr varianty showpare.</helpText>
+      <helpText lang="pt-PT">Com esta opção, a seleção da variante showpare é apresentada adicionalmente</helpText>
+      <helpText lang="hr-HR">Ezzel az opcióval a showpare variáns kiválasztása is megjelenik.</helpText>
+      <helpText lang="tr-TR">Bu seçenekle, showpare varyant seçimi ek olarak görüntülenir</helpText>
+      <helpText lang="da-DK">Med denne indstilling vises valget af showpare-variant desuden</helpText>
+      <helpText lang="ru-RU">С помощью этой опции дополнительно отображается выбор варианта показа</helpText>
+      <helpText lang="lv-LV">Izmantojot šo opciju, papildus tiek parādīta parādītarī variantu izvēle.</helpText>
+      <helpText lang="id-ID">Dengan opsi ini, pilihan varian showpare juga ditampilkan</helpText>
+      <helpText lang="el-GR">Με αυτή την επιλογή, εμφανίζεται επιπλέον η επιλογή παραλλαγής showpare</helpText>
+      <helpText lang="de-CH">Mit dieser Option wird zusätzlich die Auswahl der Showpare-Variante angezeigt</helpText>
+      <defaultValue>false</defaultValue>
+    </input-field>
+    <input-field type="bool">
+      <name>layoutStandardChangeImageOnXAxis</name>
+      <label>Image change when clicking on X-axis heading (replaces image slider)</label>
+      <label lang="de-DE">Bildwechsel beim Klicken auf die X-Achsenüberschrift (ersetzt den Image Slider)</label>
+      <label lang="es-ES">Cambio de imagen al hacer clic en el encabezado del eje X (sustituye al deslizador de imágenes)</label>
+      <label lang="fi-FI">Kuvan vaihto, kun napsautetaan X-akselin otsikkoa (korvaa kuvan liukusäätimen).</label>
+      <label lang="fr-FR">Changement d'image lorsque l'on clique sur l'en-tête de l'axe X (remplace le curseur d'image)</label>
+      <label lang="it-IT">Modifica dell'immagine quando si fa clic sull'intestazione dell'asse X (sostituisce il cursore dell'immagine)</label>
+      <label lang="nb-NO">Bildeendring når du klikker på X-aksens overskrift (erstatter bildeglidebryteren)</label>
+      <label lang="nl-NL">Afbeelding verandert wanneer op de kop van de X-as wordt geklikt (vervangt de afbeelding-schuifregelaar)</label>
+      <label lang="pl-PL">Zmiana obrazu po kliknięciu nagłówka osi X (zastępuje suwak obrazu)</label>
+      <label lang="sv-SE">Bildbyte när man klickar på X-axelns rubrik (ersätter bildslider)</label>
+      <label lang="bg-BG">Промяна на изображението при щракване върху заглавието на оста X (замества плъзгача за изображения)</label>
+      <label lang="cs-CZ">Změna obrázku při kliknutí na záhlaví osy X (nahrazuje posuvník obrázku)</label>
+      <label lang="pt-PT">Alteração da imagem quando se clica no título do eixo X (substitui o cursor de imagem)</label>
+      <label lang="hr-HR">Képváltás az X-tengely fejlécére kattintva (helyettesíti a képcsúszkát)</label>
+      <label lang="tr-TR">X ekseni başlığına tıklandığında görüntü değişimi (görüntü kaydırıcısının yerini alır)</label>
+      <label lang="da-DK">Billedskift, når man klikker på X-aksens overskrift (erstatter billedslider)</label>
+      <label lang="ru-RU">Смена изображения при нажатии на заголовок оси X (заменяет ползунок изображения)</label>
+      <label lang="lv-LV">Attēla maiņa, noklikšķinot uz X ass pozīcijas (aizstāj attēla slīdni)</label>
+      <label lang="id-ID">Perubahan gambar ketika mengklik judul sumbu X (menggantikan penggeser gambar)</label>
+      <label lang="el-GR">Αλλαγή εικόνας όταν κάνετε κλικ στην επικεφαλίδα του άξονα Χ (αντικαθιστά το ρυθμιστικό εικόνας)</label>
+      <label lang="de-CH">Bildwechsel beim Klicken auf die X-Achsenüberschrift (ersetzt den Image Slider)</label>
+      <defaultValue>false</defaultValue>
+    </input-field>
+    <input-field type="bool">
+      <name>layoutStandardChangeImageOnYAxis</name>
+      <label>Image change when clicking on Y-axis heading</label>
+      <label lang="de-DE">Bildwechsel beim Klicken auf die Überschrift der Y-Achse</label>
+      <label lang="es-ES">Cambio de imagen al hacer clic en el encabezado del eje Y</label>
+      <label lang="fi-FI">Kuvan muutos, kun napsautat Y-akselin otsikkoa</label>
+      <label lang="fr-FR">Changement d'image lorsque l'on clique sur l'en-tête de l'axe Y</label>
+      <label lang="it-IT">Modifica dell'immagine quando si fa clic sull'intestazione dell'asse Y</label>
+      <label lang="nb-NO">Bildeendring når du klikker på overskriften på Y-aksen</label>
+      <label lang="nl-NL">Afbeelding verandert bij klikken op Y-as kop</label>
+      <label lang="pl-PL">Zmiana obrazu po kliknięciu nagłówka osi Y</label>
+      <label lang="sv-SE">Bildbyte när man klickar på rubriken för Y-axeln</label>
+      <label lang="bg-BG">Промяна на изображението при щракване върху заглавието на оста Y</label>
+      <label lang="cs-CZ">Změna obrázku při kliknutí na záhlaví osy Y</label>
+      <label lang="pt-PT">Alteração da imagem ao clicar no título do eixo Y</label>
+      <label lang="hr-HR">Képváltás az Y-tengely fejlécére kattintva</label>
+      <label lang="tr-TR">Y ekseni başlığına tıklandığında görüntü değişimi</label>
+      <label lang="da-DK">Billedet skifter, når man klikker på Y-aksens overskrift</label>
+      <label lang="ru-RU">Изменение изображения при щелчке на заголовке оси Y</label>
+      <label lang="lv-LV">Attēla maiņa, noklikšķinot uz Y ass pozīcijas</label>
+      <label lang="id-ID">Perubahan gambar saat mengklik judul sumbu Y</label>
+      <label lang="el-GR">Αλλαγή εικόνας όταν κάνετε κλικ στην επικεφαλίδα του άξονα Y</label>
+      <label lang="de-CH">Bildwechsel beim Klicken auf die Überschrift der Y-Achse</label>
+      <defaultValue>false</defaultValue>
+    </input-field>
+    <input-field type="int">
+      <name>VariantMatrixViewportColsDesktop</name>
+      <label>Number of columns viewport desktop</label>
+      <label lang="de-DE">Anzahl der Spalten Ansichtsfenster Desktop</label>
+      <label lang="es-ES">Número de columnas viewport desktop</label>
+      <label lang="fi-FI">Sarakkeiden määrä viewport desktop</label>
+      <label lang="fr-FR">Nombre de colonnes viewport desktop</label>
+      <label lang="it-IT">Numero di colonne viewport desktop</label>
+      <label lang="nb-NO">Antall kolonner viewport desktop</label>
+      <label lang="nl-NL">Aantal kolommen viewport desktop</label>
+      <label lang="pl-PL">Liczba kolumn rzutni pulpitu</label>
+      <label lang="sv-SE">Antal kolumner viewport desktop</label>
+      <label lang="bg-BG">Брой на колоните на работния плот</label>
+      <label lang="cs-CZ">Počet sloupců viewport desktop</label>
+      <label lang="pt-PT">Número de colunas da área de trabalho da janela de visualização</label>
+      <label lang="hr-HR">Az oszlopok száma viewport desktop</label>
+      <label lang="tr-TR">Sütun sayısı viewport masaüstü</label>
+      <label lang="da-DK">Antal kolonner viewport desktop</label>
+      <label lang="ru-RU">Количество колонок рабочего стола видового экрана</label>
+      <label lang="lv-LV">Kolonnu skaits skatloga darbvirsma</label>
+      <label lang="id-ID">Jumlah kolom desktop viewport</label>
+      <label lang="el-GR">Αριθμός στηλών γραφείου προβολής</label>
+      <label lang="de-CH">Anzahl der Spalten Ansichtsfenster Desktop</label>
+      <defaultValue>0</defaultValue>
+    </input-field>
+    <input-field type="int">
+      <name>VariantMatrixViewportColsTabletLandscape</name>
+      <label>Number of columns viewport tablet landscape</label>
+      <label lang="de-DE">Anzahl der Spalten Ansichtstablett Querformat</label>
+      <label lang="es-ES">Número de columnas viewport tablet landscape</label>
+      <label lang="fi-FI">Sarakkeiden määrä viewport tablet landscape</label>
+      <label lang="fr-FR">Nombre de colonnes Affichage Tablette Paysage</label>
+      <label lang="it-IT">Numero di colonne viewport tablet landscape</label>
+      <label lang="nb-NO">Antall kolonner i visningsvinduet for liggende nettbrett</label>
+      <label lang="nl-NL">Aantal kolommen viewport tablet liggend</label>
+      <label lang="pl-PL">Liczba kolumn rzutni tabletu w orientacji poziomej</label>
+      <label lang="sv-SE">Antal kolumner viewport tablet landscape</label>
+      <label lang="bg-BG">Брой на колоните Viewport tablet landscape</label>
+      <label lang="cs-CZ">Počet sloupců viewport tabletu na šířku</label>
+      <label lang="pt-PT">Número de colunas viewport tablet landscape</label>
+      <label lang="hr-HR">Az oszlopok száma viewport tablet landscape</label>
+      <label lang="tr-TR">Sütun sayısı görünüm alanı tablet yatay</label>
+      <label lang="da-DK">Antal kolonner viewport tablet landscape</label>
+      <label lang="ru-RU">Количество колонок в окне просмотра планшета</label>
+      <label lang="lv-LV">Kolonnu skaits skata planšetdatora ainava</label>
+      <label lang="id-ID">Jumlah kolom lanskap tablet viewport lanskap</label>
+      <label lang="el-GR">Αριθμός στηλών viewport tablet landscape</label>
+      <label lang="de-CH">Anzahl der Spalten Ansichtstablett Querformat</label>
+      <defaultValue>0</defaultValue>
+    </input-field>
+    <input-field type="int">
+      <name>VariantMatrixViewportColsTabletportrait</name>
+      <label>Number of columns viewport tablet portrait</label>
+      <label lang="de-DE">Anzahl der Spalten Ansichtsfenster Tablette Hochformat</label>
+      <label lang="es-ES">Número de columnas viewport tablet portrait</label>
+      <label lang="fi-FI">Sarakkeiden määrä viewport tablet portrait</label>
+      <label lang="fr-FR">Nombre de colonnes Port de visualisation Tablette Portrait</label>
+      <label lang="it-IT">Numero di colonne viewport tablet portrait</label>
+      <label lang="nb-NO">Antall kolonner i visningsvinduet for stående nettbrett</label>
+      <label lang="nl-NL">Aantal kolommen viewport tablet staand</label>
+      <label lang="pl-PL">Liczba kolumn rzutni tabletu w układzie pionowym</label>
+      <label lang="sv-SE">Antal kolumner vyport tablett stående</label>
+      <label lang="bg-BG">Брой колони viewport tablet portrait</label>
+      <label lang="cs-CZ">Počet sloupců viewport tablet na výšku</label>
+      <label lang="pt-PT">Número de colunas viewport tablet portrait</label>
+      <label lang="hr-HR">Az oszlopok száma viewport tablet portré</label>
+      <label lang="tr-TR">Sütun sayısı görünüm alanı tablet portre</label>
+      <label lang="da-DK">Antal kolonner viewport tablet portræt</label>
+      <label lang="ru-RU">Количество столбцов в окне просмотра планшетный портрет</label>
+      <label lang="lv-LV">Kolonnu skaits skata portreta planšetdators portrets</label>
+      <label lang="id-ID">Jumlah kolom potret tablet viewport</label>
+      <label lang="el-GR">Αριθμός στηλών viewport tablet portrait</label>
+      <label lang="de-CH">Anzahl der Spalten Ansichtsfenster Tablette Hochformat</label>
+      <defaultValue>0</defaultValue>
+    </input-field>
+    <input-field type="int">
+      <name>VariantMatrixViewportColsMobilelandscape</name>
+      <label>Number of columns viewport mobile landscape</label>
+      <label lang="de-DE">Anzahl der Spalten Ansichtsfenster mobiles Querformat</label>
+      <label lang="es-ES">Número de columnas viewport mobile landscape</label>
+      <label lang="fi-FI">Sarakkeiden määrä viewport mobiili maisema</label>
+      <label lang="fr-FR">Nombre de colonnes viewport mobile landscape</label>
+      <label lang="it-IT">Numero di colonne viewport mobile landscape</label>
+      <label lang="nb-NO">Antall kolonner visningsport mobil liggende</label>
+      <label lang="nl-NL">Aantal kolommen viewport mobiel liggend</label>
+      <label lang="pl-PL">Liczba kolumn rzutni mobile landscape</label>
+      <label lang="sv-SE">Antal kolumner vyport mobil landskap</label>
+      <label lang="bg-BG">Брой колони viewport mobile landscape</label>
+      <label lang="cs-CZ">Počet sloupců viewport mobile landscape</label>
+      <label lang="pt-PT">Número de colunas viewport mobile landscape</label>
+      <label lang="hr-HR">Az oszlopok száma viewport mobile landscape</label>
+      <label lang="tr-TR">Sütun sayısı görünüm alanı mobil yatay</label>
+      <label lang="da-DK">Antal kolonner viewport mobil landskab</label>
+      <label lang="ru-RU">Количество колонок в мобильном ландшафтном окне просмотра</label>
+      <label lang="lv-LV">Kolonnu skaits skata laukums mobilā ainava</label>
+      <label lang="id-ID">Jumlah kolom lanskap seluler viewport</label>
+      <label lang="el-GR">Αριθμός στηλών viewport κινητό τοπίο</label>
+      <label lang="de-CH">Anzahl der Spalten Ansichtsfenster mobiles Querformat</label>
+      <defaultValue>0</defaultValue>
+    </input-field>
+    <input-field type="int">
+      <name>VariantMatrixViewportColsMobileportrait</name>
+      <label>Number of columns viewport mobile portrait</label>
+      <label lang="de-DE">Anzahl der Spalten Ansichtsfenster mobiles Hochformat</label>
+      <label lang="es-ES">Número de columnas viewport mobile portrait</label>
+      <label lang="fi-FI">Sarakkeiden määrä viewport mobile portrait</label>
+      <label lang="fr-FR">Nombre de colonnes viewport mobile portrait</label>
+      <label lang="it-IT">Numero di colonne viewport mobile portrait</label>
+      <label lang="nb-NO">Antall kolonner visningsport mobil stående</label>
+      <label lang="nl-NL">Aantal kolommen viewport mobiel staand</label>
+      <label lang="pl-PL">Liczba kolumn w widoku portret mobilny</label>
+      <label lang="sv-SE">Antal kolumner viewport mobil stående</label>
+      <label lang="bg-BG">Брой колони viewport mobile portrait</label>
+      <label lang="cs-CZ">Počet sloupců viewport mobile portrait</label>
+      <label lang="pt-PT">Número de colunas viewport mobile portrait</label>
+      <label lang="hr-HR">Az oszlopok száma viewport mobil portré</label>
+      <label lang="tr-TR">Sütun sayısı görünüm alanı mobil portre</label>
+      <label lang="da-DK">Antal kolonner viewport mobil portræt</label>
+      <label lang="ru-RU">Количество столбцов в мобильном портрете</label>
+      <label lang="lv-LV">Kolonnu skaits skata portrets mobile portrets</label>
+      <label lang="id-ID">Jumlah kolom potret seluler viewport</label>
+      <label lang="el-GR">Αριθμός στηλών παράθυρο προβολής κινητό πορτραίτο</label>
+      <label lang="de-CH">Anzahl der Spalten Ansichtsfenster mobiles Hochformat</label>
+      <defaultValue>0</defaultValue>
+    </input-field>
+  </card>
+  <card>
+    <title>For layout "1st group as selection, 2nd group as matrix"</title>
+    <title lang="de-DE">Für Layout "1. Gruppe als Auswahl, 2. Gruppe als Matrix"</title>
+    <title lang="es-ES">Para el diseño "1er grupo como selección, 2º grupo como matriz"</title>
+    <title lang="fi-FI">Asettelua varten "1. ryhmä valintana, 2. ryhmä matriisina".</title>
+    <title lang="fr-FR">Pour la mise en page "1er groupe en tant que sélection, 2ème groupe en tant que matrice".</title>
+    <title lang="it-IT">Per il layout "1° gruppo come selezione, 2° gruppo come matrice".</title>
+    <title lang="nb-NO">For layout "1. gruppe som utvalg, 2. gruppe som matrise"</title>
+    <title lang="nl-NL">Voor opmaak "1e groep als selectie, 2e groep als matrix".</title>
+    <title lang="pl-PL">Dla układu "1. grupa jako wybór, 2. grupa jako macierz"</title>
+    <title lang="sv-SE">För layout "1:a gruppen som urval, 2:a gruppen som matris"</title>
+    <title lang="bg-BG">За оформление "1-ва група като селекция, 2-ра група като матрица"</title>
+    <title lang="cs-CZ">Pro rozložení "1. skupina jako výběr, 2. skupina jako matice"</title>
+    <title lang="pt-PT">Para a apresentação "1º grupo como seleção, 2º grupo como matriz"</title>
+    <title lang="hr-HR">"1. csoport mint kiválasztás, 2. csoport mint mátrix" elrendezéshez</title>
+    <title lang="tr-TR">Düzen için "1. grup seçim olarak, 2. grup matris olarak"</title>
+    <title lang="da-DK">Til layout "1. gruppe som udvalg, 2. gruppe som matrix"</title>
+    <title lang="ru-RU">Для макета "1-я группа как выбор, 2-я группа как матрица"</title>
+    <title lang="lv-LV">Izkārtojumam "1. grupa kā atlase, 2. grupa kā matrica"</title>
+    <title lang="id-ID">Untuk tata letak "kelompok pertama sebagai pilihan, kelompok kedua sebagai matriks"</title>
+    <title lang="el-GR">Για διάταξη "1η ομάδα ως επιλογή, 2η ομάδα ως πίνακας"</title>
+    <title lang="de-CH">Für Layout "1. Gruppe als Auswahl, 2. Gruppe als Matrix"</title>
+    <input-field type="bool">
+      <name>useVariantImageOnSelectionButton</name>
+      <label>Use the variant image as the image in the Selections button</label>
+      <label lang="de-DE">Verwenden Sie das Variantenbild als Bild in der Schaltfläche Auswahlen</label>
+      <label lang="es-ES">Utilizar la imagen variante como imagen en el botón Selecciones</label>
+      <label lang="fi-FI">Käytä vaihtoehtokuvaa kuvana Valinnat-painikkeessa.</label>
+      <label lang="fr-FR">Utiliser l'image de la variante comme image dans le bouton Sélections</label>
+      <label lang="it-IT">Utilizzare l'immagine della variante come immagine nel pulsante Selezioni.</label>
+      <label lang="nb-NO">Bruk variantbildet som bilde i knappen Selections (valg)</label>
+      <label lang="nl-NL">Gebruik de variantafbeelding als afbeelding in de knop Selecties</label>
+      <label lang="pl-PL">Użyj obrazu wariantu jako obrazu w przycisku Wybory</label>
+      <label lang="sv-SE">Använd variantbilden som bild i knappen Selections (val)</label>
+      <label lang="bg-BG">Използвайте изображението на варианта като изображение в бутона Избори</label>
+      <label lang="cs-CZ">Použijte obrázek varianty jako obrázek v tlačítku Výběry.</label>
+      <label lang="pt-PT">Utilizar a imagem da variante como imagem no botão Selecções</label>
+      <label lang="hr-HR">Használja a változat képét a Kiválasztások gomb képeként.</label>
+      <label lang="tr-TR">Varyant resmini Seçimler düğmesindeki resim olarak kullanın</label>
+      <label lang="da-DK">Brug variantbilledet som billede i knappen Valg</label>
+      <label lang="ru-RU">Используйте изображение варианта в качестве изображения в кнопке "Выбор".</label>
+      <label lang="lv-LV">Izmantojiet varianta attēlu kā attēlu pogā Izvēles</label>
+      <label lang="id-ID">Gunakan gambar varian sebagai gambar di tombol Selections</label>
+      <label lang="el-GR">Χρησιμοποιήστε την εικόνα παραλλαγής ως εικόνα στο κουμπί Επιλογές</label>
+      <label lang="de-CH">Verwenden Sie das Variantenbild als Bild in der Schaltfläche Auswahlen</label>
+      <defaultValue>false</defaultValue>
+    </input-field>
+    <input-field type="bool">
+      <name>layoutSelectorChangeImageOnButtons</name>
+      <label>Image Change on click on elelement of 1st group</label>
+      <label lang="de-DE">Bildwechsel bei Klick auf Element der 1. Gruppe</label>
+      <label lang="es-ES">Cambio de imagen al hacer clic en un elemento del 1er grupo</label>
+      <label lang="fi-FI">Kuva Vaihda klikkaamalla 1. ryhmän elementtiä</label>
+      <label lang="fr-FR">Changement d'image en cliquant sur un élément du 1er groupe</label>
+      <label lang="it-IT">Modifica dell'immagine al clic sull'elemento del 1° gruppo</label>
+      <label lang="nb-NO">Bildeendring ved klikk på element i 1. gruppe</label>
+      <label lang="nl-NL">Afbeelding wijzigen bij klikken op element van 1e groep</label>
+      <label lang="pl-PL">Zmiana obrazu po kliknięciu elementu z 1. grupy</label>
+      <label lang="sv-SE">Bildbyte vid klick på elelement i 1:a gruppen</label>
+      <label lang="bg-BG">Промяна на изображението при кликване върху елемента от 1-ва група</label>
+      <label lang="cs-CZ">Změna obrázku při kliknutí na prvek 1. skupiny</label>
+      <label lang="pt-PT">Mudança de imagem ao clicar num elemento do 1º grupo</label>
+      <label lang="hr-HR">Képváltoztatás az 1. csoport elemére kattintva</label>
+      <label lang="tr-TR">Birinci grubun elemanına tıklandığında Görüntü Değişimi</label>
+      <label lang="da-DK">Billedændring ved klik på element i 1. gruppe</label>
+      <label lang="ru-RU">Изменение изображения при щелчке на элементе 1-й группы</label>
+      <label lang="lv-LV">Attēla maiņa, noklikšķinot uz 1. grupas elementa</label>
+      <label lang="id-ID">Perubahan gambar saat mengklik elemen pada grup pertama</label>
+      <label lang="el-GR">Αλλαγή εικόνας με κλικ στο στοιχείο της 1ης ομάδας</label>
+      <label lang="de-CH">Bildwechsel bei Klick auf Element der 1. Gruppe</label>
+      <defaultValue>false</defaultValue>
+    </input-field>
+    <input-field type="bool">
+      <name>variantMatrixLayoutSelectorEnableShopwareSelection</name>
+      <label>Additionally show Shopware variant selection with shopping cart</label>
+      <label lang="de-DE">Shopware Variantenauswahl zusätzlich mit Warenkorb anzeigen</label>
+      <label lang="es-ES">Mostrar adicionalmente la selección de variantes de Shopware con el carrito de la compra</label>
+      <label lang="fi-FI">Näytä lisäksi Shopware-varianttivalikoima ostoskorin kanssa</label>
+      <label lang="fr-FR">Afficher en plus la sélection des variantes Shopware avec le panier d'achat</label>
+      <label lang="it-IT">Mostra inoltre la selezione di varianti Shopware con il carrello degli acquisti</label>
+      <label lang="nb-NO">Vis i tillegg Shopware-variantvalg med handlekurv</label>
+      <label lang="nl-NL">Shopware-variant selectie toevoegen aan winkelwagen</label>
+      <label lang="pl-PL">Dodatkowo pokaż wybór wariantu Shopware z koszykiem zakupów</label>
+      <label lang="sv-SE">Visa dessutom Shopware-variantval med kundvagn</label>
+      <label lang="bg-BG">Допълнително покажете избора на вариант на Shopware с количката за пазаруване</label>
+      <label lang="cs-CZ">Zobrazit navíc výběr variant Shopware s nákupním košíkem</label>
+      <label lang="pt-PT">Mostrar adicionalmente a seleção de variantes do Shopware com o carrinho de compras</label>
+      <label lang="hr-HR">Továbbá a Shopware variáns kiválasztás megjelenítése a kosárral együtt</label>
+      <label lang="tr-TR">Ayrıca Shopware varyant seçimini alışveriş sepetiyle birlikte gösterme</label>
+      <label lang="da-DK">Vis desuden valg af Shopware-variant med indkøbskurven</label>
+      <label lang="ru-RU">Дополнительно отображайте выбор вариантов Shopware в корзине покупок</label>
+      <label lang="lv-LV">Papildus parādīt Shopware variantu izvēli ar iepirkumu grozu</label>
+      <label lang="id-ID">Selain itu, tampilkan pilihan varian Shopware dengan keranjang belanja</label>
+      <label lang="el-GR">Επιπλέον, εμφανίστε την επιλογή παραλλαγής Shopware με το καλάθι αγορών</label>
+      <label lang="de-CH">Shopware Variantenauswahl zusätzlich mit Warenkorb anzeigen</label>
+      <label lang="es-ES">Mostrar adicionalmente la selección de variantes de Shopware con el carrito de la compra</label>
+      <label lang="fi-FI">Näytä lisäksi Shopware-varianttivalikoima ostoskorin kanssa</label>
+      <label lang="fr-FR">Afficher en plus la sélection des variantes Shopware avec le panier d'achat</label>
+      <label lang="it-IT">Mostra inoltre la selezione di varianti Shopware con il carrello degli acquisti</label>
+      <label lang="nb-NO">Vis i tillegg Shopware-variantvalg med handlekurv</label>
+      <label lang="nl-NL">Shopware-variant selectie toevoegen aan winkelwagen</label>
+      <label lang="pl-PL">Dodatkowo pokaż wybór wariantu Shopware z koszykiem zakupów</label>
+      <label lang="sv-SE">Visa dessutom Shopware-variantval med kundvagn</label>
+      <label lang="bg-BG">Допълнително покажете избора на вариант на Shopware с количката за пазаруване</label>
+      <label lang="cs-CZ">Zobrazit navíc výběr variant Shopware s nákupním košíkem</label>
+      <label lang="pt-PT">Mostrar adicionalmente a seleção de variantes do Shopware com o carrinho de compras</label>
+      <label lang="hr-HR">Továbbá a Shopware variáns kiválasztás megjelenítése a kosárral együtt</label>
+      <label lang="tr-TR">Ayrıca alışveriş sepeti ile Shopware varyant seçimini gösterme</label>
+      <label lang="da-DK">Vis desuden valg af Shopware-variant med indkøbskurven</label>
+      <label lang="ru-RU">Дополнительно отображайте выбор вариантов Shopware в корзине покупок</label>
+      <label lang="lv-LV">Papildus parādīt Shopware variantu izvēli ar iepirkumu grozu</label>
+      <label lang="id-ID">Selain itu, tampilkan pilihan varian Shopware dengan keranjang belanja</label>
+      <label lang="el-GR">Επιπλέον, εμφανίστε την επιλογή παραλλαγής Shopware με το καλάθι αγορών</label>
+      <label lang="de-CH">Shopware Variantenauswahl zusätzlich mit Warenkorb anzeigen</label>
+      <helpText>With this option, the showpare variant selection is additionally displayed</helpText>
+      <helpText lang="de-DE">Mit dieser Option wird zusätzlich die Auswahl der Showpare-Variante angezeigt</helpText>
+      <helpText lang="es-ES">Con esta opción, se muestra además la selección de variantes showpare</helpText>
+      <helpText lang="fi-FI">Tämän vaihtoehdon avulla näytetään lisäksi showpare-vaihtoehdon valinta.</helpText>
+      <helpText lang="fr-FR">Cette option permet d'afficher en plus la sélection de la variante showpare.</helpText>
+      <helpText lang="it-IT">Con questa opzione, viene visualizzata in aggiunta la selezione della variante di showpare</helpText>
+      <helpText lang="nb-NO">Med dette alternativet vises i tillegg showpare-variantvalget</helpText>
+      <helpText lang="nl-NL">Met deze optie wordt de selectie van de showvariant extra weergegeven</helpText>
+      <helpText lang="pl-PL">W przypadku tej opcji dodatkowo wyświetlany jest wybór wariantu showpare</helpText>
+      <helpText lang="sv-SE">Med detta alternativ visas dessutom valet av showpare-variant</helpText>
+      <helpText lang="bg-BG">При тази опция се показва допълнително изборът на вариант на шоупар</helpText>
+      <helpText lang="cs-CZ">Při této možnosti se navíc zobrazí výběr varianty showpare.</helpText>
+      <helpText lang="pt-PT">Com esta opção, a seleção da variante showpare é apresentada adicionalmente</helpText>
+      <helpText lang="hr-HR">Ezzel az opcióval a showpare variáns kiválasztása is megjelenik.</helpText>
+      <helpText lang="tr-TR">Bu seçenekle, showpare varyant seçimi ek olarak görüntülenir</helpText>
+      <helpText lang="da-DK">Med denne indstilling vises valget af showpare-variant desuden</helpText>
+      <helpText lang="ru-RU">С помощью этой опции дополнительно отображается выбор варианта показа</helpText>
+      <helpText lang="lv-LV">Izmantojot šo opciju, papildus tiek parādīta parādītarī variantu izvēle.</helpText>
+      <helpText lang="id-ID">Dengan opsi ini, pilihan varian showpare juga ditampilkan</helpText>
+      <helpText lang="el-GR">Με αυτή την επιλογή, εμφανίζεται επιπλέον η επιλογή παραλλαγής showpare</helpText>
+      <helpText lang="de-CH">Mit dieser Option wird zusätzlich die Auswahl der Showpare-Variante angezeigt</helpText>
+      <helpText lang="es-ES">Con esta opción, se muestra además la selección de variantes showpare</helpText>
+      <helpText lang="fi-FI">Tämän vaihtoehdon avulla näytetään lisäksi showpare-vaihtoehdon valinta.</helpText>
+      <helpText lang="fr-FR">Cette option permet d'afficher en plus la sélection de la variante showpare.</helpText>
+      <helpText lang="it-IT">Con questa opzione, viene visualizzata in aggiunta la selezione della variante di showpare</helpText>
+      <helpText lang="nb-NO">Med dette alternativet vises i tillegg showpare-variantvalget</helpText>
+      <helpText lang="nl-NL">Met deze optie wordt de selectie van de showvariant extra weergegeven</helpText>
+      <helpText lang="pl-PL">W przypadku tej opcji dodatkowo wyświetlany jest wybór wariantu showpare</helpText>
+      <helpText lang="sv-SE">Med detta alternativ visas dessutom valet av showpare-variant</helpText>
+      <helpText lang="bg-BG">При тази опция се показва допълнително изборът на вариант на шоупар</helpText>
+      <helpText lang="cs-CZ">Při této možnosti se navíc zobrazí výběr varianty showpare.</helpText>
+      <helpText lang="pt-PT">Com esta opção, a seleção da variante showpare é apresentada adicionalmente</helpText>
+      <helpText lang="hr-HR">Ezzel az opcióval a showpare variáns kiválasztása is megjelenik.</helpText>
+      <helpText lang="tr-TR">Bu seçenekle, showpare varyant seçimi ek olarak görüntülenir</helpText>
+      <helpText lang="da-DK">Med denne indstilling vises valget af showpare-variant desuden</helpText>
+      <helpText lang="ru-RU">С помощью этой опции дополнительно отображается выбор варианта показа</helpText>
+      <helpText lang="lv-LV">Izmantojot šo opciju, papildus tiek parādīta parādītarī variantu izvēle.</helpText>
+      <helpText lang="id-ID">Dengan opsi ini, pilihan varian showpare juga ditampilkan</helpText>
+      <helpText lang="el-GR">Με αυτή την επιλογή, εμφανίζεται επιπλέον η επιλογή παραλλαγής showpare</helpText>
+      <helpText lang="de-CH">Mit dieser Option wird zusätzlich die Auswahl der Showpare-Variante angezeigt</helpText>
+      <defaultValue>false</defaultValue>
+    </input-field>
+    <input-field type="bool">
+      <name>EnableGroupMatrix</name>
+      <label>Display also when only one variant exists</label>
+      <label lang="de-DE">Anzeige auch, wenn nur eine Variante existiert</label>
+      <label lang="es-ES">Mostrar también cuando sólo existe una variante</label>
+      <label lang="fi-FI">Näytetään myös silloin, kun vain yksi variantti on olemassa</label>
+      <label lang="fr-FR">S'affiche également lorsqu'il n'existe qu'une seule variante</label>
+      <label lang="it-IT">Visualizzare anche quando esiste una sola variante</label>
+      <label lang="nb-NO">Vises også når det bare finnes én variant</label>
+      <label lang="nl-NL">Ook weergeven als er maar één variant bestaat</label>
+      <label lang="pl-PL">Wyświetla się również, gdy istnieje tylko jeden wariant</label>
+      <label lang="sv-SE">Visas även när endast en variant finns</label>
+      <label lang="bg-BG">Показва се и когато съществува само един вариант</label>
+      <label lang="cs-CZ">Zobrazení také v případě, že existuje pouze jedna varianta</label>
+      <label lang="pt-PT">Mostrar também quando existe apenas uma variante</label>
+      <label lang="hr-HR">Megjelenítés akkor is, ha csak egy változat létezik</label>
+      <label lang="tr-TR">Yalnızca bir varyant mevcut olduğunda da göster</label>
+      <label lang="da-DK">Vises også, når der kun findes én variant</label>
+      <label lang="ru-RU">Отображать также, если существует только один вариант</label>
+      <label lang="lv-LV">Rādīt arī tad, ja pastāv tikai viens variants</label>
+      <label lang="id-ID">Tampilan juga ketika hanya ada satu varian</label>
+      <label lang="el-GR">Εμφανίζεται επίσης όταν υπάρχει μόνο μία παραλλαγή</label>
+      <label lang="de-CH">Anzeige auch, wenn nur eine Variante existiert</label>
+      <defaultValue>true</defaultValue>
+      <helpText>Only usable with the 1st group as selection, 2nd group as matrix layout</helpText>
+      <helpText lang="de-DE">Nur verwendbar mit der 1. Gruppe als Auswahl, 2. Gruppe als Matrix-Layout</helpText>
+      <helpText lang="es-ES">Sólo utilizable con el 1er grupo como selección, 2º grupo como disposición de matriz</helpText>
+      <helpText lang="fi-FI">Käyttökelpoinen vain, kun 1. ryhmä on valinta, 2. ryhmä on matriisiasettelu.</helpText>
+      <helpText lang="fr-FR">Utilisable uniquement avec le 1er groupe en tant que sélection, le 2e groupe en tant que disposition matricielle</helpText>
+      <helpText lang="it-IT">Utilizzabile solo con il 1º gruppo come selezione, il 2º gruppo come layout della matrice</helpText>
+      <helpText lang="nb-NO">Kan bare brukes med 1. gruppe som utvalg, 2. gruppe som matriseoppsett</helpText>
+      <helpText lang="nl-NL">Alleen bruikbaar met de 1e groep als selectie, 2e groep als matrixopmaak</helpText>
+      <helpText lang="pl-PL">Można używać tylko z 1. grupą jako wyborem, 2. grupą jako układem matrycy.</helpText>
+      <helpText lang="sv-SE">Endast användbar med 1:a gruppen som urval, 2:a gruppen som matrislayout</helpText>
+      <helpText lang="bg-BG">Може да се използва само с 1-ва група като селекция, 2-ра група като матрично оформление</helpText>
+      <helpText lang="cs-CZ">Použitelné pouze s 1. skupinou jako výběrem, 2. skupina jako maticové rozložení</helpText>
+      <helpText lang="pt-PT">Apenas utilizável com o 1º grupo como seleção, 2º grupo como disposição matricial</helpText>
+      <helpText lang="hr-HR">Csak akkor használható, ha az 1. csoport a kiválasztás, a 2. csoport a mátrix elrendezése.</helpText>
+      <helpText lang="tr-TR">Sadece 1. grup seçim olarak, 2. grup matris düzeni olarak kullanılabilir</helpText>
+      <helpText lang="da-DK">Kan kun bruges med 1. gruppe som valg, 2. gruppe som matrixlayout</helpText>
+      <helpText lang="ru-RU">Можно использовать только 1-ю группу в качестве выбора, 2-ю группу в качестве матричной раскладки</helpText>
+      <helpText lang="lv-LV">Izmantojams tikai ar 1. grupu kā atlasi, 2. grupu kā matricas izkārtojumu.</helpText>
+      <helpText lang="id-ID">Hanya dapat digunakan dengan grup pertama sebagai pilihan, grup kedua sebagai tata letak matriks</helpText>
+      <helpText lang="el-GR">Χρησιμοποιείται μόνο με την 1η ομάδα ως επιλογή, τη 2η ομάδα ως διάταξη πινάκων</helpText>
+      <helpText lang="de-CH">Nur verwendbar mit der 1. Gruppe als Auswahl, 2. Gruppe als Matrix-Layout</helpText>
+    </input-field>
+    <input-field type="bool">
+      <name>layoutSelectorShowArticleNo</name>
+      <label>Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="de-DE">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="es-ES">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="fi-FI">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="fr-FR">Affichage du numéro d'article dans la matrice</label>
+      <label lang="it-IT">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="nb-NO">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="nl-NL">Voorbeeld van Artikelnummer in Matrix</label>
+      <label lang="pl-PL">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="sv-SE">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="bg-BG">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="cs-CZ">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="pt-PT">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="hr-HR">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="tr-TR">Matrix'te Artikel Numarasının Görünümü</label>
+      <label lang="da-DK">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="ru-RU">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="lv-LV">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="id-ID">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="el-GR">Εμφάνιση της Artikelnummer στη μήτρα</label>
+      <label lang="de-CH">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="es-ES">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="fi-FI">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="fr-FR">Affichage du numéro d'article dans la matrice</label>
+      <label lang="it-IT">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="nb-NO">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="nl-NL">Voorbeeld van Artikelnummer in Matrix</label>
+      <label lang="pl-PL">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="sv-SE">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="bg-BG">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="cs-CZ">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="pt-PT">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="hr-HR">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="tr-TR">Matrix'te Artikel Numarasının Görünümü</label>
+      <label lang="da-DK">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="ru-RU">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="lv-LV">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="id-ID">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="el-GR">Εμφάνιση της Artikelnummer στη μήτρα</label>
+      <label lang="de-CH">Anzeige der Artikelnummer in der Matrix</label>
+      <defaultValue>false</defaultValue>
+    </input-field>
+  </card>
+  <card>
+    <title>For layout “Last group as matrix, remaining groups as Shopware options”</title>
+    <title lang="de-DE">Für Layout "Letzte Gruppe als Matrix, restliche Gruppen als Shopware-Optionen"</title>
+    <title lang="es-ES">Para la presentación "Último grupo como matriz, resto de grupos como opciones de Shopware"</title>
+    <title lang="fi-FI">Asettelua varten "Viimeinen ryhmä matriisina, loput ryhmät Shopware-vaihtoehtoina".</title>
+    <title lang="fr-FR">Pour la mise en page "Dernier groupe en tant que matrice, les autres groupes en tant qu'options Shopware".</title>
+    <title lang="it-IT">Per il layout "L'ultimo gruppo come matrice, gli altri gruppi come opzioni Shopware".</title>
+    <title lang="nb-NO">For layout "Siste gruppe som matrise, resterende grupper som Shopware-alternativer"</title>
+    <title lang="nl-NL">Voor opmaak "Laatste groep als matrix, overige groepen als Shopware-opties".</title>
+    <title lang="pl-PL">Dla układu "Ostatnia grupa jako matryca, pozostałe grupy jako opcje Shopware"</title>
+    <title lang="sv-SE">För layout "Sista gruppen som matris, resterande grupper som Shopware-alternativ"</title>
+    <title lang="bg-BG">За оформление "Последната група като матрица, останалите групи като опции на Shopware"</title>
+    <title lang="cs-CZ">Pro rozložení "Poslední skupina jako matice, zbývající skupiny jako možnosti Shopware"</title>
+    <title lang="pt-PT">Para a apresentação "Último grupo como matriz, restantes grupos como opções de Shopware"</title>
+    <title lang="hr-HR">Az "Utolsó csoport mint mátrix, a többi csoport mint Shopware-opciók" elrendezéshez.</title>
+    <title lang="tr-TR">"Son grup matris olarak, kalan gruplar Shopware seçenekleri olarak" düzeni için</title>
+    <title lang="da-DK">For layout "Sidste gruppe som matrix, resterende grupper som Shopware-indstillinger"</title>
+    <title lang="ru-RU">Для макета "Последняя группа как матрица, остальные группы как опции Shopware"</title>
+    <title lang="lv-LV">Izkārtojumam "Pēdējā grupa kā matrica, pārējās grupas kā Shopware opcijas"</title>
+    <title lang="id-ID">Untuk tata letak "Grup terakhir sebagai matriks, grup lainnya sebagai opsi Shopware"</title>
+    <title lang="el-GR">Για διάταξη "Τελευταία ομάδα ως μήτρα, υπόλοιπες ομάδες ως επιλογές Shopware"</title>
+    <title lang="de-CH">Für Layout "Letzte Gruppe als Matrix, restliche Gruppen als Shopware-Optionen"</title>
+    <input-field type="text">
+      <name>variantMatrixSelectorBreakpointsValues</name>
+      <label>Set table grouping breakpoints</label>
+      <label lang="de-DE">Haltepunkte für Tabellengruppierungen setzen</label>
+      <label lang="es-ES">Establecer puntos de interrupción de agrupación de tablas</label>
+      <label lang="fi-FI">Taulukon ryhmittelyn taukopisteiden asettaminen</label>
+      <label lang="fr-FR">Définir les points d'arrêt du regroupement de tableaux</label>
+      <label lang="it-IT">Impostare i punti di interruzione del raggruppamento delle tabelle</label>
+      <label lang="nb-NO">Angi bruddpunkter for tabellgruppering</label>
+      <label lang="nl-NL">Tabelgroeperingsonderbrekingspunten instellen</label>
+      <label lang="pl-PL">Ustawianie punktów przerwania grupowania tabel</label>
+      <label lang="sv-SE">Ställ in brytpunkter för gruppering av tabeller</label>
+      <label lang="bg-BG">Задаване на точки на прекъсване за групиране на таблици</label>
+      <label lang="cs-CZ">Nastavení bodů přerušení seskupení tabulek</label>
+      <label lang="pt-PT">Definir pontos de paragem de agrupamento de tabelas</label>
+      <label lang="hr-HR">A táblázat csoportosítási töréspontjainak beállítása</label>
+      <label lang="tr-TR">Tablo gruplama kesme noktalarını ayarlama</label>
+      <label lang="da-DK">Indstil breakpoints for tabelgruppering</label>
+      <label lang="ru-RU">Установка точек останова группировки таблиц</label>
+      <label lang="lv-LV">Tabulu grupēšanas pārtraukuma punktu iestatīšana</label>
+      <label lang="id-ID">Mengatur breakpoint pengelompokan tabel</label>
+      <label lang="el-GR">Ορισμός σημείων διακοπής ομαδοποίησης πινάκων</label>
+      <label lang="de-CH">Haltepunkte für Tabellengruppierungen setzen</label>
+      <defaultValue/>
+      <helpText>Comma-separated list with numbers from which column tables are to be grouped. For example, 4.6 divides the variant matrix into 3 tables. The first table from column 1-3, the 2nd from column 4-5 and the 3rd from 6 to the end. This setting can be overridden at product level in a custom field.</helpText>
+      <helpText lang="de-DE">Kommagetrennte Liste mit Nummern, aus denen Spaltentabellen gruppiert werden sollen. Zum Beispiel teilt 4.6 die Variantenmatrix in 3 Tabellen auf. Die erste Tabelle von Spalte 1-3, die zweite von Spalte 4-5 und die dritte von 6 bis zum Ende. Diese Einstellung kann auf Produktebene in einem benutzerdefinierten Feld außer Kraft gesetzt werden.</helpText>
+      <helpText lang="es-ES">Lista separada por comas con los números a partir de los cuales deben agruparse las tablas de columnas. Por ejemplo, 4.6 divide la matriz de variantes en 3 tablas. La primera tabla desde la columna 1-3, la 2ª desde la columna 4-5 y la 3ª desde la 6 hasta el final. Esta configuración puede anularse a nivel de producto en un campo personalizado.</helpText>
+      <helpText lang="fi-FI">Pilkulla erotettu luettelo, jossa on numerot, joista saraketaulukot ryhmitellään. Esimerkiksi 4.6 jakaa muunnosmatriisin kolmeen taulukkoon. Ensimmäinen taulukko sarakkeista 1-3, toinen sarakkeista 4-5 ja kolmas sarakkeesta 6 loppuun. Tämä asetus voidaan ohittaa tuotetasolla mukautetussa kentässä.</helpText>
+      <helpText lang="fr-FR">Liste de numéros séparés par des virgules à partir desquels les tableaux de colonnes doivent être regroupés. Par exemple, 4.6 divise la matrice des variantes en 3 tableaux. Le premier tableau est constitué des colonnes 1 à 3, le deuxième des colonnes 4 et 5 et le troisième des colonnes 6 à la fin. Ce paramètre peut être modifié au niveau du produit dans un champ personnalisé.</helpText>
+      <helpText lang="it-IT">Elenco separato da virgole con numeri a partire dai quali le tabelle delle colonne devono essere raggruppate. Ad esempio, 4.6 divide la matrice delle varianti in 3 tabelle. La prima tabella dalla colonna 1-3, la seconda dalla colonna 4-5 e la terza dalla 6 alla fine. Questa impostazione può essere sovrascritta a livello di prodotto in un campo personalizzato.</helpText>
+      <helpText lang="nb-NO">Kommaseparert liste med tall som kolonnene i tabellene skal grupperes etter. For eksempel deler 4.6 variantmatrisen inn i 3 tabeller. Den første tabellen fra kolonne 1-3, den andre fra kolonne 4-5 og den tredje fra 6 til slutten. Denne innstillingen kan overstyres på produktnivå i et egendefinert felt.</helpText>
+      <helpText lang="nl-NL">Door komma's gescheiden lijst met nummers waaruit kolomtabellen moeten worden gegroepeerd. Bijvoorbeeld, 4.6 verdeelt de variantenmatrix in 3 tabellen. De eerste tabel van kolom 1-3, de 2e van kolom 4-5 en de 3e van 6 tot het einde. Deze instelling kan worden overschreven op productniveau in een aangepast veld.</helpText>
+      <helpText lang="pl-PL">Oddzielona przecinkami lista z numerami, z których tabele kolumn mają zostać pogrupowane. Na przykład 4.6 dzieli macierz wariantów na 3 tabele. Pierwsza tabela od kolumny 1-3, druga od kolumny 4-5 i trzecia od 6 do końca. Ustawienie to można zmienić na poziomie produktu w polu niestandardowym.</helpText>
+      <helpText lang="sv-SE">Kommaseparerad lista med nummer från vilka kolumntabellerna ska grupperas. Till exempel, 4.6 delar upp variantmatrisen i 3 tabeller. Den första tabellen från kolumn 1-3, den andra från kolumn 4-5 och den tredje från 6 till slutet. Denna inställning kan åsidosättas på produktnivå i ett anpassat fält.</helpText>
+      <helpText lang="bg-BG">Списък с числа, разделени със запетая, от които трябва да се групират таблиците с колони. Например, 4.6 разделя матрицата на вариантите на 3 таблици. Първата таблица е от колона 1-3, втората - от колона 4-5, а третата - от колона 6 до края. Тази настройка може да бъде отменена на ниво продукт в потребителско поле.</helpText>
+      <helpText lang="cs-CZ">Seznam oddělený čárkami s čísly, ze kterých se mají sloupcové tabulky seskupit. Například 4.6 rozdělí matici variant do 3 tabulek. První tabulku ze sloupce 1-3, druhou ze sloupce 4-5 a třetí ze sloupce 6 až na konec. Toto nastavení lze přepsat na úrovni produktu ve vlastním poli.</helpText>
+      <helpText lang="pt-PT">Lista separada por vírgulas com números a partir dos quais as tabelas de colunas devem ser agrupadas. Por exemplo, 4.6 divide a matriz de variantes em 3 quadros. A primeira tabela da coluna 1-3, a segunda da coluna 4-5 e a terceira da 6 até ao fim. Esta definição pode ser substituída ao nível do produto num campo personalizado.</helpText>
+      <helpText lang="hr-HR">Komával elválasztott lista számokkal, amelyekből az oszloptáblákat csoportosítani kell. Például a 4.6 a variánsmátrixot 3 táblázatra osztja. Az első táblázat az 1-3. oszlopból, a 2. a 4-5. oszlopból, a 3. pedig a 6. oszlopból a végére. Ez a beállítás felülbírálható termékszinten egy egyéni mezőben.</helpText>
+      <helpText lang="tr-TR">Sütun tablolarının gruplanacağı sayıları içeren virgülle ayrılmış liste. Örneğin, 4.6 varyant matrisini 3 tabloya böler. İlk tablo 1-3 sütunundan, 2. tablo 4-5 sütunundan ve 3. tablo 6'dan sonuna kadar. Bu ayar, özel bir alanda ürün düzeyinde geçersiz kılınabilir.</helpText>
+      <helpText lang="da-DK">Kommasepareret liste med numre, som kolonnetabellerne skal grupperes ud fra. For eksempel opdeler 4.6 variantmatrixen i 3 tabeller. Den første tabel fra kolonne 1-3, den anden fra kolonne 4-5 og den tredje fra 6 til slutningen. Denne indstilling kan tilsidesættes på produktniveau i et brugerdefineret felt.</helpText>
+      <helpText lang="ru-RU">Список, разделенный запятыми, с номерами, по которым должны быть сгруппированы таблицы столбцов. Например, 4.6 делит матрицу вариантов на 3 таблицы. Первая таблица из столбцов 1-3, вторая из столбцов 4-5 и третья с 6 и до конца. Эта настройка может быть переопределена на уровне продукта в пользовательском поле.</helpText>
+      <helpText lang="lv-LV">Ar komatu atdalīts saraksts ar numuriem, no kuriem grupējamas kolonnu tabulas. Piemēram, 4.6 sadala variantu matricu 3 tabulās. Pirmā tabula no 1.-3. slejas, otrā no 4.-5. slejas un trešā no 6. slejas līdz beigām. Šo iestatījumu var mainīt produkta līmenī pielāgotajā laukā.</helpText>
+      <helpText lang="id-ID">Daftar yang dipisahkan dengan koma dengan angka-angka yang akan dikelompokkan ke dalam tabel kolom. Sebagai contoh, 4.6 membagi matriks varian menjadi 3 tabel. Tabel pertama dari kolom 1-3, tabel ke-2 dari kolom 4-5 dan tabel ke-3 dari kolom 6 sampai akhir. Pengaturan ini dapat diganti pada tingkat produk di bidang khusus.</helpText>
+      <helpText lang="el-GR">Κατάλογος με διαχωριστικά κόμμα με αριθμούς από τους οποίους θα ομαδοποιηθούν οι πίνακες στηλών. Για παράδειγμα, το 4.6 χωρίζει τον πίνακα παραλλαγών σε 3 πίνακες. Ο πρώτος πίνακας από τη στήλη 1-3, ο 2ος από τη στήλη 4-5 και ο 3ος από τη στήλη 6 έως το τέλος. Αυτή η ρύθμιση μπορεί να παρακαμφθεί σε επίπεδο προϊόντος σε ένα προσαρμοσμένο πεδίο.</helpText>
+      <helpText lang="de-CH">Kommagetrennte Liste mit Nummern, aus denen Spaltentabellen gruppiert werden sollen. Zum Beispiel teilt 4.6 die Variantenmatrix in 3 Tabellen auf. Die erste Tabelle von Spalte 1-3, die zweite von Spalte 4-5 und die dritte von 6 bis zum Ende. Diese Einstellung kann auf Produktebene in einem benutzerdefinierten Feld außer Kraft gesetzt werden.</helpText>
+    </input-field>
+    <input-field type="text">
+      <name>variantMatrixSelectorBreakpointsNames</name>
+      <label>Table Grouping Set Designations</label>
+      <label lang="de-DE">Tabelle Gruppierungssatz Bezeichnungen</label>
+      <label lang="es-ES">Designaciones de conjuntos de agrupación de tablas</label>
+      <label lang="fi-FI">Taulukon ryhmittelyasetusten nimitykset</label>
+      <label lang="fr-FR">Désignations des ensembles de regroupement de tables</label>
+      <label lang="it-IT">Designazioni dei set di raggruppamento delle tabelle</label>
+      <label lang="nb-NO">Betegnelser for bordgrupperingssett</label>
+      <label lang="nl-NL">Tabel Groepering Set Aanduidingen</label>
+      <label lang="pl-PL">Oznaczenia zestawów grupowania tabel</label>
+      <label lang="sv-SE">Tabell Gruppering Set Beteckningar</label>
+      <label lang="bg-BG">Обозначения на набора за групиране на таблици</label>
+      <label lang="cs-CZ">Označení sady seskupení tabulek</label>
+      <label lang="pt-PT">Designações de conjuntos de agrupamento de tabelas</label>
+      <label lang="hr-HR">Asztali csoportosítási készlet megnevezései</label>
+      <label lang="tr-TR">Tablo Gruplama Seti Tanımlamaları</label>
+      <label lang="da-DK">Betegnelser for bordgrupperingssæt</label>
+      <label lang="ru-RU">Обозначения наборов для группировки таблиц</label>
+      <label lang="lv-LV">Tabulu grupēšanas kopu apzīmējumi</label>
+      <label lang="id-ID">Tabel Pengelompokan Set Penunjukan</label>
+      <label lang="el-GR">Ορισμός ομαδοποίησης πινάκων</label>
+      <label lang="de-CH">Tabelle Gruppierungssatz Bezeichnungen</label>
+      <defaultValue/>
+      <helpText>Comma-separated list with names of what the individual table groups should be called. For example, group 1, group 2, group 3. This setting can be overridden at product level in a custom field.</helpText>
+      <helpText lang="de-DE">Durch Kommata getrennte Liste mit den Namen der einzelnen Tabellengruppen, z. B. Gruppe, Gruppe, Gruppe 3. Zum Beispiel, Gruppe 1, Gruppe 2, Gruppe 3. Diese Einstellung kann auf Produktebene in einem benutzerdefinierten Feld überschrieben werden.</helpText>
+      <helpText lang="es-ES">Lista separada por comas con los nombres de los grupos de tablas individuales. Por ejemplo, grupo 1, grupo 2, grupo 3. Esta configuración se puede anular a nivel de producto en un campo personalizado.</helpText>
+      <helpText lang="fi-FI">Pilkulla erotettu luettelo, jossa on yksittäisten taulukkoryhmien nimet. Esimerkiksi ryhmä 1, ryhmä 2, ryhmä 3. Tämä asetus voidaan ohittaa tuotetasolla mukautetussa kentässä.</helpText>
+      <helpText lang="fr-FR">Liste séparée par des virgules contenant les noms des groupes de tableaux individuels. Par exemple, groupe 1, groupe 2, groupe 3. Ce paramètre peut être remplacé au niveau du produit dans un champ personnalisé.</helpText>
+      <helpText lang="it-IT">Elenco separato da virgole con i nomi dei gruppi di tabelle individuali da chiamare. Ad esempio, gruppo 1, gruppo 2, gruppo 3. Questa impostazione può essere sovrascritta a livello di prodotto in un campo personalizzato.</helpText>
+      <helpText lang="nb-NO">Kommaseparert liste med navn på hva de enkelte tabellgruppene skal hete. For eksempel gruppe 1, gruppe 2, gruppe 3. Denne innstillingen kan overstyres på produktnivå i et egendefinert felt.</helpText>
+      <helpText lang="nl-NL">Door komma's gescheiden lijst met namen van hoe de afzonderlijke tabelgroepen moeten worden genoemd. Bijvoorbeeld groep 1, groep 2, groep 3. Deze instelling kan worden overschreven op productniveau in een aangepast veld.</helpText>
+      <helpText lang="pl-PL">Rozdzielana przecinkami lista z nazwami poszczególnych grup tabel. Na przykład grupa 1, grupa 2, grupa 3. To ustawienie można zastąpić na poziomie produktu w polu niestandardowym.</helpText>
+      <helpText lang="sv-SE">Kommaseparerad lista med namn på vad de enskilda tabellgrupperna ska kallas. Till exempel grupp 1, grupp 2, grupp 3. Denna inställning kan åsidosättas på produktnivå i ett anpassat fält.</helpText>
+      <helpText lang="bg-BG">Списък, разделен със запетаи, с имена на отделните групи таблици, които трябва да се наричат. Например, група 1, група 2, група 3. Тази настройка може да бъде заменена на ниво продукт в потребителско поле.</helpText>
+      <helpText lang="cs-CZ">Seznam oddělený čárkami s názvy, jak se mají jednotlivé skupiny tabulek jmenovat. Například skupina 1, skupina 2, skupina 3. Toto nastavení lze přepsat na úrovni produktu ve vlastním poli.</helpText>
+      <helpText lang="pt-PT">Lista separada por vírgulas com os nomes dos grupos de tabelas individuais que devem ser designados. Por exemplo, grupo 1, grupo 2, grupo 3. Esta definição pode ser substituída ao nível do produto num campo personalizado.</helpText>
+      <helpText lang="hr-HR">Az egyes táblacsoportok neveit tartalmazó, vesszővel elválasztott lista. Például 1. csoport, 2. csoport, 3. csoport. Ez a beállítás felülbírálható termékszinten egy egyéni mezőben.</helpText>
+      <helpText lang="tr-TR">Tek tek tablo gruplarının adlandırılması gereken adları içeren virgülle ayrılmış liste. Örneğin, grup 1, grup 2, grup 3. Bu ayar, özel bir alanda ürün düzeyinde geçersiz kılınabilir.</helpText>
+      <helpText lang="da-DK">Kommasepareret liste med navne på, hvad de enkelte tabelgrupper skal hedde. For eksempel gruppe 1, gruppe 2, gruppe 3. Denne indstilling kan tilsidesættes på produktniveau i et brugerdefineret felt.</helpText>
+      <helpText lang="ru-RU">Список с именами отдельных групп таблиц, разделенных запятыми. Например, группа 1, группа 2, группа 3. Эта настройка может быть переопределена на уровне продукта в пользовательском поле.</helpText>
+      <helpText lang="lv-LV">Ar komatiem atdalīts saraksts ar nosaukumiem, kā saukt atsevišķas tabulu grupas. Piemēram, 1. grupa, 2. grupa, 3. grupa. Šo iestatījumu var aizstāt produkta līmenī pielāgotajā laukā.</helpText>
+      <helpText lang="id-ID">Daftar yang dipisahkan dengan koma dengan nama-nama yang harus disebut sebagai grup tabel individual. Misalnya, grup 1, grup 2, grup 3. Pengaturan ini dapat diganti di tingkat produk di bidang khusus.</helpText>
+      <helpText lang="el-GR">Λίστα διαχωρισμένη με κόμμα με τα ονόματα των επιμέρους ομάδων πινάκων που πρέπει να ονομάζονται. Για παράδειγμα, ομάδα 1, ομάδα 2, ομάδα 3. Αυτή η ρύθμιση μπορεί να παρακαμφθεί σε επίπεδο προϊόντος σε ένα προσαρμοσμένο πεδίο.</helpText>
+      <helpText lang="de-CH">Durch Kommata getrennte Liste mit den Namen der einzelnen Tabellengruppen, z. B. Gruppe, Gruppe, Gruppe 3. Zum Beispiel, Gruppe 1, Gruppe 2, Gruppe 3. Diese Einstellung kann auf Produktebene in einem benutzerdefinierten Feld überschrieben werden.</helpText>
+    </input-field>
+    <input-field type="bool">
+      <name>layoutLastGroupAsMatrixAndOtherGroupsAsSwOptionsShowArticleNo</name>
+      <label>Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="de-DE">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="es-ES">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="fi-FI">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="fr-FR">Affichage du numéro d'article dans la matrice</label>
+      <label lang="it-IT">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="nb-NO">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="nl-NL">Voorbeeld van Artikelnummer in Matrix</label>
+      <label lang="pl-PL">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="sv-SE">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="bg-BG">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="cs-CZ">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="pt-PT">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="hr-HR">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="tr-TR">Matrix'te Artikel Numarasının Görünümü</label>
+      <label lang="da-DK">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="ru-RU">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="lv-LV">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="id-ID">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="el-GR">Εμφάνιση της Artikelnummer στη μήτρα</label>
+      <label lang="de-CH">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="es-ES">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="fi-FI">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="fr-FR">Affichage du numéro d'article dans la matrice</label>
+      <label lang="it-IT">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="nb-NO">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="nl-NL">Voorbeeld van Artikelnummer in Matrix</label>
+      <label lang="pl-PL">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="sv-SE">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="bg-BG">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="cs-CZ">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="pt-PT">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="hr-HR">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="tr-TR">Matrix'te Artikel Numarasının Görünümü</label>
+      <label lang="da-DK">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="ru-RU">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="lv-LV">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="id-ID">Anzeige der Artikelnummer in der Matrix</label>
+      <label lang="el-GR">Εμφάνιση της Artikelnummer στη μήτρα</label>
+      <label lang="de-CH">Anzeige der Artikelnummer in der Matrix</label>
+      <defaultValue>false</defaultValue>
+    </input-field>
+  </card>
+</config>

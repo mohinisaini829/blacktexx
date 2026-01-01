@@ -1,0 +1,40 @@
+{% sw_extends '@Storefront/storefront/component/product/card/box-standard.html.twig'%}
+
+{% set productParentId = product.parentId %}
+
+{% if product.variantListingConfig.displayParent == true %}
+    {% set productParentId = product.id %}
+{% endif %}
+
+{% block component_product_box_description %}
+    {# lazy load variant matrix #}
+    {% if productParentId 
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixListingEnabled") == 'inline_standard'
+            and context.context.extensions.bilobaArticleVariantOrderMatrix.elements.parentProducts[productParentId].customFields.biloba_variant_matrix_hide != true %}
+        
+        {# remove description #}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_box_info %}
+    {{ parent() }}
+
+    {% if productParentId 
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixEnabled") == true 
+            and context.currentCustomerGroup.id not in config("BilobaArticleVariantOrderMatrix.config.disableMatrixForCustomersIds")
+            and config("BilobaArticleVariantOrderMatrix.config.variantMatrixListingEnabled") == 'inline_standard'
+            and context.context.extensions.bilobaArticleVariantOrderMatrix.elements.parentProducts[productParentId].customFields.biloba_variant_matrix_hide != true %}
+        
+        <script type="text/javascript">
+            window.bilobaVariantMatrixActiveIt = true;
+        </script>
+        <div class="loading text-center" data-biloba-variant-matrix-listing-inline="true" data-product-id="{{ productParentId }}">
+            <div class="spinner-border" role="status">
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

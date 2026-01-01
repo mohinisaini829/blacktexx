@@ -1,0 +1,80 @@
+{
+    "htc-popup-snp": {
+        "list": {
+            "columnLabel": "Titel",
+            "columnPriority": "Prioriteit",
+            "columnStatus": "Toestand"
+        },
+        "general": {
+            "cancelButtonText": "Annuleren",
+            "saveButtonText": "Redden",
+            "resetStatisticsText": "Statistieken resetten",
+            "errorTitle": "Fout",
+            "errorMessage": "Er is iets fout gegaan! Controleer alstublieft nog een keer.",
+            "successTitle": "Succes",
+            "successSaveMessage": "De pop-up is opgeslagen.",
+            "navigationTitle": "Pop-upbeheer",
+            "navigationDescription": "HTC pop-upbeheer"
+        },
+        "popup": {
+            "detail": {
+                "newPopupHeaderTitle": "Nieuwe pop-up",
+                "generalCardLabel": "Algemene instelling",
+                "displayCardlabel": "Beeldscherm instelling",
+                "isRedirectPopupCardlabel": "Pop-upinstelling omleiden",
+                "styleCardLabel": "Aangepaste stijlinstelling",
+                "statisticsCardLabel": "Statistieken",
+                "titleLabel": "Titel",
+                "statusLabel": "Toestand",
+                "priorityLabel": "Prioriteit",
+                "contentLabel": "Inhoud",
+                "customCssLabel": "Aangepaste CSS",
+                "backgroundMediaLabel": "Achtergrond afbeelding",
+                "classNameLabel": "Naam van de klasse",
+                "textColorLabel": "Tekst kleur",
+                "pagesShowLabel": "Visible On",
+                "visibleOptionLabels": {
+                    "homePageOptionLabel": "Startpagina",
+                    "productPageOptionLabel": "Productpagina",
+                    "categoryPageOptionLabel": "Categorie Pagina",
+                    "otherPageOptionLabel": "Andere pagina"
+                },
+                "frequency": "Frequency",
+                "frequencyOptionLabels": {
+                    "alwaysLabel": "Altijd",
+                    "onlyOneLabel": "Slechts één keer"
+                },
+                "alignContentOptions": {
+                    "leftTopLabel": "Bovenaan links",
+                    "leftCenterLabel": "Links midden",
+                    "leftBottomLabel": "Links onderaan",
+                    "centerTopLabel": "Center Top",
+                    "centerCenterLabel": "Center Center",
+                    "centerBottomLabel": "Midden onder",
+                    "rightTopLabel": "Rechtsboven",
+                    "rightCenterLabel": "Rechts midden",
+                    "rightBottomLabel": "Rechts beneden"           
+                },
+                "showGuestLabel": "Toon voor gast",
+                "customerGroupLabel": "Klantengroep",
+                "isRedirectLabel": "Is omleiding pop-up",
+                "isRedirectHelpText": "De frequentieconfiguratie wordt uitgeschakeld als de pop-up een omleidingspop-up is.",
+                "confirmButtonTitleLable": "Bevestig knoptekst",
+                "denyButtonTitleLable": "Knoptekst weigeren",
+                "denyButtonLinkLable": "Knopkoppeling weigeren",
+                "backgroundColorButton": "Knop Achtergrondkleur",
+                "viewLabel": "Weergave",
+                "clickLabel": "Klik",
+                "ctrLabel": "Doorklikratio (CTR)",
+                "widthLabel":"Breedte",
+                "heightLabel":"Hoogte",
+                "alignContentLabel": "Lijn inhoud uit"
+            }   
+        },
+        "modules": {
+            "menu": "HTC pop-up",
+            "addModulesButton": "Nieuwe pop-up toevoegen",
+            "cancelButton": "Annuleren"
+        }
+    }
+}
