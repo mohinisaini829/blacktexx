@@ -61,29 +61,32 @@
     (window, document, "script", "//bat.bing.com/bat.js", "uetq");
   </script>
   <script>
-    $(document).ready(function () {
-        function enableAccordionForMobile() {
-            if ($(window).width() <= 768) {
-                $('.accordion-content').hide(); // hide all initially on mobile
+    // Wait for both DOM and jQuery to be ready
+    if (typeof jQuery !== 'undefined') {
+        jQuery(document).ready(function ($) {
+            function enableAccordionForMobile() {
+                if ($(window).width() <= 768) {
+                    $('.accordion-content').hide(); // hide all initially on mobile
 
-                $('.accordion-header').off('click').on('click', function () {
-                    $(this).toggleClass('active');
-                    $(this).next('.accordion-content').slideToggle(200);
-                });
-            } else {
-                // Reset on desktop
-                $('.accordion-content').show();
-                $('.accordion-header').off('click').removeClass('active');
+                    $('.accordion-header').off('click').on('click', function () {
+                        $(this).toggleClass('active');
+                        $(this).next('.accordion-content').slideToggle(200);
+                    });
+                } else {
+                    // Reset on desktop
+                    $('.accordion-content').show();
+                    $('.accordion-header').off('click').removeClass('active');
+                }
             }
-        }
 
-        enableAccordionForMobile();
-
-        $(window).on('resize', function () {
             enableAccordionForMobile();
-        });
 
-    });
+            $(window).on('resize', function () {
+                enableAccordionForMobile();
+            });
+
+        });
+    }
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -158,28 +161,30 @@
         });*/
     </script>
     <script>
-    $(function() {
-        var $sticky = $('#stickyBuybox');
-        var $gallery = $('.product-detail-media');
-        if ($sticky.length && $gallery.length) {
-            var stickyTop = $sticky.offset().top;
+    // Wait for both DOM and jQuery to be ready
+    if (typeof jQuery !== 'undefined') {
+        jQuery(function($) {
+            var $sticky = $('#stickyBuybox');
+            var $gallery = $('.product-detail-media');
+            if ($sticky.length && $gallery.length) {
+                var stickyTop = $sticky.offset().top;
 
-            $(window).on('scroll resize', function() {
-        //console.log('555555555');
-                var scrollTop = $(window).scrollTop();
-                var galleryBottom = $gallery.offset().top + $gallery.outerHeight();
-                var stickyHeight = $sticky.outerHeight();
-                var stickyBottom = scrollTop + stickyHeight;
+                $(window).on('scroll resize', function() {
+            //console.log('555555555');
+                    var scrollTop = $(window).scrollTop();
+                    var galleryBottom = $gallery.offset().top + $gallery.outerHeight();
+                    var stickyHeight = $sticky.outerHeight();
+                    var stickyBottom = scrollTop + stickyHeight;
 
-                if (scrollTop > stickyTop && stickyBottom < galleryBottom) {
-                    $sticky.addClass('sticky-buybox');
-                } else {
-                    $sticky.removeClass('sticky-buybox');
-                }
-            });
-        }
-
-    });
+                    if (scrollTop > stickyTop && stickyBottom < galleryBottom) {
+                        $sticky.addClass('sticky-buybox');
+                    } else {
+                        $sticky.removeClass('sticky-buybox');
+                    }
+                });
+            }
+        });
+    }
     
 </script>
 {% endblock %}

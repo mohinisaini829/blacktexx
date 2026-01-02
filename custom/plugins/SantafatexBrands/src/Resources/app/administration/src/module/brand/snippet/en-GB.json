@@ -1,0 +1,48 @@
+{
+    "sw-santafatex": {
+        "brands": {
+            "general": {
+                "mainMenuItemGeneral": "Brands"
+            },
+            "index": {
+                "title": "Brands",
+                "columnName": "Name",
+                "columnDescription": "Description",
+                "columnActive": "Active",
+                "columnDisplayOrder": "Display Order",
+                "columnCreatedAt": "Created At",
+                "addBrand": "Add Brand",
+                "createButton": "Add Brand",
+                "editAction": "Edit",
+                "deleteAction": "Delete",
+                "searchPlaceholder": "Search brands...",
+                "emptyTitle": "No brands found",
+                "emptyText": "Create your first brand to get started",
+                "active": "Active",
+                "inactive": "Inactive",
+                "confirmDeleteTitle": "Delete Brand",
+                "confirmDeleteText": "Are you sure you want to delete this brand?"
+            },
+            "detail": {
+                "title": "Brand Details",
+                "titleNew": "New Brand",
+                "buttonCancel": "Cancel",
+                "buttonSave": "Save",
+                "generalCardTitle": "General Information",
+                "filesCardTitle": "Files",
+                "videoSliderCardTitle": "Video Slider"
+            },
+            "notification": {
+                "saveSuccess": "Success",
+                "saveSuccessMessage": "Brand saved successfully",
+                "saveError": "Error",
+                "uploadSuccess": "Success",
+                "uploadError": "Error",
+                "deleteSuccess": "Success",
+                "deleteSuccessMessage": "Brand deleted successfully",
+                "deleteError": "Error",
+                "loadErrorMessage": "Failed to load brand"
+            }
+        }
+    }
+}

@@ -2,78 +2,18 @@
 
 namespace Santafatex\Brands\Controller\Admin;
 
-use Santafatex\Brands\Service\BrandService;
-use Shopware\Core\Framework\Context;
-use Shopware\Core\Framework\Routing\Annotation\RouteScope;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
-#[RouteScope(['api'])]
-class BrandController extends AbstractController
+class FileUploadController
 {
-    private BrandService $brandService;
     private string $publicPath;
 
-    public function __construct(BrandService $brandService, string $projectDir)
+    public function __construct(string $projectDir)
     {
-        $this->brandService = $brandService;
         $this->publicPath = $projectDir . '/public/uploads/brands';
-    }
-
-    public function listBrands(Request $request, Context $context): JsonResponse
-    {
-        $limit = $request->query->getInt('limit', 25);
-        $offset = $request->query->getInt('offset', 0);
-
-        $brands = $this->brandService->getAllBrands($context, $limit, $offset);
-
-        return new JsonResponse([
-            'data' => $brands->getElements(),
-            'total' => $brands->getTotal(),
-        ]);
-    }
-
-    public function getBrand(string $id, Context $context): JsonResponse
-    {
-        $brand = $this->brandService->getBrand($id, $context);
-
-        if (!$brand) {
-            return new JsonResponse(['message' => 'Brand not found'], Response::HTTP_NOT_FOUND);
-        }
-
-        return new JsonResponse(['data' => $brand]);
-    }
-
-    public function createBrand(Request $request, Context $context): JsonResponse
-    {
-        $data = $this->prepareData($request, $context);
-
-        $brandId = $this->brandService->createBrand($data, $context);
-
-        return new JsonResponse([
-            'message' => 'Brand created successfully',
-            'id' => $brandId,
-        ], Response::HTTP_CREATED);
-    }
-
-    public function updateBrand(string $id, Request $request, Context $context): JsonResponse
-    {
-        $data = $this->prepareData($request, $context);
-
-        $this->brandService->updateBrand($id, $data, $context);
-
-        return new JsonResponse(['message' => 'Brand updated successfully']);
-    }
-
-    public function deleteBrand(string $id, Context $context): JsonResponse
-    {
-        $this->brandService->deleteBrand($id, $context);
-
-        return new JsonResponse(['message' => 'Brand deleted successfully']);
     }
 
     public function uploadFile(Request $request): JsonResponse
@@ -110,50 +50,6 @@ class BrandController extends AbstractController
                 'message' => $e->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-    }
-
-    private function prepareData(Request $request, Context $context): array
-    {
-        error_log('=== PrepareData Called ===');
-        
-        $data = $request->request->all();
-        error_log('Request data: ' . json_encode($data));
-        
-        // Log all files in request
-        $allFiles = $request->files->all();
-        error_log('All files in request: ' . json_encode(array_keys($allFiles)));
-
-        // Handle file uploads
-        if ($request->files->has('sizeChartFile')) {
-            error_log('sizeChartFile found in request');
-            $file = $request->files->get('sizeChartFile');
-            if ($file instanceof UploadedFile) {
-                error_log('sizeChartFile is valid UploadedFile instance');
-                $data['size_chart_path'] = $this->uploadFileInternal($file, 'sizeChartPaths');
-            } else {
-                error_log('sizeChartFile is NOT an UploadedFile instance');
-            }
-        } else {
-            error_log('sizeChartFile NOT found in request');
-        }
-
-        if ($request->files->has('catalogPdfFile')) {
-            error_log('catalogPdfFile found in request');
-            $file = $request->files->get('catalogPdfFile');
-            if ($file instanceof UploadedFile) {
-                error_log('catalogPdfFile is valid UploadedFile instance');
-                $data['catalog_pdf_path'] = $this->uploadFileInternal($file, 'catalogPdfPaths');
-            } else {
-                error_log('catalogPdfFile is NOT an UploadedFile instance');
-            }
-        } else {
-            error_log('catalogPdfFile NOT found in request');
-        }
-
-        error_log('Final data: ' . json_encode($data));
-        error_log('=== PrepareData Complete ===');
-        
-        return $data;
     }
 
     private function uploadFileInternal(UploadedFile $file, string $subfolder): string

@@ -546,7 +546,8 @@ class LumiseDesignerStartController extends StorefrontController
      */
     private function getProductName($product): string
     {
-        return $product->getName();
+        $name = $product->getName();
+        return $name ?? 'Product';
     }
     
     /**

@@ -1,153 +1,32 @@
-<div class="brand-index">
-    <sw-page class="sw-santafatex-brand-index">
-        <template slot="smart-bar">
-            <sw-smart-bar :item="$tc('sw-santafatex.brands.general.mainMenuItemGeneral')">
-                <template slot="smart-bar-header">
-                    <h2>{{ $t('sw-santafatex.brands.index.title') }}</h2>
-                </template>
+{% block sw_brand_index %}
+<sw-page class="sw-brand-index">
+    {% block sw_brand_index_smart_bar_header %}
+    <template #smart-bar-header>
+        <h2>Brands</h2>
+    </template>
+    {% endblock %}
 
-                <template slot="smart-bar-actions">
-                    <sw-search-bar
-                        :searchTerm="term"
-                        :isSearching="isLoading"
-                        :placeholder="$t('sw-santafatex.brands.index.searchPlaceholder')"
-                        @search="onSearch"
-                    />
+    {% block sw_brand_index_smart_bar_actions %}
+    <template #smart-bar-actions>
+        <sw-button variant="primary" :routerLink="{ name: 'santafatex.brands.create' }">
+            Add Brand
+        </sw-button>
+    </template>
+    {% endblock %}
 
-                    <sw-button
-                        class="smart-bar__content"
-                        variant="primary"
-                        size="small"
-                        @click="onCreate"
-                    >
-                        {{ $t('sw-santafatex.brands.index.createButton') }}
-                    </sw-button>
-                </template>
-            </sw-smart-bar>
-        </template>
+    {% block sw_brand_index_content %}
+    <template #content>
+        <sw-entity-listing
+            v-if="brands"
+            :items="brands"
+            :repository="brandRepository"
+            :showSelection="false"
+            :columns="columns"
+            :isLoading="isLoading"
+            detailRoute="santafatex.brands.detail">
+        </sw-entity-listing>
+    </template>
+    {% endblock %}
+</sw-page>
+{% endblock %}
 
-        <template slot="content">
-            <div class="sw-santafatex-brand-index__content">
-                <sw-data-grid
-                    class="sw-santafatex-brand-index__grid"
-                    :dataSource="brands"
-                    :columns="listingColumns"
-                    :fullPage="false"
-                    :allowColumnEdit="false"
-                    :allowInlineEdit="false"
-                    :isLoading="isLoading"
-                    :showSelection="true"
-                    :sortBy="sortBy"
-                    :sortDirection="sortDirection"
-                    identifier="santafatex_brand"
-                    @column-sort="onSort"
-                    @selection-change="onSelectionChange"
-                    @inline-edit-save="onSaveInlineEdit"
-                    @page-change="onPageChange"
-                >
-                    <!-- Name Column with Link -->
-                    <template #column-name="{ item, isInlineEdit }">
-                        <router-link
-                            v-if="!isInlineEdit"
-                            :to="{ name: 'santafatex.brands.detail', params: { id: item.id } }"
-                            class="sw-santafatex-brand-index__link"
-                        >
-                            {{ item.name }}
-                        </router-link>
-                        <div v-else>{{ item.name }}</div>
-                    </template>
-
-                    <!-- Description Column -->
-                    <template #column-description="{ item }">
-                        <div class="sw-santafatex-brand-index__description">
-                            {{ item.description | truncate(50) }}
-                        </div>
-                    </template>
-
-                    <!-- Active Column with Status Icon -->
-                    <template #column-active="{ item }">
-                        <div class="sw-santafatex-brand-index__active">
-                            <sw-icon
-                                :name="item.active ? 'regular-checkmark' : 'regular-x'"
-                                :color="item.active ? '#31b733' : '#d32f2f'"
-                                size="16px"
-                            />
-                            <span class="sw-santafatex-brand-index__active-text">
-                                {{ item.active ? $t('sw-santafatex.brands.index.active') : $t('sw-santafatex.brands.index.inactive') }}
-                            </span>
-                        </div>
-                    </template>
-
-                    <!-- Display Order Column -->
-                    <template #column-displayOrder="{ item }">
-                        <div class="sw-santafatex-brand-index__order">
-                            {{ item.displayOrder }}
-                        </div>
-                    </template>
-
-                    <!-- Created At Column -->
-                    <template #column-createdAt="{ item }">
-                        {{ item.createdAt | date('short') }}
-                    </template>
-
-                    <!-- Actions Column -->
-                    <template #actions="{ item }">
-                        <sw-context-button>
-                            <sw-context-menu-item
-                                class="sw-santafatex-brand-index__edit-action"
-                                @click="onEdit(item)"
-                            >
-                                <template slot="icon">
-                                    <sw-icon name="regular-pencil" size="16px" />
-                                </template>
-                                {{ $t('sw-santafatex.brands.index.editAction') }}
-                            </sw-context-menu-item>
-
-                            <sw-context-menu-item
-                                class="sw-santafatex-brand-index__delete-action"
-                                variant="danger"
-                                @click="onDelete(item.id)"
-                            >
-                                <template slot="icon">
-                                    <sw-icon name="regular-trash" size="16px" />
-                                </template>
-                                {{ $t('sw-santafatex.brands.index.deleteAction') }}
-                            </sw-context-menu-item>
-                        </sw-context-button>
-                    </template>
-
-                    <!-- Empty State -->
-                    <template #pagination>
-                        <sw-pagination
-                            :page="page"
-                            :limit="limit"
-                            :total="total"
-                            :total-visible="7"
-                            @page-change="onPageChange"
-                        />
-                    </template>
-                </sw-data-grid>
-
-                <!-- Empty State Message -->
-                <div v-if="!isLoading && brands.length === 0" class="sw-santafatex-brand-index__empty">
-                    <div class="sw-santafatex-brand-index__empty-icon">
-                        <sw-icon name="default-bell-bulb" size="48px" color="#ccc" />
-                    </div>
-                    <h3>{{ $t('sw-santafatex.brands.index.emptyTitle') }}</h3>
-                    <p>{{ $t('sw-santafatex.brands.index.emptyText') }}</p>
-                    <sw-button @click="onCreate" variant="primary">
-                        {{ $t('sw-santafatex.brands.index.createButton') }}
-                    </sw-button>
-                </div>
-            </div>
-        </template>
-    </sw-page>
-
-    <!-- Delete Confirmation Modal -->
-    <sw-confirm-modal
-        ref="confirmDeleteModal"
-        :title="$t('sw-santafatex.brands.index.confirmDeleteTitle')"
-        :text="$t('sw-santafatex.brands.index.confirmDeleteText')"
-        @confirm="onConfirmDelete"
-    />
-</div>

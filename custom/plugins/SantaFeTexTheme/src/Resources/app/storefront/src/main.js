@@ -3,6 +3,7 @@ import NetGrossSwitchPlugin from './plugin/net-gross-switch.plugin';
 import MultipleItemsGallerySliderPlugin from './plugin/slider/multiple-items-gallery-slider.plugin';
 import ContactFormRedirectPlugin from './plugin/contact-redirect/contact-form-redirect.plugin'
 import SantaDiscountModalPlugin from './plugin/shopLoad-modal/shopLoad-modal.plugin';
+import LoadMoreImagesPlugin from './plugin/load-more-images/load-more-images.plugin';
 import PluginManager from 'src/plugin-system/plugin.manager';
 
 PluginManager.override('OffCanvasTabs', ReplaceOffCanvasTabsPlugin, '[data-offcanvas-tabs]');
@@ -10,3 +11,4 @@ PluginManager.register('NetGrossSwitchPlugin', NetGrossSwitchPlugin, '.net-gross
 PluginManager.override('GallerySlider', MultipleItemsGallerySliderPlugin, '[data-gallery-slider]');
 PluginManager.register('ContactFormRedirectPlugin', ContactFormRedirectPlugin, '[data-contact-form]');
 PluginManager.register('SantaDiscountModalPlugin', SantaDiscountModalPlugin, '[data-santa-discount]');
+PluginManager.register('LoadMoreImagesPlugin', LoadMoreImagesPlugin, '[data-load-more-images]');

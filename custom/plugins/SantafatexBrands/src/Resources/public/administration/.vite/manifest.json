@@ -1,8 +1,11 @@
 {
   "main.js": {
-    "file": "assets/santafatex-brands-BqycMkuV.js",
+    "file": "assets/santafatex-brands-BA2UEAKe.js",
     "name": "santafatex-brands",
     "src": "main.js",
-    "isEntry": true
+    "isEntry": true,
+    "css": [
+      "assets/santafatex-brands-Bl9TXMp6.css"
+    ]
   }
 }

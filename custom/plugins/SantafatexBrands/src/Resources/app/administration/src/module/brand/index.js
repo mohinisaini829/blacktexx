@@ -1,5 +1,8 @@
-import BrandIndexPage from './page/brand-index';
-import BrandDetailPage from './page/brand-detail';
+import './page/brand-index';
+import './page/brand-detail';
+
+import enGBSnippets from './snippet/en-GB.json';
+import deGBSnippets from './snippet/de-DE.json';
 
 console.log('index');
 
@@ -13,9 +16,14 @@ Shopware.Module.register('santafatex-brands', {
     color: '#ff68b4',
     icon: 'default-bell-bulb',
 
+    snippets: {
+        'en-GB': enGBSnippets,
+        'de-DE': deGBSnippets
+    },
+
     routes: {
         index: {
-            component: BrandIndexPage,
+            component: 'brand-index',
             path: 'brands',
             name: 'santafatex.brands.index',
             meta: {
@@ -24,7 +32,7 @@ Shopware.Module.register('santafatex-brands', {
             },
         },
         detail: {
-            component: BrandDetailPage,
+            component: 'brand-detail',
             path: 'brands/:id',
             name: 'santafatex.brands.detail',
             meta: {
@@ -33,7 +41,7 @@ Shopware.Module.register('santafatex-brands', {
             },
         },
         create: {
-            component: BrandDetailPage,
+            component: 'brand-detail',
             path: 'brands/create',
             name: 'santafatex.brands.create',
             meta: {
@@ -46,7 +54,7 @@ Shopware.Module.register('santafatex-brands', {
     navigation: [
         {
             id: 'santafatex-brands',
-            label: 'sw-santafatex.brands.general.mainMenuItemGeneral',
+            label: 'Brands',
             color: '#ff68b4',
             path: 'santafatex.brands.index',
             icon: 'default-bell-bulb',

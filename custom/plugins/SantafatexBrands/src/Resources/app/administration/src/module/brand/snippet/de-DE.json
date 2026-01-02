@@ -1,0 +1,48 @@
+{
+    "sw-santafatex": {
+        "brands": {
+            "general": {
+                "mainMenuItemGeneral": "Marken"
+            },
+            "index": {
+                "title": "Marken",
+                "columnName": "Name",
+                "columnDescription": "Beschreibung",
+                "columnActive": "Aktiv",
+                "columnDisplayOrder": "Anzeigereihenfolge",
+                "columnCreatedAt": "Erstellt am",
+                "addBrand": "Marke hinzufügen",
+                "createButton": "Marke hinzufügen",
+                "editAction": "Bearbeiten",
+                "deleteAction": "Löschen",
+                "searchPlaceholder": "Marken suchen...",
+                "emptyTitle": "Keine Marken gefunden",
+                "emptyText": "Erstellen Sie Ihre erste Marke, um zu beginnen",
+                "active": "Aktiv",
+                "inactive": "Inaktiv",
+                "confirmDeleteTitle": "Marke löschen",
+                "confirmDeleteText": "Möchten Sie diese Marke wirklich löschen?"
+            },
+            "detail": {
+                "title": "Markendetails",
+                "titleNew": "Neue Marke",
+                "buttonCancel": "Abbrechen",
+                "buttonSave": "Speichern",
+                "generalCardTitle": "Allgemeine Informationen",
+                "filesCardTitle": "Dateien",
+                "videoSliderCardTitle": "Video Slider"
+            },
+            "notification": {
+                "saveSuccess": "Erfolg",
+                "saveSuccessMessage": "Marke erfolgreich gespeichert",
+                "saveError": "Fehler",
+                "uploadSuccess": "Erfolg",
+                "uploadError": "Fehler",
+                "deleteSuccess": "Erfolg",
+                "deleteSuccessMessage": "Marke erfolgreich gelöscht",
+                "deleteError": "Fehler",
+                "loadErrorMessage": "Marke konnte nicht geladen werden"
+            }
+        }
+    }
+}

@@ -39,6 +39,11 @@
             <tag name="twig.extension"/>
         </service>
 
+        <service id="SantaFeTexTheme\Twig\Extensions\BrandExtension">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <tag name="twig.extension"/>
+        </service>
+
         <service id="SantaFeTexTheme\Core\Content\Product\SalesChannel\Price\ProductPriceCalculator"
                  decorates="Shopware\Core\Content\Product\SalesChannel\Price\ProductPriceCalculator"
         >

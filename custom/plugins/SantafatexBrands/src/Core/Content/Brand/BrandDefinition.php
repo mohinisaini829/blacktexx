@@ -2,6 +2,7 @@
 
 namespace Santafatex\Brands\Core\Content\Brand;
 
+use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\SetDefault;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\BoolField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\CreatedAtField;
@@ -42,8 +43,8 @@ class BrandDefinition extends EntityDefinition
             new StringField('size_chart_path', 'sizeChartPath'),
             new LongTextField('video_slider_html', 'videoSliderHtml'),
             new StringField('catalog_pdf_path', 'catalogPdfPath'),
-            (new BoolField('active', 'active'))->setDefault(true),
-            (new IntField('display_order', 'displayOrder'))->setDefault(0),
+            (new BoolField('active', 'active'))->addFlags(new Required()),
+            new IntField('display_order', 'displayOrder'),
             new CreatedAtField(),
             new UpdatedAtField(),
         ]);

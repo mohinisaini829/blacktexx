@@ -2,10 +2,12 @@
   "base": "/bundles/santafatexbrands/administration/",
   "entryPoints": {
     "santafatex-brands": {
-      "css": [],
+      "css": [
+        "/bundles/santafatexbrands/administration/assets/santafatex-brands-Bl9TXMp6.css"
+      ],
       "dynamic": [],
       "js": [
-        "/bundles/santafatexbrands/administration/assets/santafatex-brands-BqycMkuV.js"
+        "/bundles/santafatexbrands/administration/assets/santafatex-brands-BA2UEAKe.js"
       ],
       "legacy": false,
       "preload": []

@@ -20,6 +20,10 @@ class BrandService
 
     public function createBrand(array $data, Context $context): string
     {
+        // Remove any existing id to ensure it's a create operation
+        unset($data['id']);
+        
+        // Generate new UUID
         $data['id'] = Uuid::randomHex();
 
         $this->brandRepository->create([$data], $context);

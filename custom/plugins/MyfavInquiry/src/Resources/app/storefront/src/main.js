@@ -9,7 +9,15 @@ PluginManager.register('MyfavInquiryCountPlugin', MyfavInquiryCountPlugin, '[dat
 PluginManager.register('MyfavSpecialOffersCheckboxPlugin', MyfavSpecialOffersCheckboxPlugin, '.special-offers-checkbox');
 
 // bootstrap custom file input js see: https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp
-$(".custom-file-input").on("change", function() {
-    var fileName = $(this).val().split("\\").pop();
-    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.custom-file-input').forEach(function(input) {
+        input.addEventListener('change', function() {
+            var fileName = this.value.split("\\").pop();
+            var label = this.parentElement.querySelector('.custom-file-label');
+            if (label) {
+                label.classList.add('selected');
+                label.textContent = fileName;
+            }
+        });
+    });
 });

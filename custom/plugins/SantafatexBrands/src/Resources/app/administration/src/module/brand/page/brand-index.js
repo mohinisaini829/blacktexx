@@ -7,6 +7,8 @@ const { Criteria, EqualsFilter } = Shopware.Data;
 Component.register('brand-index', {
     template,
 
+    inject: ['repositoryFactory'],
+
     mixins: [
         Mixin.getByName('listing'),
         Mixin.getByName('notification'),

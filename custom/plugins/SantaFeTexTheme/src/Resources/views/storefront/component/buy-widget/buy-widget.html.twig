@@ -118,10 +118,10 @@
         {% sw_include '@Storefront/storefront/component/buy-widget/buy-widget-price.html.twig' %}
     </div>
     <div class="product-detail-link-container row justify-content-between">
-
+        <!-- {{ dump(getAllActiveBrands()) }} -->
         <a class="col-auto print-price-list-link" href="#finishing-price-table">{{ "santa-theme.buybox.printPriceListLink"|trans|sw_sanitize }}</a>
 
-        {% set vioPdfCustomField = page.product.manufacturer.translated.customFields.vio_size_table %}
+        <!-- {% set vioPdfCustomField = page.product.manufacturer.translated.customFields.vio_size_table %}
 
         {% if vioPdfCustomField %}
             {% set vioMedia = searchMedia({vioPdfCustomField}, context.context) %}
@@ -133,7 +133,31 @@
                     {{ "santa-theme.buybox.sizeTableLink"|trans|sw_sanitize }}
                 </a>
             {% endfor %}
+        {% endif %} -->
+        {% set manufacturerName = page.product.manufacturer.translated.name|trim %}
+        {# Fetch brand data by manufacturer name from your custom Twig extension #}
+        {% set brandData = getBrandByName(manufacturerName) %}
+
+        {% if brandData %}
+            {# Check if the brand data contains a size chart path #}
+            {% set sizeChartPath = brandData.size_chart_path %}
+            
+            {% if sizeChartPath %}
+                <div class="size-chart-link">
+                    <a class="col-auto"
+                    title="{{ "santa-theme.buybox.sizeTableLink"|trans|sw_sanitize }}"
+                    href="{{ sizeChartPath }}"
+                    target="_blank">
+                        {{ "santa-theme.buybox.sizeTableLink"|trans|sw_sanitize }}
+                    </a>
+                </div>
+            {% else %}
+                <p>{{ "No size chart available for this brand."|trans }}</p>
+            {% endif %}
+        {% else %}
+            <p>{{ "Brand not found or not active."|trans }}</p>
         {% endif %}
+
     </div>
 {% endif %}
 {% endblock %}

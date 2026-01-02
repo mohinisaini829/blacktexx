@@ -1,12 +1,62 @@
 {% sw_extends '@Storefront/storefront/element/cms-element-image-gallery.html.twig' %}
 
 {% block element_image_gallery %}
+    <style>
+        .gallery-image-hidden {
+            display: none !important;
+        }
+        
+        /* Mobile Slider Styles */
+        @media (max-width: 768px) {
+            .gallery-image-container {
+                overflow-x: auto;
+                display: flex;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 10px;
+                padding: 10px 0;
+            }
+            
+            .gallery-image-item {
+                flex: 0 0 85%;
+                scroll-snap-align: center;
+            }
+            
+            .gallery-image-container::-webkit-scrollbar {
+                height: 6px;
+            }
+            
+            .gallery-image-container::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+            }
+            
+            .gallery-image-container::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 10px;
+            }
+            
+            .gallery-image-container::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+        }
+        
+        /* Desktop Grid */
+        @media (min-width: 769px) {
+            .gallery-image-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+        }
+    </style>
+    
     <div class="cms-element-image-gallery">
         <div class="gallery-image-container">
-            {% set imagesToShow = 3 %}
-            {% for item in element.data.sliderItems[:imagesToShow] %}
+            {% set imagesToShow = 4 %}
+            {% for item in element.data.sliderItems %}
                 {% if item.media is defined and item.media.url is defined %}
-                    <div class="gallery-image-item">
+                    <div class="gallery-image-item {% if loop.index > imagesToShow %}gallery-image-hidden{% endif %}">
                         <img src="{{ item.media.url }}"
                              class="img-fluid gallery-image"
                              alt="{{ item.media.alt ?: '' }}"
@@ -19,12 +69,24 @@
         
         {% if element.data.sliderItems|length > imagesToShow %}
             <div class="load-more-wrapper text-center mt-3">
-                <button class="btn btn-primary js-load-more-images">
+                <button class="btn btn-primary js-load-more-images" onclick="showAllImages(this); return false;">
                     Load more images
                 </button>
             </div>
         {% endif %}
     </div>
+
+    <script>
+        function showAllImages(button) {
+            var hiddenImages = document.querySelectorAll('.gallery-image-hidden');
+            
+            for (var i = 0; i < hiddenImages.length; i++) {
+                hiddenImages[i].classList.remove('gallery-image-hidden');
+            }
+            
+            button.parentElement.style.display = 'none';
+        }
+    </script>
 
     <!-- {{ parent() }} -->
     

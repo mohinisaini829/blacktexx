@@ -7,6 +7,8 @@ const { mapPropertyErrors } = Component.getComponentHelper();
 export default Component.register('brand-detail', {
     template,
 
+    inject: ['repositoryFactory'],
+
     mixins: [
         Mixin.getByName('notification'),
         Mixin.getByName('placeholder'),
@@ -67,8 +69,8 @@ export default Component.register('brand-detail', {
                     console.error('Error loading brand:', error);
                     this.isLoading = false;
                     this.createNotificationError({
-                        title: this.$t('sw-santafatex.brands.notification.saveError'),
-                        message: this.$t('sw-santafatex.brands.notification.loadErrorMessage'),
+                        title: 'Error',
+                        message: 'Failed to load brand',
                     });
                 });
         },
@@ -76,7 +78,7 @@ export default Component.register('brand-detail', {
         saveBrand() {
             if (!this.brand.name) {
                 this.createNotificationError({
-                    title: this.$t('sw-santafatex.brands.notification.saveError'),
+                    title: 'Error',
                     message: 'Brand name is required',
                 });
                 return;
@@ -84,6 +86,8 @@ export default Component.register('brand-detail', {
 
             this.isSaveSuccessful = false;
             this.isLoading = true;
+
+            console.log('Saving brand:', this.brand);
 
             this.brandRepository.save(this.brand, Shopware.Context.api)
                 .then(() => {
@@ -99,16 +103,26 @@ export default Component.register('brand-detail', {
                     }
 
                     this.createNotificationSuccess({
-                        title: this.$t('sw-santafatex.brands.notification.saveSuccess'),
-                        message: this.$t('sw-santafatex.brands.notification.saveSuccessMessage'),
+                        title: 'Success',
+                        message: 'Brand saved successfully',
                     });
                 })
                 .catch((error) => {
                     this.isLoading = false;
                     console.error('Error saving brand:', error);
+                    console.error('Error details:', error.response);
+                    
+                    let errorMessage = 'An error occurred while saving';
+                    if (error.response?.data?.errors) {
+                        const errors = error.response.data.errors;
+                        errorMessage = errors.map(e => e.detail || e.title).join(', ');
+                    } else if (error.response?.data?.message) {
+                        errorMessage = error.response.data.message;
+                    }
+                    
                     this.createNotificationError({
-                        title: this.$t('sw-santafatex.brands.notification.saveError'),
-                        message: error.response?.data?.message || 'An error occurred while saving',
+                        title: 'Error',
+                        message: errorMessage,
                     });
                 });
         },
@@ -134,7 +148,7 @@ export default Component.register('brand-detail', {
 
             if (!allowedExtensions.includes(fileExtension)) {
                 this.createNotificationError({
-                    title: this.$t('sw-santafatex.brands.notification.uploadError'),
+                    title: 'Error',
                     message: `Invalid file type. Allowed: ${allowedExtensions.join(', ')}`,
                 });
                 return;
@@ -144,29 +158,88 @@ export default Component.register('brand-detail', {
             const maxSize = 5 * 1024 * 1024;
             if (file.size > maxSize) {
                 this.createNotificationError({
-                    title: this.$t('sw-santafatex.brands.notification.uploadError'),
+                    title: 'Error',
                     message: 'File size exceeds 5MB limit',
                 });
                 return;
             }
 
             this.isUploadingFile = true;
+
+            // Create form data for actual file upload
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('fieldName', fieldName);
+            
+            // Determine subfolder based on field name
+            const subfolder = fieldName === 'sizeChartPath' ? 'sizeChartPaths' : 'catalogPdfPaths';
+            formData.append('subfolder', subfolder);
 
-            // For now, we'll store the file name in the field
-            // In a real implementation, you would upload to a server endpoint
-            const timestamp = Date.now();
-            const filename = `${fieldName}-${timestamp}.${fileExtension}`;
-            this.brand[fieldName] = `/uploads/brands/${fieldName}s/${filename}`;
+            // Upload to custom API endpoint
+            const headers = {
+                'Authorization': `Bearer ${Shopware.Context.api.authToken.access}`
+            };
 
-            this.isUploadingFile = false;
+            fetch('/api/_action/santafatex-brands/upload', {
+                method: 'POST',
+                body: formData,
+                headers: headers
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Upload failed');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data.success) {
+                    // Store the uploaded path
+                    this.brand[fieldName] = data.path;
+                    
+                    this.isUploadingFile = false;
 
-            this.createNotificationSuccess({
-                title: this.$t('sw-santafatex.brands.notification.uploadSuccess'),
-                message: 'File uploaded successfully. Save the brand to persist changes.',
+                    this.createNotificationSuccess({
+                        title: 'Success',
+                        message: 'File uploaded successfully. Save the brand to complete.',
+                    });
+                } else {
+                    throw new Error(data.message || 'Upload failed');
+                }
+            })
+            .catch((error) => {
+                console.error('Upload error:', error);
+                this.isUploadingFile = false;
+                
+                this.createNotificationError({
+                    title: 'Error',
+                    message: 'File upload failed: ' + error.message,
+                });
             });
+        },
+
+        onClickSave() {
+            this.isLoading = true;
+
+            this.brandRepository.save(this.brand, Shopware.Context.api)
+                .then(() => {
+                    this.isSaveSuccessful = true;
+                    this.isLoading = false;
+
+                    this.createNotificationSuccess({
+                        title: 'Success',
+                        message: 'Brand saved successfully',
+                    });
+
+                    if (this.isNewBrand) {
+                        this.$router.push({ name: 'santafatex.brands.index' });
+                    }
+                })
+                .catch((error) => {
+                    this.isLoading = false;
+                    this.createNotificationError({
+                        title: 'Error',
+                        message: 'Error saving brand',
+                    });
+                });
         },
 
         onCancel() {

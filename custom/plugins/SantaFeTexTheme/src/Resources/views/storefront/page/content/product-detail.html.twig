@@ -9,3 +9,17 @@
         </div>
     </div>
 {% endblock %}
+
+{% block page_product_detail_media %}
+    <div class="product-detail-media" data-load-more-images>
+        {{ parent() }}
+        
+        {% if page.product.media|length > 5 %}
+            <div class="text-center mt-3">
+                <button class="btn btn-primary load-more-images-btn">
+                    Load More Images
+                </button>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
