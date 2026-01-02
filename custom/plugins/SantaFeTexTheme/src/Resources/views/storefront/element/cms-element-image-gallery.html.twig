@@ -5,50 +5,6 @@
         .gallery-image-hidden {
             display: none !important;
         }
-        
-        /* Mobile Slider Styles */
-        @media (max-width: 768px) {
-            .gallery-image-container {
-                overflow-x: auto;
-                display: flex;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                gap: 10px;
-                padding: 10px 0;
-            }
-            
-            .gallery-image-item {
-                flex: 0 0 85%;
-                scroll-snap-align: center;
-            }
-            
-            .gallery-image-container::-webkit-scrollbar {
-                height: 6px;
-            }
-            
-            .gallery-image-container::-webkit-scrollbar-track {
-                background: #f1f1f1;
-                border-radius: 10px;
-            }
-            
-            .gallery-image-container::-webkit-scrollbar-thumb {
-                background: #888;
-                border-radius: 10px;
-            }
-            
-            .gallery-image-container::-webkit-scrollbar-thumb:hover {
-                background: #555;
-            }
-        }
-        
-        /* Desktop Grid */
-        @media (min-width: 769px) {
-            .gallery-image-container {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 15px;
-            }
-        }
     </style>
     
     <div class="cms-element-image-gallery">
@@ -78,18 +34,58 @@
 
     <script>
         function showAllImages(button) {
+            console.log('showAllImages called');
             var hiddenImages = document.querySelectorAll('.gallery-image-hidden');
+            console.log('Found hidden images:', hiddenImages.length);
             
             for (var i = 0; i < hiddenImages.length; i++) {
                 hiddenImages[i].classList.remove('gallery-image-hidden');
+                console.log('Removed class from image', i);
             }
             
             button.parentElement.style.display = 'none';
+            console.log('Button hidden');
         }
     </script>
 
     <!-- {{ parent() }} -->
     
+{% endblock %}
+
+{% block base_script_hmr_mode %}
+    {{ parent() }}
+    <style>
+        .gallery-image-hidden {
+            display: none !important;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Load more script initialized');
+            const loadMoreBtn = document.querySelector('.js-load-more-images');
+            console.log('Button found:', loadMoreBtn);
+            
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Button clicked');
+                    
+                    // Show all hidden images
+                    const hiddenImages = document.querySelectorAll('.gallery-image-hidden');
+                    console.log('Hidden images found:', hiddenImages.length);
+                    
+                    hiddenImages.forEach(function(img) {
+                        img.classList.remove('gallery-image-hidden');
+                        console.log('Showing image');
+                    });
+                    
+                    // Hide the button
+                    this.parentElement.style.display = 'none';
+                    console.log('Button hidden');
+                });
+            }
+        });
+    </script>
 {% endblock %}
 
 {% block element_image_gallery_inner %}
