@@ -82,6 +82,7 @@
         $(window).on('resize', function () {
             enableAccordionForMobile();
         });
+
     });
   </script>
   <script>
@@ -109,6 +110,7 @@
             });
         }
     });
+
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -176,7 +178,9 @@
                 }
             });
         }
+
     });
+    
 </script>
 {% endblock %}
 {% block base_body_classes %}{{ parent() }}{% if page.cmsPage.type == "product_list"%} santa--product-listing{% endif %}{% endblock %}

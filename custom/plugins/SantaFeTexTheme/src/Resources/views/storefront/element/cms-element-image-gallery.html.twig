@@ -1,18 +1,33 @@
 {% sw_extends '@Storefront/storefront/element/cms-element-image-gallery.html.twig' %}
 
 {% block element_image_gallery %}
-    <div class="image-badges">
-        {% if config('core.cart.wishlistEnabled') %}
-            {% block component_product_box_wishlist_action %}
-                {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
-                    appearance: 'circle',
-                    productId: page.product.id
-                } %}
-            {% endblock %}
+    <div class="cms-element-image-gallery">
+        <div class="gallery-image-container">
+            {% set imagesToShow = 3 %}
+            {% for item in element.data.sliderItems[:imagesToShow] %}
+                {% if item.media is defined and item.media.url is defined %}
+                    <div class="gallery-image-item">
+                        <img src="{{ item.media.url }}"
+                             class="img-fluid gallery-image"
+                             alt="{{ item.media.alt ?: '' }}"
+                             title="{{ item.media.title ?: '' }}"
+                             style="width:100%;height:auto;" />
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        
+        {% if element.data.sliderItems|length > imagesToShow %}
+            <div class="load-more-wrapper text-center mt-3">
+                <button class="btn btn-primary js-load-more-images">
+                    Load more images
+                </button>
+            </div>
         {% endif %}
     </div>
 
-    {{ parent() }}
+    <!-- {{ parent() }} -->
+    
 {% endblock %}
 
 {% block element_image_gallery_inner %}

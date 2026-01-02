@@ -4,7 +4,7 @@ import './brand-index.scss';
 const { Component, Mixin } = Shopware;
 const { Criteria, EqualsFilter } = Shopware.Data;
 
-export default Component.register('brand-index', {
+Component.register('brand-index', {
     template,
 
     mixins: [
@@ -134,4 +134,32 @@ export default Component.register('brand-index', {
         onEdit(brand) {
             this.$router.push({
                 name: 'santafatex.brands.detail',
-                params: { id:
+                params: { id: brand.id },
+            });
+        },
+
+        onCreate() {
+            this.$router.push({
+                name: 'santafatex.brands.create',
+            });
+        },
+
+        onSearch(value) {
+            this.term = value;
+            this.page = 1;
+            this.getList();
+        },
+
+        onPageChange(options) {
+            this.page = options.page;
+            this.limit = options.limit;
+            this.getList();
+        },
+
+        onSort(options) {
+            this.sortBy = options.sortBy;
+            this.sortDirection = options.sortDirection;
+            this.getList();
+        },
+    },
+});
