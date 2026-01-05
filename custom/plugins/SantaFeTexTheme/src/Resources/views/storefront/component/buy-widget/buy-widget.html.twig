@@ -121,19 +121,6 @@
         <!-- {{ dump(getAllActiveBrands()) }} -->
         <a class="col-auto print-price-list-link" href="#finishing-price-table">{{ "santa-theme.buybox.printPriceListLink"|trans|sw_sanitize }}</a>
 
-        <!-- {% set vioPdfCustomField = page.product.manufacturer.translated.customFields.vio_size_table %}
-
-        {% if vioPdfCustomField %}
-            {% set vioMedia = searchMedia({vioPdfCustomField}, context.context) %}
-            {% for media in vioMedia %}
-                <a class="col-auto"
-                   title="{{ "santa-theme.buybox.sizeTableLink"|trans|sw_sanitize }}"
-                   href="{{ media.url }}"
-                   target="_blank">
-                    {{ "santa-theme.buybox.sizeTableLink"|trans|sw_sanitize }}
-                </a>
-            {% endfor %}
-        {% endif %} -->
         {% set manufacturerName = page.product.manufacturer.translated.name|trim %}
         {# Fetch brand data by manufacturer name from your custom Twig extension #}
         {% set brandData = getBrandByName(manufacturerName) %}

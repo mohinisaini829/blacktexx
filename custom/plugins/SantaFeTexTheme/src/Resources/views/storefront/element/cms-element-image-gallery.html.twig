@@ -2,8 +2,84 @@
 
 {% block element_image_gallery %}
     <style>
-        .gallery-image-hidden {
-            display: none !important;
+        /* Mobile slider styles */
+        @media (max-width: 767px) {
+            .cms-element-image-gallery .gallery-image-container {
+                display: flex !important;
+                overflow-x: scroll !important;
+                scroll-snap-type: x mandatory !important;
+                -webkit-overflow-scrolling: touch !important;
+                gap: 0px !important;
+                padding: 10px 0px !important;
+                scrollbar-width: thin !important;
+                scroll-behavior: smooth !important;
+            }
+            
+            .cms-element-image-gallery .gallery-image-container::-webkit-scrollbar {
+                height: 8px !important;
+            }
+            
+            .cms-element-image-gallery .gallery-image-container::-webkit-scrollbar-track {
+                background: #f1f1f1 !important;
+                border-radius: 4px !important;
+            }
+            
+            .cms-element-image-gallery .gallery-image-container::-webkit-scrollbar-thumb {
+                background: #888 !important;
+                border-radius: 4px !important;
+            }
+            
+            .cms-element-image-gallery .gallery-image-container::-webkit-scrollbar-thumb:hover {
+                background: #555 !important;
+            }
+            
+            .cms-element-image-gallery .gallery-image-item {
+                flex: 0 0 100% !important;
+                max-width: 100% !important;
+                scroll-snap-align: start !important;
+                display: block !important;
+            }
+            
+            .cms-element-image-gallery .gallery-image-item img {
+                width: 100% !important;
+                height: auto !important;
+                border-radius: 0px !important;
+            }
+            
+            .cms-element-image-gallery .gallery-image-hidden {
+                display: block !important;
+            }
+            
+            .cms-element-image-gallery .load-more-wrapper {
+                display: none !important;
+            }
+        }
+        
+        /* Desktop vertical layout - one by one */
+        @media (min-width: 768px) {
+            .cms-element-image-gallery .gallery-image-container {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+            
+            .cms-element-image-gallery .gallery-image-item {
+                width: 100% !important;
+                display: block !important;
+            }
+            
+            .cms-element-image-gallery .gallery-image-item img {
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            .cms-element-image-gallery .gallery-image-hidden {
+                display: none !important;
+            }
+            
+            .cms-element-image-gallery .load-more-wrapper {
+                display: block !important;
+            }
         }
     </style>
     
@@ -16,8 +92,7 @@
                         <img src="{{ item.media.url }}"
                              class="img-fluid gallery-image"
                              alt="{{ item.media.alt ?: '' }}"
-                             title="{{ item.media.title ?: '' }}"
-                             style="width:100%;height:auto;" />
+                             title="{{ item.media.title ?: '' }}" />
                     </div>
                 {% endif %}
             {% endfor %}
@@ -34,58 +109,70 @@
 
     <script>
         function showAllImages(button) {
-            console.log('showAllImages called');
             var hiddenImages = document.querySelectorAll('.gallery-image-hidden');
-            console.log('Found hidden images:', hiddenImages.length);
-            
             for (var i = 0; i < hiddenImages.length; i++) {
                 hiddenImages[i].classList.remove('gallery-image-hidden');
-                console.log('Removed class from image', i);
             }
-            
-            button.parentElement.style.display = 'none';
-            console.log('Button hidden');
+            // Remove the button wrapper completely
+            var wrapper = button.closest('.load-more-wrapper');
+            if (wrapper) {
+                wrapper.remove();
+            }
+        }
+
+        // Auto-scroll for mobile slider only
+        if (window.innerWidth <= 767) {
+            document.addEventListener('DOMContentLoaded', function() {
+                var galleryContainer = document.querySelector('.cms-element-image-gallery .gallery-image-container');
+                if (galleryContainer && galleryContainer.children.length > 1) {
+                    var scrollAmount = 0;
+                    var scrollInterval;
+                    var isPaused = false;
+                    
+                    function autoScroll() {
+                        if (!isPaused) {
+                            scrollAmount += galleryContainer.offsetWidth; // full image width
+                            
+                            if (scrollAmount >= galleryContainer.scrollWidth - galleryContainer.offsetWidth) {
+                                scrollAmount = 0; // Reset to start
+                            }
+                            
+                            galleryContainer.scrollTo({
+                                left: scrollAmount,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                    
+                    // Start auto-scroll every 3 seconds
+                    scrollInterval = setInterval(autoScroll, 3000);
+                    
+                    // Pause on touch/interaction
+                    galleryContainer.addEventListener('touchstart', function() {
+                        isPaused = true;
+                    });
+                    
+                    galleryContainer.addEventListener('touchend', function() {
+                        setTimeout(function() {
+                            isPaused = false;
+                        }, 3000); // Resume after 3 seconds
+                    });
+                    
+                    // Pause on scroll
+                    galleryContainer.addEventListener('scroll', function() {
+                        isPaused = true;
+                        clearTimeout(galleryContainer.scrollTimeout);
+                        galleryContainer.scrollTimeout = setTimeout(function() {
+                            isPaused = false;
+                        }, 3000);
+                    });
+                }
+            });
         }
     </script>
 
     <!-- {{ parent() }} -->
     
-{% endblock %}
-
-{% block base_script_hmr_mode %}
-    {{ parent() }}
-    <style>
-        .gallery-image-hidden {
-            display: none !important;
-        }
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Load more script initialized');
-            const loadMoreBtn = document.querySelector('.js-load-more-images');
-            console.log('Button found:', loadMoreBtn);
-            
-            if (loadMoreBtn) {
-                loadMoreBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Button clicked');
-                    
-                    // Show all hidden images
-                    const hiddenImages = document.querySelectorAll('.gallery-image-hidden');
-                    console.log('Hidden images found:', hiddenImages.length);
-                    
-                    hiddenImages.forEach(function(img) {
-                        img.classList.remove('gallery-image-hidden');
-                        console.log('Showing image');
-                    });
-                    
-                    // Hide the button
-                    this.parentElement.style.display = 'none';
-                    console.log('Button hidden');
-                });
-            }
-        });
-    </script>
 {% endblock %}
 
 {% block element_image_gallery_inner %}
