@@ -37,17 +37,18 @@ export default class MyfavInquiryCountPlugin extends Plugin {
     showBadge(count) {
         let badge = this.el.querySelector(this.options.badgeSelector);
         if(badge === null) {
-            badge = document.createElement("p");
+            badge = document.createElement("span");
             badge.setAttribute('class', this.options.badgeClassName);
             this.el.appendChild(badge);
         }
         badge.textContent = count;
+        badge.style.display = '';
     }
 
     deleteBadge() {
         let badge = this.el.querySelector(this.options.badgeSelector);
         if(badge) {
-            badge.remove();
+            badge.style.display = 'none';
         }
     }
 

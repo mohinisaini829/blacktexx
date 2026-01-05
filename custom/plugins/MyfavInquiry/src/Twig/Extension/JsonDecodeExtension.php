@@ -14,8 +14,11 @@ class JsonDecodeExtension extends AbstractExtension
         ];
     }
 
-    public function jsonDecodeFilter(string $json): array
+    public function jsonDecodeFilter(?string $json): array
     {
-        return json_decode($json, true);
+        if ($json === null || $json === '') {
+            return [];
+        }
+        return json_decode($json, true) ?? [];
     }
 }

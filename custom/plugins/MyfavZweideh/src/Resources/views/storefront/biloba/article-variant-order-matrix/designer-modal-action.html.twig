@@ -6,7 +6,7 @@
     {% elseif buttonData.buttonAction == 'openCompanyDesigner' %}
         <a href="https://www.tiny-tex.com/" target="_blank">
     {% else %}
-        <a href="#" data-dismiss="modal">
+        <a href="#" data-bs-dismiss="modal">
     {% endif %}
         <button type="button" class="btn {% if buttonData.buttonStyle == 'blueFilled' %}btn-outline-secondary{% else %}btn-outline-primary{% endif %}">
             {{ buttonData.btnText }}

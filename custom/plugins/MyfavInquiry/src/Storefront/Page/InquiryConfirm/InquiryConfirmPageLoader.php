@@ -88,6 +88,8 @@ class InquiryConfirmPageLoader
             if(count($productIds) > 0) {
                 $productCriteria = new Criteria($productIds);
                 $productCriteria->addAssociation('options.group');
+                $productCriteria->addAssociation('cover.media.thumbnails');
+                $productCriteria->addAssociation('media');
                 $products = $this->productRepository->search(
                     $productCriteria,
                     $salesChannelContext
