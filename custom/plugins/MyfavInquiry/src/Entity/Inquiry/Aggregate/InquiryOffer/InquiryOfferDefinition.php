@@ -6,6 +6,8 @@ namespace Myfav\Inquiry\Entity\Inquiry\Aggregate\InquiryOffer;
 use Shopware\Core\Content\Media\MediaDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\BoolField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\CreatedAtField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\UpdatedAtField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\CreatedByField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\FkField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
@@ -48,6 +50,10 @@ class InquiryOfferDefinition extends EntityDefinition
                 ->addFlags(new Required(), new ApiAware()),
             new BoolField('send', 'send'),
 
+            (new CreatedAtField())
+                ->addFlags(new ApiAware()),
+            (new UpdatedAtField())
+                ->addFlags(new ApiAware()),
             (new CreatedByField())
                 ->addFlags(new ApiAware()),
             (new UpdatedByField())

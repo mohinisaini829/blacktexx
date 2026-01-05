@@ -150,11 +150,46 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     }
 }
 /************************/
+.is-ctl-product.modal-open {
+    .modal-backdrop.fade.show {
+        display: none;
+    }
+    .cms-section {
+        .modal {
+            z-index: 902;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .sticky-buybox {
+            position: relative;
+            z-index: 900;
+        }
+    }
+}
 .is-ctl-product {
     overflow-x: hidden;
+    .cms-block-cross-selling {
+        .product-slider {
+            .product-slider-container {
+                .product-slider-item {
+                    padding-right: 0 !important;
+                    .box-image {
+                        .card-body {
+                            .product-image-wrapper {
+                                img {
+                                    @media (max-width: 991px) {
+                                        margin: 0 auto;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     .cms-section {
         overflow:inherit;
-        .product-detail-media{
+        .product-detail-media {
             position: relative;
             .image-badges {
                 z-index: 10;
@@ -482,12 +517,18 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
             background-color: #c24900!important;
         }
     }
+    .brand-video-slider-section {
+        margin-bottom: 100px;
+    }
 }
 
 .finishing-sec {
     .cms-block-container {
         max-width: 1532px;
         margin: 0 auto;
+         @media (max-width: 768px) {
+            padding: 0 20px !important;
+        }
         .finishing-price-tables-select.custom-select {
             display: inline-block;
             width: 100%;
@@ -514,6 +555,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
             &:hover{
                 border-color: #c24900;
                 color: #c24900;
+            }
+        }
+        .cms-element-finishing-price-table {
+            @media (max-width: 768px) {
+                overflow-x: auto;
             }
         }
     }

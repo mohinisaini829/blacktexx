@@ -3,14 +3,15 @@ declare(strict_types=1);
 
 namespace Myfav\Inquiry\Services;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use RuntimeException;
 use Shopware\Core\Checkout\Document\Aggregate\DocumentBaseConfig\DocumentBaseConfigEntity;
 use Shopware\Core\Checkout\Document\DocumentConfiguration;
 use Shopware\Core\Checkout\Document\DocumentConfigurationFactory;
 use Shopware\Core\Checkout\Document\DocumentDefinition;
-use Shopware\Core\Checkout\Document\Service\DocumentGenerator;
-//use Shopware\Core\Checkout\Document\GeneratedDocument;
-use Shopware\Core\Content\Document\DocumentGenerator\GeneratedDocument;
+use Shopware\Core\Checkout\Document\Service\PdfRenderer;
+use Shopware\Core\Checkout\Document\Renderer\RenderedDocument;
 use Shopware\Core\Checkout\Document\Twig\DocumentTemplateRenderer;
 use Shopware\Core\Content\Media\MediaService;
 use Shopware\Core\Defaults;
@@ -33,7 +34,6 @@ class OfferService
     protected NumberRangeValueGeneratorInterface $numberRangeValueGenerator;
     protected EntityRepository $inquiryRepository;
     protected DocumentTemplateRenderer $documentTemplateRenderer;
-    protected DocumentGenerator $documentGenerator;
     protected EntityRepository $documentConfigRepository;
 
     public function __construct(
@@ -42,8 +42,7 @@ class OfferService
         EntityRepository $documentConfigRepository,
         MediaService $mediaService,
         NumberRangeValueGeneratorInterface $numberRangeValueGenerator,
-        DocumentTemplateRenderer $documentTemplateRenderer,
-        DocumentGenerator $documentGenerator
+        DocumentTemplateRenderer $documentTemplateRenderer
     )
     {
         $this->inquiryOfferRepository = $inquiryOfferRepository;
@@ -51,7 +50,6 @@ class OfferService
         $this->numberRangeValueGenerator = $numberRangeValueGenerator;
         $this->inquiryRepository = $inquiryRepository;
         $this->documentTemplateRenderer = $documentTemplateRenderer;
-        $this->documentGenerator = $documentGenerator;
         $this->documentConfigRepository = $documentConfigRepository;
     }
 
@@ -71,15 +69,15 @@ class OfferService
         $filename = sprintf('offer_%s.pdf', $offerNumber);
 
         // create file
-        $document = $this->createFile($inquiryId, $offerNumber, $filename, $context);
+        $pdfContent = $this->createFile($inquiryId, $offerNumber, $filename, $context);
 
-        $mediaId = $context->scope(Context::SYSTEM_SCOPE, function (Context $context) use ($document) : string {
+        $mediaId = $context->scope(Context::SYSTEM_SCOPE, function (Context $context) use ($pdfContent, $filename) : string {
             // save file as media
             return $this->mediaService->saveFile(
-                $document->getFileBlob(),
+                $pdfContent,
                 'pdf',
-                $document->getContentType(),
-                $document->getFileName(),
+                'application/pdf',
+                $filename,
                 $context,
                 DocumentDefinition::ENTITY_NAME
             );
@@ -102,17 +100,22 @@ class OfferService
      * @throws SyntaxError
      * @throws LoaderError
      */
-    private function createFile(string $inquiryId, string $offerNumber, string $filename, Context $context): GeneratedDocument
+    private function createFile(string $inquiryId, string $offerNumber, string $filename, Context $context): string
     {
-        // create file
-        $generatedDocument = new GeneratedDocument();
-        $generatedDocument->setFilename($filename);
-        $generatedDocument->setHtml($this->getHtml($inquiryId, $offerNumber, $context));
-        $generatedDocument->setPageOrientation('portrait');
-        $generatedDocument->setPageSize('a4');
-        $generatedDocument->setContentType('application/pdf');
-        $generatedDocument->setFileBlob($this->documentGenerator->generate($generatedDocument));
-        return $generatedDocument;
+        // Get HTML content
+        $html = $this->getHtml($inquiryId, $offerNumber, $context);
+        
+        // Generate PDF from HTML using Dompdf
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $options->set('isHtml5ParserEnabled', true);
+        
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        
+        return $dompdf->output();
     }
 
     /**

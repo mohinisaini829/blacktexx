@@ -41,9 +41,9 @@ Shopware.Component.register('sw-product-detail-zweideh-designer', {
             'parentProduct',
         ]),
 
-        ...mapGetters('swProductDetail', [
-            'isLoading',
-        ]),
+        ...mapGetters('swProductDetail', {
+            isLoadingProduct: 'isLoading',
+        }),
     },
 
     watch: {

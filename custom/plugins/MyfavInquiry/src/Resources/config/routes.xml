@@ -45,7 +45,8 @@
             </list>
         </default>
     </route>
-    <!-- <route id="api.myfav_inquiry.offer.create"
+    
+    <route id="api.myfav_inquiry.offer.create"
            path="/api/_action/myfav_inquiry_offer/create/{inquiryId}"
            controller="Myfav\Inquiry\Administration\Controllers\InquiryOfferController::create"
            methods="POST">
@@ -54,5 +55,16 @@
                 <string>api</string>
             </list>
         </default>
-    </route> -->
+    </route>
+    
+    <route id="api.myfav_inquiry.offer.download"
+           path="/api/_action/myfav_inquiry_offer/download/{offerId}"
+           controller="Myfav\Inquiry\Administration\Controllers\InquiryOfferController::download"
+           methods="GET">
+         <default key="_routeScope">
+            <list>
+                <string>api</string>
+            </list>
+        </default>
+    </route>
 </routes>

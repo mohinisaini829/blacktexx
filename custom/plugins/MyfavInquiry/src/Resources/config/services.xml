@@ -156,7 +156,6 @@
             <argument id="Shopware\Core\Content\Media\MediaService" type="service"/>
             <argument id="Shopware\Core\System\NumberRange\ValueGenerator\NumberRangeValueGeneratorInterface" type="service"/>
             <argument id="Shopware\Core\Checkout\Document\Twig\DocumentTemplateRenderer" type="service"/>
-            <argument id="Shopware\Core\Checkout\Document\Service\DocumentGenerator" type="service"/>
         </service>
 
 

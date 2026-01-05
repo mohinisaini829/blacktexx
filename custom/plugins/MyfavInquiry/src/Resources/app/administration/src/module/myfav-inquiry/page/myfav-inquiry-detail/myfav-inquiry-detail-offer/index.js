@@ -49,8 +49,15 @@ Component.register('myfav-inquiry-detail-offer', {
     computed: {
         offerColumns() {
             return [
-                { property: 'offerNumber', label: this.$tc('myfav-inquiry.detail.offerNumber') },
-                { property: 'createdAt', label: this.$tc('myfav-inquiry.detail.offerCreatedAt') }
+                { 
+                    property: 'offerNumber', 
+                    label: this.$tc('myfav-inquiry.detail.offerNumber'),
+                    primary: true
+                },
+                { 
+                    property: 'createdAt', 
+                    label: this.$tc('myfav-inquiry.detail.offerCreatedAt')
+                }
             ];
         }
     },
@@ -82,16 +89,19 @@ Component.register('myfav-inquiry-detail-offer', {
 
         downloadDocument(offer) {
             this.inquiryOfferDocumentApiService
-                .downloadDocument(offer.id, Context.api)
-                .then((response) => {
-                    if (response.data) {
-                        const filename = response.headers['content-disposition'].split('filename=')[1];
-                        const link = document.createElement('a');
-                        link.href = URL.createObjectURL(response.data);
-                        link.download = filename;
-                        link.dispatchEvent(new MouseEvent('click'));
-                        link.remove();
-                    }
+                .downloadDocument(offer.id)
+                .then((blob) => {
+                    const filename = `offer_${offer.offerNumber}.pdf`;
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(link.href);
+                })
+                .catch((error) => {
+                    console.error('Download failed:', error);
                 });
         }
     },

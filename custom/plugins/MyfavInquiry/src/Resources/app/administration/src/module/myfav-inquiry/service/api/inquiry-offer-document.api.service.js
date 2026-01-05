@@ -8,18 +8,28 @@ export default class InquiryOfferDocumentApiService extends ApiService {
     }
 
     createDocument(inquiryId) {
-        const route = `/_action/myfav_inquiry_offer/create/${inquiryId}`;
-        return this.httpClient.post(route, {
-            headers: this.getBasicHeaders(),
-            responseType: 'json'
+        const route = `_action/myfav_inquiry_offer/create/${inquiryId}`;
+        return this.httpClient.post(
+            route,
+            {},
+            {
+                headers: this.getBasicHeaders()
+            }
+        ).then((response) => {
+            return response.data;
         });
     }
 
     downloadDocument(offerId) {
-        const route = `/_action/myfav_inquiry_offer/download/${offerId}`;
-        return this.httpClient.get(route, {
-            headers: this.getBasicHeaders(),
-            responseType: 'blob'
+        const route = `_action/myfav_inquiry_offer/download/${offerId}`;
+        return this.httpClient.get(
+            route,
+            {
+                responseType: 'blob',
+                headers: this.getBasicHeaders()
+            }
+        ).then((response) => {
+            return response.data;
         });
     }
 }

@@ -1,124 +1,146 @@
-{% sw_extends '@Framework/documents/base.html.twig' %}
-{% block document_base %}
-    {# @var inquiry \Myfav\Inquiry\Entity\Inquiry\InquiryEntity #}
-    {# @var config \Shopware\Core\Checkout\Document\DocumentConfiguration #}
-    {# @var context \Shopware\Core\Framework\Context #}
-
-
-    {% set total = inquiry.lineItems.count %}
-
-    {% if config.itemsPerPage <= 0 %}
-        {% set itemsPerPage = 10 %}
-    {% else %}
-        {% set itemsPerPage = config.itemsPerPage %}
-    {% endif %}
-
-    {% set pages = (total / itemsPerPage)|round(0,'ceil') %}
-    {% if config.displayLineItems == false %}
-        {% set pages = 1 %}
-    {% endif %}
-
-    <!DOCTYPE html>
-    <html>
-    <head>
-        {{ block('document_head') }}
-    </head>
-
-    <body>
-
-    {{ block('footer') }}
-
-    {% block document_body %}
-        {% set position = 1 %}
-        {% set prefix = '' %}
-        {% set level = 0 %}
-
-        {% for lineItem in inquiry.lineItems %}
-            {{ block('loop') }}
-
-            {% set position = position + 1 %}
-        {% endfor %}
-
-        {{ block('comment')  }}
-    {% endblock %}
-    </body>
-    </html>
-{% endblock %}
-
-
-{% block document_side_info_customer_number %}{% endblock %}
-{% block document_side_info_order_number %}
-    <tr>
-        <td>
-            {{ 'document.offerNumber'|trans({'%orderNumber%': offerNumber })|sw_sanitize }}
-        </td>
-    </tr>
-{% endblock %}
-{% block document_side_info_order_date %}{% endblock %}
-
-{% block document_recipient %}
-    <span class="sender-address-small">
-        {{ block('document_recipient_sender') }}
-    </span>
-    {% if inquiry.company %}
-        {{ inquiry.company }}<br>
-    {% endif %}
-    {% if inquiry.salutation and inquiry.salutation.id is not same as(constant('Shopware\\Core\\Defaults::SALUTATION')) %}{{ inquiry.salutation.displayName ~ ' ' }}{% endif %}{{ inquiry.firstName }} {{ inquiry.lastName }}<br>
-{% endblock %}
-
-{% block comment %}
-    {% if inquiry.comment %}
-        <div class="document-comment-container">
-            {{ 'document.comment'|trans({'%comment%': inquiry.comment})|sw_sanitize }}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Offer {{ offerNumber }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            font-size: 12px;
+        }
+        .header {
+            margin-bottom: 40px;
+        }
+        .logo-company-wrapper {
+            display: table;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .logo-section {
+            display: table-cell;
+            width: 40%;
+            vertical-align: top;
+        }
+        .logo-section img {
+            max-width: 200px;
+            max-height: 80px;
+        }
+        .company-info {
+            display: table-cell;
+            width: 60%;
+            text-align: right;
+            vertical-align: top;
+        }
+        .recipient {
+            margin-bottom: 40px;
+        }
+        .offer-number {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th {
+            background-color: #f0f0f0;
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        .comment-section {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-company-wrapper">
+            {% if config.logo %}
+                <div class="logo-section">
+                    <img src="{{ config.logo.url }}" alt="Company Logo">
+                </div>
+            {% endif %}
+            <div class="company-info">
+                {% if config.companyName %}
+                    <strong>{{ config.companyName }}</strong><br>
+                {% endif %}
+                {% if config.companyAddress %}
+                    {{ config.companyAddress }}<br>
+                {% endif %}
+            </div>
         </div>
-    {% endif %}
-    {% if inquiry.deliveryDate %}
-        <div class="document-comment-container">
-            {{ 'document.inquiryDeliveryDate'|trans({'%date%': inquiry.deliveryDate|format_date('medium', locale=locale)})|sw_sanitize }}
+        
+        <div class="recipient">
+            {% if inquiry.company %}
+                {{ inquiry.company }}<br>
+            {% endif %}
+            {% if inquiry.salutation and inquiry.salutation.displayName %}
+                {{ inquiry.salutation.displayName }} 
+            {% endif %}
+            {{ inquiry.firstName }} {{ inquiry.lastName }}<br>
+            {{ inquiry.email }}
         </div>
-    {% endif %}
-{% endblock %}
+        
+        <div class="offer-number">
+            Offer Number: {{ offerNumber }}<br>
+            Date: {{ 'now'|date('d.m.Y') }}
+        </div>
+    </div>
 
-{% block document_line_item_table_row_product_number %}
-    {% if lineItem.product.productNumber %}
-        <td>{{ lineItem.product.productNumber }}</td>
-    {% else %}
-        <td></td>
-    {% endif %}
-{% endblock %}
-
-{% block document_line_item_table_row_label %}
-    <td class="line-item-breakable">
-        {% if level > 0 %}
-            {% for i in 1..level %}
-                <span class="wrapper-wrapper">
-                    <span class="label-wrapper level-{{ i }}"></span>
-                </span>
+    <h2>Offer</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Product Number</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lineItem in inquiry.lineItems %}
+                <tr>
+                    <td>
+                        {% if lineItem.product and lineItem.product.productNumber %}
+                            {{ lineItem.product.productNumber }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if lineItem.product %}
+                            {{ lineItem.product.name }}
+                        {% else %}
+                            {{ lineItem.label }}
+                        {% endif %}
+                    </td>
+                    <td>{{ lineItem.quantity }}</td>
+                </tr>
             {% endfor %}
-        {% endif %}
+        </tbody>
+    </table>
 
-        <span class="line-item-label level-{{ level }}">{{ lineItem.product.name }}</span>
-    </td>
-{% endblock %}
-
-{% block document_line_item_table_head_tax_rate %}{% endblock %}
-{% block document_line_item_table_row_tax_rate %}{% endblock %}
-{% block document_line_item_row_table_unit_price %}
-    <td class="align-right">
-        {% if lineItem.price is not null %}
-            {{ lineItem.price|currency(currencyIsoCode) }}
-        {% else %}
-            {{ lineItem.product.price.first.gross|currency(currencyIsoCode) }}
-        {% endif %}
-    </td>
-{% endblock %}
-{% block document_line_item_table_row_total_price %}
-    <td class="align-right">
-        {% if lineItem.price is not null %}
-            {{ (lineItem.price * lineItem.quantity)|currency(currencyIsoCode) }}
-        {% else %}
-            {{ (lineItem.product.price.first.gross * lineItem.quantity)|currency(currencyIsoCode) }}
-        {% endif %}
-    </td>
-{% endblock %}
-{% block shipping_costs %}{% endblock %}
+    {% if inquiry.comment %}
+        <div class="comment-section">
+            <strong>Comment:</strong><br>
+            {{ inquiry.comment }}
+        </div>
+    {% endif %}
+    
+    {% if inquiry.deliveryDate %}
+        <div style="margin-top: 20px;">
+            <strong>Requested Delivery Date:</strong> {{ inquiry.deliveryDate|date('d.m.Y') }}
+        </div>
+    {% endif %}
+</body>
+</html>

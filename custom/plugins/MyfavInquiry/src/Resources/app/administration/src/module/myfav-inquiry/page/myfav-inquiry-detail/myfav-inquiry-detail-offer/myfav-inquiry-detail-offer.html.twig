@@ -1,8 +1,12 @@
-<sw-card v-if="offers && offers.length > 0" :isLoading="isLoading">
+<sw-card :isLoading="isLoading">
     <template #title>
-        <h3>{{ $tc('myfav-inquiry.detail.offerCardTitle') }} ({{ offers.length }})</h3>
+        <h3>{{ $tc('myfav-inquiry.detail.offerCardTitle') }} <span v-if="offers">({{ offers.length }})</span></h3>
     </template>
+    <div v-if="!offers || offers.length === 0" style="padding: 20px; text-align: center;">
+        No offers found
+    </div>
     <sw-data-grid
+        v-else
         :compact-mode="false"
         :dataSource="offers"
         :columns="offerColumns"
@@ -10,7 +14,12 @@
         :showSelection="false"
     >
         <template #column-createdAt="{ item }">
-            {{ item.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
+            <template v-if="item.createdAt">
+                {{ item.createdAt | date }}
+            </template>
+            <template v-else>
+                -
+            </template>
         </template>
         <template #actions="{ item }">
             <sw-context-menu-item

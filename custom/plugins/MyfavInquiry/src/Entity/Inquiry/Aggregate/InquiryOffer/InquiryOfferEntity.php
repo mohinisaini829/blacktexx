@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Myfav\Inquiry\Entity\Inquiry\Aggregate\InquiryOffer;
 
+use DateTimeInterface;
 use Shopware\Core\Content\Media\MediaEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
@@ -19,6 +20,8 @@ class InquiryOfferEntity extends Entity
     protected ?InquiryEntity $inquiry = null;
     protected string $offerNumber;
     protected ?bool $send = null;
+    protected ?DateTimeInterface $createdAt = null;
+    protected ?DateTimeInterface $updatedAt = null;
 
     public function getMediaId(): string
     {
@@ -84,6 +87,26 @@ class InquiryOfferEntity extends Entity
     {
         $this->send = $send;
         return $this;
+    }
+
+    public function getCreatedAt(): ?DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTimeInterface $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DateTimeInterface $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
 }
