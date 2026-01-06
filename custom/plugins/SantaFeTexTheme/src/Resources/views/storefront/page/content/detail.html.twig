@@ -1,0 +1,35 @@
+{% sw_extends '@Storefront/storefront/page/content/detail.html.twig' %}
+
+{% block page_content_sections_inner %}
+    {{ parent() }}
+    
+    {% if page.product and page.product.manufacturer and page.product.manufacturer.translated.name %}
+        {% set manufacturerName = page.product.manufacturer.translated.name|trim %}
+        {% set brandData = getBrandByName(manufacturerName) %}
+
+        {% if brandData and brandData.video_slider_html %}
+            <div class="brand-video-slider-section">
+                <div class="container">
+                    <div class="brand-video-content">
+                        {% set videoContent = brandData.video_slider_html %}
+                        
+                        {# Check if it's already HTML (contains iframe or embed tag) #}
+                        {% if '<iframe' in videoContent or '<embed' in videoContent or '<video' in videoContent %}
+                            {{ videoContent|raw }}
+                        {% else %}
+                            {# It's a URL, convert to iframe #}
+                            <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                                <iframe src="{{ videoContent }}" 
+                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}
