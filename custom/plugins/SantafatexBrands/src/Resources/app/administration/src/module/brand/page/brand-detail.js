@@ -7,7 +7,7 @@ const { mapPropertyErrors } = Component.getComponentHelper();
 export default Component.register('brand-detail', {
     template,
 
-    inject: ['repositoryFactory'],
+    inject: ['repositoryFactory', 'syncService'],
 
     mixins: [
         Mixin.getByName('notification'),
@@ -52,9 +52,16 @@ export default Component.register('brand-detail', {
                 this.isNewBrand = false;
                 this.loadBrand();
             } else {
-                this.brand = this.brandRepository.create(Shopware.Context.api);
-                this.brand.active = true;
-                this.brand.displayOrder = 0;
+                this.brand = {
+                    id: null,
+                    name: '',
+                    description: null,
+                    sizeChartPath: null,
+                    videoSliderHtml: null,
+                    catalogPdfPath: null,
+                    active: true,
+                    displayOrder: 0
+                };
             }
         },
 
@@ -87,14 +94,70 @@ export default Component.register('brand-detail', {
             this.isSaveSuccessful = false;
             this.isLoading = true;
 
-            console.log('Saving brand:', this.brand);
+            console.log('=== BRAND BEFORE SAVE ===');
+            console.log(this.brand);
 
-            this.brandRepository.save(this.brand, Shopware.Context.api)
-                .then(() => {
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${Shopware.Context.api.authToken.access}`
+            };
+
+            const payload = {
+                id: this.brand.id || this.createId(),
+                name: this.brand.name,
+                description: this.brand.description || null,
+                sizeChartPath: this.brand.sizeChartPath || null,
+                videoSliderHtml: this.brand.videoSliderHtml || null,
+                catalogPdfPath: this.brand.catalogPdfPath || null,
+                active: this.brand.active !== false,
+                displayOrder: parseInt(this.brand.displayOrder) || 0
+            };
+
+            // Use sync API
+            const syncPayload = {
+                'write-santafatex_brand': {
+                    entity: 'santafatex_brand',
+                    action: 'upsert',
+                    payload: [payload]
+                }
+            };
+
+            console.log('=== SYNC PAYLOAD ===');
+            console.log(JSON.stringify(syncPayload, null, 2));
+
+            fetch('/api/_action/sync', {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(syncPayload)
+            })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            console.error('Error response:', text);
+                            let errorData;
+                            try {
+                                errorData = JSON.parse(text);
+                            } catch(e) {
+                                errorData = { message: text };
+                            }
+                            return Promise.reject(errorData);
+                        });
+                    }
+                    
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log('=== SYNC RESPONSE ===');
+                    console.log(data);
+                    
                     this.isLoading = false;
                     this.isSaveSuccessful = true;
 
                     if (this.isNewBrand) {
+                        this.brand.id = payload.id;
                         this.$router.push({
                             name: 'santafatex.brands.detail',
                             params: { id: this.brand.id },
@@ -109,15 +172,14 @@ export default Component.register('brand-detail', {
                 })
                 .catch((error) => {
                     this.isLoading = false;
-                    console.error('Error saving brand:', error);
-                    console.error('Error details:', error.response);
+                    console.error('=== SAVE ERROR ===');
+                    console.error('Error:', error);
                     
                     let errorMessage = 'An error occurred while saving';
-                    if (error.response?.data?.errors) {
-                        const errors = error.response.data.errors;
-                        errorMessage = errors.map(e => e.detail || e.title).join(', ');
-                    } else if (error.response?.data?.message) {
-                        errorMessage = error.response.data.message;
+                    if (error.errors) {
+                        errorMessage = error.errors.map(e => e.detail || e.title).join(', ');
+                    } else if (error.message) {
+                        errorMessage = error.message;
                     }
                     
                     this.createNotificationError({
@@ -125,6 +187,12 @@ export default Component.register('brand-detail', {
                         message: errorMessage,
                     });
                 });
+        },
+
+        createId() {
+            return 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'.replace(/[x]/g, () => {
+                return (Math.random() * 16 | 0).toString(16);
+            });
         },
 
         onSizeChartFileUpload(event) {
@@ -217,29 +285,7 @@ export default Component.register('brand-detail', {
         },
 
         onClickSave() {
-            this.isLoading = true;
-
-            this.brandRepository.save(this.brand, Shopware.Context.api)
-                .then(() => {
-                    this.isSaveSuccessful = true;
-                    this.isLoading = false;
-
-                    this.createNotificationSuccess({
-                        title: 'Success',
-                        message: 'Brand saved successfully',
-                    });
-
-                    if (this.isNewBrand) {
-                        this.$router.push({ name: 'santafatex.brands.index' });
-                    }
-                })
-                .catch((error) => {
-                    this.isLoading = false;
-                    this.createNotificationError({
-                        title: 'Error',
-                        message: 'Error saving brand',
-                    });
-                });
+            this.saveBrand();
         },
 
         onCancel() {

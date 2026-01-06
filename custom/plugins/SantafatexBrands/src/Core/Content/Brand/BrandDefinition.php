@@ -2,7 +2,7 @@
 
 namespace Santafatex\Brands\Core\Content\Brand;
 
-use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\SetDefault;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\BoolField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\CreatedAtField;
@@ -37,16 +37,16 @@ class BrandDefinition extends EntityDefinition
     protected function defineFields(): FieldCollection
     {
         return new FieldCollection([
-            (new IdField('id', 'id'))->addFlags(new PrimaryKey(), new Required()),
-            (new StringField('name', 'name'))->addFlags(new Required()),
-            new LongTextField('description', 'description'),
-            new StringField('size_chart_path', 'sizeChartPath'),
-            new LongTextField('video_slider_html', 'videoSliderHtml'),
-            new StringField('catalog_pdf_path', 'catalogPdfPath'),
-            (new BoolField('active', 'active'))->addFlags(new Required()),
-            new IntField('display_order', 'displayOrder'),
-            new CreatedAtField(),
-            new UpdatedAtField(),
+            (new IdField('id', 'id'))->addFlags(new PrimaryKey(), new Required(), new ApiAware()),
+            (new StringField('name', 'name'))->addFlags(new Required(), new ApiAware()),
+            (new LongTextField('description', 'description'))->addFlags(new ApiAware()),
+            (new StringField('size_chart_path', 'sizeChartPath'))->addFlags(new ApiAware()),
+            (new LongTextField('video_slider_html', 'videoSliderHtml'))->addFlags(new ApiAware()),
+            (new StringField('catalog_pdf_path', 'catalogPdfPath'))->addFlags(new ApiAware()),
+            (new BoolField('active', 'active'))->addFlags(new Required(), new ApiAware()),
+            (new IntField('display_order', 'displayOrder'))->addFlags(new ApiAware()),
+            (new CreatedAtField())->addFlags(new ApiAware()),
+            (new UpdatedAtField())->addFlags(new ApiAware()),
         ]);
     }
 }

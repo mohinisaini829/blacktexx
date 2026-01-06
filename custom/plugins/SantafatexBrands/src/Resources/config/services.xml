@@ -5,7 +5,7 @@
 
     <services>
         <service id="Santafatex\Brands\Core\Content\Brand\BrandDefinition">
-            <tag name="shopware.entity.definition"/>
+            <tag name="shopware.entity.definition" entity="santafatex_brand"/>
         </service>
 
         <service id="santafatex.brand.repository" class="Shopware\Core\Framework\DataAbstractionLayer\EntityRepository">
