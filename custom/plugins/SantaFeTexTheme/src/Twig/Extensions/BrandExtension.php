@@ -45,4 +45,5 @@ class BrandExtension extends AbstractExtension
             return null;
         }
     }
+    
 }
