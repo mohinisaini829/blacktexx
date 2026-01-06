@@ -18,20 +18,20 @@ class Migration20260101000000InitialSetup extends MigrationStep
             CREATE TABLE IF NOT EXISTS `santafatex_brand` (
                 `id` BINARY(16) NOT NULL,
                 `name` VARCHAR(255) NOT NULL,
-                `description` LONGTEXT,
-                `size_chart_path` VARCHAR(500),
-                `video_slider_html` LONGTEXT,
-                `catalog_pdf_path` VARCHAR(500),
+                `description` LONGTEXT NULL,
+                `size_chart_path` VARCHAR(500) NULL,
+                `video_slider_html` LONGTEXT NULL,
+                `catalog_pdf_path` VARCHAR(500) NULL,
                 `active` TINYINT(1) NOT NULL DEFAULT 1,
                 `display_order` INT NOT NULL DEFAULT 0,
-                `created_at` DATETIME(3) NOT NULL,
-                `updated_at` DATETIME(3) NOT NULL,
+                `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+                `updated_at` DATETIME(3) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(3),
                 PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
         ');
     }
 
-    public function revert(Connection $connection): void
+    public function updateDestructive(Connection $connection): void
     {
         $connection->executeStatement('DROP TABLE IF EXISTS `santafatex_brand`');
     }
