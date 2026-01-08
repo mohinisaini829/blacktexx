@@ -16,12 +16,35 @@ export default Component.register('brand-detail', {
 
     data() {
         return {
-            brand: null,
+            brand: {
+                id: null,
+                name: '',
+                description: null,
+                manufacturerId: '',
+                sizeChartPath: null,
+                videoSliderHtml: null,
+                catalogPdfPath: null,
+                active: true,
+                displayOrder: 0
+            },
+            manufacturerOptions: [],
             isLoading: false,
             isSaveSuccessful: false,
             isNewBrand: true,
             isUploadingFile: false,
         };
+    },
+    async mounted() {
+        // Load all manufacturers for dropdown
+        const criteria = new Shopware.Data.Criteria();
+        criteria.setLimit(500);
+        const result = await this.manufacturerRepository.search(criteria, Shopware.Context.api);
+        // Unwrap Proxy to plain array
+        let arr = Array.isArray(result) ? result : Array.from(result);
+        // Deep clone to remove Proxy
+        this.manufacturerOptions = JSON.parse(JSON.stringify(arr.map(m => ({ label: m.name, value: String(m.id) }))));
+        console.log('manufacturerOptions (plain array):', this.manufacturerOptions);
+        console.log('manufacturerOptions loaded:', this.manufacturerOptions);
     },
 
     metaInfo() {
@@ -37,43 +60,96 @@ export default Component.register('brand-detail', {
             return this.repositoryFactory.create('santafatex_brand');
         },
 
+        manufacturerRepository() {
+            return this.repositoryFactory.create('product_manufacturer');
+        },
+
+        manufacturerCriteria() {
+            const criteria = new Shopware.Data.Criteria();
+            return criteria;
+        },
+
         identifier() {
             return this.brand && this.brand.name ? this.brand.name : '';
         },
     },
 
+    watch: {
+        'brand.manufacturerId': async function(newManufacturerId) {
+             console.log('55555555');
+            console.log('brand.manufacturerId changed:', newManufacturerId);
+            if (newManufacturerId) {
+                try {
+                    const manufacturer = await this.manufacturerRepository.get(newManufacturerId, Shopware.Context.api);
+                    if (manufacturer && manufacturer.name) {
+                        this.brand.manufacturer = manufacturer;
+                        this.brand.name = manufacturer.name;
+                        console.log('brand after manufacturer select:', this.brand);
+                    }
+                } catch (error) {
+                    console.error('Error fetching manufacturer:', error);
+                }
+            } else {
+                this.brand.manufacturer = null;
+                this.brand.name = '';
+                console.log('brand after manufacturer cleared:', this.brand);
+            }
+        }
+    },
+
     created() {
         this.createdComponent();
+        console.log('brand.manufacturerId on created:', this.brand ? this.brand.manufacturerId : null);
     },
 
     methods: {
+        onManufacturerInput(value) {
+            console.log('onManufacturerInput event fired, value:', value, 'type:', typeof value);
+            this.brand.manufacturerId = value;
+            console.log('brand.manufacturerId after input:', this.brand.manufacturerId, 'type:', typeof this.brand.manufacturerId);
+        },
         createdComponent() {
             if (this.$route.params.id) {
+                console.log('22222222');
                 this.isNewBrand = false;
                 this.loadBrand();
             } else {
-                this.brand = {
+                console.log('333333');
+                Object.assign(this.brand, {
                     id: null,
                     name: '',
                     description: null,
-                    manufacturerId: null,
+                    manufacturerId: '',
                     sizeChartPath: null,
                     videoSliderHtml: null,
                     catalogPdfPath: null,
                     active: true,
                     displayOrder: 0
-                };
+                });
+                // Set brand.name if manufacturer is selected
+                this.$watch('brand.manufacturerId', async (newManufacturerId) => {
+                    console.log('44444');
+                    if (newManufacturerId) {
+                        const manufacturer = await this.manufacturerRepository.get(newManufacturerId, Shopware.Context.api);
+                        if (manufacturer && manufacturer.name) {
+                            this.brand.name = manufacturer.name;
+                        }
+                    }
+                });
             }
         },
 
         loadBrand() {
+            console.log('sdfsdfsdfd');
             this.isLoading = true;
             const criteria = new Shopware.Data.Criteria();
             criteria.addAssociation('manufacturer');
             
             this.brandRepository.get(this.$route.params.id, Shopware.Context.api, criteria)
                 .then((brand) => {
-                    this.brand = brand;
+                    const cloned = JSON.parse(JSON.stringify(brand));
+                    Object.assign(this.brand, cloned);
+                    this.brand.manufacturerId = cloned.manufacturerId ? String(cloned.manufacturerId) : '';
                     this.isLoading = false;
                 })
                 .catch((error) => {
@@ -116,7 +192,7 @@ export default Component.register('brand-detail', {
                         id: this.brand.id || this.createId(),
                         name: manufacturer.name,
                         description: this.brand.description || null,
-                        manufacturerId: this.brand.manufacturerId,
+                        manufacturerId: String(this.brand.manufacturerId),
                         sizeChartPath: this.brand.sizeChartPath || null,
                         videoSliderHtml: this.brand.videoSliderHtml || null,
                         catalogPdfPath: this.brand.catalogPdfPath || null,
@@ -149,6 +225,15 @@ export default Component.register('brand-detail', {
 
             console.log('=== SYNC PAYLOAD ===');
             console.log(JSON.stringify(syncPayload, null, 2));
+            // Define headers for fetch
+
+            // Get Shopware API token
+            const token = Shopware.Service('loginService').getToken();
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            };
 
             fetch('/api/_action/sync', {
                 method: 'POST',
@@ -193,6 +278,8 @@ export default Component.register('brand-detail', {
                         title: 'Success',
                         message: 'Brand saved successfully',
                     });
+
+                    console.log('brand object after save:', this.brand);
                 })
                 .catch((error) => {
                     this.isLoading = false;

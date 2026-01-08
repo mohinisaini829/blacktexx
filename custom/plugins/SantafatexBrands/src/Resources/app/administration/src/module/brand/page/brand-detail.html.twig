@@ -1,10 +1,17 @@
+            <!-- Debug: Set manufacturerId manually to test watcher -->
+            <div style="margin: 10px 0;">
+                <sw-button @click="brand.manufacturerId = 'testid'">Set manufacturerId to 'testid'</sw-button>
+                <span style="color: #888; font-size: 12px;">(Click to test watcher)</span>
+            </div>
 {% block sw_brand_detail %}
 <sw-page class="sw-brand-detail">
     {% block sw_brand_detail_smart_bar_header %}
     <template #smart-bar-header>
         <h2>
             <span v-if="isNewBrand">New Brand</span>
-            <span v-else>{{ brand ? brand.name : '' }}</span>
+            <span v-else>
+                {{ brand && brand.manufacturer ? brand.manufacturer.name : '' }}
+            </span>
         </h2>
     </template>
     {% endblock %}
@@ -28,12 +35,23 @@
     {% block sw_brand_detail_content %}
     <template #content>
         <sw-card v-if="brand" title="General Information">
-            <sw-entity-single-select
-                v-model="brand.manufacturerId"
-                entity="product_manufacturer"
+            <sw-single-select
+                v-model:value="brand.manufacturerId"
+                :options="manufacturerOptions"
+                label-property="label"
+                value-property="value"
                 label="Manufacturer"
-                placeholder="Select manufacturer">
-            </sw-entity-single-select>
+                placeholder="Select manufacturer"
+                required
+                @update:value="onManufacturerInput"
+            />
+
+            <!-- Debug: Show and edit manufacturerId directly -->
+            <div style="margin: 10px 0;">
+                <label>Debug manufacturerId: </label>
+                <input type="text" v-model="brand.manufacturerId" style="width: 200px;" />
+                <span style="color: #888; font-size: 12px;">(Change dropdown or edit here to test reactivity)</span>
+            </div>
 
             <sw-textarea-field
                 v-model="brand.description"
