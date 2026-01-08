@@ -245,10 +245,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
         }
         .product-detail-buy {
             h1 {
-                font-size: 48px;
+                font-size: 34px;
                 @media (max-width: 767.98px) {
-                    font-size: 31px;
-                    line-height: 39px;
+                    font-size: 28px;
+                    line-height: 37px;
                 }
             }
             .cms-element-buy-box {
@@ -346,6 +346,15 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
                     &:before {
                         box-shadow: 0 0 0 .2rem rgba(194,73,0,.25);
                     }
+                }
+            }
+            .product-detail-configurator-option-label {
+                span {
+                    position: absolute;
+                    text-align: center;
+                    bottom: 0;
+                    width: 100%;
+                    line-height: 18px;
                 }
             }
             .product-detail-configurator-container {

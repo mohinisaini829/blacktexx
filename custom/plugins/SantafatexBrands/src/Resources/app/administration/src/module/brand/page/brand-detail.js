@@ -56,6 +56,7 @@ export default Component.register('brand-detail', {
                     id: null,
                     name: '',
                     description: null,
+                    manufacturerId: null,
                     sizeChartPath: null,
                     videoSliderHtml: null,
                     catalogPdfPath: null,
@@ -67,7 +68,10 @@ export default Component.register('brand-detail', {
 
         loadBrand() {
             this.isLoading = true;
-            this.brandRepository.get(this.$route.params.id, Shopware.Context.api)
+            const criteria = new Shopware.Data.Criteria();
+            criteria.addAssociation('manufacturer');
+            
+            this.brandRepository.get(this.$route.params.id, Shopware.Context.api, criteria)
                 .then((brand) => {
                     this.brand = brand;
                     this.isLoading = false;
@@ -83,10 +87,10 @@ export default Component.register('brand-detail', {
         },
 
         saveBrand() {
-            if (!this.brand.name) {
+            if (!this.brand.manufacturerId) {
                 this.createNotificationError({
                     title: 'Error',
-                    message: 'Brand name is required',
+                    message: 'Please select a manufacturer',
                 });
                 return;
             }
@@ -103,16 +107,36 @@ export default Component.register('brand-detail', {
                 'Authorization': `Bearer ${Shopware.Context.api.authToken.access}`
             };
 
-            const payload = {
-                id: this.brand.id || this.createId(),
-                name: this.brand.name,
-                description: this.brand.description || null,
-                sizeChartPath: this.brand.sizeChartPath || null,
-                videoSliderHtml: this.brand.videoSliderHtml || null,
-                catalogPdfPath: this.brand.catalogPdfPath || null,
-                active: this.brand.active !== false,
-                displayOrder: parseInt(this.brand.displayOrder) || 0
-            };
+            // Get manufacturer name for brand name
+            const manufacturerRepo = this.repositoryFactory.create('product_manufacturer');
+            
+            return manufacturerRepo.get(this.brand.manufacturerId, Shopware.Context.api)
+                .then((manufacturer) => {
+                    const payload = {
+                        id: this.brand.id || this.createId(),
+                        name: manufacturer.name,
+                        description: this.brand.description || null,
+                        manufacturerId: this.brand.manufacturerId,
+                        sizeChartPath: this.brand.sizeChartPath || null,
+                        videoSliderHtml: this.brand.videoSliderHtml || null,
+                        catalogPdfPath: this.brand.catalogPdfPath || null,
+                        active: this.brand.active !== false,
+                        displayOrder: parseInt(this.brand.displayOrder) || 0
+                    };
+
+                    return this.saveBrandData(payload);
+                })
+                .catch((error) => {
+                    this.isLoading = false;
+                    console.error('Error fetching manufacturer:', error);
+                    this.createNotificationError({
+                        title: 'Error',
+                        message: 'Failed to fetch manufacturer details',
+                    });
+                });
+        },
+
+        saveBrandData(payload) {
 
             // Use sync API
             const syncPayload = {

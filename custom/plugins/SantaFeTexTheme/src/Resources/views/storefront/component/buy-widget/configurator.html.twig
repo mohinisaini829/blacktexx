@@ -13,15 +13,18 @@
 {% endblock %}
 
 {% block buy_widget_configurator_option_radio_label_media %}
-  {% sw_thumbnails 'configurator-option-img-thumbnails' with {
-    media: media,
-    sizes: {
-      'default': '52px'
-    },
-    attributes: {
-      'class': 'product-detail-configurator-option-image',
-      'alt': option.translated.name,
-      'title': option.translated.name
-    }
-  } %}
+  <div class="configurator-option-wrapper">
+    {% sw_thumbnails 'configurator-option-img-thumbnails' with {
+      media: media,
+      sizes: {
+        'default': '52px'
+      },
+      attributes: {
+        'class': 'product-detail-configurator-option-image',
+        'alt': option.translated.name,
+        'title': option.translated.name
+      }
+    } %}
+    <span class="configurator-option-name">{{ option.translated.name }}</span>
+  </div>
 {% endblock %}

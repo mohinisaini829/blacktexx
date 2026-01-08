@@ -28,12 +28,12 @@
     {% block sw_brand_detail_content %}
     <template #content>
         <sw-card v-if="brand" title="General Information">
-            <sw-text-field
-                v-model="brand.name"
-                label="Brand Name"
-                placeholder="Enter brand name"
-                required>
-            </sw-text-field>
+            <sw-entity-single-select
+                v-model="brand.manufacturerId"
+                entity="product_manufacturer"
+                label="Manufacturer"
+                placeholder="Select manufacturer">
+            </sw-entity-single-select>
 
             <sw-textarea-field
                 v-model="brand.description"

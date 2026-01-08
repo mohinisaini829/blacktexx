@@ -13,7 +13,10 @@ use Shopware\Core\Framework\DataAbstractionLayer\Field\IntField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\LongTextField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\UpdatedAtField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\FkField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToOneAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
+use Shopware\Core\Content\Product\Aggregate\ProductManufacturer\ProductManufacturerDefinition;
 
 class BrandDefinition extends EntityDefinition
 {
@@ -40,11 +43,13 @@ class BrandDefinition extends EntityDefinition
             (new IdField('id', 'id'))->addFlags(new PrimaryKey(), new Required(), new ApiAware()),
             (new StringField('name', 'name'))->addFlags(new Required(), new ApiAware()),
             (new LongTextField('description', 'description'))->addFlags(new ApiAware()),
+            (new FkField('manufacturer_id', 'manufacturerId', ProductManufacturerDefinition::class))->addFlags(new ApiAware()),
             (new StringField('size_chart_path', 'sizeChartPath'))->addFlags(new ApiAware()),
             (new LongTextField('video_slider_html', 'videoSliderHtml'))->addFlags(new ApiAware()),
             (new StringField('catalog_pdf_path', 'catalogPdfPath'))->addFlags(new ApiAware()),
             (new BoolField('active', 'active'))->addFlags(new Required(), new ApiAware()),
             (new IntField('display_order', 'displayOrder'))->addFlags(new ApiAware()),
+            (new ManyToOneAssociationField('manufacturer', 'manufacturer_id', ProductManufacturerDefinition::class, 'id', false))->addFlags(new ApiAware()),
             (new CreatedAtField())->addFlags(new ApiAware()),
             (new UpdatedAtField())->addFlags(new ApiAware()),
         ]);
