@@ -3,9 +3,41 @@
 {% block buy_widget_data %}
     {% block buy_widget_product_title %}
         {% set manufacturerImg = product.manufacturer.media %}
+        {% set productName = product.translated.name %}
+        
+        {# Remove size patterns from product name #}
+        {% set cleanProductName = productName|replace({
+            ', XXXL': '',
+            ', XXL': '',
+            ', XL': '',
+            ', XS': '',
+            ', XXS': '',
+            ', L': '',
+            ', M': '',
+            ', S': '',
+            ' XXXL': '',
+            ' XXL': '',
+            ' XL': '',
+            ' XS': '',
+            ' XXS': '',
+            ' L': '',
+            ' M': '',
+            ' S': ''
+        })|trim %}
+        
+        {# Remove numeric sizes (e.g., 36, 38, 40, etc.) #}
+        {% set cleanProductName = cleanProductName|replace({
+            ', 3XL': '',
+            ', 4XL': '',
+            ', 5XL': '',
+            ' 3XL': '',
+            ' 4XL': '',
+            ' 5XL': ''
+        })|trim %}
+        
         <div class="row">
             <div class="col mt-5 mt-lg-0">
-                <h1 class="mb-0">{{ product.translated.name }}</h1>
+                <h1 class="mb-0">{{ cleanProductName }}</h1>
                 <span class="product-name-suffix">{{ "detail.nameSuffix"|trans }}</span>
             </div>
             <div class="col-{% if manufacturerImg %}auto{% else %}3{% endif%} text-right">
