@@ -245,6 +245,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
             .product-detail-configurator-container {
                 .product-detail-configurator-option-label {
                     .configurator-option-wrapper{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 0.25rem;
                         span {
                             position: absolute;
                             width: 100%;
@@ -315,27 +319,29 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
                     position: relative;
                     -webkit-transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
                     transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                    margin-left: 2.6rem;
+                    margin-right: 0;
                     &:before {
                         position: absolute;
                         top: .5em;
                         display: block;
-                        height: 1rem;
+                        height: 1.2rem;
                         pointer-events: none;
                         content: "";
                         border:1px solid #adb5bd;
                         left: -2.25rem;
-                        width: 1.75rem;
+                        width: 2.3rem;
                         pointer-events: all;
-                        border-radius: .5rem;
+                        border-radius: 15px;
                         background-color: #fff;
                         -webkit-transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
                         transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
                     }
                     &:after{
                         position: absolute;
-                        top: calc(.5em + 2px);
+                        top: calc(.5em + 3px);
                         display: block;
-                        left: calc(-2.25rem + 2px);
+                        left: calc(-2.25rem + 7px);
                         width: calc(1rem - 4px);
                         height: calc(1rem - 4px);
                         border-radius: .5rem;
