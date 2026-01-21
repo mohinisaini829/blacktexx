@@ -25,7 +25,7 @@ use Shopware\Core\Framework\Uuid\Uuid;
 $_SERVER['SCRIPT_FILENAME'] = __FILE__;
 require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = new Dotenv();
-$dotenv->loadEnv(__DIR__ . '/../.env');
+$dotenv->loadEnv(__DIR__ . '/../.env.local');
 
 $classLoader = require __DIR__ . '/../vendor/autoload.php';
  
@@ -131,21 +131,46 @@ $sizeOptions    =   getPropertyOptions('Size', $container);
 $categoryList   =   getCategories($container);
 $manufacturerList   =   getManufacturers($container);
 $parentIdSkuArr     =   [];
+$categoryMapping    =   [];
 
+if(!empty($_POST['vendorCategories']) && is_array($_POST['vendorCategories'])){
+    foreach($_POST['vendorCategories'] as $key=>$cat){
+        
+        $categoryMapping[trim($cat)]    =   trim(isset($_POST['shopware_category'][$key]) ? $_POST['shopware_category'][$key] : '');
+    }
+}
+
+//print_r($categoryMapping);die;
 if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
-    $file = $_FILES['csv_file'] ?? null;
 
-    if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
-        $message = "Upload failed with error code: " . ($file['error'] ?? 'no file');
-    } else {
-        $fileType = mime_content_type($file['tmp_name']);
-
-        if (!in_array($fileType, $allowedTypes)) {
-            $message = "Invalid file type. Please upload a CSV / XLS file.";
+        // Accept temp_file from mapping form, or vendor_file from direct upload (if needed)
+        $targetFile = null;
+        if (!empty($_POST['temp_file'])) {
+            $tempFile = basename($_POST['temp_file']);
+            $tempDir = __DIR__ . '/uploads/temp/';
+            $targetFile = $tempDir . $tempFile;
+            if (!file_exists($targetFile)) {
+                die('❌ Temporary file not found: ' . htmlspecialchars($tempFile));
+            }
+        } else if (!empty($_FILES['vendor_file']['tmp_name'])) {
+            $fileTmp = $_FILES['vendor_file']['tmp_name'];
+            $originalName = basename($_FILES['vendor_file']['name']);
+            $tempDir = __DIR__ . '/uploads/temp/';
+            if (!is_dir($tempDir)) mkdir($tempDir, 0755, true);
+            $tempFile = uniqid('vendor_') . '_' . $originalName;
+            move_uploaded_file($fileTmp, $tempDir . $tempFile);
+            $targetFile = $tempDir . $tempFile;
         } else {
-            try {
-                $fileTmpPath = $file['tmp_name'];
-                $spreadsheet = IOFactory::load($fileTmpPath);
+            die('❌ No file provided for ross vendor.');
+        }
+
+        // Only allow Excel/CSV files
+        $fileType = mime_content_type($targetFile);
+        if (!in_array($fileType, $allowedTypes) && !preg_match('/spreadsheet|excel|officedocument|csv/i', $fileType)) {
+            die('Ross: Invalid file type. Please upload a CSV / XLS file.');
+        }
+        try {
+            $spreadsheet = IOFactory::load($targetFile);
 
                 $sheet      = $spreadsheet->getActiveSheet();
                 $rowCount   = 1;
@@ -421,36 +446,51 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                 if (!empty($newCategory)){
                     createBulkCategories($newCategory, $container);
                 }   
-                createProductCsv($productCsvData, $container);
+                createProductCsv($productCsvData, $container, $categoryMapping);
 
                 exit;
             } catch (\Exception $e) {
                 echo 'Error loading file: ', $e->getMessage();
             }
-        }
-    }
+        
+    
 }else if(isset($_POST['vendor']) && $_POST['vendor'] === 'harko'){
-    $file = $_FILES['csv_file'] ?? null;
-
-    if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
-        $message = "Upload failed with error code: " . ($file['error'] ?? 'no file');
+    //die('kkkk');
+    // Accept temp_file from mapping form, or vendor_file from direct upload (if needed)
+    $targetFile = null;
+    if (!empty($_POST['temp_file'])) {
+        $tempFile = basename($_POST['temp_file']);
+        $tempDir = __DIR__ . '/uploads/temp/';
+        $targetFile = $tempDir . $tempFile;
+        if (!file_exists($targetFile)) {
+            die('❌ Temporary file not found: ' . htmlspecialchars($tempFile));
+        }
+    } else if (!empty($_FILES['vendor_file']['tmp_name'])) {
+        $fileTmp = $_FILES['vendor_file']['tmp_name'];
+        $originalName = basename($_FILES['vendor_file']['name']);
+        $tempDir = __DIR__ . '/uploads/temp/';
+        if (!is_dir($tempDir)) mkdir($tempDir, 0755, true);
+        $tempFile = uniqid('vendor_') . '_' . $originalName;
+        move_uploaded_file($fileTmp, $tempDir . $tempFile);
+        $targetFile = $tempDir . $tempFile;
     } else {
-        $fileType = mime_content_type($file['tmp_name']);
+        die('❌ No file provided for harko vendor.');
+    }
 
-        if (!in_array($fileType, $allowedTypes)) {
-            $message = "Invalid file type. Please upload a CSV / XLS file.";
-        } else {
-            try {
-                $fileTmpPath = $file['tmp_name'];
-                $spreadsheet = IOFactory::load($fileTmpPath);
-
-                $sheet      = $spreadsheet->getActiveSheet();
-                $rowCount   = 1;
-                $header     = [];
-                $parentIds  = [];
-                $productCsvData     =   [];
-                $sizeProperyData     =   [];
-                $colorProperyData     =   [];
+    // Only allow Excel/CSV files
+    $fileType = mime_content_type($targetFile);
+    if (!in_array($fileType, $allowedTypes) && !preg_match('/spreadsheet|excel|officedocument|csv/i', $fileType)) {
+        die('Harko: Invalid file type. Please upload a CSV / XLS file.');
+    }
+    try {
+        $spreadsheet = IOFactory::load($targetFile);
+        $sheet      = $spreadsheet->getActiveSheet();
+        $rowCount   = 1;
+        $header     = [];
+        $parentIds  = [];
+        $productCsvData     =   [];
+        $sizeProperyData     =   [];
+        $colorProperyData     =   [];
 
                 $productDefaultArray    =   [
                                                 0 => '',
@@ -758,31 +798,38 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                     createBulkCategories($newCategory, $container);
                 } 
 
-                createProductCsv($productCsvData, $container);
+                createProductCsv($productCsvData, $container, $categoryMapping);
 
                 exit;
             } catch (\Exception $e) {
                 echo 'Error loading file: ', $e->getMessage();
             }
+        
+    
+
+}else if (isset($_POST['vendor']) && $_POST['vendor'] === 'newwave') {
+    
+
+    // Accept temp_file from mapping form, or vendor_file from direct upload
+    $targetFile = null;
+    if (!empty($_POST['temp_file'])) {
+        $tempFile = basename($_POST['temp_file']);
+        $tempDir = __DIR__ . '/uploads/temp/';
+        $targetFile = $tempDir . $tempFile;
+        if (!file_exists($targetFile)) {
+            die('❌ Temporary file not found: ' . htmlspecialchars($tempFile));
         }
+    } else if (!empty($_FILES['vendor_file']['tmp_name'])) {
+        $fileTmp = $_FILES['vendor_file']['tmp_name'];
+        $originalName = basename($_FILES['vendor_file']['name']);
+        $tempDir = __DIR__ . '/uploads/temp/';
+        if (!is_dir($tempDir)) mkdir($tempDir, 0755, true);
+        $tempFile = uniqid('vendor_') . '_' . $originalName;
+        move_uploaded_file($fileTmp, $tempDir . $tempFile);
+        $targetFile = $tempDir . $tempFile;
+    } else {
+        die('❌ No file provided for newwave vendor.');
     }
-
-} else if (isset($_POST['vendor']) && $_POST['vendor'] === 'newwave') {
-    $file = $_FILES['csv_file'] ?? null;
-
-    if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
-        die("❌ Upload failed with error code: " . ($file['error'] ?? 'no file'));
-    }
-
-    $fileTmpPath = $file['tmp_name'];
-    $targetDir = __DIR__ . '/uploads/';
-    $targetFile = $targetDir . basename($file['name']);
-
-    if (!is_dir($targetDir)) {
-        mkdir($targetDir, 0755, true);
-    }
-
-    move_uploaded_file($fileTmpPath, $targetFile);
 
     // Decode JSON
     $jsonData = json_decode(file_get_contents($targetFile), true);
@@ -849,8 +896,7 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
         37 => '',
         38 => '',
         39 => '',
-        40 => '',
-        41 => ''
+        40 => ''
     ];
 
     // 🎯 Target product number
@@ -1052,14 +1098,14 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                         $vRow[17] = $name;         // cover_media_alt   (REQUIRED)
 
                         // Gallery images
-                        $vRow[41] = implode('|', array_unique($imgList));
+                        //$vRow[41] = implode('|', array_unique($imgList));
                     }else {
                         $vRow[15] = '';  // cover_media_url
                         $vRow[16] = '';  // cover_media_title
                         $vRow[17] = '';  // cover_media_alt
 
                         // Optionally, you can also set gallery images to empty (if necessary)
-                        $vRow[41] = '';
+                        //$vRow[41] = '';
                     }
                     //$vRow[42]=$name.'_526565';
 
@@ -1120,7 +1166,7 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
 
                 // Handle Gallery Images
                 // If there are multiple images in the array, join them with a pipe (|)
-                $parentRow[41] = implode('|', array_unique($imageUrlsParent)); // Gallery images (unique URLs)
+                //$parentRow[41] = implode('|', array_unique($imageUrlsParent)); // Gallery images (unique URLs)
             } else {
                 // In case no images are available, leave the cover and gallery image fields blank (or set a default)
                 $parentRow[15] = '';   // cover_media_url
@@ -1128,7 +1174,7 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                 $parentRow[17] = '';   // cover_media_alt
 
                 // Optionally, clear gallery images if there are no cover images
-                $parentRow[41] = '';   // Gallery images (empty if no images available)
+                //$parentRow[41] = '';   // Gallery images (empty if no images available)
             }
 
             //$parentRow[42]=$name.'_526565';
@@ -1236,7 +1282,7 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
 
         if (!empty($productCsvData)) {
             // Hand-off to your CSV creator
-            createProductCsv($productCsvData, $container);
+            createProductCsv($productCsvData, $container, $categoryMapping);
 
             // Count parent and variants
             $parentCount  = 0;
@@ -1327,121 +1373,123 @@ function createManufacturers($data, $container) {
     $repository->create($data, $context);
 }
 
-function createProductCsv($csvData, $container){
-    //print_r($csvData);die;
-    $date       =  date("dmy");
-    $vendoer    = $_POST['vendor'];
-    $csvName    = $vendoer."_product_import_{$date}.csv";
-    $manufacturerList   =   getManufacturers($container);
-    $colorOptions       =   getPropertyOptions('Color', $container);
-    $sizeOptions        =   getPropertyOptions('Size', $container);    
-    $productCsvHeader   =   [
-                                'id',
-                                'parent_id',
-                                'product_number',
-                                'active',
-                                'stock',
-                                'name',
-                                'description',
-                                'price_net',
-                                'price_gross',
-                                'purchase_prices_net',
-                                'purchase_prices_gross',
-                                'tax_id',
-                                'tax_rate',
-                                'tax_name',
-                                'cover_media_id',
-                                'cover_media_url',
-                                'cover_media_title',
-                                'cover_media_alt',
-                                'manufacturer_id',
-                                'manufacturer_name',
-                                'categories',
-                                'sales_channel',
-                                'propertyIds',
-                                'optionIds',
-                                'material',
-                                'gender',
-                                'sleeve_length',
-                                'article_number_short',
-                                'ean',
-                                'model_name',
-                                'item_in_box',
-                                'item_in_bag',
-                                'weight',
-                                'country',
-                                'washing_temp',
-                                'supplier',
-                                'cut',
-                                'febric_weight',
-                                'article_code',
-                                'gtin',
-                                'supplier_article',
-                                'gallery_images'
-                                //'seo_url'
-                            ];
+function createProductCsv($csvData, $container,$categoryMapping)
+{
+    $date       = date("dmy");
+    $vendor     = $_POST['vendor'] ?? 'vendor';
+    $csvName    = $vendor . "_product_import_{$date}.csv";
+
+    $manufacturerList = getManufacturers($container);
+    $colorOptions     = getPropertyOptions('Color', $container);
+    $sizeOptions      = getPropertyOptions('Size', $container);
+    // Ensure categoryList is available for ID-to-name mapping
+    $categoryList = getCategories($container);
+
+    // Prevent duplicate mapping inserts
+    $vendorCategoryMap = [];
+
+    // ===================== INSERT / UPDATE CATEGORY MAPPING =====================
+    // try {
+    //     // Native PDO
+    //     $pdo = $container->get(\Doctrine\DBAL\Connection::class)->getNativeConnection();
+    //     $vendorCode = $_POST['vendor'] ?? '';
+
+    //     foreach ($csvData as $row) {
+    //        $vendorCatName = trim((string)($row[20] ?? ''));
+    //         if ($vendorCatName === '') continue;
+    //         $shopwareCatId = $categoryMapping[$vendorCatName] ?? '';
+    //         if ($shopwareCatId === '') continue;
+    //         if (isset($vendorCategoryMap[$vendorCatName])) continue;
+    //         $vendorCategoryMap[$vendorCatName] = true;
+    //         // ✅ UPSERT SQL
+    //         $sql = "
+    //             INSERT INTO custom_category_mapping
+    //             (vendor_code, vendor_cat, shopware_cat, vendor_cat_name, shopware_cat_name, created_at, updated_at)
+    //             VALUES (?, ?, ?, ?, ?, ?, ?)
+    //             ON DUPLICATE KEY UPDATE
+    //                 shopware_cat = VALUES(shopware_cat),
+    //                 vendor_cat_name = VALUES(vendor_cat_name),
+    //                 updated_at = VALUES(updated_at)
+    //         ";
+    //         $params = [
+    //             $vendorCode,
+    //             $vendorCatName,
+    //             $shopwareCatId,
+    //             $vendorCatName,
+    //             '',
+    //             date('Y-m-d H:i:s'),
+    //             date('Y-m-d H:i:s'),
+    //         ];
+    //         $stmt = $pdo->prepare($sql);
+    //         $stmt->execute($params);
+    //     }
+
+    // } catch (\Exception $e) {
+    //     error_log($e->getMessage());
+    // }
+
+    // ===================== CSV HEADER =====================
+    $productCsvHeader = [
+        'id','parent_id','product_number','active','stock','name','description',
+        'price_net','price_gross','purchase_prices_net','purchase_prices_gross',
+        'tax_id','tax_rate','tax_name','cover_media_id','cover_media_url',
+        'cover_media_title','cover_media_alt','manufacturer_id','manufacturer_name',
+        'categories','sales_channel','propertyIds','optionIds','material','gender',
+        'sleeve_length','article_number_short','ean','model_name','item_in_box',
+        'item_in_bag','weight','country','washing_temp','supplier','cut',
+        'febric_weight','article_code','gtin','supplier_article',
+        'vendor_category','shopware_category_id'
+    ];
 
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="' . $csvName . '"');
+    header('Content-Disposition: attachment; filename="'.$csvName.'"');
 
-    $proFile = fopen('php://output', 'w');
-    fputcsv($proFile, $productCsvHeader, ";");
-    foreach ($csvData as $csvDatakey => $csvDatavalue) {
+    $out = fopen('php://output', 'w');
+    fputcsv($out, $productCsvHeader, ";");
+    
 
-        //print_r($csvDatavalue);die;
-    $name = $csvDatavalue[19] ?? '';
-
-    // Fix missing manufacturer ID
-    if (empty($csvDatavalue[18]) && isset($manufacturerList[$name])) {
-        $csvDatavalue[18] = $manufacturerList[$name];
-    }
-
-    // Handle color property safely
-    if (isset($csvDatavalue['color_opt_name'])) {
-        $colorName = trim($csvDatavalue['color_opt_name']);
-        $colorId = $colorOptions[$colorName] ?? null;
-
-        if (is_string($colorId) && is_string($csvDatavalue[23])) {
-            //$csvDatavalue[23] = str_replace($colorName, $colorId, $csvDatavalue[23]);
-
-            list($colPart, $sizePart) = explode("|", $csvDatavalue[23]);
-
-            $colPart = trim($colPart);
-            $sizePart = trim($sizePart);
-
-            $colorId = $colorOptions[$colPart] ?? null;
-            $sizeId  = $sizeOptions[$sizePart] ?? null;
-
-            $csvDatavalue[23] = $colorId . "|" . $sizeId;
-
-
-        } elseif (!empty($colorName) && empty($colorId)) {
-            echo "⚠️ Warning: Color '{$colorName}' not found in colorOptions<br>";
+    // ===================== CSV ROWS =====================
+    foreach ($csvData as $row) {
+        // Manufacturer ID resolve
+        if (empty($row[18]) && !empty($row[19]) && isset($manufacturerList[$row[19]])) {
+            $row[18] = $manufacturerList[$row[19]];
         }
-
-        unset($csvDatavalue['color_opt_name']);
-    }
-
-    // Handle size property safely
-    if (isset($csvDatavalue['size_opt_name'])) {
-        $sizeName = trim($csvDatavalue['size_opt_name']);
-        $sizeId = $sizeOptions[$sizeName] ?? null;
-
-        if (is_string($sizeId) && is_string($csvDatavalue[23])) {
-            $csvDatavalue[23] = str_replace($sizeName, $sizeId, $csvDatavalue[23]);
-        } elseif (!empty($sizeName) && empty($sizeId)) {
-            echo "⚠️ Warning: Size '{$sizeName}' not found in sizeOptions<br>";
+        // Property mapping (Color | Size)
+        if (isset($row['color_opt_name']) && isset($row[23])) {
+            $colorName = trim($row['color_opt_name']);
+            [$c, $s] = array_pad(explode('|', $row[23]), 2, '');
+            $row[23] =
+                ($colorOptions[$c] ?? '') . "|" .
+                ($sizeOptions[$s] ?? '');
+            unset($row['color_opt_name'], $row['size_opt_name']);
         }
-
-        unset($csvDatavalue['size_opt_name']);
+        // Category mapping using $categoryMapping
+        $vendorCatId = trim((string)($row[20] ?? ''));
+        // Get vendor category name from categoryList (id => name)
+        $vendorCatName = '';
+        if (!empty($vendorCatId)) {
+            // Try to find the name by id (reverse lookup)
+            $vendorCatName = array_search($vendorCatId, $categoryList, true);
+            if ($vendorCatName === false) {
+                $vendorCatName = '';
+            }
+        }
+        // Get shopware category id from categoryMapping
+        $shopwareCatId = $categoryMapping[$vendorCatName] ?? '';
+        // Append mapping columns: vendor category name, id, shopware category id
+        //$row[] = $vendorCatName;
+        $row[] = $vendorCatId;
+        $row[] = $shopwareCatId;
+        fputcsv($out, $row, ";");
     }
 
-    fputcsv($proFile, $csvDatavalue, ";");
+    fclose($out);
+    exit;
 }
 
-fclose($proFile);
-exit;
-}
+
+
+
 
 function getRootCategory(){
     return '01980cc2b7f6704fafdb4844bd5c097f';
