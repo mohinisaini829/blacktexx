@@ -1389,44 +1389,69 @@ function createProductCsv($csvData, $container,$categoryMapping)
     $vendorCategoryMap = [];
 
     // ===================== INSERT / UPDATE CATEGORY MAPPING =====================
-    // try {
-    //     // Native PDO
-    //     $pdo = $container->get(\Doctrine\DBAL\Connection::class)->getNativeConnection();
-    //     $vendorCode = $_POST['vendor'] ?? '';
+    try {
+        // Native PDO
+        $pdo = $container->get(\Doctrine\DBAL\Connection::class)->getNativeConnection();
+        $vendorCode = $_POST['vendor'] ?? '';
 
-    //     foreach ($csvData as $row) {
-    //        $vendorCatName = trim((string)($row[20] ?? ''));
-    //         if ($vendorCatName === '') continue;
-    //         $shopwareCatId = $categoryMapping[$vendorCatName] ?? '';
-    //         if ($shopwareCatId === '') continue;
-    //         if (isset($vendorCategoryMap[$vendorCatName])) continue;
-    //         $vendorCategoryMap[$vendorCatName] = true;
-    //         // ✅ UPSERT SQL
-    //         $sql = "
-    //             INSERT INTO custom_category_mapping
-    //             (vendor_code, vendor_cat, shopware_cat, vendor_cat_name, shopware_cat_name, created_at, updated_at)
-    //             VALUES (?, ?, ?, ?, ?, ?, ?)
-    //             ON DUPLICATE KEY UPDATE
-    //                 shopware_cat = VALUES(shopware_cat),
-    //                 vendor_cat_name = VALUES(vendor_cat_name),
-    //                 updated_at = VALUES(updated_at)
-    //         ";
-    //         $params = [
-    //             $vendorCode,
-    //             $vendorCatName,
-    //             $shopwareCatId,
-    //             $vendorCatName,
-    //             '',
-    //             date('Y-m-d H:i:s'),
-    //             date('Y-m-d H:i:s'),
-    //         ];
-    //         $stmt = $pdo->prepare($sql);
-    //         $stmt->execute($params);
-    //     }
+        foreach ($csvData as $row) {
+            $vendorCatId = trim((string)($row[20] ?? ''));
+            // Get vendor category name from categoryList (id => name)
+            $vendorCatName = '';
+            if (!empty($vendorCatId)) {
+                // Try to find the name by id (reverse lookup)
+                $vendorCatName = array_search($vendorCatId, $categoryList, true);
+                if ($vendorCatName === false) {
+                    $vendorCatName = '';
+                }
+            }
+            // Get shopware category id from categoryMapping
+            $shopwareCatId = $categoryMapping[$vendorCatName] ?? '';
+            if ($vendorCatName === '') continue;
+            $shopwareCatId = $categoryMapping[$vendorCatName] ?? '';
+            if ($shopwareCatId === '') continue;
+            if (isset($vendorCategoryMap[$vendorCatName])) continue;
+            $vendorCategoryMap[$vendorCatName] = true;
+            // Check if mapping already exists (by vendor_code + vendor_cat)
+            $checkSql = "SELECT id FROM custom_category_mapping WHERE vendor_code = ? AND vendor_cat = ? LIMIT 1";
+            $checkStmt = $pdo->prepare($checkSql);
+            $checkStmt->execute([$vendorCode, $vendorCatId]);
+            $existing = $checkStmt->fetchColumn();
 
-    // } catch (\Exception $e) {
-    //     error_log($e->getMessage());
-    // }
+            if ($existing) {
+                // Update existing row
+                $sql = "UPDATE custom_category_mapping SET shopware_cat = ?, vendor_cat_name = ?, shopware_cat_name = ?, updated_at = ? WHERE id = ?";
+                $params = [
+                    $shopwareCatId,
+                    $vendorCatName,
+                    $shopwareCatName = $categoryList[$shopwareCatId] ?? '',
+                    date('Y-m-d H:i:s'),
+                    $existing
+                ];
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute($params);
+            } else {
+                // Insert new row with new binary id
+                $binaryId = \Shopware\Core\Framework\Uuid\Uuid::randomBytes();
+                $sql = "INSERT INTO custom_category_mapping (id, vendor_code, vendor_cat, shopware_cat, vendor_cat_name, shopware_cat_name, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                $params = [
+                    $binaryId,
+                    $vendorCode,
+                    $vendorCatId,
+                    $shopwareCatId,
+                    $vendorCatName,
+                    $shopwareCatName = $categoryList[$shopwareCatId] ?? '',
+                    date('Y-m-d H:i:s'),
+                    date('Y-m-d H:i:s'),
+                ];
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute($params);
+            }
+        }
+
+    } catch (\Exception $e) {
+        error_log($e->getMessage());
+    }
 
     // ===================== CSV HEADER =====================
     $productCsvHeader = [
