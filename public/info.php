@@ -223,7 +223,6 @@ if (
             // ===============================
             // CATEGORY EXTRACTION
             // ===============================
-            //echo $data['Category Shop'];die;
            
             if ($vendor === 'ross' && !empty($data['Category Shop'])) {
                 // echo "<pre>Vendor: ".$vendor."</pre>";
@@ -232,21 +231,13 @@ if (
                 // echo "<pre>Data: "; print_r($data); echo "</pre>";
                 // die('DEBUG END');
                 $vendorCategories[] = trim($data['Category Shop']);
-               // print_r($vendorCategories);
-                //die('ggggggggg');
             }
-            //die('hhhhhh');
             if ($vendor === 'harko' && !empty($data['Article Shop Group'])) {
                 $vendorCategories[] = trim($data['Article Shop Group']);
             }
 
             $rowCount++;
         }
-        // DEBUG OUTPUT
-    // echo '<pre>';
-    // print_r($vendorCategories);
-    // echo '</pre>';
-    // die;
     }
 
     // ===============================

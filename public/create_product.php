@@ -140,7 +140,7 @@ if(!empty($_POST['vendorCategories']) && is_array($_POST['vendorCategories'])){
     }
 }
 
-//print_r($categoryMapping);die;
+
 if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
 
         // Accept temp_file from mapping form, or vendor_file from direct upload (if needed)
@@ -540,10 +540,6 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                 $rootCategory   =   getRootCategory();
 
                 foreach ($sheet->getRowIterator() as $row) {
-                    /*if (in_array($rowCount, [3,4,5])) {
-                        $rowCount++;
-                        continue;
-                    }*/
 
                     $rowData = [];
                     $cellIterator = $row->getCellIterator();
@@ -655,7 +651,6 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                         $productCsvData[]     =   $lastParent;
                     }
 
-                    //echo '<pre />'; print_r($data); die;
 
                     // --- CHILD PRODUCT OPTIONS ---
                     //$configOptions      =   $data['Master Field für Variant (Color-Size)'] ?? '';
@@ -698,41 +693,7 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                                     $optIdArr[]         =   $colorOptions[$colorVal];
                                 }
                             }
-                    /*if ($configOptions) {
-                        $masterColorSizeS  = explode('; ', $configOptions);
-                        if (isset($masterColorSizeS[1])) {
-                            $masterColorSizeSC =    explode(' | ', $masterColorSizeS[1]);
-                            $sizeVal           =    trim($masterColorSizeSC[1] ?? '');
-                            $colorVal          =    trim($masterColorSizeSC[0] ?? '');
-                            $sizeName          =    $colorName  =   '';*/
-                            /* Write Size Property */
-
-                            /*if (!empty($sizeVal)){
-                                if (!isset($sizeOptions[$sizeVal])){
-                                    $sizeProperyData[]  =   ['name' => $sizeVal];
-                                    $sizeName           =   $sizeVal;
-                                    $optIdArr[]         =   $sizeName;
-                                } else {
-                                    $optIdArr[]         =   $sizeOptions[$sizeVal];
-                                }                                
-                            }*/
-
-                            /* Write Size Property */
-
-                            /* Write Color Property */
-                            /*if (!empty($colorVal)){
-                                if (!isset($colorOptions[$colorVal])){
-                                    $colorProperyData[]  =   ['name' => $colorVal];
-                                    $colorName           =   $colorVal;
-                                    $optIdArr[]          =   $colorName;
-                                } else {
-                                    $optIdArr[]         =   $colorOptions[$colorVal];
-                                }
-                            }*/
-                            /* Write Color Property */
-                        /*}
-                    }
-                    */
+                    
                     /* Add Child Row */
                     $optIdStr           =   implode('|', $optIdArr);
 
@@ -837,7 +798,6 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
         die('❌ Invalid JSON format. Missing "result" array.');
     }
 
-    //echo "✅ JSON file parsed successfully (" . count($jsonData['result']) . " items)<br>";
 
     // --- Prepare arrays ---
     $productCsvData   = [];
@@ -911,10 +871,6 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
             $productNumber = isset($product['productNumber']) && is_string($product['productNumber'])
                 ? trim($product['productNumber'])
                 : '';
-
-            /*if ($productNumber !== $targetProductNumber) {
-                continue;
-            }*/
 
             // Parent-level fields
             $skuParent = $productNumber;
