@@ -4,6 +4,8 @@ declare(strict_types=1);
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
+ini_set('memory_limit', '4G');
+set_time_limit(1800);
 
 use Doctrine\DBAL\Connection;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -142,15 +144,22 @@ if(!empty($_POST['vendorCategories']) && is_array($_POST['vendorCategories'])){
 
 
 if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
+        $vendor = 'ross'; // Set vendor variable
 
         // Accept temp_file from mapping form, or vendor_file from direct upload (if needed)
         $targetFile = null;
         if (!empty($_POST['temp_file'])) {
-            $tempFile = basename($_POST['temp_file']);
-            $tempDir = __DIR__ . '/uploads/temp/';
-            $targetFile = $tempDir . $tempFile;
-            if (!file_exists($targetFile)) {
-                die('❌ Temporary file not found: ' . htmlspecialchars($tempFile));
+            // Check if it's already a full path
+            if (file_exists($_POST['temp_file'])) {
+                $targetFile = $_POST['temp_file'];
+            } else {
+                // Legacy: basename only, look in uploads/temp/
+                $tempFile = basename($_POST['temp_file']);
+                $tempDir = __DIR__ . '/uploads/temp/';
+                $targetFile = $tempDir . $tempFile;
+                if (!file_exists($targetFile)) {
+                    die('❌ Temporary file not found: ' . htmlspecialchars($tempFile));
+                }
             }
         } else if (!empty($_FILES['vendor_file']['tmp_name'])) {
             $fileTmp = $_FILES['vendor_file']['tmp_name'];
@@ -170,7 +179,9 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
             die('Ross: Invalid file type. Please upload a CSV / XLS file.');
         }
         try {
-            $spreadsheet = IOFactory::load($targetFile);
+            $reader = IOFactory::createReaderForFile($targetFile);
+            $reader->setReadDataOnly(true);
+            $spreadsheet = $reader->load($targetFile);
 
                 $sheet      = $spreadsheet->getActiveSheet();
                 $rowCount   = 1;
@@ -179,6 +190,7 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                 $productCsvData     =   [];
                 $sizeProperyData     =   [];
                 $colorProperyData     =   [];
+                $parentSizeSpecPdfBySku = [];
 
                 $productDefaultArray    =   [
                     0 => '',
@@ -269,6 +281,7 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
 
                     /* Add Parent Row */
                     $parentSku = $data['Master Article Number'] ?? null;
+                    $sizeSpecPdfUrl = buildRossSizeSpecPdfUrl($data);
 
                     $brandId        =   '';
                     $brandName      =   $data['Brand'];
@@ -283,8 +296,10 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                     $categoryIds    =   '';
                     $categoryName   =   $data['Category Shop'];
                     if (!empty($categoryName)){
+                        error_log("[ROSS] Found category: '" . $categoryName . "'");
                         if (isset($categoryList[$categoryName])){
                             $categoryIds    =   $categoryList[$categoryName];
+                            error_log("[ROSS] Category already exists with ID: " . $categoryIds);
                         } else {
                             $categoryIds    =   Uuid::randomHex();
                             $newCategory[]  =   [
@@ -293,8 +308,11 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                                                     'active'   => true,
                                                     'parentId' => $rootCategory
                                                 ];
+                            error_log("[ROSS] New category created with ID: " . $categoryIds);
                             $categoryList[$categoryName]    =   $categoryIds;
                         }
+                    } else {
+                        error_log("[ROSS] No category found for this product (Category Shop is empty)");
                     }
 
                     $gender     =   $data['Gender/Sex'];
@@ -325,17 +343,24 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                         $proArr             =   $productDefaultArray;
                         $proArr[0]          =   $parentHexId;
                         $proArr[2]          =   $parentSku;
-                        $proArr[5]          =   $data['Web Shop Article Name (Product Page, Listing)'] ?? '';
+                        $productName        =   trim($data['Web Shop Article Name (Product Page, Listing)'] ?? '');
+                        if (empty($productName)) {
+                            $productName    =   'Product ' . $parentSku;
+                        }
+                        $proArr[5]          =   $productName;
                         $proArr[6]          =   $description;
                         $proArr[19]         =   $brandName;
                         $proArr[18]         =   $brandId;
                         $proArr[20]         =   $categoryIds;
-                        $proArr[7]          =   $data[1] ?? '';
-                        $proArr[8]          =   $data[1] ?? '';
+                        $grossPrice         =   floatval($data[1] ?? 0);
+                        $proArr[7]          =   round($grossPrice / 1.19, 2);
+                        $proArr[8]          =   $grossPrice;
                         $proArr[25]         =   $gender;
                         $proArr[35]         =   $Supplier;
+                        $proArr['size_spec_pdf_url'] = $sizeSpecPdfUrl;
                         $productCsvData[]   =   $proArr;
                         $lastParent         =   $proArr;
+                        $parentSizeSpecPdfBySku[$parentSku] = $sizeSpecPdfUrl;
                     }
                     /* Add Parent Row */
 
@@ -347,20 +372,22 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                     $configOptions      =   $data['Master Field für Variant (Color-Size)'] ?? '';
 
                     $optIdArr           =   [];
+                    $sizeName           =    $colorName  =   '';
+                    
                     if ($configOptions) {
                         $masterColorSizeS  = explode('; ', $configOptions);
                         if (isset($masterColorSizeS[1])) {
                             $masterColorSizeSC =    explode(' | ', $masterColorSizeS[1]);
                             $sizeVal           =    trim($masterColorSizeSC[1] ?? '');
                             $colorVal          =    trim($masterColorSizeSC[0] ?? '');
-                            $sizeName          =    $colorName  =   '';
+                            
                             /* Write Size Property */
 
                             if (!empty($sizeVal)){
+                                $sizeName = $sizeVal;  // Store actual size name
                                 if (!isset($sizeOptions[$sizeVal])){
                                     $sizeProperyData[]  =   ['name' => $sizeVal];
-                                    $sizeName           =   $sizeVal;
-                                    $optIdArr[]         =   $sizeName;
+                                    $optIdArr[]         =   $sizeVal;
                                 } else {
                                     $optIdArr[]         =   $sizeOptions[$sizeVal];
                                 }                                
@@ -370,10 +397,10 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
 
                             /* Write Color Property */
                             if (!empty($colorVal)){
+                                $colorName = $colorVal;  // Store actual color name
                                 if (!isset($colorOptions[$colorVal])){
                                     $colorProperyData[]  =   ['name' => $colorVal];
-                                    $colorName           =   $colorVal;
-                                    $optIdArr[]          =   $colorName;
+                                    $optIdArr[]          =   $colorVal;
                                 } else {
                                     $optIdArr[]         =   $colorOptions[$colorVal];
                                 }
@@ -389,10 +416,20 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                     $proArr[0]          =   Uuid::randomHex();
                     $proArr[1]          =   $parentIdSkuArr[$parentSku];
                     $proArr[2]          =   $data['Article Number'];
-                    $proArr[5]          =   $data['Web Shop Article Name (Product Page, Listing)'] ?? '';
+                    
+                    // Set variant name from Color - Size extracted from Master Field
+                    $variantNameParts = array_filter([$colorName, $sizeName]);
+                    if (!empty($variantNameParts)) {
+                        $proArr[5] = implode(' - ', $variantNameParts);  // e.g., "Black - XL"
+                    } else {
+                        $productName = trim($data['Web Shop Article Name (Product Page, Listing)'] ?? '');
+                        $proArr[5] = !empty($productName) ? $productName : 'Product ' . $data['Article Number'];
+                    }
+                    
                     $proArr[6]          =   $description;
-                    $proArr[7]          =   $data[1] ?? '';
-                    $proArr[8]          =   $data[1] ?? '';
+                    $grossPrice         =   floatval($data[1] ?? 0);
+                    $proArr[7]          =   round($grossPrice / 1.19, 2);
+                    $proArr[8]          =   $grossPrice;
                     $proArr[18]         =   $brandId;
                     $proArr[19]         =   $brandName;
                     $proArr[20]         =   $categoryIds;
@@ -421,6 +458,7 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                     if (!empty($sizeName)) {
                         $proArr['size_opt_name']         =   $sizeName;                        
                     }
+                    $proArr['size_spec_pdf_url']         =   '';
 
                     $productCsvData[]   =   $proArr;
                     /* Add Child Row */
@@ -444,26 +482,51 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                 }
 
                 if (!empty($newCategory)){
+                    error_log("[ROSS] Creating " . count($newCategory) . " new categories");
+                    foreach ($newCategory as $cat) {
+                        error_log("[ROSS] Category: " . $cat['name']);
+                    }
                     createBulkCategories($newCategory, $container);
-                }   
-                createProductCsv($productCsvData, $container, $categoryMapping);
-
-                exit;
+                } else {
+                    error_log("[ROSS] No new categories to create (newCategory is empty)");
+                }
+                $result = createProductCsv($productCsvData, $container, $categoryMapping);
+                
+                // Show queue processing UI inline ONLY if not called from import_processor
+                if (isset($result['jobId']) && !defined('IMPORT_PROCESSOR_MODE')) {
+                    showQueueProcessingUI($result['jobId'], $vendor, basename($result['path']), count($productCsvData));
+                    exit;
+                }
+                
+                // Output CSV path for import_processor to capture
+                if (defined('IMPORT_PROCESSOR_MODE') && isset($result['path'])) {
+                    echo $result['path'];
+                }
+                
+                if (!defined('IMPORT_PROCESSOR_MODE')) {
+                    exit;
+                }
             } catch (\Exception $e) {
                 echo 'Error loading file: ', $e->getMessage();
             }
         
     
 }else if(isset($_POST['vendor']) && $_POST['vendor'] === 'harko'){
-    //die('kkkk');
+    $vendor = 'harko'; // Set vendor variable
     // Accept temp_file from mapping form, or vendor_file from direct upload (if needed)
     $targetFile = null;
     if (!empty($_POST['temp_file'])) {
-        $tempFile = basename($_POST['temp_file']);
-        $tempDir = __DIR__ . '/uploads/temp/';
-        $targetFile = $tempDir . $tempFile;
-        if (!file_exists($targetFile)) {
-            die('❌ Temporary file not found: ' . htmlspecialchars($tempFile));
+        // Check if it's already a full path
+        if (file_exists($_POST['temp_file'])) {
+            $targetFile = $_POST['temp_file'];
+        } else {
+            // Legacy: basename only, look in uploads/temp/
+            $tempFile = basename($_POST['temp_file']);
+            $tempDir = __DIR__ . '/uploads/temp/';
+            $targetFile = $tempDir . $tempFile;
+            if (!file_exists($targetFile)) {
+                die('❌ Temporary file not found: ' . htmlspecialchars($tempFile));
+            }
         }
     } else if (!empty($_FILES['vendor_file']['tmp_name'])) {
         $fileTmp = $_FILES['vendor_file']['tmp_name'];
@@ -483,7 +546,9 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
         die('Harko: Invalid file type. Please upload a CSV / XLS file.');
     }
     try {
-        $spreadsheet = IOFactory::load($targetFile);
+        $reader = IOFactory::createReaderForFile($targetFile);
+        $reader->setReadDataOnly(true);
+        $spreadsheet = $reader->load($targetFile);
         $sheet      = $spreadsheet->getActiveSheet();
         $rowCount   = 1;
         $header     = [];
@@ -491,6 +556,29 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
         $productCsvData     =   [];
         $sizeProperyData     =   [];
         $colorProperyData     =   [];
+        $colorOptionsLower   =   [];
+        $sizeOptionsLower    =   [];
+        $colorNameByLower    =   [];
+        $sizeNameByLower     =   [];
+        $colorKeysByLength   =   [];
+        $sizeKeysByLength    =   [];
+
+        foreach ($colorOptions as $name => $id) {
+            $colorOptionsLower[mb_strtolower((string)$name, 'UTF-8')] = $id;
+            $colorNameByLower[mb_strtolower((string)$name, 'UTF-8')] = (string)$name;
+        }
+        foreach ($sizeOptions as $name => $id) {
+            $sizeOptionsLower[mb_strtolower((string)$name, 'UTF-8')] = $id;
+            $sizeNameByLower[mb_strtolower((string)$name, 'UTF-8')] = (string)$name;
+        }
+        $colorKeysByLength = array_keys($colorNameByLower);
+        usort($colorKeysByLength, function ($a, $b) {
+            return mb_strlen((string)$b, 'UTF-8') <=> mb_strlen((string)$a, 'UTF-8');
+        });
+        $sizeKeysByLength = array_keys($sizeNameByLower);
+        usort($sizeKeysByLength, function ($a, $b) {
+            return mb_strlen((string)$b, 'UTF-8') <=> mb_strlen((string)$a, 'UTF-8');
+        });
 
                 $productDefaultArray    =   [
                                                 0 => '',
@@ -633,13 +721,18 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                         $proArr             =   $productDefaultArray;
                         $proArr[0]          =   $parentHexId;
                         $proArr[2]          =   $parentSku;
-                        $proArr[5]          =   $data['3 Article Name'] ?? '';
+                        $productName        =   trim($data['3 Article Name'] ?? '');
+                        if (empty($productName)) {
+                            $productName    =   'Product ' . $parentSku;
+                        }
+                        $proArr[5]          =   $productName;
                         $proArr[6]          =   $description;
                         $proArr[19]         =   $brandName;
                         $proArr[18]         =   $brandId;
                         $proArr[20]         =   $categoryIds;
-                        $proArr[7]          =   $data['Price 1'] ?? '';
-                        $proArr[8]          =   $data['Price 1'] ?? '';
+                        $grossPrice         =   floatval($data['Price 1'] ?? 0);
+                        $proArr[7]          =   round($grossPrice / 1.19, 2);
+                        $proArr[8]          =   $grossPrice;
                         $proArr[25]         =   $gender;
                         $proArr[35]         =   $Supplier;
                         $productCsvData[]   =   $proArr;
@@ -653,45 +746,244 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
 
 
                     // --- CHILD PRODUCT OPTIONS ---
-                    //$configOptions      =   $data['Master Field für Variant (Color-Size)'] ?? '';
-
                     $configOptions      =   $data['Master Formular (master; 1; Color | Size)'] ?? '';
-                    $str = $data['Master Formular (master; 1; Color | Size)'] ?? '';
-                    //die('here111');
 
-                    // step 1: explode by ";"
-                    $parts = explode(";", $str);
-
-                    // last part has "Farbe | Größe"
-                    $lastPart = trim(end($parts));
-
-                    // step 2: explode last part by "|"
-                    $attributes = array_map('trim', explode("|", $lastPart));
-
-                    $colorVal  = $attributes[0] ?? null; // "Farbe"
-                    $sizeVal   = $attributes[1] ?? null; // "Größe"
                     $optIdArr           =   [];
-                            if (!empty($sizeVal)){
-                                if (!isset($sizeOptions[$sizeVal])){
-                                    $sizeProperyData[]  =   ['name' => $sizeVal];
-                                    $sizeName           =   $sizeVal;
-                                    $optIdArr[]         =   $sizeName;
+                    $colorVal           =   trim((string)($data['4 Color'] ?? ''));
+                    $sizeVal            =   trim((string)($data['11 Size'] ?? ''));
+                    if ($colorVal === '') {
+                        $colorVal = trim((string)($data['19 Color Group'] ?? ''));
+                    }
+                    if ($sizeVal === '') {
+                        $sizeVal = trim((string)($data['Size'] ?? ''));
+                    }
+                    $combined           =   '';
+                    
+                    if ($configOptions && ($colorVal === '' || $sizeVal === '')) {
+                        // Format: "master; variant_number; ColorValue | SizeValue"
+                        // Example: "master; 1; kiwi | XS"
+                        //          [0]     [1]           [2]
+                        $masterColorSizeS  = explode('; ', $configOptions);
+                        if (isset($masterColorSizeS[2])) {
+                            $masterColorSizeSC =    explode(' | ', $masterColorSizeS[2]);
+                            $colorVal          =    trim($masterColorSizeSC[0] ?? '');
+                            $sizeVal           =    trim($masterColorSizeSC[1] ?? '');
+                        }
+                        if ($colorVal === '' || $sizeVal === '') {
+                            $combined = trim((string)($masterColorSizeS[2] ?? $masterColorSizeS[1] ?? $masterColorSizeS[0] ?? ''));
+                            if ($combined !== '') {
+                                if (strpos($combined, ' | ') !== false) {
+                                    [$cTmp, $sTmp] = array_pad(explode(' | ', $combined, 2), 2, '');
+                                    $colorVal = $colorVal !== '' ? $colorVal : trim($cTmp);
+                                    $sizeVal = $sizeVal !== '' ? $sizeVal : trim($sTmp);
+                                } elseif (strpos($combined, ' / ') !== false) {
+                                    [$cTmp, $sTmp] = array_pad(explode(' / ', $combined, 2), 2, '');
+                                    $colorVal = $colorVal !== '' ? $colorVal : trim($cTmp);
+                                    $sizeVal = $sizeVal !== '' ? $sizeVal : trim($sTmp);
+                                } elseif (strpos($combined, ' - ') !== false) {
+                                    [$cTmp, $sTmp] = array_pad(explode(' - ', $combined, 2), 2, '');
+                                    $colorVal = $colorVal !== '' ? $colorVal : trim($cTmp);
+                                    $sizeVal = $sizeVal !== '' ? $sizeVal : trim($sTmp);
+                                }
+                            }
+                        }
+                        if (($colorVal === '' || $sizeVal === '') && !empty($combined)) {
+                            $combinedLower = mb_strtolower($combined, 'UTF-8');
+                            foreach ($sizeNameByLower as $sizeLower => $sizeOriginal) {
+                                if ($sizeLower === '') {
+                                    continue;
+                                }
+                                $sizeLen = mb_strlen($sizeLower, 'UTF-8');
+                                if (mb_substr($combinedLower, -$sizeLen, null, 'UTF-8') === $sizeLower) {
+                                    $sizeVal = $sizeVal !== '' ? $sizeVal : $sizeOriginal;
+                                    $colorPart = trim(mb_substr($combined, 0, mb_strlen($combined, 'UTF-8') - mb_strlen($sizeOriginal, 'UTF-8'), 'UTF-8'));
+                                    $colorPart = trim(preg_replace('/[\s\-\/|]+$/u', '', $colorPart));
+                                    $colorVal = $colorVal !== '' ? $colorVal : $colorPart;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if ($colorVal === '' || $sizeVal === '') {
+                        $colorNameCandidate = '';
+                        $colorCodeCandidate = '';
+                        $sizeNameCandidate = '';
+                        $sizeCodeCandidate = '';
+
+                        foreach ($data as $key => $value) {
+                            $keyLower = mb_strtolower((string)$key, 'UTF-8');
+                            $keyNorm = preg_replace('/[^a-z0-9]+/u', '', $keyLower);
+                            $val = trim((string)$value);
+                            if ($val === '') {
+                                continue;
+                            }
+
+                            $isColorKey = (bool)preg_match('/(color|colour|farbe)/', $keyNorm);
+                            $isSizeKey = (bool)preg_match('/(size|groesse|grosse|grösse|größe)/u', $keyNorm);
+
+                            if ($isColorKey) {
+                                if (preg_match('/(name|bezeichnung)/', $keyNorm)) {
+                                    $colorNameCandidate = $val;
+                                } elseif (preg_match('/(code|nr|no|id)/', $keyNorm)) {
+                                    $colorCodeCandidate = $val;
+                                } elseif ($colorNameCandidate === '') {
+                                    $colorNameCandidate = $val;
+                                }
+                            }
+
+                            if ($isSizeKey) {
+                                if (preg_match('/(name|bezeichnung)/', $keyNorm)) {
+                                    $sizeNameCandidate = $val;
+                                } elseif (preg_match('/(code|nr|no|id)/', $keyNorm)) {
+                                    $sizeCodeCandidate = $val;
+                                } elseif ($sizeNameCandidate === '') {
+                                    $sizeNameCandidate = $val;
+                                }
+                            }
+                        }
+
+                        if ($colorVal === '' && $colorNameCandidate !== '') {
+                            $colorVal = $colorNameCandidate;
+                        } elseif ($colorVal === '' && $colorCodeCandidate !== '') {
+                            $colorVal = $colorCodeCandidate;
+                        }
+
+                        if ($sizeVal === '' && $sizeNameCandidate !== '') {
+                            $sizeVal = $sizeNameCandidate;
+                        } elseif ($sizeVal === '' && $sizeCodeCandidate !== '') {
+                            $sizeVal = $sizeCodeCandidate;
+                        }
+                    }
+                    if ($colorVal === '' || $sizeVal === '') {
+                        foreach ($data as $key => $value) {
+                            $keyLower = mb_strtolower((string)$key, 'UTF-8');
+                            $keyNorm = preg_replace('/[^a-z0-9]+/u', '', $keyLower);
+                            $val = trim((string)$value);
+                            if ($val === '') {
+                                continue;
+                            }
+
+                            $isColorKey = (bool)preg_match('/(color|colour|farbe)/', $keyNorm);
+                            $isSizeKey = (bool)preg_match('/(size|groesse|grosse|grösse|größe)/u', $keyNorm);
+
+                            if (($colorVal === '' || $sizeVal === '') && $isColorKey && $isSizeKey) {
+                                $combined = $combined !== '' ? $combined : $val;
+                                if (strpos($combined, ' | ') !== false) {
+                                    [$cTmp, $sTmp] = array_pad(explode(' | ', $combined, 2), 2, '');
+                                    $colorVal = $colorVal !== '' ? $colorVal : trim($cTmp);
+                                    $sizeVal = $sizeVal !== '' ? $sizeVal : trim($sTmp);
+                                } elseif (strpos($combined, ' / ') !== false) {
+                                    [$cTmp, $sTmp] = array_pad(explode(' / ', $combined, 2), 2, '');
+                                    $colorVal = $colorVal !== '' ? $colorVal : trim($cTmp);
+                                    $sizeVal = $sizeVal !== '' ? $sizeVal : trim($sTmp);
+                                } elseif (strpos($combined, ' - ') !== false) {
+                                    [$cTmp, $sTmp] = array_pad(explode(' - ', $combined, 2), 2, '');
+                                    $colorVal = $colorVal !== '' ? $colorVal : trim($cTmp);
+                                    $sizeVal = $sizeVal !== '' ? $sizeVal : trim($sTmp);
                                 } else {
-                                    $optIdArr[]         =   $sizeOptions[$sizeVal];
-                                }                                
+                                    $combinedLower = mb_strtolower($combined, 'UTF-8');
+                                    foreach ($sizeNameByLower as $sizeLower => $sizeOriginal) {
+                                        if ($sizeLower === '') {
+                                            continue;
+                                        }
+                                        $sizeLen = mb_strlen($sizeLower, 'UTF-8');
+                                        if (mb_substr($combinedLower, -$sizeLen, null, 'UTF-8') === $sizeLower) {
+                                            $sizeVal = $sizeVal !== '' ? $sizeVal : $sizeOriginal;
+                                            $colorPart = trim(mb_substr($combined, 0, mb_strlen($combined, 'UTF-8') - mb_strlen($sizeOriginal, 'UTF-8'), 'UTF-8'));
+                                            $colorPart = trim(preg_replace('/[\s\-\/|]+$/u', '', $colorPart));
+                                            $colorVal = $colorVal !== '' ? $colorVal : $colorPart;
+                                            break;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ($colorVal === '' && $isColorKey) {
+                                    $colorVal = $val;
+                                }
+                                if ($sizeVal === '' && $isSizeKey) {
+                                    $sizeVal = $val;
+                                }
+                            }
+
+                            if ($colorVal !== '' && $sizeVal !== '') {
+                                break;
+                            }
+                        }
+                    }
+                    if ($colorVal === '' || $sizeVal === '') {
+                        $sizeTokens = ['7XL','6XL','5XL','4XL','3XL','XXXL','XXL','XL','L','M','S','XS','XXS'];
+                        foreach ($data as $value) {
+                            $val = trim((string)$value);
+                            if ($val === '') {
+                                continue;
+                            }
+                            $valLower = mb_strtolower($val, 'UTF-8');
+
+                            if ($sizeVal === '') {
+                                foreach ($sizeTokens as $token) {
+                                    if (preg_match('/(^|\b|\s)'.preg_quote(mb_strtolower($token, 'UTF-8'), '/').'(\b|\s|$)/u', $valLower)) {
+                                        $sizeVal = $token;
+                                        break;
+                                    }
+                                }
+                                if ($sizeVal === '') {
+                                    foreach ($sizeKeysByLength as $sizeLower) {
+                                        if ($sizeLower === '') {
+                                            continue;
+                                        }
+                                        if (preg_match('/(^|\b|\s)'.preg_quote($sizeLower, '/').'(\b|\s|$)/u', $valLower)) {
+                                            $sizeVal = $sizeNameByLower[$sizeLower] ?? $sizeLower;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if ($colorVal === '') {
+                                foreach ($colorKeysByLength as $colorLower) {
+                                    if ($colorLower === '') {
+                                        continue;
+                                    }
+                                    if (mb_stripos($valLower, $colorLower, 0, 'UTF-8') !== false) {
+                                        $colorVal = $colorNameByLower[$colorLower] ?? $colorLower;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if ($colorVal !== '' && $sizeVal !== '') {
+                                break;
+                            }
+                        }
+                    }
+                    $colorName          =   ''; // Initialize color name variable
+                    $sizeName           =   ''; // Initialize size name variable
+
+                            if (!empty($sizeVal)){
+                                $sizeName = (string)$sizeVal; // Always store size name for display
+                                $sizeKey  = mb_strtolower($sizeName, 'UTF-8');
+                                if (!isset($sizeOptionsLower[$sizeKey])){
+                                    $newSizeId = Uuid::randomHex();
+                                    $sizeProperyData[]  =   ['id' => $newSizeId, 'name' => $sizeName];
+                                    $sizeOptions[$sizeName] = $newSizeId;
+                                    $sizeOptionsLower[$sizeKey] = $newSizeId;
+                                }
+                                $optIdArr[] = $sizeOptionsLower[$sizeKey];
                             }
 
                             /* Write Size Property */
 
                             /* Write Color Property */
                             if (!empty($colorVal)){
-                                if (!isset($colorOptions[$colorVal])){
-                                    $colorProperyData[]  =   ['name' => $colorVal];
-                                    $colorName           =   $colorVal;
-                                    $optIdArr[]          =   $colorName;
-                                } else {
-                                    $optIdArr[]         =   $colorOptions[$colorVal];
+                                $colorName = (string)$colorVal; // Always store color name for display
+                                $colorKey  = mb_strtolower($colorName, 'UTF-8');
+                                if (!isset($colorOptionsLower[$colorKey])){
+                                    $newColorId = Uuid::randomHex();
+                                    $colorProperyData[]  =   ['id' => $newColorId, 'name' => $colorName];
+                                    $colorOptions[$colorName] = $newColorId;
+                                    $colorOptionsLower[$colorKey] = $newColorId;
                                 }
+                                $optIdArr[] = $colorOptionsLower[$colorKey];
                             }
                     
                     /* Add Child Row */
@@ -701,10 +993,16 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                     $proArr[0]          =   Uuid::randomHex();
                     $proArr[1]          =   $parentIdSkuArr[$parentSku];
                     $proArr[2]          =   $data['Article Number'];
-                    $proArr[5]          =   $data['ERP Article Name'] ?? '';
+                    // Use 3 Article Name for consistency with parent (base name only)
+                    $productName        =   trim($data['3 Article Name'] ?? '');
+                    if (empty($productName)) {
+                        $productName    =   'Product ' . $data['Article Number'];
+                    }
+                    $proArr[5]          =   $productName;
                     $proArr[6]          =   $description;
-                    $proArr[7]          =   $data['Price 1'] ?? '';
-                    $proArr[8]          =   $data['Price 1'] ?? '';
+                    $grossPrice         =   floatval($data['Price 1'] ?? 0);
+                    $proArr[7]          =   round($grossPrice / 1.19, 2);
+                    $proArr[8]          =   $grossPrice;
                     $proArr[18]         =   $brandId;
                     $proArr[19]         =   $brandName;
                     $proArr[20]         =   $categoryIds;
@@ -739,7 +1037,7 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
 
                     $rowCount++;
                 }
-
+                    //print_r($productCsvData);die;
                 /* CREATE BRANDS/MANUFACTURER */
                 if (!empty($newBrands)){
                     createManufacturers($newBrands, $container);
@@ -756,12 +1054,31 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                 }
 
                 if (!empty($newCategory)){
+                    error_log("[HARKO] Creating " . count($newCategory) . " new categories");
+                    foreach ($newCategory as $cat) {
+                        error_log("[HARKO] Category: " . $cat['name']);
+                    }
                     createBulkCategories($newCategory, $container);
-                } 
+                } else {
+                    error_log("[HARKO] No new categories to create (newCategory is empty)");
+                }
 
-                createProductCsv($productCsvData, $container, $categoryMapping);
-
-                exit;
+                $result = createProductCsv($productCsvData, $container, $categoryMapping);
+                
+                // Show queue processing UI inline ONLY if not called from import_processor
+                if (isset($result['jobId']) && !defined('IMPORT_PROCESSOR_MODE')) {
+                    showQueueProcessingUI($result['jobId'], $vendor, basename($result['path']), count($productCsvData));
+                    exit;
+                }
+                
+                // Output CSV path for import_processor to capture
+                if (defined('IMPORT_PROCESSOR_MODE') && isset($result['path'])) {
+                    echo $result['path'];
+                }
+                
+                if (!defined('IMPORT_PROCESSOR_MODE')) {
+                    exit;
+                }
             } catch (\Exception $e) {
                 echo 'Error loading file: ', $e->getMessage();
             }
@@ -769,16 +1086,21 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
     
 
 }else if (isset($_POST['vendor']) && $_POST['vendor'] === 'newwave') {
-    
-
+    $vendor = 'newwave'; // Set vendor variable
     // Accept temp_file from mapping form, or vendor_file from direct upload
     $targetFile = null;
     if (!empty($_POST['temp_file'])) {
-        $tempFile = basename($_POST['temp_file']);
-        $tempDir = __DIR__ . '/uploads/temp/';
-        $targetFile = $tempDir . $tempFile;
-        if (!file_exists($targetFile)) {
-            die('❌ Temporary file not found: ' . htmlspecialchars($tempFile));
+        // Check if it's already a full path
+        if (file_exists($_POST['temp_file'])) {
+            $targetFile = $_POST['temp_file'];
+        } else {
+            // Legacy: basename only, look in uploads/temp/
+            $tempFile = basename($_POST['temp_file']);
+            $tempDir = __DIR__ . '/uploads/temp/';
+            $targetFile = $tempDir . $tempFile;
+            if (!file_exists($targetFile)) {
+                die('❌ Temporary file not found: ' . htmlspecialchars($tempFile));
+            }
         }
     } else if (!empty($_FILES['vendor_file']['tmp_name'])) {
         $fileTmp = $_FILES['vendor_file']['tmp_name'];
@@ -887,7 +1209,7 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
             
             // If name is still empty, set a default name to avoid the "blank" error
             if (empty($name)) {
-                $name = "Default Product Name";  // Replace with a fallback name
+                $name = 'Product ' . $productNumber;  // Use product number as fallback
             }
 
             // Safe description
@@ -899,14 +1221,31 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
             // Safe brand
             $brandName = trim((string)($product['productBrand'] ?? ''));
 
-            // Safe category name
+            // Safe category name - extract from productCategory nested JSON structure
             $categoryName = '';
-            if (
-                !empty($product['productCategory']) &&
-                isset($product['productCategory'][0]['translation']) &&
-                is_array($product['productCategory'][0]['translation'])
-            ) {
-                $categoryName = trim((string)($product['productCategory'][0]['translation']['en'] ?? ''));
+            if (!empty($product['productCategory']) && is_array($product['productCategory'])) {
+                $firstCategory = $product['productCategory'][0];
+                
+                // Try English translation first
+                if (isset($firstCategory['translation']['en'])) {
+                    $categoryName = trim((string)$firstCategory['translation']['en']);
+                } 
+                // Fallback to key field
+                elseif (isset($firstCategory['key'])) {
+                    $categoryName = trim((string)$firstCategory['key']);
+                }
+                // Fallback to any available translation (German first, then any)
+                elseif (isset($firstCategory['translation']['de'])) {
+                    $categoryName = trim((string)$firstCategory['translation']['de']);
+                }
+                elseif (is_array($firstCategory['translation'])) {
+                    $translations = array_filter($firstCategory['translation'], function($v) {
+                        return is_string($v) && !empty($v);
+                    });
+                    if (!empty($translations)) {
+                        $categoryName = trim((string)current($translations));
+                    }
+                }
             }
             
             $imageUrlsParent = [];
@@ -982,6 +1321,11 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
 
                     $availability = isset($skuItem['availability']) ? (int)$skuItem['availability'] : 0;
                     $price = $skuItem['retailPrice']['price'] ?? null;
+                    
+                    // DEBUG: Log price data
+                    if ($variantSku === 'HK0105001003') {
+                        error_log("DEBUG Price for HK0105001003: price=$price, type=" . gettype($price));
+                    }
 
                     // create variant CSV row based on your $productDefaultArray shape
                     $vRow = $productDefaultArray;
@@ -990,14 +1334,22 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                     $vRow[2] = $variantSku;               // sku (index 2 used previously)
                     $vRow[3] = $isActive;                 // active flag (keep your existing variable)
                     $vRow[4] = $availability;             // stock
-                    $vRow[5] = $name . " " . trim($skuItem['description'] ?? ''); // product name + small desc
+                    
+                    // Set variant name immediately with color and size
+                    $colorNameForVariant = $colorsFound[$skuColor]['name'] ?? $skuColor;
+                    $sizeNameForVariant = $skuSizeWeb;
+                    $variantNameParts = array_filter([$colorNameForVariant, $sizeNameForVariant]);
+                    $vRow[5] = !empty($variantNameParts) ? implode(' - ', $variantNameParts) : $name;
+                    
                     $vRow[6] = $description;              // long description
                     // price mapping (you used 7/8/9/10 for net/gross etc in parent example)
                     if ($price !== null) {
-                        $vRow[7] = $price; // net price (best effort). Adjust if you need gross/net calc
-                        $vRow[8] = $price; // gross
-                        $vRow[9] = $price;
-                        $vRow[10] = $price;
+                        $grossPrice = floatval($price);
+                        $netPrice = round($grossPrice / 1.19, 2); // 19% tax removed
+                        $vRow[7] = $netPrice;    // net price
+                        $vRow[8] = $grossPrice;  // gross price
+                        $vRow[9] = $netPrice;    // purchase price net
+                        $vRow[10] = $grossPrice; // purchase price gross
                     }
                     // brand
                     if (isset($manufacturerList[$brandName])) {
@@ -1049,13 +1401,15 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                     //$vRow[41] = implode('|', $imgList); // you used 41 previously
                     if (!empty($imgList)) {
                         // Cover image
-                        $vRow[15] = $imgList[0];   // cover_media_url
-                        $vRow[16] = $name;         // cover_media_title (REQUIRED)
-                        $vRow[17] = $name;         // cover_media_alt   (REQUIRED)
+                        $vRow[14] = '';          // cover_media_id - keep blank for newwave
+                        $vRow[15] = "";   // cover_media_url
+                        $vRow[16] = "";         // cover_media_title (REQUIRED)
+                        $vRow[17] = "";         // cover_media_alt   (REQUIRED)
 
                         // Gallery images
                         //$vRow[41] = implode('|', array_unique($imgList));
                     }else {
+                        $vRow[14] = '';  // cover_media_id - keep blank for newwave
                         $vRow[15] = '';  // cover_media_url
                         $vRow[16] = '';  // cover_media_title
                         $vRow[17] = '';  // cover_media_alt
@@ -1093,10 +1447,12 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
                 }
             }
             if ($lowestPrice !== null) {
-                    $parentRow[7]  = $lowestPrice;
-                    $parentRow[8]  = $lowestPrice;
-                    $parentRow[9]  = $lowestPrice;
-                    $parentRow[10] = $lowestPrice;
+                    $grossPrice = floatval($lowestPrice);
+                    $netPrice = round($grossPrice / 1.19, 2); // 19% tax removed
+                    $parentRow[7]  = $netPrice;      // net price
+                    $parentRow[8]  = $grossPrice;    // gross price
+                    $parentRow[9]  = $netPrice;      // purchase price net
+                    $parentRow[10] = $grossPrice;    // purchase price gross
                 } else {
                     // Force zero when no price found
                     $parentRow[7]  = 0;
@@ -1116,15 +1472,17 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
             if (!empty($imageUrlsParent)) {
                 // Handle Cover Image (MANDATORY 3 fields)
                 // Ensure the first image URL is set for cover media
-                $parentRow[15] = $imageUrlsParent[0] ?? '';   // cover_media_url
-                $parentRow[16] = $name;                       // cover_media_title (REQUIRED)
-                $parentRow[17] = $name;                       // cover_media_alt   (REQUIRED)
+                $parentRow[14] =  "";   // cover_media_id - keep blank for newwave
+                $parentRow[15] =  "";   // cover_media_url
+                $parentRow[16] = "";                       // cover_media_title (REQUIRED)
+                $parentRow[17] = "";                       // cover_media_alt   (REQUIRED)
 
                 // Handle Gallery Images
                 // If there are multiple images in the array, join them with a pipe (|)
                 //$parentRow[41] = implode('|', array_unique($imageUrlsParent)); // Gallery images (unique URLs)
             } else {
                 // In case no images are available, leave the cover and gallery image fields blank (or set a default)
+                $parentRow[14] = '';   // cover_media_id - keep blank for newwave
                 $parentRow[15] = '';   // cover_media_url
                 $parentRow[16] = '';   // cover_media_title
                 $parentRow[17] = '';   // cover_media_alt
@@ -1178,17 +1536,12 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
 
             // push variants and attach parent id
             foreach ($variantRows as $vr) {
-                // set variant parent linkage (adjust column index if your CSV expects a specific index)
-                // I add explicit keys so your downstream createProductCsv can map them: 'parentId' => $parentId
-                //$vr['parentId'] = $parentId;
-                // If your CSV expects the parent ID at a certain numeric index instead, set that index too, e.g. $vr[14] = $parentId;
-                $vr[14] = $parentId; // <-- adjust index if needed by your createProductCsv
-                $vr[1] = $parentId; // <-- adjust index if needed by your createProductCsv
+                // set variant parent linkage to index 1 only (parent_id column)
+                // Index 14 is cover_media_id and must stay blank for newwave imports
+                $vr[1] = $parentId; // parent_id
 
-                // also set variant's display name to include options
-                //$optTitle = trim( ($vr['color_opt_name'] ?? '') . ' ' . ($vr['size_opt_name'] ?? '') );
-                $optTitle = trim($vr['color_opt_name'] ?? '');
-                $vr[5] = $name . ' - ' . $optTitle;
+                // Variant name is already set during creation, just add to CSV
+                // No need to re-calculate here as it's already in $vr[5]
 
                 $productCsvData[] = $vr;
             }
@@ -1233,13 +1586,32 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
         }
 
         if (!empty($newCategory)) {
+            error_log("[NEWWAVE] Creating " . count($newCategory) . " new categories");
+            foreach ($newCategory as $cat) {
+                error_log("[NEWWAVE] Category: " . $cat['name']);
+            }
             createBulkCategories($newCategory, $container);
+        } else {
+            error_log("[NEWWAVE] No new categories to create (newCategory is empty)");
         }
 
         if (!empty($productCsvData)) {
             // Hand-off to your CSV creator
-            createProductCsv($productCsvData, $container, $categoryMapping);
+            $result = createProductCsv($productCsvData, $container, $categoryMapping);
+            
+            // Show queue processing UI inline ONLY if not called from import_processor
+            if (isset($result['jobId']) && !defined('IMPORT_PROCESSOR_MODE')) {
+                showQueueProcessingUI($result['jobId'], $vendor, basename($result['path']), count($productCsvData));
+                exit;
+            }
+            
+            // Output CSV path for import_processor to capture
+            if (defined('IMPORT_PROCESSOR_MODE') && isset($result['path'])) {
+                echo $result['path'];
+                return; // Exit this included file, let import_processor.php handle response wrapping
+            }
 
+            // Below is only executed when NOT in IMPORT_PROCESSOR_MODE
             // Count parent and variants
             $parentCount  = 0;
             $variantCount = 0;
@@ -1257,14 +1629,19 @@ if (isset($_POST['vendor']) && $_POST['vendor'] === 'ross') {
 
             echo "🎉 Imported {$parentCount} parent products and {$variantCount} variants successfully!<br>";
             echo "✅ Imported SKUs: " . implode(', ', array_unique($importedSkus));
+            exit;
 
         } else {
             echo "⚠️ No products found or no variants available.";
+            exit;
         }
-
-        exit;
+        
+        return; // Exit included file so import_processor.php can continue
+} else {
+    echo "❌ Error: Vendor not recognized or no vendor specified. Vendor value: " . ($_POST['vendor'] ?? 'NOT SET');
+    error_log("create_product.php: Vendor not matched - " . ($_POST['vendor'] ?? 'NOT SET'));
+    exit;
 }
-
 
 
 
@@ -1334,10 +1711,51 @@ function createProductCsv($csvData, $container,$categoryMapping)
     $date       = date("dmy");
     $vendor     = $_POST['vendor'] ?? 'vendor';
     $csvName    = $vendor . "_product_import_{$date}.csv";
+    
+    // ===================== CREATE JOB ENTRY IN vendor_import_jobs =====================
+    $jobId = 'JOB_' . strtoupper($vendor) . '_' . date('YmdHis') . '_' . substr(md5(uniqid()), 0, 6);
+    $originalFileName = $_FILES['vendor_file']['name'] ?? $_POST['temp_file'] ?? 'unknown';
+    $totalRows = count($csvData);
+    
+    try {
+        $pdo = $container->get(\Doctrine\DBAL\Connection::class)->getNativeConnection();
+        
+        $insertJobSql = "INSERT INTO vendor_import_jobs 
+            (job_id, vendor_name, import_type, file_name, file_path, batch_size, total_rows, processed_rows, error_rows, status, category_mapping, created_at, started_at) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())";
+        
+        $stmt = $pdo->prepare($insertJobSql);
+        $stmt->execute([
+            $jobId,
+            $vendor,
+            'product',
+            basename($originalFileName),
+            '', // file_path will be updated after CSV is saved
+            25, // default batch_size
+            $totalRows,
+            0, // processed_rows
+            0, // error_rows
+            'pending', // status
+            json_encode($categoryMapping)
+        ]);
+        
+    } catch (\Exception $e) {
+        error_log("Failed to create job entry: " . $e->getMessage());
+    }
 
+    global $colorPropertyGrpId, $sizePropertyGrpId;
     $manufacturerList = getManufacturers($container);
     $colorOptions     = getPropertyOptions('Color', $container);
     $sizeOptions      = getPropertyOptions('Size', $container);
+    $enableOptionIdFix = ($vendor === 'harko');
+    $colorOptionsLower = [];
+    foreach ($colorOptions as $name => $id) {
+        $colorOptionsLower[mb_strtolower((string)$name, 'UTF-8')] = $id;
+    }
+    $sizeOptionsLower = [];
+    foreach ($sizeOptions as $name => $id) {
+        $sizeOptionsLower[mb_strtolower((string)$name, 'UTF-8')] = $id;
+    }
     // Ensure categoryList is available for ID-to-name mapping
     $categoryList = getCategories($container);
 
@@ -1411,7 +1829,7 @@ function createProductCsv($csvData, $container,$categoryMapping)
 
     // ===================== CSV HEADER =====================
     $productCsvHeader = [
-        'id','parent_id','product_number','active','stock','name','description',
+        'id','parent_id','product_number','active','stock','translations.DEFAULT.name','translations.DEFAULT.description',
         'price_net','price_gross','purchase_prices_net','purchase_prices_gross',
         'tax_id','tax_rate','tax_name','cover_media_id','cover_media_url',
         'cover_media_title','cover_media_alt','manufacturer_id','manufacturer_name',
@@ -1419,29 +1837,163 @@ function createProductCsv($csvData, $container,$categoryMapping)
         'sleeve_length','article_number_short','ean','model_name','item_in_box',
         'item_in_bag','weight','country','washing_temp','supplier','cut',
         'febric_weight','article_code','gtin','supplier_article',
-        'vendor_category','shopware_category_id'
+        'vendor_category','shopware_category_id','size_spec_pdf_url'
     ];
 
-    header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="'.$csvName.'"');
-
-    $out = fopen('php://output', 'w');
+    // Always save to disk (no browser download)
+    $outputDir = __DIR__ . '/csv-imports/product/';
+    if (!is_dir($outputDir)) {
+        mkdir($outputDir, 0777, true);
+    }
+    $outputPath = $outputDir . $csvName;
+    $out = fopen($outputPath, 'w');
+    
     fputcsv($out, $productCsvHeader, ";");
     
 
     // ===================== CSV ROWS =====================
+    $rowNum = 0;
+    $resolveOptionId = function ($value, $optionsLower) {
+        $value = trim((string)$value);
+        if ($value === '') {
+            return '';
+        }
+        $valueNoDash = strtolower(str_replace('-', '', $value));
+        if (preg_match('/^[0-9a-f]{32}$/i', $valueNoDash)) {
+            return $valueNoDash;
+        }
+        $key = mb_strtolower($value, 'UTF-8');
+        return $optionsLower[$key] ?? '';
+    };
+
+    $ensureOptionId = function ($name, $groupId, &$options, &$optionsLower, $container) {
+        $name = trim((string)$name);
+        if ($name === '') {
+            return '';
+        }
+        $key = mb_strtolower($name, 'UTF-8');
+        if (isset($optionsLower[$key])) {
+            return $optionsLower[$key];
+        }
+        $newId = Uuid::randomHex();
+        createPropertyOptions($groupId, [[
+            'id' => $newId,
+            'name' => $name,
+        ]], $container);
+        $options[$name] = $newId;
+        $optionsLower[$key] = $newId;
+        return $newId;
+    };
     foreach ($csvData as $row) {
+        $rowNum++;
+        // Clean and normalize name field
+        if (isset($row[5])) {
+            $originalName = $row[5];
+            $row[5] = str_replace(';', ',', trim($row[5]));
+            
+            // For child products (has parent_id), clean base name first
+            if (!empty($row[1])) {
+                // If this variant already has color/size keys and vendor is HARKO, set name to "Color - Size"
+                $isHarkoVariant = ($vendor === 'harko') && isset($row['color_opt_name']) && isset($row['size_opt_name']);
+                // NEWWAVE: If this variant already has color/size keys, the name is already correct
+                // (set in newwave handler as "Color - Size" format)
+                $isNewwaveVariant = isset($row['color_opt_name']) && isset($row['size_opt_name']);
+                
+                if ($isHarkoVariant) {
+                    $colorName = trim((string)($row['color_opt_name'] ?? ''));
+                    $sizeName = trim((string)($row['size_opt_name'] ?? ''));
+                    $nameParts = array_filter([$colorName, $sizeName]);
+                    $row[5] = !empty($nameParts) ? implode(' - ', $nameParts) : $row[5];
+                } elseif (!$isNewwaveVariant) {
+                    // Old behavior: clean and rebuild name for other vendors
+                    $brandName = trim($row[19] ?? '');
+                    
+                    // Strip brand name from the beginning if present (case insensitive)
+                    if (!empty($brandName) && stripos($row[5], $brandName) === 0) {
+                        $row[5] = ltrim(substr($row[5], strlen($brandName)));
+                    }
+                    
+                    // Remove existing variant info (color, size) which comes after comma
+                    $commaPos = strpos($row[5], ',');
+                    if ($commaPos !== false) {
+                        $row[5] = substr($row[5], 0, $commaPos);
+                    }
+                    
+                    $row[5] = trim($row[5]);
+                    
+                    // Debug first few rows
+                    if ($rowNum <= 3) {
+                        error_log("CSV ROW $rowNum: Original='$originalName' -> Cleaned='{$row[5]}' | Has Parent: YES | Brand: '$brandName'");
+                    }
+                } else {
+                    // Newwave variant: name is already correct (e.g., "99 - 3XL"), keep as-is
+                    $row[5] = trim($row[5]);
+                    if ($rowNum <= 3) {
+                        error_log("CSV ROW $rowNum: Newwave variant name (correct): '{$row[5]}'");
+                    }
+                }
+            } else {
+                // Parent product
+                if ($rowNum <= 3) {
+                    error_log("CSV ROW $rowNum: Name='{$row[5]}' | Has Parent: NO (Parent Product)");
+                }
+            }
+            
+            // Final validation - ensure name is not empty
+            if (empty($row[5])) {
+                $row[5] = 'Product ' . ($row[2] ?? 'Unknown');
+                error_log("CSV ROW $rowNum: Name was EMPTY, using fallback: '{$row[5]}'");
+            }
+        }
+        
         // Manufacturer ID resolve
         if (empty($row[18]) && !empty($row[19]) && isset($manufacturerList[$row[19]])) {
             $row[18] = $manufacturerList[$row[19]];
         }
-        // Property mapping (Color | Size)
-        if (isset($row['color_opt_name']) && isset($row[23])) {
+        
+        // Property mapping (Color | Size) for option IDs
+        if ($enableOptionIdFix && isset($row[23])) {
+            $colorName = trim((string)($row['color_opt_name'] ?? ''));
+            $sizeName = trim((string)($row['size_opt_name'] ?? ''));
+
+            if ($colorName !== '' || $sizeName !== '') {
+                $resolvedColor = $resolveOptionId($colorName, $colorOptionsLower);
+                $resolvedSize  = $resolveOptionId($sizeName, $sizeOptionsLower);
+
+                if ($resolvedColor === '') {
+                    $resolvedColor = $ensureOptionId($colorName, $colorPropertyGrpId, $colorOptions, $colorOptionsLower, $container);
+                }
+                if ($resolvedSize === '') {
+                    $resolvedSize = $ensureOptionId($sizeName, $sizePropertyGrpId, $sizeOptions, $sizeOptionsLower, $container);
+                }
+            } else {
+                [$c, $s] = array_pad(explode('|', $row[23]), 2, '');
+                $resolvedColor = $resolveOptionId($c, $colorOptionsLower);
+                $resolvedSize  = $resolveOptionId($s, $sizeOptionsLower);
+
+                if ($resolvedColor === '') {
+                    $fallbackColor = $row['color_opt_name'] ?? $c;
+                    $resolvedColor = $ensureOptionId($fallbackColor, $colorPropertyGrpId, $colorOptions, $colorOptionsLower, $container);
+                }
+                if ($resolvedSize === '') {
+                    $fallbackSize = $row['size_opt_name'] ?? $s;
+                    $resolvedSize = $ensureOptionId($fallbackSize, $sizePropertyGrpId, $sizeOptions, $sizeOptionsLower, $container);
+                }
+            }
+
+            $row[23] = $resolvedColor . "|" . $resolvedSize;
+
+            unset($row['color_opt_name'], $row['size_opt_name']);
+        } elseif (isset($row['color_opt_name']) && isset($row[23])) {
             $colorName = trim($row['color_opt_name']);
+            $sizeName = isset($row['size_opt_name']) ? trim($row['size_opt_name']) : '';
+
+            // Map option codes to option IDs
             [$c, $s] = array_pad(explode('|', $row[23]), 2, '');
             $row[23] =
                 ($colorOptions[$c] ?? '') . "|" .
                 ($sizeOptions[$s] ?? '');
+
             unset($row['color_opt_name'], $row['size_opt_name']);
         }
         // Category mapping using $categoryMapping
@@ -1461,11 +2013,82 @@ function createProductCsv($csvData, $container,$categoryMapping)
         //$row[] = $vendorCatName;
         $row[] = $vendorCatId;
         $row[] = $shopwareCatId;
+
+        $sizeSpecPdfUrl = '';
+        if ($vendor === 'ross') {
+            $isParentRow = empty($row[1]);
+            $sizeSpecPdfUrl = $isParentRow ? trim((string)($row['size_spec_pdf_url'] ?? '')) : '';
+        }
+        unset($row['size_spec_pdf_url']);
+        $row[] = $sizeSpecPdfUrl;
+
         fputcsv($out, $row, ";");
     }
 
     fclose($out);
-    exit;
+    
+    // ===================== AUTO-ADD VISIBILITY TO SALES CHANNEL =====================
+    // All newly created products should be visible on the sales channel automatically
+    try {
+        $connection = $container->get(\Doctrine\DBAL\Connection::class);
+        $salesChannelId = '0197e3dc1566708987331d818f8e1867';
+        
+        // Extract product numbers from CSV data and add visibility for each
+        foreach ($csvData as $row) {
+            $productNumber = $row[2] ?? null; // product_number at index 2
+            if (empty($productNumber)) continue;
+            
+            // Get product ID from database
+            $getProductSql = "SELECT HEX(id) as product_id, HEX(version_id) as version_id FROM product WHERE product_number = ? LIMIT 1";
+            $getStmt = $connection->prepare($getProductSql);
+            $getResult = $getStmt->executeQuery([$productNumber]);
+            $product = $getResult->fetchAssociative();
+            
+            if ($product) {
+                $productId = $product['product_id'];
+                $versionId = $product['version_id'];
+                
+                // Check if visibility already exists
+                $checkSql = "SELECT id FROM product_visibility WHERE product_id = UNHEX(?) AND sales_channel_id = UNHEX(?)";
+                $checkStmt = $connection->prepare($checkSql);
+                $checkResult = $checkStmt->executeQuery([$productId, $salesChannelId]);
+                
+                if ($checkResult->rowCount() === 0) {
+                    // Add visibility to sales channel
+                    $insertVisSql = "INSERT INTO product_visibility (id, product_id, product_version_id, sales_channel_id, visibility, created_at) 
+                                    VALUES (UNHEX(?), UNHEX(?), UNHEX(?), UNHEX(?), 30, NOW())";
+                    $visStmt = $connection->prepare($insertVisSql);
+                    $visStmt->executeStatement([
+                        str_replace('-', '', Uuid::randomHex()),
+                        $productId,
+                        $versionId,
+                        $salesChannelId
+                    ]);
+                    echo "✓ Added visibility for: " . $productNumber . "\n";
+                }
+            }
+        }
+        echo "✓ Product visibility update completed\n";
+    } catch (\Exception $e) {
+        error_log("Failed to add product visibility: " . $e->getMessage());
+        echo "✗ Error adding visibility: " . $e->getMessage() . "\n";
+    }
+    
+    // ===================== UPDATE JOB WITH FILE PATH =====================
+    try {
+        $pdo = $container->get(\Doctrine\DBAL\Connection::class)->getNativeConnection();
+        $updateJobSql = "UPDATE vendor_import_jobs SET file_path = ? WHERE job_id = ?";
+        $stmt = $pdo->prepare($updateJobSql);
+        $stmt->execute([$outputPath, $jobId]);
+    } catch (\Exception $e) {
+        error_log("Failed to update job file path: " . $e->getMessage());
+    }
+    
+    // Return array with jobId and path for queue processing UI
+    return [
+        'jobId' => $jobId,
+        'path' => $outputPath
+    ];
 }
 
 
@@ -1498,4 +2121,415 @@ function createBulkCategories($data, $container)
     $context        =   Context::createDefaultContext();
     $repository     =   $container->get('category.repository');
     $repository->create($data, $context);
+}
+
+function showQueueProcessingUI($jobId, $vendor, $fileName, $totalRows) {
+    // Ensure vendor has a value
+    $vendor = $vendor ?? 'unknown';
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Processing Import - <?= htmlspecialchars($jobId) ?></title>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                padding: 20px;
+            }
+            .container {
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                padding: 40px;
+                max-width: 900px;
+                margin: 0 auto;
+            }
+            h1 {
+                color: #333;
+                margin-bottom: 10px;
+                font-size: 32px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .job-info {
+                background: #f8f9fa;
+                padding: 20px;
+                border-radius: 10px;
+                margin: 20px 0;
+            }
+            .job-info p {
+                margin: 8px 0;
+                color: #666;
+                font-size: 15px;
+            }
+            .job-info strong {
+                color: #333;
+                display: inline-block;
+                min-width: 120px;
+            }
+            .progress-container {
+                background: #f0f0f0;
+                border-radius: 10px;
+                height: 50px;
+                overflow: hidden;
+                margin: 20px 0;
+                position: relative;
+                box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .progress-bar {
+                background: linear-gradient(90deg, #667eea, #764ba2);
+                height: 100%;
+                width: 0%;
+                transition: width 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: bold;
+                font-size: 16px;
+            }
+            .stats {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+                margin: 25px 0;
+            }
+            .stat-box {
+                background: #f8f9fa;
+                padding: 25px;
+                border-radius: 12px;
+                text-align: center;
+                transition: transform 0.2s;
+            }
+            .stat-box:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            .stat-box h3 {
+                font-size: 36px;
+                margin-bottom: 8px;
+                font-weight: 700;
+            }
+            .stat-box.success h3 { color: #28a745; }
+            .stat-box.danger h3 { color: #dc3545; }
+            .stat-box.warning h3 { color: #ffc107; }
+            .stat-box.info h3 { color: #17a2b8; }
+            .stat-box p {
+                color: #666;
+                font-size: 14px;
+                font-weight: 500;
+            }
+            .log-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 25px 0 10px;
+            }
+            .log-header h2 {
+                color: #333;
+                font-size: 20px;
+            }
+            .log {
+                background: #1e1e1e;
+                color: #d4d4d4;
+                padding: 20px;
+                border-radius: 10px;
+                max-height: 400px;
+                overflow-y: auto;
+                font-family: 'Courier New', monospace;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+            .log-entry {
+                margin: 5px 0;
+                padding: 8px 12px;
+                border-left: 3px solid transparent;
+                border-radius: 4px;
+                animation: slideIn 0.3s ease;
+            }
+            @keyframes slideIn {
+                from { opacity: 0; transform: translateX(-10px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            .log-entry.success { 
+                border-color: #28a745; 
+                background: rgba(40, 167, 69, 0.1);
+            }
+            .log-entry.error { 
+                border-color: #dc3545; 
+                color: #ff6b6b; 
+                background: rgba(220, 53, 69, 0.1);
+            }
+            .log-entry.skip { 
+                border-color: #ffc107; 
+                color: #ffd93d; 
+                background: rgba(255, 193, 7, 0.1);
+            }
+            .log-entry.info { 
+                border-color: #17a2b8; 
+                background: rgba(23, 162, 184, 0.1);
+            }
+            .complete-message {
+                background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+                color: #155724;
+                padding: 25px;
+                border-radius: 12px;
+                margin-top: 20px;
+                border: 2px solid #28a745;
+                display: none;
+                animation: fadeIn 0.5s ease;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: scale(0.95); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            .complete-message.show { display: block; }
+            .complete-message h2 {
+                margin-bottom: 10px;
+                font-size: 24px;
+            }
+            .spinner {
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+                border: 3px solid rgba(255,255,255,.3);
+                border-radius: 50%;
+                border-top-color: white;
+                animation: spin 1s ease-in-out infinite;
+                margin-right: 8px;
+            }
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+            .log::-webkit-scrollbar {
+                width: 8px;
+            }
+            .log::-webkit-scrollbar-track {
+                background: #2d2d2d;
+            }
+            .log::-webkit-scrollbar-thumb {
+                background: #555;
+                border-radius: 4px;
+            }
+            .log::-webkit-scrollbar-thumb:hover {
+                background: #777;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🚀 Processing Import Job</h1>
+            
+            <div class="job-info">
+                <p><strong>Job ID:</strong> <?= htmlspecialchars($jobId) ?></p>
+                <p><strong>Vendor:</strong> <?= htmlspecialchars(strtoupper($vendor)) ?></p>
+                <p><strong>File:</strong> <?= htmlspecialchars($fileName) ?></p>
+                <p><strong>Total Products:</strong> <?= $totalRows ?></p>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">
+                    <span id="progressText"><span class="spinner"></span> 0%</span>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-box info">
+                    <h3 id="processedCount">0</h3>
+                    <p>Processed</p>
+                </div>
+                <div class="stat-box success">
+                    <h3 id="createdCount">0</h3>
+                    <p>Created</p>
+                </div>
+                <div class="stat-box warning">
+                    <h3 id="skippedCount">0</h3>
+                    <p>Skipped (Duplicates)</p>
+                </div>
+                <div class="stat-box danger">
+                    <h3 id="errorCount">0</h3>
+                    <p>Errors</p>
+                </div>
+            </div>
+
+            <div class="complete-message" id="completeMessage">
+                <h2>✅ Import Completed Successfully!</h2>
+                <p id="summaryText">All products have been processed.</p>
+            </div>
+
+            <div class="log-header">
+                <h2>📋 Processing Log</h2>
+            </div>
+            <div class="log" id="logContainer">
+                <div class="log-entry info">🔄 Initializing import process...</div>
+            </div>
+        </div>
+
+        <script>
+            const jobId = '<?= $jobId ?>';
+            let processed = 0;
+            let created = 0;
+            let skipped = 0;
+            let errors = 0;
+            const totalRows = <?= $totalRows ?>;
+
+            function updateProgress() {
+                const progress = Math.min((processed / totalRows) * 100, 100);
+                const progressBar = document.getElementById('progressBar');
+                progressBar.style.width = progress + '%';
+                
+                const progressText = document.getElementById('progressText');
+                if (progress < 100) {
+                    progressText.innerHTML = '<span class="spinner"></span> ' + Math.round(progress) + '%';
+                } else {
+                    progressText.innerHTML = '✓ 100% Complete';
+                }
+                
+                document.getElementById('processedCount').textContent = processed;
+                document.getElementById('createdCount').textContent = created;
+                document.getElementById('skippedCount').textContent = skipped;
+                document.getElementById('errorCount').textContent = errors;
+
+                if (processed >= totalRows) {
+                    const completeMsg = document.getElementById('completeMessage');
+                    const summary = `Processed ${processed} products: ${created} created, ${skipped} skipped (duplicates), ${errors} errors.`;
+                    document.getElementById('summaryText').textContent = summary;
+                    completeMsg.classList.add('show');
+                }
+            }
+
+            function addLog(message, type = 'info') {
+                const logContainer = document.getElementById('logContainer');
+                const entry = document.createElement('div');
+                entry.className = 'log-entry ' + type;
+                const timestamp = new Date().toLocaleTimeString();
+                entry.textContent = `[${timestamp}] ${message}`;
+                logContainer.appendChild(entry);
+                logContainer.scrollTop = logContainer.scrollHeight;
+            }
+
+            // Start processing immediately
+            addLog('Starting CSV processing...', 'info');
+            addLog('Connecting to worker: process_csv_worker.php?job_id=' + jobId, 'info');
+            processCSV();
+
+            async function processCSV() {
+                try {
+                    addLog('Fetching worker endpoint...', 'info');
+                    const response = await fetch('process_csv_worker.php?job_id=' + encodeURIComponent(jobId));
+                    
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status + ': ' + response.statusText);
+                    }
+                    
+                    if (!response.body) {
+                        throw new Error('ReadableStream not supported in this browser');
+                    }
+                    
+                    addLog('Worker connected, processing started...', 'success');
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder();
+                    let buffer = '';
+
+                    while (true) {
+                        const {done, value} = await reader.read();
+                        if (done) {
+                            addLog('Stream ended', 'info');
+                            break;
+                        }
+
+                        buffer += decoder.decode(value, {stream: true});
+                        const lines = buffer.split('\n');
+                        
+                        // Keep the last incomplete line in buffer
+                        buffer = lines.pop() || '';
+
+                        for (const line of lines) {
+                            if (!line.trim()) continue;
+
+                            try {
+                                const data = JSON.parse(line);
+                                
+                                if (data.type === 'progress') {
+                                    processed = data.processed;
+                                    created = data.created;
+                                    skipped = data.skipped;
+                                    errors = data.errors;
+                                    updateProgress();
+                                } else if (data.type === 'log') {
+                                    addLog(data.message, data.level);
+                                } else if (data.type === 'complete') {
+                                    addLog('✅ Import completed successfully!', 'success');
+                                    updateProgress();
+                                }
+                            } catch (e) {
+                                console.error('Parse error:', e, 'Line:', line);
+                                addLog('⚠️ Parse error in response', 'error');
+                            }
+                        }
+                    }
+                    
+                    // Process any remaining data in buffer
+                    if (buffer.trim()) {
+                        try {
+                            const data = JSON.parse(buffer);
+                            if (data.type === 'complete') {
+                                addLog('✅ Import completed!', 'success');
+                                updateProgress();
+                            }
+                        } catch (e) {
+                            console.error('Final buffer parse error:', e);
+                        }
+                    }
+                } catch (error) {
+                    addLog('❌ Connection Error: ' + error.message, 'error');
+                    addLog('Please check if process_csv_worker.php exists and is accessible', 'error');
+                    console.error('Fetch error:', error);
+                }
+            }
+        </script>
+    </body>
+    </html>
+    <?php
+}
+
+function buildRossSizeSpecPdfUrl(array $data): string
+{
+    $brand = trim((string)($data['Brand'] ?? ''));
+    $style = trim((string)($data['Style'] ?? ''));
+    $manufacturerCode = trim((string)($data['Manufacturer Code'] ?? ''));
+    $articleCode = trim((string)($data['Article Code'] ?? ''));
+
+    if ($brand === '' || $style === '' || $manufacturerCode === '' || $articleCode === '') {
+        return '';
+    }
+
+    $sanitizePart = static function (string $value): string {
+        $value = str_replace(['\\', '/'], '-', trim($value));
+        return preg_replace('/\s+/u', ' ', $value) ?? '';
+    };
+
+    $brand = $sanitizePart($brand);
+    $style = $sanitizePart($style);
+    $manufacturerCode = $sanitizePart($manufacturerCode);
+    $articleCode = $sanitizePart($articleCode);
+
+    if ($brand === '' || $style === '' || $manufacturerCode === '' || $articleCode === '') {
+        return '';
+    }
+
+    $brandFolder = $brand;
+    if (preg_match('/^b\s*&\s*c$/iu', $brand) === 1) {
+        $brandFolder = 'B&C';
+    }
+
+    $fileName = $style . '_' . $manufacturerCode . '--' . $articleCode . '_sizespecs.pdf';
+
+    return '/my-imports/ROSS/PDF/size specs/' . $brandFolder . '/' . $fileName;
 }
