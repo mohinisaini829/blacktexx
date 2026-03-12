@@ -43,7 +43,7 @@ class AddArticleToVioInquiryController extends StorefrontController
    #[Route(
         path: '/myfavDesigner/addArticleToVioInquiry',
         name: 'frontend.myfav.designer.add.article.to.vio.inquiry',
-        methods: ['POST'],
+        methods: ['GET','POST'],
         defaults: ['XmlHttpRequest' => true, 'csrf_protected' => false]
     )]
     public function add(Request $request, SalesChannelContext $salesChannelContext): JsonResponse {
@@ -52,19 +52,14 @@ class AddArticleToVioInquiryController extends StorefrontController
         $lumiseArticleId = (int)$request->request->get('lumiseArticleId');
         $selectedSizes = $request->request->all('selectedSizes');
         //$selectedSizes = $request->request->get('selectedSizes');
-        //print_r($selectedSizes);die;
         $comment = $request->request->get('comment');
-        //$modifiedProductImage = $request->request->get('modifiedProductImage');
 
         if(0 === $lumiseArticleId) {
             throw new \Exception('Article not found');
         }
 
         $product = $this->loadShopwareArticleByLumiseId($lumiseArticleId, $salesChannelContext);
-
-        //echo "<pre>";print_r($product);die;
         foreach($selectedSizes as $size) {
-            //print_r($product);die;
             $sizeName = $size['name'];
             $sizeQuantity = $size['qty'];
 

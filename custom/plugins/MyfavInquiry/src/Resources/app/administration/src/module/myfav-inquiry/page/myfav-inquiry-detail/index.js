@@ -177,7 +177,7 @@ Component.register('myfav-inquiry-detail', {
                 return '';
             }
 
-            const baseImageUrl = 'https://shopware678.ezxdemo.com/';
+            const baseImageUrl = 'https://blacktexx.com/';
 
             return baseImageUrl + designerLineItem.modifiedProductImage;
         },

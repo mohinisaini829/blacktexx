@@ -88,7 +88,9 @@ Component.register('myfav-inquiry-list', {
     methods: {
         getList() {
             this.isLoading = true;
-            let criteria = new Criteria();
+            //let criteria = new Criteria();
+            let criteria = new Criteria(this.page, this.limit);
+
             criteria
                 .addAssociation('medias')
                 .addAssociation('lineItems')

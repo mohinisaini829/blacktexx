@@ -1,6 +1,57 @@
 {% sw_extends '@Storefront/storefront/component/product/description.html.twig' %}
+
 {% block component_product_description_title %}
     <div class="h3 product-detail-description-title">
-        {{ "detail.descriptionTitle.before"|trans|sw_sanitize }}{{ product.translated.name }}
+        {{ "detail.descriptionTitle.before"|trans|sw_sanitize }}{{ product.translated.name|split(',')[0] }}
     </div>
+    {# Display custom PDF field if available #}
+    {% set mediaId = product.translated.customFields.products_additional_data_prosheet|default(null) %}
+    {% set prosheetMedia = null %}
+    {% if mediaId %}
+        {% set prosheetMediaCollection = searchMedia([mediaId], context.context) %}
+        {% set prosheetMedia = prosheetMediaCollection.get(mediaId) %}
+    {% endif %}
+
+    {% if prosheetMedia and prosheetMedia.url %}
+        <div class="product-detail-pdf mt-3">
+            <a href="{{ prosheetMedia.url }}" target="_blank" class="btn btn-primary" rel="noopener">
+                📄 {{ "santa-theme.buybox.downloadPdf"|trans|sw_sanitize }}
+            </a>
+        </div>
+    {% endif %}
+    {# Display PDF from subscriber extension if available #}
+    {% set pdfMedia = page.extensions.productPdfMedia ?? null %}
+    {% if (not prosheetMedia or not prosheetMedia.url) and pdfMedia and pdfMedia.url %}
+        <div class="product-detail-pdf mt-3">
+            <a href="{{ pdfMedia.url }}" target="_blank" class="btn btn-primary" rel="noopener">
+                📄 {{ "santa-theme.buybox.downloadPdf"|trans|sw_sanitize }}
+            </a>
+        </div>
+    {% endif %}
+    {# Fallback: Show size chart PDF if no product PDF is available #}
+    {% if not (prosheetMedia and prosheetMedia.url) and not (pdfMedia and pdfMedia.url) %}
+        {% set manufacturerName = page.product.manufacturer.translated.name|trim %}
+        {% if manufacturerName is defined and manufacturerName %}
+            {% set brandData = getBrandByName(manufacturerName) %}
+            {% if brandData %}
+                {# Check if the brand data contains a size chart path #}
+                {% set sizeChartPath = brandData.size_chart_path %}
+                {% if sizeChartPath %}
+                    <div class="product-detail-pdf my-3">
+                        <a class="col-auto btn btn-primary"
+                        title="{{ "santa-theme.buybox.sizeTableLink"|trans|sw_sanitize }}"
+                        href="{{ sizeChartPath }}"
+                        target="_blank">
+                            {{ "santa-theme.buybox.sizeTableLink"|trans|sw_sanitize }}
+                        </a>
+                    </div>
+                {% else %}
+                    <p>{{ "No size chart available for this brand."|trans }}</p>
+                {% endif %}
+            {% else %}
+                <!-- <p>{{ "Brand not found or not active."|trans }}</p> -->
+            {% endif %}
+        {% endif %}
+    {% endif %}
+ 
 {% endblock %}

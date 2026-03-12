@@ -442,6 +442,8 @@ body {
                                 width: 100%;
                                 height: 100%;
                                 object-fit: cover;
+                                max-height: 285px;
+                                padding: 5px;
                             }
                         }
                     }
@@ -836,3 +838,43 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {color:#4a545b}
         }
     }
 }
+.is-act-index {
+    .cms-sections {
+        .subcat-section-list-page.custom-sub-cat {
+            display: none;
+        }
+    }
+    &.santa--product-listing{
+        .cms-sections {
+            .subcat-section-list-page.custom-sub-cat {
+                display: block;
+            }
+        }
+        .cms-image-container.is-cover{
+            display: none;
+        } 
+        .cms-block-product-listing  {
+            margin-top:0;
+            .cms-listing-col {
+                .product-image-wrapper {
+                    height: 350px !important;
+                    flex-basis: 350px;
+                }
+            }
+            .sorting {
+                margin-top: -29px;
+            }
+        }
+    }
+}
+body {
+    #myfav-inquiry-form {
+        .form-row {
+            .form-group {
+                textarea{
+                    height: 80px;
+                }
+            }
+        }
+    }
+} 

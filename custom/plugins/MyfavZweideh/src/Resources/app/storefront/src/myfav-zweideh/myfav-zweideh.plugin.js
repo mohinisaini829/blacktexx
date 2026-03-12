@@ -17,37 +17,27 @@ export default class MyfavZweideh extends Plugin {
      * Init the Button "Designer starten".
      **/
     _initDesignerButtons() {
-        var me = this;
-        
-        const elements = document.querySelectorAll('.myfavQtySelect');
-
-        // Show Overlay when button was clicked.
-        for(var i = 0; i < elements.length; i++) {
-            var input = elements[i];
-            
-            input.addEventListener('keyup', function(event) {
-                me._updateButtonsByPrice(me, input);
-            });
-
-            input.addEventListener('change', function(event) {
-                me._updateButtonsByPrice(me, input);
-            });
-        }
+        // Only attach to this.el (the element this plugin instance is bound to)
+        const input = this.el;
+        input.addEventListener('keyup', (event) => {
+            this._updateButtonsByPrice(this, input);
+        });
+        input.addEventListener('change', (event) => {
+            this._updateButtonsByPrice(this, input);
+        });
     }
 
     /**
      * Geänderte Stückzahl des einen Eingabefeldes im anderen aktualisieren.
      */
     _initQuantityUpdate() {
-        var me = this;
-        var srcElem = document.querySelector('.myfavQtySelect');
-        
-        srcElem.addEventListener('keyup', function(event) {
-            me._updateRequestFormQuantityField(srcElem.value);
+        // Only attach to this.el (the element this plugin instance is bound to)
+        const srcElem = this.el;
+        srcElem.addEventListener('keyup', (event) => {
+            this._updateRequestFormQuantityField(srcElem.value);
         });
-
-        srcElem.addEventListener('change', function(event) {
-            me._updateRequestFormQuantityField(srcElem.value);
+        srcElem.addEventListener('change', (event) => {
+            this._updateRequestFormQuantityField(srcElem.value);
         });
     }
 
