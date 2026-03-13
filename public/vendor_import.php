@@ -538,26 +538,43 @@ try {
             card.addEventListener('click', function() {
                 document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
                 this.classList.add('selected');
+                // Ensure the radio input is checked
+                const radio = this.querySelector('input[name="import_type"]');
+                if (radio) radio.checked = true;
                 document.getElementById('uploadForm').classList.add('active');
-                
-                // Show category mapping only for product import
-                const importType = this.querySelector('input[name="import_type"]').value;
-                const categorySection = document.getElementById('categoryMappingSection');
-                const loadCategoriesBtn = document.getElementById('loadCategoriesBtn');
-                if (importType === 'product') {
-                    categorySection.style.display = 'block';
-                    loadCategoriesBtn.disabled = false;
-                    loadCategoriesBtn.style.opacity = '1';
-                } else {
-                    categorySection.style.display = 'none';
-                    categorySection.style.visibility = 'hidden';
-                    loadCategoriesBtn.disabled = true;
-                    loadCategoriesBtn.style.opacity = '0.5';
-                    loadCategoriesBtn.style.cursor = 'not-allowed';
-                    loadCategoriesBtn.style.pointerEvents = 'none';
-                }
+                updateCategoryMappingSection();
             });
         });
+
+        // Also update on radio change (keyboard navigation or programmatic)
+        document.querySelectorAll('input[name="import_type"]').forEach(radio => {
+            radio.addEventListener('change', updateCategoryMappingSection);
+        });
+
+        function updateCategoryMappingSection() {
+            const importTypeRadio = document.querySelector('input[name="import_type"]:checked');
+            const importType = importTypeRadio ? importTypeRadio.value : '';
+            const categorySection = document.getElementById('categoryMappingSection');
+            const loadCategoriesBtn = document.getElementById('loadCategoriesBtn');
+            if (importType === 'product') {
+                categorySection.style.display = 'block';
+                loadCategoriesBtn.disabled = false;
+                loadCategoriesBtn.style.opacity = '1';
+                loadCategoriesBtn.style.cursor = '';
+                loadCategoriesBtn.style.pointerEvents = '';
+                categorySection.style.visibility = 'visible';
+            } else {
+                categorySection.style.display = 'none';
+                categorySection.style.visibility = 'hidden';
+                loadCategoriesBtn.disabled = true;
+                loadCategoriesBtn.style.opacity = '0.5';
+                loadCategoriesBtn.style.cursor = 'not-allowed';
+                loadCategoriesBtn.style.pointerEvents = 'none';
+            }
+        }
+
+        // On page load, ensure correct state
+        document.addEventListener('DOMContentLoaded', updateCategoryMappingSection);
         
         // Handle file input
         document.getElementById('csvFile').addEventListener('change', function(e) {
@@ -768,6 +785,7 @@ try {
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder();
                 let buffer = '';
+                let gotCompleteEvent = false;
                 
                 while (true) {
                     const {done, value} = await reader.read();
@@ -793,6 +811,7 @@ try {
                             } else if (data.type === 'log') {
                                 console.log('[' + data.level + '] ' + data.message);
                             } else if (data.type === 'complete') {
+                                gotCompleteEvent = true;
                                 alert('✅ Import Completed!\\n\\nProcessed: ' + data.processed + '\\nCreated: ' + data.created + '\\nSkipped: ' + data.skipped + '\\nErrors: ' + data.errors);
                                 document.querySelector('.submit-btn').disabled = false;
                                 document.querySelector('.submit-btn').textContent = 'Start Import Process';
@@ -800,6 +819,38 @@ try {
                         } catch (e) {
                             console.error('JSON parse error:', e, line);
                         }
+                    }
+                }
+
+                // Process any trailing buffered line
+                if (buffer && buffer.trim()) {
+                    try {
+                        const data = JSON.parse(buffer.trim());
+                        if (data.type === 'complete') {
+                            gotCompleteEvent = true;
+                            alert('✅ Import Completed!\\n\\nProcessed: ' + data.processed + '\\nCreated: ' + data.created + '\\nSkipped: ' + data.skipped + '\\nErrors: ' + data.errors);
+                        }
+                    } catch (e) {
+                        console.warn('Trailing buffer parse skipped:', e);
+                    }
+                }
+
+                // Fallback: if stream ended without complete event, verify final status from progress endpoint
+                if (!gotCompleteEvent) {
+                    try {
+                        const statusResponse = await fetch('import_progress.php?job_id=' + encodeURIComponent(jobId));
+                        const statusData = await statusResponse.json();
+                        if (statusData && (statusData.status === 'completed' || statusData.status === 'failed')) {
+                            document.querySelector('.submit-btn').disabled = false;
+                            document.querySelector('.submit-btn').textContent = 'Start Import Process';
+                            if (statusData.status === 'completed') {
+                                alert('✅ Import completed.');
+                            } else {
+                                alert('⚠️ Import finished with failure status. Please check logs.');
+                            }
+                        }
+                    } catch (statusErr) {
+                        console.warn('Status fallback check failed:', statusErr);
                     }
                 }
             } catch (error) {

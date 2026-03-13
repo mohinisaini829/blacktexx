@@ -332,10 +332,15 @@ private EntityRepository $productRepository;
                 if ($newImagePath) {
                     $extendedData['modifiedProductImage'] = $newImagePath;
                 }
-
+                $originalProductId = $extendedData['originalProductId'] ?? null;
+                $productId = Uuid::fromHexToBytes($originalProductId);
                 $this->connection->update(
                     'myfav_inquiry_line_item',
-                    ['extended_data' => json_encode($extendedData)],
+                    [
+                        'product_id' => $productId,
+                        'extended_data' => json_encode($extendedData)
+                    ],
+
                     ['id' => $item['id']]
                 );
             }
@@ -449,7 +454,7 @@ private EntityRepository $productRepository;
         // Step 6: Prepare mail data
         $data = new DataBag();
         $recipients = [
-            'mohini.saini@emails.emizentech.com' => 'Santafetex Onlineshop',
+            'ajit.jain123@emails.emizentech.com' => 'Santafetex Onlineshop',
             //'steve@mindfav.com' => 'Steve Krämer',
         ];
         $senderName = 'Santafetex Onlineshop';

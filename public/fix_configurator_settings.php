@@ -30,7 +30,7 @@ echo "Found " . count($parents) . " parent products without configurator setting
 
 if (empty($parents)) {
     echo "All parent products already have configurator settings!\n";
-    exit(0);
+    return;
 }
 
 $totalCreated = 0;

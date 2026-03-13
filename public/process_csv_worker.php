@@ -178,12 +178,69 @@ $rowNumber = 0;
 // Track imported product numbers for media cleanup
 $importedProductNumbers = [];
 
+// First pass: collapse duplicate product_number rows (last occurrence wins)
+$rowsByProductNumber = [];
+$duplicateRowsInCsv = 0;
+
 while (($row = fgetcsv($handle, 0, ';')) !== false) {
     $rowNumber++;
-    
+
     try {
-        // Combine with header
         $data = array_combine($header, $row);
+        if ($data === false) {
+            $errors++;
+            sendLog("Row $rowNumber: Invalid CSV row format", 'error');
+            sendProgress($processed, $created, $skipped, $errors);
+            continue;
+        }
+
+        $productNumber = trim((string)($data['product_number'] ?? ''));
+        if ($productNumber === '') {
+            $skipped++;
+            sendLog("Row $rowNumber: Skipped - No product number", 'skip');
+            sendProgress($processed, $created, $skipped, $errors);
+            continue;
+        }
+
+        if (isset($rowsByProductNumber[$productNumber])) {
+            $duplicateRowsInCsv++;
+        }
+
+        $rowsByProductNumber[$productNumber] = [
+            'rowNumber' => $rowNumber,
+            'data' => $data,
+        ];
+    } catch (\Exception $e) {
+        $errors++;
+        sendLog("Row $rowNumber: Error while reading CSV - " . $e->getMessage(), 'error');
+        sendProgress($processed, $created, $skipped, $errors);
+    }
+}
+
+if ($duplicateRowsInCsv > 0) {
+    sendLog("Duplicate rows detected in CSV: $duplicateRowsInCsv (last occurrence used per product_number)", 'warning');
+}
+
+// Parent-first processing to keep parent/child relation stable
+$parentEntries = [];
+$childEntries = [];
+foreach ($rowsByProductNumber as $entry) {
+    $parentIdValue = trim((string)($entry['data']['parent_id'] ?? ''));
+    if ($parentIdValue === '') {
+        $parentEntries[] = $entry;
+    } else {
+        $childEntries[] = $entry;
+    }
+}
+
+$entriesToProcess = array_merge($parentEntries, $childEntries);
+sendLog('Unique products to process: ' . count($entriesToProcess), 'info');
+
+foreach ($entriesToProcess as $entry) {
+    $rowNumber = (int)$entry['rowNumber'];
+    $data = $entry['data'];
+
+    try {
         $parentIdValue = trim((string)($data['parent_id'] ?? ''));
         $isParentRow = ($parentIdValue === '');
 
@@ -204,67 +261,33 @@ while (($row = fgetcsv($handle, 0, ';')) !== false) {
         } elseif (!empty($data['size_spec_pdf_url']) && !$isParentRow) {
             sendLog("Row $rowNumber: Prosheet skipped for child row {$data['product_number']} (parent_id: {$parentIdValue})", 'info');
         }
-        
-        // Skip if no product number
-        if (empty($data['product_number'])) {
-            $skipped++;
-            sendLog("Row $rowNumber: Skipped - No product number", 'skip');
-            sendProgress($processed, $created, $skipped, $errors);
-            continue;
-        }
 
-        // Track imported product numbers
-        $importedProductNumbers[] = trim($data['product_number']);
-        
-        // Check if product already exists
-        $productNumber = trim($data['product_number']);
+        $productNumber = trim((string)$data['product_number']);
+        $importedProductNumbers[] = $productNumber;
+
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter('productNumber', $productNumber));
         $criteria->setLimit(1);
         $existingProduct = $productRepo->search($criteria, $context)->first();
 
         if ($existingProduct) {
-            // Always update name from CSV for parent products (no parentId)
-            if ($isParentRow) {
-                try {
-                    $updatePayload = [
-                        'id' => $existingProduct->getId(),
-                        'name' => $data['translations.DEFAULT.name'] ?? 'Unnamed Product'
-                    ];
-
-                    if (!empty($data['products_additional_data_prosheet']) && Uuid::isValid($data['products_additional_data_prosheet'])) {
-                        $updatePayload['customFields'] = [
-                            'products_additional_data_prosheet' => $data['products_additional_data_prosheet']
-                        ];
-                    }
-
-                    $productRepo->update([
-                        $updatePayload
-                    ], $context);
-                    $processed++;
-                    if (!empty($updatePayload['customFields']['products_additional_data_prosheet'])) {
-                        sendLog("Row $rowNumber: Updated parent + prosheet custom field for $productNumber", 'update');
-                    } else {
-                        sendLog("Row $rowNumber: Updated parent product name for $productNumber", 'update');
-                    }
-                } catch (\Exception $e) {
-                    $errors++;
-                    sendLog("Row $rowNumber: Error updating parent product name for $productNumber - " . $e->getMessage(), 'error');
-                }
-            } else {
-                $skipped++;
+            try {
+                $productRepo->delete([
+                    ['id' => $existingProduct->getId()]
+                ], $context);
+                sendLog("Row $rowNumber: Existing product deleted for recreate - $productNumber", 'warning');
+            } catch (\Exception $deleteException) {
+                $errors++;
                 $processed++;
-                sendLog("Row $rowNumber: Skipped - Product $productNumber already exists", 'skip');
+                sendLog("Row $rowNumber: Failed to delete existing product $productNumber - " . $deleteException->getMessage(), 'error');
+                sendProgress($processed, $created, $skipped, $errors);
+                continue;
             }
-            sendProgress($processed, $created, $skipped, $errors);
-            continue;
         }
 
-        // Prepare product data
         $productData = prepareProductData($data);
         $batch[] = $productData;
 
-        // Process batch
         if (count($batch) >= $batchSize) {
             $result = processBatch($batch, $productRepo, $context);
             $created += $result['created'];
@@ -277,7 +300,6 @@ while (($row = fgetcsv($handle, 0, ';')) !== false) {
             $batch = [];
             gc_collect_cycles();
         }
-        
     } catch (\Exception $e) {
         $errors++;
         $processed++;
@@ -992,35 +1014,41 @@ function prepareProductData($data) {
     // Custom fields
     $customFields = [];
     $customFieldMap = [
-        'material' => 'material',
-        'gender' => 'gender',
-        'sleeve_length' => 'sleeve_length',
-        'article_number_short' => 'article_number_short',
-        'ean' => 'ean',
-        'model_name' => 'model_name',
-        'item_in_box' => 'item_in_box',
-        'item_in_bag' => 'item_in_bag',
-        'weight' => 'weight',
-        'country' => 'country',
-        'washing_temp' => 'washing_temp',
-        'supplier' => 'supplier',
-        'cut' => 'cut',
-        'febric_weight' => 'febric_weight',
-        'article_code' => 'article_code',
-        'gtin' => 'gtin',
-        'supplier_article' => 'supplier_article'
+        'material' => ['products_additional_data_material'],
+        'gender' => ['products_additional_data_gender'],
+        'sleeve_length' => ['products_additional_data_armlength'],
+        'article_number_short' => ['short_article_number'],
+        'model_name' => ['products_additional_data_modelcode'],
+        'item_in_box' => ['products_additional_data_iteminbox'],
+        'item_in_bag' => ['products_additional_data_iteminbag'],
+        'country' => ['products_additional_data_country'],
+        'washing_temp' => ['products_additional_data_washtemp'],
+        'supplier' => ['supplier'],
+        'cut' => ['products_additional_data_fit', 'cut'],
+        'febric_weight' => ['products_additional_data_areaweight'],
+        'article_code' => ['products_additional_data_colorcode'],
+        'gtin' => ['products_additional_data_gtin'],
+        'supplier_article' => ['products_additional_data_supgln']
     ];
     
-    foreach ($customFieldMap as $csvKey => $fieldName) {
+    foreach ($customFieldMap as $csvKey => $fieldNames) {
         if (!empty($data[$csvKey])) {
-            $customFields[$fieldName] = $data[$csvKey];
+            foreach ((array)$fieldNames as $fieldName) {
+                $customFields[$fieldName] = $data[$csvKey];
+            }
         }
+    }
+
+    if (!empty($data['size_spec_pdf_url'])) {
+        $customFields['products_additional_data_productsheet'] = (string)$data['size_spec_pdf_url'];
     }
 
     if (!empty($data['products_additional_data_prosheet']) && Uuid::isValid($data['products_additional_data_prosheet'])) {
         $customFields['products_additional_data_prosheet'] = $data['products_additional_data_prosheet'];
     }
     
+    $customFields = sanitizeCustomFieldTypes($customFields);
+
     if (!empty($customFields)) {
         $product['customFields'] = $customFields;
     }
@@ -1034,7 +1062,6 @@ function processBatch($batch, $productRepo, $context) {
     
     try {
         $productRepo->create($batch, $context);
-        applyProsheetCustomFieldUpdates($batch, $productRepo, $context);
         $created = count($batch);
     } catch (\Exception $e) {
         // Batch failed - try individual creates to see which ones fail
@@ -1046,7 +1073,6 @@ function processBatch($batch, $productRepo, $context) {
         foreach ($batch as $idx => $product) {
             try {
                 $productRepo->create([$product], $context);
-                applyProsheetCustomFieldUpdates([$product], $productRepo, $context);
                 $created++;
                 sendLog("Individual create succeeded for product: " . ($product['productNumber'] ?? 'N/A'), 'info');
             } catch (\Exception $individualError) {
@@ -1060,6 +1086,23 @@ function processBatch($batch, $productRepo, $context) {
         'created' => $created,
         'errors' => $errors
     ];
+}
+
+function sanitizeCustomFieldTypes(array $customFields): array {
+    if (isset($customFields['products_additional_data_iteminbag'])) {
+        $value = trim((string)$customFields['products_additional_data_iteminbag']);
+        if ($value === '' || !is_numeric($value)) {
+            unset($customFields['products_additional_data_iteminbag']);
+        } else {
+            $customFields['products_additional_data_iteminbag'] = (int)$value;
+        }
+    }
+
+    if (isset($customFields['products_additional_data_iteminbox'])) {
+        $customFields['products_additional_data_iteminbox'] = (string)$customFields['products_additional_data_iteminbox'];
+    }
+
+    return $customFields;
 }
 
 function applyProsheetCustomFieldUpdates(array $products, $productRepo, $context): void

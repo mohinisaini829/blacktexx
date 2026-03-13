@@ -148,12 +148,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
             <select name="vendor" style="width: 100%;height: 35px;">
                 <option value="ross">Falk Ross</option>
                 <option value="harko">Harko</option>
-                <option value="another">Another</option>
+                <option value="newwave">New Wave</option>
             </select>
         </div>
         <div class="form-group">
             <label for="csv_file">Choose CSV file:</label>
-            <input type="file" name="csv_file" id="csv_file" accept=".xls" required>
+            <input type="file" name="csv_file" id="csv_file" accept=".csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/json" required >
         </div>
         <button type="submit">Upload</button>
     </form>

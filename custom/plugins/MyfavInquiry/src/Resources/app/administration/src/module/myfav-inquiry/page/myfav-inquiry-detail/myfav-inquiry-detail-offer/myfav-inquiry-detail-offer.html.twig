@@ -11,16 +11,23 @@
         :dataSource="offers"
         :columns="offerColumns"
         :isLoading="isLoading"
-        :showSelection="false"
-    >
+        :showSelection="false">
         <template #column-createdAt="{ item }">
+            <template v-if="item.createdAt">
+                {{ item.createdAt.substr(0, 10) }}
+            </template>
+            <template v-else>
+                -
+            </template>
+        </template>
+        <!-- <template #column-createdAt="{ item }">
             <template v-if="item.createdAt">
                 {{ item.createdAt | date }}
             </template>
             <template v-else>
                 -
             </template>
-        </template>
+        </template> -->
         <template #actions="{ item }">
             <sw-context-menu-item
                 :disabled="!acl.can('myfav_inquiry.viewer')"
