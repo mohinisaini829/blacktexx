@@ -878,3 +878,23 @@ body {
         }
     }
 } 
+.is-ctl-navigation {
+    .contact-form {
+        .cms-element-text {
+            h2 {
+                display: none;
+            }
+        }
+        .cms-element-form {
+            text-align: left;
+            max-width: 1198px;
+            margin: 0 auto;
+            .card-title.mb-4 {
+                margin-bottom: 1.5rem;
+            }
+            .form-label {
+                color: #4a545b;
+            }
+        }
+    }
+}

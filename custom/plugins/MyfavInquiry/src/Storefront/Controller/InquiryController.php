@@ -174,111 +174,17 @@ private EntityRepository $productRepository;
     {
         $logos = $request->files->get('logo', []);
         $inquiryId = $this->inquiryService->createInquiry($data, $salesChannelContext, $logos);
-        return $this->redirectToRoute('frontend.myfav.wishlisted.finish', ['inquiryId' => $inquiryId]);
+        return $this->redirectToRoute('frontend.myfav.wishlisted.finish');
     }
-    #[Route('/wishlisted/success', name: 'frontend.myfav.wishlisted.finish', methods: ['GET'], defaults: ['_routeScope' => ['storefront']])]
+    #[Route('/thank-you', name: 'frontend.myfav.wishlisted.finish', methods: ['GET'], defaults: ['_routeScope' => ['storefront']])]
     #[StorefrontRoute]
-    public function finish(InquiryFinishPageLoader $pageLoader, Request $request, SalesChannelContext $salesChannelContext): Response
+    public function finish(): Response
     {
-        $page = $pageLoader->load($request, $salesChannelContext, true);
-
-        $html = $this->twig->render('@MyfavInquiry/storefront/myfav-inquiry/page/finish/index.html.twig', [
-            'page' => $page
-        ]);
-
+        $html = $this->twig->render('@MyfavInquiry/storefront/myfav-inquiry/page/finish/index.html.twig');
         return new Response($html);
     }
 
-    /*#[Route(
-    '/myfav/inquiry/trigger',
-    name: 'frontend.myfav.inquiry.trigger',
-    methods: ['GET'],
-    defaults: [
-            '_routeScope' => ['storefront'],       // CSRF disable for simple GET requests
-            'XmlHttpRequest' => true          // optional, if only for XHR
-        ]
-    )]
-    public function triggerInquiryLogic(
-        Request $request,
-        SalesChannelContext $salesChannelContext
-    ): JsonResponse {
-        $inquiryId = $request->query->get('inquiryId');
-        $sql = "SELECT id, extended_data FROM myfav_inquiry_line_item WHERE inquiry_id = :inquiryId";
-        //$lineItems = $this->connection->fetchAllAssociative($sql, ['inquiryId' => $inquiryId]);
-        $lineItems = $this->connection->createQueryBuilder()
-        ->select('*')
-        ->from('myfav_inquiry_line_item')
-        ->where('inquiry_id = :inquiryId')
-        ->setParameter('inquiryId', Uuid::fromHexToBytes($inquiryId)) // ✅ Convert HEX to binary
-        ->fetchAllAssociative();
-        //print_r($lineItems);die('sdasdas');
-        if ($lineItems) {
-            foreach ($lineItems as $item) {
-            // Decode existing extended_data
-            $extendedData = json_decode($item['extended_data'], true) ?? [];
-
-            // Get the folder path from extendedData
-            $modifiedProductImageFolder = $extendedData['modifiedProductImage'] ?? null;
-
-            // Initialize new path (in case image is found)
-            $newImagePath = null;
-
-            if ($modifiedProductImageFolder) {
-                // Absolute folder path (assumes path starts from public/)
-                $folderPath = $_SERVER['DOCUMENT_ROOT'] . $modifiedProductImageFolder;
-                $folderPath = rtrim($folderPath, '/');
-
-                // Valid image extensions
-                $validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-
-                // Find all files
-                $allFiles = glob($folderPath . '/*');
-
-                // Filter only image files
-                $imageFiles = array_filter($allFiles, function ($file) use ($validExtensions) {
-                    $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-                    return in_array($ext, $validExtensions);
-                });
-
-                // Pick the first image (if any)
-                $firstImagePath = reset($imageFiles);
-
-                if ($firstImagePath) {
-                    // Convert back to web-relative path
-                    $newImagePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $firstImagePath);
-                }
-            }
-
-            // ✅ Update extendedData
-            if ($newImagePath) {
-                $extendedData['modifiedProductImage'] = $newImagePath;
-            }
-
-            // Save back to DB
-            $this->connection->update(
-                'myfav_inquiry_line_item',
-                ['extended_data' => json_encode($extendedData)],
-                ['id' => $item['id']]
-            );
-        }
-
-        }
-
-        $this->connection->update(
-            'myfav_inquiry',
-            ['status' => 'new'],  // New status
-            ['id' => Uuid::fromHexToBytes($inquiryId)]  // Target the inquiry by ID
-        );
-
-        if (!$inquiryId) {
-            return new JsonResponse(['error' => 'Missing inquiryId'], 400);
-        }
-
-        // ✅ Your custom logic
-        //$this->handleInquiryCompleted($inquiryId, $salesChannelContext);
-
-        return new JsonResponse(['status' => 'triggered']);
-    }*/
+    
 
     #[Route(
     '/myfav/inquiry/trigger',

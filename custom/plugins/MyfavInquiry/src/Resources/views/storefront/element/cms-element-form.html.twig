@@ -23,3 +23,17 @@
     {% endif %}
 {% endblock %}
 
+{% block element_form_contact_form_title %}
+    <div class="card-title mb-4">
+        {% if element.config.title.value %}
+            {% if element.config.title.value|trim == 'Kontaktformular' %}
+                Ihre Frage an uns
+            {% else %}
+                {{ element.config.title.value }}
+            {% endif %}
+        {% else %}
+            {{ 'contact.headline'|trans }}
+        {% endif %}
+    </div>
+{% endblock %}
+
