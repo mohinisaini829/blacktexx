@@ -10,10 +10,13 @@
     {% if element.config.type.value is same as('myfavinquiry') %}
         {% block element_myfav_inquiry_element %}
             <div class="card-title mb-4">
-                {% if element.config.title.value %}
+                {% set normTitle = element.config.title.value|default('')|trim|lower %}
+                {% if normTitle == 'kontaktformular' or normTitle == 'my products' or normTitle == 'meine produkte' %}
+                    Ihre Anfrage
+                {% elseif element.config.title.value %}
                     {{ element.config.title.value }}
-                {%  else %}
-                    {{ "myfavInquiry.cartTitle"|trans }}
+                {% else %}
+                    Ihre Anfrage
                 {% endif %}
             </div>
             {% sw_include '@MyfavInquiry/storefront/myfav-inquiry/page/confirm/form.html.twig' %}
@@ -25,14 +28,17 @@
 
 {% block element_form_contact_form_title %}
     <div class="card-title mb-4">
+        {% set normTitle = element.config.title.value|default('')|trim|lower %}
         {% if element.config.title.value %}
-            {% if element.config.title.value|trim == 'Kontaktformular' %}
+            {% if normTitle == 'kontaktformular' %}
                 Ihre Frage an uns
+            {% elseif normTitle == 'my products' or normTitle == 'meine produkte' %}
+                Ihre Anfrage
             {% else %}
                 {{ element.config.title.value }}
             {% endif %}
         {% else %}
-            {{ 'contact.headline'|trans }}
+            Ihre Frage an uns
         {% endif %}
     </div>
 {% endblock %}
